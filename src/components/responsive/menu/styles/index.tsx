@@ -28,4 +28,6 @@ export const Item = styled.li`
 
 export const List = styled.ul`
     background-color: #eeeeee;
+    position: absolute;
+    padding: 1%;
 `
