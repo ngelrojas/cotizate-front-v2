@@ -4,12 +4,14 @@ import {List, Item, Go, ItemLogo, Picture} from './styles'
 import DropDown from '../dropdown'
 import CotizateLogo from './img/cotizate.png'
 import ResponsiveMenu from '../../components/responsive/menu'
+import Logo from '../logo'
 
 const Menu: React.FC = () => {
     return (
         <Grid fluid>
             <Row>
                 <ResponsiveMenu />
+                <Logo />
                 <List>
                     <Item>
                         <Go to="/crear-proyectos">CREAR PROYECTOS</Go>
