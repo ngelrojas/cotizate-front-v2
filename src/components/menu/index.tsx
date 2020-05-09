@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import {Grid, Row} from 'react-styled-flexboxgrid'
 import {List, Item, Go, ItemLogo, Picture} from './styles'
 import DropDown from '../dropdown'
@@ -33,7 +33,7 @@ const Menu: React.FC = () => {
                         <Go to="/registrarse">REGISTRARSE</Go>
                     </Item>
                     <Item>
-                        <Go to="/login">INGRESAR</Go>
+                        <Go to="/ingresar">INGRESAR</Go>
                     </Item>
                 </List>
             </Row>

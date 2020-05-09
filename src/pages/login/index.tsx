@@ -1,21 +1,21 @@
 import React from 'react'
 import {Grid, Row} from 'react-styled-flexboxgrid'
-import FormRegister from './forms'
+import FormLogin from './forms'
 import {H1, Content} from './styles'
 
-const Register: React.FC = () => {
+const Login: React.FC = () => {
     return (
         <Content>
             <Grid>
                 <Row>
-                    <H1>REGISTRARSE</H1>
+                    <H1>INGRESAR</H1>
                 </Row>
                 <Row>
-                    <FormRegister />
+                    <FormLogin />
                 </Row>
             </Grid>
         </Content>
     )
 }
 
-export default Register
+export default Login

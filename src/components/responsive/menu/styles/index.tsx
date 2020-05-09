@@ -15,7 +15,7 @@ export const WrapMenu = styled.div`
 export const Go = styled(Link)`
     text-decoration: none;
     font-size: 15px;
-    color: #000000;
+    color: #3b3b3b;
     &:hover {
         color: #f37a22;
     }
@@ -27,7 +27,10 @@ export const Item = styled.li`
 `
 
 export const List = styled.ul`
-    background-color: #eeeeee;
+    background-color: #dddddd;
     position: absolute;
     padding: 1%;
+    @media ${device.mobileM} {
+        width: 50%;
+    }
 `

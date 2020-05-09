@@ -33,7 +33,8 @@ export const Picture = styled.picture`
 export const Go = styled(Link)`
     text-decoration: none;
     font-size: 15px;
-    color: #000000;
+    color: #3b3b3b;
+    font-weight: 410;
     &:hover {
         color: #f37a22;
     }

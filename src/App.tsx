@@ -5,6 +5,8 @@ import Header from './header'
 import Footer from './footer'
 import Home from './pages/home'
 import Register from './pages/register'
+import Login from './pages/login'
+import PageNotFound from './pages/404'
 
 const App: React.FC = () => {
     return (
@@ -15,6 +17,8 @@ const App: React.FC = () => {
                 <Switch>
                     <Route exact path="/" component={Home} />
                     <Route exact path="/registrarse" component={Register} />
+                    <Route exact path="/ingresar" component={Login} />
+                    <Route component={PageNotFound} />
                 </Switch>
 
                 <Footer />

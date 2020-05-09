@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
 import {WrapMenu, Go, Item, List} from './styles'
 import {Menu2Outline} from '@styled-icons/evaicons-outline/Menu2Outline'
+import DropDown from '../../dropdown'
 
 const ResponsiveMenu: React.FC = () => {
     const [isopen, SetIsopen] = useState(false)
@@ -11,13 +12,19 @@ const ResponsiveMenu: React.FC = () => {
             {isopen ? (
                 <List>
                     <Item>
-                        <Go to="sub">subcategory 1</Go>
+                        <Go to="/crear-proyectos">CREAR PROYECTOS</Go>
                     </Item>
                     <Item>
-                        <Go to="sub">subcategory 2</Go>
+                        <Go to="/explorar-proyectos">EXPLORAR PROYECTOS</Go>
                     </Item>
                     <Item>
-                        <Go to="sub">subcategory 3</Go>
+                        <DropDown />
+                    </Item>
+                    <Item>
+                        <Go to="/registrarse">REGISTRARSE</Go>
+                    </Item>
+                    <Item>
+                        <Go to="/ingresar">INGRESAR</Go>
                     </Item>
                 </List>
             ) : null}

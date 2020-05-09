@@ -1,80 +1,60 @@
 import React, {useState} from 'react'
 import {useForm} from 'react-hook-form'
+import {useHistory} from 'react-router-dom'
 import {Grid, Row, Col} from 'react-styled-flexboxgrid'
 import API from '../../../api'
-import {Label, Btn, Form, BtnGoogle, SuccessInfo, Go, Accept} from './styles'
+import {
+    Label,
+    Btn,
+    Form,
+    BtnGoogle,
+    SuccessInfo,
+    Go,
+    Accept,
+    ErrorInfo
+} from './styles'
 
 type FormData = {
-    firstName: string
-    lastName: string
     email: string
     password: string
-    password_repeat: string
 }
 
-const FormRegister: React.FC = () => {
+const FormLogin: React.FC = () => {
     const [success, setSuccess] = useState('')
-    const {register, handleSubmit, errors, watch, setValue} = useForm<FormData>(
-        {
-            mode: 'onChange'
-        }
-    )
+    const [errorinf, setErrorinf] = useState('')
+    let history = useHistory()
+    const {register, handleSubmit, errors, setValue} = useForm<FormData>({
+        mode: 'onChange'
+    })
 
     const clearFields = () => {
-        setValue('firstName', '')
-        setValue('lastName', '')
         setValue('email', '')
         setValue('password', '')
-        setValue('password_repeat', '')
-        setSuccess('enviamos un email para su confirmacion.')
+        setSuccess('Bienvenido a Cotizate.')
+        setErrorinf('')
     }
 
-    const onSubmit = handleSubmit(
-        async ({firstName, lastName, email, password}) => {
-            await API.post(`/user/create/`, {
-                name: firstName,
-                last_name: lastName,
-                email: email,
-                password: password,
-                dni: '123456',
-                cellphone: '123456'
+    const onSubmit = handleSubmit(async ({email, password}) => {
+        await API.post(`/user/token/`, {
+            email: email,
+            password: password
+        })
+            .then(resp => {
+                clearFields()
+                console.log(resp.data.token)
+                history.push('/')
             })
-                .then(resp => {
-                    clearFields()
-                })
-                .catch(err => {
-                    console.error(err)
-                })
-        }
-    )
+            .catch(err => {
+                console.error(err)
+                setErrorinf('Usuario o contrasena incorrectos.')
+            })
+    })
     return (
         <Grid>
             <Row>
                 <Col xs={12}>
                     <Row center="xs">
                         <Form onSubmit={onSubmit}>
-                            <Label>
-                                <input
-                                    name="firstName"
-                                    ref={register({required: true})}
-                                    placeholder="NOMBRE(S)"
-                                />
-                                <span>
-                                    {errors.firstName &&
-                                        'ingrese su nombre porfavor.'}
-                                </span>
-                            </Label>
-                            <Label>
-                                <input
-                                    name="lastName"
-                                    ref={register({required: true})}
-                                    placeholder="APELLIDOS"
-                                />
-                                <span>
-                                    {errors.lastName &&
-                                        'ingrese su apellido porfavor.'}
-                                </span>
-                            </Label>
                             <Label>
                                 <input
                                     name="email"
@@ -108,26 +88,10 @@ const FormRegister: React.FC = () => {
                                         'debe introducir una contrasena.'}
                                 </span>
                             </Label>
-                            <Label>
-                                <input
-                                    name="password_repeat"
-                                    type="password"
-                                    ref={register({
-                                        required: true,
-                                        validate: value =>
-                                            value === watch('password')
-                                    })}
-                                    placeholder="REPETIR CONTRASENA"
-                                />
-                                <span>
-                                    {errors.password_repeat &&
-                                        'las contrasenas no coinciden.'}
-                                </span>
-                            </Label>
                             <Row>
                                 <Col xs={12}>
                                     <Row center="xs">
-                                        <Btn type="submit">REGISTRARSE</Btn>
+                                        <Btn type="submit">INGRESAR</Btn>
                                     </Row>
                                 </Col>
                             </Row>
@@ -136,7 +100,7 @@ const FormRegister: React.FC = () => {
                                 <Col xs={12}>
                                     <Row center="xs">
                                         <BtnGoogle type="button">
-                                            REGISTRARSE CON GOOGLE
+                                            INGRESAR CON GOOGLE
                                         </BtnGoogle>
                                     </Row>
                                 </Col>
@@ -146,20 +110,21 @@ const FormRegister: React.FC = () => {
                                 <Col xs={12}>
                                     <Row center="xs">
                                         <SuccessInfo>{success}</SuccessInfo>
+                                        <ErrorInfo>{errorinf}</ErrorInfo>
                                     </Row>
                                 </Col>
                             </Row>
                             <br />
                             <Row>
                                 <Col xs={12} sm={6} md={6}>
-                                    <Row start="xs">
+                                    <Row start="sm">
                                         <Go to="#">Terminos y condiciones</Go>
                                     </Row>
                                 </Col>
                                 <Col xs={12} sm={6} md={6}>
-                                    <Row end="xs">
+                                    <Row end="sm">
                                         <Accept>
-                                            Al momento de registrase accepta los
+                                            Al momento de ingresar accepta los
                                             terminos y condiciones de cotizate.
                                         </Accept>
                                     </Row>
@@ -173,4 +138,4 @@ const FormRegister: React.FC = () => {
     )
 }
 
-export default FormRegister
+export default FormLogin
