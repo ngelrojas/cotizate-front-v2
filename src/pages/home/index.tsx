@@ -7,7 +7,6 @@ const Home: React.FC = () => {
     return (
         <Content>
             <Grid fluid>
-                <h1>home page</h1>
                 <ListBulletin />
             </Grid>
         </Content>

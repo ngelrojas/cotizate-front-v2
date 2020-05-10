@@ -93,16 +93,16 @@ const Bulletin: React.FC<Ibullentin> = props => {
                     </Col>
                 </Row>
                 <Row>
-                    <Col sm={12} md={12} lg={6}>
+                    <Col sm={6} md={6} lg={6}>
                         <Row start="lg">
-                            <Col lg={12}>
+                            <Col sm={6} lg={12}>
                                 <PercentTitle>alcanzado</PercentTitle>
                             </Col>
                         </Row>
                     </Col>
-                    <Col sm={12} md={12} lg={6}>
+                    <Col sm={6} md={6} lg={6}>
                         <Row end="lg">
-                            <Col sm={12} md={12} lg={12}>
+                            <Col sm={6} lg={12}>
                                 <PercentNumber>58%</PercentNumber>
                             </Col>
                         </Row>

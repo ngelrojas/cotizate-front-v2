@@ -125,6 +125,9 @@ export const PercentNumber = styled.span`
     margin: 2%;
     color: #007bff;
     font-size: 12px;
+    @media ${device.tablet} {
+        float: right;
+    }
 `
 
 export const Bar = styled.div`
@@ -141,6 +144,9 @@ export const Bar = styled.div`
         rgba(237, 186, 123, 1) 90%
     );
     filter: opacity(0.4);
+    @media ${device.mobileM} {
+        margin-left: -50%;
+    }
 `
 
 export const Go = styled(Link)`
