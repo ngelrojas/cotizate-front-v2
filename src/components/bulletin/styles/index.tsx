@@ -1,79 +1,149 @@
 import styled from 'styled-components'
+import {Link} from 'react-router-dom'
+import {device} from '../../../styles/mediaquery'
+
+export const Info = styled.div`
+    display: none;
+    position: absolute;
+    right: 51.2%;
+    text-transform: uppercase;
+    width: 20%;
+    top: 20.7%;
+    background: #00000030;
+    padding-top: 1%;
+    padding-left: 1%;
+    color: #f9f5f5;
+    height: 38%;
+`
 
 export const Section = styled.section`
-    width: 25%;
+    width: 85%;
     padding: 1%;
-`
-
-export const Title = styled.h3`
-    text-align: justify;
-    margin-top: 16%;
-    color: #3b3b3b;
-    margin-bottom: 5%;
-`
-export const Excerpt = styled.div`
-    margin: 1%;
-    > p {
-        text-align: justify;
-    }
-`
-
-export const Foot = styled.div`
-    margin: 4%;
-`
-
-export const Btn = styled.button`
-    padding: 2%;
-    background-color: #007bff;
-    color: #ffffff;
-    border: 0;
-    width: 100%;
-    border-radius: 2px;
     &:hover {
-        cursor: pointer;
+        ${Info} {
+            display: block;
+        }
+    }
+    @media ${device.tablet} {
+        width: 100%;
     }
 `
 
-export const Wrap = styled.div`
-    width: 100%;
-    margin-top: 6%;
-    margin-bottom: 6%;
+export const Article = styled.article`
+    margin: 3%;
     position: relative;
 `
-export const Bar = styled.div`
-    margin-right: 2%;
-    margin-left: 2%;
-    height: 10px;
-    background-color: #f37a22;
-`
-export const Mpoint = styled.span`
-    float: right;
-    border-radius: 5%;
-    background-color: #ddd;
-    padding: 1px;
-    color: #1e78f9;
-    position: absolute;
-    top: 0;
-    right: 4%;
-    font-size: 15px;
+export const ArticleBody = styled.article`
+    margin: 3%;
+    position: relative;
 `
 
 export const Picture = styled.picture`
-    text-align: center;
+    height: auto;
+`
+export const Img = styled.img`
+    width: 100%;
+    border-radius: 2px;
+`
+
+export const Title = styled.h1`
+    color: #f9f9f9;
+    font-weight: 410;
+    position: absolute;
+    bottom: 4px;
+    background: #00000047;
+    text-align: justify;
+    padding: 1%;
+    text-transform: uppercase;
+    font-size: 15px;
+`
+
+export const Excerpt = styled.p`
+    color: #3b3b3b;
     margin: 2%;
-    > img {
-        text-align: center;
+    text-align: justify;
+    padding-bottom: 10%;
+    @media ${device.tablet} {
+        margin: 0%;
+        padding-bottom: 8%;
+    }
+    @media ${device.mobileM} {
+        width: 17%;
+        padding-bottom: 2%;
     }
 `
-
-export const Place = styled.span`
-    float: left;
-    color: #1e78f9;
+export const Author = styled.div`
     margin: 4%;
+    color: #007bff;
+    font-size: 12px;
+    font-weight: 410;
+    @media ${device.tablet} {
+        width: 100%;
+        margin: 1%;
+        margin-bottom: 10%;
+    }
+`
+export const Place = styled.div`
+    margin: 6%;
+    color: #007bff;
+    font-weight: 410;
+    float: right;
+    font-size: 12px;
+    > svg {
+        color: green;
+    }
+    @media ${device.tablet} {
+        width: 100%;
+        margin: 0%;
+        margin-right: -39%;
+        margin-top: 6%;
+        margin-bottom: 10%;
+    }
+    @media ${device.mobileM} {
+        margin-right: 0%;
+    }
+`
+export const PlaceHide = styled.div`
+    margin: 6%;
+    color: #007bff;
+    font-weight: 410;
+    font-size: 12px;
+    > svg {
+        color: green;
+    }
+`
+export const PercentTitle = styled.span`
+    text-transform: uppercase;
+    margin: 2%;
+    color: #3b3b3b;
+    font-size: 12px;
+    font-weight: 410;
+`
+export const PercentNumber = styled.span`
+    font-size: 15px;
+    float: right;
+    margin: 2%;
+    color: #007bff;
+    font-size: 12px;
 `
 
-export const Author = styled.span`
-    float: right;
-    color: #1e78f9;
-    margin: 4%;
+export const Bar = styled.div`
+    height: 5%;
+    bottom: 0%;
+    width: 58%;
+    padding: 4%;
+    position: absolute;
+    background: rgb(243, 122, 34);
+    background: linear-gradient(
+        -90deg,
+        rgba(243, 122, 34, 0.8995799003195029) 31%,
+        rgba(237, 186, 123, 1) 83%,
+        rgba(237, 186, 123, 1) 90%
+    );
+    filter: opacity(0.4);
+`
+
+export const Go = styled(Link)`
+    text-decoration: none;
+    color: inherit;
 `

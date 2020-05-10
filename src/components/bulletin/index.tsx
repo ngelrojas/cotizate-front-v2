@@ -1,17 +1,22 @@
 import React from 'react'
-import {Grid, Row, Col} from 'react-styled-flexboxgrid'
+import {Row, Col} from 'react-styled-flexboxgrid'
+import {MdLocationOn} from 'react-icons/md'
 import {
     Section,
+    Article,
+    ArticleBody,
+    Picture,
+    Img,
     Title,
     Excerpt,
-    Foot,
-    Btn,
-    Bar,
-    Wrap,
-    Mpoint,
-    Picture,
+    Author,
     Place,
-    Author
+    PlaceHide,
+    PercentTitle,
+    PercentNumber,
+    Bar,
+    Go,
+    Info
 } from './styles'
 
 interface Ibullentin {
@@ -20,30 +25,93 @@ interface Ibullentin {
 const Bulletin: React.FC<Ibullentin> = props => {
     return (
         <Section>
-            <article>
-                <Picture>
-                    <img
-                        src="https://picsum.photos/id/1/280/200"
-                        alt="cotizate"
-                    />
-                </Picture>
-                <Place>La Paz</Place>
-                <Author>NextFlix</Author>
-                <Title>{props.title}</Title>
-                <Excerpt>
+            <Info>
+                {props.title}
+                <Author>
+                    <p>Autor:</p>
+                    <p>Aljandro Matos</p>
+                </Author>
+                <PlaceHide>
+                    <p>Ciudad:</p>
                     <p>
-                        excerpt this post more than more thsn flawe therll core
-                        more listke ai tingin fifudnsk is dthdaaldkg porflekams
+                        <Go to="/category/santa-cruz">
+                            <MdLocationOn />
+                            Santa Cruz de la Sierra
+                        </Go>
                     </p>
-                </Excerpt>
-                <Wrap>
-                    <Bar />
-                    <Mpoint>58%</Mpoint>
-                </Wrap>
-                <Foot>
-                    <Btn type="button">leer...</Btn>
-                </Foot>
-            </article>
+                </PlaceHide>
+            </Info>
+            <Article>
+                <Picture>
+                    <Go to="/my-article">
+                        <Img
+                            src="https://placebeard.it/640x360"
+                            alt="cotizate"
+                        />
+                    </Go>
+                </Picture>
+                <Title>{props.title}</Title>
+            </Article>
+            <ArticleBody>
+                <Row>
+                    <Col sm={6} md={12} lg={6}>
+                        <Row start="lg">
+                            <Col sm={12} md={12} lg={12}>
+                                <Author>
+                                    <p>Autor:</p>
+                                    <p>Aljandro Matos</p>
+                                </Author>
+                            </Col>
+                        </Row>
+                    </Col>
+                    <Col sm={6} md={12} lg={6}>
+                        <Row end="lg">
+                            <Col sm={12} md={12} lg={12}>
+                                <Place>
+                                    <span>
+                                        <Go to="/category/santa-cruz">
+                                            Bolivia - Santa Cruz de la Sierra
+                                        </Go>
+                                    </span>
+                                    <MdLocationOn />
+                                </Place>
+                            </Col>
+                        </Row>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col sm={12} md={12} lg={12}>
+                        <Excerpt>
+                            <Go to="/">
+                                Lorem ipsum dolor sit amet, consectetur
+                                adipiscing elit, sed do eiusmod tempor
+                                incididunt ut labore et dolore magna aliqua. Ut
+                                enim ad minim veniam, quis nostrud exercitation
+                                ullamco laboris bet forme{' '}
+                            </Go>
+                        </Excerpt>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col sm={12} md={12} lg={6}>
+                        <Row start="lg">
+                            <Col lg={12}>
+                                <PercentTitle>alcanzado</PercentTitle>
+                            </Col>
+                        </Row>
+                    </Col>
+                    <Col sm={12} md={12} lg={6}>
+                        <Row end="lg">
+                            <Col sm={12} md={12} lg={12}>
+                                <PercentNumber>58%</PercentNumber>
+                            </Col>
+                        </Row>
+                    </Col>
+                    <Col sm={12} md={12} lg={12}>
+                        <Bar />
+                    </Col>
+                </Row>
+            </ArticleBody>
         </Section>
     )
 }

@@ -11,7 +11,7 @@ export const Picture = styled.picture`
         display: block;
         text-align: right;
         width: 93%;
-        > img {
+        > a > img {
             width: 30%;
             text-align: right;
         }
