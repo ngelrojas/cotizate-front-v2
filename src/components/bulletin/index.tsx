@@ -11,12 +11,10 @@ import {
     Excerpt,
     Author,
     Place,
-    PlaceHide,
     PercentTitle,
     PercentNumber,
     Bar,
-    Go,
-    Info
+    Go
 } from './styles'
 
 interface Ibullentin {
@@ -25,22 +23,6 @@ interface Ibullentin {
 const Bulletin: React.FC<Ibullentin> = props => {
     return (
         <Section>
-            <Info>
-                {props.title}
-                <Author>
-                    <p>Autor:</p>
-                    <p>Aljandro Matos</p>
-                </Author>
-                <PlaceHide>
-                    <p>Ciudad:</p>
-                    <p>
-                        <Go to="/category/santa-cruz">
-                            <MdLocationOn />
-                            Santa Cruz de la Sierra
-                        </Go>
-                    </p>
-                </PlaceHide>
-            </Info>
             <Article>
                 <Picture>
                     <Go to="/my-article">

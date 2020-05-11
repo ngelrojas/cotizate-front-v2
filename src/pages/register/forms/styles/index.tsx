@@ -24,10 +24,10 @@ export const Label = styled.label`
 
 export const Btn = styled.button`
     border: 0;
-    background-color: #ffffff;
+    background-color: #007bff;
     border-radius: 2px;
     padding: 4%;
-    color: #007bff;
+    color: #ffffff;
     width: 95%;
     border: 1px solid #007bff;
     &:hover {
@@ -42,18 +42,6 @@ export const Form = styled.form`
     }
     @media ${device.mobileM} {
         width: 100%;
-    }
-`
-
-export const BtnGoogle = styled.button`
-    border: 0;
-    background-color: #007bff;
-    border-radius: 2px;
-    padding: 4%;
-    color: #fefefe;
-    width: 95%;
-    &:hover {
-        cursor: pointer;
     }
 `
 

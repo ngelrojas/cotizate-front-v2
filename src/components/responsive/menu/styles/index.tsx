@@ -30,6 +30,7 @@ export const List = styled.ul`
     background-color: #dddddd;
     position: absolute;
     padding: 1%;
+    z-index: 1;
     @media ${device.mobileM} {
         width: 50%;
     }

@@ -3,16 +3,8 @@ import {useForm} from 'react-hook-form'
 import {useHistory} from 'react-router-dom'
 import {Grid, Row, Col} from 'react-styled-flexboxgrid'
 import API from '../../../api'
-import {
-    Label,
-    Btn,
-    Form,
-    BtnGoogle,
-    SuccessInfo,
-    Go,
-    Accept,
-    ErrorInfo
-} from './styles'
+import GoogleLogin from './google-login'
+import {Label, Btn, Form, SuccessInfo, Go, Accept, ErrorInfo} from './styles'
 
 type FormData = {
     email: string
@@ -99,9 +91,7 @@ const FormLogin: React.FC = () => {
                             <Row>
                                 <Col xs={12}>
                                     <Row center="xs">
-                                        <BtnGoogle type="button">
-                                            INGRESAR CON GOOGLE
-                                        </BtnGoogle>
+                                        <GoogleLogin />
                                     </Row>
                                 </Col>
                             </Row>
@@ -137,5 +127,4 @@ const FormLogin: React.FC = () => {
         </Grid>
     )
 }
-
 export default FormLogin

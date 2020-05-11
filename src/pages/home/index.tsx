@@ -6,7 +6,7 @@ import ListBulletin from '../../components/list-bulletin'
 const Home: React.FC = () => {
     return (
         <Content>
-            <Grid fluid>
+            <Grid>
                 <ListBulletin />
             </Grid>
         </Content>

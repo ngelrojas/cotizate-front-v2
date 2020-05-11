@@ -2,28 +2,10 @@ import styled from 'styled-components'
 import {Link} from 'react-router-dom'
 import {device} from '../../../styles/mediaquery'
 
-export const Info = styled.div`
-    display: none;
-    position: absolute;
-    right: 51.2%;
-    text-transform: uppercase;
-    width: 20%;
-    top: 20.7%;
-    background: #00000030;
-    padding-top: 1%;
-    padding-left: 1%;
-    color: #f9f5f5;
-    height: 38%;
-`
-
 export const Section = styled.section`
     width: 85%;
     padding: 1%;
-    &:hover {
-        ${Info} {
-            display: block;
-        }
-    }
+
     @media ${device.tablet} {
         width: 100%;
     }
@@ -95,23 +77,15 @@ export const Place = styled.div`
     @media ${device.tablet} {
         width: 100%;
         margin: 0%;
-        margin-right: -39%;
         margin-top: 6%;
         margin-bottom: 10%;
+        text-align: right;
     }
     @media ${device.mobileM} {
         margin-right: 0%;
     }
 `
-export const PlaceHide = styled.div`
-    margin: 6%;
-    color: #007bff;
-    font-weight: 410;
-    font-size: 12px;
-    > svg {
-        color: green;
-    }
-`
+
 export const PercentTitle = styled.span`
     text-transform: uppercase;
     margin: 2%;

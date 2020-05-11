@@ -2,7 +2,8 @@ import React, {useState} from 'react'
 import {useForm} from 'react-hook-form'
 import {Grid, Row, Col} from 'react-styled-flexboxgrid'
 import API from '../../../api'
-import {Label, Btn, Form, BtnGoogle, SuccessInfo, Go, Accept} from './styles'
+import GoogleRegister from '../forms/google-register'
+import {Label, Btn, Form, SuccessInfo, Go, Accept} from './styles'
 
 type FormData = {
     firstName: string
@@ -135,9 +136,7 @@ const FormRegister: React.FC = () => {
                             <Row>
                                 <Col xs={12}>
                                     <Row center="xs">
-                                        <BtnGoogle type="button">
-                                            REGISTRARSE CON GOOGLE
-                                        </BtnGoogle>
+                                        <GoogleRegister />
                                     </Row>
                                 </Col>
                             </Row>
