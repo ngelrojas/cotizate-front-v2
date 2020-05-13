@@ -1,14 +1,12 @@
 import styled from 'styled-components'
 import {Link} from 'react-router-dom'
-import {device} from '../../../styles/mediaquery'
+import {device} from '../../../../styles/mediaquery'
 
 export const SubNav = styled.ul`
     display: none;
     position: absolute;
-    left: 0;
-    background-color: #f37a22;
-    margin-top: 0.5%;
-    width: 100%;
+    background-color: #dddddd;
+    width: 13%;
     z-index: 1;
     @media ${device.tablet} {
         width: 78%;
@@ -16,11 +14,12 @@ export const SubNav = styled.ul`
 `
 export const Go = styled(Link)`
     text-decoration: none;
-    font-size: 15px;
-    color: #fff;
+    font-size: 13px;
+    color: #3b3b3b;
     font-weight: 410;
+    text-transform: uppercase;
     &:hover {
-        color: #eee;
+        color: #f37a22;
     }
 `
 
@@ -35,7 +34,7 @@ export const Item = styled.li`
 export const Span = styled.span`
     &:hover {
         > ul {
-            display: flex;
+            display: block;
         }
         @media ${device.tablet} {
             > ul {
@@ -51,6 +50,7 @@ export const Title = styled.p`
     font-size: 15px;
     color: #3b3b3b;
     font-weight: 410;
+    text-transform: uppercase;
     &:hover {
         cursor: pointer;
         color: #f37a22;

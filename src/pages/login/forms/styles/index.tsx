@@ -88,3 +88,10 @@ export const ErrorInfo = styled.span`
     color: red;
     font-size: 1rem;
 `
+
+export const ForgotPwd = styled(Link)`
+    color: green;
+    font-size: 11px;
+    text-transform: uppercase;
+    text-decoration: none;
+`

@@ -1,45 +1,38 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
+import {connect} from 'react-redux'
 import {useForm} from 'react-hook-form'
 import {useHistory} from 'react-router-dom'
 import {Grid, Row, Col} from 'react-styled-flexboxgrid'
-import API from '../../../api'
 import GoogleLogin from './google-login'
-import {Label, Btn, Form, SuccessInfo, Go, Accept, ErrorInfo} from './styles'
-
+import Loading from '../../../components/loading'
+import {Label, Btn, Form, Go, Accept, ErrorInfo, ForgotPwd} from './styles'
+import {loginUser} from '../../../redux/actions/user.actions'
 type FormData = {
     email: string
     password: string
 }
 
-const FormLogin: React.FC = () => {
-    const [success, setSuccess] = useState('')
+const FormLogin: React.FC = (props: any) => {
     const [errorinf, setErrorinf] = useState('')
+    const [loading, setLoading] = useState(false)
     let history = useHistory()
-    const {register, handleSubmit, errors, setValue} = useForm<FormData>({
+    const {register, handleSubmit, errors} = useForm<FormData>({
         mode: 'onChange'
     })
 
-    const clearFields = () => {
-        setValue('email', '')
-        setValue('password', '')
-        setSuccess('Bienvenido a Cotizate.')
-        setErrorinf('')
-    }
+    useEffect(() => {
+        if (props.UI.errors) {
+            setErrorinf('Usuario o la contrasena no son correctos.')
+        }
+        setLoading(false)
+    }, [props.UI.errors])
 
     const onSubmit = handleSubmit(async ({email, password}) => {
-        await API.post(`/user/token/`, {
+        const userData = {
             email: email,
             password: password
-        })
-            .then(resp => {
-                clearFields()
-                console.log(resp.data.token)
-                history.push('/')
-            })
-            .catch(err => {
-                console.error(err)
-                setErrorinf('Usuario o contrasena incorrectos.')
-            })
+        }
+        props.loginUser(userData, history)
     })
     return (
         <Grid>
@@ -96,10 +89,31 @@ const FormLogin: React.FC = () => {
                                 </Col>
                             </Row>
                             <br />
+                            {loading ? (
+                                <Row>
+                                    <Col xs={12}>
+                                        <Row center="xs">
+                                            <Loading message="ingresando" />
+                                        </Row>
+                                    </Col>
+                                </Row>
+                            ) : (
+                                ''
+                            )}
+
                             <Row>
                                 <Col xs={12}>
                                     <Row center="xs">
-                                        <SuccessInfo>{success}</SuccessInfo>
+                                        <ForgotPwd to="/recuperar-contrasena">
+                                            olivide mi constrasena
+                                        </ForgotPwd>
+                                    </Row>
+                                </Col>
+                            </Row>
+                            <br />
+                            <Row>
+                                <Col xs={12}>
+                                    <Row center="xs">
                                         <ErrorInfo>{errorinf}</ErrorInfo>
                                     </Row>
                                 </Col>
@@ -127,4 +141,13 @@ const FormLogin: React.FC = () => {
         </Grid>
     )
 }
-export default FormLogin
+
+const mapStateToProps = (state: any) => ({
+    user: state.user,
+    UI: state.UI
+})
+
+const mapActionToProps = {
+    loginUser
+}
+export default connect(mapStateToProps, mapActionToProps)(FormLogin)

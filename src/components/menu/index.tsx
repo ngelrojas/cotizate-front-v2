@@ -1,12 +1,23 @@
-import React, {useState} from 'react'
+import React from 'react'
+import {connect} from 'react-redux'
 import {Grid, Row} from 'react-styled-flexboxgrid'
 import {List, Item, Go, ItemLogo, Picture} from './styles'
-import DropDown from '../dropdown'
+import UserMenu from './user-menu'
+import ListDropdown from '../list-dropdown'
 import CotizateLogo from './img/cotizate.png'
 import ResponsiveMenu from '../../components/responsive/menu'
 import Logo from '../logo'
 
-const Menu: React.FC = () => {
+type userType = {
+    name: string
+    last_name: string
+}
+interface Iauth {
+    authenticated: boolean
+    currentUser: userType
+}
+
+const Menu: React.FC<Iauth> = ({authenticated, currentUser}) => {
     return (
         <Grid fluid>
             <Row>
@@ -27,18 +38,29 @@ const Menu: React.FC = () => {
                         </Go>
                     </ItemLogo>
                     <Item>
-                        <DropDown />
+                        <ListDropdown />
                     </Item>
-                    <Item>
-                        <Go to="/registrarse">REGISTRARSE</Go>
-                    </Item>
-                    <Item>
-                        <Go to="/ingresar">INGRESAR</Go>
-                    </Item>
+                    {authenticated ? (
+                        <Item>
+                            <UserMenu username={currentUser.name} />
+                        </Item>
+                    ) : (
+                        <>
+                            <Item>
+                                <Go to="/registrarse">REGISTRARSE</Go>
+                            </Item>
+                            <Item>
+                                <Go to="/ingresar">INGRESAR</Go>
+                            </Item>
+                        </>
+                    )}
                 </List>
             </Row>
         </Grid>
     )
 }
-
-export default Menu
+const mapStateToProps = (state: any) => ({
+    authenticated: state.user.authenticated,
+    currentUser: state.user
+})
+export default connect(mapStateToProps)(Menu)

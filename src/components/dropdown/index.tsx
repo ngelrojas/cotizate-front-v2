@@ -8,13 +8,13 @@ const DropDown: React.FC = () => {
                 <Title>CATEGORIAS</Title>
                 <SubNav>
                     <Item>
-                        <Go to="here">subcategory 1</Go>
+                        <Go to="#">category one</Go>
                     </Item>
                     <Item>
-                        <Go to="here">subcategory 2</Go>
+                        <Go to="#">category one</Go>
                     </Item>
                     <Item>
-                        <Go to="here">subcategory 3</Go>
+                        <Go to="#">category one</Go>
                     </Item>
                 </SubNav>
             </Span>

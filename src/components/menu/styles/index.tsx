@@ -35,6 +35,7 @@ export const Go = styled(Link)`
     font-size: 15px;
     color: #3b3b3b;
     font-weight: 410;
+    text-transform: uppercase;
     &:hover {
         color: #f37a22;
     }

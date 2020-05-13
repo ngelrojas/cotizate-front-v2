@@ -1,30 +1,25 @@
-import React, {useState} from 'react'
-//import GoogleLogin from 'react-google-login'
-import API from '../../../../api'
+import React from 'react'
+import {connect} from 'react-redux'
 import {useHistory} from 'react-router-dom'
-import {SuccessInfo, WarningInfo, BtnGoogle} from './styles'
+import {BtnGoogle} from './styles'
+import {loginUser} from '../../../../redux/actions/user.actions'
 
-const GoogleLogin: React.FC = () => {
-    const [success, setSuccess] = useState('')
-    const [warning, setWarning] = useState('')
+type FormData = {
+    email: string
+    password: string
+}
+
+const GoogleLogin: React.FC = (props: any) => {
     let history = useHistory()
+
     const responseGoogle = async (response: any) => {
         let res = response.profileObj
-        await API.post(`/user/token/`, {
+        const userData = {
             email: res.email,
             password: res.email
-        })
-            .then(res => {
-                setSuccess(`bienvenido.`)
-                setWarning('')
-                history.push('/')
-            })
-            .catch(err => {
-                setSuccess('')
-                setWarning(
-                    'usuario no registrado o quiza su usuario no se encuentre activado.'
-                )
-            })
+        }
+        props.loginUser(userData, history)
+        // setSuccess(props.UI.loading)
     }
     return (
         <>
@@ -34,10 +29,16 @@ const GoogleLogin: React.FC = () => {
                 onSuccess={responseGoogle}
                 onFailure={responseGoogle}
             ></BtnGoogle>
-            <SuccessInfo>{success}</SuccessInfo>
-            <WarningInfo>{warning}</WarningInfo>
         </>
     )
 }
 
-export default GoogleLogin
+const mapStateToProps = (state: any) => ({
+    user: state.user,
+    UI: state.UI
+})
+
+const mapActionToProps = {
+    loginUser
+}
+export default connect(mapStateToProps, mapActionToProps)(GoogleLogin)

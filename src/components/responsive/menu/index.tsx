@@ -1,9 +1,20 @@
 import React, {useState} from 'react'
+import {connect} from 'react-redux'
 import {WrapMenu, Go, Item, List} from './styles'
 import {Menu2Outline} from '@styled-icons/evaicons-outline/Menu2Outline'
 import DropDown from '../../dropdown'
+import UserMenu from '../../menu/user-menu'
 
-const ResponsiveMenu: React.FC = () => {
+type userType = {
+    name: string
+    last_name: string
+}
+
+interface Iauth {
+    authenticated: boolean
+    currentUser: userType
+}
+const ResponsiveMenu: React.FC<Iauth> = ({authenticated, currentUser}) => {
     const [isopen, SetIsopen] = useState(false)
 
     return (
@@ -20,16 +31,27 @@ const ResponsiveMenu: React.FC = () => {
                     <Item>
                         <DropDown />
                     </Item>
-                    <Item>
-                        <Go to="/registrarse">REGISTRARSE</Go>
-                    </Item>
-                    <Item>
-                        <Go to="/ingresar">INGRESAR</Go>
-                    </Item>
+                    {authenticated ? (
+                        <Item>
+                            <UserMenu username={currentUser.name} />
+                        </Item>
+                    ) : (
+                        <>
+                            <Item>
+                                <Go to="/registrarse">REGISTRARSE</Go>
+                            </Item>
+                            <Item>
+                                <Go to="/ingresar">INGRESAR</Go>
+                            </Item>
+                        </>
+                    )}
                 </List>
             ) : null}
         </WrapMenu>
     )
 }
-
-export default ResponsiveMenu
+const mapStateToProps = (state: any) => ({
+    authenticated: state.user.authenticated,
+    currentUser: state.user
+})
+export default connect(mapStateToProps)(ResponsiveMenu)

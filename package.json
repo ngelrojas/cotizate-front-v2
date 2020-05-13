@@ -29,6 +29,7 @@
         "react-tabs": "^3.1.0",
         "react-tabtab": "^2.0.0",
         "redux-logger": "^3.0.6",
+        "redux-thunk": "^2.3.0",
         "styled-components": "^5.1.0",
         "styled-icons": "^10.2.1",
         "typescript": "^3.7.5"
@@ -43,11 +44,7 @@
         "extends": "react-app"
     },
     "browserslist": {
-        "production": [
-            ">0.2%",
-            "not dead",
-            "not op_mini all"
-        ],
+        "production": [">0.2%", "not dead", "not op_mini all"],
         "development": [
             "last 1 chrome version",
             "last 1 firefox version",
