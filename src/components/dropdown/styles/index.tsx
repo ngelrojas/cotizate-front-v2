@@ -7,7 +7,6 @@ export const SubNav = styled.ul`
     position: absolute;
     left: 0;
     background-color: #f37a22;
-    margin-top: 0.5%;
     width: 100%;
     z-index: 1;
     @media ${device.tablet} {
