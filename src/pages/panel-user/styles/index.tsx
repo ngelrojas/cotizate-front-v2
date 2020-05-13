@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import {Tab, Tabs, TabPanel} from 'react-tabs'
+import {Tab, Tabs, TabPanel, TabList} from 'react-tabs'
 
 export const Content = styled.main`
     height: auto;
@@ -23,14 +23,17 @@ export const TabItem = styled(Tab)`
 `
 
 export const TabContent = styled(Tabs)`
-    display: flex;
     width: 100%;
     position: relative;
 `
 
 export const TabPanels = styled(TabPanel)`
     margin-left: 15%;
-    position: absolute;
     margin-top: 2%;
-    width: 100%;
+    width: 75%;
+`
+
+export const TabLists = styled(TabList)`
+    width: 25%;
+    float:left;
 `
