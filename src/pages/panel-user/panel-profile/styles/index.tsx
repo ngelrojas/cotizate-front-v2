@@ -18,6 +18,7 @@ export const Label = styled.label`
     margin: 5%;
     float: left;
     width: 33%;
+    position: relative;
 `
 
 export const Form = styled.form`
@@ -37,5 +38,47 @@ export const FormSubTitle = styled.p`
     width: 100%;
     color: #007bff;
     margin-bottom: 4%;
+    font-size: 14px;
+    font-weight: 410;
+    padding: 3%;
+`
+
+export const WrapBtn = styled.div`
+    width: 100%;
+    margin: 5%;
+`
+
+export const Btn = styled.button`
+    border: 0;
+    border-radius: 2px;
+    background-color: #007bff;
+    padding: 1%;
+    color: #fff;
+    width: 78%;
+    text-transform: uppercase;
+`
+
+export const ErrorInfo = styled.span`
+    position: absolute;
+    top: 101%;
+    padding-left: 4%;
+    padding-right: 4%;
+    color: red;
+    width: 100%;
+    text-align: center;
+`
+export const InfoSuccess = styled.p`
+    margin: 2%;
+    color: green;
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 14px;
+`
+
+export const InfoError = styled.p`
+    margin: 2%;
+    color: red;
+    text-align: center;
+    text-transform: uppercase;
     font-size: 14px;
 `
