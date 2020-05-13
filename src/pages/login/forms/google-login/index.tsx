@@ -24,7 +24,7 @@ const GoogleLogin: React.FC = (props: any) => {
     return (
         <>
             <BtnGoogle
-                clientId="156734380889-2ia01r8prno31as99nhrr1trv4t0vbtq.apps.googleusercontent.com"
+                clientId={`${process.env.REACT_APP_GOOGLE_ID}`}
                 buttonText="INGRESAR CON GOOGLE"
                 onSuccess={responseGoogle}
                 onFailure={responseGoogle}
