@@ -9,7 +9,7 @@ import ResponsiveMenu from '../../components/responsive/menu'
 import Logo from '../logo'
 
 type userType = {
-    name: string
+    first_name: string
     last_name: string
 }
 interface Iauth {
@@ -18,6 +18,7 @@ interface Iauth {
 }
 
 const Menu: React.FC<Iauth> = ({authenticated, currentUser}) => {
+    console.log(currentUser)
     return (
         <Grid fluid>
             <Row>
@@ -42,7 +43,7 @@ const Menu: React.FC<Iauth> = ({authenticated, currentUser}) => {
                     </Item>
                     {authenticated ? (
                         <Item>
-                            <UserMenu username={currentUser.name} />
+                            <UserMenu username={currentUser.first_name} />
                         </Item>
                     ) : (
                         <>
