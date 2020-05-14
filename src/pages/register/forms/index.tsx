@@ -32,13 +32,11 @@ const FormRegister: React.FC = () => {
 
     const onSubmit = handleSubmit(
         async ({firstName, lastName, email, password}) => {
-            await API.post(`/user/create/`, {
-                name: firstName,
+            await API.post(`/user`, {
+                first_name: firstName,
                 last_name: lastName,
                 email: email,
-                password: password,
-                dni: '123456',
-                cellphone: '123456'
+                password: password
             })
                 .then(resp => {
                     clearFields()
