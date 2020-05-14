@@ -15,7 +15,7 @@ export const Title = styled.h1`
 `
 
 export const Label = styled.label`
-    margin: 5%;
+    margin: 4%;
     float: left;
     width: 33%;
     position: relative;
@@ -81,4 +81,10 @@ export const InfoError = styled.p`
     text-align: center;
     text-transform: uppercase;
     font-size: 14px;
+`
+
+export const Line = styled.div`
+    width: 100%;
+    height: 5px;
+    overflow: hidden;
 `
