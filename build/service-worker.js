@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/ngelrojas/cotizate-front-v2/precache-manifest.57609784a479c1029b3cdae9481599e3.js"
+  "/ngelrojas/cotizate-front-v2/precache-manifest.f9bc113fc68c065f6f525fc97e9854ed.js"
 );
 
 self.addEventListener('message', (event) => {
