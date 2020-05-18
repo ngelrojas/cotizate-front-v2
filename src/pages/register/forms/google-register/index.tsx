@@ -9,13 +9,11 @@ const GoogleRegister: React.FC = () => {
 
     const responseGoogle = async (response: any) => {
         let res = response.profileObj
-        await API.post(`/user/create/`, {
-            name: res.givenName,
+        await API.post(`/user`, {
+            first_name: res.givenName,
             last_name: res.familyName,
             email: res.email,
-            password: res.email,
-            dni: '123456',
-            cellphone: '123456'
+            password: res.email
         })
             .then(res => {
                 setSuccess('enviamos un email para su confirmacion.')

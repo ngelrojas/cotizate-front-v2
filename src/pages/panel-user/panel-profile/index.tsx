@@ -4,6 +4,7 @@ import {useForm} from 'react-hook-form'
 import {Grid, Row, Col} from 'react-styled-flexboxgrid'
 import API from '../../../api'
 import Loading from '../../../components/loading'
+import UpdatePassword from './update-password'
 
 import {
     Content,
@@ -20,13 +21,9 @@ import {
 } from './styles'
 
 type profileType = {
-    name: string
+    first_name: string
     last_name: string
-    password: string
     email: string
-    dni: string
-    cellphone: string
-    address: string
 }
 
 interface Iauth {
@@ -42,38 +39,32 @@ const Profile: React.FC<Iauth> = ({authenticated, currentUser}) => {
     const {register, handleSubmit, errors} = useForm<profileType>({
         mode: 'onChange'
     })
-
-    const onSubmit = handleSubmit(
-        async ({name, last_name, dni, cellphone, address}) => {
-            await API.patch(
-                '/user/me/',
-                {
-                    name: name,
-                    last_name: last_name,
-                    dni: dni,
-                    cellphone: cellphone,
-                    address: address
-                },
-                {
-                    headers: {
-                        Authorization: 'token ' + token
-                    }
+    const onSubmit = handleSubmit(async ({first_name, last_name, email}) => {
+        await API.put(
+            '/user/25',
+            {
+                first_name: first_name,
+                last_name: last_name,
+                email: email
+            },
+            {
+                headers: {
+                    Authorization: 'Bearer ' + token
                 }
-            )
-                .then(resp => {
-                    setLoading(true)
-                    if (resp.status === 200) {
-                        setMsgSuccess('datos personales actualziados.')
-                        setLoading(false)
-                    }
-                })
-                .catch(err => {
-                    setMsgError(
-                        'no se guardo correctamente intentelo mas tarde.'
-                    )
-                })
-        }
-    )
+            }
+        )
+            .then(resp => {
+                setLoading(true)
+                if (resp.status === 200) {
+                    setMsgSuccess('datos personales actualziados.')
+                    setLoading(false)
+                }
+            })
+            .catch(err => {
+                console.log(err)
+                setMsgError('no se guardo correctamente intentelo mas tarde.')
+            })
+    })
     return (
         <Content>
             {authenticated ? (
@@ -89,15 +80,16 @@ const Profile: React.FC<Iauth> = ({authenticated, currentUser}) => {
                     </Row>
                     <Row>
                         <Form onSubmit={onSubmit}>
-                            <Label htmlFor="name">
+                            <Label htmlFor="first_name">
                                 <FormSubTitle>nombre</FormSubTitle>
                                 <ErrorInfo>
-                                    {errors.name && 'es obligatorio este dato.'}
+                                    {errors.first_name &&
+                                        'es obligatorio este dato.'}
                                 </ErrorInfo>
                                 <Input
-                                    name="name"
+                                    name="first_name"
                                     type="text"
-                                    defaultValue={currentUser.name}
+                                    defaultValue={currentUser.first_name}
                                     ref={register({required: true})}
                                     placeholder="Nombre"
                                 />
@@ -116,43 +108,6 @@ const Profile: React.FC<Iauth> = ({authenticated, currentUser}) => {
                                     placeholder="Nombre"
                                 />
                             </Label>
-                            <Label htmlFor="dni">
-                                <FormSubTitle>carnet de identidad</FormSubTitle>
-                                <ErrorInfo>
-                                    {errors.dni && 'es obligatorio este dato.'}
-                                </ErrorInfo>
-                                <Input
-                                    name="dni"
-                                    type="text"
-                                    defaultValue={currentUser.dni}
-                                    ref={register({required: true})}
-                                    placeholder="DNI"
-                                />
-                            </Label>
-                            <Label htmlFor="cellphone">
-                                <FormSubTitle>celular</FormSubTitle>
-                                <ErrorInfo>
-                                    {errors.cellphone &&
-                                        'es obligatorio este dato.'}
-                                </ErrorInfo>
-                                <Input
-                                    name="cellphone"
-                                    type="text"
-                                    defaultValue={currentUser.cellphone}
-                                    ref={register({required: true})}
-                                    placeholder="Numero de Celular"
-                                />
-                            </Label>
-                            <Label htmlFor="address">
-                                <FormSubTitle>direccion</FormSubTitle>
-                                <Input
-                                    name="address"
-                                    type="text"
-                                    defaultValue={currentUser.address}
-                                    ref={register}
-                                    placeholder="Direccion"
-                                />
-                            </Label>
                             <Label htmlFor="email">
                                 <FormSubTitle>email</FormSubTitle>
                                 <Input
@@ -166,8 +121,9 @@ const Profile: React.FC<Iauth> = ({authenticated, currentUser}) => {
                                     placeholder="Direccion"
                                 />
                             </Label>
+
                             <WrapBtn>
-                                <Btn type="submit">guardar</Btn>
+                                <Btn type="submit">actualizar</Btn>
                             </WrapBtn>
                             <WrapBtn>
                                 {loading ? <Loading message="guardando" /> : ''}
@@ -176,6 +132,8 @@ const Profile: React.FC<Iauth> = ({authenticated, currentUser}) => {
                             <InfoError>{msgError}</InfoError>
                         </Form>
                     </Row>
+
+                    <UpdatePassword />
                 </Grid>
             ) : (
                 <Grid>
@@ -194,4 +152,5 @@ const mapStateToProps = (state: any) => ({
     authenticated: state.user.authenticated,
     currentUser: state.user
 })
+
 export default connect(mapStateToProps)(Profile)
