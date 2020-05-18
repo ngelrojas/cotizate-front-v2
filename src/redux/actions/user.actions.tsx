@@ -23,7 +23,7 @@ export const loginUser = (userData: any, history: any) => (dispatch: any) => {
         .catch(err => {
             dispatch({
                 type: SET_ERRORS,
-                payload: err.response.data
+                payload: err
             })
         })
 }
@@ -31,7 +31,7 @@ export const loginUser = (userData: any, history: any) => (dispatch: any) => {
 export const getUserData = (token: any) => (dispatch: any) => {
     dispatch({type: LOADING_USER})
     API.get(`/user/25`, {
-        headers: {Authorization: 'Bearer ' + token}
+        headers: {Authorization: `Bearer ${token}`}
     })
         .then(resp => {
             dispatch({
@@ -51,4 +51,23 @@ export const logoutUser = () => (dispatch: any) => {
         type: SET_UNAUTHENTICATED,
         payload: null
     })
+}
+
+export const UpdateUserData = (updateData: any, token: any) => (
+    dispatch: any
+) => {
+    dispatch({type: LOADING_USER})
+    API.put(
+        `/user/25`,
+        {updateData},
+        {
+            headers: {Authorization: `Bearer +${token}`}
+        }
+    )
+        .then(resp => {
+            console.log(resp)
+        })
+        .catch(err => {
+            console.log(err)
+        })
 }

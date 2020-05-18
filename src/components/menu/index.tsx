@@ -18,7 +18,6 @@ interface Iauth {
 }
 
 const Menu: React.FC<Iauth> = ({authenticated, currentUser}) => {
-    console.log(currentUser)
     return (
         <Grid fluid>
             <Row>

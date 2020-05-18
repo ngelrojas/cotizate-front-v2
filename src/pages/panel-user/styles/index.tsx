@@ -35,5 +35,6 @@ export const TabPanels = styled(TabPanel)`
 
 export const TabLists = styled(TabList)`
     width: 25%;
-    float:left;
+    float: left;
+    cursor: pointer;
 `

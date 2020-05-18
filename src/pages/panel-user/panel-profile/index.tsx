@@ -4,6 +4,7 @@ import {useForm} from 'react-hook-form'
 import {Grid, Row, Col} from 'react-styled-flexboxgrid'
 import API from '../../../api'
 import Loading from '../../../components/loading'
+import UpdatePassword from './update-password'
 
 import {
     Content,
@@ -16,14 +17,12 @@ import {
     Btn,
     ErrorInfo,
     InfoSuccess,
-    InfoError,
-    Line
+    InfoError
 } from './styles'
 
 type profileType = {
     first_name: string
     last_name: string
-    password: string
     email: string
 }
 
@@ -37,40 +36,35 @@ const Profile: React.FC<Iauth> = ({authenticated, currentUser}) => {
     const [msgError, setMsgError] = React.useState('')
     const [loading, setLoading] = React.useState(false)
     let token = window.sessionStorage.getItem('token')
-    const {register, handleSubmit, errors, watch} = useForm<profileType>({
+    const {register, handleSubmit, errors} = useForm<profileType>({
         mode: 'onChange'
     })
-
-    const onSubmit = handleSubmit(
-        async ({first_name, last_name, password, email}) => {
-            await API.put(
-                '/user/25',
-                {
-                    first_name: first_name,
-                    last_name: last_name,
-                    email: email,
-                    password: password
-                },
-                {
-                    headers: {
-                        Authorization: 'token ' + token
-                    }
+    const onSubmit = handleSubmit(async ({first_name, last_name, email}) => {
+        await API.put(
+            '/user/25',
+            {
+                first_name: first_name,
+                last_name: last_name,
+                email: email
+            },
+            {
+                headers: {
+                    Authorization: 'Bearer ' + token
                 }
-            )
-                .then(resp => {
-                    setLoading(true)
-                    if (resp.status === 200) {
-                        setMsgSuccess('datos personales actualziados.')
-                        setLoading(false)
-                    }
-                })
-                .catch(err => {
-                    setMsgError(
-                        'no se guardo correctamente intentelo mas tarde.'
-                    )
-                })
-        }
-    )
+            }
+        )
+            .then(resp => {
+                setLoading(true)
+                if (resp.status === 200) {
+                    setMsgSuccess('datos personales actualziados.')
+                    setLoading(false)
+                }
+            })
+            .catch(err => {
+                console.log(err)
+                setMsgError('no se guardo correctamente intentelo mas tarde.')
+            })
+    })
     return (
         <Content>
             {authenticated ? (
@@ -86,14 +80,14 @@ const Profile: React.FC<Iauth> = ({authenticated, currentUser}) => {
                     </Row>
                     <Row>
                         <Form onSubmit={onSubmit}>
-                            <Label htmlFor="name">
+                            <Label htmlFor="first_name">
                                 <FormSubTitle>nombre</FormSubTitle>
                                 <ErrorInfo>
                                     {errors.first_name &&
                                         'es obligatorio este dato.'}
                                 </ErrorInfo>
                                 <Input
-                                    name="name"
+                                    name="first_name"
                                     type="text"
                                     defaultValue={currentUser.first_name}
                                     ref={register({required: true})}
@@ -127,26 +121,7 @@ const Profile: React.FC<Iauth> = ({authenticated, currentUser}) => {
                                     placeholder="Direccion"
                                 />
                             </Label>
-                            <Line />
-                            <Label htmlFor="password">
-                                <FormSubTitle>Contrasena</FormSubTitle>
-                                <Input
-                                    name="password"
-                                    type="password"
-                                    placeholder="Contrasena"
-                                />
-                            </Label>
-                            <Label htmlFor="password_repeat">
-                                <FormSubTitle>repetir contrasena</FormSubTitle>
-                                <Input
-                                    name="password_repeat"
-                                    type="password"
-                                    ref={register({
-                                        validate: value => watch('password')
-                                    })}
-                                    placeholder="Repetir contrasena"
-                                />
-                            </Label>
+
                             <WrapBtn>
                                 <Btn type="submit">actualizar</Btn>
                             </WrapBtn>
@@ -157,6 +132,8 @@ const Profile: React.FC<Iauth> = ({authenticated, currentUser}) => {
                             <InfoError>{msgError}</InfoError>
                         </Form>
                     </Row>
+
+                    <UpdatePassword />
                 </Grid>
             ) : (
                 <Grid>
@@ -175,4 +152,5 @@ const mapStateToProps = (state: any) => ({
     authenticated: state.user.authenticated,
     currentUser: state.user
 })
+
 export default connect(mapStateToProps)(Profile)
