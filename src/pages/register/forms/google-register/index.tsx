@@ -10,7 +10,7 @@ const GoogleRegister: React.FC = () => {
     const responseGoogle = async (response: any) => {
         let res = response.profileObj
         await API.post(`/user`, {
-            first_name: res.givenName,
+            first_name: res.name,
             last_name: res.familyName,
             email: res.email,
             password: res.email
@@ -31,6 +31,7 @@ const GoogleRegister: React.FC = () => {
                 buttonText="REGISTRARSE CON GOOGLE"
                 onSuccess={responseGoogle}
                 onFailure={responseGoogle}
+                cookiePolicy={'single_host_origin'}
             ></BtnGoogle>
             <SuccessInfo>{success}</SuccessInfo>
             <WarningInfo>{warning}</WarningInfo>

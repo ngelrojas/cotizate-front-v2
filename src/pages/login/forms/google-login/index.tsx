@@ -28,6 +28,7 @@ const GoogleLogin: React.FC = (props: any) => {
                 buttonText="INGRESAR CON GOOGLE"
                 onSuccess={responseGoogle}
                 onFailure={responseGoogle}
+                cookiePolicy={'single_host_origin'}
             ></BtnGoogle>
         </>
     )
