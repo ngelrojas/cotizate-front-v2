@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "1b415676a9b8f3454270d96cd729e1db",
+    "revision": "d924db8cf095d54d2276ee3d681eade1",
     "url": "/ngelrojas/cotizate-front-v2/index.html"
   },
   {
@@ -12,8 +12,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/ngelrojas/cotizate-front-v2/static/js/2.99d283c2.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "feef50a477cd18664d49",
-    "url": "/ngelrojas/cotizate-front-v2/static/js/main.2a6060f0.chunk.js"
+    "revision": "22de20319d8f9420de93",
+    "url": "/ngelrojas/cotizate-front-v2/static/js/main.eda0a97e.chunk.js"
   },
   {
     "revision": "3350403923f1d7ea0c43",
