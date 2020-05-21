@@ -11,7 +11,7 @@ import {PANEL_USER} from '../panels'
 
 export const loginUser = (userData: any, history: any) => (dispatch: any) => {
     dispatch({type: LOADING_UI})
-    API.post('/auth', userData)
+    API.post('auth', userData)
         .then(resp => {
             const token = `Bearer ${resp.data.token}`
             window.sessionStorage.setItem('token', resp.data.token)
@@ -30,7 +30,7 @@ export const loginUser = (userData: any, history: any) => (dispatch: any) => {
 
 export const getUserData = (token: any) => (dispatch: any) => {
     dispatch({type: LOADING_USER})
-    API.get(`/user/25`, {
+    API.get(`user/25`, {
         headers: {Authorization: `Bearer ${token}`}
     })
         .then(resp => {
@@ -58,7 +58,7 @@ export const UpdateUserData = (updateData: any, token: any) => (
 ) => {
     dispatch({type: LOADING_USER})
     API.put(
-        `/user/25`,
+        `user/25`,
         {updateData},
         {
             headers: {Authorization: `Bearer +${token}`}

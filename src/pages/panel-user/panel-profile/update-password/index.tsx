@@ -32,7 +32,7 @@ const UpdatePassword: React.FC = () => {
 
     const onSubmit = handleSubmit(async ({password}) => {
         await API.put(
-            '/user/25',
+            'user/25',
             {
                 password: password
             },

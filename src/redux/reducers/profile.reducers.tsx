@@ -1,4 +1,4 @@
-import {SET_PROFILE} from '../types'
+import {GET_PROFILE} from '../types'
 
 const initialState = {
     authenticated: false,
@@ -8,11 +8,9 @@ const initialState = {
 
 export default function(state = initialState, action: any) {
     switch (action.type) {
-        case SET_PROFILE:
+        case GET_PROFILE:
             return {
-                authenticated: true,
-                loading: false,
-                ...action.payload
+                ...state
             }
         default:
             return state

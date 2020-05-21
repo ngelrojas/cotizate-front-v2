@@ -7,4 +7,4 @@ export const SET_ERRORS = 'SET_ERRORS'
 export const LOADING_UI = 'LOADING_UI'
 export const CLEAR_ERRORS = 'CLEAR_ERRORS'
 
-export const SET_PROFILE = 'SET_PROFILE'
+export const GET_PROFILE = 'GET_PROFILE'
