@@ -152,5 +152,4 @@ const mapStateToProps = (state: any) => ({
     authenticated: state.user.authenticated,
     currentUser: state.user
 })
-
 export default connect(mapStateToProps)(Profile)

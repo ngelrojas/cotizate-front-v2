@@ -4,6 +4,7 @@ import {useForm} from 'react-hook-form'
 import {Grid, Row, Col} from 'react-styled-flexboxgrid'
 import API from '../../../api'
 import Loading from '../../../components/loading'
+
 import {
     Content,
     Title,
@@ -33,32 +34,46 @@ type profileType = {
 
 interface Iauth {
     authenticated: boolean
-    currentUser: profileType
+    currentUserP: profileType
 }
 
-const ProfilePersonal: React.FC<Iauth> = ({authenticated, currentUser}) => {
+const ProfilePersonal: React.FC<Iauth> = ({authenticated, currentUserP}) => {
     const [msgSuccess, setMsgSuccess] = React.useState('')
     const [msgError, setMsgError] = React.useState('')
     const [loading, setLoading] = React.useState(false)
+    const [currentProfile, setCurrentProfile] = React.useState()
     let token = window.sessionStorage.getItem('token')
     const {register, handleSubmit, errors} = useForm<profileType>({
         mode: 'onChange'
     })
-
-    const load = () => {
-        API.get('personal/profile', {
+    const onSubmit = handleSubmit(
+        async ({
+            address,
+            dni,
+            country,
+            city,
+            cellphone,
+            current_position,
+            current_city,
+            head_line,
+            birthdate,
+            age
+        }) => {
+            console.log('here in submit personal profile')
+        }
+    )
+    React.useEffect(() => {
+        API.get(`personal/profile/25`, {
             headers: {Authorization: `Bearer ${token}`}
         })
             .then(resp => {
-                console.log(resp)
+                setCurrentProfile(resp.data.data)
+                console.log(resp.data.data)
             })
             .catch(err => {
                 console.log(err)
             })
-    }
-    React.useEffect(() => {
-        load()
-    })
+    }, [])
     return (
         <Content>
             {authenticated ? (
@@ -73,7 +88,175 @@ const ProfilePersonal: React.FC<Iauth> = ({authenticated, currentUser}) => {
                         </Col>
                     </Row>
                     <Row>
-                        <h1>content</h1>
+                        <Form onSubmit={onSubmit}>
+                            <Label htmlFor="address">
+                                <FormSubTitle>Direccion</FormSubTitle>
+                                <ErrorInfo>
+                                    {errors.address &&
+                                        'es obligatorio este dato.'}
+                                </ErrorInfo>
+                                <Input
+                                    name="address"
+                                    type="text"
+                                    defaultValue={
+                                        currentProfile
+                                            ? currentProfile.address
+                                            : ''
+                                    }
+                                    ref={register({required: true})}
+                                    placeholder="DIRECCION"
+                                />
+                            </Label>
+                            <Label htmlFor="dni">
+                                <FormSubTitle>cedula de identidad</FormSubTitle>
+                                <ErrorInfo>
+                                    {errors.dni && 'es obligatorio este dato.'}
+                                </ErrorInfo>
+                                <Input
+                                    name="dni"
+                                    type="text"
+                                    defaultValue={
+                                        currentProfile ? currentProfile.dni : ''
+                                    }
+                                    ref={register({required: true})}
+                                    placeholder="CEDULA DE IDENTIDAD"
+                                />
+                            </Label>
+                            <Label htmlFor="country">
+                                <FormSubTitle>pais</FormSubTitle>
+                                <Input
+                                    name="country"
+                                    type="text"
+                                    defaultValue={
+                                        currentProfile
+                                            ? currentProfile.country
+                                            : ''
+                                    }
+                                    ref={register({
+                                        required: true
+                                    })}
+                                    placeholder="PAIS"
+                                />
+                            </Label>
+                            <Label htmlFor="city">
+                                <FormSubTitle>ciudad</FormSubTitle>
+                                <Input
+                                    name="city"
+                                    type="text"
+                                    defaultValue={
+                                        currentProfile
+                                            ? currentProfile.city
+                                            : ''
+                                    }
+                                    ref={register({
+                                        required: true
+                                    })}
+                                    placeholder="CIUDAD"
+                                />
+                            </Label>
+                            <Label htmlFor="cellphone">
+                                <FormSubTitle>Celular</FormSubTitle>
+                                <Input
+                                    name="cellphone"
+                                    type="text"
+                                    defaultValue={
+                                        currentProfile
+                                            ? currentProfile.cellphone
+                                            : ''
+                                    }
+                                    ref={register({
+                                        required: true
+                                    })}
+                                    placeholder="CELULAR"
+                                />
+                            </Label>
+                            <Label htmlFor="current_position">
+                                <FormSubTitle>pocision actual</FormSubTitle>
+                                <Input
+                                    name="current_position"
+                                    type="text"
+                                    defaultValue={
+                                        currentProfile
+                                            ? currentProfile.current_position
+                                            : ''
+                                    }
+                                    ref={register({
+                                        required: true
+                                    })}
+                                    placeholder="POCISION ACTUAL"
+                                />
+                            </Label>
+                            <Label htmlFor="current_city">
+                                <FormSubTitle>ciudad actual</FormSubTitle>
+                                <Input
+                                    name="current_city"
+                                    type="text"
+                                    defaultValue={
+                                        currentProfile
+                                            ? currentProfile.current_city
+                                            : ''
+                                    }
+                                    ref={register({
+                                        required: true
+                                    })}
+                                    placeholder="CIUDAD ACTUAL"
+                                />
+                            </Label>
+                            <Label htmlFor="head_line">
+                                <FormSubTitle>profesion</FormSubTitle>
+                                <Input
+                                    name="head_line"
+                                    type="text"
+                                    defaultValue={
+                                        currentProfile
+                                            ? currentProfile.headline
+                                            : ''
+                                    }
+                                    ref={register({
+                                        required: true
+                                    })}
+                                    placeholder="PROFESION"
+                                />
+                            </Label>
+                            <Label htmlFor="birthdate">
+                                <FormSubTitle>fecha de nacimiento</FormSubTitle>
+                                <Input
+                                    name="bithdate"
+                                    type="text"
+                                    defaultValue={
+                                        currentProfile
+                                            ? currentProfile.birthdate
+                                            : ''
+                                    }
+                                    ref={register({
+                                        required: true
+                                    })}
+                                    placeholder="FECHA DE NACIMIENTO"
+                                />
+                            </Label>
+                            <Label htmlFor="age">
+                                <FormSubTitle>Edad</FormSubTitle>
+                                <Input
+                                    name="age"
+                                    type="text"
+                                    defaultValue={
+                                        currentProfile ? currentProfile.age : ''
+                                    }
+                                    ref={register({
+                                        required: true
+                                    })}
+                                    placeholder="EDAD"
+                                />
+                            </Label>
+                            <WrapBtn>
+                                <Btn type="submit">actualizar</Btn>
+                            </WrapBtn>
+                            <WrapBtn>
+                                {loading ? <Loading message="guardando" /> : ''}
+                            </WrapBtn>
+                            <InfoSuccess>{msgSuccess}</InfoSuccess>
+                            <InfoError>{msgError}</InfoError>
+                        </Form>
                     </Row>
                 </Grid>
             ) : (
@@ -91,6 +274,6 @@ const ProfilePersonal: React.FC<Iauth> = ({authenticated, currentUser}) => {
 
 const mapStateToProps = (state: any) => ({
     authenticated: state.user.authenticated,
-    currentUser: state.profile
+    currentUserP: state.profile
 })
 export default connect(mapStateToProps)(ProfilePersonal)
