@@ -2,6 +2,7 @@ import React from 'react'
 import {Grid, Row} from 'react-styled-flexboxgrid'
 import Profile from './panel-profile'
 import ProfilePersonal from './panel-personal'
+import ProfileCompany from './panel-company'
 import {Content, TabItem, TabContent, TabPanels, TabLists} from './styles'
 
 const PanelUser: React.FC = () => {
@@ -22,7 +23,9 @@ const PanelUser: React.FC = () => {
                         <TabPanels>
                             <ProfilePersonal />
                         </TabPanels>
-                        <TabPanels>datos de empresa</TabPanels>
+                        <TabPanels>
+                            <ProfileCompany />
+                        </TabPanels>
                         <TabPanels>mis proyectos</TabPanels>
                     </TabContent>
                 </Row>

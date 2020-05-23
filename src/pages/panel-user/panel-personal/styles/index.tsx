@@ -54,9 +54,10 @@ export const Btn = styled.button`
     background-color: #007bff;
     padding: 1%;
     color: #fff;
-    width: 78%;
+    width: 74%;
     text-transform: uppercase;
     cursor: pointer;
+    margin-top: 10%;
 `
 
 export const ErrorInfo = styled.span`
@@ -74,6 +75,8 @@ export const InfoSuccess = styled.p`
     text-align: center;
     text-transform: uppercase;
     font-size: 14px;
+    font-weight: 410;
+    width: 84%;
 `
 
 export const InfoError = styled.p`
