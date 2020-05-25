@@ -41,7 +41,7 @@ const Profile: React.FC<Iauth> = ({authenticated, currentUser}) => {
     })
     const onSubmit = handleSubmit(async ({first_name, last_name, email}) => {
         await API.put(
-            '/user/25',
+            'user/25',
             {
                 first_name: first_name,
                 last_name: last_name,
@@ -152,5 +152,4 @@ const mapStateToProps = (state: any) => ({
     authenticated: state.user.authenticated,
     currentUser: state.user
 })
-
 export default connect(mapStateToProps)(Profile)

@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 export const WrapDots = styled.p`
     text-align: center;
-    color: orange;
+    color: blue;
 `
 export const Dots = styled.span`
     &::after {

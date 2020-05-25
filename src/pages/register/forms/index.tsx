@@ -32,7 +32,7 @@ const FormRegister: React.FC = () => {
 
     const onSubmit = handleSubmit(
         async ({firstName, lastName, email, password}) => {
-            await API.post(`/user`, {
+            await API.post(`user`, {
                 first_name: firstName,
                 last_name: lastName,
                 email: email,
