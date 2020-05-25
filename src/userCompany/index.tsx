@@ -34,4 +34,16 @@ export class CompanyProfile {
         })
         return this.resp_company
     }
+
+    /*
+     * update current company profile
+     * */
+    updateCompanyProfile = async (data_id: number, data_send: any) => {
+        this.resp_company = await API.put(
+            `company/profile/${data_id}`,
+            data_send,
+            {headers: {Authorization: `Bearer ${this.token}`}}
+        )
+        return this.resp_company
+    }
 }

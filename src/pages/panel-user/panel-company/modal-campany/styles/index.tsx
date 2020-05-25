@@ -12,6 +12,7 @@ export const BtnUpdate = styled.button`
         cursor: pointer;
     }
 `
+
 export const Form = styled.form`
     width: 100%;
 `
@@ -59,4 +60,23 @@ export const BtnClose = styled.button`
     color: #dddddd;
     width: 3%;
     border-radius: 50%;
+`
+
+export const MsgError = styled.span`
+    position: absolute;
+    color: red;
+    text-align: center;
+    width: 100%;
+    left: 3%;
+    top: 100%;
+`
+export const BreakLine = styled.div`
+    width: 100%;
+    overflow: hidden;
+`
+
+export const H4 = styled.h3`
+    text-transform: uppercase;
+    text-align: center;
+    color: #007bff;
 `

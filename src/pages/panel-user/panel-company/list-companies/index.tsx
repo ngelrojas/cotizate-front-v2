@@ -43,7 +43,7 @@ const ListCompanies: React.FC = () => {
                         <tbody>
                             {companies ? (
                                 companies.map((company: any) => (
-                                    <tr>
+                                    <tr key={company.id}>
                                         <Td>{company.name}</Td>
                                         <Td>{company.address}</Td>
                                         <Td>{company.email_company}</Td>
@@ -69,7 +69,11 @@ const ListCompanies: React.FC = () => {
                                     </tr>
                                 ))
                             ) : (
-                                <Loading message="cargando info" />
+                                <tr>
+                                    <Td>
+                                        <Loading message="cargando info" />
+                                    </Td>
+                                </tr>
                             )}
                         </tbody>
                     ) : (
