@@ -1,19 +1,19 @@
 {
   "files": {
-    "main.js": "/ngelrojas/cotizate-front-v2/static/js/main.eda0a97e.chunk.js",
-    "main.js.map": "/ngelrojas/cotizate-front-v2/static/js/main.eda0a97e.chunk.js.map",
+    "main.js": "/ngelrojas/cotizate-front-v2/static/js/main.22e32dd3.chunk.js",
+    "main.js.map": "/ngelrojas/cotizate-front-v2/static/js/main.22e32dd3.chunk.js.map",
     "runtime-main.js": "/ngelrojas/cotizate-front-v2/static/js/runtime-main.f15f3533.js",
     "runtime-main.js.map": "/ngelrojas/cotizate-front-v2/static/js/runtime-main.f15f3533.js.map",
-    "static/js/2.99d283c2.chunk.js": "/ngelrojas/cotizate-front-v2/static/js/2.99d283c2.chunk.js",
-    "static/js/2.99d283c2.chunk.js.map": "/ngelrojas/cotizate-front-v2/static/js/2.99d283c2.chunk.js.map",
+    "static/js/2.969db34e.chunk.js": "/ngelrojas/cotizate-front-v2/static/js/2.969db34e.chunk.js",
+    "static/js/2.969db34e.chunk.js.map": "/ngelrojas/cotizate-front-v2/static/js/2.969db34e.chunk.js.map",
     "index.html": "/ngelrojas/cotizate-front-v2/index.html",
-    "precache-manifest.d1f1a7e240e43f895a1ad7e9d3bb317a.js": "/ngelrojas/cotizate-front-v2/precache-manifest.d1f1a7e240e43f895a1ad7e9d3bb317a.js",
+    "precache-manifest.06adedfa2c021b70b2fc609415b38ae4.js": "/ngelrojas/cotizate-front-v2/precache-manifest.06adedfa2c021b70b2fc609415b38ae4.js",
     "service-worker.js": "/ngelrojas/cotizate-front-v2/service-worker.js",
-    "static/js/2.99d283c2.chunk.js.LICENSE.txt": "/ngelrojas/cotizate-front-v2/static/js/2.99d283c2.chunk.js.LICENSE.txt"
+    "static/js/2.969db34e.chunk.js.LICENSE.txt": "/ngelrojas/cotizate-front-v2/static/js/2.969db34e.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.f15f3533.js",
-    "static/js/2.99d283c2.chunk.js",
-    "static/js/main.eda0a97e.chunk.js"
+    "static/js/2.969db34e.chunk.js",
+    "static/js/main.22e32dd3.chunk.js"
   ]
 }
