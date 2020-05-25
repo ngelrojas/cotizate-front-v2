@@ -39,27 +39,6 @@ export const Btn = styled.button`
 `
 
 export const BtnCreate = styled(Btn)`
-    width: 74%;
+    width: 30%;
     background-color: #007bff;
-`
-
-export const BtnUpdate = styled(Btn)`
-    background-color: orange;
-`
-
-export const BtnDelete = styled(Btn)`
-    background-color: red;
-`
-export const Table = styled.table`
-    margin-top: 5%;
-    width: 100%;
-`
-
-export const Th = styled.th`
-    color: #007bff;
-    text-align: center;
-`
-
-export const Td = styled.td`
-    padding-top: 2%;
 `

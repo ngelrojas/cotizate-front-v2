@@ -1,19 +1,9 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {useHistory} from 'react-router-dom'
 import {Grid, Row, Col} from 'react-styled-flexboxgrid'
-import Loading from '../../../components/loading'
-import {
-    Content,
-    Title,
-    WrapBtn,
-    BtnCreate,
-    BtnUpdate,
-    BtnDelete,
-    Table,
-    Th,
-    Td
-} from './styles'
+import ListCompanies from './list-companies'
+import {Content, Title, BtnCreate} from './styles'
+import CreateCompany from './create-company'
 
 type profileType = {
     first_name: string
@@ -27,10 +17,10 @@ interface Iauth {
 }
 
 const ProfileCompany: React.FC<Iauth> = ({authenticated, currentUser}) => {
-    const [loading, setLoading] = React.useState(false)
-    let history = useHistory()
-    const handleGo = () => {
-        history.push('panel-de-usuario/crear-compania')
+    const [showform, setShowform] = React.useState(false)
+
+    const handleCreate = () => {
+        setShowform(true)
     }
     return (
         <Content>
@@ -40,44 +30,18 @@ const ProfileCompany: React.FC<Iauth> = ({authenticated, currentUser}) => {
                         <Col xs={12}>
                             <Row center="xs">
                                 <Col xs={6}>
-                                    <Title>Companias</Title>
+                                    <Title>Compania</Title>
                                 </Col>
                             </Row>
                         </Col>
                     </Row>
                     <Row>
-                        <WrapBtn>
-                            <BtnCreate onClick={handleGo}>
-                                crear compania
-                            </BtnCreate>
-                        </WrapBtn>
+                        <BtnCreate onClick={handleCreate}>
+                            crear empresa/compania
+                        </BtnCreate>
                     </Row>
                     <Row>
-                        <Table>
-                            <thead>
-                                <tr>
-                                    <Th>COMPANIA</Th>
-                                    <Th>DIRECCION</Th>
-                                    <Th>EMAIL</Th>
-                                    <Th>PHONE</Th>
-                                    <Th>OPCIONES</Th>
-                                </tr>
-                            </thead>
-
-                            <tbody>
-                                <tr>
-                                    <Td>mi compania</Td>
-                                    <Td>mi direccion</Td>
-                                    <Td>compony@gmail.com</Td>
-                                    <Td>123456789</Td>
-                                    <Td>
-                                        <BtnUpdate>actualizar</BtnUpdate>
-
-                                        <BtnDelete>eliminar</BtnDelete>
-                                    </Td>
-                                </tr>
-                            </tbody>
-                        </Table>
+                        {!showform ? <ListCompanies /> : <CreateCompany />}
                     </Row>
                 </Grid>
             ) : (
