@@ -46,4 +46,14 @@ export class CompanyProfile {
         )
         return this.resp_company
     }
+
+    /*
+     * delete current company profile
+     * */
+    deleteCompanyProfile = async (data_id: number) => {
+        this.resp_company = await API.delete(`company/profile/${data_id}`, {
+            headers: {Authorization: `Bearer ${this.token}`}
+        })
+        return this.resp_company
+    }
 }

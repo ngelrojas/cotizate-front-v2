@@ -1,5 +1,6 @@
 import React from 'react'
 import Modal from 'react-modal'
+import {useHistory} from 'react-router-dom'
 import {useForm} from 'react-hook-form'
 import {
     BtnUpdate,
@@ -12,17 +13,18 @@ import {
     BtnClose,
     MsgError,
     BreakLine,
-    H4
+    H4,
+    MsgSuccess
 } from './styles'
 import {CompanyProfile} from '../../../../userCompany'
 
 const customStyles = {
     content: {
         top: '50%',
-        left: '50%',
+        left: '60%',
         right: 'auto',
         bottom: 'auto',
-        transform: 'translate(-50%, -50%)'
+        transform: 'translate(-75%, -50%)'
     }
 }
 
@@ -43,6 +45,8 @@ type FormData = {
 
 const ModalCompany: React.FC<GetData> = props => {
     const [modalIsOpen, setIsOpen] = React.useState(false)
+    const [msgSuccess, setMsgSuccess] = React.useState('')
+    let history = useHistory()
     const {register, handleSubmit, errors} = useForm<FormData>({
         mode: 'onChange'
     })
@@ -78,7 +82,7 @@ const ModalCompany: React.FC<GetData> = props => {
             comProfile
                 .updateCompanyProfile(props.data_company.id, data_send)
                 .then(resp => {
-                    console.log(resp)
+                    setMsgSuccess('sus datos fueron actualizados.')
                 })
                 .catch(err => {
                     console.log(err)
@@ -214,6 +218,9 @@ const ModalCompany: React.FC<GetData> = props => {
                                 defaultChecked={props.data_company.represent}
                             />
                         </Label>
+                    </BreakLine>
+                    <BreakLine>
+                        <MsgSuccess>{msgSuccess}</MsgSuccess>
                     </BreakLine>
                     <WrapBtn>
                         <BtnSave>actualizar</BtnSave>

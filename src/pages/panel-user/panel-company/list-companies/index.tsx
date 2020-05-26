@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {FormEvent} from 'react'
 import {Grid, Row} from 'react-styled-flexboxgrid'
 import Loading from '../../../../components/loading'
 import ModalCompany from '../modal-campany'
@@ -61,7 +61,9 @@ const ListCompanies: React.FC = () => {
                                             />
 
                                             <BtnDelete
-                                                to={`eliminar/${company.id}`}
+                                                onClick={() =>
+                                                    alert(company.id)
+                                                }
                                             >
                                                 eliminar
                                             </BtnDelete>

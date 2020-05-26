@@ -80,3 +80,8 @@ export const H4 = styled.h3`
     text-align: center;
     color: #007bff;
 `
+
+export const MsgSuccess = styled.p`
+    text-align: center;
+    color: green;
+`
