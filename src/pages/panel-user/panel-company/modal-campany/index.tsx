@@ -1,6 +1,5 @@
 import React from 'react'
 import Modal from 'react-modal'
-import {useHistory} from 'react-router-dom'
 import {useForm} from 'react-hook-form'
 import {
     BtnUpdate,
@@ -46,7 +45,6 @@ type FormData = {
 const ModalCompany: React.FC<GetData> = props => {
     const [modalIsOpen, setIsOpen] = React.useState(false)
     const [msgSuccess, setMsgSuccess] = React.useState('')
-    let history = useHistory()
     const {register, handleSubmit, errors} = useForm<FormData>({
         mode: 'onChange'
     })

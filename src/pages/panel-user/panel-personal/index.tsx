@@ -47,7 +47,7 @@ const ProfilePersonal: React.FC<Iauth> = ({authenticated, currentUserP}) => {
         mode: 'onChange'
     })
 
-    React.useEffect(() => {
+    React.useEffect((): void => {
         resp.getPersonalProfile().then(res => {
             setLoading(true)
             setCurrentProfile(res.data.data)
