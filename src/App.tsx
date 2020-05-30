@@ -12,6 +12,7 @@ import RecoveryPassword from './pages/recovery-password'
 import ConfirmPassword from './pages/confirm-password'
 import Confirmation from './pages/confirmation'
 import PanelUser from './pages/panel-user'
+import PanelCampaing from './pages/panel-user/panel-campaings'
 import PageNotFound from './pages/404'
 import {CheckAuthentication} from './redux/auth'
 
@@ -58,6 +59,11 @@ const App: React.FC = () => {
                         exact
                         path="/panel-de-usuario"
                         component={PanelUser}
+                    />
+                    <Route
+                        exact
+                        path="/panel-de-usuario/proyectos"
+                        component={PanelCampaing}
                     />
                     <Route component={PageNotFound} />
                 </Switch>

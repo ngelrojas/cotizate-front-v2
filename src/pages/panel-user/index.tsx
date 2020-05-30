@@ -15,7 +15,6 @@ const PanelUser: React.FC = () => {
                             <TabItem>datos personales</TabItem>
                             <TabItem>perfil personal</TabItem>
                             <TabItem>datos de empresa</TabItem>
-                            <TabItem>mis proyectos</TabItem>
                         </TabLists>
                         <TabPanels>
                             <Profile />
@@ -26,7 +25,6 @@ const PanelUser: React.FC = () => {
                         <TabPanels>
                             <ProfileCompany />
                         </TabPanels>
-                        <TabPanels>mis proyectos</TabPanels>
                     </TabContent>
                 </Row>
             </Grid>

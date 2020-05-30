@@ -22,7 +22,7 @@ const UserMenu: React.FC<Iusername> = props => {
                         <Go to="/create-proyectos">crear proyectos</Go>
                     </Item>
                     <Item>
-                        <Go to="/mis-proyectos">mis proyectos</Go>
+                        <Go to="/panel-de-usuario/proyectos">mis proyectos</Go>
                     </Item>
                     <Item>
                         <button type="button" onClick={logOut}>
