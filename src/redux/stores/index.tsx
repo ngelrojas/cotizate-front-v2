@@ -1,16 +1,21 @@
-import {createStore, combineReducers, applyMiddleware, compose} from 'redux'
-import thunk from 'redux-thunk'
+import {
+    createStore,
+    combineReducers /*, applyMiddleware, compose*/
+} from 'redux'
+
+// import thunk from 'redux-thunk'
+
 import userReducer from '../reducers/user.reducers'
 import uiReducer from '../reducers/ui.reducers'
 
 const initialState = {}
-const middleware = [thunk]
+// const middleware = [thunk]
 
-declare global {
+/*declare global {
     interface Window {
         __REDUX_DEVTOOLS_EXTENSION__?: typeof compose
     }
-}
+}*/
 
 const reducer = combineReducers({
     user: userReducer,
@@ -19,12 +24,12 @@ const reducer = combineReducers({
 
 const store = createStore(
     reducer,
-    initialState,
-    compose(
+    initialState
+    /* compose(
         applyMiddleware(...middleware),
         window.__REDUX_DEVTOOLS_EXTENSION__ &&
             (window.__REDUX_DEVTOOLS_EXTENSION__() as any)
-    )
+)*/
 )
 
 export default store
