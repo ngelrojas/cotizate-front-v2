@@ -1,8 +1,8 @@
 import styled from 'styled-components'
 import {MdHighlightOff} from 'react-icons/md'
 
-export const BtnUpdate = styled.button`
-    background-color: orange;
+export const BtnDelete = styled.button`
+    background-color: red;
     padding: 2%;
     color: #dddddd;
     text-decoration: none;
@@ -49,7 +49,7 @@ export const WrapBtn = styled.div`
 `
 
 export const BtnSave = styled.button`
-    background-color: blue;
+    background-color: red;
     color: #fff;
     width: 100%;
     text-transform: uppercase;
@@ -60,7 +60,7 @@ export const BtnClose = styled.button`
     background-color: white;
 `
 
-export const IconClose = styled(MdHighlightOff)`
+export const IconClose =styled(MdHighlightOff)`
     color: red;
     font-size: 21px;
 `

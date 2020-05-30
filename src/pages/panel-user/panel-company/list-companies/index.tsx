@@ -2,7 +2,8 @@ import React from 'react'
 import {Grid, Row} from 'react-styled-flexboxgrid'
 import Loading from '../../../../components/loading'
 import ModalCompany from '../modal-campany'
-import {Table, Th, Td, BtnDelete, Activate, NotActivate} from './styles'
+import ModalCompanyDelete from '../modal-campany-delete'
+import {Table, Th, Td, Activate, NotActivate} from './styles'
 import {CompanyProfile} from '../../../../userCompany'
 
 const ListCompanies: React.FC = () => {
@@ -10,7 +11,6 @@ const ListCompanies: React.FC = () => {
     const [isData, setIsData] = React.useState(true)
     let token = window.sessionStorage.getItem('token')
     const comProfile = new CompanyProfile(token)
-
     React.useEffect(() => {
         comProfile
             .getCompanyProfile()
@@ -59,12 +59,9 @@ const ListCompanies: React.FC = () => {
                                             <ModalCompany
                                                 data_company={company}
                                             />
-
-                                            <BtnDelete
-                                                to={`eliminar/${company.id}`}
-                                            >
-                                                eliminar
-                                            </BtnDelete>
+                                            <ModalCompanyDelete
+                                                data_company={company}
+                                            />
                                         </Td>
                                     </tr>
                                 ))

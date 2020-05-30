@@ -2,7 +2,6 @@ import {createStore, combineReducers, applyMiddleware, compose} from 'redux'
 import thunk from 'redux-thunk'
 import userReducer from '../reducers/user.reducers'
 import uiReducer from '../reducers/ui.reducers'
-import profileReducer from '../reducers/profile.reducers'
 
 const initialState = {}
 const middleware = [thunk]
@@ -15,8 +14,7 @@ declare global {
 
 const reducer = combineReducers({
     user: userReducer,
-    UI: uiReducer,
-    profile: profileReducer
+    UI: uiReducer
 })
 
 const store = createStore(

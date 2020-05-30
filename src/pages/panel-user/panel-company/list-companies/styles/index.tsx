@@ -26,7 +26,7 @@ export const BtnUpdate = styled(Link)`
     font-weight: 410;
 `
 
-export const BtnDelete = styled(Link)`
+export const BtnDelete = styled.button`
     background-color: red;
     padding: 2%;
     color: #dddddd;
