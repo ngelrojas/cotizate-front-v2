@@ -1,6 +1,5 @@
 import React from 'react'
 import {useForm} from 'react-hook-form'
-import {useHistory} from 'react-router-dom'
 import Loading from '../../../../components/loading'
 import {CompanyProfile} from '../../../../userCompany'
 
@@ -34,7 +33,6 @@ const CreateCompany: React.FC = () => {
     const {register, handleSubmit, errors} = useForm<FormData>({
         mode: 'onChange'
     })
-    let history = useHistory()
     let token = window.sessionStorage.getItem('token')
     let createComp = new CompanyProfile(token)
 

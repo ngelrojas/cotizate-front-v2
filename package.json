@@ -1,8 +1,8 @@
 {
-    "name": "cotizate-front-v2",
+    "name": "cotizate",
     "version": "0.1.0",
-    "private": true,
-    "homepage": "https://github.com/ngelrojas/cotizate-front-v2",
+    "private": false,
+    "homepage": "http://cotizate.com",
     "dependencies": {
         "@testing-library/jest-dom": "^4.2.4",
         "@testing-library/react": "^9.5.0",
@@ -50,11 +50,7 @@
         "extends": "react-app"
     },
     "browserslist": {
-        "production": [
-            ">0.2%",
-            "not dead",
-            "not op_mini all"
-        ],
+        "production": [">0.2%", "not dead", "not op_mini all"],
         "development": [
             "last 1 chrome version",
             "last 1 firefox version",
