@@ -11,7 +11,6 @@ const ListCompanies: React.FC = () => {
     const [isData, setIsData] = React.useState(true)
     let token = window.sessionStorage.getItem('token')
     const comProfile = new CompanyProfile(token)
-
     React.useEffect(() => {
         comProfile
             .getCompanyProfile()

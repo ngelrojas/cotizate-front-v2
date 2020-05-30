@@ -53,9 +53,11 @@ const CreateCompany: React.FC = () => {
             let send_data = {
                 name: name,
                 address: address,
+                dni: dni,
                 country: country,
                 city: city,
-                phone: cellphone,
+                phone: phone,
+                cellphone: cellphone,
                 email_company: email_company,
                 represent: represent
             }
@@ -65,7 +67,7 @@ const CreateCompany: React.FC = () => {
                     console.log(resp)
                     setShow(true)
                     setMsgSuccess('compania/empresa creada.')
-                    history.push('/panel-de-usuario')
+                    window.location.href = '/panel-de-usuario'
                 })
                 .catch(err => {
                     console.log(err)

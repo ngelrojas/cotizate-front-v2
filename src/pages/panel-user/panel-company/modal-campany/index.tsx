@@ -13,7 +13,8 @@ import {
     MsgError,
     BreakLine,
     H4,
-    MsgSuccess
+    MsgSuccess,
+    IconClose
 } from './styles'
 import {CompanyProfile} from '../../../../userCompany'
 
@@ -104,7 +105,9 @@ const ModalCompany: React.FC<GetData> = props => {
                 style={customStyles}
                 contentLabel="update company"
             >
-                <BtnClose onClick={closeModal}>X</BtnClose>
+                <BtnClose onClick={closeModal}>
+                    <IconClose />
+                </BtnClose>
                 <H4>actualizar datos de empresa/compania</H4>
                 <Form onSubmit={handleUpdate} method="put">
                     <Label>

@@ -5,13 +5,12 @@ import {
     BtnDelete,
     Form,
     WrapBtn,
-    FormSubTitle,
     BtnSave,
     BtnClose,
-    MsgError,
     BreakLine,
     H4,
-    MsgSuccess
+    MsgSuccess,
+    IconClose
 } from './styles'
 import {CompanyProfile} from '../../../../userCompany'
 
@@ -41,6 +40,7 @@ const ModalCompanyDelete: React.FC<GetData> = props => {
     const openModal = () => {
         setIsOpen(true)
     }
+
     let token = window.sessionStorage.getItem('token')
     let comProfile = new CompanyProfile(token)
 
@@ -70,14 +70,16 @@ const ModalCompanyDelete: React.FC<GetData> = props => {
                 style={customStyles}
                 contentLabel="delete company"
             >
-                <BtnClose onClick={closeModal}>X</BtnClose>
-                <H4>eliminar datos de empresa {props.data_company.name}</H4>
+                <BtnClose onClick={closeModal}>
+                    <IconClose />
+                </BtnClose>
+                <H4>eliminar datos de empresa: {props.data_company.name} ?</H4>
                 <Form onSubmit={handleDelete} method="delete">
                     <BreakLine>
                         <MsgSuccess>{msgSuccess}</MsgSuccess>
                     </BreakLine>
                     <WrapBtn>
-                        <BtnSave>eliminar {props.data_company.id}</BtnSave>
+                        <BtnSave>eliminar</BtnSave>
                     </WrapBtn>
                 </Form>
             </Modal>

@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import {MdHighlightOff} from 'react-icons/md'
 
 export const BtnUpdate = styled.button`
     background-color: orange;
@@ -56,10 +57,12 @@ export const BtnSave = styled.button`
 `
 
 export const BtnClose = styled.button`
-    background-color: red;
-    color: #dddddd;
-    width: 3%;
-    border-radius: 50%;
+    background-color: white;
+`
+
+export const IconClose = styled(MdHighlightOff)`
+    color: red;
+    font-size: 21px;
 `
 
 export const MsgError = styled.span`
