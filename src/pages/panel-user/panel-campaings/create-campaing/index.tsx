@@ -3,6 +3,7 @@ import {Grid, Row, Col} from 'react-styled-flexboxgrid'
 import {Tabs, TabPanel} from 'react-tabs'
 import FormBasic from './form-basic'
 import FormDescription from './form-description'
+import FormCatTag from './form-catags'
 import {Content, H1, Title, TabMenu, TabSubMenu} from './styles'
 
 const CreateCampaing: React.FC = () => {
@@ -25,10 +26,10 @@ const CreateCampaing: React.FC = () => {
                                             INFORMACION BASICA
                                         </TabSubMenu>
                                         <TabSubMenu>
-                                            INFORMACION DE DESCRIPCION
+                                            RESUMEN Y DESCRIPCION
                                         </TabSubMenu>
                                         <TabSubMenu>
-                                            INFORMACION COMPLEMETARIA
+                                            CATEGORIA Y TAGS
                                         </TabSubMenu>
                                     </TabMenu>
                                     <TabPanel>
@@ -38,7 +39,7 @@ const CreateCampaing: React.FC = () => {
                                         <FormDescription />
                                     </TabPanel>
                                     <TabPanel>
-                                        <h1>informacion complementaria</h1>
+                                        <FormCatTag />
                                     </TabPanel>
                                 </Tabs>
                             </Col>

@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import {Link} from 'react-router-dom'
-import {Tabs, Tab, TabList} from 'react-tabs'
+import {Tab, TabList} from 'react-tabs'
 
 export const Content = styled.main`
     height: auto;
@@ -51,7 +51,7 @@ export const TabSubMenu = styled(Tab)`
     width: 100%;
     text-align: center;
     cursor: pointer;
-    &:hover{
+    &:hover {
         color: #f37a22;
     }
 `
@@ -112,4 +112,15 @@ export const MsgSuccess = styled.p`
     text-align: center;
     margin-top: 4%;
     margin-bottom: 4%;
+`
+
+export const Select = styled.select`
+    border: 0px;
+    width: 100%;
+    padding: 1.5%;
+    background-color: #007bff;
+    color: #ddd;
+    &:after {
+        background-color: #fff transparent transparent transparent;
+    }
 `

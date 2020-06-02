@@ -18,5 +18,9 @@ export const GlobalLayout = createGlobalStyle`
     background: #fefefe;
     margin: 0px;
     padding: 0px; 
-  } 
+}
+
+.tox-notifications-container{
+    display:none;
+}
 `
