@@ -19,3 +19,10 @@ export const SubTitle = styled.h2`
     color: #007bff;
     font-size: 18px;
 `
+
+export const SubTitleError = styled.h3`
+    margin-top: 5%;
+    margin-bottom: 5%;
+    color: red;
+    text-align: center;
+`

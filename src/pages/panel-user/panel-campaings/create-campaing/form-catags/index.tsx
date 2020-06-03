@@ -1,6 +1,7 @@
 import React from 'react'
 import {useForm} from 'react-hook-form'
 import {CategoriesCampaing} from '../../../../../userCategories'
+import {TagCampaing} from '../../../../../userTags'
 import {
     Label,
     Input,
@@ -23,9 +24,9 @@ type FormData = {
 const FormCatTag: React.FC = () => {
     const [msg, Setmsg] = React.useState('')
     const [cate, SetCate] = React.useState()
-
     let token = window.sessionStorage.getItem('token')
     let CatCamp = new CategoriesCampaing(token)
+    let TabCamp = new TagCampaing(token)
     const {register, handleSubmit, errors} = useForm<FormData>({
         mode: 'onChange'
     })
@@ -52,13 +53,20 @@ const FormCatTag: React.FC = () => {
     }
 
     const LoadTags = () => {
-        return true
+        TabCamp.getTagCampaing()
+            .then(resp => {
+                console.log(resp)
+            })
+            .catch(err => {
+                console.log(err)
+            })
     }
 
     React.useEffect(() => {
         LoadCategories()
         LoadTags()
     }, [])
+
     return (
         <Form onSubmit={onSubmit}>
             <Label>
@@ -66,7 +74,7 @@ const FormCatTag: React.FC = () => {
                 <Select ref={register({required: true})} name="category">
                     <option value="">SELECCIONAR</option>
                     {cate &&
-                        cate.map((category: any) => (
+                        (cate as any).map((category: any) => (
                             <option value={category.id} key={category.id}>
                                 {category.name}
                             </option>
@@ -78,13 +86,11 @@ const FormCatTag: React.FC = () => {
                 </MsgError>
             </Label>
             <Label>
-                <FormSubTitle>video o imagen del proyecto</FormSubTitle>
-                <Input
-                    type="text"
-                    name="video_img"
-                    ref={register({required: true})}
-                    placeholder="video/imagen proyecto"
-                />
+                <FormSubTitle>Tags</FormSubTitle>
+                <select name="tag">
+                    <option value="">one</option>
+                    <option>two</option>
+                </select>
                 <MsgError>{errors.tags && 'este campo es requerido'}</MsgError>
             </Label>
             <Label>
