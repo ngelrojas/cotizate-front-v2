@@ -24,9 +24,12 @@ type FormData = {
 const FormCatTag: React.FC = () => {
     const [msg, Setmsg] = React.useState('')
     const [cate, SetCate] = React.useState()
+    const [tagcp, Settagcp] = React.useState()
+    const [selected, Setselected] = React.useState()
     let token = window.sessionStorage.getItem('token')
     let CatCamp = new CategoriesCampaing(token)
     let TabCamp = new TagCampaing(token)
+    //const selectTags = React.useRef<HTMLSelectElement>(null)
     const {register, handleSubmit, errors} = useForm<FormData>({
         mode: 'onChange'
     })
@@ -44,7 +47,6 @@ const FormCatTag: React.FC = () => {
     const LoadCategories = () => {
         CatCamp.getCategoryCampaing()
             .then(resp => {
-                console.log(resp)
                 SetCate(resp.data)
             })
             .catch(err => {
@@ -55,13 +57,25 @@ const FormCatTag: React.FC = () => {
     const LoadTags = () => {
         TabCamp.getTagCampaing()
             .then(resp => {
-                console.log(resp)
+                Settagcp(resp.data)
             })
             .catch(err => {
                 console.log(err)
             })
     }
-
+    const handleTagChange = (event: React.FormEvent<HTMLSelectElement>) => {
+        event.preventDefault()
+        const selectTags = event
+        let arrayTag: any = []
+        let value_str: string = event.currentTarget.value
+        let value_id: number = +value_str
+        let value_name: any = selectTags.currentTarget[value_id].textContent
+        //console.log(selectTags.currentTarget.value)
+        //console.log(selectTags.currentTarget[value_id].textContent)
+        arrayTag.push(value_name)
+        Setselected(arrayTag)
+        console.log(arrayTag)
+    }
     React.useEffect(() => {
         LoadCategories()
         LoadTags()
@@ -87,10 +101,16 @@ const FormCatTag: React.FC = () => {
             </Label>
             <Label>
                 <FormSubTitle>Tags</FormSubTitle>
-                <select name="tag">
-                    <option value="">one</option>
-                    <option>two</option>
+                <select name="tag" onChange={handleTagChange}>
+                    <option value="">SELECCIONAR</option>
+                    {tagcp &&
+                        (tagcp as any).map((tag: any) => (
+                            <option value={tag.id} key={tag.id}>
+                                {tag.name}
+                            </option>
+                        ))}
                 </select>
+                <div>{selected}</div>
                 <MsgError>{errors.tags && 'este campo es requerido'}</MsgError>
             </Label>
             <Label>
