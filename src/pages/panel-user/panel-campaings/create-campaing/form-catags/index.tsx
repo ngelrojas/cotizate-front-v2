@@ -1,5 +1,6 @@
 import React from 'react'
 import {useForm} from 'react-hook-form'
+import Select from 'react-select'
 import {CategoriesCampaing} from '../../../../../userCategories'
 import {TagCampaing} from '../../../../../userTags'
 import {
@@ -11,7 +12,7 @@ import {
     Form,
     MsgError,
     MsgSuccess,
-    Select
+    SelectCat
 } from '../styles'
 
 type FormData = {
@@ -58,24 +59,15 @@ const FormCatTag: React.FC = () => {
         TabCamp.getTagCampaing()
             .then(resp => {
                 Settagcp(resp.data)
+                console.log(resp.data)
             })
             .catch(err => {
                 console.log(err)
             })
     }
 
-    const handleTagChange = (event: React.FormEvent<HTMLSelectElement>) => {
-        event.preventDefault()
-        const selectTags = event
-        let arrayTag: Array<string> = []
-        let value_str: string = selectTags.currentTarget.value
-        let value_id: number = +value_str
-        let value_name: any = selectTags.currentTarget[value_id].textContent
-        //console.log(selectTags.currentTarget.value)
-        //console.log(selectTags.currentTarget[value_id].textContent)
-        arrayTag.push(value_name)
-
-        Setselected(arrayTag)
+    const handleTagChange = (selected:any) => {
+        Setselected(selected)
         console.log(selected)
     }
     React.useEffect(() => {
@@ -87,7 +79,7 @@ const FormCatTag: React.FC = () => {
         <Form onSubmit={onSubmit}>
             <Label>
                 <FormSubTitle>category del proyecto</FormSubTitle>
-                <Select ref={register({required: true})} name="category">
+                <SelectCat ref={register({required: true})} name="category">
                     <option value="">SELECCIONAR</option>
                     {cate &&
                         (cate as any).map((category: any) => (
@@ -95,7 +87,7 @@ const FormCatTag: React.FC = () => {
                                 {category.name}
                             </option>
                         ))}
-                </Select>
+                </SelectCat>
 
                 <MsgError>
                     {errors.category && 'este campo es requerido'}
@@ -103,7 +95,7 @@ const FormCatTag: React.FC = () => {
             </Label>
             <Label>
                 <FormSubTitle>Tags</FormSubTitle>
-                <select name="tag" onChange={handleTagChange} multiple={true}>
+                <select name="tag"  multiple={true}>
                     <option value="">SELECCIONAR</option>
                     {tagcp &&
                         (tagcp as any).map((tag: any) => (
@@ -112,7 +104,12 @@ const FormCatTag: React.FC = () => {
                             </option>
                         ))}
                 </select>
-                <div>{selected}</div>
+                    <Select
+                        multiple={true}
+                    value={selected}
+                    onChange={handleTagChange}
+                    options={tagcp} 
+                />
                 <MsgError>{errors.tags && 'este campo es requerido'}</MsgError>
             </Label>
             <Label>

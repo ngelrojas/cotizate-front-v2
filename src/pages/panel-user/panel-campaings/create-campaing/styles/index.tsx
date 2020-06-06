@@ -114,7 +114,7 @@ export const MsgSuccess = styled.p`
     margin-bottom: 4%;
 `
 
-export const Select = styled.select`
+export const SelectCat = styled.select`
     border: 0px;
     width: 100%;
     padding: 1.5%;
