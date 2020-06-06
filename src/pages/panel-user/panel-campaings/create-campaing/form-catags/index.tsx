@@ -63,18 +63,20 @@ const FormCatTag: React.FC = () => {
                 console.log(err)
             })
     }
+
     const handleTagChange = (event: React.FormEvent<HTMLSelectElement>) => {
         event.preventDefault()
         const selectTags = event
-        let arrayTag: any = []
-        let value_str: string = event.currentTarget.value
+        let arrayTag: Array<string> = []
+        let value_str: string = selectTags.currentTarget.value
         let value_id: number = +value_str
         let value_name: any = selectTags.currentTarget[value_id].textContent
         //console.log(selectTags.currentTarget.value)
         //console.log(selectTags.currentTarget[value_id].textContent)
         arrayTag.push(value_name)
+
         Setselected(arrayTag)
-        console.log(arrayTag)
+        console.log(selected)
     }
     React.useEffect(() => {
         LoadCategories()
@@ -101,7 +103,7 @@ const FormCatTag: React.FC = () => {
             </Label>
             <Label>
                 <FormSubTitle>Tags</FormSubTitle>
-                <select name="tag" onChange={handleTagChange}>
+                <select name="tag" onChange={handleTagChange} multiple={true}>
                     <option value="">SELECCIONAR</option>
                     {tagcp &&
                         (tagcp as any).map((tag: any) => (
