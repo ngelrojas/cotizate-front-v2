@@ -41,6 +41,17 @@ export const BtnCreate = styled(Link)`
     text-decoration: none;
 `
 
+export const BtnCreateCampaing = styled(Btn)`
+    margin-bottom: 5%;
+    background-color: #f37a22;
+    border: 0px;
+    border-radius: 2px;
+    color: #dddddd;
+    padding: 1.1%;
+    text-transform: uppercase;
+    text-decoration: none;
+    width: 100%;
+`
 export const TabMenu = styled(TabList)`
     display: flex;
     margin-top: 3%;

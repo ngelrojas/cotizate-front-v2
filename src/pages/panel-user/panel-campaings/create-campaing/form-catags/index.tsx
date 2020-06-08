@@ -1,6 +1,5 @@
 import React from 'react'
 import {useForm} from 'react-hook-form'
-import Select from 'react-select'
 import {CategoriesCampaing} from '../../../../../userCategories'
 import {TagCampaing} from '../../../../../userTags'
 import {
@@ -22,6 +21,10 @@ type FormData = {
     amount: number
 }
 
+interface TagProps{
+    tagArray:number[]
+}
+
 const FormCatTag: React.FC = () => {
     const [msg, Setmsg] = React.useState('')
     const [cate, SetCate] = React.useState()
@@ -38,11 +41,11 @@ const FormCatTag: React.FC = () => {
     const onSubmit = handleSubmit(({category, tags}) => {
         let send_data = {
             category: category,
-            tags: tags
+            tags: selected
         }
 
         window.localStorage.setItem('formCatag', JSON.stringify(send_data))
-        Setmsg('datos basicos guardados')
+        Setmsg('categoria y tags guardados.')
     })
 
     const LoadCategories = () => {
@@ -66,10 +69,15 @@ const FormCatTag: React.FC = () => {
             })
     }
 
-    const handleTagChange = (selected:any) => {
-        Setselected(selected)
-        console.log(selected)
+    const handleTags = (e:React.FormEvent<HTMLInputElement> ) => {
+        const arrayTag = []
+        //Setselected()
+        let id:number = +e.currentTarget.value
+        //Setselected([selected, id])
+        arrayTag.push(id)
+        Setselected(arrayTag)
     }
+
     React.useEffect(() => {
         LoadCategories()
         LoadTags()
@@ -95,46 +103,18 @@ const FormCatTag: React.FC = () => {
             </Label>
             <Label>
                 <FormSubTitle>Tags</FormSubTitle>
-                <select name="tag"  multiple={true}>
-                    <option value="">SELECCIONAR</option>
                     {tagcp &&
                         (tagcp as any).map((tag: any) => (
-                            <option value={tag.id} key={tag.id}>
-                                {tag.name}
-                            </option>
+                        <label key={tag.id}>
+                            <span>{tag.name}</span>
+                                <input 
+                                    type="checkbox" 
+                                    value={tag.id} 
+                                    onClick={handleTags} />
+                        </label>
                         ))}
-                </select>
-                    <Select
-                        multiple={true}
-                    value={selected}
-                    onChange={handleTagChange}
-                    options={tagcp} 
-                />
+                            <p>{selected}</p>
                 <MsgError>{errors.tags && 'este campo es requerido'}</MsgError>
-            </Label>
-            <Label>
-                <FormSubTitle>cuantos dias durara tu campaña</FormSubTitle>
-                <Input
-                    type="number"
-                    name="qty_day"
-                    ref={register({required: true})}
-                    placeholder="cantidad de dias"
-                />
-                <MsgError>
-                    {errors.qty_day && 'este campo es requerido'}
-                </MsgError>
-            </Label>
-            <Label>
-                <FormSubTitle>cantidad de dinero a recaudar</FormSubTitle>
-                <Input
-                    type="number"
-                    name="amount"
-                    ref={register({required: true})}
-                    placeholder="$Bs 15.000"
-                />
-                <MsgError>
-                    {errors.amount && 'este campo es requerido'}
-                </MsgError>
             </Label>
             <MsgSuccess>{msg}</MsgSuccess>
             <WrapBtn>
