@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import {Link} from 'react-router-dom'
 
 export const Content = styled.main`
     height: auto;
@@ -21,6 +22,7 @@ export const Title = styled.div`
 
 export const Table = styled.table`
     width: 100%;
+    margin-top: 3%;
 `
 
 export const Th = styled.th`
@@ -37,7 +39,13 @@ export const Btn = styled.button`
     cursor: pointer;
 `
 
-export const BtnCreate = styled(Btn)`
+export const BtnCreate = styled(Link)`
     margin-bottom: 5%;
     background-color: #007bff;
+    border: 0px;
+    border-radius: 2px;
+    color: #dddddd;
+    padding: 1.1%;
+    text-transform: uppercase;
+    text-decoration: none;
 `

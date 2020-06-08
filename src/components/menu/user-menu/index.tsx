@@ -19,7 +19,9 @@ const UserMenu: React.FC<Iusername> = props => {
                         <Go to="/panel-de-usuario">dashboard</Go>
                     </Item>
                     <Item>
-                        <Go to="/create-proyectos">crear proyectos</Go>
+                        <Go to="/panel-de-usuario/crear-campania">
+                            crear proyectos
+                        </Go>
                     </Item>
                     <Item>
                         <Go to="/panel-de-usuario/proyectos">mis proyectos</Go>

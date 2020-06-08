@@ -16,7 +16,9 @@ const PanelCampaing: React.FC = () => {
                     <Col xs={12}>
                         <Row end="xs">
                             <Col xs={4}>
-                                <BtnCreate>crear campaña</BtnCreate>
+                                <BtnCreate to="/panel-de-usuario/crear-campania">
+                                    crear campaña
+                                </BtnCreate>
                             </Col>
                         </Row>
                     </Col>
