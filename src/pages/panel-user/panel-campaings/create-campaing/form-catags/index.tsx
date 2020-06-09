@@ -4,14 +4,14 @@ import {CategoriesCampaing} from '../../../../../userCategories'
 import {TagCampaing} from '../../../../../userTags'
 import {
     Label,
-    Input,
     FormSubTitle,
     WrapBtn,
     BtnNext,
     Form,
     MsgError,
     MsgSuccess,
-    SelectCat
+    SelectCat,
+    TagLabel
 } from '../styles'
 
 type FormData = {
@@ -21,17 +21,11 @@ type FormData = {
     amount: number
 }
 
-interface TagPoint{
-    tag: number[]
-}
-
-const listOfTag: TagPoint[]=[]
-
 const FormCatTag: React.FC = () => {
     const [msg, Setmsg] = React.useState('')
     const [cate, SetCate] = React.useState()
     const [tagcp, Settagcp] = React.useState()
-    const [selected, Setselected] = React.useState<[]>([])
+    const [selected, Setselected] = React.useState<number[]>([])
     let token = window.sessionStorage.getItem('token')
     let CatCamp = new CategoriesCampaing(token)
     let TabCamp = new TagCampaing(token)
@@ -73,9 +67,13 @@ const FormCatTag: React.FC = () => {
 
     const handleTags = (e:React.FormEvent<HTMLInputElement> ) => {
         //Setselected()
-        let id: number = +e.currentTarget.value
-        console.log(id)
-        Setselected(id)
+        const id: number = +e.currentTarget.value
+        const {checked} = e.currentTarget
+        if(checked){
+            Setselected(prev=>[...prev, id])
+        }else{
+            Setselected(prev=>prev.filter(item=>item !== id))
+        } 
     }
 
     React.useEffect(() => {
@@ -105,15 +103,15 @@ const FormCatTag: React.FC = () => {
                 <FormSubTitle>Tags</FormSubTitle>
                     {tagcp &&
                         (tagcp as any).map((tag: any) => (
-                        <label key={tag.id}>
+                        <TagLabel key={tag.id}>
                             <span>{tag.name}</span>
                                 <input 
+                                    defaultChecked={selected.includes(tag.id)}
                                     type="checkbox" 
                                     value={tag.id} 
                                     onClick={handleTags} />
-                        </label>
+                        </TagLabel>
                         ))}
-                            <p>{selected}</p>
                 <MsgError>{errors.tags && 'este campo es requerido'}</MsgError>
             </Label>
             <MsgSuccess>{msg}</MsgSuccess>

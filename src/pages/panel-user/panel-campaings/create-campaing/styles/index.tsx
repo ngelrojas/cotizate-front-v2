@@ -135,3 +135,9 @@ export const SelectCat = styled.select`
         background-color: #fff transparent transparent transparent;
     }
 `
+
+export const TagLabel = styled.label`
+    text-transform:uppercase;
+    padding: 1%;
+    font-size: 15px;
+`
