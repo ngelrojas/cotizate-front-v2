@@ -21,15 +21,17 @@ type FormData = {
     amount: number
 }
 
-interface TagProps{
-    tagArray:number[]
+interface TagPoint{
+    tag: number[]
 }
+
+const listOfTag: TagPoint[]=[]
 
 const FormCatTag: React.FC = () => {
     const [msg, Setmsg] = React.useState('')
     const [cate, SetCate] = React.useState()
     const [tagcp, Settagcp] = React.useState()
-    const [selected, Setselected] = React.useState()
+    const [selected, Setselected] = React.useState<[]>([])
     let token = window.sessionStorage.getItem('token')
     let CatCamp = new CategoriesCampaing(token)
     let TabCamp = new TagCampaing(token)
@@ -70,12 +72,10 @@ const FormCatTag: React.FC = () => {
     }
 
     const handleTags = (e:React.FormEvent<HTMLInputElement> ) => {
-        const arrayTag = []
         //Setselected()
-        let id:number = +e.currentTarget.value
-        //Setselected([selected, id])
-        arrayTag.push(id)
-        Setselected(arrayTag)
+        let id: number = +e.currentTarget.value
+        console.log(id)
+        Setselected(id)
     }
 
     React.useEffect(() => {
