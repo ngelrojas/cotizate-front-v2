@@ -26,6 +26,7 @@ const FormCatTag: React.FC = () => {
     const [cate, SetCate] = React.useState()
     const [tagcp, Settagcp] = React.useState()
     const [selected, Setselected] = React.useState<number[]>([])
+    const [loadTag, SetloadTag] = React.useState()
     let token = window.sessionStorage.getItem('token')
     let CatCamp = new CategoriesCampaing(token)
     let TabCamp = new TagCampaing(token)
@@ -58,7 +59,6 @@ const FormCatTag: React.FC = () => {
         TabCamp.getTagCampaing()
             .then(resp => {
                 Settagcp(resp.data)
-                console.log(resp.data)
             })
             .catch(err => {
                 console.log(err)
@@ -66,7 +66,6 @@ const FormCatTag: React.FC = () => {
     }
 
     const handleTags = (e:React.FormEvent<HTMLInputElement> ) => {
-        //Setselected()
         const id: number = +e.currentTarget.value
         const {checked} = e.currentTarget
         if(checked){
@@ -77,8 +76,14 @@ const FormCatTag: React.FC = () => {
     }
 
     React.useEffect(() => {
+        let _formCatag:any = window.localStorage.getItem('formCatag')
+        let form_parse = JSON.parse(_formCatag)
+        let _tags: any = form_parse
+        SetloadTag(_tags?.tags)
+        //console.log(_tags?.tags)
         LoadCategories()
         LoadTags()
+
     }, [])
 
     return (
@@ -106,7 +111,7 @@ const FormCatTag: React.FC = () => {
                         <TagLabel key={tag.id}>
                             <span>{tag.name}</span>
                                 <input 
-                                    defaultChecked={selected.includes(tag.id)}
+                                    defaultChecked={selected.includes(tag.id || loadTag[0])}
                                     type="checkbox" 
                                     value={tag.id} 
                                     onClick={handleTags} />
