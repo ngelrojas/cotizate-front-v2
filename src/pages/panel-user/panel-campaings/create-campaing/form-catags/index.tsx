@@ -30,6 +30,7 @@ const FormCatTag: React.FC = () => {
     let token = window.sessionStorage.getItem('token')
     let CatCamp = new CategoriesCampaing(token)
     let TabCamp = new TagCampaing(token)
+    let idTag:number
     //const selectTags = React.useRef<HTMLSelectElement>(null)
     const {register, handleSubmit, errors} = useForm<FormData>({
         mode: 'onChange'
@@ -38,7 +39,7 @@ const FormCatTag: React.FC = () => {
     const onSubmit = handleSubmit(({category, tags}) => {
         let send_data = {
             category: category,
-            tags: selected
+            tags:selected 
         }
 
         window.localStorage.setItem('formCatag', JSON.stringify(send_data))
@@ -107,18 +108,47 @@ const FormCatTag: React.FC = () => {
             <Label>
                 <FormSubTitle>Tags</FormSubTitle>
                     {tagcp &&
-                        (tagcp as any).map((tag: any) => (
+                        (tagcp as any).map((tag: any) => ( 
                         <TagLabel key={tag.id}>
                             <span>{tag.name}</span>
                                 <input 
-                                    defaultChecked={selected.includes(tag.id || loadTag[0])}
+                                    defaultChecked={selected.includes(tag.id)}
                                     type="checkbox" 
                                     value={tag.id} 
                                     onClick={handleTags} />
                         </TagLabel>
                         ))}
                 <MsgError>{errors.tags && 'este campo es requerido'}</MsgError>
+
             </Label>
+
+            <Label>
+                <FormSubTitle>Tags</FormSubTitle>
+
+                    {tagcp &&
+                        (tagcp as any).map((tag: any) => ( 
+                            
+                        loadTag &&
+                            (loadTag as any).map((lotag: any) => {
+                                if(lotag === tag.id){
+                                   return (<TagLabel  key={lotag}>
+                                    <span>{tag.name}</span>
+                                        <input 
+                                            defaultChecked={tag.id === lotag ? tag.id: ''}
+                                            type="checkbox" 
+                                            value={tag.id} 
+                                            onClick={handleTags} />
+                                    </TagLabel>)
+                                }
+
+                    }) 
+                            
+                        ))
+                    }
+
+                <MsgError>{errors.tags && 'este campo es requerido'}</MsgError>
+            </Label>
+
             <MsgSuccess>{msg}</MsgSuccess>
             <WrapBtn>
                 <BtnNext>guardar</BtnNext>
