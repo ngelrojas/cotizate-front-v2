@@ -17,6 +17,12 @@ export const H1 = styled.h1`
     margin-bottom: 5%;
 `
 
+export const H3 = styled.h3`
+    text-transform: uppercase;
+    text-align: center;
+    color: #007bff;
+`
+
 export const Title = styled.div`
     width: 100%;
 `
@@ -106,6 +112,11 @@ export const Form = styled.form`
     margin: 0 auto;
 `
 
+export const FormR = styled.form`
+    width: 90%;
+    margin: 0 auto;
+`
+
 export const MsgError = styled.span`
     width: 100%;
     left: 0%;
@@ -140,4 +151,26 @@ export const TagLabel = styled.label`
     text-transform:uppercase;
     padding: 1%;
     font-size: 15px;
+`
+
+export const Table = styled.table`
+    width: 100%;
+    margin-top: 10%;
+`
+
+export const Thead = styled.thead`
+    text-transform: uppercase;
+    color: #f37a22;
+`
+
+export const Th = styled.th`
+    padding: 8px;
+`
+
+export const Td = styled.td`
+    padding: 8px;
+`
+
+export const Tr = styled.tr`
+    text-align: center;
 `

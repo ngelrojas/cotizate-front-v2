@@ -31,8 +31,8 @@ const FormCatTag: React.FC = () => {
     const [msg, Setmsg] = React.useState('')
     const [cate, SetCate] = React.useState()
     const [tagcp, Settagcp] = React.useState()
-    //const [selected, Setselected] = React.useState<number[]>([])
-    const [selected, Setselected] = React.useState([])
+    const [selected, Setselected] = React.useState<number[]>([])
+    // const [selected, Setselected] = React.useState([])
     const [loadTag, SetloadTag] = React.useState()
     let token = window.sessionStorage.getItem('token')
     let CatCamp = new CategoriesCampaing(token)
@@ -67,18 +67,10 @@ const FormCatTag: React.FC = () => {
     }
 
     const LoadTags = () => {
-        let tagjson: any 
         let chtag: any
         TabCamp.getTagCampaing()
             .then(resp => {
                 Settagcp(resp.data)
-                //console.log(resp.data)
-                tagjson = resp.data
-                tagjson.map( (tagj: any) =>(
-                    arrayTag.push({label: tagj.name, value: tagj.id}) 
-                ))
-                setChargeTag(arrayTag)
-                chtag = arrayTag
             })
             .catch(err => {
                 console.log(err)
@@ -87,15 +79,15 @@ const FormCatTag: React.FC = () => {
                 console.log(chtag)
     }
 
-/*    const handleTags = (e:React.FormEvent<HTMLInputElement> ) => {*/
-        //const id: number = +e.currentTarget.value
-        //const {checked} = e.currentTarget
-        //if(checked){
-            //Setselected(prev=>[...prev, id])
-        //}else{
-            //Setselected(prev=>prev.filter(item=>item !== id))
-        //} 
-    /*}*/
+    const handleTags = (e:React.FormEvent<HTMLInputElement> ) => {
+        const id: number = +e.currentTarget.value
+        const {checked} = e.currentTarget
+        if(checked){
+            Setselected(prev=>[...prev, id])
+        }else{
+            Setselected(prev=>prev.filter(item=>item !== id))
+        } 
+    }
 
     React.useEffect(() => {
         let _formCatag:any = window.localStorage.getItem('formCatag')
@@ -127,13 +119,20 @@ const FormCatTag: React.FC = () => {
             </Label>
             <Label>
                 <FormSubTitle>Tags</FormSubTitle>
-                
-                <MsgError>{errors.tags && 'este campo es requerido'}</MsgError>
+                {tagcp &&
+                tagcp.map((tag: any) => (
+                    <>
 
-            </Label>
-            <Label>
-                <FormSubTitle>Tags</FormSubTitle>
+                      <input
+                        checked={selected.includes(tag.id)}
+                        type="checkbox"
+                        value={tag.id}
+                        onClick={handleTags}
+                      />
 
+                    {tag.name}
+                  </>
+            ))}
                 <MsgError>{errors.tags && 'este campo es requerido'}</MsgError>
 
             </Label>
