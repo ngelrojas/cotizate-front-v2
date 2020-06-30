@@ -27,7 +27,6 @@ const FormRewards: React.FC = () => {
     const [description, Setdescription] = React.useState()
     const [MsgErrorF, setMsgErrorF] = React.useState()
     const [sendData, SetsendData] = React.useState<any[]>([])
-    let token = window.sessionStorage.getItem('token')
     const {register, handleSubmit, errors} = useForm<FormData>({
         mode: 'onChange'
     })
@@ -39,8 +38,8 @@ const FormRewards: React.FC = () => {
                 cant_reward: cant_reward,
                 descript: description
             }
-            console.log(sendData)
-            SetsendData(prev =>[...prev, data_reward]) 
+            console.log(data_reward)
+            SetsendData(prev =>[...prev, data_reward])  
             window.localStorage.setItem('formReward', JSON.stringify(sendData))
             Setmsg('recompensa agregada.')
             setMsgErrorF('')

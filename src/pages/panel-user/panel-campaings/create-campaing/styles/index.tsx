@@ -165,6 +165,7 @@ export const Thead = styled.thead`
 
 export const Th = styled.th`
     padding: 8px;
+    font-size: 14px;
 `
 
 export const Td = styled.td`
