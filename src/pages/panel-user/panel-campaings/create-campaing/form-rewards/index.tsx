@@ -38,8 +38,11 @@ const FormRewards: React.FC = () => {
                 cant_reward: cant_reward,
                 descript: description
             }
+            console.log('here')
             console.log(data_reward)
-            SetsendData(prev =>[...prev, data_reward])  
+
+            SetsendData( (prev:any)=>[...prev, data_reward])  
+            console.log(sendData)
             window.localStorage.setItem('formReward', JSON.stringify(sendData))
             Setmsg('recompensa agregada.')
             setMsgErrorF('')
@@ -59,6 +62,11 @@ const FormRewards: React.FC = () => {
         }
         return true
     }
+    
+    React.useEffect(()=>{
+        let _formreward: any = window.localStorage.getItem('formReward')
+        SetsendData(JSON.parse(_formreward))
+    },[])
 
     return (
         <Grid>
