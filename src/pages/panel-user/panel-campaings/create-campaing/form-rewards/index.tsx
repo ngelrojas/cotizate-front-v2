@@ -38,12 +38,10 @@ const FormRewards: React.FC = () => {
                 cant_reward: cant_reward,
                 descript: description
             }
-            console.log('here')
-            console.log(data_reward)
 
-            SetsendData( (prev:any)=>[...prev, data_reward])  
-            console.log(sendData)
-            window.localStorage.setItem('formReward', JSON.stringify(sendData))
+            SetsendData(prev=>[...prev, data_reward])  
+            console.log("result below", sendData)
+            //window.localStorage.setItem('formReward', JSON.stringify(sendData))
             Setmsg('recompensa agregada.')
             setMsgErrorF('')
         }
