@@ -67,7 +67,6 @@ const FormCatTag: React.FC = () => {
     }
 
     const LoadTags = () => {
-        let chtag: any
         TabCamp.getTagCampaing()
             .then(resp => {
                 Settagcp(resp.data)
@@ -75,8 +74,6 @@ const FormCatTag: React.FC = () => {
             .catch(err => {
                 console.log(err)
             })
-
-                console.log(chtag)
     }
 
     const handleTags = (e:React.FormEvent<HTMLInputElement> ) => {
@@ -121,17 +118,17 @@ const FormCatTag: React.FC = () => {
                 <FormSubTitle>Tags</FormSubTitle>
                 {tagcp &&
                 tagcp.map((tag: any) => (
-                    <>
+                    <TagLabel key={tag.id}>
 
-                      <input
-                        checked={selected.includes(tag.id)}
-                        type="checkbox"
-                        value={tag.id}
-                        onClick={handleTags}
-                      />
+                          <input
+                            defaultChecked={selected.includes(tag.id)}
+                            type="checkbox"
+                            value={tag.id}
+                            onClick={handleTags}
+                          />
 
-                    {tag.name}
-                  </>
+                        {tag.name}
+                    </TagLabel>
             ))}
                 <MsgError>{errors.tags && 'este campo es requerido'}</MsgError>
 
