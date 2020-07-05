@@ -11,15 +11,19 @@ import {
 
 const TableReward: React.FC = ()=>{
     const [getRewards, SetgetRewards] = React.useState()
+    let _formReward:any = window.localStorage.getItem('formReward')  
+    let form_parse = JSON.parse(_formReward)
+    let _rewards: any = form_parse
 
     React.useEffect(() => {
-        let _formReward:any = window.localStorage.getItem('formReward')
-        let form_parse = JSON.parse(_formReward)
-        let _rewards: any = form_parse
         console.log(_rewards)
-        SetgetRewards(_rewards)
-        
+        if(_rewards.length){
+           SetgetRewards(_rewards) 
+        }
+        //SetgetRewards(_rewards)
     }, [])
+    //console.log(_rewards.length)
+
     return(
         <Col xs={6}>
             <H3>LISTA DE RECOMPENSAS</H3>
