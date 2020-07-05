@@ -11,8 +11,7 @@ import {
     BtnNext,
     FormR,
     MsgError,
-    MsgSuccess,
-    BtnCreateCampaing
+    MsgSuccess
 } from '../styles'
 
 type FormData = {
@@ -26,7 +25,7 @@ const FormRewards: React.FC = () => {
     const [msg, Setmsg] = React.useState('')
     const [description, Setdescription] = React.useState()
     const [MsgErrorF, setMsgErrorF] = React.useState()
-    const [sendData, SetsendData] = React.useState<any[]>([])
+    const [sendData, SetsendData] = React.useState<FormData[]>([])
     const {register, handleSubmit, errors} = useForm<FormData>({
         mode: 'onChange'
     })
@@ -38,10 +37,9 @@ const FormRewards: React.FC = () => {
                 cant_reward: cant_reward,
                 descript: description
             }
-
-            SetsendData(prev=>[...prev, data_reward])  
-            console.log("result below", sendData)
-            //window.localStorage.setItem('formReward', JSON.stringify(sendData))
+            const nextState = [...sendData, data_reward]
+            SetsendData(nextState)  
+            window.localStorage.setItem('formReward', JSON.stringify(nextState))
             Setmsg('recompensa agregada.')
             setMsgErrorF('')
         }
@@ -130,7 +128,6 @@ const FormRewards: React.FC = () => {
                                         file,
                                         base64
                                     )
-                                    console.log(blobInfo)
                                     blobCache.add(blobInfo)
                                     cb(blobInfo.blobUri(), {title: file.name})
                                 }
