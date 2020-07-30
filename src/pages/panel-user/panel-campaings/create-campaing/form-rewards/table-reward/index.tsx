@@ -23,6 +23,10 @@ const TableReward: React.FC = ()=>{
         //SetgetRewards(_rewards)
     }, [])
     //console.log(_rewards.length)
+    const handleDelete = (e:number) => {
+        console.log(e)
+        SetgetRewards(_rewards.splice(e, 1))
+    }
 
     return(
         <Col xs={6}>
@@ -41,7 +45,7 @@ const TableReward: React.FC = ()=>{
                      <Tr key={index}>
                         <Td>{reward.title}</Td>
                         <Td>{reward.cant_reward}</Td>
-                        <Td><button>eleminiar</button></Td>
+                        <Td><button type="button" onClick={()=>handleDelete(index)}>eleminiar</button></Td>
                     </Tr>                        
                     ))
                 }

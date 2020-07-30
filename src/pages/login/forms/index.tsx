@@ -61,7 +61,7 @@ const FormLogin: React.FC = (props: any) => {
                                     ref={register({
                                         required: true,
                                         minLength: {
-                                            value: 8,
+                                            value: 6,
                                             message:
                                                 'su contrasena debe tener por lo menos 8 caracteres'
                                         }
