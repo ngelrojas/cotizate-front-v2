@@ -9,4 +9,3 @@ before_install:
 
 script:
     - docker build -t cotizate/cotizte-app .
-    - docker push cotizate/cotizate-app
