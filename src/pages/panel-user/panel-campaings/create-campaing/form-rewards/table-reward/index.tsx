@@ -24,8 +24,10 @@ const TableReward: React.FC = ()=>{
     }, [])
     //console.log(_rewards.length)
     const handleDelete = (e:number) => {
-        console.log(e)
-        SetgetRewards(_rewards.splice(e, 1))
+        //console.log(e)
+        const conjunt = _rewards.slice(0, e).concat(_rewards.slice(e + 1, _rewards.length))
+        console.log(conjunt) 
+        window.localStorage.setItem('formReward', JSON.stringify(conjunt))
     }
 
     return(
