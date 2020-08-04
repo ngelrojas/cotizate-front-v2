@@ -1,16 +1,12 @@
-laguage: node_js
-node_js:
-    - "stable"
-cache:
-    direcotories:
-        - node_modules
+laguage: generic 
+sudo: required
+
+services:
+    - docker
+
+before_install:
+    - docker build -t cotizate/cotizate-app -f Dockerfile.dev .
+
 script:
-    - npm test
-    - npm run build
-deploy:
-    provider: pages
-    skip_cleanup: true
-    github_token: $GITHUB_TOKEN
-    local_dir: build
-    on:
-        branch: master
+    - docker build -t cotizate/cotizte-app .
+    - docker push cotizate/cotizate-app
