@@ -24,6 +24,7 @@ const FormDescription: React.FC = () => {
     const [excerpt, setExcerpt] = React.useState('')
     const [msgExcerpt, setMsgExcerpt] = React.useState('')
     const [msgdescription, setMsgdescription] = React.useState('')
+    const [formDesc, SetformDesc] = React.useState()
     const {register, handleSubmit, errors} = useForm<FormData>({
         mode: 'onChange'
     })
@@ -47,7 +48,7 @@ const FormDescription: React.FC = () => {
                 'formDescription',
                 JSON.stringify(send_data)
             )
-            Setmsg('datos basicos guardados')
+            Setmsg('datos de resumen y descripcion guardados.')
             setMsgExcerpt('')
             setMsgdescription('')
         }
@@ -64,6 +65,17 @@ const FormDescription: React.FC = () => {
         }
         return true
     }
+
+    React.useEffect(()=>{
+        let _formDescription: any = window.localStorage.getItem('formDescription')
+        let form_parse = JSON.parse(_formDescription)
+        SetformDesc(form_parse)
+        let _excerpt:any = form_parse
+        setExcerpt(_excerpt?.excerpt)
+        let _description: any = form_parse
+        setDescripction(_description?.description)
+    },[])
+
     return (
         <Form onSubmit={onSubmit}>
             <Label>
@@ -73,6 +85,7 @@ const FormDescription: React.FC = () => {
                     name="public_at"
                     ref={register({required: true})}
                     placeholder="mm/dd/yyyy"
+                    defaultValue={formDesc?.public_at}
                 />
                 <MsgError>
                     {errors.public_at && 'este campo es requerido'}
@@ -81,7 +94,7 @@ const FormDescription: React.FC = () => {
             <Label>
                 <FormSubTitle>resumen del proyecto</FormSubTitle>
                 <Editor
-                    initialValue=""
+                    initialValue={formDesc?.excerpt}
                     init={{
                         height: 300,
                         menubar: false,
@@ -131,7 +144,7 @@ const FormDescription: React.FC = () => {
             <Label>
                 <FormSubTitle>descripcion completa campaña</FormSubTitle>
                 <Editor
-                    initialValue=""
+                    initialValue={formDesc?.description}
                     init={{
                         height: 500,
                         menubar: false,

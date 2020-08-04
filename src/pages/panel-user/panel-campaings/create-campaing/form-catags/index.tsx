@@ -1,17 +1,18 @@
 import React from 'react'
 import {useForm} from 'react-hook-form'
+import MultiSelect from 'react-multi-select-component'
 import {CategoriesCampaing} from '../../../../../userCategories'
 import {TagCampaing} from '../../../../../userTags'
 import {
     Label,
-    Input,
     FormSubTitle,
     WrapBtn,
     BtnNext,
     Form,
     MsgError,
     MsgSuccess,
-    SelectCat
+    SelectCat,
+    TagLabel
 } from '../styles'
 
 type FormData = {
@@ -21,18 +22,25 @@ type FormData = {
     amount: number
 }
 
-interface TagProps{
-    tagArray:number[]
+interface listTag{
+    label: string
+    value: number
 }
 
 const FormCatTag: React.FC = () => {
     const [msg, Setmsg] = React.useState('')
     const [cate, SetCate] = React.useState()
     const [tagcp, Settagcp] = React.useState()
-    const [selected, Setselected] = React.useState()
+    const [selected, Setselected] = React.useState<number[]>([])
+    // const [selected, Setselected] = React.useState([])
+    const [loadTag, SetloadTag] = React.useState()
     let token = window.sessionStorage.getItem('token')
     let CatCamp = new CategoriesCampaing(token)
     let TabCamp = new TagCampaing(token)
+    let idTag:number
+
+    let arrayTag: listTag[] = Array()
+    const [chargeTag, setChargeTag] = React.useState()
     //const selectTags = React.useRef<HTMLSelectElement>(null)
     const {register, handleSubmit, errors} = useForm<FormData>({
         mode: 'onChange'
@@ -41,7 +49,7 @@ const FormCatTag: React.FC = () => {
     const onSubmit = handleSubmit(({category, tags}) => {
         let send_data = {
             category: category,
-            tags: selected
+            tags:selected 
         }
 
         window.localStorage.setItem('formCatag', JSON.stringify(send_data))
@@ -62,7 +70,6 @@ const FormCatTag: React.FC = () => {
         TabCamp.getTagCampaing()
             .then(resp => {
                 Settagcp(resp.data)
-                console.log(resp.data)
             })
             .catch(err => {
                 console.log(err)
@@ -70,15 +77,21 @@ const FormCatTag: React.FC = () => {
     }
 
     const handleTags = (e:React.FormEvent<HTMLInputElement> ) => {
-        const arrayTag = []
-        //Setselected()
-        let id:number = +e.currentTarget.value
-        //Setselected([selected, id])
-        arrayTag.push(id)
-        Setselected(arrayTag)
+        const id: number = +e.currentTarget.value
+        const {checked} = e.currentTarget
+        if(checked){
+            Setselected(prev=>[...prev, id])
+        }else{
+            Setselected(prev=>prev.filter(item=>item !== id))
+        } 
     }
 
     React.useEffect(() => {
+        let _formCatag:any = window.localStorage.getItem('formCatag')
+        let form_parse = JSON.parse(_formCatag)
+        let _tags: any = form_parse
+        SetloadTag(_tags?.tags)
+        //console.log(_tags?.tags)
         LoadCategories()
         LoadTags()
     }, [])
@@ -103,19 +116,24 @@ const FormCatTag: React.FC = () => {
             </Label>
             <Label>
                 <FormSubTitle>Tags</FormSubTitle>
-                    {tagcp &&
-                        (tagcp as any).map((tag: any) => (
-                        <label key={tag.id}>
-                            <span>{tag.name}</span>
-                                <input 
-                                    type="checkbox" 
-                                    value={tag.id} 
-                                    onClick={handleTags} />
-                        </label>
-                        ))}
-                            <p>{selected}</p>
+                {tagcp &&
+                tagcp.map((tag: any) => (
+                    <TagLabel key={tag.id}>
+
+                          <input
+                            defaultChecked={selected.includes(tag.id)}
+                            type="checkbox"
+                            value={tag.id}
+                            onClick={handleTags}
+                          />
+
+                        {tag.name}
+                    </TagLabel>
+            ))}
                 <MsgError>{errors.tags && 'este campo es requerido'}</MsgError>
+
             </Label>
+
             <MsgSuccess>{msg}</MsgSuccess>
             <WrapBtn>
                 <BtnNext>guardar</BtnNext>

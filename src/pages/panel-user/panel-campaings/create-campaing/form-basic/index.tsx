@@ -20,6 +20,7 @@ type FormData = {
 
 const FormBasic: React.FC = () => {
     const [msg, Setmsg] = React.useState('')
+    const [formbasic, Setformbasic] = React.useState()
     const {register, handleSubmit, errors} = useForm<FormData>({
         mode: 'onChange'
     })
@@ -35,6 +36,12 @@ const FormBasic: React.FC = () => {
         window.localStorage.setItem('formBasic', JSON.stringify(send_data))
         Setmsg('datos basicos guardados')
     })
+
+    React.useEffect(()=>{
+        let _formbasic: any = window.localStorage.getItem('formBasic')
+        Setformbasic(JSON.parse(_formbasic))
+    },[])
+
     return (
         <Form onSubmit={onSubmit}>
             <Label>
@@ -44,6 +51,7 @@ const FormBasic: React.FC = () => {
                     name="title"
                     ref={register({required: true})}
                     placeholder="titulo del proyecto"
+                    defaultValue={formbasic?.title}
                 />
                 <MsgError>{errors.title && 'este campo es requerido'}</MsgError>
             </Label>
@@ -54,6 +62,7 @@ const FormBasic: React.FC = () => {
                     name="video_img"
                     ref={register({required: true})}
                     placeholder="video/imagen proyecto"
+                    defaultValue={formbasic?.video_img} 
                 />
                 <MsgError>
                     {errors.video_img && 'este campo es requerido'}
@@ -66,6 +75,7 @@ const FormBasic: React.FC = () => {
                     name="qty_day"
                     ref={register({required: true})}
                     placeholder="cantidad de dias"
+                    defaultValue={formbasic?.qty_day}
                 />
                 <MsgError>
                     {errors.qty_day && 'este campo es requerido'}
@@ -77,7 +87,8 @@ const FormBasic: React.FC = () => {
                     type="number"
                     name="amount"
                     ref={register({required: true})}
-                    placeholder="$Bs 15.000"
+                    placeholder="Bs 15.000"
+                    defaultValue={formbasic?.amount}
                 />
                 <MsgError>
                     {errors.amount && 'este campo es requerido'}

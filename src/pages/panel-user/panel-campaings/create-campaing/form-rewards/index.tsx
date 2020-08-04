@@ -1,50 +1,74 @@
 import React from 'react'
 import {useForm} from 'react-hook-form'
 import {Editor} from '@tinymce/tinymce-react'
+import {Grid, Row, Col} from 'react-styled-flexboxgrid'
+import TableReward from './table-reward'
 import {
     Label,
     Input,
     FormSubTitle,
     WrapBtn,
     BtnNext,
-    Form,
+    FormR,
     MsgError,
-    MsgSuccess,
-    BtnCreateCampaing
+    MsgSuccess
 } from '../styles'
 
 type FormData = {
     title: string
     cant_reward: number
-    description: string
+    descript: string
 }
 
 
 const FormRewards: React.FC = () => {
     const [msg, Setmsg] = React.useState('')
     const [description, Setdescription] = React.useState()
-    let token = window.sessionStorage.getItem('token')
+    const [MsgErrorF, setMsgErrorF] = React.useState()
+    const [sendData, SetsendData] = React.useState<FormData[]>([])
     const {register, handleSubmit, errors} = useForm<FormData>({
         mode: 'onChange'
     })
 
-    const onSubmit = handleSubmit(({title, cant_reward, description}) => {
-        let send_data = {
-            title: title,
-            cant_reward: cant_reward,
-            description: description
+    const onSubmit = handleSubmit(({title, cant_reward, descript}) => {
+        if(validate()){
+            let data_reward = {
+                title: title,
+                cant_reward: cant_reward,
+                descript: description
+            }
+            const nextState = [...sendData, data_reward]
+            SetsendData(nextState)  
+            window.localStorage.setItem('formReward', JSON.stringify(nextState))
+            Setmsg('recompensa agregada.')
+            setMsgErrorF('')
         }
 
-        window.localStorage.setItem('formReward', JSON.stringify(send_data))
-        Setmsg('recompensa guardada.')
     })
 
     const handleEditorReward = (content: any, editor: any) => {
         Setdescription(content)
     }
 
+    const validate = () => { 
+
+        if (description.length === 0) {
+            setMsgErrorF('este campo es requerido')
+            return false
+        }
+        return true
+    }
+    
+    React.useEffect(()=>{
+        let _formreward: any = window.localStorage.getItem('formReward')
+        SetsendData(JSON.parse(_formreward))
+    },[])
+
     return (
-        <Form onSubmit={onSubmit}>
+        <Grid>
+        <Row>
+        <Col xs={6}>
+        <FormR onSubmit={onSubmit}>
             <Label>
                 <FormSubTitle>Titulo</FormSubTitle>
                 <Input
@@ -70,7 +94,7 @@ const FormRewards: React.FC = () => {
             </Label>
             <FormSubTitle>descripcion de la recompensa</FormSubTitle>
                 <Editor
-                    initialValue=""
+                    initialValue=''
                     init={{
                         height: 300,
                         menubar: false,
@@ -104,7 +128,6 @@ const FormRewards: React.FC = () => {
                                         file,
                                         base64
                                     )
-                                    console.log(blobInfo)
                                     blobCache.add(blobInfo)
                                     cb(blobInfo.blobUri(), {title: file.name})
                                 }
@@ -116,13 +139,19 @@ const FormRewards: React.FC = () => {
                     onEditorChange={handleEditorReward}
                 />
             <MsgSuccess>{msg}</MsgSuccess>
+            <MsgError>{MsgErrorF}</MsgError>
             <WrapBtn>
                 <BtnNext>adicionar</BtnNext>
             </WrapBtn>
-            <WrapBtn>
-                <BtnCreateCampaing>gravar campaña</BtnCreateCampaing>
-            </WrapBtn>
-        </Form>
+        </FormR>
+        </Col>
+        
+        <TableReward />
+
+        </Row>
+
+        </Grid>
+
     )
 }
 
