@@ -6,14 +6,8 @@ services:
         build:
             context: .
             dockerfile: Dockerfile
-        expose:
-            - 9000
+        ports:
+            - 8000:8000
         volumes:
             - "/app/node_modules"
             - "./:/app"
-    nginx:
-        build: ./nginx
-        ports:
-            - 9000:9000
-        depends_on:
-            - client
