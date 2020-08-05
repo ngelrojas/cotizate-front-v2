@@ -1,11 +1,11 @@
-FROM nginx:1.15.2-alpine
+FROM node:alpine
 
-COPY . /app 
+WORKDIR /app
 
-RUN rm /etc/nginx/conf.d/default.conf
+COPY package.json /app
 
-COPY nginx/nginx.conf /etc/nginx/conf.d
+RUN npm install
 
-EXPOSE 80
+COPY . /app
 
-ENTRYPOINT ["nginx","-g","daemon off;"]
+CMD ["npm", "run", "build"]
