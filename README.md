@@ -28,6 +28,6 @@ cotizate is an cms for crowfounding, this cms is develped using reactjs, redux, 
 - up container
 
 ```bash
-    docker-compose -f docker-compose.prod.yml up
+    docker-compose -f docker-compose.prod.yml up -d
 ```
 
