@@ -7,13 +7,13 @@ services:
             context: .
             dockerfile: Dockerfile
         expose:
-            - 8000
+            - 9000
         volumes:
             - "/app/node_modules"
             - "./:/app"
     nginx:
         build: ./nginx
         ports:
-            - 80:80
+            - 9000:9000
         depends_on:
             - client
