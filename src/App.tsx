@@ -19,7 +19,7 @@ import {CheckAuthentication} from './redux/auth'
 
 const App: React.FC = () => {
     useEffect(() => {
-        CheckAuthentication()
+        CheckAuthentication() 
     }, [])
     return (
         <Layout>
