@@ -24,6 +24,7 @@ type profileType = {
     first_name: string
     last_name: string
     email: string
+    id: number
 }
 
 interface Iauth {
@@ -41,7 +42,7 @@ const Profile: React.FC<Iauth> = ({authenticated, currentUser}) => {
     })
     const onSubmit = handleSubmit(async ({first_name, last_name, email}) => {
         await API.put(
-            'user/25',
+            `user/${currentUser.id}`,
             {
                 first_name: first_name,
                 last_name: last_name,
