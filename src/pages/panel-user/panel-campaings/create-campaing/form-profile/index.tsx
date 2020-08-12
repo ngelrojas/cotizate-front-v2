@@ -8,7 +8,7 @@ import {
     Input,
     FormSubTitle,
     WrapBtn,
-    BtnNext,
+    BtnSaveProject,
     Form,
     MsgError,
     MsgSuccess
@@ -25,31 +25,60 @@ type userType = {
     last_name: string
     id: number
 }
+type ErrorType = {
+    name: string
+    error: string
+    description: string
+}
+
 interface Iauth {
     authenticated: boolean
     currentUser: userType
 }
 
 const FormProfile: React.FC<Iauth> = ({authenticated, currentUser}) => {
-    const [msg, Setmsg] = React.useState('')
+    const [showMessage, setShowMessage] = React.useState({})
     const [currentProfile, setCurrentProfile] = React.useState()
     let token = window.sessionStorage.getItem('token')
+ 
     const resp = new PersonalProfile(token)
     const {handleSubmit, errors} = useForm<FormData>({
         mode: 'onChange'
     })
 
-    const onSubmit = handleSubmit(({title, video_img, qty_day, amount}) => {
-        let send_data = {
-            title: title,
-            video_img: video_img,
-            qty_day: qty_day,
-            amount: amount
-        }
+    const onSubmit = handleSubmit(() => {
+        let formBasic = window.localStorage.getItem('formBasic')
+        let formDescription = window.localStorage.getItem('formDescription')
+        let formCatag = window.localStorage.getItem('formCatag')
+        let formReward = window.localStorage.getItem('formReward')
 
-        window.localStorage.setItem('formBasic', JSON.stringify(send_data))
-        Setmsg('datos basicos guardados')
+        let errorFB = validateForm(formBasic, 'formBasic', 'INFORMACION BASICA')
+        let errorFD = validateForm(formDescription, 'formDescription', 'RESUMEN Y DESCRIPCION')
+        let errorFC = validateForm(formCatag, 'formCatag', 'CATEGORIA Y TAGS')
+        let errorFR = validateForm(formReward, 'formReward', 'RECOMPONENSAS')
+        
+        console.log(showMessage)
+        
+        /*console.log('basic', errorFB)
+        console.log('BASIC', showMessage)
+        console.log('description', errorFD)
+        console.log('category', errorFC)
+        console.log('reward', errorFR)*/
     })
+
+    const validateForm=(form: any, nameForm:string, nameDesc: string)=>{
+
+        if(form === null){
+            let errorType = {
+                name: nameForm,
+                error: 'debe completar el formulario: ',
+                description: nameDesc
+            }
+            setShowMessage(errorType)
+        }
+        return false
+        
+    }
     //TODO: not return complete field, add end-point to backend to return complete field
     React.useEffect(()=>{
         console.log('ID USER', currentUser.id)
@@ -58,18 +87,17 @@ const FormProfile: React.FC<Iauth> = ({authenticated, currentUser}) => {
             setCurrentProfile(res.data.data)
             console.log(res.data.data)
         })
+
     },[])
 
     return (
         <Form onSubmit={onSubmit}>
             <Label>
-                <FormSubTitle>complete su perfil {currentUser.first_name}</FormSubTitle>
-                 
-                <MsgError>{errors.title && 'este campo es requerido'}</MsgError>
+                <FormSubTitle>complete su perfil: {currentUser.first_name}</FormSubTitle>     
             </Label>
-            <MsgSuccess>{msg}</MsgSuccess>
+            <MsgError></MsgError>
             <WrapBtn>
-                <BtnNext>guardar</BtnNext>
+                <BtnSaveProject>guardar proyecto</BtnSaveProject>
             </WrapBtn>
         </Form>
     )
