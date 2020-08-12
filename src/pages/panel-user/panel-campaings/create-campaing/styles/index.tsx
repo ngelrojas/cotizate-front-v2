@@ -107,6 +107,10 @@ export const BtnNext = styled(Btn)`
     float: right;
 `
 
+export const BtnSaveProject = styled(Btn)`
+    background-color: #007bff;
+    width: 100%;
+`
 export const Form = styled.form`
     width: 60%;
     margin: 0 auto;
