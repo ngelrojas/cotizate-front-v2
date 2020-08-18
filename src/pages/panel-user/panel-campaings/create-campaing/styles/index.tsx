@@ -129,7 +129,16 @@ export const MsgError = styled.span`
     text-align: center;
     margin-top: 2%;
     margin-bottom: 2%;
-    text-align: center;
+`
+
+export const MsgErrorForm = styled.div`
+    width: 100%;
+    left: 0%;
+    top: 150%;
+    color: red;
+    text-align: left;
+    margin-top: 2%;
+    margin-bottom: 2%;
 `
 
 export const MsgSuccess = styled.p`
