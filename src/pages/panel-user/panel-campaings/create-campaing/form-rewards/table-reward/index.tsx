@@ -17,7 +17,7 @@ const TableReward: React.FC = ()=>{
 
     React.useEffect(() => {
         console.log(_rewards)
-        if(_rewards.length){
+        if(_rewards){
            SetgetRewards(_rewards) 
         }
         //SetgetRewards(_rewards)
