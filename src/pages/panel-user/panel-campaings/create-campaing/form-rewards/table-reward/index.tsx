@@ -16,15 +16,11 @@ const TableReward: React.FC = ()=>{
     let _rewards: any = form_parse
 
     React.useEffect(() => {
-        console.log(_rewards)
         if(_rewards){
            SetgetRewards(_rewards) 
         }
-        //SetgetRewards(_rewards)
     }, [])
-    //console.log(_rewards.length)
     const handleDelete = (e:number) => {
-        //console.log(e)
         const conjunt = _rewards.slice(0, e).concat(_rewards.slice(e + 1, _rewards.length))
         console.log(conjunt) 
         window.localStorage.setItem('formReward', JSON.stringify(conjunt))

@@ -1,10 +1,10 @@
 import API from '../api'
 
 export class Campaings {
-    private token: string
+    private token: any 
     private resp_campaing: any
 
-    constructor(token: string){
+    constructor(token: any){
         this.token = token
     }
 

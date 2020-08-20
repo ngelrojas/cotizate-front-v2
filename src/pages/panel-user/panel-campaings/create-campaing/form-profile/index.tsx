@@ -3,6 +3,8 @@ import {connect} from 'react-redux'
 import {useForm} from 'react-hook-form'
 // import API from '../../../../../api'
 import {PersonalProfile} from '../../../../../userProfile'
+import {Campaings} from '../../../../../userCampaings'
+
 import {
     Label,
     FormSubTitle,
@@ -40,15 +42,45 @@ const FormProfile: React.FC<Iauth> = ({authenticated, currentUser}) => {
     let token = window.sessionStorage.getItem('token')
     let errorType: Array<{name:string, error:string, description:string}>
     const resp = new PersonalProfile(token)
-    const {handleSubmit, errors} = useForm<FormData>({
+    let campaing = new Campaings(token)
+    let formBasic:any = window.localStorage.getItem('formBasic')
+    let formDescription:any = window.localStorage.getItem('formDescription')
+    let formCatag:any = window.localStorage.getItem('formCatag')
+    let formReward:any = window.localStorage.getItem('formReward')
+    let basic_form_parse = JSON.parse(formBasic) 
+    let descr_form_parse = JSON.parse(formDescription)
+    let categ_form_parse = JSON.parse(formCatag)
+    let rewar_form_parse = JSON.parse(formReward)
+    const {handleSubmit} = useForm<FormData>({
         mode: 'onChange'
     })
-
+    // TODO: continue here and complete send campaing to the endpoint
     const onSubmit = handleSubmit(() => {
-        let formBasic = window.localStorage.getItem('formBasic')
-        let formDescription = window.localStorage.getItem('formDescription')
-        let formCatag = window.localStorage.getItem('formCatag')
-        let formReward = window.localStorage.getItem('formReward')
+
+        if (msgError()){
+           console.log(basic_form_parse) 
+           let send_data = {
+                title: basic_form_parse.title,
+                excerpt: descr_form_parse.excerpt,
+                description: descr_form_parse.description,
+                public_at: descr_form_parse.public_at,
+                qty_day: basic_form_parse.qty_day,
+                video_img: basic_form_parse.video_img,
+                amount: basic_form_parse.amount,
+                category: categ_form_parse.category,
+                tags: categ_form_parse.tags
+           }
+           campaing.createCampaing(send_data).then(resp=>{
+            console.log(resp)
+           }).catch(error => {
+            console.log(error)
+           })
+        }
+
+    })
+
+    const msgError = () => {
+
 
         let errorFB = validateForm(formBasic, 'formBasic', 'INFORMACION BASICA')
         let errorFD = validateForm(formDescription, 'formDescription', 'RESUMEN Y DESCRIPCION')
@@ -56,24 +88,29 @@ const FormProfile: React.FC<Iauth> = ({authenticated, currentUser}) => {
         let errorFR = validateForm(formReward, 'formReward', 'RECOMPONENSAS') 
 
         if(errorFB){
-            setErrorsFB(errorFB[0].error+' '+errorFB[0].description)
+            setErrorsFB(`${errorFB[0].error} ${errorFB[0].description}`)
+            return false
         }
 
         if(errorFD){
-            setErrorsFD(errorFD[0].error+' '+errorFD[0].description)
+            setErrorsFD(`${errorFD[0].error} ${errorFD[0].description}`)
+            return false
         }
 
         if(errorFC){
-            setErrorsFC(errorFC[0].error+' '+errorFC[0].description)
+            setErrorsFC(`${errorFC[0].error} ${errorFC[0].description}`)
+            return false
         }
 
         if(errorFR){
-            setErrorsFR(errorFR[0].error+' '+errorFR[0].description)
+            setErrorsFR(`${errorFR[0].error} ${errorFR[0].description}`)
+            return false
         }
 
-    })
+        return true
+    }
 
-    const validateForm=(form: any, nameForm:string, nameDesc: string)=>{
+    const validateForm = (form: any, nameForm:string, nameDesc: string)=>{
         if(form === null){
             errorType = Array({
                 name: nameForm,

@@ -62,7 +62,6 @@ const Profile: React.FC<Iauth> = ({authenticated, currentUser}) => {
                 }
             })
             .catch(err => {
-                console.log(err)
                 setMsgError('no se guardo correctamente intentelo mas tarde.')
             })
     })
