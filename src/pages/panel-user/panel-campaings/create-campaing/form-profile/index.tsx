@@ -1,9 +1,9 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {useForm} from 'react-hook-form'
-// import API from '../../../../../api'
 import {PersonalProfile} from '../../../../../userProfile'
 import {Campaings} from '../../../../../userCampaings'
+import {Reward} from '../../../../../userReward'
 
 import {
     Label,
@@ -25,6 +25,7 @@ type userType = {
     first_name: string
     last_name: string
     id: number
+    complete: boolean
 }
 
 interface Iauth {
@@ -43,6 +44,7 @@ const FormProfile: React.FC<Iauth> = ({authenticated, currentUser}) => {
     let errorType: Array<{name:string, error:string, description:string}>
     const resp = new PersonalProfile(token)
     let campaing = new Campaings(token)
+    let reward = new Reward(token)
     let formBasic:any = window.localStorage.getItem('formBasic')
     let formDescription:any = window.localStorage.getItem('formDescription')
     let formCatag:any = window.localStorage.getItem('formCatag')
@@ -58,23 +60,43 @@ const FormProfile: React.FC<Iauth> = ({authenticated, currentUser}) => {
     const onSubmit = handleSubmit(() => {
 
         if (msgError()){
-           console.log(basic_form_parse) 
+
+           let send_data_reward = {} 
+
            let send_data = {
                 title: basic_form_parse.title,
                 excerpt: descr_form_parse.excerpt,
                 description: descr_form_parse.description,
-                public_at: descr_form_parse.public_at,
-                qty_day: basic_form_parse.qty_day,
+                currencies: 1,
+                //public_at: descr_form_parse.public_at,
+                qty_day: parseInt(basic_form_parse.qty_day),
                 video_img: basic_form_parse.video_img,
-                amount: basic_form_parse.amount,
-                category: categ_form_parse.category,
-                tags: categ_form_parse.tags
+                amount: parseFloat(basic_form_parse.amount),
+                category: parseInt(categ_form_parse.category),
+                tags: 1
            }
            campaing.createCampaing(send_data).then(resp=>{
             console.log(resp)
+            /*rewar_form_parse.map((rew:any) => {*/
+                //send_data_reward = {
+                    //title: rew.title,
+                    //description: rew.descript,
+                    //amount: rew.cant_reward,
+                    //campaings: resp.id
+                //}
+
+                //reward.createReward(send_data_reward).then(resp_re=>{
+                   //console.log(resp_re) 
+                //}).catch(err=>{
+                    //console.log(err)
+                //})
+
+            /*})*/
+
            }).catch(error => {
             console.log(error)
            })
+
         }
 
     })
@@ -127,8 +149,11 @@ const FormProfile: React.FC<Iauth> = ({authenticated, currentUser}) => {
         // console.log('ID USER', currentUser.id) 
         resp.getPersonalProfile().then(res => {
             setCurrentProfile(res.data.data)
+            console.log('HERE')
             console.log(res.data.data)
 
+        }).catch(err =>{
+            console.error('here', err)
         })
 
     },[])
@@ -136,7 +161,7 @@ const FormProfile: React.FC<Iauth> = ({authenticated, currentUser}) => {
     return (
         <Form onSubmit={onSubmit}>
             <Label>
-                <FormSubTitle>complete su perfil: {currentUser.first_name}</FormSubTitle>     
+                <FormSubTitle>complete su perfil: {currentUser.first_name} - {currentUser.last_name}</FormSubTitle>     
             </Label>
             <MsgErrorForm>{errorsFB}</MsgErrorForm>
             <MsgErrorForm>{errorsFD}</MsgErrorForm>
