@@ -4,7 +4,7 @@ export class Reward {
     private token: any
     private resp_reward: any
 
-    construct(token: any){
+    constructor(token: any){
         this.token = token
     }
 
