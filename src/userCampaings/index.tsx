@@ -23,7 +23,10 @@ export class Campaings {
     */
     createCampaing = async(data_send: any) => {
         this.resp_campaing = await API.post(`campaing`, data_send, {
-            headers: {Authorization: `Bearer ${this.token}`}
+            headers: {
+                'Authorization': `Bearer ${this.token}`,
+                'content-type': 'application/x-www-form-urlencoded'
+            }
         })
         return this.resp_campaing
     }

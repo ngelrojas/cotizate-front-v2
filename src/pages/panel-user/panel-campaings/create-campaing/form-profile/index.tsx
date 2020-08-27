@@ -61,37 +61,23 @@ const FormProfile: React.FC<Iauth> = ({authenticated, currentUser}) => {
 
         if (msgError()){
 
-           let send_data_reward = {} 
+           let campID: number = 0
 
            let send_data = {
                 title: basic_form_parse.title,
                 excerpt: descr_form_parse.excerpt,
                 description: descr_form_parse.description,
-                currencies: 1,
-                //public_at: descr_form_parse.public_at,
                 qty_day: parseInt(basic_form_parse.qty_day),
-                video_img: basic_form_parse.video_img,
                 amount: parseFloat(basic_form_parse.amount),
-                category: parseInt(categ_form_parse.category),
+                currencies: 1,
+                video_img: basic_form_parse.video_img,
+                public_at: descr_form_parse.public_at,
+                categories: parseInt(categ_form_parse.category),
                 tags: 1
            }
+           console.info(send_data)
            campaing.createCampaing(send_data).then(resp=>{
             console.log(resp)
-            /*rewar_form_parse.map((rew:any) => {*/
-                //send_data_reward = {
-                    //title: rew.title,
-                    //description: rew.descript,
-                    //amount: rew.cant_reward,
-                    //campaings: resp.id
-                //}
-
-                //reward.createReward(send_data_reward).then(resp_re=>{
-                   //console.log(resp_re) 
-                //}).catch(err=>{
-                    //console.log(err)
-                //})
-
-            /*})*/
 
            }).catch(error => {
             console.log(error)
@@ -100,6 +86,28 @@ const FormProfile: React.FC<Iauth> = ({authenticated, currentUser}) => {
         }
 
     })
+
+/*    const saveReward = (campid: number) =>{*/
+
+        //let send_data_reward = {} 
+        //rewar_form_parse.map((rew:any) => {
+
+            //send_data_reward = {
+                //title: rew.title,
+                //description: rew.descript,
+                //amount: rew.cant_reward,
+                //campaings: campid 
+            //}
+
+            //reward.createReward(send_data_reward).then(resp_re=>{
+               //console.log(resp_re) 
+            //}).catch(err=>{
+                //console.log(err)
+            //})
+
+        //})
+
+    /*}*/
 
     const msgError = () => {
 
@@ -146,14 +154,12 @@ const FormProfile: React.FC<Iauth> = ({authenticated, currentUser}) => {
     }
     //TODO: not return complete field, add end-point to backend to return complete field
     React.useEffect(()=>{
-        // console.log('ID USER', currentUser.id) 
         resp.getPersonalProfile().then(res => {
             setCurrentProfile(res.data.data)
-            console.log('HERE')
             console.log(res.data.data)
 
         }).catch(err =>{
-            console.error('here', err)
+            console.error(err)
         })
 
     },[])
