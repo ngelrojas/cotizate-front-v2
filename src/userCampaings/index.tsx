@@ -35,7 +35,7 @@ export class Campaings {
      * retrieve a campaing
      * with camaping ID
     */
-    retrieveCamaping = async(data_id: number) =>{
+    retrieveCampaing = async(data_id: number) =>{
         this.resp_campaing = await API.get(`campaing/${data_id}`, {
             headers: {Authorization: `Bearer ${this.token}`}
         }) 
