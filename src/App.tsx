@@ -14,6 +14,7 @@ import Confirmation from './pages/confirmation'
 import PanelUser from './pages/panel-user'
 import PanelCampaing from './pages/panel-user/panel-campaings'
 import CreateCampaing from './pages/panel-user/panel-campaings/create-campaing'
+import UpdateCampaing from './pages/panel-user/panel-campaings/update-campaing'
 import PageNotFound from './pages/404'
 import {CheckAuthentication} from './redux/auth'
 
@@ -70,6 +71,11 @@ const App: React.FC = () => {
                         exact
                         path="/panel-de-usuario/crear-campania"
                         component={CreateCampaing}
+                    />
+                    <Route
+                        exact
+                        path="/panel-de-usuario/actualizar-campania/:id"
+                        component={UpdateCampaing}
                     />
                     <Route component={PageNotFound} />
                 </Switch>
