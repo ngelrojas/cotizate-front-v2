@@ -19,19 +19,28 @@ const UpdateCampaing: React.FC = () => {
 
     const RetrieveCampaing = (camp_id:number) =>{
         dataCampaing.retrieveCampaing(camp_id).then(res => {
+            console.log(res.data.data)
             setDcamp(res.data.data)
         }).catch(err => {
             console.error(err)
         })
     } 
+    
+    const GetCampID = () =>{
+        let url_param:string = window.location.pathname
+        let camp_id = url_param.replace(/[^0-9]/g,'')
+        let cmpID = parseInt(camp_id)
+        return cmpID
+    }
 
     React.useEffect(()=>{
         if(!CheckAuthentication()){
             history.push('/')
         }
-        // TODO: create a function get query parameter from URL
-        // and replace number 4 to var query parameter
-        RetrieveCampaing(4)
+
+        let ID = GetCampID()
+        
+        RetrieveCampaing(ID)
 
     },[])
 
@@ -70,10 +79,10 @@ const UpdateCampaing: React.FC = () => {
                                         <FormBasic {...dcamp} />
                                     </TabPanel>
                                     <TabPanel>
-                                        <FormDescription />
+                                        <FormDescription {...dcamp} />
                                     </TabPanel>
                                     <TabPanel>
-                                        <FormCatTag />
+                                        <FormCatTag {...dcamp} />
                                     </TabPanel>
                                     <TabPanel>
                                         <FormRewards />
