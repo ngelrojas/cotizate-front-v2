@@ -45,7 +45,7 @@ export class Campaings {
     /*
      * update current camaping
     */
-    updateCamaping = async(data_id: number, data_send: any) => {
+    updateCampaing = async(data_id: number, data_send: any) => {
         this.resp_campaing = await API.put(
             `campaing/${data_id}`,
             data_send,
@@ -57,7 +57,7 @@ export class Campaings {
     /*
      * delete current camaping
     */
-    deleteCamaping = async(data_id: number) => {
+    deleteCampaing = async(data_id: number) => {
         this.resp_campaing = await API.put(`campaing/${data_id}`,
             {headers: {Authorization: `Bearer ${this.token}`}}
         )
