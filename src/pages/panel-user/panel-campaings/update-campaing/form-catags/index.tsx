@@ -3,6 +3,7 @@ import {useForm} from 'react-hook-form'
 import MultiSelect from 'react-multi-select-component'
 import {CategoriesCampaing} from '../../../../../userCategories'
 import {TagCampaing} from '../../../../../userTags'
+import {Campaings} from '../../../../../userCampaings'
 import {
     Label,
     FormSubTitle,
@@ -27,7 +28,13 @@ interface listTag{
     value: number
 }
 
-const FormCatTag: React.FC = () => {
+type propsCamp = {
+    id: number,
+    categories: number,
+    tags: any
+}
+
+const FormCatTag: React.FC<propsCamp> = (propsCamp) => {
     const [msg, Setmsg] = React.useState('')
     const [cate, SetCate] = React.useState()
     const [tagcp, Settagcp] = React.useState()
@@ -35,6 +42,7 @@ const FormCatTag: React.FC = () => {
     // const [selected, Setselected] = React.useState([])
     const [loadTag, SetloadTag] = React.useState()
     let token = window.sessionStorage.getItem('token')
+    let dataCampaing = new Campaings(token)
     let CatCamp = new CategoriesCampaing(token)
     let TabCamp = new TagCampaing(token)
     let idTag:number
@@ -96,18 +104,24 @@ const FormCatTag: React.FC = () => {
         LoadTags()
     }, [])
 
+    // TODO: continu here complete for tags
     return (
         <Form onSubmit={onSubmit}>
-            <Label>
+            <Label> 
                 <FormSubTitle>category del proyecto</FormSubTitle>
                 <SelectCat ref={register({required: true})} name="category">
-                    <option value="">SELECCIONAR</option>
                     {cate &&
-                        (cate as any).map((category: any) => (
-                            <option value={category.id} key={category.id}>
-                                {category.name}
-                            </option>
-                        ))}
+                        (cate as any).map((category: any) => {
+                            if(propsCamp.categories === category.id){
+                                return (<option value={category.id} key={category.id}>
+                                    {category.name}
+                                </option>)
+                            }
+                                return (<option value={category.id} key={category.id}>
+                                    {category.name}
+                                </option>)
+
+                    } )}
                 </SelectCat>
 
                 <MsgError>
