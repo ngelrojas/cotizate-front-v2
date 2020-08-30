@@ -46,7 +46,6 @@ const PanelCampaing: React.FC<Iauth> = ({authenticated, currentUser}) => {
 
     React.useEffect(()=>{
         campaing.listCampaings().then(resp => {
-            console.log(resp.data.data)
             if(resp.data.data.length === 0){
                 setIsData(false)
             }
