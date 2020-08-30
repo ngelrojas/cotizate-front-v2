@@ -1,5 +1,6 @@
 import React from 'react'
 import {useForm} from 'react-hook-form'
+import {Campaings} from '../../../../../userCampaings'
 import {
     Label,
     Input,
@@ -17,15 +18,20 @@ type FormData = {
     qty_day: number
     amount: number
 }
-// TODO: complete all data just for this form not retrieve all data
+
 type propsCamp = {
+    id: number,
     title: string,
-    description: string
+    video_img: string,
+    qty_day: number,
+    amount: number
 }
 
 const FormBasic: React.FC<propsCamp> = (propsCamp) => {
     const [msg, Setmsg] = React.useState('')
     const [formbasic, Setformbasic] = React.useState()
+    let token = window.sessionStorage.getItem('token')
+    let dataCampaing = new Campaings(token)
     const {register, handleSubmit, errors} = useForm<FormData>({
         mode: 'onChange'
     })
@@ -37,26 +43,28 @@ const FormBasic: React.FC<propsCamp> = (propsCamp) => {
             qty_day: qty_day,
             amount: amount
         }
-
-        window.localStorage.setItem('formBasic', JSON.stringify(send_data))
-        Setmsg('datos basicos guardados')
+        dataCampaing.updateCampaing(propsCamp.id, send_data).then(res =>{
+            console.log(res.data.data)
+            if (res.data.data){
+                Setmsg('datos basicos actualizados.')
+            }
+        }).catch(err =>{
+            console.error(err)
+            Setmsg('existe algun error porfavor intente mas tarde.')
+        })
+        
     })
-
-    React.useEffect(()=>{
-        let _formbasic: any = window.localStorage.getItem('formBasic')
-        Setformbasic(JSON.parse(_formbasic))
-    },[])
 
     return (
         <Form onSubmit={onSubmit}>
             <Label>
-                <FormSubTitle>titulo del proyecto actualizar {propsCamp.title}</FormSubTitle>
+                <FormSubTitle>titulo del proyecto</FormSubTitle>
                 <Input
                     type="text"
                     name="title"
                     ref={register({required: true})}
                     placeholder="titulo del proyecto"
-                    defaultValue={formbasic?.title}
+                    defaultValue={propsCamp.title}
                 />
                 <MsgError>{errors.title && 'este campo es requerido'}</MsgError>
             </Label>
@@ -67,7 +75,7 @@ const FormBasic: React.FC<propsCamp> = (propsCamp) => {
                     name="video_img"
                     ref={register({required: true})}
                     placeholder="video/imagen proyecto"
-                    defaultValue={formbasic?.video_img} 
+                    defaultValue={propsCamp.video_img} 
                 />
                 <MsgError>
                     {errors.video_img && 'este campo es requerido'}
@@ -80,7 +88,7 @@ const FormBasic: React.FC<propsCamp> = (propsCamp) => {
                     name="qty_day"
                     ref={register({required: true})}
                     placeholder="cantidad de dias"
-                    defaultValue={formbasic?.qty_day}
+                    defaultValue={propsCamp.qty_day}
                 />
                 <MsgError>
                     {errors.qty_day && 'este campo es requerido'}
@@ -93,7 +101,7 @@ const FormBasic: React.FC<propsCamp> = (propsCamp) => {
                     name="amount"
                     ref={register({required: true})}
                     placeholder="Bs 15.000"
-                    defaultValue={formbasic?.amount}
+                    defaultValue={propsCamp.amount}
                 />
                 <MsgError>
                     {errors.amount && 'este campo es requerido'}
