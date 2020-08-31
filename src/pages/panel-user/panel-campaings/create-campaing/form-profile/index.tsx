@@ -62,7 +62,7 @@ const FormProfile: React.FC<Iauth> = ({authenticated, currentUser}) => {
         if (msgError()){
 
            let campID: number = 0
-
+           let dformat = new Date(descr_form_parse.public_at)
            let send_data = {
                 title: basic_form_parse.title,
                 excerpt: descr_form_parse.excerpt,
@@ -71,9 +71,9 @@ const FormProfile: React.FC<Iauth> = ({authenticated, currentUser}) => {
                 amount: parseFloat(basic_form_parse.amount),
                 currencies: 1,
                 video_img: basic_form_parse.video_img,
-                public_at: descr_form_parse.public_at,
+                public_at: dformat.toISOString(),
                 categories: parseInt(categ_form_parse.category),
-                tags: 1
+                tags: [1]
            }
            console.info(send_data)
            campaing.createCampaing(send_data).then(resp=>{
