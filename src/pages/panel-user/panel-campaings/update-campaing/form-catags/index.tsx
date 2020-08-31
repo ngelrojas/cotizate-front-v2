@@ -56,12 +56,19 @@ const FormCatTag: React.FC<propsCamp> = (propsCamp) => {
 
     const onSubmit = handleSubmit(({category, tags}) => {
         let send_data = {
-            category: category,
+            categories: category,
             tags:selected 
         }
 
-        window.localStorage.setItem('formCatag', JSON.stringify(send_data))
-        Setmsg('categoria y tags guardados.')
+        dataCampaing.updateCampaing(propsCamp.id, send_data).then(res =>{
+            console.log(res.data.data)
+            if (res.data.data){
+                Setmsg('datos de resumen y descripcion actualizados.')
+            }
+        }).catch(err =>{
+            console.error(err)
+            Setmsg('existe algun error porfavor intente mas tarde.')
+        })
     })
 
     const LoadCategories = () => {
@@ -104,7 +111,7 @@ const FormCatTag: React.FC<propsCamp> = (propsCamp) => {
         LoadTags()
     }, [])
 
-    // TODO: continu here complete for tags
+    // TODO: fix error in categories, use defaultValue in selectcat
     return (
         <Form onSubmit={onSubmit}>
             <Label> 
@@ -113,13 +120,13 @@ const FormCatTag: React.FC<propsCamp> = (propsCamp) => {
                     {cate &&
                         (cate as any).map((category: any) => {
                             if(propsCamp.categories === category.id){
-                                return (<option value={category.id} key={category.id}>
-                                    {category.name}
+                                return (<option defaultValue={category.id} key={category.id}>
+                                    {category.name} {propsCamp.categories} {category.id}
                                 </option>)
                             }
-                                return (<option value={category.id} key={category.id}>
-                                    {category.name}
-                                </option>)
+                            return (<option value={category.id} key={category.id}>
+                                {category.name}
+                            </option>)
 
                     } )}
                 </SelectCat>
@@ -131,19 +138,40 @@ const FormCatTag: React.FC<propsCamp> = (propsCamp) => {
             <Label>
                 <FormSubTitle>Tags</FormSubTitle>
                 {tagcp &&
-                tagcp.map((tag: any) => (
-                    <TagLabel key={tag.id}>
+                tagcp.map((tag: any) => {
+                    if(propsCamp.tags){
+                        return (propsCamp.tags.map((ptag:any)=>{
+                            if(ptag === tag.id){
+                                return (<TagLabel key={tag.id}>
+                                              <input
+                                                defaultChecked={tag.id ? tag.id: selected.includes(tag.id)}
+                                                type="checkbox"
+                                                value={tag.id}
+                                                onClick={handleTags}
+                                              />
 
-                          <input
-                            defaultChecked={selected.includes(tag.id)}
-                            type="checkbox"
-                            value={tag.id}
-                            onClick={handleTags}
-                          />
+                                            {tag.name}
+                                        </TagLabel>)
+                            }else{
+                                return (<TagLabel key={tag.id}>
 
-                        {tag.name}
-                    </TagLabel>
-            ))}
+                                      <input
+                                        defaultChecked={selected.includes(tag.id)}
+                                        type="checkbox"
+                                        value={tag.id}
+                                        onClick={handleTags}
+                                      />
+
+                                    {tag.name}
+                                </TagLabel>)
+                            }
+
+
+                        } ))
+
+                    }
+
+                })}
                 <MsgError>{errors.tags && 'este campo es requerido'}</MsgError>
 
             </Label>
