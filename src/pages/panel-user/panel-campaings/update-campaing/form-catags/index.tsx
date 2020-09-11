@@ -4,6 +4,7 @@ import MultiSelect from 'react-multi-select-component'
 import {CategoriesCampaing} from '../../../../../userCategories'
 import {TagCampaing} from '../../../../../userTags'
 import {Campaings} from '../../../../../userCampaings'
+import SelectedField from '../../../../../components/selected-field'
 import {
     Label,
     FormSubTitle,
@@ -121,7 +122,7 @@ const FormCatTag: React.FC<propsCamp> = (propsCamp) => {
                         (cate as any).map((category: any) => {
                             if(propsCamp.categories === category.id){
                                 return (<option defaultValue={category.id} key={category.id}>
-                                    {category.name} {propsCamp.categories} {category.id}
+                                    {category.name}
                                 </option>)
                             }
                             return (<option value={category.id} key={category.id}>
@@ -135,45 +136,9 @@ const FormCatTag: React.FC<propsCamp> = (propsCamp) => {
                     {errors.category && 'este campo es requerido'}
                 </MsgError>
             </Label>
+
             <Label>
-                <FormSubTitle>Tags</FormSubTitle>
-                {tagcp &&
-                tagcp.map((tag: any) => {
-                    if(propsCamp.tags){
-                        return (propsCamp.tags.map((ptag:any)=>{
-                            if(ptag === tag.id){
-                                return (<TagLabel key={tag.id}>
-                                              <input
-                                                defaultChecked={tag.id ? tag.id: selected.includes(tag.id)}
-                                                type="checkbox"
-                                                value={tag.id}
-                                                onClick={handleTags}
-                                              />
-
-                                            {tag.name}
-                                        </TagLabel>)
-                            }else{
-                                return (<TagLabel key={tag.id}>
-
-                                      <input
-                                        defaultChecked={selected.includes(tag.id)}
-                                        type="checkbox"
-                                        value={tag.id}
-                                        onClick={handleTags}
-                                      />
-
-                                    {tag.name}
-                                </TagLabel>)
-                            }
-
-
-                        } ))
-
-                    }
-
-                })}
-                <MsgError>{errors.tags && 'este campo es requerido'}</MsgError>
-
+                <SelectedField {...propsCamp.tags} />
             </Label>
 
             <MsgSuccess>{msg}</MsgSuccess>
