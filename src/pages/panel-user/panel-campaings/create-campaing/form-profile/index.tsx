@@ -69,11 +69,11 @@ const FormProfile: React.FC<Iauth> = ({authenticated, currentUser}) => {
                 description: descr_form_parse.description,
                 qty_day: parseInt(basic_form_parse.qty_day),
                 amount: parseFloat(basic_form_parse.amount),
-                currencies: 1,
                 video_img: basic_form_parse.video_img,
                 public_at: dformat.toISOString(),
                 categories: parseInt(categ_form_parse.category),
-                tags: [1]
+                currencies: 1,
+                tags: 1
            }
            console.info(send_data)
            campaing.createCampaing(send_data).then(resp=>{
