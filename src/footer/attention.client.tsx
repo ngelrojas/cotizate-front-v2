@@ -1,11 +1,11 @@
 import React from 'react'
-import {H5, List, Item, Go} from './styles'
+import {H5, ListOC, Item, Go} from './styles'
 
 const AttentionClient: React.FC = () => {
     return (
         <>
             <H5>ATENCION AL CLIENTE</H5>
-            <List>
+            <ListOC>
                 <Item>
                     <Go to="#">Guia de usuario</Go>
                 </Item>
@@ -18,7 +18,10 @@ const AttentionClient: React.FC = () => {
                 <Item>
                     <Go to="#">Terminos y condiciones de uso</Go>
                 </Item>
-            </List>
+                <Item>
+                    <Go to="#">Trabaje con nosotros</Go>
+                </Item>
+            </ListOC>
         </>
     )
 }

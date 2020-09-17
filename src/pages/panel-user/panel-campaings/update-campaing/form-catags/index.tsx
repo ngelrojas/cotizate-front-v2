@@ -60,16 +60,16 @@ const FormCatTag: React.FC<propsCamp> = (propsCamp) => {
             categories: category,
             tags:selected 
         }
-
-        dataCampaing.updateCampaing(propsCamp.id, send_data).then(res =>{
-            console.log(res.data.data)
-            if (res.data.data){
-                Setmsg('datos de resumen y descripcion actualizados.')
-            }
-        }).catch(err =>{
-            console.error(err)
-            Setmsg('existe algun error porfavor intente mas tarde.')
-        })
+        console.info(tags)
+        /*dataCampaing.updateCampaing(propsCamp.id, send_data).then(res =>{*/
+            //console.log(res.data.data)
+            //if (res.data.data){
+                //Setmsg('datos de resumen y descripcion actualizados.')
+            //}
+        //}).catch(err =>{
+            //console.error(err)
+            //Setmsg('existe algun error porfavor intente mas tarde.')
+        /*})*/
     })
 
     const LoadCategories = () => {
@@ -92,15 +92,15 @@ const FormCatTag: React.FC<propsCamp> = (propsCamp) => {
             })
     }
 
-    const handleTags = (e:React.FormEvent<HTMLInputElement> ) => {
-        const id: number = +e.currentTarget.value
-        const {checked} = e.currentTarget
-        if(checked){
-            Setselected(prev=>[...prev, id])
-        }else{
-            Setselected(prev=>prev.filter(item=>item !== id))
-        } 
-    }
+    /*const handleTags = (e:React.FormEvent<HTMLInputElement> ) => {*/
+        //const id: number = +e.currentTarget.value
+        //const {checked} = e.currentTarget
+        //if(checked){
+            //Setselected(prev=>[...prev, id])
+        //}else{
+            //Setselected(prev=>prev.filter(item=>item !== id))
+        //} 
+    /*}*/
 
     React.useEffect(() => {
         let _formCatag:any = window.localStorage.getItem('formCatag')

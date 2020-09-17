@@ -5,7 +5,7 @@ import {useHistory} from 'react-router-dom'
 import {Grid, Row, Col} from 'react-styled-flexboxgrid'
 import GoogleLogin from './google-login'
 import Loading from '../../../components/loading'
-import {Label, Btn, Form, Go, Accept, ErrorInfo, ForgotPwd} from './styles'
+import {Label, Btn, Form, Go, Accept, ErrorInfo, ForgotPwd, Registerlink} from './styles'
 import {loginUser} from '../../../redux/actions/user.actions'
 type FormData = {
     email: string
@@ -102,11 +102,18 @@ const FormLogin: React.FC = (props: any) => {
                             )}
 
                             <Row>
-                                <Col xs={12}>
+                                <Col xs={6}>
                                     <Row center="xs">
                                         <ForgotPwd to="/recuperar-contrasena">
                                             olivide mi constrasena
                                         </ForgotPwd>
+                                    </Row>
+                                </Col>
+                                <Col xs={6}>
+                                    <Row center="xs">
+                                        <Registerlink to="/registrarse">
+                                           registrarse 
+                                        </Registerlink>
                                     </Row>
                                 </Col>
                             </Row>

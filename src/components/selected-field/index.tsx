@@ -19,14 +19,34 @@ const SelectedField: React.FC = (propsCamp)=>{
     const LoadTags = () => {
         TabCamp.getTagCampaing()
             .then(resp => {
-                Settagcp(resp.data)
+                Settagcp(resp.data)  
             })
             .catch(err => {
-                console.log(err)
+                console.error(err)
             })
     }
 
-    const handleTags = (e:React.FormEvent<HTMLInputElement> ) => {
+    const LoadedTags = () => {
+        TabCamp.getTagCampaing()
+            .then(resp => {
+                Object.entries(propsCamp).forEach(
+                    ([key, value])=>{
+                    if(resp.data[key].id === value){
+                        let tag_coll: tagcom
+                        tag_coll = {
+                            id: resp.data[key].id,
+                            name: resp.data[key].name
+                        }
+                        Setagselect(nextData=>[...nextData, tag_coll])
+                    }
+                }) 
+            })
+            .catch(err => {
+                console.error(err)
+            })
+    }
+
+    const handleTags = (e:React.FormEvent<HTMLInputElement>) => {
         let tag_coll: tagcom
         let idn: number = +e.currentTarget.value
         let label: string = e.currentTarget.name
@@ -40,16 +60,14 @@ const SelectedField: React.FC = (propsCamp)=>{
             Setagselect(nextData=>[...nextData, tag_coll])
         }else{
             Setagselect(prev=>prev.filter(item=>item.id !== tag_coll.id))
-        }
-        
-        console.info(tagselect)
+        }    
     }
 
     React.useEffect(()=>{
         LoadTags()
-        console.info(propsCamp)
+        LoadedTags()
     },[])
-    //
+
     return(
         <div>
             <div>
