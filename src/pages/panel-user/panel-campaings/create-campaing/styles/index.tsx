@@ -1,6 +1,8 @@
 import styled from 'styled-components'
 import {Link} from 'react-router-dom'
-import {Tab, TabList} from 'react-tabs'
+// import {Tab, TabList} from 'react-tabs'
+import { MdLens, MdPanoramaFishEye } from 'react-icons/md'
+import { Tabs, TabList, Tab, TabPanels, TabPanel} from '@reach/tabs';
 
 export const Content = styled.main`
     height: auto;
@@ -58,19 +60,14 @@ export const BtnCreateCampaing = styled(Btn)`
     text-decoration: none;
     width: 100%;
 `
-export const TabMenu = styled(TabList)`
-    display: flex;
-    margin-top: 3%;
+export const TabNav = styled(TabList)`
+    background-color: #ffffff;
     margin-bottom: 5%;
 `
 
 export const TabSubMenu = styled(Tab)`
-    width: 100%;
-    text-align: center;
-    cursor: pointer;
-    &:hover {
-        color: #f37a22;
-    }
+    width: 33%;
+    border-bottom: 0px;
 `
 
 export const Label = styled.label`
@@ -129,6 +126,7 @@ export const MsgError = styled.span`
     text-align: center;
     margin-top: 2%;
     margin-bottom: 2%;
+    text-align: center;
 `
 
 export const MsgErrorForm = styled.div`
@@ -187,4 +185,8 @@ export const Td = styled.td`
 
 export const Tr = styled.tr`
     text-align: center;
+`
+
+export const IconOn = styled(MdLens)`
+    color: #f37a22;
 `
