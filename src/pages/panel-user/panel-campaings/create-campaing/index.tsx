@@ -18,9 +18,7 @@ const CreateCampaing: React.FC = () => {
     let history = useHistory()
 
     function CoolTab(props:any) {
-        // `isSelected` comes from `TabList` cloning the `CoolTab`.
         const { isSelected, children } = props;
-        // make sure to forward *all* props received from TabList
         return (
           <TabSubMenu {...props}>
             {isSelected ? <IconOn /> : <MdPanoramaFishEye />}
@@ -46,12 +44,12 @@ const CreateCampaing: React.FC = () => {
 
     <Tabs>
       <TabNav>
-      <CoolTab> <br />DATOS DE TU PROYECTO</CoolTab>
-      <CoolTab> <br />PERFIL</CoolTab>
-      <CoolTab><br />VISTA PREVIA</CoolTab>
+      <CoolTab> <p>DATOS DE TU PROYECTO</p></CoolTab>
+      <CoolTab> <p>PERFIL</p></CoolTab>
+      <CoolTab><p>VISTA PREVIA</p></CoolTab>
       </TabNav>
       <TabPanels>
-        <TabPanel>1</TabPanel>
+          <TabPanel><FormBasic /></TabPanel>
         <TabPanel>2</TabPanel>
         <TabPanel>3</TabPanel>
       </TabPanels>

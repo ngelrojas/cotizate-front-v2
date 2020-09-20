@@ -25,6 +25,24 @@ export const H3 = styled.h3`
     color: #007bff;
 `
 
+export const H4 = styled(H3)`
+    text-align: left;
+    margin-top: 5%;
+    margin-bottom: 2%;
+    font-size: 18px;
+`
+
+export const TextConf = styled.p`
+    font-size: 18px;
+    color: #828282;
+    margin-bottom: 6%;
+`
+
+export const TextMain = styled.p`
+    font-size: 18px;
+    color: #828282;
+`
+
 export const Title = styled.div`
     width: 100%;
 `
@@ -32,10 +50,21 @@ export const Title = styled.div`
 export const Btn = styled.button`
     border: 0px;
     border-radius: 2px;
-    color: #dddddd;
-    padding: 1.1%;
+    color: #fff;
+    padding: 2.1%;
     text-transform: uppercase;
     cursor: pointer;
+    width: 20%;
+`
+
+export const BtnLink = styled(Link)`
+    border: 0px;
+    border-radius: 2px;
+    color: #fff;
+    padding: 2.1%;
+    text-transform: uppercase;
+    cursor: pointer;
+    width: 20%;
 `
 
 export const BtnCreate = styled(Link)`
@@ -94,23 +123,31 @@ export const FormSubTitle = styled.p`
 `
 
 export const WrapBtn = styled.div`
-    width: 100%;
+    width: 50%;
     overflow: hidden;
     margin-top: 4%;
+    float:left;
 `
 
 export const BtnNext = styled(Btn)`
-    background-color: #007bff;
+    background-color:#F4A14C ;
     float: right;
+`
+
+export const BtnBack = styled(BtnLink)`
+    background-color:#F4A14C ;
+    float: left;
+    text-decoration: none;
+    text-align: center;
 `
 
 export const BtnSaveProject = styled(Btn)`
     background-color: #007bff;
     width: 100%;
 `
+
 export const Form = styled.form`
-    width: 60%;
-    margin: 0 auto;
+    width: 100%;
 `
 
 export const FormR = styled.form`
@@ -189,4 +226,51 @@ export const Tr = styled.tr`
 
 export const IconOn = styled(MdLens)`
     color: #f37a22;
+`
+
+export const WrapperBox = styled.div`
+    background-color:#FCF2E9;
+    padding-top: 4%;
+    padding-bottom: 4%;
+    padding-left: 6%;
+    margin-bottom: 4%;
+`
+
+export const BoxTitle = styled.p`
+    margin-bottom: 1%;
+`
+
+export const BoxText = styled.p`
+    margin-bottom: 1%;
+    color: #828282;
+`
+
+export const BoxSelect = styled.select`
+    width: 45%;
+    height: 49px;
+`
+
+export const BoxInput = styled.input`
+    width: 45%;
+    height: 49px;
+    padding-left: 5%;
+`
+
+export const BoxInputDuration = styled(BoxInput)`
+    padding-left: 2%;
+`
+
+export const WrappBoxInput = styled.div`
+    position: relative;
+`
+
+export const BS = styled.p`
+    background-color: #F2A85D;
+    padding-top: 1.5%;
+    padding-left: 1%;
+    padding-right: 1%;
+    position: absolute;
+    top: 0%;
+    height: 49px;
+    color: #fff;
 `
