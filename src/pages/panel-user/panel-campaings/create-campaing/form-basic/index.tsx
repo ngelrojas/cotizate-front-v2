@@ -1,34 +1,50 @@
 import React from 'react'
 import {useForm} from 'react-hook-form'
+import {CategoriesCampaing} from '../../../../../userCategories'
 import {
-    Label,
-    Input,
-    FormSubTitle,
     WrapBtn,
-    BtnNext,
+    BtnNext,   
+    BtnBack,
     Form,
     MsgError,
-    MsgSuccess
+    MsgSuccess,
+    WrapperBox,
+    BoxTitle,
+    BoxText,
+    BoxSelect,
+    H4,
+    TextConf,
+    TextMain,
+    BoxInput,
+    BoxInputDuration,
+    WrappBoxInput,
+    BS
 } from '../styles'
 
+
 type FormData = {
-    title: string
-    video_img: string
+    category: string
+    tags: string
     qty_day: number
     amount: number
+    locations: string
 }
 
 const FormBasic: React.FC = () => {
+
+    let token = window.sessionStorage.getItem('token')
+    let CatCamp = new CategoriesCampaing(token)
+    const [cate, SetCate] = React.useState()
     const [msg, Setmsg] = React.useState('')
     const [formbasic, Setformbasic] = React.useState()
     const {register, handleSubmit, errors} = useForm<FormData>({
         mode: 'onChange'
     })
 
-    const onSubmit = handleSubmit(({title, video_img, qty_day, amount}) => {
+    const onSubmit = handleSubmit(({category, locations, qty_day, amount}) => {
         let send_data = {
-            title: title,
-            video_img: video_img,
+            category: category,
+            localtions: locations,
             qty_day: qty_day,
             amount: amount
         }
@@ -37,40 +53,68 @@ const FormBasic: React.FC = () => {
         Setmsg('datos basicos guardados')
     })
 
+    const LoadCategories = () => {
+        CatCamp.getCategoryCampaing()
+            .then(resp => {
+                SetCate(resp.data)
+            })
+            .catch(err => {
+                console.log(err)
+            })
+    }
+
     React.useEffect(()=>{
         let _formbasic: any = window.localStorage.getItem('formBasic')
         Setformbasic(JSON.parse(_formbasic))
+        LoadCategories()
     },[])
 
     return (
+        <>
+        <div>
+            <TextMain>
+Cotizate es una plataforma donde diferentes tipos de personas pueden expresarse libremente. Y sabemos
+que, de vez en cuando, expresarse es sinónimo de provocar reflexión e instigar. Nuestro rol es mantener 
+un ambiente acogedor para todo tipo de público y es por eso que tenemos algunas reglas para proyectos 
+de contenido para adultos. Sepa lo que puede y lo que no puede.
+            </TextMain>
+</div>
+<H4>1.- CONFIGURACION</H4>
+<TextConf>Vamos a configuar tu proyecto selecciona siguientes opciones</TextConf>
+
         <Form onSubmit={onSubmit}>
-            <Label>
-                <FormSubTitle>titulo del proyecto</FormSubTitle>
-                <Input
-                    type="text"
-                    name="title"
-                    ref={register({required: true})}
-                    placeholder="titulo del proyecto"
-                    defaultValue={formbasic?.title}
-                />
-                <MsgError>{errors.title && 'este campo es requerido'}</MsgError>
-            </Label>
-            <Label>
-                <FormSubTitle>video o imagen del proyecto</FormSubTitle>
-                <Input
-                    type="text"
-                    name="video_img"
-                    ref={register({required: true})}
-                    placeholder="video/imagen proyecto"
-                    defaultValue={formbasic?.video_img} 
-                />
-                <MsgError>
-                    {errors.video_img && 'este campo es requerido'}
-                </MsgError>
-            </Label>
-            <Label>
-                <FormSubTitle>cuantos dias durara tu campaña</FormSubTitle>
-                <Input
+        <WrapperBox>
+                <BoxTitle>* Categoria</BoxTitle>
+                <BoxText>Seleccione la categoría que mejor represente su proyecto </BoxText>
+                <BoxSelect ref={register({required: true})} name="category">
+                    <option value="">SELECCIONAR</option>
+                    {cate &&
+                        (cate as any).map((category: any) => (
+                            <option value={category.id} key={category.id}>
+                                {category.name}
+                            </option>
+                        ))}
+                </BoxSelect>
+        </WrapperBox>
+
+        <WrapperBox>
+                <BoxTitle>* Ubicacion</BoxTitle>
+                <BoxText>Donde esta ubicado tu proyecto, Elija la ubicación de donde esta ubicado tu proyecto</BoxText>
+                <BoxSelect ref={register({required: true})} name="category">
+                    <option value="">SELECCIONAR</option>
+                    {cate &&
+                        (cate as any).map((category: any) => (
+                            <option value={category.id} key={category.id}>
+                                {category.name}
+                            </option>
+                        ))}
+                </BoxSelect>
+        </WrapperBox>
+
+        <WrapperBox>
+                <BoxTitle>* Duracion del proyecto</BoxTitle>
+                <BoxText>Cuanto tiempo vaa durar tu campaña, lo mas recomendable es de 90 dias </BoxText>
+                <BoxInputDuration
                     type="number"
                     name="qty_day"
                     ref={register({required: true})}
@@ -80,25 +124,37 @@ const FormBasic: React.FC = () => {
                 <MsgError>
                     {errors.qty_day && 'este campo es requerido'}
                 </MsgError>
-            </Label>
-            <Label>
-                <FormSubTitle>cantidad de dinero a recaudar</FormSubTitle>
-                <Input
-                    type="number"
-                    name="amount"
-                    ref={register({required: true})}
-                    placeholder="Bs 15.000"
-                    defaultValue={formbasic?.amount}
-                />
+        </WrapperBox>
+
+        <WrapperBox>
+                <BoxTitle>* Meta</BoxTitle>
+                <BoxText>¿Cuánto necesitas recaudar? Fíjate una meta coherente con lo que propone tu proyecto. No 
+olvide incluir las tarifas administrativas en su cálculo. </BoxText>
+                <WrappBoxInput>
+                    <BoxInput
+                        type="number"
+                        name="amount"
+                        ref={register({required: true})}
+                        placeholder="Bs 15.000"
+                        defaultValue={formbasic?.amount}
+                    />
+                    <BS>BS</BS>
+                </WrappBoxInput>
+
                 <MsgError>
                     {errors.amount && 'este campo es requerido'}
                 </MsgError>
-            </Label>
+        </WrapperBox>
             <MsgSuccess>{msg}</MsgSuccess>
             <WrapBtn>
-                <BtnNext>guardar</BtnNext>
+                <BtnBack to="/crear-proyectos">volver</BtnBack>
+            </WrapBtn>
+            <WrapBtn>
+                <BtnNext>siguiente</BtnNext>
             </WrapBtn>
         </Form>
+        </>
+
     )
 }
 

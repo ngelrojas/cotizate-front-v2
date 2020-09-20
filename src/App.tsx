@@ -70,7 +70,7 @@ const App: React.FC = () => {
                     />
                     <Route
                         exact
-                        path="/panel-de-usuario/crear-campania"
+                        path="/panel-de-usuario/:campania"
                         component={CreateCampaing}
                     />
                     <Route
