@@ -1,18 +1,21 @@
 import React from 'react'
 import {useForm} from 'react-hook-form'
 import {Editor} from '@tinymce/tinymce-react'
-import {Grid, Row, Col} from 'react-styled-flexboxgrid'
-import TableReward from './table-reward'
+import { Row} from 'react-styled-flexboxgrid'
+import TablePhase from './table-phase'
 import {
     Label,
-    Input,
     FormSubTitle,
-    WrapBtn,
+    WrapBtnAdd,
     BtnNext,
     FormR,
     MsgError,
-    MsgSuccess
-} from '../styles'
+    MsgSuccess,
+    WrapperBoxRD,
+    WrapperBoxTable,
+    BoxTitle,
+    BoxText,
+} from '../../styles'
 
 type FormData = {
     title: string
@@ -21,7 +24,7 @@ type FormData = {
 }
 
 
-const FormRewards: React.FC = () => {
+const FormPhase: React.FC = () => {
     const [msg, Setmsg] = React.useState('')
     const [description, Setdescription] = React.useState()
     const [MsgErrorF, setMsgErrorF] = React.useState()
@@ -68,34 +71,17 @@ const FormRewards: React.FC = () => {
     },[])
 
     return (
-        <Grid>
-        <Row>
-        <Col xs={6}>
+        <>
+            <WrapperBoxRD>
+                <BoxTitle> *Fases del proyecto </BoxTitle>
+                <BoxText> 
+                 ¿Cómo se utilizará su dinero? Cuanta más transparencia, mejor. Muestre qué pasos seguira y cuanto de dinero invertira en cada fase del proyecto.
+                </BoxText>
+
         <FormR onSubmit={onSubmit}>
             <Label>
-                <FormSubTitle>Titulo</FormSubTitle>
-                <Input
-                    type="text"
-                    name="title"
-                    ref={register({required: true})}
-                    placeholder="titulo de la recompensa"
-                />
-
-                <MsgError>
-                    {errors.title && 'este campo es requerido'}
-                </MsgError>
+                <FormSubTitle>Fase-1</FormSubTitle>
             </Label>
-            <Label>
-                <FormSubTitle>Monto</FormSubTitle>
-                <Input
-                    type="number"
-                    name="cant_reward"
-                    ref={register({required: true})}
-                    placeholder="cantidad de la recompensa"
-                />
-                <MsgError>{errors.cant_reward && 'este campo es requerido'}</MsgError>
-            </Label>
-            <FormSubTitle>descripcion de la recompensa</FormSubTitle>
                 <Editor
                     initialValue=''
                     init={{
@@ -143,19 +129,22 @@ const FormRewards: React.FC = () => {
                 />
             <MsgSuccess>{msg}</MsgSuccess>
             <MsgError>{MsgErrorF}</MsgError>
-            <WrapBtn>
+            <WrapBtnAdd>
                 <BtnNext>adicionar</BtnNext>
-            </WrapBtn>
+            </WrapBtnAdd>
         </FormR>
-        </Col>
-        
-        <TableReward />
 
+        </WrapperBoxRD>
+        
+        <Row>
+            <WrapperBoxTable>
+                <TablePhase />
+            </WrapperBoxTable>
         </Row>
 
-        </Grid>
+        </>
 
     )
 }
 
-export default FormRewards
+export default FormPhase

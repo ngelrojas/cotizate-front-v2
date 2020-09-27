@@ -7,7 +7,7 @@ import {
     Th,
     Td,
     Tr
-} from '../../styles'
+} from '../../../styles'
 
 const TableReward: React.FC = ()=>{
     const [getRewards, SetgetRewards] = React.useState()

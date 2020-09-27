@@ -105,10 +105,9 @@ export const Label = styled.label`
 `
 
 export const Input = styled.input`
-    border: 0;
-    border-bottom: 1px solid #f37a22;
-    padding: 1%;
-    width: 100%;
+    width: 45%;
+    height: 49px;
+    padding-left: 2%;
 `
 
 export const FormSubTitle = styled.p`
@@ -129,21 +128,33 @@ export const WrapBtn = styled.div`
     float:left;
 `
 
+export const WrapBtnSave = styled(WrapBtn)`
+    width: 95%;
+`
+
+export const WrapBtnAdd = styled(WrapBtn)`
+    margin-top: 0%;
+`
+
 export const BtnNext = styled(Btn)`
     background-color:#F4A14C ;
     float: right;
+    font-size: 14px;
 `
 
-export const BtnBack = styled(BtnLink)`
+export const BtnBack = styled(Btn)`
     background-color:#F4A14C ;
     float: left;
     text-decoration: none;
     text-align: center;
+    font-size: 14px;
 `
 
 export const BtnSaveProject = styled(Btn)`
     background-color: #007bff;
     width: 100%;
+    padding: 1.5%;
+    font-size: 16px;
 `
 
 export const Form = styled.form`
@@ -233,7 +244,12 @@ export const WrapperBox = styled.div`
     padding-top: 4%;
     padding-bottom: 4%;
     padding-left: 6%;
+    padding-right: 1%;
     margin-bottom: 4%;
+`
+
+export const WrapperBoxTable = styled(WrapperBox)`
+    width:100%;
 `
 
 export const BoxTitle = styled.p`
@@ -273,4 +289,29 @@ export const BS = styled.p`
     top: 0%;
     height: 49px;
     color: #fff;
+`
+
+export const Img = styled.img`
+    width: 305px;
+`
+
+export const ImgText = styled.p`
+    width: 50%;
+    color: #1383C5;
+`
+
+export const WrapperBoxRD = styled.div`
+    background-color:#FCF2E9;
+    padding-top: 4%;
+    padding-bottom: 4%;
+    padding-left: 4%;
+    padding-right: 4%;
+    margin-bottom: 4%;
+`
+
+export const WrapperSave = styled.div`
+    width: 40%;
+    position: absolute;
+    margin-left: 12%;
+    margin-top: 0.8%;
 `
