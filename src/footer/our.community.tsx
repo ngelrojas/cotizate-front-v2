@@ -1,23 +1,21 @@
 import React from 'react'
-import {H5, List, Item, Go} from './styles'
+import {H5S, ListOC, Item, Go, FormS, Input, IconNext,
+Button} from './styles'
 
 
 const OurCommunity:React.FC = ()=>{
     return(
-<>
-                        <H5>NUESTRA COMUNIDAD</H5>
-                        <List>
-                            <Item>
-                                <Go to="#">Facebook</Go>
-                            </Item>
-                            <Item>
-                                <Go to="#">LinkedIn</Go>
-                            </Item>
-                            <Item>
-                                <Go to="#">Twitter</Go>
-                            </Item>
-                        </List>
-</>
+        <>
+            <H5S>SUSCRIBETE</H5S>
+            <ListOC>
+                <Item>
+                    <FormS action="">
+                        <Input type="text" placeholder="EMAIL" name="subscribe" />
+                        <Button><IconNext /></Button>
+                    </FormS>
+                </Item>
+            </ListOC>
+        </>
 )
 }
 

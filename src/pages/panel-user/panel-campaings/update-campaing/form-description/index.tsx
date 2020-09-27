@@ -1,6 +1,7 @@
 import React from 'react'
 import {useForm} from 'react-hook-form'
 import {Editor} from '@tinymce/tinymce-react'
+import {Campaings} from '../../../../../userCampaings'
 import {
     Label,
     Input,
@@ -18,13 +19,21 @@ type FormData = {
     description: number
 }
 
-const FormDescription: React.FC = () => {
+type propsCamp = {
+    id: number,
+    public_at: any,
+    excerpt: string,
+    description: string 
+}
+
+const FormDescription: React.FC<propsCamp> = (propsCamp) => {
     const [msg, Setmsg] = React.useState('')
     const [description, setDescripction] = React.useState('')
     const [excerpt, setExcerpt] = React.useState('')
     const [msgExcerpt, setMsgExcerpt] = React.useState('')
     const [msgdescription, setMsgdescription] = React.useState('')
-    const [formDesc, SetformDesc] = React.useState()
+    let token = window.sessionStorage.getItem('token')
+    let dataCampaing = new Campaings(token)
     const {register, handleSubmit, errors} = useForm<FormData>({
         mode: 'onChange'
     })
@@ -39,20 +48,28 @@ const FormDescription: React.FC = () => {
 
     const onSubmit = handleSubmit(({public_at}) => {
         if (validate()) {
+
+            let dformat = new Date(public_at)
             let send_data = {
-                public_at: public_at,
+                public_at: dformat.toISOString(),
                 excerpt: excerpt,
                 description: description
             }
-            window.localStorage.setItem(
-                'formDescription',
-                JSON.stringify(send_data)
-            )
-            Setmsg('datos de resumen y descripcion guardados.')
-            setMsgExcerpt('')
-            setMsgdescription('')
+            dataCampaing.updateCampaing(propsCamp.id, send_data).then(res =>{
+                console.log(res.data.data)
+                if (res.data.data){
+                    Setmsg('datos de resumen y descripcion actualizados.')
+                    setMsgExcerpt('')
+                    setMsgdescription('')
+                }
+            }).catch(err =>{
+                console.error(err)
+                Setmsg('existe algun error porfavor intente mas tarde.')
+            })
+
         }
     })
+
     const validate = () => {
         if (excerpt.length === 0) {
             setMsgExcerpt('este campo es requerido')
@@ -66,26 +83,25 @@ const FormDescription: React.FC = () => {
         return true
     }
 
-    React.useEffect(()=>{
-        let _formDescription: any = window.localStorage.getItem('formDescription')
-        let form_parse = JSON.parse(_formDescription)
-        SetformDesc(form_parse)
-        let _excerpt:any = form_parse
-        setExcerpt(_excerpt?.excerpt)
-        let _description: any = form_parse
-        setDescripction(_description?.description)
-    },[])
+    const formattDate = (date_in_parse:Date)=>{
+        var date_parse = new Date(date_in_parse)
+        var day = date_parse.getDate()
+        var month = date_parse.getMonth()
+        var year = date_parse.getFullYear()
+        var complete_date = year +'/'+month+'/'+day 
+        return complete_date 
+
+    }
 
     return (
         <Form onSubmit={onSubmit}>
             <Label>
                 <FormSubTitle>fecha en al que se publicara</FormSubTitle>
                 <Input
-                    type="date"
+                    type="text"
                     name="public_at"
                     ref={register({required: true})}
-                    placeholder="mm/dd/yyyy"
-                    defaultValue={formDesc?.public_at}
+                    defaultValue={formattDate(propsCamp.public_at)}
                 />
                 <MsgError>
                     {errors.public_at && 'este campo es requerido'}
@@ -94,7 +110,7 @@ const FormDescription: React.FC = () => {
             <Label>
                 <FormSubTitle>resumen del proyecto</FormSubTitle>
                 <Editor
-                    initialValue={formDesc?.excerpt}
+                    initialValue={propsCamp.excerpt}
                     init={{
                         height: 300,
                         menubar: false,
@@ -144,7 +160,7 @@ const FormDescription: React.FC = () => {
             <Label>
                 <FormSubTitle>descripcion completa campaña</FormSubTitle>
                 <Editor
-                    initialValue={formDesc?.description}
+                    initialValue={propsCamp.description}
                     init={{
                         height: 500,
                         menubar: false,

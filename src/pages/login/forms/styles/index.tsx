@@ -95,3 +95,11 @@ export const ForgotPwd = styled(Link)`
     text-transform: uppercase;
     text-decoration: none;
 `
+
+export const Registerlink = styled(Link)`
+    color: blue;
+    text-align: right;
+    font-size: 11px;
+    text-transform: uppercase;
+    text-decoration: none;
+`

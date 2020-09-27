@@ -14,12 +14,14 @@ import Confirmation from './pages/confirmation'
 import PanelUser from './pages/panel-user'
 import PanelCampaing from './pages/panel-user/panel-campaings'
 import CreateCampaing from './pages/panel-user/panel-campaings/create-campaing'
+import UpdateCampaing from './pages/panel-user/panel-campaings/update-campaing'
+import PageCreating from './pages/creating'
 import PageNotFound from './pages/404'
 import {CheckAuthentication} from './redux/auth'
 
 const App: React.FC = () => {
     useEffect(() => {
-        CheckAuthentication()
+        CheckAuthentication() 
     }, [])
     return (
         <Layout>
@@ -68,8 +70,18 @@ const App: React.FC = () => {
                     />
                     <Route
                         exact
-                        path="/panel-de-usuario/crear-campania"
+                        path="/panel-de-usuario/:campania"
                         component={CreateCampaing}
+                    />
+                    <Route
+                        exact
+                        path="/panel-de-usuario/actualizar-campania/:id"
+                        component={UpdateCampaing}
+                    />
+                    <Route
+                        exact
+                        path="/crear-proyectos"
+                        component={PageCreating}
                     />
                     <Route component={PageNotFound} />
                 </Switch>
