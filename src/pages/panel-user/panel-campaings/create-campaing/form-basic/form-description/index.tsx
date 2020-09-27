@@ -1,18 +1,32 @@
 import React from 'react'
 import {useForm} from 'react-hook-form'
 import {Editor} from '@tinymce/tinymce-react'
+import Default from '../public/default.png'
+import {Row, Col} from 'react-styled-flexboxgrid'
+
 import {
-    Label,
     Input,
-    FormSubTitle,
-    WrapBtn,
-    BtnNext,
+    WrapBtnSave,
+    WrapperSave,
+    BtnSaveProject,
     Form,
     MsgError,
-    MsgSuccess
-} from '../styles'
+    MsgSuccess,
+    H4,
+    TextConf,
+    WrapperBox,
+    BoxTitle,
+    BoxText,
+    Img,
+    ImgText,
+    WrapperBoxRD,
+} from '../../styles'
 
 type FormData = {
+    title: string
+    slogan_campaing: string
+    imagen_campaing: string
+    video: string
     public_at: string
     excerpt: string
     description: number
@@ -25,6 +39,7 @@ const FormDescription: React.FC = () => {
     const [msgExcerpt, setMsgExcerpt] = React.useState('')
     const [msgdescription, setMsgdescription] = React.useState('')
     const [formDesc, SetformDesc] = React.useState()
+    const [showImg, SetShowImg] = React.useState()
     const {register, handleSubmit, errors} = useForm<FormData>({
         mode: 'onChange'
     })
@@ -66,6 +81,17 @@ const FormDescription: React.FC = () => {
         return true
     }
 
+    const _onChange = (event: React.ChangeEvent<HTMLInputElement>)=> {
+        let file: any = event.currentTarget.files 
+        let reader = new FileReader()
+        var url = reader.readAsDataURL(file)
+
+        reader.onloadend = function(e){ 
+            SetShowImg(url)
+        }
+        console.info(file)
+    }
+
     React.useEffect(()=>{
         let _formDescription: any = window.localStorage.getItem('formDescription')
         let form_parse = JSON.parse(_formDescription)
@@ -77,26 +103,70 @@ const FormDescription: React.FC = () => {
     },[])
 
     return (
+        <>
+        <H4>2.- DESCRIPCIÓN DEL PROYECTO</H4>
+        <TextConf>Describe tu proyecto en forma clara, cuando llegues a las faces detente y piensa en cuanto nesecitas para cada  face de tu proyecto y cuanto será el costo para este item  
+        </TextConf>
         <Form onSubmit={onSubmit}>
-            <Label>
-                <FormSubTitle>fecha en al que se publicara</FormSubTitle>
+        <WrapperBox>
+                <BoxTitle>* Titulo</BoxTitle>
+                <BoxText>¿Cuál es el título del proyecto? </BoxText>
                 <Input
-                    type="date"
-                    name="public_at"
+                    type="text"
+                    name="title"
                     ref={register({required: true})}
-                    placeholder="mm/dd/yyyy"
-                    defaultValue={formDesc?.public_at}
+                    defaultValue={formDesc?.title}
                 />
-                <MsgError>
-                    {errors.public_at && 'este campo es requerido'}
-                </MsgError>
-            </Label>
-            <Label>
-                <FormSubTitle>resumen del proyecto</FormSubTitle>
+        </WrapperBox>
+        <WrapperBox>
+                <BoxTitle>Lema de la campaña del proyecto</BoxTitle>
+                <BoxText>Elija una frase que permite resumir el espíritu o la idea de tu campaña</BoxText>
+                <Input
+                    type="text"
+                    name="slogan_campaing"
+                    defaultValue={formDesc?.slogan_campaing}
+                />
+        </WrapperBox>
+        <WrapperBox>
+                <BoxTitle>* Imagen</BoxTitle>
+                <Row>
+                <Col xs={6}>
+                    <ImgText>
+                        Esta imagen se utilizará como miniatura de su proyecto (PNG, JPG tamaño 305 x 161 pixeles tamanho minimo 220 x 220 px.
+                    </ImgText>
+                </Col>
+                <Col xs={5}>
+
+                    <Img src={Default} alt="cotizate" />
+                    <Input
+                        type="file"
+                        name="imagen_campaing"
+                        ref={register({required: true})}
+                        defaultValue={formDesc?.imagen_campaing}
+                        accept="image/png, image/jpeg"
+                        onChange={_onChange}
+                    />
+                </Col>
+                </Row>
+        </WrapperBox>
+         <WrapperBox>
+                <BoxTitle>* Video</BoxTitle>
+                <BoxText>As tu mejor video, Un buen video marca la diferencia y es en gran parte responsable del éxito de tu proyecto.</BoxText>
+                <Input
+                    type="text"
+                    name="video_campaing"
+                    defaultValue={formDesc?.video_campaing}
+                />
+        </WrapperBox>       
+            <WrapperBoxRD>
+                <BoxTitle> * Resumen descripción </BoxTitle>
+                <BoxText> 
+                Este es el resumen de  descripción del post utiliza max. 200 caracteres
+                </BoxText>
                 <Editor
                     initialValue={formDesc?.excerpt}
                     init={{
-                        height: 300,
+                        height: 200,
                         menubar: false,
                         plugins: [
                             'advlist autolink lists link image charmap print preview anchor image',
@@ -140,9 +210,13 @@ const FormDescription: React.FC = () => {
                     onEditorChange={handleEditorExcerptChange}
                 />
                 <MsgError>{msgExcerpt}</MsgError>
-            </Label>
-            <Label>
-                <FormSubTitle>descripcion completa campaña</FormSubTitle>
+            </WrapperBoxRD>
+
+            <WrapperBoxRD>
+                <BoxTitle>* Descripción de tu campaña </BoxTitle>
+                <BoxText> 
+                Habla con claridad sobre lo que quieres lograr. Aclara posibles dudas sobre cómo se utilizará el dinero, quién está detrás del proyecto, La transparencia atrae a más seguidores. Recuerde: su proyecto será accedido por personas comunes que decidirán si quieren o no apoyar su proyecto.
+                </BoxText>
                 <Editor
                     initialValue={formDesc?.description}
                     init={{
@@ -190,12 +264,18 @@ const FormDescription: React.FC = () => {
                     onEditorChange={handleEditorChange}
                 />
                 <MsgError>{msgdescription}</MsgError>
-            </Label>
+            </WrapperBoxRD>
             <MsgSuccess>{msg}</MsgSuccess>
-            <WrapBtn>
-                <BtnNext>guardar</BtnNext>
-            </WrapBtn>
+            <Row>
+                <WrapperSave>
+                    <WrapBtnSave>
+                        <BtnSaveProject>guardar</BtnSaveProject>
+                    </WrapBtnSave>
+                </WrapperSave>
+            </Row>
         </Form>
+        </>
+
     )
 }
 
