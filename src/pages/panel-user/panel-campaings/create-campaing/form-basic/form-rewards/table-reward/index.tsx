@@ -27,7 +27,7 @@ const TableReward: React.FC = ()=>{
     }
 
     return(
-        <Col xs={6}>
+        <Col>
             <H3>LISTA DE RECOMPENSAS</H3>
             <Table>
                 <Thead>
