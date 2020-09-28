@@ -62,7 +62,6 @@ const CreateCompany: React.FC = () => {
             createComp
                 .createCompanyProfile(send_data)
                 .then(resp => {
-                    console.log(resp)
                     setShow(true)
                     setMsgSuccess('compania/empresa creada.')
                     window.location.href = '/panel-de-usuario'

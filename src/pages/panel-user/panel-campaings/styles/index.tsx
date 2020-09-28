@@ -29,7 +29,9 @@ export const Th = styled.th`
     padding-top: 1%;
     padding-bottom: 1%;
 `
-
+export const Td = styled.td`
+    padding-top: 2%;
+`
 export const Btn = styled.button`
     border: 0px;
     border-radius: 2px;
@@ -48,4 +50,12 @@ export const BtnCreate = styled(Link)`
     padding: 1.1%;
     text-transform: uppercase;
     text-decoration: none;
+`
+export const BtnUpdate = styled(BtnCreate)`
+    background-color: #f37a22;
+    font-size: 14px;
+`
+export const BtnDelete = styled(BtnCreate)`
+    background-color: red;
+    font-size: 14px;
 `

@@ -7,6 +7,7 @@ export const CheckAuthentication = () => {
     if (authToken) {
         store.dispatch({type: SET_AUTHENTICATED})
         store.dispatch(getUserData(authToken))
+        return authToken
     } else {
         store.dispatch(logoutUser())
     }

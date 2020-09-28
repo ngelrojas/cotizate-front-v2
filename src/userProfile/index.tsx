@@ -18,14 +18,14 @@ export class PersonalProfile {
      * method get personal profile
      */
     getPersonalProfile = async () => {
-        this.resp_profile = await API.get(`personal/profile/25`, {
+        this.resp_profile = await API.get(`personal/profile`, {
             headers: {Authorization: `Bearer ${this.token}`}
         })
         return this.resp_profile
     }
 
     updatePersonalProfile = async (dataUpdate: any) => {
-        this.resp_profile = await API.put(`personal/profile/25`, dataUpdate, {
+        this.resp_profile = await API.put(`personal/profile`, dataUpdate, {
             headers: {Authorization: `Bearer ${this.token}`}
         })
         return this.resp_profile

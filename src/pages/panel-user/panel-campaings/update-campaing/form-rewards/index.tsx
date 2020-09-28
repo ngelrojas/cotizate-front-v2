@@ -51,17 +51,20 @@ const FormRewards: React.FC = () => {
     }
 
     const validate = () => { 
-
-        if (description.length === 0) {
+        if(!description){
             setMsgErrorF('este campo es requerido')
             return false
         }
         return true
     }
     
-    React.useEffect(()=>{
-        let _formreward: any = window.localStorage.getItem('formReward')
-        SetsendData(JSON.parse(_formreward))
+    React.useEffect(()=>{ 
+        let _formreward: any = window.localStorage.getItem('formReward')  
+        if(!_formreward){
+            window.localStorage.setItem('formReward', JSON.stringify(sendData))
+        }else{
+            SetsendData(JSON.parse(_formreward))
+        }
     },[])
 
     return (

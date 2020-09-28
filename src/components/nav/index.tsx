@@ -1,11 +1,12 @@
 import React from 'react'
 import Menu from '../menu'
+import {Nav} from './styles'
 
 const Navegation: React.FC = () => {
     return (
-        <nav>
+        <Nav>
             <Menu />
-        </nav>
+        </Nav>
     )
 }
 
