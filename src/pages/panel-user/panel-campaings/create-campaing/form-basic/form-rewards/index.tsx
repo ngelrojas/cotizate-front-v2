@@ -20,7 +20,13 @@ import {
     TextConf,
     WrapBtnAdd,
     WrapperBoxTable,
-    WrapperBox
+    WrapperBox,
+    SpaceB,
+    WrappBoxInput,
+    BoxInput,
+    BS,
+    TableCities,
+    ItemCity
 } from '../../styles'
 
 type FormData = {
@@ -86,6 +92,7 @@ const FormRewards: React.FC = () => {
 
         <WrapperBoxRD>
                 <BoxTitle>* Titulo</BoxTitle>
+                    <SpaceB />
                      <Input
                         type="text"
                         name="title"
@@ -96,16 +103,33 @@ const FormRewards: React.FC = () => {
                     {errors.title && 'este campo es requerido'}
                 </MsgError>
             
+                <SpaceB />
                 <BoxTitle>* Monto</BoxTitle>
-                <Input
-                    type="number"
-                    name="cant_reward"
-                    ref={register({required: true})}
-                    placeholder="cantidad de la recompensa"
-                />
-                <MsgError>{errors.cant_reward && 'este campo es requerido'}</MsgError>
+                <SpaceB />
+                <WrappBoxInput>
+                    <BoxInput
+                        type="number"
+                        name="cant_reward"
+                        ref={register({required: true})}
+                        placeholder="Bs 15.000"
+                    />
+                    <BS>BS</BS>
+                </WrappBoxInput>
 
+                <MsgError>{errors.cant_reward && 'este campo es requerido'}</MsgError>
+                <SpaceB />
+                <BoxTitle>* Entrega prevista</BoxTitle>
+                <SpaceB />
+                <WrappBoxInput>
+                    <Input
+                        type="date"
+                        name="date_reward"
+                        ref={register({required: true})}
+                    />
+                </WrappBoxInput>
+            <SpaceB />
             <BoxTitle>* Descripcion de la recompensa</BoxTitle>
+            <SpaceB />
                 <Editor
                     initialValue=''
                     init={{
@@ -151,21 +175,35 @@ const FormRewards: React.FC = () => {
                     }}
                     onEditorChange={handleEditorReward}
                 />
+                <SpaceB />
+                <BoxTitle>Alcanse de entrega a : </BoxTitle>
+                <SpaceB />
+                <TableCities>
+                    <ItemCity>
+                        <input type="checkbox" name="cities[]" /> La Paz
+                    </ItemCity>
+                    <ItemCity>
+                        <input type="checkbox" name="cities[]" /> Santa Cruz
+                    </ItemCity>
+                    <ItemCity>
+                        <input type="checkbox" name="cities[]" />Cochabamba 
+                    </ItemCity>
+                </TableCities>
+
             <MsgSuccess>{msg}</MsgSuccess>
             <MsgError>{MsgErrorF}</MsgError>
             <WrapBtnAdd>
                 <BtnNext>adicionar</BtnNext>
             </WrapBtnAdd>
 </WrapperBoxRD>
+
         </Form>
-         <Row>
+         <div>
             <WrapperBoxTable>
                 <TableReward />
             </WrapperBoxTable>
-        </Row>       
+        </div>       
         
-
-
         </>
 
     )

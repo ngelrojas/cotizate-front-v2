@@ -27,7 +27,7 @@ const TablePhase: React.FC = ()=>{
     }
 
     return(
-        <Col xs={6}>
+        <Col>
             <H3>LISTA DE FASES</H3>
             <Table>
                 <Thead>

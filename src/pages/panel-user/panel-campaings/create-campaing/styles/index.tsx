@@ -214,12 +214,13 @@ export const TagLabel = styled.label`
 
 export const Table = styled.table`
     width: 100%;
-    margin-top: 10%;
+    margin-top: 2%;
 `
 
 export const Thead = styled.thead`
     text-transform: uppercase;
     color: #f37a22;
+    text-align: left;
 `
 
 export const Th = styled.th`
@@ -232,7 +233,7 @@ export const Td = styled.td`
 `
 
 export const Tr = styled.tr`
-    text-align: center;
+    text-align: left;
 `
 
 export const IconOn = styled(MdLens)`
@@ -250,6 +251,12 @@ export const WrapperBox = styled.div`
 
 export const WrapperBoxTable = styled(WrapperBox)`
     width:100%;
+`
+
+export const WrapperBoxTableP = styled(WrapperBox)`
+    width:100%;
+    padding-left: 10%;
+    padding-right: 4%;
 `
 
 export const BoxTitle = styled.p`
@@ -314,4 +321,18 @@ export const WrapperSave = styled.div`
     position: absolute;
     margin-left: 12%;
     margin-top: 0.8%;
+`
+
+export const SpaceB = styled.p`
+    margin: 2%;
+`
+
+export const TableCities = styled.div`
+    display: flex;
+    padding: 3%;
+    width: 50%;
+`
+
+export const ItemCity = styled.label`
+    margin: 2%;
 `
