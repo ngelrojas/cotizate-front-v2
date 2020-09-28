@@ -12,14 +12,18 @@ import {
     MsgError,
     MsgSuccess,
     WrapperBoxRD,
-    WrapperBoxTable,
+    WrapperBoxTableP,
     BoxTitle,
     BoxText,
+    WrapperBox,
+    WrappBoxInput,
+    BoxInput,
+    BS
 } from '../../styles'
 
 type FormData = {
     title: string
-    cant_reward: number
+    cant_phase: number
     descript: string
 }
 
@@ -29,18 +33,19 @@ const FormPhase: React.FC = () => {
     const [description, Setdescription] = React.useState()
     const [MsgErrorF, setMsgErrorF] = React.useState()
     const [sendData, SetsendData] = React.useState<FormData[]>([])
+    const [formphase, Setformphase] = React.useState()
     const {register, handleSubmit, errors} = useForm<FormData>({
         mode: 'onChange'
     })
 
-    const onSubmit = handleSubmit(({title, cant_reward, descript}) => {
+    const onSubmit = handleSubmit(({title, cant_phase, descript}) => {
         if(validate()){
-            let data_reward = {
+            let data_phase = {
                 title: title,
-                cant_reward: cant_reward,
+                cant_phase: cant_phase,
                 descript: description
             }
-            const nextState = [...sendData, data_reward]
+            const nextState = [...sendData, data_phase]
             SetsendData(nextState)  
             window.localStorage.setItem('formReward', JSON.stringify(nextState))
             Setmsg('recompensa agregada.')
@@ -78,10 +83,26 @@ const FormPhase: React.FC = () => {
                  ¿Cómo se utilizará su dinero? Cuanta más transparencia, mejor. Muestre qué pasos seguira y cuanto de dinero invertira en cada fase del proyecto.
                 </BoxText>
 
+        <WrapperBox>
+                <BoxTitle> FASE - 1 </BoxTitle>
+                <BoxText>* Cuanto de dinero necesitaras para esta fase del proyecto </BoxText>
+                <WrappBoxInput>
+                    <BoxInput
+                        type="number"
+                        name="amount"
+                        ref={register({required: true})}
+                        placeholder="Bs 100"
+                        defaultValue={formphase?.cant_phase}
+                    />
+                    <BS>BS</BS>
+                </WrappBoxInput>
+
+                <MsgError>
+                    {errors.cant_phase && 'este campo es requerido'}
+                </MsgError>
+        </WrapperBox>
         <FormR onSubmit={onSubmit}>
-            <Label>
-                <FormSubTitle>Fase-1</FormSubTitle>
-            </Label>
+
                 <Editor
                     initialValue=''
                     init={{
@@ -136,11 +157,11 @@ const FormPhase: React.FC = () => {
 
         </WrapperBoxRD>
         
-        <Row>
-            <WrapperBoxTable>
+        <div>
+            <WrapperBoxTableP>
                 <TablePhase />
-            </WrapperBoxTable>
-        </Row>
+            </WrapperBoxTableP>
+        </div>
 
         </>
 
