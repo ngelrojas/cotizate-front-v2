@@ -1,32 +1,28 @@
 import React from 'react'
 import {useForm} from 'react-hook-form'
 import {Editor} from '@tinymce/tinymce-react'
-import {Grid, Row, Col} from 'react-styled-flexboxgrid'
+import {Row, Col} from 'react-styled-flexboxgrid'
 import TableReward from './table-reward'
 import {
-    Label,
     Input,
-    FormSubTitle,
-    WrapBtn,
     BtnNext,
-    FormR,
     Form,
     MsgError,
     MsgSuccess,
     WrapperBoxRD,
     BoxTitle,
-    BoxText,
     H4,
     TextConf,
     WrapBtnAdd,
     WrapperBoxTable,
-    WrapperBox,
     SpaceB,
     WrappBoxInput,
     BoxInput,
     BS,
     TableCities,
-    ItemCity
+    ItemCity,
+    SecondItem,
+    BoxCity
 } from '../../styles'
 
 type FormData = {
@@ -44,6 +40,18 @@ const FormRewards: React.FC = () => {
     const {register, handleSubmit, errors} = useForm<FormData>({
         mode: 'onChange'
     })
+
+    const cities = [
+        {"id": 1, "name": "La Paz"},
+        {"id": 2, "name": "Santa Cruz"},
+        {"id": 3, "name": "Cochabamba"},
+        {"id": 4, "name": "Chiquisaca"},
+        {"id": 5, "name": "Tarija"},
+        {"id": 6, "name": "Potosi"},
+        {"id": 7, "name": "Beni"},
+        {"id": 8, "name": "Pando"},
+        {"id": 9, "name": "Oruro"},
+    ]
 
     const onSubmit = handleSubmit(({title, cant_reward, descript}) => {
         if(validate()){
@@ -178,17 +186,43 @@ const FormRewards: React.FC = () => {
                 <SpaceB />
                 <BoxTitle>Alcanse de entrega a : </BoxTitle>
                 <SpaceB />
-                <TableCities>
-                    <ItemCity>
-                        <input type="checkbox" name="cities[]" /> La Paz
-                    </ItemCity>
-                    <ItemCity>
-                        <input type="checkbox" name="cities[]" /> Santa Cruz
-                    </ItemCity>
-                    <ItemCity>
-                        <input type="checkbox" name="cities[]" />Cochabamba 
-                    </ItemCity>
-                </TableCities>
+                <BoxCity>
+                    <Row between="xs">
+
+                    <Col xs={12}>
+                        <TableCities>
+                            <Row between="xs">
+                                {
+                                    cities.map((ct)=>(
+                                            <Col xs={4} key={ct.id} > 
+                                            <ItemCity>
+                                                <input type="checkbox" name="cities[]" value={ct.id} />{ct.name} 
+                                            </ItemCity>
+                                            </Col>
+                                    )) 
+                                }
+                            </Row>
+
+                        </TableCities>
+                        <SecondItem>
+
+                            <Row>
+                                    <Col xs={6} > 
+                                    <ItemCity>
+                                        <input type="checkbox" name="all_cities" value="1" /> Toda Bolivia
+                                    </ItemCity>
+                                    </Col>
+                                    <Col xs={6} > 
+                                    <ItemCity>
+                                        <input type="checkbox" name="get_local" value="2" /> Retirar en le local
+                                    </ItemCity>
+                                    </Col>
+                            </Row>
+                        </SecondItem>
+                    </Col>
+                    </Row>
+                </BoxCity>
+
 
             <MsgSuccess>{msg}</MsgSuccess>
             <MsgError>{MsgErrorF}</MsgError>
