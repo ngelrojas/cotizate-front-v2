@@ -103,7 +103,7 @@ export const TabNavProfile = styled(TabList)`
 `
 
 export const TabSubMenu = styled(Tab)`
-    width: 33%;
+    width: 50%;
     border-bottom: 0px;
 `
 
@@ -279,6 +279,7 @@ export const BoxText = styled.p`
 export const BoxSelect = styled.select`
     width: 45%;
     height: 49px;
+    padding: 1%;
 `
 
 export const BoxInput = styled.input`

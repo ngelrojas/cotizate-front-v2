@@ -13,7 +13,9 @@ import {ContentProfile,
         ProfileImg,
         SpanDescription,
         SecondSpan,
-        SaveProfile
+        SaveProfile,
+        WrapperBoxLast,
+        SpanPhoto
 } from './styles' 
 
 type FormData = {
@@ -39,9 +41,9 @@ const Personal: React.FC = ()=>{
 
     return(
         <>
-        <ContentProfile>
+        <div>
             <form>
-            <div>
+            <ContentProfile>
                 <Row>
                     <Col xs={12}>
                         <Row center="xs">
@@ -194,6 +196,7 @@ const Personal: React.FC = ()=>{
                                     <label>
                                         <Span>* Direccion (calle, avenida): </Span>
                                         <TextArea 
+                                               rows={5}
                                                name="address"
                                                ref={register({required: true})}/>
                                     </label>
@@ -210,6 +213,7 @@ const Personal: React.FC = ()=>{
                                     <label>
                                         <Span>* Barrio: </Span>
                                         <TextArea 
+                                               rows={5}
                                                name="neighborhood"
                                                ref={register({required: true})}/>
                                     </label>
@@ -253,7 +257,7 @@ const Personal: React.FC = ()=>{
                             <Col xs={6}>
                                 <WrapperBox>
                                     <label>
-                                        <Span>Foto de Perfil: </Span>
+                                        <SpanPhoto>Foto de Perfil: </SpanPhoto>
                                         <input type="file"
                                                name="photo_perfil"
                                                />
@@ -309,7 +313,7 @@ const Personal: React.FC = ()=>{
                     <Col xs={12}>
                         <Row center="xs">
                             <Col xs={6}>
-                                <WrapperBox>
+                                <WrapperBoxLast>
                                     <label>
                                         <SpanDescription>Description de perfil: </SpanDescription>
                                             <SecondSpan> Habla sobre ti y trata de proporcionar la 
@@ -318,13 +322,14 @@ const Personal: React.FC = ()=>{
                                             </SecondSpan>
                                         <TextArea rows={6} name="description_social_network"/>
                                     </label>
-                                </WrapperBox>
+                                </WrapperBoxLast>
                             </Col>
                         </Row>
                     </Col>
 
                 </Row>
 
+            </ContentProfile>
                 <Row>
                     <Col xs={12}>
                         <Row center="xs">
@@ -336,11 +341,9 @@ const Personal: React.FC = ()=>{
                         </Row>
                     </Col>
                 </Row>
-
-            </div>
             </form>
   
-        </ContentProfile>
+        </div>
         </>
     ) 
 } 
