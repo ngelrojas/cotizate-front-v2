@@ -93,6 +93,14 @@ export const TabNav = styled(TabList)`
     background-color: #ffffff;
     margin-bottom: 5%;
 `
+export const TabNavProfile = styled(TabList)`
+    background-color: #fcfcfc;
+    width: 68%;
+    margin: 0 auto;
+    border: 1px solid #5D5A5A;
+    padding: 1%;
+    margin-bottom: 5%;
+`
 
 export const TabSubMenu = styled(Tab)`
     width: 33%;
@@ -330,9 +338,22 @@ export const SpaceB = styled.p`
 export const TableCities = styled.div`
     display: flex;
     padding: 3%;
-    width: 50%;
+    width: 80%;
 `
 
 export const ItemCity = styled.label`
     margin: 2%;
+`
+
+export const SecondItem = styled.div`
+    width: 95%;
+    margin: 0 auto;
+`
+
+export const BoxCity = styled.div`
+    background-color: #ffffff;
+    padding-left: 2%;
+    padding-bottom: 2%;
+    width: 71%;
+    margin-left: 29%;
 `
