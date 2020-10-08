@@ -89,10 +89,12 @@ export const BtnCreateCampaing = styled(Btn)`
     text-decoration: none;
     width: 100%;
 `
+
 export const TabNav = styled(TabList)`
     background-color: #ffffff;
     margin-bottom: 5%;
 `
+
 export const TabNavProfile = styled(TabList)`
     background-color: #fcfcfc;
     width: 68%;
@@ -174,8 +176,8 @@ export const FormR = styled.form`
     margin: 0 auto;
 `
 
-export const MsgError = styled.span`
-    width: 100%;
+export const MsgError = styled.div`
+    width: 45%;
     left: 0%;
     top: 150%;
     color: red;
@@ -183,6 +185,7 @@ export const MsgError = styled.span`
     margin-top: 2%;
     margin-bottom: 2%;
     text-align: center;
+    overflow: hidden;
 `
 
 export const MsgErrorForm = styled.div`
