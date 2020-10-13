@@ -7,7 +7,7 @@ import {
     SET_UNAUTHENTICATED
 } from '../types'
 import API from '../../api'
-import {PANEL_USER} from '../panels'
+import {PANEL_HOME} from '../panels'
 
 export const loginUser = (userData: any, history: any) => (dispatch: any) => {
     dispatch({type: LOADING_UI})
@@ -18,7 +18,7 @@ export const loginUser = (userData: any, history: any) => (dispatch: any) => {
             dispatch(getUserData(token))
             dispatch({type: CLEAR_ERRORS})
             // history.push('/dashboard')
-            window.location.href = PANEL_USER
+            window.location.href = PANEL_HOME
         })
         .catch(err => {
             dispatch({
@@ -61,13 +61,13 @@ export const UpdateUserData = (updateData: any, token: any) => (
         `user/25`,
         {updateData},
         {
-            headers: {Authorization: `Bearer +${token}`}
+            headers: {Authorization: `Bearer ${token}`}
         }
     )
         .then(resp => {
-            console.log(resp)
+            console.info(resp)
         })
         .catch(err => {
-            console.log(err)
+            console.error(err)
         })
 }

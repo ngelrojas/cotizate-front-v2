@@ -8,3 +8,9 @@ export const LOADING_UI = 'LOADING_UI'
 export const CLEAR_ERRORS = 'CLEAR_ERRORS'
 
 export const GET_PROFILE = 'GET_PROFILE'
+
+/*campaing types*/
+export const SET_CAMPAING = 'SET_CAMPAING'
+export const LOADING_CAMPAING = 'LOADING_CAMPAING'
+export const SET_DEFAULT_CAMPAING = 'SET_DEFAULT_CAMPAING'
+

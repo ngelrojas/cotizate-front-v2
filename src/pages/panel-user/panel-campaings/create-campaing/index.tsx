@@ -9,8 +9,6 @@ import FormProfile from './form-profile'
 import {Content, TabNav, TabSubMenu, IconOn} from './styles'
 import {CheckAuthentication} from '../../../../redux/auth'
 
-
-
 const CreateCampaing: React.FC = () => {
     let history = useHistory()
 
@@ -33,7 +31,6 @@ const CreateCampaing: React.FC = () => {
     return (
         <Content>
             <Grid>
-
                 <Row>
                     <Col xs={12}>
                         <Row center="xs">

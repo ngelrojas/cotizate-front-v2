@@ -1,4 +1,5 @@
 import React from 'react'
+import {connect} from 'react-redux'
 import {useForm} from 'react-hook-form'
 import {Editor} from '@tinymce/tinymce-react'
 import Default from '../public/default.png'
@@ -26,13 +27,26 @@ type FormData = {
     title: string
     slogan_campaing: string
     imagen_campaing: string
-    video: string
+    video_campaing: string
     public_at: string
     excerpt: string
     description: number
 }
 
-const FormDescription: React.FC = () => {
+type campaingHeader = {
+    id: number,
+    category:string,
+    city: string,
+    qty_day: number,
+    amount: number,
+    role: number 
+}
+
+interface Icampaing {
+    currentCampaingHeader: campaingHeader 
+}
+
+const FormDescription: React.FC<Icampaing> = ({currentCampaingHeader}) => {
     const [msg, Setmsg] = React.useState('')
     const [description, setDescripction] = React.useState('')
     const [excerpt, setExcerpt] = React.useState('')
@@ -100,11 +114,12 @@ const FormDescription: React.FC = () => {
         setExcerpt(_excerpt?.excerpt)
         let _description: any = form_parse
         setDescripction(_description?.description)
+        console.info(currentCampaingHeader)
     },[])
-
+    // TODO: retrieve the las campaing of the current user, check in REDUCER, actions, reducers
     return (
         <>
-        <H4>2.- DESCRIPCIÓN DEL PROYECTO</H4>
+        <H4>2.- DESCRIPCIÓN DEL PROYECTO </H4>
         <TextConf>Describe tu proyecto en forma clara, cuando llegues a las faces detente y piensa en cuanto nesecitas para cada  face de tu proyecto y cuanto será el costo para este item  
         </TextConf>
         <Form onSubmit={onSubmit}>
@@ -117,6 +132,9 @@ const FormDescription: React.FC = () => {
                     ref={register({required: true})}
                     defaultValue={formDesc?.title}
                 />
+                <MsgError>
+                    {errors.title && 'este campo es requerido'}
+                </MsgError>
         </WrapperBox>
         <WrapperBox>
                 <BoxTitle>Lema de la campaña del proyecto</BoxTitle>
@@ -130,23 +148,26 @@ const FormDescription: React.FC = () => {
         <WrapperBox>
                 <BoxTitle>* Imagen</BoxTitle>
                 <Row>
-                <Col xs={6}>
-                    <ImgText>
-                        Esta imagen se utilizará como miniatura de su proyecto (PNG, JPG tamaño 305 x 161 pixeles tamanho minimo 220 x 220 px.
-                    </ImgText>
-                </Col>
-                <Col xs={5}>
+                    <Col xs={6}>
+                        <ImgText>
+                            Esta imagen se utilizará como miniatura de su proyecto (PNG, JPG tamaño 305 x 161 pixeles tamanho minimo 220 x 220 px.
+                        </ImgText>
+                    </Col>
+                    <Col xs={5}>
 
-                    <Img src={Default} alt="cotizate" />
-                    <Input
-                        type="file"
-                        name="imagen_campaing"
-                        ref={register({required: true})}
-                        defaultValue={formDesc?.imagen_campaing}
-                        accept="image/png, image/jpeg"
-                        onChange={_onChange}
-                    />
-                </Col>
+                        <Img src={Default} alt="cotizate" />
+                        <Input
+                            type="file"
+                            name="imagen_campaing"
+                            ref={register({required: true})}
+                            defaultValue={formDesc?.imagen_campaing}
+                            accept="image/png, image/jpeg"
+                            onChange={_onChange}
+                        />
+                    </Col>
+                <MsgError>
+                    {errors.imagen_campaing && 'este campo es requerido'}
+                </MsgError>
                 </Row>
         </WrapperBox>
          <WrapperBox>
@@ -157,6 +178,9 @@ const FormDescription: React.FC = () => {
                     name="video_campaing"
                     defaultValue={formDesc?.video_campaing}
                 />
+                <MsgError>
+                    {errors.video_campaing && 'este campo es requerido'}
+                </MsgError>
         </WrapperBox>       
             <WrapperBoxRD>
                 <BoxTitle> * Resumen descripción </BoxTitle>
@@ -279,4 +303,8 @@ const FormDescription: React.FC = () => {
     )
 }
 
-export default FormDescription
+const mapStateToProps = (state: any)=>({
+    currentCampaingHeader: state.campaing 
+})
+
+export default connect(mapStateToProps)(FormDescription)

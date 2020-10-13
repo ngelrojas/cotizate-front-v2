@@ -1,4 +1,5 @@
 import React from 'react'
+import {connect} from 'react-redux'
 import {useRouteMatch} from 'react-router-dom'
 import {useHistory} from 'react-router-dom'
 import {useForm} from 'react-hook-form'
@@ -6,6 +7,8 @@ import {CategoriesCampaing} from '../../../../../../userCategories'
 import {City} from '../../../../../../userCountryCities'
 import {CampaingHeader} from '../../../../../../userCampaings'
 import {Row} from 'react-styled-flexboxgrid'
+import {CreateCampaingHeader} from '../../../../../../redux/actions/campaing.actions'
+
 import {
     WrapBtnSave,
     WrapperSave,
@@ -28,8 +31,8 @@ import {
 
 
 type FormData = {
+    id: number
     category: string
-    tags: string
     qty_day: number
     amount: number
     city: string
@@ -37,7 +40,7 @@ type FormData = {
 }
 
 
-const FormConfig: React.FC = () => {
+const FormConfig: React.FC = (props: any) => {
 
     let match = useRouteMatch('/panel-de-usuario/:campania')
     let history = useHistory()
@@ -58,7 +61,8 @@ const FormConfig: React.FC = () => {
     })
 
     const onSubmit = handleSubmit(({category, city, qty_day, amount}) => {
-        let campaing_type:number = type_campaing === 'crear-emprendimiento' ? 1 : 2 
+        let campaing_type:number = type_campaing === 'crear-emprendimiento' ? 2 : 1 
+        let data_camp: any
         let send_data = {
             category: category,
             city: city,
@@ -67,13 +71,18 @@ const FormConfig: React.FC = () => {
             role: campaing_type
         }
 
-        SaveCampaing.createCampaingHeader(send_data)
-            .then(resp=>{
-                Setmsg("DATOS GUARDADOS")
-            })
-            .catch(err => {
-                console.error(err)
-            })
+        data_camp = props.CreateCampaingHeader(send_data) 
+        console.info(data_camp)
+        Setmsg("DATOS GUARDADOS")
+        /*SaveCampaing.createCampaingHeader(send_data)*/
+            //.then(resp=>{
+                //Setmsg("DATOS GUARDADOS")
+                //console.info(resp.data.data)
+                //props.shareCampaing(resp.data.data)
+            //})
+            //.catch(err => {
+                //console.error(err)
+            /*})*/
         //window.localStorage.setItem('formBasic', JSON.stringify(send_data))
         /*Setmsg('datos basicos guardados')*/
         //history.push(`/panel-de-usuario/${type_campaing}/descripcion`)
@@ -205,4 +214,8 @@ olvide incluir las tarifas administrativas en su cálculo. </BoxText>
     )
 }
 
-export default FormConfig
+const mapActionToProps = {
+    CreateCampaingHeader
+}
+
+export default connect(null, mapActionToProps)(FormConfig)
