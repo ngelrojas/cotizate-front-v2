@@ -22,7 +22,7 @@ export class Campaings {
      * create campaings
     */
     createCampaing = async(data_send: any) => {
-        this.resp_campaing = await API.post(`campaing`, data_send, {
+        this.resp_campaing = await API.post(`campaing-body`, data_send, {
             headers: {Authorization: `Bearer ${this.token}`}
         })
         return this.resp_campaing
@@ -75,6 +75,16 @@ export class CampaingHeader {
     */
     createCampaingHeader = async(data_send: any) => {
         this.resp_campaing_header = await API.post(`campaing-header`, data_send, {
+            headers: {Authorization: `Bearer ${this.token}`}
+        })
+        return this.resp_campaing_header
+    }
+
+    /*
+       get last campaing for the current user
+     */
+    getLastCampaingHeader = async() => {
+        this.resp_campaing_header = await API.get(`campaing-header-last`,{
             headers: {Authorization: `Bearer ${this.token}`}
         })
         return this.resp_campaing_header
