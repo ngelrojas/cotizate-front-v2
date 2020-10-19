@@ -144,12 +144,23 @@ export const WrapBtnSave = styled(WrapBtn)`
 
 export const WrapBtnAdd = styled(WrapBtn)`
     margin-top: 0%;
+    width: 100%;
+    float:none;
 `
 
 export const BtnNext = styled(Btn)`
     background-color:#F4A14C ;
     float: right;
     font-size: 14px;
+`
+
+export const BtnAdd = styled(Btn)`
+    background-color:#F4A14C ;
+    float: right;
+    font-size: 14px;
+    width: 100%;
+    padding: 1.5%;
+    float: none;
 `
 
 export const BtnBack = styled(Btn)`
@@ -182,8 +193,6 @@ export const MsgError = styled.div`
     top: 150%;
     color: red;
     text-align: center;
-    margin-top: 2%;
-    margin-bottom: 2%;
     text-align: center;
     overflow: hidden;
 `
@@ -271,7 +280,7 @@ export const WrapperBoxTableP = styled(WrapperBox)`
 
 export const WrapperBoxPhase = styled(WrapperBox)`
     padding-top: 0%;
-    padding-bottom: 0%;
+    padding-bottom: 6%;
     padding-left: 0%;
     padding-right: 0%;
 `

@@ -2,13 +2,13 @@ import React from 'react'
 import {useForm} from 'react-hook-form'
 import {Editor} from '@tinymce/tinymce-react'
 import {Row, Col} from 'react-styled-flexboxgrid'
-import TableReward from './table-reward'
+// import TableReward from './table-reward'
 import {CampaingHeader} from '../../../../../../userCampaings'
 import {Cities} from '../../../../../../userCities'
 import {Reward} from '../../../../../../userReward'
 import {
     Input,
-    BtnNext,
+    BtnAdd,
     Form,
     MsgError,
     MsgSuccess,
@@ -17,7 +17,6 @@ import {
     H4,
     TextConf,
     WrapBtnAdd,
-    WrapperBoxTable,
     SpaceB,
     WrappBoxInput,
     BoxInput,
@@ -52,7 +51,7 @@ const FormRewards: React.FC = () => {
     const [description, Setdescription] = React.useState()
     const [selected, Setselected] = React.useState<number[]>([])
     const [MsgErrorF, setMsgErrorF] = React.useState()
-    const [sendData, SetsendData] = React.useState<FormData[]>([])
+    //const [sendData, SetsendData] = React.useState<FormData[]>([])
     const [cities, setCities] = React.useState()
     const {register, handleSubmit, errors} = useForm<FormData>({
         mode: 'onChange'
@@ -129,12 +128,7 @@ const FormRewards: React.FC = () => {
     React.useEffect(()=>{ 
         getLast()
         listCities()
-        let _formreward: any = window.localStorage.getItem('formReward')  
-        if(!_formreward){
-            window.localStorage.setItem('formReward', JSON.stringify(sendData))
-        }else{
-            SetsendData(JSON.parse(_formreward))
-        }
+        
     },[])
 
     return (
@@ -166,7 +160,7 @@ const FormRewards: React.FC = () => {
                         type="number"
                         name="amount"
                         ref={register({required: true})}
-                        placeholder="Bs 15.000"
+                        placeholder="15000"
                     />
                     <BS>BS</BS>
                 </WrappBoxInput>
@@ -287,19 +281,17 @@ const FormRewards: React.FC = () => {
                 </BoxCity>
 
 
-            <MsgSuccess>{msg}</MsgSuccess>
-            <MsgError>{MsgErrorF}</MsgError>
-            <WrapBtnAdd>
-                <BtnNext>adicionar</BtnNext>
-            </WrapBtnAdd>
-</WrapperBoxRD>
+                <MsgSuccess>{msg}</MsgSuccess>
+                
+                <MsgError>{MsgErrorF}</MsgError>
 
-        </Form>
-         <div>
-            <WrapperBoxTable>
-                <TableReward />
-            </WrapperBoxTable>
-        </div>       
+                <WrapBtnAdd>
+                    <BtnAdd>adicionar</BtnAdd>
+                </WrapBtnAdd>
+
+            </WrapperBoxRD>
+
+        </Form>       
         
         </>
 

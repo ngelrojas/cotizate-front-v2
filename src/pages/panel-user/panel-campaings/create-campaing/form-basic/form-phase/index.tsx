@@ -8,11 +8,12 @@ import PhaseContext from '../../../../../../context/phases'
 import TablePhase from './table-phase'
 import {
     WrapBtnAdd,
-    BtnNext,
+    BtnAdd,
     FormR,
     MsgError,
     MsgSuccess,
     WrapperBoxRD,
+    WrapperBox,
     WrapperBoxTableP,
     BoxTitle,
     BoxText,
@@ -26,7 +27,6 @@ import {
 type FormData = {
     title: string
     amount: number
-    descript: string
 }
 
 const FormPhase: React.FC = () => {
@@ -38,8 +38,6 @@ const FormPhase: React.FC = () => {
     const [msg, Setmsg] = React.useState('')
     const [description, Setdescription] = React.useState()
     const [MsgErrorF, setMsgErrorF] = React.useState()
-    // const [sendData, SetsendData] = React.useState<FormData[]>([])
-    const [formphase, Setformphase] = React.useState()
     const {register, handleSubmit, errors} = useForm<FormData>({
         mode: 'onChange'
     })
@@ -53,7 +51,7 @@ const FormPhase: React.FC = () => {
             })
     }
 
-    const onSubmit = handleSubmit(({title, amount, descript}) => {
+    const onSubmit = handleSubmit(({title, amount}) => {
         if(validate()){
             let data_phase = {
                 title: title,
@@ -67,15 +65,9 @@ const FormPhase: React.FC = () => {
                     console.info(resp.data.data) 
                     Setmsg('Fase Agregada.')
                     setMsgErrorF('')
-                }).catch(err =>{
-                    setMsgErrorF('Error en la Red')
-                    console.error(err)
+                }).catch(err =>{    
+                    setMsgErrorF('no debe exceder mas 150 palabras')
                 })
-            /*const nextState = [...sendData, data_phase]*/
-            //SetsendData(nextState)  
-            //window.localStorage.setItem('formReward', JSON.stringify(nextState))
-            //Setmsg('recompensa agregada.')
-            /*setMsgErrorF('')*/
         }
     })
 
@@ -98,11 +90,12 @@ const FormPhase: React.FC = () => {
     return (
         <PhaseContext.Provider value={datach}>
             <WrapperBoxRD>
-                <BoxTitle> *Fases del proyecto {datach}</BoxTitle>
+            <WrapperBox>
+                <BoxTitle> *Fases del proyecto</BoxTitle>
                 <BoxText> 
                  ¿Cómo se utilizará su dinero? Cuanta más transparencia, mejor. Muestre qué pasos seguira y cuanto de dinero invertira en cada fase del proyecto.
                 </BoxText>
-
+            </WrapperBox>
 
         <FormR onSubmit={onSubmit}>
             <WrapperBoxPhase>
@@ -127,8 +120,7 @@ const FormPhase: React.FC = () => {
                             type="number"
                             name="amount"
                             ref={register({required: true})}
-                            placeholder="Bs 100"
-                            defaultValue={formphase?.cant_phase}
+                            placeholder="100"
                         />
                         <BS>BS</BS>
                     </WrappBoxInput>
@@ -183,20 +175,18 @@ const FormPhase: React.FC = () => {
                     }}
                     onEditorChange={handleEditorReward}
                 />
+
             <MsgSuccess>{msg}</MsgSuccess>
+            
             <MsgError>{MsgErrorF}</MsgError>
+
             <WrapBtnAdd>
-                <BtnNext>adicionar</BtnNext>
+                <BtnAdd>adicionar</BtnAdd>
             </WrapBtnAdd>
+
         </FormR>
 
-        </WrapperBoxRD>
-        
-        <div>
-            <WrapperBoxTableP>
-                <TablePhase />
-            </WrapperBoxTableP>
-        </div>
+        </WrapperBoxRD> 
 
         </PhaseContext.Provider>
 

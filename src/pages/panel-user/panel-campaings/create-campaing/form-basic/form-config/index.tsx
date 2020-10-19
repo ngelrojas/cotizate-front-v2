@@ -45,7 +45,6 @@ const FormConfig: React.FC = (props: any) => {
     let SaveCampaing = new CampaingHeader(token)
     const [cate, SetCate] = React.useState()
     const [msg, Setmsg] = React.useState('')
-    const [formbasic, Setformbasic] = React.useState()
     const [cities, SetCities] = React.useState()
     let matchUrl: any = match
     let type_campaing = matchUrl.params.campania   
@@ -95,8 +94,6 @@ const FormConfig: React.FC = (props: any) => {
     }
 
     React.useEffect(()=>{
-        let _formbasic: any = window.localStorage.getItem('formBasic')
-        Setformbasic(JSON.parse(_formbasic))
         LoadCategories()
         LoadListCities()
     },[])
@@ -172,7 +169,7 @@ olvide incluir las tarifas administrativas en su cálculo. </BoxText>
                         type="number"
                         name="amount"
                         ref={register({required: true})}
-                        placeholder="Bs 15.000"
+                        placeholder="15000"
                     />
                     <BS>BS</BS>
                 </WrappBoxInput>

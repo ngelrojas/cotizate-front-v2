@@ -46,7 +46,6 @@ const FormDescription: React.FC = () => {
     const [excerpt, setExcerpt] = React.useState('')
     const [msgExcerpt, setMsgExcerpt] = React.useState('')
     const [msgdescription, setMsgdescription] = React.useState('')
-    const [formDesc, SetformDesc] = React.useState()
     const [datach, setDatach] = React.useState()
     const [showImg, SetShowImg] = React.useState()
     const {register, handleSubmit, errors} = useForm<FormData>({
@@ -123,13 +122,6 @@ const FormDescription: React.FC = () => {
     }
 
     React.useEffect(()=>{
-        let _formDescription: any = window.localStorage.getItem('formDescription')
-        let form_parse = JSON.parse(_formDescription)
-        SetformDesc(form_parse)
-        let _excerpt:any = form_parse
-        setExcerpt(_excerpt?.excerpt)
-        let _description: any = form_parse
-        setDescripction(_description?.description)
         getLast()
     },[])
 
@@ -157,6 +149,16 @@ const FormDescription: React.FC = () => {
                 <Input
                     type="text"
                     name="slogan_campaing"
+                    ref={register({required: false})}
+                />
+        </WrapperBox>
+        <WrapperBox>
+                <BoxTitle>Url corto del proyecto</BoxTitle>
+                <BoxText>Puede adicionar una url corta para que su proyecto, sea compartido de manera mas fasil.</BoxText>
+                <Input
+                    type="text"
+                    name="short_url"
+                    ref={register({required: false})}
                 />
         </WrapperBox>
         <WrapperBox>
