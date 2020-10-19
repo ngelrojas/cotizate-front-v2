@@ -1,11 +1,12 @@
 import React from 'react'
 import {useForm} from 'react-hook-form'
 import {Editor} from '@tinymce/tinymce-react'
-import { Row} from 'react-styled-flexboxgrid'
+import {CampaingHeader} from '../../../../../../userCampaings'
+import {Phases} from '../../../../../../userPhases'
+// import {Row} from 'react-styled-flexboxgrid'
+import PhaseContext from '../../../../../../context/phases'
 import TablePhase from './table-phase'
 import {
-    Label,
-    FormSubTitle,
     WrapBtnAdd,
     BtnNext,
     FormR,
@@ -15,43 +16,67 @@ import {
     WrapperBoxTableP,
     BoxTitle,
     BoxText,
-    WrapperBox,
+    WrapperBoxPhase,
     WrappBoxInput,
+    BoxInputPhase,
     BoxInput,
     BS
 } from '../../styles'
 
 type FormData = {
     title: string
-    cant_phase: number
+    amount: number
     descript: string
 }
 
-
 const FormPhase: React.FC = () => {
+
+    let token = window.sessionStorage.getItem('token')
+    let CamHeader = new CampaingHeader(token)
+    let Phase = new Phases(token)
+    const [datach, setDatach] = React.useState<number>(0)
     const [msg, Setmsg] = React.useState('')
     const [description, Setdescription] = React.useState()
     const [MsgErrorF, setMsgErrorF] = React.useState()
-    const [sendData, SetsendData] = React.useState<FormData[]>([])
+    // const [sendData, SetsendData] = React.useState<FormData[]>([])
     const [formphase, Setformphase] = React.useState()
     const {register, handleSubmit, errors} = useForm<FormData>({
         mode: 'onChange'
     })
 
-    const onSubmit = handleSubmit(({title, cant_phase, descript}) => {
+    const getLast = () => {
+        CamHeader.getLastCampaingHeader()
+            .then(resp => {
+                setDatach(resp.data.data.id)
+            }).catch(err =>{
+                console.error(err)
+            })
+    }
+
+    const onSubmit = handleSubmit(({title, amount, descript}) => {
         if(validate()){
             let data_phase = {
                 title: title,
-                cant_phase: cant_phase,
-                descript: description
+                amount: amount,
+                description: description,
+                header: datach 
             }
-            const nextState = [...sendData, data_phase]
-            SetsendData(nextState)  
-            window.localStorage.setItem('formReward', JSON.stringify(nextState))
-            Setmsg('recompensa agregada.')
-            setMsgErrorF('')
-        }
 
+            Phase.createPhase(data_phase)
+                .then(resp => {
+                    console.info(resp.data.data) 
+                    Setmsg('Fase Agregada.')
+                    setMsgErrorF('')
+                }).catch(err =>{
+                    setMsgErrorF('Error en la Red')
+                    console.error(err)
+                })
+            /*const nextState = [...sendData, data_phase]*/
+            //SetsendData(nextState)  
+            //window.localStorage.setItem('formReward', JSON.stringify(nextState))
+            //Setmsg('recompensa agregada.')
+            /*setMsgErrorF('')*/
+        }
     })
 
     const handleEditorReward = (content: any, editor: any) => {
@@ -67,41 +92,51 @@ const FormPhase: React.FC = () => {
     }
     
     React.useEffect(()=>{ 
-        let _formreward: any = window.localStorage.getItem('formReward')  
-        if(!_formreward){
-            window.localStorage.setItem('formReward', JSON.stringify(sendData))
-        }else{
-            SetsendData(JSON.parse(_formreward))
-        }
+       getLast()
     },[])
 
     return (
-        <>
+        <PhaseContext.Provider value={datach}>
             <WrapperBoxRD>
-                <BoxTitle> *Fases del proyecto </BoxTitle>
+                <BoxTitle> *Fases del proyecto {datach}</BoxTitle>
                 <BoxText> 
                  ¿Cómo se utilizará su dinero? Cuanta más transparencia, mejor. Muestre qué pasos seguira y cuanto de dinero invertira en cada fase del proyecto.
                 </BoxText>
 
-        <WrapperBox>
-                <BoxTitle> FASE - 1 </BoxTitle>
-                <BoxText>* Cuanto de dinero necesitaras para esta fase del proyecto </BoxText>
-                <WrappBoxInput>
-                    <BoxInput
-                        type="number"
-                        name="amount"
-                        ref={register({required: true})}
-                        placeholder="Bs 100"
-                        defaultValue={formphase?.cant_phase}
-                    />
-                    <BS>BS</BS>
-                </WrappBoxInput>
 
-                <MsgError>
-                    {errors.cant_phase && 'este campo es requerido'}
-                </MsgError>
-        </WrapperBox>
         <FormR onSubmit={onSubmit}>
+            <WrapperBoxPhase>
+                    <BoxText>* Titulo de la Fase </BoxText>
+                    <WrappBoxInput>
+                        <BoxInputPhase
+                            type="text"
+                            name="title"
+                            ref={register({required: true})}
+                            placeholder="Fase 1"
+                        />
+                    </WrappBoxInput>
+
+                    <MsgError>
+                        {errors.title && 'este campo es requerido'}
+                    </MsgError>
+            </WrapperBoxPhase>
+            <WrapperBoxPhase>
+                    <BoxText>* Cuanto de dinero necesitaras para esta fase del proyecto </BoxText>
+                    <WrappBoxInput>
+                        <BoxInput
+                            type="number"
+                            name="amount"
+                            ref={register({required: true})}
+                            placeholder="Bs 100"
+                            defaultValue={formphase?.cant_phase}
+                        />
+                        <BS>BS</BS>
+                    </WrappBoxInput>
+
+                    <MsgError>
+                        {errors.amount && 'este campo es requerido'}
+                    </MsgError>
+            </WrapperBoxPhase>
 
                 <Editor
                     initialValue=''
@@ -163,7 +198,7 @@ const FormPhase: React.FC = () => {
             </WrapperBoxTableP>
         </div>
 
-        </>
+        </PhaseContext.Provider>
 
     )
 }

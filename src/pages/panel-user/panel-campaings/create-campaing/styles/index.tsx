@@ -257,7 +257,6 @@ export const WrapperBox = styled.div`
     padding-bottom: 4%;
     padding-left: 6%;
     padding-right: 1%;
-    margin-bottom: 4%;
 `
 
 export const WrapperBoxTable = styled(WrapperBox)`
@@ -268,6 +267,13 @@ export const WrapperBoxTableP = styled(WrapperBox)`
     width:100%;
     padding-left: 10%;
     padding-right: 4%;
+`
+
+export const WrapperBoxPhase = styled(WrapperBox)`
+    padding-top: 0%;
+    padding-bottom: 0%;
+    padding-left: 0%;
+    padding-right: 0%;
 `
 
 export const BoxTitle = styled.p`
@@ -290,6 +296,10 @@ export const BoxInput = styled.input`
     height: 49px;
     padding-left: 5%;
 `
+
+export const BoxInputPhase = styled(BoxInput)`
+    padding-left: 1%;
+` 
 
 export const BoxInputDuration = styled(BoxInput)`
     padding-left: 2%;

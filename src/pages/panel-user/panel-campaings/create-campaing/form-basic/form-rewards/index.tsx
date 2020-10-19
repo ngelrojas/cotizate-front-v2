@@ -3,6 +3,9 @@ import {useForm} from 'react-hook-form'
 import {Editor} from '@tinymce/tinymce-react'
 import {Row, Col} from 'react-styled-flexboxgrid'
 import TableReward from './table-reward'
+import {CampaingHeader} from '../../../../../../userCampaings'
+import {Cities} from '../../../../../../userCities'
+import {Reward} from '../../../../../../userReward'
 import {
     Input,
     BtnNext,
@@ -26,48 +29,90 @@ import {
 } from '../../styles'
 
 type FormData = {
-    title: string
-    cant_reward: number
-    descript: string
+    title: string,
+    amount: number,
+    descript: string,
+    expected_delivery: string,
+    header: number,
+    user: number,
+    cities:[],
+    all_cities: boolean,
+    pick_up_locally: boolean
+
 }
 
 
 const FormRewards: React.FC = () => {
+    let token = window.sessionStorage.getItem('token')
+    let CamHeader = new CampaingHeader(token)
+    let Rewards = new Reward(token)
+    let City = new Cities(token)
+    const [datach, setDatach] = React.useState<number>(0)
     const [msg, Setmsg] = React.useState('')
     const [description, Setdescription] = React.useState()
+    const [selected, Setselected] = React.useState<number[]>([])
     const [MsgErrorF, setMsgErrorF] = React.useState()
     const [sendData, SetsendData] = React.useState<FormData[]>([])
+    const [cities, setCities] = React.useState()
     const {register, handleSubmit, errors} = useForm<FormData>({
         mode: 'onChange'
     })
+    
+    const listCities = () => {
+        City.listCities()
+            .then(resp => {
+                console.info(resp.data)
+                setCities(resp.data)
+            }).catch(err => {
+                console.info(err)
+            })
+    }
 
-    const cities = [
-        {"id": 1, "name": "La Paz"},
-        {"id": 2, "name": "Santa Cruz"},
-        {"id": 3, "name": "Cochabamba"},
-        {"id": 4, "name": "Chiquisaca"},
-        {"id": 5, "name": "Tarija"},
-        {"id": 6, "name": "Potosi"},
-        {"id": 7, "name": "Beni"},
-        {"id": 8, "name": "Pando"},
-        {"id": 9, "name": "Oruro"},
-    ]
+    const getLast = () => {
+        CamHeader.getLastCampaingHeader()
+            .then(resp => {
+                setDatach(resp.data.data.id)
+            }).catch(err =>{
+                console.error(err)
+            })
+    }
 
-    const onSubmit = handleSubmit(({title, cant_reward, descript}) => {
+    const onSubmit = handleSubmit(({title, amount, descript, expected_delivery, all_cities, pick_up_locally}) => {
         if(validate()){
-            let data_reward = {
+            let data_format = expected_delivery + " 00:00:00"
+            let data_reward = { 
                 title: title,
-                cant_reward: cant_reward,
-                descript: description
+                amount: amount,
+                description: description,
+                expected_delivery: data_format,
+                header: datach,
+                user: 0,
+                cities:selected,
+                all_cities: all_cities,
+                pick_up_locally: pick_up_locally
             }
-            const nextState = [...sendData, data_reward]
-            SetsendData(nextState)  
-            window.localStorage.setItem('formReward', JSON.stringify(nextState))
-            Setmsg('recompensa agregada.')
-            setMsgErrorF('')
+
+            Rewards.createReward(data_reward)
+                .then(resp => {
+                    console.info(resp.data)
+                    Setmsg('recompensa agregada.')
+                    setMsgErrorF('')
+                }).catch(err => {
+                    console.info(err)
+                })         
         }
 
     })
+
+    const handleCities = (e:React.FormEvent<HTMLInputElement> ) => {
+        const id: number = +e.currentTarget.value
+        const {checked} = e.currentTarget
+        if(checked){
+            Setselected(prev=>[...prev, id])
+        }else{
+            Setselected(prev=>prev.filter(item=>item !== id))
+        } 
+    }
 
     const handleEditorReward = (content: any, editor: any) => {
         Setdescription(content)
@@ -82,6 +127,8 @@ const FormRewards: React.FC = () => {
     }
     
     React.useEffect(()=>{ 
+        getLast()
+        listCities()
         let _formreward: any = window.localStorage.getItem('formReward')  
         if(!_formreward){
             window.localStorage.setItem('formReward', JSON.stringify(sendData))
@@ -117,21 +164,21 @@ const FormRewards: React.FC = () => {
                 <WrappBoxInput>
                     <BoxInput
                         type="number"
-                        name="cant_reward"
+                        name="amount"
                         ref={register({required: true})}
                         placeholder="Bs 15.000"
                     />
                     <BS>BS</BS>
                 </WrappBoxInput>
 
-                <MsgError>{errors.cant_reward && 'este campo es requerido'}</MsgError>
+                <MsgError>{errors.amount && 'este campo es requerido'}</MsgError>
                 <SpaceB />
                 <BoxTitle>* Entrega prevista</BoxTitle>
                 <SpaceB />
                 <WrappBoxInput>
                     <Input
                         type="date"
-                        name="date_reward"
+                        name="expected_delivery"
                         ref={register({required: true})}
                     />
                 </WrappBoxInput>
@@ -193,10 +240,16 @@ const FormRewards: React.FC = () => {
                         <TableCities>
                             <Row between="xs">
                                 {
-                                    cities.map((ct)=>(
+                                    cities && cities.map((ct: any)=>(
                                             <Col xs={4} key={ct.id} > 
                                             <ItemCity>
-                                                <input type="checkbox" name="cities[]" value={ct.id} />{ct.name} 
+                                            <input 
+                                                defaultChecked={selected.includes(ct.id)}
+                                                type="checkbox" 
+                                                name="cities[]" 
+                                                value={ct.id}
+                                                onClick={handleCities} 
+                                                />{ct.name} 
                                             </ItemCity>
                                             </Col>
                                     )) 
@@ -209,12 +262,22 @@ const FormRewards: React.FC = () => {
                             <Row>
                                     <Col xs={6} > 
                                     <ItemCity>
-                                        <input type="checkbox" name="all_cities" value="1" /> Toda Bolivia
+                                        <input 
+                                            type="checkbox" 
+                                            name="all_cities" 
+                                            value="1"
+                                            ref={register({required: false})}
+                                        /> Toda Bolivia
                                     </ItemCity>
                                     </Col>
                                     <Col xs={6} > 
                                     <ItemCity>
-                                        <input type="checkbox" name="get_local" value="2" /> Retirar en le local
+                                        <input 
+                                            type="checkbox" 
+                                            name="pick_up_locally" 
+                                            value="1"
+                                            ref={register({required: false})}
+                                        /> Retirar en le local
                                     </ItemCity>
                                     </Col>
                             </Row>
