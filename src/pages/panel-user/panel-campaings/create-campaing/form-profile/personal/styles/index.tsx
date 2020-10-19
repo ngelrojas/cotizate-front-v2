@@ -8,10 +8,16 @@ export const Input = styled.input`
     width: 80%;
     padding: 1%;
     float: right;
+    height: 49px;
 `
 
 export const WrapperBox = styled.div`
     margin-top: 5%;
+`
+
+export const WrapperBoxLast = styled(WrapperBox)`
+    margin-bottom: 10%;
+    overflow: hidden;
 `
 
 export const Span = styled.div`
@@ -19,15 +25,22 @@ export const Span = styled.div`
     float: left;
 `
 
+export const SpanPhoto = styled(Span)`
+    width: 20%;
+`
+
 export const ErrorInput = styled.div`
     color: red;
-    text-align: center
+    text-align: center;
+    overflow: hidden;
+    width: 100%;
 `
 
 export const SelectInput = styled.select`
     width: 80%;
     padding: 1%;
     float: right; 
+    height: 40px;
 `
 
 export const TextArea = styled.textarea`

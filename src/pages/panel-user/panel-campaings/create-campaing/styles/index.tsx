@@ -89,10 +89,12 @@ export const BtnCreateCampaing = styled(Btn)`
     text-decoration: none;
     width: 100%;
 `
+
 export const TabNav = styled(TabList)`
     background-color: #ffffff;
     margin-bottom: 5%;
 `
+
 export const TabNavProfile = styled(TabList)`
     background-color: #fcfcfc;
     width: 68%;
@@ -103,7 +105,7 @@ export const TabNavProfile = styled(TabList)`
 `
 
 export const TabSubMenu = styled(Tab)`
-    width: 33%;
+    width: 50%;
     border-bottom: 0px;
 `
 
@@ -142,12 +144,23 @@ export const WrapBtnSave = styled(WrapBtn)`
 
 export const WrapBtnAdd = styled(WrapBtn)`
     margin-top: 0%;
+    width: 100%;
+    float:none;
 `
 
 export const BtnNext = styled(Btn)`
     background-color:#F4A14C ;
     float: right;
     font-size: 14px;
+`
+
+export const BtnAdd = styled(Btn)`
+    background-color:#F4A14C ;
+    float: right;
+    font-size: 14px;
+    width: 100%;
+    padding: 1.5%;
+    float: none;
 `
 
 export const BtnBack = styled(Btn)`
@@ -174,15 +187,14 @@ export const FormR = styled.form`
     margin: 0 auto;
 `
 
-export const MsgError = styled.span`
-    width: 100%;
+export const MsgError = styled.div`
+    width: 45%;
     left: 0%;
     top: 150%;
     color: red;
     text-align: center;
-    margin-top: 2%;
-    margin-bottom: 2%;
     text-align: center;
+    overflow: hidden;
 `
 
 export const MsgErrorForm = styled.div`
@@ -254,7 +266,6 @@ export const WrapperBox = styled.div`
     padding-bottom: 4%;
     padding-left: 6%;
     padding-right: 1%;
-    margin-bottom: 4%;
 `
 
 export const WrapperBoxTable = styled(WrapperBox)`
@@ -265,6 +276,13 @@ export const WrapperBoxTableP = styled(WrapperBox)`
     width:100%;
     padding-left: 10%;
     padding-right: 4%;
+`
+
+export const WrapperBoxPhase = styled(WrapperBox)`
+    padding-top: 0%;
+    padding-bottom: 6%;
+    padding-left: 0%;
+    padding-right: 0%;
 `
 
 export const BoxTitle = styled.p`
@@ -279,6 +297,7 @@ export const BoxText = styled.p`
 export const BoxSelect = styled.select`
     width: 45%;
     height: 49px;
+    padding: 1%;
 `
 
 export const BoxInput = styled.input`
@@ -286,6 +305,10 @@ export const BoxInput = styled.input`
     height: 49px;
     padding-left: 5%;
 `
+
+export const BoxInputPhase = styled(BoxInput)`
+    padding-left: 1%;
+` 
 
 export const BoxInputDuration = styled(BoxInput)`
     padding-left: 2%;

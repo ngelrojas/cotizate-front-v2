@@ -11,7 +11,8 @@ import {ContentProfile,
         SaveProfile,
         SpanAssiaction,
         SelectInput,
-        SpanAE
+        SpanAE,
+        WrapperBoxLast
 } from './styles' 
 
 type FormData = {
@@ -37,9 +38,9 @@ const Association: React.FC = ()=>{
 
     return(
         <>
-        <ContentProfile>
+        <div>
             <form>
-            <div>
+            <ContentProfile>
                 <Row>
                     <Col xs={12}>
                         <Row center="xs">
@@ -54,11 +55,12 @@ const Association: React.FC = ()=>{
                             <Col xs={6}>
                                 <WrapperBox>
                                     <label>
-                                    <SpanAE>* Assiciacion/Empresa: </SpanAE>
+                                    <SpanAE>* Assiciacion/Empresa/Otros: </SpanAE>
                                         <SelectInput ref={register({required: true})} name="country">
                                             <option value="">SELECIONAR</option>
                                             <option value="1">ASOCIACION</option>
                                             <option value="2">EMPRESA</option>
+                                            <option value="3">OTROS</option>
                                         </SelectInput>
                                     </label>
                                     <ErrorInput>{errors.country && 'este campo es requerido'}</ErrorInput>
@@ -166,6 +168,7 @@ const Association: React.FC = ()=>{
                                     <label>
                                         <SpanAssiaction>* Direccion (calle, avenida): </SpanAssiaction>
                                         <TextArea 
+                                               rows={5}
                                                name="address"
                                                ref={register({required: true})}/>
                                     </label>
@@ -182,6 +185,7 @@ const Association: React.FC = ()=>{
                                     <label>
                                         <Span>* Barrio: </Span>
                                         <TextArea 
+                                               rows={5}
                                                name="neighborhood"
                                                ref={register({required: true})}/>
                                     </label>
@@ -194,7 +198,7 @@ const Association: React.FC = ()=>{
                     <Col xs={12}>
                         <Row center="xs">
                             <Col xs={6}>
-                                <WrapperBox>
+                                <WrapperBoxLast>
                                     <label>
                                         <Span>* Numero: </Span>
                                         <Input type="number"
@@ -202,13 +206,14 @@ const Association: React.FC = ()=>{
                                                ref={register({required: true})}/>
                                     </label>
                                     <ErrorInput>{errors.neighborhood_number && 'este campo es requerido'}</ErrorInput>
-                                </WrapperBox>
+                                </WrapperBoxLast>
                             </Col>
                         </Row>
                     </Col>
 
                 </Row>
 
+            </ContentProfile>
                 <Row>
                     <Col xs={12}>
                         <Row center="xs">
@@ -220,11 +225,9 @@ const Association: React.FC = ()=>{
                         </Row>
                     </Col>
                 </Row>
-
-            </div>
             </form>
   
-        </ContentProfile>
+        </div>
         </>
     ) 
 } 

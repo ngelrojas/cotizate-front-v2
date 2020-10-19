@@ -191,7 +191,7 @@ const FormProfile: React.FC<Iauth> = ({authenticated, currentUser}) => {
                                 <Tabs>
                                   <TabNavProfile>
                                       <CoolTab> Perfil Personal</CoolTab>
-                                      <CoolTab> Perfil Asociación/Empresa</CoolTab>
+                                      <CoolTab> Perfil Asociación/Empresa/Otros</CoolTab>
                                   </TabNavProfile>
                                   <TabPanels>
                                           <TabPanel><Personal /></TabPanel>
