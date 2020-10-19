@@ -1,5 +1,7 @@
 import React from 'react'
 import {Col} from 'react-styled-flexboxgrid'
+import {Phases} from '../../../../../../../userPhases'
+import PhaseContext from '../../../../../../../context/phases'
 import {
     H3,
     Table,
@@ -9,22 +11,30 @@ import {
     Tr
 } from '../../../styles'
 
-const TablePhase: React.FC = ()=>{
-    const [getRewards, SetgetRewards] = React.useState()
-    let _formReward:any = window.localStorage.getItem('formReward')  
-    let form_parse = JSON.parse(_formReward)
-    let _rewards: any = form_parse
+const TablePhase: React.FC= ()=>{
+    const phasecamp = React.useContext(PhaseContext) 
+    let token = window.sessionStorage.getItem('token')
+    let Phase = new Phases(token)
+    const [listPhases, setlistPhases] = React.useState()
+
+    const handleDelete = (e:number) => {
+        /*const conjunt = _rewards.slice(0, e).concat(_rewards.slice(e + 1, _rewards.length))*/
+        /*console.log(conjunt)*/  
+    }
+
+    const getListPhases = () =>{
+        Phase.listPhases(phasecamp)
+            .then(resp=>{
+                setlistPhases(resp.data.data)
+            }).catch(err=>{
+                console.error(err)
+            })
+    }
 
     React.useEffect(() => {
-        if(_rewards){
-           SetgetRewards(_rewards) 
-        }
+        getListPhases() 
     }, [])
-    const handleDelete = (e:number) => {
-        const conjunt = _rewards.slice(0, e).concat(_rewards.slice(e + 1, _rewards.length))
-        console.log(conjunt) 
-        window.localStorage.setItem('formReward', JSON.stringify(conjunt))
-    }
+    
 
     return(
         <Col>
@@ -39,10 +49,10 @@ const TablePhase: React.FC = ()=>{
                 </Thead>
                 <tbody>
                 {
-                    getRewards && getRewards.map( (reward:any, index:number) =>(
+                    listPhases && listPhases.map( (phase:any, index:number) =>(
                      <Tr key={index}>
-                        <Td>{reward.title}</Td>
-                        <Td>{reward.cant_reward}</Td>
+                        <Td>{phase.title}</Td>
+                        <Td>{phase.amount}</Td>
                         <Td><button type="button" onClick={()=>handleDelete(index)}>eleminiar</button></Td>
                     </Tr>                        
                     ))

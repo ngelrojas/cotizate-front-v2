@@ -29,11 +29,13 @@ export const GoC = styled(Link)`
 
 export const RecEmp = styled.div`
     border: 1px solid #2A8EC8;
+    border-radius: 1%;
     margin-top: 15%;
 `
 
 export const RecCausa = styled.div`
     border: 1px solid #F4A14C;
+    border-radius: 1%;
     margin-top: 15%;
 `
 

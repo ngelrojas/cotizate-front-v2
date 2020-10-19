@@ -27,7 +27,7 @@ export default function(state = initialState, action: any) {
                 ...action.payload
             }
         case GET_PROFILE:
-            console.log(action.payload)
+            console.info(action.payload)
             break
         case LOADING_USER:
             return {...state, loading: true}
