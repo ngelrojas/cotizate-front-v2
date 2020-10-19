@@ -1,4 +1,5 @@
 import React from 'react'
+import {connect} from 'react-redux'
 import {useHistory} from 'react-router-dom'
 import { Tabs, TabPanels, TabPanel} from '@reach/tabs';
 import {MdPanoramaFishEye } from 'react-icons/md'
@@ -9,7 +10,18 @@ import FormProfile from './form-profile'
 import {Content, TabNav, TabSubMenu, IconOn} from './styles'
 import {CheckAuthentication} from '../../../../redux/auth'
 
-const CreateCampaing: React.FC = () => {
+type profileType = {
+    first_name: string
+    last_name: string
+    id: number
+}
+
+interface Iauth {
+    authenticated: boolean
+    currentUser: profileType
+}
+
+const CreateCampaing: React.FC<Iauth> = ({authenticated, currentUser}) => {
     let history = useHistory()
 
     function CoolTab(props:any) {
@@ -58,4 +70,9 @@ const CreateCampaing: React.FC = () => {
     )
 }
 
-export default CreateCampaing
+const mapStateToProps = (state: any) => ({
+    authenticated: state.user.authenticated,
+    currentUser: state.user
+})
+
+export default connect(mapStateToProps)(CreateCampaing)
