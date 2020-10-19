@@ -109,6 +109,11 @@ export const TabSubMenu = styled(Tab)`
     border-bottom: 0px;
 `
 
+export const TabSubMenuPro = styled(Tab)`
+    width: 50%;
+    border-bottom: 0px;
+`
+
 export const Label = styled.label`
     width: 33%;
     position: relative;

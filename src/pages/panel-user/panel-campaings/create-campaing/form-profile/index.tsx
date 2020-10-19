@@ -8,7 +8,7 @@ import Association from './association'
 import {CheckAuthentication} from '../../../../../redux/auth'
 
 import {
-    TabSubMenu,
+    TabSubMenuPro,
     IconOn,
     TabNavProfile
 } from '../styles'
@@ -20,10 +20,10 @@ const FormProfile: React.FC = () => {
     function CoolTab(props:any) {
         const { isSelected, children } = props;
         return (
-          <TabSubMenu {...props}>
+          <TabSubMenuPro {...props}>
             {isSelected ? <IconOn /> : <MdPanoramaFishEye />}
             {children}
-          </TabSubMenu>
+          </TabSubMenuPro>
         );
     }
 
