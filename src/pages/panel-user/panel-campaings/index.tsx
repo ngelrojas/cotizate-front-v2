@@ -1,4 +1,5 @@
 import React from 'react'
+import {useHistory} from 'react-router-dom'
 import {connect} from 'react-redux'
 import Loading from '../../../components/loading'
 import {Grid, Row, Col} from 'react-styled-flexboxgrid'
@@ -7,6 +8,7 @@ import {Content, H1, Title, Table, Th, Td, BtnCreate,
         BtnDelete
        } from './styles'
 import {Campaings} from '../../../userCampaings'
+import {CheckAuthentication} from '../../../redux/auth'
 
 type FormData = {
     id: number
@@ -29,6 +31,7 @@ interface Iauth {
 
 const PanelCampaing: React.FC<Iauth> = ({authenticated, currentUser}) => {
 
+    let history = useHistory()
     const [dataCamp, setDataCamp] = React.useState()
     const [isData, setIsData] = React.useState(true)
     let token = window.sessionStorage.getItem('token')
@@ -45,6 +48,11 @@ const PanelCampaing: React.FC<Iauth> = ({authenticated, currentUser}) => {
     }
 
     React.useEffect(()=>{
+
+        if(!CheckAuthentication()){
+            history.push('/')
+        }
+
         campaing.listCampaings().then(resp => {
             if(resp.data.data.length === 0){
                 setIsData(false)
@@ -54,6 +62,7 @@ const PanelCampaing: React.FC<Iauth> = ({authenticated, currentUser}) => {
             console.error(err)
         })
     },[])
+
     return (
         <Content>
             <Grid>

@@ -1,11 +1,14 @@
 import React from 'react'
 import { Tabs, TabPanels, TabPanel} from '@reach/tabs';
+import {Grid, Row, Col} from 'react-styled-flexboxgrid'
 import {connect} from 'react-redux'
 import {useForm} from 'react-hook-form'
 import {PersonalProfile} from '../../../../../userProfile'
 import {Campaings} from '../../../../../userCampaings'
 import {Reward} from '../../../../../userReward'
 import {MdPanoramaFishEye } from 'react-icons/md'
+import Personal from './personal'
+import Association from './association'
 
 import {
     Label,
@@ -16,6 +19,7 @@ import {
     MsgErrorForm,
     TabSubMenu,
     IconOn,
+    TabNavProfile
 } from '../styles'
 
 type FormData = {
@@ -166,6 +170,7 @@ const FormProfile: React.FC<Iauth> = ({authenticated, currentUser}) => {
     }
     //TODO: not return complete field, add end-point to backend to return complete field
     React.useEffect(()=>{
+
         resp.getPersonalProfile().then(res => {
             setCurrentProfile(res.data.data)
             console.log(res.data.data)
@@ -177,18 +182,29 @@ const FormProfile: React.FC<Iauth> = ({authenticated, currentUser}) => {
     },[])
 
     return (
-        <Form onSubmit={onSubmit}>
-            <Label>
-                <FormSubTitle>complete su perfil: {currentUser.first_name} - {currentUser.last_name}</FormSubTitle>     
-            </Label>
-            <MsgErrorForm>{errorsFB}</MsgErrorForm>
-            <MsgErrorForm>{errorsFD}</MsgErrorForm>
-            <MsgErrorForm>{errorsFC}</MsgErrorForm>
-            <MsgErrorForm>{errorsFR}</MsgErrorForm>
-            <WrapBtn>
-                <BtnSaveProject>guardar proyecto</BtnSaveProject>
-            </WrapBtn>
-        </Form>
+        <>
+                <Row>
+                    <Col xs={12}>
+                        <Row center="xs">
+                            <Col xs={12}>
+
+                                <Tabs>
+                                  <TabNavProfile>
+                                      <CoolTab> Perfil Personal</CoolTab>
+                                      <CoolTab> Perfil Asociación/Empresa/Otros</CoolTab>
+                                  </TabNavProfile>
+                                  <TabPanels>
+                                          <TabPanel><Personal /></TabPanel>
+                                          <TabPanel><Association /></TabPanel>
+                                  </TabPanels>
+                                </Tabs>
+
+                            </Col>
+                        </Row>
+                    </Col>
+                </Row>
+        </>
+
     )
 }
 const mapStateToProps = (state: any) => ({

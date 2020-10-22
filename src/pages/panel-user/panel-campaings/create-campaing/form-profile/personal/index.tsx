@@ -1,7 +1,9 @@
 import React from 'react'
+import {connect} from 'react-redux'
 import {useForm} from 'react-hook-form'
 import {Row, Col} from 'react-styled-flexboxgrid'
 import DefaultImg from '../../form-basic/public/default.png'
+import {PersonalProfile} from '../../../../../../userProfile'
 import {ContentProfile,
         Input, 
         WrapperBox,
@@ -21,10 +23,10 @@ import {ContentProfile,
 type FormData = {
     first_name: string
     last_name: string
-    ci_nit: number
-    cell_phone: string
-    phone: string
     email: string
+    cinit: string
+    cellphone: string
+    telephone: string
     country: string
     city: string
     address: string
@@ -33,11 +35,41 @@ type FormData = {
     photo: string
 }
 
-const Personal: React.FC = ()=>{
+type profileType = {
+    first_name: string
+    last_name: string
+    email: string
+    id: number
+}
 
+interface Iauth {
+    authenticated: boolean
+    currentUser: profileType
+}
+
+const Personal: React.FC<Iauth> = ({authenticated, currentUser})=>{
+
+    let token = window.sessionStorage.getItem('token')
+    let currentPersonal = new PersonalProfile(token)
+    const [personalData, setPersonalData] = React.useState()
     const {register, handleSubmit, errors} = useForm<FormData>({
         mode: 'onChange'
     })
+
+    const LoadPersonalData = ()=> {
+        currentPersonal.currentPersonalProfile(currentUser.id)
+            .then(resp=>{
+                console.info(resp.data.data)
+                setPersonalData(resp.data.data)
+            }).catch(err => {
+                console.info(err)
+            })
+    }
+
+    React.useEffect(()=>{
+        console.info('USER IN PROFILE TAB', currentUser.first_name)
+        LoadPersonalData()
+    },[])
 
     return(
         <>
@@ -61,7 +93,9 @@ const Personal: React.FC = ()=>{
                                         <Span>* Nombre: </Span>
                                         <Input type="text"
                                                name="first_name"
-                                               ref={register({required: true})}/>
+                                               ref={register({required: true})}
+                                               defaultValue={currentUser.first_name}
+                                        />
                                     </label>
                                     <ErrorInput>{errors.first_name && 'este campo es requerido'}</ErrorInput>
                                 </WrapperBox>
@@ -77,7 +111,9 @@ const Personal: React.FC = ()=>{
                                         <Span>* Apellido: </Span>
                                         <Input type="text"
                                                name="last_name"
-                                               ref={register({required: true})}/>
+                                               ref={register({required: true})}
+                                               defaultValue={currentUser.last_name}
+                                        />
                                     </label>
                                     <ErrorInput>{errors.last_name && 'este campo es requerido'}</ErrorInput>
                                 </WrapperBox>
@@ -92,10 +128,11 @@ const Personal: React.FC = ()=>{
                                     <label>
                                         <Span>* CI: </Span>
                                         <Input type="text"
-                                               name="ci_nit"
-                                               ref={register({required: true})}/>
+                                               name="cinit"
+                                               ref={register({required: true})}
+                                        />
                                     </label>
-                                    <ErrorInput>{errors.ci_nit && 'este campo es requerido'}</ErrorInput>
+                                    <ErrorInput>{errors.cinit && 'este campo es requerido'}</ErrorInput>
                                 </WrapperBox>
                             </Col>
                         </Row>
@@ -109,9 +146,10 @@ const Personal: React.FC = ()=>{
                                         <Span>* Numero de celular: </Span>
                                         <Input type="text"
                                                name="cell_phone"
-                                               ref={register({required: true})}/>
+                                               ref={register({required: true})}
+                                        />
                                     </label>
-                                    <ErrorInput>{errors.cell_phone && 'este campo es requerido'}</ErrorInput>
+                                    <ErrorInput>{errors.cellphone && 'este campo es requerido'}</ErrorInput>
                                 </WrapperBox>
                             </Col>
                         </Row>
@@ -124,8 +162,9 @@ const Personal: React.FC = ()=>{
                                     <label>
                                         <Span>Numero de Telefono: </Span>
                                         <Input type="text"
-                                               name="phone"
-                                               />
+                                                name="phone"
+                                                ref={register({required: false})}
+                                        />
                                     </label>
                                 </WrapperBox>
                             </Col>
@@ -140,7 +179,9 @@ const Personal: React.FC = ()=>{
                                         <Span>* Email: </Span>
                                         <Input type="text"
                                                name="email"
-                                               ref={register({required: true})}/>
+                                               ref={register({required: true})}
+                                               defaultValue={currentUser.email}
+                                        />
                                     </label>
                                     <ErrorInput>{errors.email && 'este campo es requerido'}</ErrorInput>
                                 </WrapperBox>
@@ -348,4 +389,9 @@ const Personal: React.FC = ()=>{
     ) 
 } 
 
-export default Personal
+const mapStateToProps = (state: any) => ({
+    authenticated: state.user.authenticated,
+    currentUser: state.user
+})
+
+export default connect(mapStateToProps)(Personal)

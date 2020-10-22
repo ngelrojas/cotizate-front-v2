@@ -15,10 +15,21 @@ export class PersonalProfile {
     }
 
     /*
-     * method get personal profile
+     * TODO: this methos is for DELETE 
+     method get personal profile
      */
     getPersonalProfile = async () => {
         this.resp_profile = await API.get(`personal/profile`, {
+            headers: {Authorization: `Bearer ${this.token}`}
+        })
+        return this.resp_profile
+    }
+
+    /*
+     * method get current personal profile
+     */
+    currentPersonalProfile = async (currentUser: number) => {
+        this.resp_profile = await API.get(`profile/personal/${currentUser}`, {
             headers: {Authorization: `Bearer ${this.token}`}
         })
         return this.resp_profile

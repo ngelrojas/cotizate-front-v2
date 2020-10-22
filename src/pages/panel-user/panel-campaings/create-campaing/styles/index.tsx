@@ -105,6 +105,11 @@ export const TabNavProfile = styled(TabList)`
 `
 
 export const TabSubMenu = styled(Tab)`
+    width: 33%;
+    border-bottom: 0px;
+`
+
+export const TabSubMenuPro = styled(Tab)`
     width: 50%;
     border-bottom: 0px;
 `
