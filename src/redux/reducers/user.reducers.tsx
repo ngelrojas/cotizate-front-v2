@@ -3,6 +3,7 @@ import {
     SET_AUTHENTICATED,
     SET_UNAUTHENTICATED,
     GET_PROFILE,
+    GET_CURRENT_PROFILE,
     LOADING_USER
 } from '../types'
 const initialState = {
@@ -29,6 +30,10 @@ export default function(state = initialState, action: any) {
         case GET_PROFILE:
             console.info(action.payload)
             break
+        case GET_CURRENT_PROFILE:
+            return{
+                ...action.payload
+            }
         case LOADING_USER:
             return {...state, loading: true}
         default:

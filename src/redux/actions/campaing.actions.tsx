@@ -1,9 +1,7 @@
 import {
     SET_CAMPAING,
     SET_ERRORS,
-    LOADING_UI,
     LOADING_CAMPAING,
-    CLEAR_ERRORS,
 } from '../types'
 
 import {CampaingHeader} from '../../userCampaings'

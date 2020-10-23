@@ -5,6 +5,7 @@ export const Input = styled.input`
     width: 100%;
     border: 0;
     border-radius: 5%;
+    padding: 1%;
 `
 
 export const ContentBox = styled.div`

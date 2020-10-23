@@ -3,7 +3,8 @@ import {connect} from 'react-redux'
 import {useForm} from 'react-hook-form'
 import {Row, Col} from 'react-styled-flexboxgrid'
 import DefaultImg from '../../form-basic/public/default.png'
-import {PersonalProfile} from '../../../../../../userProfile'
+//import {PersonalProfile} from '../../../../../../userProfile'
+import {LoadPersonalData} from '../../../../../../redux/actions/profile.actions'
 import {ContentProfile,
         Input, 
         WrapperBox,
@@ -35,40 +36,55 @@ type FormData = {
     photo: string
 }
 
-type profileType = {
+type userType = {
     first_name: string
     last_name: string
     email: string
     id: number
 }
 
-interface Iauth {
-    authenticated: boolean
-    currentUser: profileType
+type profileType = {
+    cinit: string
+    cellphone: string
+    telephone: string
+    country: string
+    city: string
+    address: string
+    neighborhood: string
+    neighborhood_number: number
+    photo: string
 }
 
-const Personal: React.FC<Iauth> = ({authenticated, currentUser})=>{
 
-    let token = window.sessionStorage.getItem('token')
-    let currentPersonal = new PersonalProfile(token)
+interface Iauth {
+    authenticated: boolean
+    currentUser: userType
+    currentProfile: profileType
+}
+
+const Personal: React.FC<Iauth> = ({authenticated, currentUser, currentProfile})=>{
+
+    //let token = window.sessionStorage.getItem('token')
+    //let currentPersonal = new PersonalProfile(token)
     const [personalData, setPersonalData] = React.useState()
     const {register, handleSubmit, errors} = useForm<FormData>({
         mode: 'onChange'
     })
 
-    const LoadPersonalData = ()=> {
-        currentPersonal.currentPersonalProfile(currentUser.id)
-            .then(resp=>{
-                console.info(resp.data.data)
-                setPersonalData(resp.data.data)
-            }).catch(err => {
-                console.info(err)
-            })
-    }
+/*    const LoadPersonalData = ()=> {*/
+        //currentPersonal.currentPersonalProfile(currentUser.id)
+            //.then(resp=>{
+                //console.info(resp.data.data)
+                //setPersonalData(resp.data.data)
+            //}).catch(err => {
+                //console.info(err)
+            //})
+    /*}*/
 
     React.useEffect(()=>{
         console.info('USER IN PROFILE TAB', currentUser.first_name)
-        LoadPersonalData()
+        console.info(currentProfile)
+        setPersonalData(LoadPersonalData(currentUser.id))
     },[])
 
     return(
@@ -391,7 +407,12 @@ const Personal: React.FC<Iauth> = ({authenticated, currentUser})=>{
 
 const mapStateToProps = (state: any) => ({
     authenticated: state.user.authenticated,
-    currentUser: state.user
+    currentUser: state.user,
+    currentProfile: state.profile
 })
 
-export default connect(mapStateToProps)(Personal)
+const mapActionToProps = {
+    LoadPersonalData   
+}
+
+export default connect(mapStateToProps, mapActionToProps)(Personal)
