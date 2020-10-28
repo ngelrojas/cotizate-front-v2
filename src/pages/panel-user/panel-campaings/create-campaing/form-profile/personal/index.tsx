@@ -3,8 +3,9 @@ import {connect} from 'react-redux'
 import {useForm} from 'react-hook-form'
 import {Row, Col} from 'react-styled-flexboxgrid'
 import DefaultImg from '../../form-basic/public/default.png'
+import {CheckAuthentication} from '../../../../../../redux/auth'
 //import {PersonalProfile} from '../../../../../../userProfile'
-import {LoadPersonalData} from '../../../../../../redux/actions/profile.actions'
+//import {LoadPersonalData} from '../../../../../../redux/actions/profile.actions'
 import {ContentProfile,
         Input, 
         WrapperBox,
@@ -55,7 +56,6 @@ type profileType = {
     photo: string
 }
 
-
 interface Iauth {
     authenticated: boolean
     currentUser: userType
@@ -64,27 +64,36 @@ interface Iauth {
 
 const Personal: React.FC<Iauth> = ({authenticated, currentUser, currentProfile})=>{
 
-    //let token = window.sessionStorage.getItem('token')
+/*    let token = window.sessionStorage.getItem('token')*/
     //let currentPersonal = new PersonalProfile(token)
-    const [personalData, setPersonalData] = React.useState()
+
+    /*const [personalData, SetpersonalData] = React.useState()*/
+
     const {register, handleSubmit, errors} = useForm<FormData>({
         mode: 'onChange'
     })
 
-/*    const LoadPersonalData = ()=> {*/
-        //currentPersonal.currentPersonalProfile(currentUser.id)
+/*    const LoadPersonalData = () => {*/
+        //currentPersonal.currentPersonalProfile()
             //.then(resp=>{
-                //console.info(resp.data.data)
-                //setPersonalData(resp.data.data)
+                ////console.info(resp.data.data)
+                ////myData = resp.data.data
+                //SetpersonalData((prevState: any) => resp.data.data)
+                ////console.info(myData)
             //}).catch(err => {
                 //console.info(err)
             //})
+        ////SetpersonalData('come here working..!')
     /*}*/
 
     React.useEffect(()=>{
-        console.info('USER IN PROFILE TAB', currentUser.first_name)
+        //LoadPersonalData()
+        //LoadPersonalData()
+        if(CheckAuthentication()){
+            console.info("authenticated")
+        }
         console.info(currentProfile)
-        setPersonalData(LoadPersonalData(currentUser.id))
+        //setPersonalData(LoadPersonalData(2))
     },[])
 
     return(
@@ -411,8 +420,10 @@ const mapStateToProps = (state: any) => ({
     currentProfile: state.profile
 })
 
-const mapActionToProps = {
-    LoadPersonalData   
-}
+/*const mapActionToProps = {*/
+    //LoadPersonalData   
+/*}*/
 
-export default connect(mapStateToProps, mapActionToProps)(Personal)
+export default connect(mapStateToProps)(Personal)
+
+//export default connect(mapStateToProps)(Personal)

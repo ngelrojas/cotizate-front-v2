@@ -28,8 +28,8 @@ export class PersonalProfile {
     /*
      * method get current personal profile
      */
-    currentPersonalProfile = async (currentUser: number) => {
-        this.resp_profile = await API.get(`profile/personal/${currentUser}`, {
+    currentPersonalProfile = async () => {
+        this.resp_profile = await API.get(`profile/personal/2`, {
             headers: {Authorization: `Bearer ${this.token}`}
         })
         return this.resp_profile
