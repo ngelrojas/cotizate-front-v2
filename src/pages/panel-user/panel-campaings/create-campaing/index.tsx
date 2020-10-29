@@ -7,6 +7,7 @@ import '@reach/tabs/styles.css'
 import {Grid, Row, Col} from 'react-styled-flexboxgrid'
 import FormBasic from './form-basic'
 import FormProfile from './form-profile'
+import FormPreview from './form-preview'
 import {Content, TabNav, TabSubMenu, IconOn} from './styles'
 import {CheckAuthentication} from '../../../../redux/auth'
 
@@ -55,9 +56,9 @@ const CreateCampaing: React.FC<Iauth> = ({authenticated, currentUser}) => {
                                   <CoolTab><p>VISTA PREVIA</p></CoolTab>
                                   </TabNav>
                                   <TabPanels>
-                                      <TabPanel><FormBasic /></TabPanel>
+                                    <TabPanel> <FormBasic /></TabPanel>
                                     <TabPanel> <FormProfile /></TabPanel>
-                                    <TabPanel>3</TabPanel>
+                                    <TabPanel> <FormPreview /></TabPanel>
                                   </TabPanels>
                                 </Tabs>
 
