@@ -3,13 +3,31 @@ import {Row, Col} from 'react-styled-flexboxgrid'
 import {Table, Th, Td, Done, Err, Preview} from './styles'
 import {CampaingHeader, CampaingBody} from '../../../../../userCampaings'
 
+type IcampTypeBody = {
+    created_at: string,
+    currency: number,
+    description: string,
+    ended_at: string,
+    excerpt: string,
+    header: number,
+    id: number,
+    imagen_main: string,
+    public_at: string,
+    short_url: string,
+    slogan_campaing: string,
+    slug: string,
+    status: number,
+    title: string,
+    updated_at: string,
+    video_main: string
+}
+
 const FormPreview: React.FC = () => {
     let token = window.sessionStorage.getItem('token')
     let CamHeader = new CampaingHeader(token)
     let CamBody = new CampaingBody(token)
-    //const camp_header_id = React.useRef(null)
     const [datach, setDatach] = React.useState(0)
-    const [cpb, setCpb] = React.useState({})
+    const [cpb, setCpb] = React.useState<IcampTypeBody>()
 
     const getLast = () => {
         CamHeader.getLastCampaingHeader()
@@ -22,11 +40,11 @@ const FormPreview: React.FC = () => {
             })
     }
 
-    const retrieveCampBody = () =>{
-        CamBody.getRetrieveCBody(19)
+    const retrieveCampBody= () =>{
+        CamBody.getRetrieveCBody(datach)
             .then(resp =>{
-                console.info(resp.data.data)
                 setCpb(resp.data.data)
+                console.info(cpb)
             })
             .catch(err => {
                 console.info(err)
@@ -35,9 +53,11 @@ const FormPreview: React.FC = () => {
 
     React.useEffect(()=>{
         getLast()
-        console.info(datach)
-        retrieveCampBody()
-    },[])
+        if(datach !== 0){
+            retrieveCampBody()
+        } 
+
+    },[datach])
 
     return(
         <div>
@@ -54,7 +74,7 @@ const FormPreview: React.FC = () => {
                             </thead>                           
                              <tbody>
                                 <tr>
-                                    <Td>my campaing</Td>
+                                    <Td> title</Td>
                                     <Td><Done /> </Td>
                                 </tr>
                                 <tr>
