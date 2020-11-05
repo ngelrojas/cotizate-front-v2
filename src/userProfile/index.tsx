@@ -34,9 +34,22 @@ export class PersonalProfile {
         })
         return this.resp_profile
     }
-
+    /*
+     * TODO: this method is to delete
+    */
     updatePersonalProfile = async (dataUpdate: any) => {
         this.resp_profile = await API.put(`personal/profile`, dataUpdate, {
+            headers: {Authorization: `Bearer ${this.token}`}
+        })
+        return this.resp_profile
+    }
+    
+    /*
+     * update personal profile
+    */
+
+    upadteProfilePersonal = async (dataUpdate: any, currentUser: number) => {
+        this.resp_profile = await API.put(`profile/personal/${currentUser}`, dataUpdate, {
             headers: {Authorization: `Bearer ${this.token}`}
         })
         return this.resp_profile

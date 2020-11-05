@@ -38,7 +38,7 @@ const FormPhase: React.FC = () => {
     const [msg, Setmsg] = React.useState('')
     const [description, Setdescription] = React.useState()
     const [MsgErrorF, setMsgErrorF] = React.useState()
-    const {register, handleSubmit, errors} = useForm<FormData>({
+    const {register, handleSubmit, reset, errors} = useForm<FormData>({
         mode: 'onChange'
     })
 
@@ -63,6 +63,7 @@ const FormPhase: React.FC = () => {
             Phase.createPhase(data_phase)
                 .then(resp => {
                     Setmsg('Fase Agregada.')
+                    reset() 
                     setMsgErrorF('')
                 }).catch(err =>{    
                     setMsgErrorF('no debe exceder mas 150 palabras')
@@ -104,7 +105,7 @@ const FormPhase: React.FC = () => {
                             type="text"
                             name="title"
                             ref={register({required: true})}
-                            placeholder="Fase 1"
+                            placeholder="Fase"
                         />
                     </WrappBoxInput>
 

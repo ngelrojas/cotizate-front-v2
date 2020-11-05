@@ -49,7 +49,7 @@ const FormConfig: React.FC = (props: any) => {
     let matchUrl: any = match
     let type_campaing = matchUrl.params.campania   
 
-    const {register, handleSubmit, errors} = useForm<FormData>({
+    const {register, handleSubmit, reset, errors} = useForm<FormData>({
         mode: 'onChange'
     })
 
@@ -66,6 +66,7 @@ const FormConfig: React.FC = (props: any) => {
         SaveCampaing.createCampaingHeader(send_data)
             .then(resp=>{
                 Setmsg("DATOS GUARDADOS")
+                reset()
             })
             .catch(err => {
                 console.error(err)

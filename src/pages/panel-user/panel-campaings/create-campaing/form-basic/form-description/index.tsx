@@ -48,7 +48,7 @@ const FormDescription: React.FC = () => {
     const [msgdescription, setMsgdescription] = React.useState('')
     const [datach, setDatach] = React.useState()
     const [showImg, SetShowImg] = React.useState()
-    const {register, handleSubmit, errors} = useForm<FormData>({
+    const {register, handleSubmit, reset, errors} = useForm<FormData>({
         mode: 'onChange'
     })
 
@@ -90,6 +90,7 @@ const FormDescription: React.FC = () => {
                     Setmsg('Datos guardados.')
                     setMsgExcerpt('')
                     setMsgdescription('')
+                    reset()
                 }).catch(err => {
                     console.error(err)
                 })

@@ -51,8 +51,8 @@ const CreateCampaing: React.FC<Iauth> = ({authenticated, currentUser}) => {
 
                                 <Tabs>
                                   <TabNav>
-                                  <CoolTab> <p>DATOS DE TU PROYECTO</p></CoolTab>
-                                  <CoolTab> <p>PERFIL</p></CoolTab>
+                                  <CoolTab><p>DATOS DE TU PROYECTO</p></CoolTab>
+                                  <CoolTab><p>PERFIL</p></CoolTab>
                                   <CoolTab><p>VISTA PREVIA</p></CoolTab>
                                   </TabNav>
                                   <TabPanels>
