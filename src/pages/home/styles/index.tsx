@@ -43,6 +43,13 @@ export const Section = styled.section`
         width: 100%;
     }
 `
+export const Sectionportada = styled.section`
+    width: 85%;
+    padding: 1%;
+    @media ${device.tablet} {
+        width: 100%;
+    }
+`
 export const Article = styled.article`
     margin: 3%;
     position: relative;
@@ -63,5 +70,29 @@ export const Go = styled(Link)`
     text-decoration: none;
     color: inherit;
 `
-
+export const Div2 = styled.div`
+    display:inline-block;
+    position:relative;
+`
+export const Link2 = styled(Link)`
+    position: absolute;
+    bottom:4em;
+    left:22em;
+    right:22em;
+    background-color:#1986C6;
+    border-radius:1.5em;
+    color:white;
+    text-transform:uppercase;
+    padding:1em 1.5em;
+`
+export const Btnflotante = styled.button`
+    position: absolute;
+    bottom:25%;
+    left:45%;
+    background-color:#1986C6;
+    border-radius:1.5em;
+    color:white;
+    text-transform:uppercase;
+    padding:1em 1.5em;
+`
 

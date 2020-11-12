@@ -1,29 +1,32 @@
 import React, {useState, useEffect} from 'react';
-import {Section, Article, Picture, Go,Img, Title } from '../styles/index'
-import PortadaImg from '../images/portadanueva.png'
+import {Sectionportada, Article, Picture, Go,Img, Title, Div2, Link2, Btnflotante } from '../styles/index'
+import PortadaImg from '../images/3.2.png';
+import { useHistory } from "react-router-dom";
 
 
 const Portada: React.FC = () => {
-    const [content, setContent] = useState('')
+    const [content, setContent] = useState('');
+    const history = useHistory();
     useEffect(() => {
         setContent('titulo more longer the now more here please')
     }, [])
 
+    const  handleSubmit = () => {        
+        history.push("/registrarse");
+    };
+
     return (
         <>
-            <Section  >
-                <Article>
-                    <Picture>
-                        <Go to="/my-article">
-                            <Img
-                                src={PortadaImg}
-                                alt="cotizate"
-                            />
-                        </Go>
-                    </Picture>
-                    <Title>hola quehace</Title>
-                </Article>
-            </Section>      
+            <Sectionportada  >
+               <Div2 >
+                    <Img
+                        src={PortadaImg}
+                        alt="cotizate"
+                    />
+                    <Btnflotante onClick={handleSubmit} > Registrate  </Btnflotante>
+               </Div2>
+
+            </Sectionportada>      
         </>
       
     )
