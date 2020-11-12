@@ -13,13 +13,13 @@ const Home: React.FC = () => {
     
     return (
         <Content>
-            <Grid style={{ alignContent: 'center'}} >
+            <div style={{ alignContent: 'center'}} >
                <Portada />
-             </Grid>
-             <Grid >
+             </div>
+             <div >
                <Banner />
-             </Grid>
-            <Grid style={{ background:'#F9F0E8'}}>
+             </div>
+            <div style={{ background:'#F9F0E8'}}>
                 
                 <Title>PROYECTOS DESTACADOS </Title>
                 <Carousel >
@@ -30,9 +30,9 @@ const Home: React.FC = () => {
                     <ListBulletin />
                 </Carousel>
                
-            </Grid>   
+            </div>   
             <Br/>
-            <Grid style={{ background:'#F9F0E8'}} >
+            <div style={{ background:'#F9F0E8'}} >
             <Title>PROYECTOS FINALIZADOS </Title>
             <Carousel >
                     <ListBulletin />
@@ -41,18 +41,20 @@ const Home: React.FC = () => {
                     <ListBulletin />
                     <ListBulletin />
             </Carousel>
-            </Grid>
+            </div>
             <Br/>
-            <Grid style={{ background:'#F9F0E8'}}>
+            <div style={{ background:'#F9F0E8'}}>
             <Title>CAUSAS SOCIALES </Title>
-            <Carousel arrows={true} dots={true}>
+            <Carousel 
+            // arrows={true} dots={true}
+            >
                     <ListBulletin />
                     <ListBulletin />
                     <ListBulletin />
                     <ListBulletin />
                     <ListBulletin />
             </Carousel>
-            </Grid>
+            </div>
         </Content>
     )
 }
