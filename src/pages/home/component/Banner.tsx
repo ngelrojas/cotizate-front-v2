@@ -2,6 +2,8 @@ import React, {useState, useEffect} from 'react';
 import {Section, Article, Picture, Go,Img, Title } from '../styles/index'
 import {Row, Col} from 'react-styled-flexboxgrid'
 import { useHistory } from "react-router-dom";
+import Cotizate from '../images/4.1.jpg';
+import Crowdfunding from '../images/5.2.jpg';
 
 const Banner: React.FC = () => {
     const [content, setContent] = useState('');
@@ -25,12 +27,11 @@ const Banner: React.FC = () => {
                         <Picture>
                             <Go to="/crowfounding">
                                 <Img
-                                    src="https://placebeard.it/640x360"
+                                    src={Crowdfunding}
                                     alt="cotizate"
                                 />
                             </Go>
                         </Picture>
-                        {/* <Title>hola quehace</Title> */}
                     </Article>
                </Section>
             </Col>
@@ -40,12 +41,11 @@ const Banner: React.FC = () => {
                         <Picture>
                             <Go to="/cotizate">
                                 <Img
-                                    src="https://placebeard.it/640x360"
+                                    src={Cotizate}
                                     alt="cotizate"
                                 />
                             </Go>
                         </Picture>
-                        {/* <Title>hola quehace</Title> */}
                     </Article>
                  </Section>
             </Col>

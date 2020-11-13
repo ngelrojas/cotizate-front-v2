@@ -19,6 +19,7 @@ const Home: React.FC = () => {
              <div >
                <Banner />
              </div>
+             <Br/>
             <div style={{ background:'#F9F0E8'}}>
                 
                 <Title>PROYECTOS DESTACADOS </Title>

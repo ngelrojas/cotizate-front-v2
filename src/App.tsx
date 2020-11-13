@@ -16,6 +16,8 @@ import PanelCampaing from './pages/panel-user/panel-campaings'
 import CreateCampaing from './pages/panel-user/panel-campaings/create-campaing'
 import UpdateCampaing from './pages/panel-user/panel-campaings/update-campaing'
 import PageCreating from './pages/creating'
+import Crowdfunding from './pages/crowdfunding'
+import Cotizate from './pages/cotizate'
 import PageNotFound from './pages/404'
 import {CheckAuthentication} from './redux/auth'
 
@@ -82,6 +84,16 @@ const App: React.FC = () => {
                         exact
                         path="/crear-proyectos"
                         component={PageCreating}
+                    />
+                    <Route
+                        exact
+                        path="/crowfounding"
+                        component={Crowdfunding}
+                    />
+                     <Route
+                        exact
+                        path="/cotizate"
+                        component={Cotizate}
                     />
                     <Route component={PageNotFound} />
                 </Switch>
