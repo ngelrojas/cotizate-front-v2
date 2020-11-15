@@ -4,19 +4,20 @@ import {Row, Col} from 'react-styled-flexboxgrid'
 import { useHistory } from "react-router-dom";
 import Cotizate from '../images/4.1.jpg';
 import Crowdfunding from '../images/5.2.jpg';
+import * as Action from '../../../redux/actions/homeAction';
+import { useDispatch, useSelector } from "react-redux";
 
 const Banner: React.FC = () => {
     const [content, setContent] = useState('');
     const history = useHistory();
+    const dispatch = useDispatch();
+
     useEffect(() => {
-        setContent('titulo more longer the now more here please')
+        
+        dispatch(Action.listaDetalle());
     }, []);
-    const  gocrowfundig = () => {        
-        history.push("/crowfounding");
-    };
-    const  handleSubmit = () => {        
-        history.push("/cotizate");  
-    };
+   
+
 
     return (
     <>      
