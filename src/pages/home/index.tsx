@@ -6,6 +6,7 @@ import Banner from './component/Banner'
 import Portada from './component/Portada'
 import Carousel from '@brainhubeu/react-carousel';
 import '@brainhubeu/react-carousel/lib/style.css';
+import Projects from './component/projects';
 
 
 const Home: React.FC = () => {
@@ -19,16 +20,30 @@ const Home: React.FC = () => {
              <div >
                <Banner />
              </div>
+             
+             <div style={{ background:'#F9F0E8'}}>
+                
+                <Title>PROYECTOS DESTACADOS2 </Title>
+                <Carousel >
+                     <Projects />
+                     <Projects />
+                     <Projects />
+                     <Projects />
+                     <Projects />
+                     <Projects />
+                </Carousel>
+               
+            </div>   
              <Br/>
             <div style={{ background:'#F9F0E8'}}>
                 
                 <Title>PROYECTOS DESTACADOS </Title>
                 <Carousel >
                     <ListBulletin />
+                    {/* <ListBulletin />
                     <ListBulletin />
                     <ListBulletin />
-                    <ListBulletin />
-                    <ListBulletin />
+                    <ListBulletin /> */}
                 </Carousel>
                
             </div>   
