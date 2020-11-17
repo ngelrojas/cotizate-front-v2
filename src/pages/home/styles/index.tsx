@@ -8,7 +8,6 @@ export const Content = styled.main`
     padding: 3em 1em 4em 1em;
     box-sizing: border-box;
     width: 100%;
-    text-align: center;
 `
 export const Title = styled.h1`
     
@@ -45,6 +44,11 @@ export const SectionBanner = styled.section`
     }
     
 `
+export const ArticleBanner = styled.article`
+    margin: 0%;
+    position: relative;
+`
+
 export const Section = styled.section`
     width: 85%;
     padding: 1%;
