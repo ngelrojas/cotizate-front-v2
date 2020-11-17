@@ -2,7 +2,8 @@ import {
     PROYECTOS_FINALIZADOS_LOAD
 } from '../types/homeTypes'
 const initialState = {
-    proyectos: false
+    proyectos: false,
+    dataProyects:[]
 }
 
 export default function(state = initialState, action: any) {
@@ -10,7 +11,8 @@ export default function(state = initialState, action: any) {
         case PROYECTOS_FINALIZADOS_LOAD:
             return {
                 ...state,
-                proyectos: true
+                proyectos: true,
+                dataProyects:action.proyectos
             }
         default:
             return state

@@ -15,12 +15,15 @@ export const Title = styled.h1`
     height: 22px;
     left: 30px;
     top: 842px;
-    padding-left:50px;
+    padding-left:6px;
     font-style: normal;
     font-weight: 500;
     font-size: 20px;
     line-height: 23px;
     color: #5D5A5A;
+    margin-bottom: 4px;
+"
+
 `
 export const Title2 = styled.h2`
     height: 22px;
