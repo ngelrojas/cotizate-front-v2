@@ -2,7 +2,7 @@ import React from 'react'
 import {Row, Col} from 'react-styled-flexboxgrid'
 import {MdLocationOn} from 'react-icons/md'
 import {
-    Section,
+    SectionDetails,
     Article,
     ArticleBody,
     Picture,
@@ -22,7 +22,7 @@ interface Ibullentin {
 }
 const Projectdetails: React.FC<Ibullentin> = props => {
     return (
-        <Section>
+        <SectionDetails>
             <Article>
                 <Picture>
                     <Go to="/my-article">
@@ -94,7 +94,7 @@ const Projectdetails: React.FC<Ibullentin> = props => {
                     </Col>
                 </Row>
             </ArticleBody>
-        </Section>
+        </SectionDetails>
     )
 }
 export default Projectdetails

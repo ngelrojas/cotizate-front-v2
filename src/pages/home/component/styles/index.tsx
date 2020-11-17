@@ -17,7 +17,14 @@ export const Section = styled.section`
         width: 100%;
     }
 `
+export const SectionDetails = styled.section`
+    width: 33%;
+    padding: 1%;
 
+    @media ${device.tablet} {
+        width: 100%;
+    }
+`
 export const Article = styled.article`
     margin: 3%;
     position: relative;

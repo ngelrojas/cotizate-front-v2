@@ -10,13 +10,18 @@ const Projects: React.FC = () => {
 
     return (
         <>
-            <List>
+            {/* <List> */}
                 <li>
-                   <Projectdetails title={'titulo 1'}/>          
-                </li>                         
-            </List>            
+                   <Projectdetails title={'titulo 1'}/>                           
+
+                </li>   
+                      
+                              
+            {/* </List>             */}
+            
         </>
     )
 }
 
 export default Projects
+

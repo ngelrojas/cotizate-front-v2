@@ -4,7 +4,7 @@ import {Content,Title2,Title, Br} from './styles'
 import ListBulletin from '../../components/list-bulletin'
 import Banner from './component/Banner'
 import Portada from './component/Portada'
-import Carousel from '@brainhubeu/react-carousel';
+import Carousel,{ slidesToShowPlugin } from '@brainhubeu/react-carousel';
 import '@brainhubeu/react-carousel/lib/style.css';
 import Projects from './component/projects';
 
@@ -22,15 +22,24 @@ const Home: React.FC = () => {
              </div>
              
              <div style={{ background:'#F9F0E8'}}>
-                
+             {/* https://brainhubeu.github.io/react-carousel/docs/examples/customArrows */}
                 <Title>PROYECTOS DESTACADOS2 </Title>
-                <Carousel >
+                <Carousel 
+                  plugins={[
+                    'centered',
+                    'infinite',
+                    'arrows',
+                    {
+                      resolve: slidesToShowPlugin,
+                      options: {
+                       numberOfSlides: 2,
+                      },
+                    },
+                  ]}   
+                >
                      <Projects />
                      <Projects />
-                     <Projects />
-                     <Projects />
-                     <Projects />
-                     <Projects />
+                     <Projects /> 
                 </Carousel>
                
             </div>   
