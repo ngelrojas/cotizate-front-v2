@@ -11,10 +11,10 @@ const Projects: React.FC = () => {
     return (
         <>
             {/* <List> */}
-                <li>
+                {/* <li> */}
                    <Projectdetails title={'titulo 1'}/>                           
 
-                </li>   
+                {/* </li>    */}
                       
                               
             {/* </List>             */}

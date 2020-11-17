@@ -1,6 +1,6 @@
 import React from 'react'
 import {Grid} from 'react-styled-flexboxgrid'
-import {Content,Title2,Title, Br} from './styles'
+import {Content,Title2,Title, Br,DivPortada} from './styles'
 import ListBulletin from '../../components/list-bulletin'
 import Banner from './component/Banner'
 import Portada from './component/Portada'
@@ -14,28 +14,28 @@ const Home: React.FC = () => {
     
     return (
         <Content>
-            <div style={{ alignContent: 'center'}} >
-               <Portada />
-             </div>
+            <DivPortada >
+                  <Portada />
+             </DivPortada>
              <div >
-               <Banner />
+                  <Banner />
              </div>
              
              <div style={{ background:'#F9F0E8'}}>
              {/* https://brainhubeu.github.io/react-carousel/docs/examples/customArrows */}
                 <Title>PROYECTOS DESTACADOS2 </Title>
                 <Carousel 
-                  plugins={[
-                    'centered',
-                    'infinite',
-                    'arrows',
-                    {
-                      resolve: slidesToShowPlugin,
-                      options: {
-                       numberOfSlides: 2,
-                      },
-                    },
-                  ]}   
+                plugins={[
+                  'infinite',
+                  'arrows',
+                  {
+                    resolve: slidesToShowPlugin,
+                    options: {
+                     numberOfSlides: 3
+                    }
+                  },
+                ]}
+                
                 >
                      <Projects />
                      <Projects />

@@ -8,6 +8,7 @@ export const Content = styled.main`
     padding: 3em 1em 4em 1em;
     box-sizing: border-box;
     width: 100%;
+    text-align: center;
 `
 export const Title = styled.h1`
     
@@ -35,6 +36,15 @@ export const Title2 = styled.h2`
 export const Br = styled.br`
   
 `
+export const SectionBanner = styled.section`
+    width: 100%;
+    padding: 1%;
+
+    @media ${device.tablet} {
+        width: 100%;
+    }
+    
+`
 export const Section = styled.section`
     width: 85%;
     padding: 1%;
@@ -44,11 +54,12 @@ export const Section = styled.section`
     }
 `
 export const Sectionportada = styled.section`
-    width: 85%;
+    width: 100%;
     padding: 1%;
     @media ${device.tablet} {
         width: 100%;
     }
+    
 `
 export const Article = styled.article`
     margin: 3%;
@@ -95,4 +106,9 @@ export const Btnflotante = styled.button`
     text-transform:uppercase;
     padding:1em 1.5em;
 `
+export const DivPortada = styled.div`
+text-align: center;
 
+
+ 
+`

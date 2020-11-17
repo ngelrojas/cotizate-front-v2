@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {Section, Article, Picture, Go,Img, Title } from '../styles/index'
+import {SectionBanner, Article, Picture, Go,Img, Title } from '../styles/index'
 import {Row, Col} from 'react-styled-flexboxgrid'
 import { useHistory } from "react-router-dom";
 import Cotizate from '../images/4.1.jpg';
@@ -23,7 +23,7 @@ const Banner: React.FC = () => {
     <>      
         <Row>
             <Col sm={6} md={12} lg={6}>
-                <Section>
+                <SectionBanner>
                     <Article>
                         <Picture>
                             <Go to="/crowfounding">
@@ -34,10 +34,10 @@ const Banner: React.FC = () => {
                             </Go>
                         </Picture>
                     </Article>
-               </Section>
+               </SectionBanner>
             </Col>
             <Col sm={6} md={12} lg={6}>
-                <Section>
+                <SectionBanner>
                     <Article>
                         <Picture>
                             <Go to="/cotizate">
@@ -48,7 +48,7 @@ const Banner: React.FC = () => {
                             </Go>
                         </Picture>
                     </Article>
-                 </Section>
+                 </SectionBanner>
             </Col>
         </Row>          
     </>
