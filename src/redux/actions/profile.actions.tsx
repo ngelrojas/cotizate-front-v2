@@ -24,9 +24,9 @@ let currentPersonal = new PersonalProfile(token)
         //.catch(err => console.log(err))
 /*}*/
 
-export const LoadPersonalData = () =>(dispatch: any)=> {
+export const LoadPersonalData = (current_user_id:number) =>(dispatch: any)=> {
     dispatch({type: LOADING_USER})
-    currentPersonal.currentPersonalProfile()
+    currentPersonal.currentPersonalProfile(current_user_id)
             .then(resp => {
                 console.info(resp.data.data)
                 dispatch({
