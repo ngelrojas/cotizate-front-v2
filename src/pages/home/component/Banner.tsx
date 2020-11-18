@@ -14,7 +14,7 @@ const Banner: React.FC = () => {
 
     useEffect(() => {
         
-        dispatch(Action.listaDetalle());
+        
     }, []);
    
 

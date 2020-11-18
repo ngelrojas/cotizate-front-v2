@@ -3,7 +3,7 @@ import {
 } from '../types/homeTypes'
 const initialState = {
     proyectos: false,
-    dataProyects:[]
+    featuredProjects:[]
 }
 
 export default function(state = initialState, action: any) {
@@ -12,7 +12,7 @@ export default function(state = initialState, action: any) {
             return {
                 ...state,
                 proyectos: true,
-                dataProyects:action.proyectos
+                featuredProjects:action.proyectos
             }
         default:
             return state

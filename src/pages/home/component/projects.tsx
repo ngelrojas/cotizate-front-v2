@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import {List,Section} from './styles'
 import Projectdetails from './Projectdetails'
+import * as Action from '../../../redux/actions/homeAction';
 
 const Projects: React.FC = () => {
     const [content, setContent] = useState('')

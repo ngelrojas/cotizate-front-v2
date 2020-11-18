@@ -7,6 +7,7 @@ import campaingReducer from '../reducers/campaing.reducers'
 import uiReducer from '../reducers/ui.reducers'
 import phaseReducer from '../reducers/phase.reducers'
 import homeReducer from '../reducers/home.reducers'
+import profileReducer from '../reducers/profile.reducers' 
 
 const initialState = {}
 const middleware = [thunk]
@@ -20,6 +21,7 @@ declare global {
 const reducer = combineReducers({
     user: userReducer,
     UI: uiReducer,
+    profile: profileReducer,
     campaing: campaingReducer,
     phase: phaseReducer,
     home:homeReducer

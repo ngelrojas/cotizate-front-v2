@@ -1,9 +1,10 @@
 import React, {FormEvent} from 'react'
-import {SubNav, Item, Go, Span, Title} from './styles'
+import {SubNav, Item, Go, Span, Title, Divid, CloseBtn} from './styles'
 
 interface Iusername {
     username: string
 }
+
 const UserMenu: React.FC<Iusername> = props => {
     const logOut = (e: FormEvent<HTMLButtonElement>) => {
         e.preventDefault()
@@ -14,22 +15,37 @@ const UserMenu: React.FC<Iusername> = props => {
         <div>
             <Span>
                 <Title>Hola, {props.username}</Title>
-                <SubNav>
+                <SubNav>                    
                     <Item>
-                        <Go to="/panel-de-usuario">dashboard</Go>
+                        <Divid>MIS PROYECTOS</Divid>
+                    </Item>
+                    <Item>
+                        <Go to="/panel-de-usuario">Proyectos Creados</Go>
                     </Item>
                     <Item>
                         <Go to="/panel-de-usuario/crear-campania">
-                            crear proyectos
+                           Proyectos Apoyados 
                         </Go>
                     </Item>
                     <Item>
-                        <Go to="/panel-de-usuario/proyectos">mis proyectos</Go>
+                        <Go to="/panel-de-usuario/proyectos">Proyectos Guardados</Go>
                     </Item>
                     <Item>
-                        <button type="button" onClick={logOut}>
-                            SALIR
-                        </button>
+                        <Divid>MI PERFIL</Divid>
+                    </Item>
+                    <Item>
+                        <Go to="/panel-de-usuario">Datos de Registro</Go>
+                    </Item>
+                    <Item>
+                        <Go to="/panel-de-usuario">Perfil de Usuario</Go>
+                    </Item>
+                    <Item>
+                        <Go to="/panel-de-usuario">Notificaciones</Go>
+                    </Item>
+                    <Item>
+                        <CloseBtn type="button" onClick={logOut}>
+                           CERRAR SESION 
+                        </CloseBtn>
                     </Item>
                 </SubNav>
             </Span>

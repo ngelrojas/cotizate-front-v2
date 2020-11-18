@@ -15,6 +15,16 @@ export class PersonalProfile {
     }
 
     /*
+    * create Personal Profile
+    **/
+    createPP = async (dataPP: any) => {
+        this.resp_profile = await API.post(`profile/personal`,dataPP, {
+            headers: {Authorization: `Bearer ${this.token}`}
+        })
+        return this.resp_profile
+    } 
+
+    /*
      * TODO: this methos is for DELETE 
      method get personal profile
      */
@@ -28,15 +38,28 @@ export class PersonalProfile {
     /*
      * method get current personal profile
      */
-    currentPersonalProfile = async (currentUser: number) => {
-        this.resp_profile = await API.get(`profile/personal/${currentUser}`, {
+    currentPersonalProfile = async (current_user_id:number) => {
+        this.resp_profile = await API.get(`profile/personal/${current_user_id}`, {
             headers: {Authorization: `Bearer ${this.token}`}
         })
         return this.resp_profile
     }
-
+    /*
+     * TODO: this method is to delete
+    */
     updatePersonalProfile = async (dataUpdate: any) => {
         this.resp_profile = await API.put(`personal/profile`, dataUpdate, {
+            headers: {Authorization: `Bearer ${this.token}`}
+        })
+        return this.resp_profile
+    }
+    
+    /*
+     * update personal profile
+    */
+
+    upadteProfilePersonal = async (dataUpdate: any, currentUser: number) => {
+        this.resp_profile = await API.put(`profile/personal/${currentUser}`, dataUpdate, {
             headers: {Authorization: `Bearer ${this.token}`}
         })
         return this.resp_profile

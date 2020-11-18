@@ -7,6 +7,7 @@ import GoogleLogin from './google-login'
 import Loading from '../../../components/loading'
 import {Label, Btn, Form, Go, Accept, ErrorInfo, ForgotPwd, Registerlink} from './styles'
 import {loginUser} from '../../../redux/actions/user.actions'
+
 type FormData = {
     email: string
     password: string

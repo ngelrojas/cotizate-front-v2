@@ -6,7 +6,6 @@ import DefaultImg from '../../form-basic/public/default.png'
 import {PersonalProfile} from '../../../../../../userProfile'
 import {User} from '../../../../../../user'
 import {City} from '../../../../../../userCountryCities'
-import {UploadFiles} from '../../../../../../userImg'
 import {ContentProfile,
         Input, 
         WrapperBox,
@@ -20,8 +19,7 @@ import {ContentProfile,
         SecondSpan,
         SaveProfile,
         WrapperBoxLast,
-        SpanPhoto,
-        MsgSuccess
+        SpanPhoto
 } from './styles' 
 
 interface Icountries {
@@ -55,7 +53,7 @@ type FormData = {
     address: string
     neightbordhood: string
     number_address: number
-    photo: any 
+    photo: string
     rs_facebook: string
     rs_twitter: string
     rs_linkedin: string
@@ -80,7 +78,6 @@ interface IprofileType {
     cities: Icities
     city_id: number
     address: string
-    photo: any 
     neightbordhood: string
     number_address: number
     rs_facebook: string
@@ -101,21 +98,24 @@ const Personal: React.FC<Iauth> = ({authenticated, currentUser})=>{
     let currentPersonal = new PersonalProfile(token)
     let DataUser = new User(token)
     let CityUser = new City(token)
-    let UploadImages = new UploadFiles()
 
     const [personalData, SetpersonalData] = React.useState<IprofileType>()
     const [loadcity, setLoadcity] = React.useState<Icities[]>()
     const [isLoading, setIsLoading] = React.useState(true)
     const [showImg, SetShowImg] = React.useState()
-    const [displayMsg, setDisplayMsg] = React.useState('')
-    const {register, handleSubmit, reset, errors} = useForm<FormData>({
+    const {register, handleSubmit, errors} = useForm<FormData>({
         mode: 'onChange'
     })
 
     const onSubmit = handleSubmit(({cinit, cellphone, telephone, countries, cities,
-                                   address, neightbordhood, number_address, photo,
+                                   address, neightbordhood, number_address,
                                    rs_facebook, rs_twitter, rs_linkedin, rs_another,
                                    description, country_id, city_id}) => {
+        /*let data_user = {*/
+            //first_name: first_name,
+            //last_name: last_name,
+            //email: email
+        /*}*/
 
         let data_profile = {
             cinit: cinit,
@@ -126,7 +126,7 @@ const Personal: React.FC<Iauth> = ({authenticated, currentUser})=>{
             address: address, 
             neightbordhood: neightbordhood,
             number_address: number_address,
-            photo: 'my profile photo here',
+            photo: showImg,
             rs_facebook: rs_facebook,
             rs_twitter: rs_twitter,
             rs_linkedin: rs_linkedin,
@@ -134,31 +134,25 @@ const Personal: React.FC<Iauth> = ({authenticated, currentUser})=>{
             description: description
         }
 
-        /*let data_img = {*/
-            //file_uploaded: photo[0] 
-        //}
-
-        //console.info(photo)
-
-        //UploadImages.uploadImg(photo)
+        /*DataUser.updateUser(data_user, currentUser.id)*/
             //.then(resp => {
                 //console.info(resp.data)
-            //}).catch(err=>{
+            //}).catch(err => {
                 //console.error(err)
             /*})*/
 
-        currentPersonal.createPP(data_profile)
+        currentPersonal.upadteProfilePersonal(data_profile, currentUser.id)
             .then(resp => {
                 console.info(resp.data)
-                setDisplayMsg('Perfil Creado.')
-                reset()
             }).catch(err=>{
                 console.error(err)
-                setDisplayMsg('Hubo un error en la conexion, intentelo mas tarde porfavor.')
             })
 
+
+        //console.info(data_user)
+        console.info(data_profile)
+
     })
- 
 
     const _onChange = (event: React.ChangeEvent<HTMLInputElement>)=> {
         let file: any = event.currentTarget.files 
@@ -171,10 +165,23 @@ const Personal: React.FC<Iauth> = ({authenticated, currentUser})=>{
         reader.readAsDataURL(file[0])
     }
 
+    const LoadPersonalData = () => {
+        currentPersonal.currentPersonalProfile(currentUser.id)
+            .then(resp=>{
+                // console.info(resp.data.data)
+                SetpersonalData(resp.data.data)
+                //console.info(myData)
+            }).catch(err => {
+                console.info(err)
+            }).then(()=>{
+                setIsLoading(false)
+            })
+    }
+
     const LoadCities = () => {
         CityUser.listCities()
             .then(resp=>{
-                //console.info(resp.data)
+                console.info(resp.data)
                 setLoadcity(resp.data)
             }).catch(err=>{
                 console.info(err)
@@ -184,6 +191,7 @@ const Personal: React.FC<Iauth> = ({authenticated, currentUser})=>{
     }
 
     React.useEffect(()=>{
+        LoadPersonalData()
         LoadCities()
     },[])
 
@@ -245,10 +253,16 @@ const Personal: React.FC<Iauth> = ({authenticated, currentUser})=>{
                                 <WrapperBox>
                                     <label>
                                         <Span>* CI: </Span>
-                                        <Input type="text"
+                                        {!isLoading && personalData ?(
+                                            <Input type="text"
                                                name="cinit"
                                                ref={register({required: true})}
-                                            />
+                                               defaultValue={personalData.cinit}
+                                            /> 
+                                        ):(<Input type="text"
+                                               name="cinit"
+                                               ref={register({required: true})}
+                                            /> )}
                                         
                                     </label>
                                     <ErrorInput>{errors.cinit && 'este campo es requerido'}</ErrorInput>
@@ -263,10 +277,16 @@ const Personal: React.FC<Iauth> = ({authenticated, currentUser})=>{
                                 <WrapperBox>
                                     <label>
                                         <Span>* Numero de celular: </Span>
-                                        <Input type="text"
+                                        {!isLoading && personalData ?(
+                                            <Input type="text"
                                                name="cellphone"
                                                ref={register({required: true})}
+                                               defaultValue={personalData.cellphone}
                                                />
+                                        ):(<Input type="text"
+                                               name="cellphone"
+                                               ref={register({required: true})}
+                                               />)}
                                         
                                     </label>
                                     <ErrorInput>{errors.cellphone && 'este campo es requerido'}</ErrorInput>
@@ -281,10 +301,16 @@ const Personal: React.FC<Iauth> = ({authenticated, currentUser})=>{
                                 <WrapperBox>
                                     <label>
                                         <Span>Numero de Telefono: </Span>
-                                        <Input type="text"
+                                        {!isLoading && personalData ? (
+                                            <Input type="text"
                                                 name="telephone"
                                                 ref={register({required: false})}
+                                                defaultValue={personalData.telephone}
                                                 />
+                                        ):(<Input type="text"
+                                                name="telephone"
+                                                ref={register({required: false})}
+                                                />)}
                                         
                                     </label>
                                 </WrapperBox>
@@ -317,8 +343,14 @@ const Personal: React.FC<Iauth> = ({authenticated, currentUser})=>{
                                 <WrapperBox>
                                     <label>
                                         <Span>* Pais: </Span>
-                                        <SelectInput ref={register({required: true})} name="country_id"> 
-                                                <option value="1">Bolivia</option>
+                                        <SelectInput ref={register({required: true})} name="country_id">
+                                            
+                                                {!isLoading && personalData ? (
+                                                    <option value={personalData.countries.id}>
+                                                        {personalData.countries.name}
+                                                    </option>
+                                                ):(<option value="">SELECIONAR</option>)}
+                                            
                                         </SelectInput>
                                     </label>
                                     <ErrorInput>{errors.countries && 'este campo es requerido'}</ErrorInput>
@@ -334,17 +366,19 @@ const Personal: React.FC<Iauth> = ({authenticated, currentUser})=>{
                                     <label>
                                         <Span>* Ciudad: </Span>
                                         <SelectInput ref={register({required: true})} name="city_id"> 
-                                                <option value="">SELECIONAR</option>
-                                            {!isLoading && loadcity ? (
+                                            {!isLoading && loadcity && personalData ? (
                                                 loadcity.map((city:any)=>{
 
+                                                    if(personalData.cities.id === city.id){
+                                                        return <option key={city.id} value={city.id}>{city.name}</option>
+                                                    }
                                                     return <option key={city.id} value={city.id}>{city.name}</option>
                                                 }
                                             ) 
                                             ):('')}
                                         </SelectInput>
                                     </label>
-                                    <ErrorInput>{errors.city_id && 'este campo es requerido'}</ErrorInput>
+                                    <ErrorInput>{errors.cities && 'este campo es requerido'}</ErrorInput>
                                 </WrapperBox>
                             </Col>
                         </Row>
@@ -356,11 +390,17 @@ const Personal: React.FC<Iauth> = ({authenticated, currentUser})=>{
                                 <WrapperBox>
                                     <label>
                                         <Span>* Direccion (calle, avenida): </Span>
-                                        <TextArea 
+                                        {!isLoading && personalData ? (
+                                            <TextArea 
+                                               rows={5}
+                                               name="address"
+                                               ref={register({required: true})}
+                                               defaultValue={personalData.address}/>
+                                            ):(<TextArea 
                                                rows={5}
                                                name="address"
                                                ref={register({required: true})}/>
-                                            
+                                            )}
                                         
                                     </label>
                                     <ErrorInput>{errors.address && 'este campo es requerido'}</ErrorInput>
@@ -375,10 +415,16 @@ const Personal: React.FC<Iauth> = ({authenticated, currentUser})=>{
                                 <WrapperBox>
                                     <label>
                                         <Span>* Barrio: </Span>
+                                            {!isLoading && personalData ? (
                                             <TextArea 
                                                rows={5}
                                                name="neightbordhood"
-                                               ref={register({required: true})}/>
+                                               ref={register({required: true})}
+                                               defaultValue={personalData.neightbordhood}/>
+                                            ):(<TextArea 
+                                               rows={5}
+                                               name="neightbordhood"
+                                               ref={register({required: true})}/>)}
                                         
                                     </label>
                                     <ErrorInput>{errors.neightbordhood && 'este campo es requerido'}</ErrorInput>
@@ -393,9 +439,15 @@ const Personal: React.FC<Iauth> = ({authenticated, currentUser})=>{
                                 <WrapperBox>
                                     <label>
                                         <Span>* Numero: </Span>
+                                            {!isLoading && personalData ? (
                                             <Input type="number"
                                                name="number_address"
-                                                ref={register({required: true})}/>
+                                                ref={register({required: true})}
+                                                defaultValue={personalData.number_address}/>
+                                                
+                                            ):(<Input type="number"
+                                               name="number_address"
+                                                ref={register({required: true})}/>)}
                                         
                                     </label>
                                     <ErrorInput>{errors.number_address && 'este campo es requerido'}</ErrorInput>
@@ -425,7 +477,7 @@ const Personal: React.FC<Iauth> = ({authenticated, currentUser})=>{
                                         <SpanPhoto>Foto de Perfil: </SpanPhoto>
                                         <input
                                             type="file"
-                                            name="photo"
+                                            name="photo_perfil"
                                             ref={register({required: false})}
                                             accept="image/png, image/jpeg"
                                             onChange={_onChange}
@@ -444,9 +496,14 @@ const Personal: React.FC<Iauth> = ({authenticated, currentUser})=>{
                                 <WrapperBox>
                                     <label>
                                         <Span>Facebook: </Span>
-                                            <Input type="text"
+                                            {!isLoading && personalData ? (
+                                                <Input type="text"
+                                                    name="rs_facebook"
+                                                    ref={register({required: false})}
+                                                    defaultValue={personalData.rs_facebook} />
+                                            ):(<Input type="text"
                                                 name="rs_facebook"
-                                                ref={register({required: false})} /> 
+                                                ref={register({required: false})} />)} 
                                     </label>
                                 </WrapperBox>
                             </Col>
@@ -459,9 +516,14 @@ const Personal: React.FC<Iauth> = ({authenticated, currentUser})=>{
                                 <WrapperBox>
                                     <label>
                                         <Span>Twitter: </Span>
-                                        <Input type="text"
+                                        {!isLoading && personalData ? (
+                                                <Input type="text"
+                                                    name="rs_twitter"
+                                                    ref={register({required: false})}
+                                                    defaultValue={personalData.rs_twitter} />
+                                            ):(<Input type="text"
                                                 name="rs_twitter"
-                                                ref={register({required: false})} />
+                                                ref={register({required: false})} />)}
                                     </label>
                                 </WrapperBox>
                             </Col>
@@ -474,9 +536,14 @@ const Personal: React.FC<Iauth> = ({authenticated, currentUser})=>{
                                 <WrapperBox>
                                     <label>
                                         <Span>LinkedIn: </Span>
-                                        <Input type="text"
+                                        {!isLoading && personalData ? (
+                                                <Input type="text"
+                                                    name="rs_linkedin"
+                                                    ref={register({required: false})}
+                                                    defaultValue={personalData.rs_linkedin} />
+                                            ):(<Input type="text"
                                                 name="rs_linkedin"
-                                                ref={register({required: false})} />
+                                                ref={register({required: false})} />)}
                                     </label>
                                 </WrapperBox>
                             </Col>
@@ -489,9 +556,14 @@ const Personal: React.FC<Iauth> = ({authenticated, currentUser})=>{
                                 <WrapperBox>
                                     <label>
                                         <Span>Otra red social: </Span>
-                                        <Input type="text"
+                                        {!isLoading && personalData ? (
+                                                <Input type="text"
+                                                    name="rs_another"
+                                                    ref={register({required: false})}
+                                                    defaultValue={personalData.rs_another} />
+                                            ):(<Input type="text"
                                                 name="rs_another"
-                                                ref={register({required: false})} />
+                                                ref={register({required: false})} />)}
                                     </label>
                                 </WrapperBox>
                             </Col>
@@ -508,11 +580,15 @@ const Personal: React.FC<Iauth> = ({authenticated, currentUser})=>{
                                                 información más relevante para que los visitantes 
                                                 puedan conocerte mejor.
                                             </SecondSpan>
-                                            
-                                            <TextArea rows={6}
-                                                name="description"
-                                                ref={register({required: false})}
-                                                 />
+                                            {!isLoading && personalData ? (
+                                                <TextArea rows={6} name="description"
+                                                    ref={register({required: false})}
+                                                    defaultValue={personalData.description} />
+                                            ):(
+                                                <TextArea rows={6}
+                                                    name="description"
+                                                    ref={register({required: false})}
+                                                     />)}
                                         
                                     </label>
                                 </WrapperBoxLast>
@@ -523,19 +599,6 @@ const Personal: React.FC<Iauth> = ({authenticated, currentUser})=>{
                 </Row>
 
             </ContentProfile>
-                <Row>
-                    <Col xs={12}>
-                        <Row center="xs">
-                            <Col xs={6}>
-                                <WrapperBox>
-                                    <MsgSuccess>
-                                    {displayMsg} 
-                                    </MsgSuccess>
-                                </WrapperBox>
-                            </Col>
-                        </Row>
-                    </Col>
-                </Row>
                 <Row>
                     <Col xs={12}>
                         <Row center="xs">
@@ -561,3 +624,4 @@ const mapStateToProps = (state: any) => ({
 })
 
 export default connect(mapStateToProps)(Personal)
+

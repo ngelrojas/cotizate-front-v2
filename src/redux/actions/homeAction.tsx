@@ -95,26 +95,24 @@ const lista1 = [
 
   ];
 
-export function listaDetalle(){       
+export function listaDetalle(header_id: number){       
     return (dispatch : any) =>{          
         dispatch({type: PROYECTOS_FINALIZADOS_LOAD,
             proyectos:lista1
         })
     console.log("llego el primer actions");
-    //   const body ={
-    //       "docId": form.carnet,                    
-    //       "producto": form.codigoProducto                    
-    //   };
-    //   requestPost('/usuario/registrar',body,dispatch)
-    //   .then((response)=>{
-    //     if(response && response.data){
-    //       dispatch({  
-    //         type: AGREGAR_REGISTRO_EXITO,
-    //         showMessage: true,
-    //         mensajeRegistro:response.data.mensaje,
-    //       });                                                                   
-    //     }
-    //   })
+    API.get(`campaing-public/${header_id}`).then(resp => {
+          if(resp.status == 200){
+            // console.log(resp.data.data)  ;
+            dispatch({type: PROYECTOS_FINALIZADOS_LOAD,
+                proyectos:resp.data.data
+            })
+          }
+            
+        })
+        .catch(err => console.log(err))
+
+
            
     }
 }

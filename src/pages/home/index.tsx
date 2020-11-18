@@ -8,18 +8,28 @@ import Carousel,{ slidesToShowPlugin } from '@brainhubeu/react-carousel';
 import '@brainhubeu/react-carousel/lib/style.css';
 import Projects from './component/projects';
 import { useDispatch, useSelector } from "react-redux";
+import * as Action from '../../redux/actions/homeAction';
 
 const Home: React.FC = () => {
 
   const {
-    proyectos
+    proyectos,
+    featuredProjects
   } = useSelector((stateSelector: any) => {
     return stateSelector.home;
   });
+  const dispatch = useDispatch();
 
-  useEffect(() => {
-    
-  }, [proyectos]);
+
+  useEffect(() => {        
+    dispatch(Action.listaDetalle(5));
+}, []);
+
+useEffect(() => {   
+  
+  console.log(featuredProjects);
+
+}, [featuredProjects]);
 
     return (
         <Content>
@@ -30,8 +40,7 @@ const Home: React.FC = () => {
                   <Banner />
              </div>
              {proyectos?
-             <div style={{ background:'#F9F0E8'}}>
-             {/* https://brainhubeu.github.io/react-carousel/docs/examples/customArrows */}
+             <div style={{ background:'#F9F0E8'}}>             
                 <Title>PROYECTOS DESTACADOS </Title>
                 <Carousel 
                 plugins={[
@@ -43,12 +52,13 @@ const Home: React.FC = () => {
                      numberOfSlides: 3
                     }
                   },
-                ]}
-                
+                ]}                
                 >
+                  {featuredProjects.map((value : any, index : number) =>(
                      <Projects />
-                     <Projects />
-                     <Projects /> 
+                  ))}
+                    
+                
                 </Carousel>
                
             </div>   
