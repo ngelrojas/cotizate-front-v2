@@ -26,7 +26,7 @@ const Home: React.FC = () => {
 }, []);
 
 useEffect(() => {   
-  
+
   console.log(featuredProjects);
 
 }, [featuredProjects]);
@@ -55,7 +55,7 @@ useEffect(() => {
                 ]}                
                 >
                   {featuredProjects.map((value : any, index : number) =>(
-                     <Projects />
+                     <Projects data={value} />
                   ))}
                     
                 

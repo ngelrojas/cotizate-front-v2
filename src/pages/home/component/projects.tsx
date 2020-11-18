@@ -3,7 +3,14 @@ import {List,Section} from './styles'
 import Projectdetails from './Projectdetails'
 import * as Action from '../../../redux/actions/homeAction';
 
+
+// interface DataProps {
+//     data: any
+// }
+
+
 const Projects: React.FC = () => {
+    
     const [content, setContent] = useState('')
     useEffect(() => {
         setContent('titulo more longer the now more here please')

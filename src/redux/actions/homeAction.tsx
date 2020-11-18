@@ -103,7 +103,7 @@ export function listaDetalle(header_id: number){
     console.log("llego el primer actions");
     API.get(`campaing-public/${header_id}`).then(resp => {
           if(resp.status == 200){
-            // console.log(resp.data.data)  ;
+
             dispatch({type: PROYECTOS_FINALIZADOS_LOAD,
                 proyectos:resp.data.data
             })
