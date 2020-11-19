@@ -18,7 +18,8 @@ import {
 } from './styles'
 
 interface Ibullentin {
-    title: string
+    title: string,
+    data: {}
 }
 const Projectdetails: React.FC<Ibullentin> = props => {
     return (
