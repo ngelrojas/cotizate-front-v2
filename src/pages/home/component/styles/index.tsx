@@ -79,6 +79,17 @@ export const Author = styled.div`
         margin-bottom: 10%;
     }
 `
+export const CodigoFaltante = styled.div`
+    margin: 4%;
+    // color: #007bff;
+    font-size: 12px;
+    font-weight: 410;
+    @media ${device.tablet} {
+        width: 100%;
+        margin: 1%;
+        margin-bottom: 10%;
+    }
+`
 export const Place = styled.div`
     margin: 6%;
     color: #007bff;
