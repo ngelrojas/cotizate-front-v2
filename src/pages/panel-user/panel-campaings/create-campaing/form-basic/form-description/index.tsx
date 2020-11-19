@@ -74,12 +74,12 @@ const FormDescription: React.FC = () => {
             let send_data = {
                 title: title,
                 video_main: video_main,
-                imagen_main: showImg,
+                imagen_main: imagen_main[0],
                 excerpt: excerpt,
                 description: description, 
                 public_at: "2020-03-19 00:00:00", 
                 header: datach,
-                currency: "Boliviano", 
+                currency: 1, 
                 short_url: short_url ? short_url: '', 
                 slogan_campaing: slogan_campaing ? slogan_campaing: ''
             }
