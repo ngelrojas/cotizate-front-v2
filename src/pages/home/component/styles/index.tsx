@@ -19,14 +19,18 @@ export const Section = styled.section`
 `
 export const SectionDetails = styled.section`
     width: 33%;
-    padding: 1%;
+    background: #F2F2F2;
+    padding-left: 0px;
+    padding-bottom: 0px;
+    padding-right: 0px;
+    padding-top: 0px;
 
     @media ${device.tablet} {
         width: 100%;
     }
 `
 export const Article = styled.article`
-    margin: 3%;
+    margin: 0%;
     position: relative;
 `
 export const ArticleBody = styled.article`
@@ -47,7 +51,7 @@ export const Title = styled.h1`
     font-weight: 410;
     position: absolute;
     bottom: 4px;
-    background: #00000047;
+    background: #2B76B1;
     text-align: justify;
     padding: 1%;
     text-transform: uppercase;
@@ -69,9 +73,10 @@ export const Excerpt = styled.p`
     }
 `
 export const Author = styled.div`
-    margin: 4%;
+    margin: 2%;
     color: #007bff;
     font-size: 12px;
+    padding-bottom: 10%;
     font-weight: 410;
     @media ${device.tablet} {
         width: 100%;
@@ -80,9 +85,10 @@ export const Author = styled.div`
     }
 `
 export const CodigoFaltante = styled.div`
-    margin: 4%;
-    // color: #007bff;
+    margin: 2%;
+    color: #3b3b3b;
     font-size: 12px;
+    padding-bottom: 10%;
     font-weight: 410;
     @media ${device.tablet} {
         width: 100%;
@@ -92,10 +98,11 @@ export const CodigoFaltante = styled.div`
 `
 export const Place = styled.div`
     margin: 6%;
-    color: #007bff;
+    color: #5D5A5A;
     font-weight: 410;
-    float: right;
+    float: left;
     font-size: 12px;
+    text-align: left;
     > svg {
         color: green;
     }
@@ -104,10 +111,11 @@ export const Place = styled.div`
         margin: 0%;
         margin-top: 6%;
         margin-bottom: 10%;
-        text-align: right;
+        text-align: left;
     }
     @media ${device.mobileM} {
         margin-right: 0%;
+        width: 100%;
     }
 `
 
@@ -119,10 +127,11 @@ export const PercentTitle = styled.span`
     font-weight: 410;
 `
 export const PercentNumber = styled.span`
-    font-size: 15px;
+    
     float: right;
     margin: 2%;
-    color: #007bff;
+    color: #5D5A5A;
+    font-style: normal;
     font-size: 12px;
     @media ${device.tablet} {
         float: right;

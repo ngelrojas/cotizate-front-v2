@@ -5,6 +5,8 @@ import * as Action from '../../../redux/actions/homeAction';
 
 import {Row, Col, Grid} from 'react-styled-flexboxgrid'
 import {MdLocationOn} from 'react-icons/md'
+import { FaSave } from 'react-icons/fa'
+
 import {
     SectionDetails,
     Article,
@@ -106,12 +108,10 @@ const Projects: React.FC<Iproyect> = (props)=> {
                                 <Place>
                                    <MdLocationOn />
                                     <span>
-                                        <Go to="/category/santa-cruz">
-                                            
-                                            {props.data.header.city.name} - {props.data.header.city.countries.name}
+                                        <Go to="/category/santa-cruz">                                            
+                                          {' '}  {props.data.header.city.name} - {props.data.header.city.countries.name}
                                         </Go>
-                                    </span>
-                                    
+                                    </span>                                    
                                 </Place>
                             </Col>
                         </Row>
@@ -124,6 +124,7 @@ const Projects: React.FC<Iproyect> = (props)=> {
                                     <p>Autor:</p>
                                     <p>Aljandro Matos</p>
                                 </Author> */}
+                               
                             </Col>
                         </Row>
                     </Col>
@@ -163,7 +164,7 @@ const Projects: React.FC<Iproyect> = (props)=> {
                         <Row start="lg">
                             <Col sm={12} md={12} lg={12}>
                                <CodigoFaltante>
-                                    <p>Faltan: 90 Dias</p>                                    
+                                    <p>Faltan: {props.data.header.qty_day_left} Dias</p>                                    
                                 </CodigoFaltante>  
                             </Col>
                         </Row>
@@ -172,7 +173,7 @@ const Projects: React.FC<Iproyect> = (props)=> {
                     <Col sm={6} md={12} lg={6}>
                         <Row end="lg">
                             <Col sm={6}  lg={12}>                             
-                                <PercentNumber>100 BS</PercentNumber>
+                               <PercentNumber>Cod: {props.data.header.code_campaing }</PercentNumber>
                             </Col>
                         </Row>
                     </Col>
