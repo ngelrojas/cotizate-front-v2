@@ -23,8 +23,6 @@ const Home: React.FC = () => {
     return stateSelector.home;
   });
   const dispatch = useDispatch();
-
-
   useEffect(() => {        
     dispatch(Action.proyectosDestacados(5));
     dispatch(Action.proyectosFinalizados(7));
@@ -74,7 +72,7 @@ useEffect(() => {
              <div style={{ background:'#F9F0E8'}}>             
                 <Title>PROYECTOS FINALIZADOS </Title>
                 <Carousel 
-                plugins={[
+                 plugins={[
                   'infinite',
                   'arrows',
                   {
@@ -83,7 +81,7 @@ useEffect(() => {
                      numberOfSlides: 3
                     }
                   },
-                ]}                
+                ]}     
                 >
                   {finalizedProjects.map((value : any, index : number) =>(
                      <Projects data={value} />
