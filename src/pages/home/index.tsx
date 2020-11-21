@@ -13,7 +13,7 @@ import * as Action from '../../redux/actions/homeAction';
 const Home: React.FC = () => {
 
   const {
-    proyectos,
+    proyectosDestacados,
     featuredProjects
   } = useSelector((stateSelector: any) => {
     return stateSelector.home;
@@ -22,7 +22,8 @@ const Home: React.FC = () => {
 
 
   useEffect(() => {        
-    dispatch(Action.listaDetalle(5));
+    dispatch(Action.proyectosDestacados(5));
+
 }, []);
 
 useEffect(() => {   
@@ -39,7 +40,7 @@ useEffect(() => {
              <div >
                   <Banner />
              </div>
-             {proyectos?
+             {proyectosDestacados?
              <div style={{ background:'#F9F0E8'}}>             
                 <Title>PROYECTOS DESTACADOS </Title>
                 <Carousel 

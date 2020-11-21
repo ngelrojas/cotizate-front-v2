@@ -95,24 +95,49 @@ const lista1 = [
 
   ];
 
-export function listaDetalle(header_id: number){       
+export function proyectosDestacados(header_id: number){       
     return (dispatch : any) =>{          
-        dispatch({type: PROYECTOS_FINALIZADOS_LOAD,
-            proyectos:lista1
-        })
-    console.log("llego el primer actions");
-    API.get(`campaing-public/${header_id}`).then(resp => {
+        
+       API.get(`campaing-public/${header_id}`).then(resp => {
           if(resp.status == 200){
-
-            dispatch({type: PROYECTOS_FINALIZADOS_LOAD,
+            dispatch({
+                type: PROYECTOS_FINALIZADOS_LOAD,
+                destacados:resp.data.data
+            })
+          }
+            
+        })
+        .catch(err => console.log(err))
+        }
+}
+export function proyectosFinalizados(header_id: number){       
+    return (dispatch : any) =>{          
+        
+       API.get(`campaing-public/${header_id}`).then(resp => {
+          if(resp.status == 200){
+            dispatch({
+                type: PROYECTOS_FINALIZADOS_LOAD,
                 proyectos:resp.data.data
             })
           }
             
         })
         .catch(err => console.log(err))
-
-
-           
-    }
+        }
 }
+export function causasSociales(header_id: number){       
+    return (dispatch : any) =>{          
+        
+       API.get(`campaing-public/${header_id}`).then(resp => {
+          if(resp.status == 200){
+            dispatch({
+                type: PROYECTOS_FINALIZADOS_LOAD,
+                proyectos:resp.data.data
+            })
+          }
+            
+        })
+        .catch(err => console.log(err))
+        }
+}
+
