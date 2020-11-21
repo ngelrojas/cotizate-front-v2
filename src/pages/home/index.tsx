@@ -14,7 +14,11 @@ const Home: React.FC = () => {
 
   const {
     proyectosDestacados,
-    featuredProjects
+    featuredProjects,
+    proyectosFinalizados,
+    finalizedProjects,
+    causasSociales,
+    listCausasSociales
   } = useSelector((stateSelector: any) => {
     return stateSelector.home;
   });
@@ -23,14 +27,15 @@ const Home: React.FC = () => {
 
   useEffect(() => {        
     dispatch(Action.proyectosDestacados(5));
-
+    dispatch(Action.proyectosFinalizados(7));
+    dispatch(Action.causasSociales(1));
 }, []);
 
 useEffect(() => {   
 
-  console.log(featuredProjects);
+  console.log(proyectosFinalizados);
 
-}, [featuredProjects]);
+}, [featuredProjects,proyectosFinalizados,finalizedProjects]);
 
     return (
         <Content>
@@ -65,7 +70,59 @@ useEffect(() => {
             </div>   
              : null }
              <Br/>
-            <div style={{ background:'#F9F0E8'}}>
+             {proyectosFinalizados?
+             <div style={{ background:'#F9F0E8'}}>             
+                <Title>PROYECTOS FINALIZADOS </Title>
+                <Carousel 
+                plugins={[
+                  'infinite',
+                  'arrows',
+                  {
+                    resolve: slidesToShowPlugin,
+                    options: {
+                     numberOfSlides: 3
+                    }
+                  },
+                ]}                
+                >
+                  {finalizedProjects.map((value : any, index : number) =>(
+                     <Projects data={value} />
+                  ))}
+                    
+                
+                </Carousel>
+               
+            </div>   
+             : null }
+             <Br/>
+             {causasSociales?
+             <div style={{ background:'#F9F0E8'}}>             
+                <Title>PROYECTOS FINALIZADOS </Title>
+                <Carousel 
+                plugins={[
+                  'infinite',
+                  'arrows',
+                  {
+                    resolve: slidesToShowPlugin,
+                    options: {
+                     numberOfSlides: 3
+                    }
+                  },
+                ]}                
+                >
+                  {listCausasSociales.map((value : any, index : number) =>(
+                     <Projects data={value} />
+                  ))}
+                    
+                
+                </Carousel>
+               
+            </div>   
+             : null }
+             <Br/>
+
+
+            {/* <div style={{ background:'#F9F0E8'}}>
                 
                 <Title>PROYECTOS DESTACADOS </Title>
                 <Carousel >
@@ -100,7 +157,7 @@ useEffect(() => {
                     <ListBulletin />
                     <ListBulletin />
             </Carousel>
-            </div>
+            </div> */}
         </Content>
     )
 }

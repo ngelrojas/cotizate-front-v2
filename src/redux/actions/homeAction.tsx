@@ -116,28 +116,29 @@ export function proyectosFinalizados(header_id: number){
     return (dispatch : any) =>{          
         
        API.get(`campaing-public/${header_id}`).then(resp => {
-          if(resp.status == 200){
-            dispatch({
-                type: PROYECTOS_FINALIZADOS_LOAD,
-                proyectos:resp.data.data
-            })
-          }
-            
+          if(resp.status == 200 ){
+              if(resp.data.data.length > 0){              
+                    dispatch({
+                        type: PROYECTOS_FINALIZADOS_LOAD,
+                        finalizeds:resp.data.data
+                    })
+           }
+          }            
         })
         .catch(err => console.log(err))
         }
 }
 export function causasSociales(header_id: number){       
-    return (dispatch : any) =>{          
-        
+    return (dispatch : any) =>{                  
        API.get(`campaing-public/${header_id}`).then(resp => {
           if(resp.status == 200){
-            dispatch({
-                type: PROYECTOS_FINALIZADOS_LOAD,
-                proyectos:resp.data.data
-            })
-          }
-            
+            if(resp.data.data.length > 0){ 
+                dispatch({
+                    type: CAUSAS_SOCIALES_LOAD,
+                    causas:resp.data.data
+                })
+            }
+          }            
         })
         .catch(err => console.log(err))
         }

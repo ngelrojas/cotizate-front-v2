@@ -83,14 +83,7 @@ const Projects: React.FC<Iproyect> = (props)=> {
     }, [])
     
     return (
-        <>
-            {/* <List> */}
-                {/* <li> */}
-                {/* {propsCamp.data} */}
-                   {/* <Projectdetails title={props.data.title} data={props.data}/>    */}
-                {/* </li>    */}                                                  
-            {/* </List>             */}
-            
+        <>            
             <SectionDetails>
             <Article>
                 <Picture>

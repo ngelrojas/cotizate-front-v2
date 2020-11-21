@@ -9,7 +9,7 @@ const initialState = {
     proyectosFinalizados: false,
     finalizedProjects:[],
     causasSociales: false,
-    ListCausasSociales:[]
+    listCausasSociales:[]
 }
 
 export default function(state = initialState, action: any) {
@@ -19,6 +19,18 @@ export default function(state = initialState, action: any) {
                 ...state,
                 proyectosDestacados: true,
                 featuredProjects:action.destacados
+            }
+        case PROYECTOS_FINALIZADOS_LOAD:
+            return {
+                ...state,
+                proyectosFinalizados: true,
+                finalizedProjects:action.finalizeds
+            }
+        case CAUSAS_SOCIALES_LOAD:
+            return {
+                ...state,
+                causasSociales: true,
+                listCausasSociales:action.causas
             }
         default:
             return state
