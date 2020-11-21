@@ -62,7 +62,34 @@ export const Excerpt = styled.p`
     color: #3b3b3b;
     margin: 2%;
     text-align: justify;
+    
+    @media ${device.tablet} {
+        margin: 0%;
+        padding-bottom: 8%;
+    }
+    @media ${device.mobileM} {
+        width: 17%;
+        padding-bottom: 2%;
+    }
+`
+export const Description = styled.p`
+
+    width: 270px;
+    height: 26px;
+    left: 50px;
+    margin: 2%;
+    top: 1216px;
     padding-bottom: 10%;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 11px;
+    line-height: 135.1%;
+
+    display: flex;
+    align-items: center;
+
+color: #6C6C6C;
     @media ${device.tablet} {
         margin: 0%;
         padding-bottom: 8%;
@@ -90,6 +117,27 @@ export const CodigoFaltante = styled.div`
     font-size: 12px;
     padding-bottom: 10%;
     font-weight: 410;
+    @media ${device.tablet} {
+        width: 100%;
+        margin: 1%;
+        margin-bottom: 10%;
+    }
+`
+export const Alcanzado = styled.div`
+   
+    
+    padding-left: 5px;
+    width: 100%;
+    height: 12px;
+    padding-bottom: 10%;
+    top: 1302px;
+
+    color: #000000;
+    font-family: Roboto;
+    font-style: normal;
+    
+    font-size: 10px;
+    line-height: 12px;
     @media ${device.tablet} {
         width: 100%;
         margin: 1%;
@@ -137,6 +185,20 @@ export const PercentNumber = styled.span`
         float: right;
     }
 `
+export const NumberMonto = styled.span`
+color: #000000;
+font-family: Roboto;
+     
+    float: right;
+    margin: 2%;
+    font-style: normal;
+    font-size: 12px;
+    @media ${device.tablet} {
+        float: right;
+        
+    }
+`
+
 
 export const Bar = styled.div`
     height: 5%;
