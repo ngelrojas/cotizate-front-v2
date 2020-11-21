@@ -1,5 +1,7 @@
 import {
-    PROYECTOS_FINALIZADOS_LOAD
+    PROYECTOS_FINALIZADOS_LOAD,
+    PROYECTOS_DESTACADOS_LOAD,
+    CAUSAS_SOCIALES_LOAD
 } from '../types/homeTypes'
 import API from '../../api'
 
@@ -101,7 +103,7 @@ export function proyectosDestacados(header_id: number){
        API.get(`campaing-public/${header_id}`).then(resp => {
           if(resp.status == 200){
             dispatch({
-                type: PROYECTOS_FINALIZADOS_LOAD,
+                type: PROYECTOS_DESTACADOS_LOAD,
                 destacados:resp.data.data
             })
           }
