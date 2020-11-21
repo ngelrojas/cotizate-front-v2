@@ -56,6 +56,8 @@ export const Title = styled.h1`
     padding: 1%;
     text-transform: uppercase;
     font-size: 15px;
+    width:100%;
+
 `
 
 export const Excerpt = styled.p`
@@ -83,7 +85,7 @@ export const Description = styled.p`
     font-family: Roboto;
     font-style: normal;
     font-weight: normal;
-    font-size: 11px;
+    font-size: 12px;
     line-height: 135.1%;
 
     display: flex;
@@ -102,13 +104,13 @@ color: #6C6C6C;
 export const Author = styled.div`
     margin: 2%;
     color: #007bff;
-    font-size: 12px;
-    padding-bottom: 10%;
+    font-size: 13px;
+    padding-bottom: 4%;
     font-weight: 410;
     @media ${device.tablet} {
         width: 100%;
         margin: 1%;
-        margin-bottom: 10%;
+        margin-bottom: 4%;
     }
 `
 export const CodigoFaltante = styled.div`
@@ -145,12 +147,14 @@ export const Alcanzado = styled.div`
     }
 `
 export const Place = styled.div`
-    margin: 6%;
+    margin: 1%;
     color: #5D5A5A;
     font-weight: 410;
+    font-family: Roboto;
     float: left;
     font-size: 12px;
     text-align: left;
+    line-height: 11px;
     > svg {
         color: green;
     }

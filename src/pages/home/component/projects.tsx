@@ -211,7 +211,7 @@ const Projects: React.FC<Iproyect> = (props)=> {
                     </Col>
                 </Row>
                 <Row>
-                    <Col sm={6} md={12} lg={12}>
+                    <Col sm={12} md={12} lg={12}>
                         <Row start="lg">
                             <Col sm={12} md={12} lg={12}>
                                 <Author>
