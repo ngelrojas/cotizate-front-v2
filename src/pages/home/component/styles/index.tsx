@@ -146,6 +146,19 @@ export const Alcanzado = styled.div`
         margin-bottom: 10%;
     }
 `
+export const Porcentaje = styled.div`
+   
+    
+    padding-left: 5px;
+    padding-bottom: 5%;
+   
+    @media ${device.tablet} {
+        width: 100%;
+        margin: 1%;
+        padding-left: 5px;
+        margin-bottom: 5%;
+    }
+`
 export const Place = styled.div`
     margin: 1%;
     color: #5D5A5A;

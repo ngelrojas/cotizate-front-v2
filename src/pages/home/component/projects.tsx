@@ -1,11 +1,10 @@
 import React, {useState, useEffect} from 'react'
-import {List,Section} from './styles'
-import Projectdetails from './Projectdetails'
 import * as Action from '../../../redux/actions/homeAction';
 
 import {Row, Col, Grid} from 'react-styled-flexboxgrid'
 import {MdLocationOn} from 'react-icons/md'
 import { FaSave } from 'react-icons/fa'
+import LineProgress from '../../../../src/components/LineProgress'
 
 import {
     SectionDetails,
@@ -22,6 +21,7 @@ import {
     PercentTitle,
     Alcanzado,
     NumberMonto,
+    Porcentaje,
     PercentNumber,
     Bar,
     Go
@@ -129,7 +129,7 @@ const Projects: React.FC<Iproyect> = (props)=> {
                 <Row>
                     <Col sm={12} md={12} lg={12}>
                         <Excerpt>
-                            <Go to="/">
+                            <Go to="/my-article">
                                 {props.data.excerpt}
                             </Go>
                         </Excerpt>
@@ -144,27 +144,20 @@ const Projects: React.FC<Iproyect> = (props)=> {
                         </Description>
                     </Col>
                 </Row>
-                {/* <Row>
-                    <Col sm={6} md={6} lg={6}>
-                        <Row start="lg">
-                            <Col sm={6} lg={12}>
-                                <PercentTitle>alcanzado</PercentTitle>
-                            </Col>
-                        </Row>
-                    </Col>
-                    <Col sm={6} md={6} lg={6}>
-                        <Row end="lg">
-                            <Col sm={6} lg={12}>
-                                <PercentNumber>58%</PercentNumber>
-                            </Col>
-                        </Row>
-                    </Col>
+                <Row>
                     <Col sm={12} md={12} lg={12}>
-                        <Bar />
+                        <Row start="lg">
+                            <Col sm={12} md={12} lg={12}>
+                                <Porcentaje>
+                                <LineProgress bgcolor={'#7CC142'} completed={props.data.header.percent_reached} />
+                                </Porcentaje>                            
+                            </Col>
+                        </Row>
                     </Col>
-                </Row> */}
+                </Row>
+           
 
-<Row>
+                <Row>   
                    <Col sm={6} md={6} lg={6}>
                         <Row start="lg">
                             <Col sm={12} md={12} lg={12}>
