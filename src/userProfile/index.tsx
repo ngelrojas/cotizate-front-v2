@@ -73,3 +73,21 @@ export class PersonalProfile {
         return this.resp_profile
     }
 }
+
+
+export class CompanyProfile {
+
+    private token: any
+    private resp_company: any
+
+    constructor(token:any){
+        this.token = token
+    }
+
+    retrieveCompany = async(current_user:any, token: any) => {
+        this.resp_company = await API.get(`profile/company/${current_user}`, {
+            headers: {Authorization: `Bearer ${this.token}`}
+        })
+        return this.resp_company
+    }
+} 
