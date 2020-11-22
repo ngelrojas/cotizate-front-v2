@@ -116,7 +116,7 @@ const Association: React.FC<Iauth> = ({authenticated, currentUser})=>{
             type_institution: typeIns
         }
 
-        console.info(data_profile)
+        //console.info(data_profile)
 
         /*let data_img = {*/
             //file_uploaded: photo[0] 
@@ -131,7 +131,7 @@ const Association: React.FC<Iauth> = ({authenticated, currentUser})=>{
 
         companyProfile.createCP(data_profile)
             .then(resp => {
-                console.info(resp.data)
+                //console.info(resp.data)
                 setDisplayMsg('Perfil de Institucion guardada.')
                 reset()
             }).catch(err=>{
