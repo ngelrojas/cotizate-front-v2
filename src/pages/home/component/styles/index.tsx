@@ -24,6 +24,7 @@ export const SectionDetails = styled.section`
     padding-bottom: 0px;
     padding-right: 0px;
     padding-top: 0px;
+    margin: 1%;
 
     @media ${device.tablet} {
         width: 100%;
