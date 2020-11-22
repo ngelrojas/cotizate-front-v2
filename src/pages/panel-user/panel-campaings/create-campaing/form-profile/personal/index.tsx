@@ -149,7 +149,7 @@ const Personal: React.FC<Iauth> = ({authenticated, currentUser})=>{
 
         currentPersonal.createPP(data_profile)
             .then(resp => {
-                console.info(resp.data)
+                //console.info(resp.data)
                 setDisplayMsg('Perfil Creado.')
                 reset()
             }).catch(err=>{
