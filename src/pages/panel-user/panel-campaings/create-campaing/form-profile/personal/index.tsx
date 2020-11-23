@@ -106,6 +106,7 @@ const Personal: React.FC<Iauth> = ({authenticated, currentUser})=>{
     const [personalData, SetpersonalData] = React.useState<IprofileType>()
     const [loadcity, setLoadcity] = React.useState<Icities[]>()
     const [isLoading, setIsLoading] = React.useState(true)
+    const [LoadImg, setLoadImg] = React.useState()
     const [showImg, SetShowImg] = React.useState()
     const [displayMsg, setDisplayMsg] = React.useState('')
     const {register, handleSubmit, reset, errors} = useForm<FormData>({
@@ -134,30 +135,38 @@ const Personal: React.FC<Iauth> = ({authenticated, currentUser})=>{
             description: description
         }
 
-        /*let data_img = {*/
-            //file_uploaded: photo[0] 
-        //}
-
-        //console.info(photo)
-
-        //UploadImages.uploadImg(photo)
+        /*currentPersonal.createPP(data_profile)*/
             //.then(resp => {
-                //console.info(resp.data)
+                ////console.info(resp.data)
+                //setDisplayMsg('Perfil Creado.')
+                //reset()
             //}).catch(err=>{
                 //console.error(err)
+                //setDisplayMsg('Hubo un error en la conexion, intentelo mas tarde porfavor.')
             /*})*/
-
-        currentPersonal.createPP(data_profile)
-            .then(resp => {
-                //console.info(resp.data)
-                setDisplayMsg('Perfil Creado.')
-                reset()
-            }).catch(err=>{
-                console.error(err)
-                setDisplayMsg('Hubo un error en la conexion, intentelo mas tarde porfavor.')
-            })
+        console.info(photo)
+        setLoadImg(photo)
+        SendImg(photo)
 
     })
+
+    const SendImg = (photo:any) => {
+
+         let data_img = {
+            file_uploaded: LoadImg
+        }
+        console.info(data_img)
+        UploadImages.uploadImg(data_img)
+            .then(resp => {
+                console.info(resp.data)
+            })
+            .catch(err=>{
+                console.error(err)
+            })
+            .then(()=>{
+                setIsLoading(false)
+            })       
+    }
  
 
     const _onChange = (event: React.ChangeEvent<HTMLInputElement>)=> {
@@ -185,7 +194,7 @@ const Personal: React.FC<Iauth> = ({authenticated, currentUser})=>{
 
     React.useEffect(()=>{
         LoadCities()
-    },[])
+    },[LoadImg])
 
     return(
         <>
