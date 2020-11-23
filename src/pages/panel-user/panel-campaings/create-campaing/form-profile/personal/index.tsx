@@ -127,7 +127,7 @@ const Personal: React.FC<Iauth> = ({authenticated, currentUser})=>{
             address: address, 
             neightbordhood: neightbordhood,
             number_address: number_address,
-            photo: 'my profile photo here',
+            photo: 'mediafiles/',
             rs_facebook: rs_facebook,
             rs_twitter: rs_twitter,
             rs_linkedin: rs_linkedin,
@@ -135,27 +135,24 @@ const Personal: React.FC<Iauth> = ({authenticated, currentUser})=>{
             description: description
         }
 
-        /*currentPersonal.createPP(data_profile)*/
-            //.then(resp => {
-                ////console.info(resp.data)
-                //setDisplayMsg('Perfil Creado.')
-                //reset()
-            //}).catch(err=>{
-                //console.error(err)
-                //setDisplayMsg('Hubo un error en la conexion, intentelo mas tarde porfavor.')
-            /*})*/
-        console.info(photo)
-        setLoadImg(photo)
-        SendImg(photo)
+        currentPersonal.createPP(data_profile)
+            .then(resp => {
+                //console.info(resp.data)
+                setDisplayMsg('Perfil Creado.')
+                reset()
+            }).catch(err=>{
+                console.error(err)
+                setDisplayMsg('Hubo un error en la conexion, intentelo mas tarde porfavor.')
+            })
 
     })
 
-    const SendImg = (photo:any) => {
+    const SendImg = () => {
 
          let data_img = {
             file_uploaded: LoadImg
         }
-        console.info(data_img)
+        //console.info(data_img)
         UploadImages.uploadImg(data_img)
             .then(resp => {
                 console.info(resp.data)
