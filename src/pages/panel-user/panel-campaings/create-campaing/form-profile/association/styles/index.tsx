@@ -5,7 +5,7 @@ export const ContentProfile = styled.div`
 `
 
 export const Input = styled.input`
-    width: 63%;
+    width: 80%;
     padding: 1%;
     float: right;
     height: 49px;
@@ -21,7 +21,7 @@ export const WrapperBoxLast = styled(WrapperBox)`
 `
 
 export const Span = styled.div`
-    width: 36%;
+    width: 16%;
     float: left;
 `
 
@@ -86,4 +86,16 @@ export const SaveProfile = styled.button`
     padding: 2%;
     margin-bottom: 5%;
     border-radius: 2px;
+`
+
+export const SpanPhoto = styled(Span)`
+    width: 20%;
+`
+
+export const MsgSuccess = styled.p`
+    width: 100%;
+    color: green;
+    text-align: center;
+    margin-top: 4%;
+    margin-bottom: 4%;
 `

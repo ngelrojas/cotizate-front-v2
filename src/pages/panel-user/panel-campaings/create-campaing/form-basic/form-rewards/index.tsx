@@ -53,14 +53,13 @@ const FormRewards: React.FC = () => {
     const [MsgErrorF, setMsgErrorF] = React.useState()
     //const [sendData, SetsendData] = React.useState<FormData[]>([])
     const [cities, setCities] = React.useState()
-    const {register, handleSubmit, errors} = useForm<FormData>({
+    const {register, handleSubmit, reset, errors} = useForm<FormData>({
         mode: 'onChange'
     })
     
     const listCities = () => {
         City.listCities()
             .then(resp => {
-                console.info(resp.data)
                 setCities(resp.data)
             }).catch(err => {
                 console.info(err)
@@ -95,6 +94,7 @@ const FormRewards: React.FC = () => {
                 .then(resp => {
                     console.info(resp.data)
                     Setmsg('recompensa agregada.')
+                    reset() 
                     setMsgErrorF('')
                 }).catch(err => {
                     console.info(err)

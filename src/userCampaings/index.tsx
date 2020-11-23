@@ -90,3 +90,19 @@ export class CampaingHeader {
         return this.resp_campaing_header
     }
 }
+
+export class CampaingBody{
+    private token: any 
+    private resp_campaing_body: any
+
+    constructor(token: any){
+        this.token = token
+    }
+
+    getRetrieveCBody = async(camp_header_id:number) => {
+        this.resp_campaing_body = await API.get(`campaing-body-last/${camp_header_id}`,{
+            headers: {Authorization: `Bearer ${this.token}`}
+        })
+        return this.resp_campaing_body
+    }
+} 

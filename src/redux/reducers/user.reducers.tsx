@@ -5,6 +5,7 @@ import {
     GET_PROFILE,
     LOADING_USER
 } from '../types'
+
 const initialState = {
     authenticated: false,
     credential: {},
@@ -18,19 +19,27 @@ export default function(state = initialState, action: any) {
                 ...state,
                 authenticated: true
             }
+
         case SET_UNAUTHENTICATED:
             return initialState
+
         case SET_USER:
             return {
                 authenticated: true,
                 loading: false,
                 ...action.payload
             }
+
         case GET_PROFILE:
-            console.info(action.payload)
-            break
+            return {
+                authenticated: true,
+                loading: false,
+                ...action.payload
+            }
+
         case LOADING_USER:
             return {...state, loading: true}
+
         default:
             return state
     }

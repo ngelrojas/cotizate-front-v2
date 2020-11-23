@@ -82,3 +82,11 @@ export const SaveProfile = styled.button`
     margin-bottom: 5%;
     border-radius: 2px;
 `
+
+export const MsgSuccess = styled.p`
+    width: 100%;
+    color: green;
+    text-align: center;
+    margin-top: 4%;
+    margin-bottom: 4%;
+`

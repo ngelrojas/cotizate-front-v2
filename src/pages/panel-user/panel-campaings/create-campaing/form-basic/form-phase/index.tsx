@@ -4,8 +4,8 @@ import {Editor} from '@tinymce/tinymce-react'
 import {CampaingHeader} from '../../../../../../userCampaings'
 import {Phases} from '../../../../../../userPhases'
 // import {Row} from 'react-styled-flexboxgrid'
-import PhaseContext from '../../../../../../context/phases'
-import TablePhase from './table-phase'
+//import PhaseContext from '../../../../../../context/phases'
+//import TablePhase from './table-phase'
 import {
     WrapBtnAdd,
     BtnAdd,
@@ -14,7 +14,7 @@ import {
     MsgSuccess,
     WrapperBoxRD,
     WrapperBox,
-    WrapperBoxTableP,
+    //WrapperBoxTableP,
     BoxTitle,
     BoxText,
     WrapperBoxPhase,
@@ -38,7 +38,7 @@ const FormPhase: React.FC = () => {
     const [msg, Setmsg] = React.useState('')
     const [description, Setdescription] = React.useState()
     const [MsgErrorF, setMsgErrorF] = React.useState()
-    const {register, handleSubmit, errors} = useForm<FormData>({
+    const {register, handleSubmit, reset, errors} = useForm<FormData>({
         mode: 'onChange'
     })
 
@@ -62,8 +62,8 @@ const FormPhase: React.FC = () => {
 
             Phase.createPhase(data_phase)
                 .then(resp => {
-                    console.info(resp.data.data) 
                     Setmsg('Fase Agregada.')
+                    reset() 
                     setMsgErrorF('')
                 }).catch(err =>{    
                     setMsgErrorF('no debe exceder mas 150 palabras')
@@ -88,7 +88,7 @@ const FormPhase: React.FC = () => {
     },[])
 
     return (
-        <PhaseContext.Provider value={datach}>
+        <>
             <WrapperBoxRD>
             <WrapperBox>
                 <BoxTitle> *Fases del proyecto</BoxTitle>
@@ -105,7 +105,7 @@ const FormPhase: React.FC = () => {
                             type="text"
                             name="title"
                             ref={register({required: true})}
-                            placeholder="Fase 1"
+                            placeholder="Fase"
                         />
                     </WrappBoxInput>
 
@@ -188,7 +188,7 @@ const FormPhase: React.FC = () => {
 
         </WrapperBoxRD> 
 
-        </PhaseContext.Provider>
+        </>
 
     )
 }
