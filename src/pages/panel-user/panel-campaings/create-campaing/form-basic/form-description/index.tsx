@@ -34,6 +34,7 @@ type FormData = {
     currency: string
     short_url: string
     slogan_campaing: string
+    profile_ca: number
 }
 
 const FormDescription: React.FC = () => {
@@ -101,6 +102,11 @@ const FormDescription: React.FC = () => {
     const validate = () => {
         if (excerpt.length === 0) {
             setMsgExcerpt('este campo es requerido')
+            return false
+        }
+
+        if (excerpt.length >= 250) {
+            setMsgExcerpt('no debe superar las 44 palabras')
             return false
         }
 
@@ -201,7 +207,7 @@ const FormDescription: React.FC = () => {
             <WrapperBoxRD>
                 <BoxTitle> * Resumen descripción </BoxTitle>
                 <BoxText> 
-                Este es el resumen de  descripción del post utiliza max. 200 caracteres
+                Este es el resumen de  descripción del post utiliza max. 240 caracteres o 42 palabras
                 </BoxText>
                 <Editor
                     initialValue=''
@@ -238,7 +244,6 @@ const FormDescription: React.FC = () => {
                                         file,
                                         base64
                                     )
-                                    console.log(blobInfo)
                                     blobCache.add(blobInfo)
                                     cb(blobInfo.blobUri(), {title: file.name})
                                 }

@@ -61,6 +61,8 @@ type FormData = {
     rs_linkedin: string
     rs_another: string
     description: string
+    current_position: string
+    headline: string
 }
 
 type userType = {
@@ -88,6 +90,8 @@ interface IprofileType {
     rs_linkedin: string
     rs_another: string
     description: string
+    current_position: string
+    headline: string
 }
 
 interface Iauth {
@@ -116,7 +120,8 @@ const Personal: React.FC<Iauth> = ({authenticated, currentUser})=>{
     const onSubmit = handleSubmit(({cinit, cellphone, telephone, countries, cities,
                                    address, neightbordhood, number_address, photo,
                                    rs_facebook, rs_twitter, rs_linkedin, rs_another,
-                                   description, country_id, city_id}) => {
+                                   description, country_id, city_id, current_position,
+                                    headline}) => {
 
         let data_profile = {
             cinit: cinit,
@@ -132,7 +137,9 @@ const Personal: React.FC<Iauth> = ({authenticated, currentUser})=>{
             rs_twitter: rs_twitter,
             rs_linkedin: rs_linkedin,
             rs_another: rs_another,
-            description: description
+            description: description,
+            current_position: current_position,
+            headline: headline
         }
 
         currentPersonal.createPP(data_profile)
@@ -316,7 +323,43 @@ const Personal: React.FC<Iauth> = ({authenticated, currentUser})=>{
                             </Col>
                         </Row>
                     </Col>
-                    
+
+                     <Col xs={12}>
+                        <Row center="xs">
+                            <Col xs={6}>
+                                <WrapperBox>
+                                    <label>
+                                        <Span>Profesion: </Span>
+                                        <Input type="text"
+                                                name="headline"
+                                                placeholder="ej. ARQUITECTO, INGENIERO, etc."
+                                                ref={register({required: false})}
+                                                />
+                                        
+                                    </label>
+                                </WrapperBox>
+                            </Col>
+                        </Row>
+                    </Col>                   
+
+                     <Col xs={12}>
+                        <Row center="xs">
+                            <Col xs={6}>
+                                <WrapperBox>
+                                    <label>
+                                        <Span>Posicion Actual: </Span>
+                                        <Input type="text"
+                                                name="current_position"
+                                                placeholder="ej. CEO, EMPRESARIO, etc."
+                                                ref={register({required: false})}
+                                                />
+                                        
+                                    </label>
+                                </WrapperBox>
+                            </Col>
+                        </Row>
+                    </Col>
+
                     <Col xs={12}>
                         <Row center="xs">
                             <Col xs={6}>
