@@ -1,10 +1,12 @@
 import React from 'react'
+import {connect} from 'react-redux'
 import {useRouteMatch} from 'react-router-dom'
 import {useForm} from 'react-hook-form'
 import {CategoriesCampaing} from '../../../../../../userCategories'
 import {City} from '../../../../../../userCountryCities'
 import {CampaingHeader} from '../../../../../../userCampaings'
 import {Row} from 'react-styled-flexboxgrid'
+import {next, back} from '../../../../../../redux/actions/next_back.actions'
 
 import {
     WrapBtnSave,
@@ -26,7 +28,6 @@ import {
     BS
 } from '../../styles'
 
-
 type FormData = {
     category: string
     qty_day: number
@@ -35,8 +36,18 @@ type FormData = {
     role: number
 }
 
+interface Icounter {
+    counter: any 
+}
 
-const FormConfig: React.FC = (props: any) => {
+interface Ihandlers {
+    handleNext: typeof next; 
+    handleBack: typeof back; 
+}
+
+type AllProps = Icounter & Ihandlers
+
+const FormConfig: React.FC<AllProps> = ({counter, handleNext}) => {
 
     let match = useRouteMatch('/panel-de-usuario/:campania')
     let token = window.sessionStorage.getItem('token')
@@ -63,16 +74,20 @@ const FormConfig: React.FC = (props: any) => {
             role: campaing_type
         }
 
-        SaveCampaing.createCampaingHeader(send_data)
-            .then(resp=>{
-                Setmsg("DATOS GUARDADOS")
-                reset()
-            })
-            .catch(err => {
-                console.error(err)
-            })
+/*        SaveCampaing.createCampaingHeader(send_data)*/
+            //.then(resp=>{
+                //Setmsg("DATOS GUARDADOS")
+                //reset()
+            //})
+            //.catch(err => {
+                //console.error(err)
+            /*})*/
+        handleNext()
+        console.info(counter) 
 
     })
+
+
 
     const LoadCategories = () => {
         CatCamp.getCategoryCampaing()
@@ -195,5 +210,13 @@ olvide incluir las tarifas administrativas en su cálculo. </BoxText>
     )
 }
 
+const mapStateToProps = (counter:number) => ({
+    counter,
+})
 
-export default FormConfig
+const mapDispatchToProps = {
+    handleNext: next,
+    handleBack: back,
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(FormConfig)

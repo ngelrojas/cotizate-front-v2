@@ -1,24 +1,11 @@
 import React from 'react'
-import {connect} from 'react-redux'
 import FormConfig from './form-config' 
 import FormDescription from './form-description'
 import FormPhase from './form-phase'
 import FormReward from './form-rewards'
 import {WrapBtn, BtnBack, BtnNext} from '../styles'
 
-interface Icounter {
-    counter: any 
-}
-
-interface Ihandlers {
-    handle_Next: any; 
-    handle_Back: any; 
-}
-
-
-type AllProps = Icounter & Ihandlers
-
-const FormBasic: React.FC<AllProps> = ({counter, handle_Next, handle_Back}) => {
+const FormBasic: React.FC = () => {
 
     const [datai, setDatai] = React.useState()
     const [menu, setMenu] = React.useState(1)
@@ -46,9 +33,6 @@ const FormBasic: React.FC<AllProps> = ({counter, handle_Next, handle_Back}) => {
     }
 
     const stepForm = (index: number) => {
-        if(counter >= 1 ){
-            index = counter + index
-        }
         switch(index){
             case 1: 
                 return <FormConfig />
@@ -66,11 +50,9 @@ const FormBasic: React.FC<AllProps> = ({counter, handle_Next, handle_Back}) => {
     return (
         <>
             {
-                
                stepForm(menu) 
             }
             <div>           
-            COUNTER {counter}
             <WrapBtn>
                 <BtnBack onClick={handleBack}>volver</BtnBack>
             </WrapBtn>
@@ -83,10 +65,5 @@ const FormBasic: React.FC<AllProps> = ({counter, handle_Next, handle_Back}) => {
 
     )
 }
-const mapStateToProps = (state: any) => ({
-    handle_Next: 0,
-    handle_Back: 0,
-    counter: state.nextForm.counter,
-})
 
-export default connect(mapStateToProps)(FormBasic)
+export default FormBasic
