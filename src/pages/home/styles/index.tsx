@@ -62,7 +62,7 @@ export const Section = styled.section`
 `
 export const Sectionportada = styled.section`
     width: 100%;
-    padding: 1%;
+    padding: 0%;
     @media ${device.tablet} {
         width: 100%;
     }
