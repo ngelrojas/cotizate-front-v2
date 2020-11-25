@@ -25,6 +25,20 @@ export const Title = styled.h1`
 "
 
 `
+export const LineCeleste = styled.hr`
+    width: 100%;
+    height: 3px;
+    left: 29.07px;
+    top: 3423.45px;
+    background: #1986C6;
+`;
+export const LineMostaza = styled.hr`
+    width: 100%;
+    height: 3px;
+    left: 29.07px;
+    top: 3423.45px;
+    background: #F69939;  
+`;
 export const Title2 = styled.h2`
     height: 22px;
     left: 30px;
@@ -144,4 +158,8 @@ export const ImgCategoria = styled.img`
 `
 export const DivCategoria = styled.div`
 text-align: center;
+`
+export const ImgPatrocinador = styled.img`
+    width: 15%;
+    border-radius: 2px;
 `

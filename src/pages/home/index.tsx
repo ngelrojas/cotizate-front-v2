@@ -1,10 +1,11 @@
 import React, { useEffect,useState } from 'react'
 import {Grid} from 'react-styled-flexboxgrid'
-import {Content,Title2,Title, Br,DivPortada} from './styles'
+import {Content,Title2,Title,LineCeleste,LineMostaza, Br,DivPortada} from './styles'
 import ListBulletin from '../../components/list-bulletin'
 import Banner from './component/Banner'
 import Portada from './component/Portada'
 import Categorias from './component/Categorias';
+import Patrocinadores from './component/Patrocinadores';
 import Carousel,{ slidesToShowPlugin } from '@brainhubeu/react-carousel';
 import '@brainhubeu/react-carousel/lib/style.css';
 import Projects from './component/projects';
@@ -121,8 +122,16 @@ useEffect(() => {
              <Br/>
              <div>
                   <Title>CATEGORIAS </Title>
-                  <Br/>
+                  {/* <Br/> */}
                   <Categorias />
+             </div>
+               <Br/>
+             <div>
+                  <Title>PATROCINADORES </Title>
+                  <LineCeleste/>
+                  <Br/>
+                    <Patrocinadores/>
+                  <LineCeleste/>
              </div>
 
 

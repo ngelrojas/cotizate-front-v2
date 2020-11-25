@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {Sectionportada, Div2,ImgCategoria,DivCategoria, TitleCategoria } from '../styles/index'
+import {Sectionportada, Div2,ImgCategoria,DivCategoria,LineMostaza, TitleCategoria } from '../styles/index'
 import PortadaImg from '../images/7portada-nueva-crow.png';
 import { useHistory } from "react-router-dom";
 import {Row, Col, Grid} from 'react-styled-flexboxgrid';
@@ -24,6 +24,7 @@ const Portada: React.FC = () => {
     };
     return (
             <>
+            <LineMostaza/>
                 <Sectionportada>
                 <Row>
                         <Col xs={2} sm={2} md={2} >
@@ -83,6 +84,7 @@ const Portada: React.FC = () => {
                         </Col>                                 
                 </Row>      
                 </Sectionportada>
+                <LineMostaza/>
             </>      
     )
 }
