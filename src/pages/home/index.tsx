@@ -4,6 +4,7 @@ import {Content,Title2,Title, Br,DivPortada} from './styles'
 import ListBulletin from '../../components/list-bulletin'
 import Banner from './component/Banner'
 import Portada from './component/Portada'
+import Categorias from './component/Categorias';
 import Carousel,{ slidesToShowPlugin } from '@brainhubeu/react-carousel';
 import '@brainhubeu/react-carousel/lib/style.css';
 import Projects from './component/projects';
@@ -118,6 +119,11 @@ useEffect(() => {
             </div>   
              : null }
              <Br/>
+             <div>
+                  <Title>CATEGORIAS </Title>
+                  <Br/>
+                  <Categorias />
+             </div>
 
 
             {/* <div style={{ background:'#F9F0E8'}}>

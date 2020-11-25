@@ -119,3 +119,29 @@ text-align: center;
 
  
 `
+export const TitleCategoria = styled.h2`
+    height: 22px;
+    left: 30px;
+    top: 842px;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 23px;
+    font-family: Roboto;
+    color: #000000;
+    @media ${device.tablet} {
+        font-size: 12px;
+    
+    }
+    @media ${device.tablet} {
+        font-size: 10px;
+    }
+  
+`
+export const ImgCategoria = styled.img`
+    width: 80%;
+    border-radius: 2px;
+`
+export const DivCategoria = styled.div`
+text-align: center;
+`
