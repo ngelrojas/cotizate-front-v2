@@ -160,6 +160,21 @@ export const DivCategoria = styled.div`
 text-align: center;
 `
 export const ImgPatrocinador = styled.img`
-    width: 15%;
+    width: 40%;
     border-radius: 2px;
+    justify-content:center;
+    @media ${device.tablet} {
+        width: 80%;
+    }
+    @media ${device.mobileM} {
+        width: 95%;
+    }
+`
+export const SectionPatrocinadores= styled.section`
+    
+   
+    @media ${device.tablet} {
+        width: 100%;
+    }
+    
 `
