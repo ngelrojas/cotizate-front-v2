@@ -77,16 +77,13 @@ const FormConfig: React.FC<AllProps> = ({counter, handleNext}) => {
             .then(resp=>{
                 Notifications('Datos de configuracion guardados', 'success')
                 reset()
+                handleNext()
             })
             .catch(err => {
                 console.error(err)
+                Notifications(err, 'danger')
             })
-
-        handleNext()
-
     })
-
-
 
     const LoadCategories = () => {
         CatCamp.getCategoryCampaing()

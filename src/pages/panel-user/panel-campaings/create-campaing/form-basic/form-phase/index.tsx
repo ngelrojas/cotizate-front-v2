@@ -1,21 +1,17 @@
 import React from 'react'
 import {useForm} from 'react-hook-form'
 import {Editor} from '@tinymce/tinymce-react'
+import {store} from 'react-notifications-component'
 import {CampaingHeader} from '../../../../../../userCampaings'
 import {Phases} from '../../../../../../userPhases'
-import ScrollTop from '../../../../../../components/scrolltop'
-// import {Row} from 'react-styled-flexboxgrid'
-//import PhaseContext from '../../../../../../context/phases'
-//import TablePhase from './table-phase'
 import {
     WrapBtnAdd,
     BtnAdd,
     FormR,
+    MsgErrorPhase,
     MsgError,
-    MsgSuccess,
     WrapperBoxRD,
     WrapperBox,
-    //WrapperBoxTableP,
     BoxTitle,
     BoxText,
     WrapperBoxPhase,
@@ -36,7 +32,6 @@ const FormPhase: React.FC = () => {
     let CamHeader = new CampaingHeader(token)
     let Phase = new Phases(token)
     const [datach, setDatach] = React.useState<number>(0)
-    const [msg, Setmsg] = React.useState('')
     const [description, Setdescription] = React.useState()
     const [MsgErrorF, setMsgErrorF] = React.useState()
     const {register, handleSubmit, reset, errors} = useForm<FormData>({
@@ -63,11 +58,12 @@ const FormPhase: React.FC = () => {
 
             Phase.createPhase(data_phase)
                 .then(resp => {
-                    Setmsg('Fase Agregada.')
+                    Notifications('Fase Guardada, puede seguir agregando.', 'success')
                     reset() 
                     setMsgErrorF('')
                 }).catch(err =>{    
                     setMsgErrorF('no debe exceder mas 150 palabras')
+                    Notifications('La descripcion de la Fase no debe exceder mas 870 caracteres o 150 palabras.', 'danger')
                 })
         }
     })
@@ -79,18 +75,39 @@ const FormPhase: React.FC = () => {
     const validate = () => { 
         if(!description){
             setMsgErrorF('este campo es requerido')
+            Notifications('La Fase debe contener una descripcion', 'danger')
             return false
         }
         return true
     }
-    
+
+    const Notifications = (set_messages: string, set_type: any) => {
+        store.addNotification({
+            title: 'Guardando Datos',
+            message: set_messages,
+            type: set_type,
+            insert: 'top',
+            container: 'top-right',
+            animationIn: ['animate__animated', 'animate__fadeIn'],
+            animationOut: ['animate__animated', 'animate__fadeOut'],
+            dismiss: {
+                duration: 5000,
+                onScreen: true
+            }
+        })
+    }
+
     React.useEffect(()=>{ 
+        window.scrollTo({
+            top: 0,
+            left: 0,
+            behavior: 'smooth'
+        })
        getLast()
     },[])
 
     return (
         <>
-        <ScrollTop />
             <WrapperBoxRD>
             <WrapperBox>
                 <BoxTitle> *Fases del proyecto</BoxTitle>
@@ -131,7 +148,9 @@ const FormPhase: React.FC = () => {
                         {errors.amount && 'este campo es requerido'}
                     </MsgError>
             </WrapperBoxPhase>
-
+                <BoxText> 
+                Descripción de la fase no debe exceder mas de  870 caracteres o 150 palabras
+                </BoxText>
                 <Editor
                     initialValue=''
                     init={{
@@ -177,10 +196,8 @@ const FormPhase: React.FC = () => {
                     }}
                     onEditorChange={handleEditorReward}
                 />
-
-            <MsgSuccess>{msg}</MsgSuccess>
-            
-            <MsgError>{MsgErrorF}</MsgError>
+ 
+            <MsgErrorPhase>{MsgErrorF}</MsgErrorPhase>
 
             <WrapBtnAdd>
                 <BtnAdd>adicionar</BtnAdd>

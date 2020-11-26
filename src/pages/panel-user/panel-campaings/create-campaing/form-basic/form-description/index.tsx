@@ -15,7 +15,6 @@ import {
     BtnSaveProject,
     Form,
     MsgError,
-    MsgSuccess,
     H4,
     TextConf,
     WrapperBox,
@@ -56,7 +55,6 @@ const FormDescription: React.FC<AllProps> = ({counter, handleNext, handleBack}) 
     let token = window.sessionStorage.getItem('token')
     let CamHeader = new CampaingHeader(token)
     let CamBody = new Campaings(token)
-    const [msg, Setmsg] = React.useState('')
     const [description, setDescripction] = React.useState('')
     const [excerpt, setExcerpt] = React.useState('')
     const [msgExcerpt, setMsgExcerpt] = React.useState('')
@@ -102,34 +100,36 @@ const FormDescription: React.FC<AllProps> = ({counter, handleNext, handleBack}) 
 
             CamBody.createCampaing(send_data)
                 .then(resp =>{
-                    console.info(resp.data.data)
-                    Notifications('Datos de Descripcion guardados', 'success')
+                    Notifications('Datos de Descripcion de proyecto guardados', 'success')
                     setMsgExcerpt('')
                     setMsgdescription('')
                     reset()
+                    handleNext()
                 }).catch(err => {
                     console.error(err)
-                    Notifications('ERROR DE CONECCION', 'danger')
+                    Notifications('Porfavor debe revisar los datos a ser llenados.', 'danger')
                 })
 
         }
 
-        handleNext()
     })
 
     const validate = () => {
         if (excerpt.length === 0) {
+            Notifications('El Resumen de tu proyecto es requerido','danger')
             setMsgExcerpt('este campo es requerido')
             return false
         }
 
-        if (excerpt.length >= 250) {
-            setMsgExcerpt('no debe superar las 44 palabras')
+        if (excerpt.length >= 249) {
+            setMsgExcerpt('asegurate de no tener letras resaltadas o con negritas.')
+            Notifications('El Resumen no debe superar las 44 palabras','danger')
             return false
         }
 
         if (description.length === 0) {
             setMsgdescription('este campo es requerido')
+            Notifications('Es obligatorio detallar tu proyecto','danger')
             return false
         }
         return true
@@ -249,7 +249,7 @@ const FormDescription: React.FC<AllProps> = ({counter, handleNext, handleBack}) 
             <WrapperBoxRD>
                 <BoxTitle> * Resumen descripción </BoxTitle>
                 <BoxText> 
-                Este es el resumen de  descripción del post utiliza max. 240 caracteres o 42 palabras
+                Este es el resumen de  descripción del post utiliza max. 244 caracteres o 44 palabras
                 </BoxText>
                 <Editor
                     initialValue=''
@@ -352,7 +352,6 @@ const FormDescription: React.FC<AllProps> = ({counter, handleNext, handleBack}) 
                 />
                 <MsgError>{msgdescription}</MsgError>
             </WrapperBoxRD>
-            <MsgSuccess>{msg}</MsgSuccess>
             <Row>
                 <WrapperSave>
                     <WrapBtnSave>

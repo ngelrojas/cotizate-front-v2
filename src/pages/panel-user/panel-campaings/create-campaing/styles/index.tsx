@@ -202,6 +202,11 @@ export const MsgError = styled.div`
     overflow: hidden;
 `
 
+export const MsgErrorPhase = styled(MsgError)`
+    width: 100%;
+    margin-bottom: 2%;
+`
+
 export const MsgErrorForm = styled.div`
     width: 100%;
     left: 0%;
