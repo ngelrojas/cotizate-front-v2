@@ -5,9 +5,10 @@ import {device} from '../../../../styles/mediaquery'
 export const SubNav = styled.ul`
     display: none;
     position: absolute;
-    background-color: #dddddd;
+    background-color: #fff;
     width: 13%;
     z-index: 1;
+    border: #000 solid .5px;
     @media ${device.tablet} {
         width: 78%;
     }
@@ -21,6 +22,11 @@ export const Go = styled(Link)`
     &:hover {
         color: #f37a22;
     }
+`
+
+export const Divid = styled.div`
+    font-size: 13px;
+    color: #2A8EC8;
 `
 
 export const Item = styled.li`
@@ -54,5 +60,12 @@ export const Title = styled.p`
     &:hover {
         cursor: pointer;
         color: #f37a22;
+    }
+`
+
+export const CloseBtn = styled.button`
+    text-transformation: uppercase;
+    &:hover {
+        cursor: pointer;
     }
 `

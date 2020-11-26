@@ -15,7 +15,7 @@ export class CompanyProfile {
         return this.resp_company
     }
 
-    /*
+    /* TODO: this method is to delete
      * create company to current user
      */
     createCompanyProfile = async (data_send: any) => {
@@ -25,6 +25,15 @@ export class CompanyProfile {
         return this.resp_company
     }
 
+    /*
+     * create company profile to current user
+     */
+    createCP = async (data_send: any) => {
+        this.resp_company = await API.post(`profile/company`, data_send, {
+            headers: {Authorization: `Bearer ${this.token}`}
+        })
+        return this.resp_company
+    }
     /*
      * get current company profile
      * */
