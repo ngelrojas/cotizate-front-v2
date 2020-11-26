@@ -1,6 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {useForm} from 'react-hook-form'
+import {store} from 'react-notifications-component'
 import {Row, Col} from 'react-styled-flexboxgrid'
 import DefaultImg from '../../form-basic/public/default.png'
 import {City} from '../../../../../../userCountryCities'
@@ -21,7 +22,6 @@ import {ContentProfile,
         ProfileImg,
         SpanDescription,
         SecondSpan,
-        MsgSuccess
 } from './styles' 
 
 interface Icountries {
@@ -132,13 +132,39 @@ const Association: React.FC<Iauth> = ({authenticated, currentUser})=>{
         companyProfile.createCP(data_profile)
             .then(resp => {
                 //console.info(resp.data)
-                setDisplayMsg('Perfil de Institucion guardada.')
+                Notifications('Perfil Institucional guardada', 'success')
                 reset()
             }).catch(err=>{
-                console.error(err)
-                setDisplayMsg('Existe problemas de red, intentelo mas tarde porfavor.')
+                
+                Notifications('Existe problemas de red, intentelo mas tarde porfavor.', 'danger')
             })
+
+        ScrollTop()
     })
+
+    const ScrollTop = () => {
+        window.scrollTo({
+            top:0,
+            left:0,
+            behavior: 'smooth'
+        })
+    }
+
+    const Notifications = (set_messages: string, set_type: any) => {
+        store.addNotification({
+            title: 'Guardando Datos',
+            message: set_messages,
+            type: set_type,
+            insert: 'top',
+            container: 'top-right',
+            animationIn: ['animate__animated', 'animate__fadeIn'],
+            animationOut: ['animate__animated', 'animate__fadeOut'],
+            dismiss: {
+                duration: 5000,
+                onScreen: true
+            }
+        })
+    }
 
     const _onChange = (event: React.ChangeEvent<HTMLInputElement>)=> {
         let file: any = event.currentTarget.files 
@@ -501,19 +527,7 @@ const Association: React.FC<Iauth> = ({authenticated, currentUser})=>{
                 </Row>
 
             </ContentProfile>
-                <Row>
-                    <Col xs={12}>
-                        <Row center="xs">
-                            <Col xs={6}>
-                                <WrapperBox>
-                                    <MsgSuccess>
-                                    {displayMsg} 
-                                    </MsgSuccess>
-                                </WrapperBox>
-                            </Col>
-                        </Row>
-                    </Col>
-                </Row>
+
                 <Row>
                     <Col xs={12}>
                         <Row center="xs">
