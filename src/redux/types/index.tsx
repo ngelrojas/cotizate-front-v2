@@ -18,3 +18,7 @@ export const SET_DEFAULT_CAMPAING = 'SET_DEFAULT_CAMPAING'
 export const SET_PHASE = 'SET_PHASE'
 export const LOADING_PHASE = 'LOADING_PHASE'
 export const SET_DEFAULT_PHASE = 'SET_DEFAULT_PHASE'
+
+/* types increment */
+export const NEXT = 'NEXT'
+export const BACK = 'BACK'

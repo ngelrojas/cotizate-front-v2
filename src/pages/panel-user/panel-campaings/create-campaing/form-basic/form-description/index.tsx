@@ -1,9 +1,12 @@
 import React from 'react'
+import {connect} from 'react-redux'
 import {useForm} from 'react-hook-form'
+import {store} from 'react-notifications-component'
 import {Editor} from '@tinymce/tinymce-react'
 import DefaultImg from '../public/default.png'
 import {CampaingHeader, Campaings} from '../../../../../../userCampaings'
 import {Row, Col} from 'react-styled-flexboxgrid'
+import {next, back} from '../../../../../../redux/actions/next_back.actions'
 
 import {
     Input,
@@ -12,7 +15,6 @@ import {
     BtnSaveProject,
     Form,
     MsgError,
-    MsgSuccess,
     H4,
     TextConf,
     WrapperBox,
@@ -34,14 +36,25 @@ type FormData = {
     currency: string
     short_url: string
     slogan_campaing: string
+    profile_ca: number
 }
 
-const FormDescription: React.FC = () => {
+interface Icounter {
+    counter: any 
+}
+
+interface Ihandlers {
+    handleNext: typeof next; 
+    handleBack: typeof back; 
+}
+
+type AllProps = Icounter & Ihandlers
+
+const FormDescription: React.FC<AllProps> = ({counter, handleNext, handleBack}) => {
 
     let token = window.sessionStorage.getItem('token')
     let CamHeader = new CampaingHeader(token)
     let CamBody = new Campaings(token)
-    const [msg, Setmsg] = React.useState('')
     const [description, setDescripction] = React.useState('')
     const [excerpt, setExcerpt] = React.useState('')
     const [msgExcerpt, setMsgExcerpt] = React.useState('')
@@ -70,6 +83,7 @@ const FormDescription: React.FC = () => {
     }
 
     const onSubmit = handleSubmit(({title, video_main, imagen_main, public_at, short_url, slogan_campaing}) => {
+        
         if (validate()) {
             let send_data = {
                 title: title,
@@ -86,29 +100,55 @@ const FormDescription: React.FC = () => {
 
             CamBody.createCampaing(send_data)
                 .then(resp =>{
-                    console.info(resp.data.data)
-                    Setmsg('Datos guardados.')
+                    Notifications('Datos de Descripcion de proyecto guardados', 'success')
                     setMsgExcerpt('')
                     setMsgdescription('')
                     reset()
+                    handleNext()
                 }).catch(err => {
                     console.error(err)
+                    Notifications('Porfavor debe revisar los datos a ser llenados.', 'danger')
                 })
 
         }
+
     })
 
     const validate = () => {
         if (excerpt.length === 0) {
+            Notifications('El Resumen de tu proyecto es requerido','danger')
             setMsgExcerpt('este campo es requerido')
+            return false
+        }
+
+        if (excerpt.length >= 249) {
+            setMsgExcerpt('asegurate de no tener letras resaltadas o con negritas.')
+            Notifications('El Resumen no debe superar las 44 palabras','danger')
             return false
         }
 
         if (description.length === 0) {
             setMsgdescription('este campo es requerido')
+            Notifications('Es obligatorio detallar tu proyecto','danger')
             return false
         }
         return true
+    }
+
+    const Notifications = (set_messages: string, set_type: any) => {
+        store.addNotification({
+            title: 'Guardando Datos',
+            message: set_messages,
+            type: set_type,
+            insert: 'top',
+            container: 'top-right',
+            animationIn: ['animate__animated', 'animate__fadeIn'],
+            animationOut: ['animate__animated', 'animate__fadeOut'],
+            dismiss: {
+                duration: 5000,
+                onScreen: true
+            }
+        })
     }
 
     const _onChange = (event: React.ChangeEvent<HTMLInputElement>)=> {
@@ -122,12 +162,20 @@ const FormDescription: React.FC = () => {
         reader.readAsDataURL(file[0])
     }
 
+
+
     React.useEffect(()=>{
+        window.scrollTo({
+            top: 0,
+            left: 0,
+            behavior: 'smooth'
+        })
         getLast()
     },[])
 
     return (
         <>
+
         <H4>2.- DESCRIPCIÓN DEL PROYECTO </H4>
         <TextConf>Describe tu proyecto en forma clara, cuando llegues a las faces detente y piensa en cuanto nesecitas para cada  face de tu proyecto y cuanto será el costo para este item  
         </TextConf>
@@ -201,7 +249,7 @@ const FormDescription: React.FC = () => {
             <WrapperBoxRD>
                 <BoxTitle> * Resumen descripción </BoxTitle>
                 <BoxText> 
-                Este es el resumen de  descripción del post utiliza max. 200 caracteres
+                Este es el resumen de  descripción del post utiliza max. 244 caracteres o 44 palabras
                 </BoxText>
                 <Editor
                     initialValue=''
@@ -238,7 +286,6 @@ const FormDescription: React.FC = () => {
                                         file,
                                         base64
                                     )
-                                    console.log(blobInfo)
                                     blobCache.add(blobInfo)
                                     cb(blobInfo.blobUri(), {title: file.name})
                                 }
@@ -305,7 +352,6 @@ const FormDescription: React.FC = () => {
                 />
                 <MsgError>{msgdescription}</MsgError>
             </WrapperBoxRD>
-            <MsgSuccess>{msg}</MsgSuccess>
             <Row>
                 <WrapperSave>
                     <WrapBtnSave>
@@ -319,4 +365,13 @@ const FormDescription: React.FC = () => {
     )
 }
 
-export default FormDescription
+const mapStateToProps = (counter:number) => ({
+    counter,
+})
+
+const mapDispatchToProps = {
+    handleNext: next,
+    handleBack: back,
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(FormDescription)
