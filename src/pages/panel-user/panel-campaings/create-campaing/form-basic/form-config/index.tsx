@@ -2,6 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {useRouteMatch} from 'react-router-dom'
 import {useForm} from 'react-hook-form'
+import {store} from 'react-notifications-component'
 import {CategoriesCampaing} from '../../../../../../userCategories'
 import {City} from '../../../../../../userCountryCities'
 import {CampaingHeader} from '../../../../../../userCampaings'
@@ -14,7 +15,6 @@ import {
     BtnSaveProject,
     Form,
     MsgError,
-    MsgSuccess,
     WrapperBox,
     BoxTitle,
     BoxText,
@@ -55,7 +55,6 @@ const FormConfig: React.FC<AllProps> = ({counter, handleNext}) => {
     let GetCities = new City(token)
     let SaveCampaing = new CampaingHeader(token)
     const [cate, SetCate] = React.useState()
-    const [msg, Setmsg] = React.useState('')
     const [cities, SetCities] = React.useState()
     let matchUrl: any = match
     let type_campaing = matchUrl.params.campania   
@@ -76,7 +75,7 @@ const FormConfig: React.FC<AllProps> = ({counter, handleNext}) => {
 
         SaveCampaing.createCampaingHeader(send_data)
             .then(resp=>{
-                Setmsg("DATOS GUARDADOS")
+                Notifications('Datos de configuracion guardados', 'success')
                 reset()
             })
             .catch(err => {
@@ -107,6 +106,22 @@ const FormConfig: React.FC<AllProps> = ({counter, handleNext}) => {
             .catch(err => {
                 console.error(err)
             })
+    }
+
+    const Notifications = (set_messages: string, set_type: any) => {
+        store.addNotification({
+            title: 'Guardando Datos',
+            message: set_messages,
+            type: set_type,
+            insert: 'top',
+            container: 'top-right',
+            animationIn: ['animate__animated', 'animate__fadeIn'],
+            animationOut: ['animate__animated', 'animate__fadeOut'],
+            dismiss: {
+                duration: 5000,
+                onScreen: true
+            }
+        })
     }
 
     React.useEffect(()=>{
@@ -194,7 +209,6 @@ olvide incluir las tarifas administrativas en su cálculo. </BoxText>
                     {errors.amount && 'este campo es requerido'}
                 </MsgError>
         </WrapperBox>
-            <MsgSuccess>{msg}</MsgSuccess>
             <Row>
                 <WrapperSave>
                     <WrapBtnSave>

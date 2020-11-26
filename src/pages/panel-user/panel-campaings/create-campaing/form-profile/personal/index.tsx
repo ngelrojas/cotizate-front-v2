@@ -1,6 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {useForm} from 'react-hook-form'
+import {store} from 'react-notifications-component'
 import {Row, Col} from 'react-styled-flexboxgrid'
 import DefaultImg from '../../form-basic/public/default.png'
 import {PersonalProfile} from '../../../../../../userProfile'
@@ -21,7 +22,6 @@ import {ContentProfile,
         SaveProfile,
         WrapperBoxLast,
         SpanPhoto,
-        MsgSuccess
 } from './styles' 
 
 interface Icountries {
@@ -110,9 +110,7 @@ const Personal: React.FC<Iauth> = ({authenticated, currentUser})=>{
     const [personalData, SetpersonalData] = React.useState<IprofileType>()
     const [loadcity, setLoadcity] = React.useState<Icities[]>()
     const [isLoading, setIsLoading] = React.useState(true)
-    const [LoadImg, setLoadImg] = React.useState()
     const [showImg, SetShowImg] = React.useState()
-    const [displayMsg, setDisplayMsg] = React.useState('')
     const {register, handleSubmit, reset, errors} = useForm<FormData>({
         mode: 'onChange'
     })
@@ -145,21 +143,20 @@ const Personal: React.FC<Iauth> = ({authenticated, currentUser})=>{
         currentPersonal.createPP(data_profile)
             .then(resp => {
                 //console.info(resp.data)
-                setDisplayMsg('Perfil Creado')
+                Notifications('Su perfil se ha creado', 'success')
                 reset()
             }).catch(err=>{
-                console.error(err)
-                setDisplayMsg('Hubo un error en la conexion, intentelo mas tarde porfavor.')
+                Notifications('Hubo un error en la conexion, intentelo mas tarde porfavor.', 'danger')
             })
 
         ScrollTop()
 
     })
 
-    const SendImg = () => {
+    const SendImg = (photo: any) => {
 
          let data_img = {
-            file_uploaded: LoadImg
+            file_uploaded:photo 
         }
         //console.info(data_img)
         UploadImages.uploadImg(data_img)
@@ -179,6 +176,22 @@ const Personal: React.FC<Iauth> = ({authenticated, currentUser})=>{
             top:0,
             left:0,
             behavior: 'smooth'
+        })
+    }
+
+    const Notifications = (set_messages: string, set_type: any) => {
+        store.addNotification({
+            title: 'Guardando Datos',
+            message: set_messages,
+            type: set_type,
+            insert: 'top',
+            container: 'top-right',
+            animationIn: ['animate__animated', 'animate__fadeIn'],
+            animationOut: ['animate__animated', 'animate__fadeOut'],
+            dismiss: {
+                duration: 5000,
+                onScreen: true
+            }
         })
     }
 
@@ -207,26 +220,13 @@ const Personal: React.FC<Iauth> = ({authenticated, currentUser})=>{
 
     React.useEffect(()=>{
         LoadCities()
-    },[LoadImg])
+    },[])
 
     return(
         <>
         <div>
             <form onSubmit={onSubmit} encType="multipart/form-data">
             <ContentProfile>
-                <Row>
-                    <Col xs={12}>
-                        <Row center="xs">
-                            <Col xs={6}>
-                                <WrapperBox>
-                                    <MsgSuccess>
-                                    {displayMsg} 
-                                    </MsgSuccess>
-                                </WrapperBox>
-                            </Col>
-                        </Row>
-                    </Col>
-                </Row>
                 <Row>
                     <Col xs={12}>
                         <Row center="xs">

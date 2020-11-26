@@ -1,12 +1,12 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {useForm} from 'react-hook-form'
+import {store} from 'react-notifications-component'
 import {Editor} from '@tinymce/tinymce-react'
 import DefaultImg from '../public/default.png'
 import {CampaingHeader, Campaings} from '../../../../../../userCampaings'
 import {Row, Col} from 'react-styled-flexboxgrid'
 import {next, back} from '../../../../../../redux/actions/next_back.actions'
-import ScrollTop from '../../../../../../components/scrolltop'
 
 import {
     Input,
@@ -103,12 +103,13 @@ const FormDescription: React.FC<AllProps> = ({counter, handleNext, handleBack}) 
             CamBody.createCampaing(send_data)
                 .then(resp =>{
                     console.info(resp.data.data)
-                    Setmsg('Datos guardados.')
+                    Notifications('Datos de Descripcion guardados', 'success')
                     setMsgExcerpt('')
                     setMsgdescription('')
                     reset()
                 }).catch(err => {
                     console.error(err)
+                    Notifications('ERROR DE CONECCION', 'danger')
                 })
 
         }
@@ -134,6 +135,22 @@ const FormDescription: React.FC<AllProps> = ({counter, handleNext, handleBack}) 
         return true
     }
 
+    const Notifications = (set_messages: string, set_type: any) => {
+        store.addNotification({
+            title: 'Guardando Datos',
+            message: set_messages,
+            type: set_type,
+            insert: 'top',
+            container: 'top-right',
+            animationIn: ['animate__animated', 'animate__fadeIn'],
+            animationOut: ['animate__animated', 'animate__fadeOut'],
+            dismiss: {
+                duration: 5000,
+                onScreen: true
+            }
+        })
+    }
+
     const _onChange = (event: React.ChangeEvent<HTMLInputElement>)=> {
         let file: any = event.currentTarget.files 
         let reader = new FileReader()
@@ -148,12 +165,16 @@ const FormDescription: React.FC<AllProps> = ({counter, handleNext, handleBack}) 
 
 
     React.useEffect(()=>{
+        window.scrollTo({
+            top: 0,
+            left: 0,
+            behavior: 'smooth'
+        })
         getLast()
     },[])
 
     return (
         <>
-        <ScrollTop />
 
         <H4>2.- DESCRIPCIÓN DEL PROYECTO </H4>
         <TextConf>Describe tu proyecto en forma clara, cuando llegues a las faces detente y piensa en cuanto nesecitas para cada  face de tu proyecto y cuanto será el costo para este item  
