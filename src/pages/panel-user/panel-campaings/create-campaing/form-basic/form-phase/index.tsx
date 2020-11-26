@@ -3,6 +3,7 @@ import {useForm} from 'react-hook-form'
 import {Editor} from '@tinymce/tinymce-react'
 import {CampaingHeader} from '../../../../../../userCampaings'
 import {Phases} from '../../../../../../userPhases'
+import ScrollTop from '../../../../../../components/scrolltop'
 // import {Row} from 'react-styled-flexboxgrid'
 //import PhaseContext from '../../../../../../context/phases'
 //import TablePhase from './table-phase'
@@ -89,6 +90,7 @@ const FormPhase: React.FC = () => {
 
     return (
         <>
+        <ScrollTop />
             <WrapperBoxRD>
             <WrapperBox>
                 <BoxTitle> *Fases del proyecto</BoxTitle>

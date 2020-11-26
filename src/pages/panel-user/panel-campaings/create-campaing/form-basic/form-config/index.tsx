@@ -74,16 +74,16 @@ const FormConfig: React.FC<AllProps> = ({counter, handleNext}) => {
             role: campaing_type
         }
 
-/*        SaveCampaing.createCampaingHeader(send_data)*/
-            //.then(resp=>{
-                //Setmsg("DATOS GUARDADOS")
-                //reset()
-            //})
-            //.catch(err => {
-                //console.error(err)
-            /*})*/
+        SaveCampaing.createCampaingHeader(send_data)
+            .then(resp=>{
+                Setmsg("DATOS GUARDADOS")
+                reset()
+            })
+            .catch(err => {
+                console.error(err)
+            })
+
         handleNext()
-        console.info(counter) 
 
     })
 

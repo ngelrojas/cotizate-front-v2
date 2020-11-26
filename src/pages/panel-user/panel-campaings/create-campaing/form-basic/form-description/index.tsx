@@ -1,9 +1,12 @@
 import React from 'react'
+import {connect} from 'react-redux'
 import {useForm} from 'react-hook-form'
 import {Editor} from '@tinymce/tinymce-react'
 import DefaultImg from '../public/default.png'
 import {CampaingHeader, Campaings} from '../../../../../../userCampaings'
 import {Row, Col} from 'react-styled-flexboxgrid'
+import {next, back} from '../../../../../../redux/actions/next_back.actions'
+import ScrollTop from '../../../../../../components/scrolltop'
 
 import {
     Input,
@@ -37,7 +40,18 @@ type FormData = {
     profile_ca: number
 }
 
-const FormDescription: React.FC = () => {
+interface Icounter {
+    counter: any 
+}
+
+interface Ihandlers {
+    handleNext: typeof next; 
+    handleBack: typeof back; 
+}
+
+type AllProps = Icounter & Ihandlers
+
+const FormDescription: React.FC<AllProps> = ({counter, handleNext, handleBack}) => {
 
     let token = window.sessionStorage.getItem('token')
     let CamHeader = new CampaingHeader(token)
@@ -71,6 +85,7 @@ const FormDescription: React.FC = () => {
     }
 
     const onSubmit = handleSubmit(({title, video_main, imagen_main, public_at, short_url, slogan_campaing}) => {
+        
         if (validate()) {
             let send_data = {
                 title: title,
@@ -97,6 +112,8 @@ const FormDescription: React.FC = () => {
                 })
 
         }
+
+        handleNext()
     })
 
     const validate = () => {
@@ -128,12 +145,16 @@ const FormDescription: React.FC = () => {
         reader.readAsDataURL(file[0])
     }
 
+
+
     React.useEffect(()=>{
         getLast()
     },[])
 
     return (
         <>
+        <ScrollTop />
+
         <H4>2.- DESCRIPCIÓN DEL PROYECTO </H4>
         <TextConf>Describe tu proyecto en forma clara, cuando llegues a las faces detente y piensa en cuanto nesecitas para cada  face de tu proyecto y cuanto será el costo para este item  
         </TextConf>
@@ -324,4 +345,13 @@ const FormDescription: React.FC = () => {
     )
 }
 
-export default FormDescription
+const mapStateToProps = (counter:number) => ({
+    counter,
+})
+
+const mapDispatchToProps = {
+    handleNext: next,
+    handleBack: back,
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(FormDescription)

@@ -145,12 +145,14 @@ const Personal: React.FC<Iauth> = ({authenticated, currentUser})=>{
         currentPersonal.createPP(data_profile)
             .then(resp => {
                 //console.info(resp.data)
-                setDisplayMsg('Perfil Creado.')
+                setDisplayMsg('Perfil Creado')
                 reset()
             }).catch(err=>{
                 console.error(err)
                 setDisplayMsg('Hubo un error en la conexion, intentelo mas tarde porfavor.')
             })
+
+        ScrollTop()
 
     })
 
@@ -171,7 +173,14 @@ const Personal: React.FC<Iauth> = ({authenticated, currentUser})=>{
                 setIsLoading(false)
             })       
     }
- 
+    
+    const ScrollTop = () => {
+        window.scrollTo({
+            top:0,
+            left:0,
+            behavior: 'smooth'
+        })
+    }
 
     const _onChange = (event: React.ChangeEvent<HTMLInputElement>)=> {
         let file: any = event.currentTarget.files 
@@ -205,6 +214,19 @@ const Personal: React.FC<Iauth> = ({authenticated, currentUser})=>{
         <div>
             <form onSubmit={onSubmit} encType="multipart/form-data">
             <ContentProfile>
+                <Row>
+                    <Col xs={12}>
+                        <Row center="xs">
+                            <Col xs={6}>
+                                <WrapperBox>
+                                    <MsgSuccess>
+                                    {displayMsg} 
+                                    </MsgSuccess>
+                                </WrapperBox>
+                            </Col>
+                        </Row>
+                    </Col>
+                </Row>
                 <Row>
                     <Col xs={12}>
                         <Row center="xs">
@@ -572,19 +594,7 @@ const Personal: React.FC<Iauth> = ({authenticated, currentUser})=>{
                 </Row>
 
             </ContentProfile>
-                <Row>
-                    <Col xs={12}>
-                        <Row center="xs">
-                            <Col xs={6}>
-                                <WrapperBox>
-                                    <MsgSuccess>
-                                    {displayMsg} 
-                                    </MsgSuccess>
-                                </WrapperBox>
-                            </Col>
-                        </Row>
-                    </Col>
-                </Row>
+
                 <Row>
                     <Col xs={12}>
                         <Row center="xs">

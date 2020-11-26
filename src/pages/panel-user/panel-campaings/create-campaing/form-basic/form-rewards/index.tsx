@@ -6,6 +6,7 @@ import {Row, Col} from 'react-styled-flexboxgrid'
 import {CampaingHeader} from '../../../../../../userCampaings'
 import {Cities} from '../../../../../../userCities'
 import {Reward} from '../../../../../../userReward'
+import ScrollTop from '../../../../../../components/scrolltop'
 import {
     Input,
     BtnAdd,
@@ -134,6 +135,7 @@ const FormRewards: React.FC = () => {
     return (
         <>
 
+        <ScrollTop />
         <H4>3- RECOMPENSAS </H4>
         <TextConf>Antes de ofrecer una recompensa, es importante tener mapeados todos los procesos de producción y entrega.</TextConf>
         

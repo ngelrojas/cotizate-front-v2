@@ -132,13 +132,23 @@ const Association: React.FC<Iauth> = ({authenticated, currentUser})=>{
         companyProfile.createCP(data_profile)
             .then(resp => {
                 //console.info(resp.data)
-                setDisplayMsg('Perfil de Institucion guardada.')
+                setDisplayMsg('Perfil de Institucion guardada')
                 reset()
             }).catch(err=>{
                 console.error(err)
                 setDisplayMsg('Existe problemas de red, intentelo mas tarde porfavor.')
             })
+
+        ScrollTop()
     })
+
+    const ScrollTop = () => {
+        window.scrollTo({
+            top:0,
+            left:0,
+            behavior: 'smooth'
+        })
+    }
 
     const _onChange = (event: React.ChangeEvent<HTMLInputElement>)=> {
         let file: any = event.currentTarget.files 
@@ -171,6 +181,19 @@ const Association: React.FC<Iauth> = ({authenticated, currentUser})=>{
         <div>
             <form onSubmit={onSubmit} encType="multipart/form-data">
             <ContentProfile>
+                <Row>
+                    <Col xs={12}>
+                        <Row center="xs">
+                            <Col xs={6}>
+                                <WrapperBox>
+                                    <MsgSuccess>
+                                    {displayMsg} 
+                                    </MsgSuccess>
+                                </WrapperBox>
+                            </Col>
+                        </Row>
+                    </Col>
+                </Row>
                 <Row>
                     <Col xs={12}>
                         <Row center="xs">
@@ -501,19 +524,7 @@ const Association: React.FC<Iauth> = ({authenticated, currentUser})=>{
                 </Row>
 
             </ContentProfile>
-                <Row>
-                    <Col xs={12}>
-                        <Row center="xs">
-                            <Col xs={6}>
-                                <WrapperBox>
-                                    <MsgSuccess>
-                                    {displayMsg} 
-                                    </MsgSuccess>
-                                </WrapperBox>
-                            </Col>
-                        </Row>
-                    </Col>
-                </Row>
+
                 <Row>
                     <Col xs={12}>
                         <Row center="xs">

@@ -24,6 +24,14 @@ const FormBasic: React.FC<AllProps> = ({counter, handle_Next, handle_Back}) => {
     const [menu, setMenu] = React.useState(1)
 
     const handleBack=()=>{
+        if(counter === 1){
+            setMenu(counter - 1)
+        }
+
+        if(counter === 2){
+            setMenu(counter - 2)
+        }
+
         let rest:number = 0 
         if(menu > 1){
             rest = menu - 1 
@@ -46,9 +54,11 @@ const FormBasic: React.FC<AllProps> = ({counter, handle_Next, handle_Back}) => {
     }
 
     const stepForm = (index: number) => {
+
         if(counter >= 1 ){
             index = counter + index
         }
+
         switch(index){
             case 1: 
                 return <FormConfig />
@@ -70,7 +80,6 @@ const FormBasic: React.FC<AllProps> = ({counter, handle_Next, handle_Back}) => {
                stepForm(menu) 
             }
             <div>           
-            COUNTER {counter}
             <WrapBtn>
                 <BtnBack onClick={handleBack}>volver</BtnBack>
             </WrapBtn>

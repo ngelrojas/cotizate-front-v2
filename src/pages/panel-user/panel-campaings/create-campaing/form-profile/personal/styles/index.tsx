@@ -89,4 +89,5 @@ export const MsgSuccess = styled.p`
     text-align: center;
     margin-top: 4%;
     margin-bottom: 4%;
+    text-transform: uppercase;
 `
