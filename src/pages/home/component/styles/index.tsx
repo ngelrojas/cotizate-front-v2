@@ -18,7 +18,7 @@ export const Section = styled.section`
     }
 `
 export const SectionDetails = styled.section`
-    width: 33%;
+    width: 95%;
     background: #F2F2F2;
     padding-left: 0px;
     padding-bottom: 0px;
@@ -27,7 +27,10 @@ export const SectionDetails = styled.section`
     margin: 1%;
 
     @media ${device.tablet} {
-        width: 100%;
+        width: 92%;
+    }
+    @media ${device.mobileL} {
+        width: 92%;
     }
 `
 export const Article = styled.article`

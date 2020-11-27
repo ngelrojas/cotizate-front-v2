@@ -6,11 +6,13 @@ import Banner from './component/Banner'
 import Portada from './component/Portada'
 import Categorias from './component/Categorias';
 import Patrocinadores from './component/Patrocinadores';
-import Carousel,{ slidesToShowPlugin } from '@brainhubeu/react-carousel';
-import '@brainhubeu/react-carousel/lib/style.css';
+// import Carousel,{ slidesToShowPlugin } from '@brainhubeu/react-carousel';
+// import '@brainhubeu/react-carousel/lib/style.css';
 import Projects from './component/projects';
 import { useDispatch, useSelector } from "react-redux";
 import * as Action from '../../redux/actions/homeAction';
+import Carousel from 'react-multi-carousel';
+import 'react-multi-carousel/lib/styles.css';
 
 const Home: React.FC = () => {
 
@@ -37,6 +39,26 @@ useEffect(() => {
 
 }, [featuredProjects,proyectosFinalizados,finalizedProjects]);
 
+        const responsive = {
+          superLargeDesktop: {
+            // the naming can be any, depends on you.
+            breakpoint: { max: 4000, min: 3000 },
+            items: 5
+          },
+          desktop: {
+            breakpoint: { max: 3000, min: 1024 },
+            items: 3
+          },
+          tablet: {
+            breakpoint: { max: 1024, min: 464 },
+            items: 2
+          },
+          mobile: {
+            breakpoint: { max: 464, min: 0 },
+            items: 1
+          }
+        };
+
     return (
         <Content>
             <DivPortada >
@@ -48,18 +70,7 @@ useEffect(() => {
              {proyectosDestacados?
              <div style={{ background:'#F9F0E8'}}>             
                 <Title>PROYECTOS DESTACADOS </Title>
-                <Carousel 
-                plugins={[
-                  'infinite',
-                  'arrows',
-                  {
-                    resolve: slidesToShowPlugin,
-                    options: {
-                     numberOfSlides: 3
-                    }
-                  },
-                ]}                
-                >
+                <Carousel  responsive={responsive} >
                   {featuredProjects.map((value : any, index : number) =>(
                      <Projects data={value} />
                   ))}
@@ -70,7 +81,7 @@ useEffect(() => {
             </div>   
              : null }
              <Br/>
-             {proyectosFinalizados?
+             {/* {proyectosFinalizados?
              <div style={{ background:'#F9F0E8'}}>             
                 <Title>PROYECTOS FINALIZADOS </Title>
                 <Carousel 
@@ -118,7 +129,7 @@ useEffect(() => {
                 </Carousel>
                
             </div>   
-             : null }
+             : null } */}
              <Br/>
              <div>
                   <Title>CATEGORIAS </Title>
