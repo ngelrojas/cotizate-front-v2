@@ -100,7 +100,9 @@ useEffect(() => {
              <div style={{ background:'#F9F0E8'}}>        
                 <Br/>     
                 <Title>PROYECTOS FINALIZADOS </Title>
-                <Carousel responsive={responsive} >
+                <Carousel responsive={responsive}
+                  arrows={false}
+                >
                   {listCausasSociales.map((value : any, index : number) =>(
                      <Projects data={value} />
                   ))}

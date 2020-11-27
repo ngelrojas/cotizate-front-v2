@@ -158,8 +158,7 @@ const Projects: React.FC<Iproyect> = (props)=> {
            
 
                 <Row>   
-                   <Col xs={6} sm={6} md={6} lg={6}>
-                   {/* <Col sm={12} md={12} lg={6}> */}
+                   <Col xs={6} sm={6} md={6} lg={6}>                   
                         <Row start="lg">
                             <Col xs={12} sm={12} md={12} lg={12}>
                                <Alcanzado>
@@ -168,8 +167,7 @@ const Projects: React.FC<Iproyect> = (props)=> {
                             </Col>
                         </Row>
                     </Col>
-                    <Col xs={6} sm={6} md={6} lg={6}>
-                    {/* <Col sm={12} md={12} lg={6}> */}
+                    <Col xs={6} sm={6} md={6} lg={6}>                    
                         <Row end="lg">
                             <Col xs={12} sm={12} md={12} lg={12}>                             
                                <NumberMonto> {props.data.header.amount_reached } Bs</NumberMonto>

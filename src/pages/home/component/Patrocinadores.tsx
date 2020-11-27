@@ -42,38 +42,8 @@ const Patrocinadores: React.FC = () => {
       };
 
     return (
-            // <Carousel
-            // plugins={[
-            //     'infinite',
-            //     'arrows',
-            //     {
-            //       resolve: slidesToShowPlugin,
-            //       options: {
-            //        numberOfSlides: 3
-            //       }
-            //     },
-            //   ]}   
-            // >
-            //     {/* <Sectionportada> */}
-            //        <ImgPatrocinador
-            //             src={Santacruz}
-            //             alt="cotizate"
-            //         />
-            //         <ImgPatrocinador
-            //             src={Comunity}
-            //             alt="cotizate"
-            //         />
-            //         <ImgPatrocinador
-            //             src={Ypfb}
-            //             alt="cotizate"
-            //         />
-      
-            //     {/* </Sectionportada> */}
-                
-            // </Carousel> 
-            
-            <Carousel 
-        
+
+            <Carousel         
             // swipeable={false}
             // draggable={false}
             // showDots={true}

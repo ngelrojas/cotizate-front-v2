@@ -68,19 +68,21 @@ export const Excerpt = styled.p`
     color: #3b3b3b;
     margin: 2%;
     text-align: justify;
+    width: 97%;
     
     @media ${device.tablet} {
         margin: 0%;
         padding-bottom: 8%;
+        width: 100%;
     }
     @media ${device.mobileM} {
-        width: 17%;
+        width: 100%;
         padding-bottom: 2%;
     }
 `
 export const Description = styled.p`
 
-    width: 270px;
+    width: 97%;
     height: 26px;
     left: 50px;
     margin: 2%;
@@ -99,9 +101,10 @@ color: #6C6C6C;
     @media ${device.tablet} {
         margin: 0%;
         padding-bottom: 8%;
+        width: 100%;
     }
     @media ${device.mobileM} {
-        width: 17%;
+        width: 100%;
         padding-bottom: 2%;
     }
 `
@@ -146,11 +149,11 @@ export const Alcanzado = styled.div`
     line-height: 12px;
     @media ${device.tablet} {
         width: 80%;
-        margin: 1%;
+        padding-left: 1px;
         margin-bottom: 10%;
     }
     @media ${device.mobileM} {
-        margin-right: 0%;
+        padding-left: 1px;
         width: 100%;
         font-style: normal;
         line-height: 12px;
@@ -165,9 +168,11 @@ export const Porcentaje = styled.div`
    
     @media ${device.tablet} {
         width: 100%;
-        margin: 1%;
-        padding-left: 5px;
+        padding-left: 1px;
         margin-bottom: 5%;
+    }
+    @media ${device.mobileM} {
+        
     }
 `
 export const Place = styled.div`
