@@ -8,7 +8,6 @@ import {PersonalProfile} from '../../../../../../userProfile'
 import {User} from '../../../../../../user'
 import {City} from '../../../../../../userCountryCities'
 import {UploadFiles} from '../../../../../../userImg'
-import 'react-notifications-component/dist/theme.css'
 import {ContentProfile,
         Input, 
         WrapperBox,
