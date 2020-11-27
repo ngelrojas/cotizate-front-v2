@@ -80,22 +80,12 @@ useEffect(() => {
                
             </div>   
              : null }
-             <Br/>
-             {/* {proyectosFinalizados?
-             <div style={{ background:'#F9F0E8'}}>             
+             
+             {proyectosFinalizados?
+             <div style={{ background:'#F9F0E8'}}>     
+              <Br/>        
                 <Title>PROYECTOS FINALIZADOS </Title>
-                <Carousel 
-                 plugins={[
-                  'infinite',
-                  'arrows',
-                  {
-                    resolve: slidesToShowPlugin,
-                    options: {
-                     numberOfSlides: 3
-                    }
-                  },
-                ]}     
-                >
+                <Carousel  responsive={responsive}   >
                   {finalizedProjects.map((value : any, index : number) =>(
                      <Projects data={value} />
                   ))}
@@ -105,31 +95,20 @@ useEffect(() => {
                
             </div>   
              : null }
-             <Br/>
+             
              {causasSociales?
-             <div style={{ background:'#F9F0E8'}}>             
+             <div style={{ background:'#F9F0E8'}}>        
+                <Br/>     
                 <Title>PROYECTOS FINALIZADOS </Title>
-                <Carousel 
-                plugins={[
-                  'infinite',
-                  'arrows',
-                  {
-                    resolve: slidesToShowPlugin,
-                    options: {
-                     numberOfSlides: 3
-                    }
-                  },
-                ]}                
-                >
+                <Carousel responsive={responsive} >
                   {listCausasSociales.map((value : any, index : number) =>(
                      <Projects data={value} />
                   ))}
-                    
-                
+                                  
                 </Carousel>
                
             </div>   
-             : null } */}
+             : null }
              <Br/>
              <div>
                   <Title>CATEGORIAS </Title>
