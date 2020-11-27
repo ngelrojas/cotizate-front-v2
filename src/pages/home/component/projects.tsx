@@ -127,7 +127,7 @@ const Projects: React.FC<Iproyect> = (props)=> {
  
                 </Row>
                 <Row>
-                    <Col sm={12} md={12} lg={12}>
+                    <Col xs={12} sm={12} md={12} lg={12}>
                         <Excerpt>
                             <Go to="/my-article">
                                 {props.data.excerpt}
@@ -136,7 +136,7 @@ const Projects: React.FC<Iproyect> = (props)=> {
                     </Col>
                 </Row>
                 <Row>
-                    <Col sm={12} md={12} lg={12}>
+                    <Col xs={12} sm={12} md={12} lg={12}>
                         <Description>
                             {/* <Go to="/"> */}
                                 {props.data.excerpt}
@@ -145,9 +145,9 @@ const Projects: React.FC<Iproyect> = (props)=> {
                     </Col>
                 </Row>
                 <Row>
-                    <Col sm={12} md={12} lg={12}>
+                    <Col xs={12} sm={12} md={12} lg={12}>
                         <Row start="lg">
-                            <Col sm={12} md={12} lg={12}>
+                            <Col xs={12} sm={12} md={12} lg={12}>
                                 <Porcentaje>
                                 <LineProgress bgcolor={'#7CC142'} completed={props.data.header.percent_reached} />
                                 </Porcentaje>                            
