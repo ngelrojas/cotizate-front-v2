@@ -131,7 +131,7 @@ export const Btnflotante = styled.button`
         left:44%;
     }
     @media ${device.mobileM} {
-        bottom:23%;
+        bottom:15%;
         left:33%;
     }
 `
