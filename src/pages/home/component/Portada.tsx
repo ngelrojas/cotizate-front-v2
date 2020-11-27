@@ -18,13 +18,13 @@ const Portada: React.FC = () => {
     return (
         <>
             <Sectionportada  >
-               {/* <Div2 > */}
+               <Div2 >
                     <Img
                         src={PortadaImg}
                         alt="cotizate"
                     />
                     <Btnflotante onClick={handleSubmit} > Registrate  </Btnflotante>
-               {/* </Div2> */}
+               </Div2>
 
             </Sectionportada>      
         </>

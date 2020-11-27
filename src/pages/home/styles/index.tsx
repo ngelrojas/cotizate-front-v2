@@ -119,13 +119,21 @@ export const Link2 = styled(Link)`
 `
 export const Btnflotante = styled.button`
     position: absolute;
-    bottom:25%;
-    left:45%;
+    bottom:18%;
+    left:44%;
     background-color:#1986C6;
     border-radius:1.5em;
     color:white;
     text-transform:uppercase;
     padding:1em 1.5em;
+    @media ${device.tablet} {
+        bottom:18%;
+        left:44%;
+    }
+    @media ${device.mobileM} {
+        bottom:23%;
+        left:33%;
+    }
 `
 export const DivPortada = styled.div`
 text-align: center;
