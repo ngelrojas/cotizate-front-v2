@@ -158,19 +158,20 @@ const Projects: React.FC<Iproyect> = (props)=> {
            
 
                 <Row>   
-                   <Col sm={6} md={6} lg={6}>
+                   <Col xs={6} sm={6} md={6} lg={6}>
+                   {/* <Col sm={12} md={12} lg={6}> */}
                         <Row start="lg">
-                            <Col sm={12} md={12} lg={12}>
+                            <Col xs={12} sm={12} md={12} lg={12}>
                                <Alcanzado>
                                     <p> {props.data.header.percent_reached}{'% '} ALCANZADO</p>                                    
                                 </Alcanzado>  
                             </Col>
                         </Row>
                     </Col>
-
-                    <Col sm={6} md={6} lg={6}>
+                    <Col xs={6} sm={6} md={6} lg={6}>
+                    {/* <Col sm={12} md={12} lg={6}> */}
                         <Row end="lg">
-                            <Col sm={12} md={12} lg={12}>                             
+                            <Col xs={12} sm={12} md={12} lg={12}>                             
                                <NumberMonto> {props.data.header.amount_reached } Bs</NumberMonto>
                             </Col>
                         </Row>
@@ -178,9 +179,9 @@ const Projects: React.FC<Iproyect> = (props)=> {
                 </Row>
                
                <Row>
-                   <Col sm={6} md={6} lg={6}>
+                   <Col xs={6} sm={6} md={6} lg={6}>
                         <Row start="lg">
-                            <Col sm={12} md={12} lg={12}>
+                            <Col xs={12} sm={12} md={12} lg={12}>
                                <CodigoFaltante>
                                     <p>Faltan: {props.data.header.qty_day_left} Dias</p>                                    
                                 </CodigoFaltante>  
@@ -188,9 +189,9 @@ const Projects: React.FC<Iproyect> = (props)=> {
                         </Row>
                     </Col>
 
-                    <Col sm={6} md={6} lg={6}>
+                    <Col xs={6} sm={6} md={6} lg={6}>
                         <Row end="lg">
-                            <Col sm={12} md={12} lg={12}>                             
+                            <Col xs={12} sm={12} md={12} lg={12}>                             
                                <PercentNumber>Cod: {props.data.header.code_campaing }</PercentNumber>
                             </Col>
                         </Row>

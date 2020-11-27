@@ -145,10 +145,17 @@ export const Alcanzado = styled.div`
     font-size: 10px;
     line-height: 12px;
     @media ${device.tablet} {
-        width: 100%;
+        width: 80%;
         margin: 1%;
         margin-bottom: 10%;
     }
+    @media ${device.mobileM} {
+        margin-right: 0%;
+        width: 100%;
+        font-style: normal;
+        line-height: 12px;
+    }
+
 `
 export const Porcentaje = styled.div`
    
