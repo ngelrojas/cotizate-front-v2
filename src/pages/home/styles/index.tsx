@@ -105,6 +105,7 @@ export const Go = styled(Link)`
 export const Div2 = styled.div`
     display:inline-block;
     position:relative;
+    width:100%;
 `
 export const Link2 = styled(Link)`
     position: absolute;
@@ -137,6 +138,7 @@ export const Btnflotante = styled.button`
 `
 export const DivPortada = styled.div`
 text-align: center;
+
 
 
  
