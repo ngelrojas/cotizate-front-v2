@@ -17,26 +17,24 @@ const PanelUser: React.FC= () => {
 
     return (
         <Content>
-            <Grid>
-                <Row>
-                    <TabContent>
-                        <TabLists>
-                            <TabItem>datos personales</TabItem>
-                            <TabItem>perfil personal</TabItem>
-                            <TabItem>datos de empresa</TabItem>
-                        </TabLists>
-                        <TabPanels>
-                            <Profile />
-                        </TabPanels>
-                        <TabPanels>
-                            <ProfilePersonal />
-                        </TabPanels>
-                        <TabPanels>
-                            <ProfileCompany />
-                        </TabPanels>
-                    </TabContent>
-                </Row>
-            </Grid>
+            <Row>
+                <TabContent>
+                    <TabLists>
+                        <TabItem>datos personales</TabItem>
+                        <TabItem>perfil personal</TabItem>
+                        <TabItem>datos de empresa</TabItem>
+                    </TabLists>
+                    <TabPanels>
+                        <Profile />
+                    </TabPanels>
+                    <TabPanels>
+                        <ProfilePersonal />
+                    </TabPanels>
+                    <TabPanels>
+                        <ProfileCompany />
+                    </TabPanels>
+                </TabContent>
+            </Row>
         </Content>
     )
 }
