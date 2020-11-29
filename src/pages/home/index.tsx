@@ -78,7 +78,7 @@ useEffect(() => {
                 </Carousel>               
             </div>   
              : null }             
-             
+
              {proyectosFinalizados?
              <div style={{ background:'#F9F0E8'}}>     
               <Br/>        
@@ -116,6 +116,7 @@ useEffect(() => {
                   <LineCeleste/>
                   <Br/>
                     <Patrocinadores/>
+                  <Br/>
                   <LineCeleste/>
              </div>
         </Content>

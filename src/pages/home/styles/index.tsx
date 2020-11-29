@@ -179,7 +179,7 @@ export const DivCategoria = styled.div`
     }
 `
 export const ImgPatrocinador = styled.img`
-    width: 40%;
+    width: 100%;
     border-radius: 2px;
     justify-content:center;
     @media ${device.tablet} {
