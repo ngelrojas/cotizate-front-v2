@@ -167,8 +167,9 @@ export const ImgCategoria = styled.img`
     border-radius: 2px;
 `
 export const DivCategoria = styled.div`
-text-align: center;
+  text-align: center;
   width: 50%;
+  
   @media ${device.tablet} {
     width: 70%;
     }

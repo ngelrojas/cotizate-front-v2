@@ -40,20 +40,20 @@ const Portada: React.FC = () => {
                 <Sectionportada>
                 <Row>
                 {listaCategorias.map((value : any, index : number) =>(
-                     <Col xs={2} sm={2} md={2} >
-                     <Row end="lg">
+                     <Col xs={4} sm={2} md={2} >
+                      <Row center="xs">
                          <DivCategoria>
                              <ImgCategoria
                                  src={Ecologico}
-                                 alt="Ecologico"
+                                 alt={value.descripcion}
                              />      
                              <TitleCategoria> {value.name}</TitleCategoria>    
                          </DivCategoria>                                           
-                     </Row>
-                 </Col>
+                      </Row>
+                     </Col>
                   ))}
                         {/* <Col xs={2} sm={2} md={2} >
-                            <Row end="lg">
+                            <Row center="xs">
                                 <DivCategoria>
                                     <ImgCategoria
                                         src={Ecologico}
@@ -64,7 +64,7 @@ const Portada: React.FC = () => {
                             </Row>
                         </Col>
                         <Col xs={2} sm={2} md={2} >
-                            <Row end="lg">  
+                            <Row center="xs">  
                                 <DivCategoria>
                                     <ImgCategoria
                                         src={Fotografia}
@@ -75,7 +75,7 @@ const Portada: React.FC = () => {
                             </Row>
                         </Col>
                         <Col xs={2} sm={2} md={2} >
-                            <Row end="lg">                        
+                            <Row center="xs">                        
                                 <DivCategoria>
                                     <ImgCategoria
                                         src={Games}
@@ -86,7 +86,7 @@ const Portada: React.FC = () => {
                             </Row>
                         </Col>
                         <Col xs={2} sm={2} md={2} >
-                            <Row end="lg">     
+                            <Row center="xs">     
                                 <DivCategoria>
                                     <ImgCategoria
                                         src={Quimica}
@@ -97,7 +97,7 @@ const Portada: React.FC = () => {
                             </Row>
                         </Col>
                         <Col xs={2} sm={2} md={2} >
-                            <Row end="lg"> 
+                            <Row center="xs"> 
                                 <DivCategoria>
                                     <ImgCategoria
                                         src={Salud}
@@ -106,7 +106,19 @@ const Portada: React.FC = () => {
                                     <TitleCategoria> Salud</TitleCategoria>       
                                     </DivCategoria>                  
                             </Row>
-                        </Col>                                  */}
+                        </Col>        
+                        <Col xs={2} sm={2} md={2} >
+                            <Row center="xs"> 
+                                <DivCategoria>
+                                    <ImgCategoria
+                                        src={Salud}
+                                        alt="Salud"
+                                    />      
+                                    <TitleCategoria> Salud</TitleCategoria>       
+                                    </DivCategoria>                  
+                            </Row>
+                        </Col>                                                      */}
+
                 </Row>      
                 </Sectionportada>
                 <LineMostaza/>
