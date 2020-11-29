@@ -41,8 +41,7 @@ type FormData = {
 
 }
 
-
-const FormRewards: React.FC = () => {
+const FormRewards: React.FC= () => {
     let token = window.sessionStorage.getItem('token')
     let CamHeader = new CampaingHeader(token)
     let Rewards = new Reward(token)
@@ -154,7 +153,6 @@ const FormRewards: React.FC = () => {
         })
         getLast()
         listCities()
-        
     },[])
 
     return (
