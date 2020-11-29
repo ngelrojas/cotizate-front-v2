@@ -38,7 +38,7 @@ const Portada: React.FC = () => {
             <>
             <LineMostaza/>
                 <Sectionportada>
-                <Row>
+                <Row center="xs">
                 {listaCategorias.map((value : any, index : number) =>(
                      <Col xs={4} sm={2} md={2} >
                       <Row center="xs">
