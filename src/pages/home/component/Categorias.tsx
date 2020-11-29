@@ -19,27 +19,21 @@ import Tegnologia from '../images/categorias/tegnologia.png';
 const Portada: React.FC = () => {
     const history = useHistory();
     const dispatch = useDispatch();
-
     const {
-        categoriasStatus,
         listaCategorias
       } = useSelector((stateSelector: any) => {
         return stateSelector.home;
       });
-
-
     useEffect(() => {
          dispatch(Action.getCategorias());
     }, [])
-    const  handleSubmit = () => {        
-        
-    };
+
     return (
             <>
             <LineMostaza/>
                 <Sectionportada>
                 <Row center="xs">
-                {listaCategorias.map((value : any, index : number) =>(
+                  {listaCategorias.map((value : any, index : number) =>(
                      <Col xs={4} sm={2} md={2} >
                       <Row center="xs">
                          <DivCategoria>
@@ -51,73 +45,7 @@ const Portada: React.FC = () => {
                          </DivCategoria>                                           
                       </Row>
                      </Col>
-                  ))}
-                        {/* <Col xs={2} sm={2} md={2} >
-                            <Row center="xs">
-                                <DivCategoria>
-                                    <ImgCategoria
-                                        src={Ecologico}
-                                        alt="Ecologico"
-                                    />      
-                                    <TitleCategoria> Ecologico</TitleCategoria>    
-                                    </DivCategoria>                                           
-                            </Row>
-                        </Col>
-                        <Col xs={2} sm={2} md={2} >
-                            <Row center="xs">  
-                                <DivCategoria>
-                                    <ImgCategoria
-                                        src={Fotografia}
-                                        alt="Fotografia"
-                                    />      
-                                    <TitleCategoria> Fotografia</TitleCategoria>       
-                                    </DivCategoria>                        
-                            </Row>
-                        </Col>
-                        <Col xs={2} sm={2} md={2} >
-                            <Row center="xs">                        
-                                <DivCategoria>
-                                    <ImgCategoria
-                                        src={Games}
-                                        alt="Games"
-                                    />      
-                                    <TitleCategoria> Games</TitleCategoria>       
-                                    </DivCategoria>                      
-                            </Row>
-                        </Col>
-                        <Col xs={2} sm={2} md={2} >
-                            <Row center="xs">     
-                                <DivCategoria>
-                                    <ImgCategoria
-                                        src={Quimica}
-                                        alt="Quimica"
-                                    />      
-                                    <TitleCategoria> Quimica</TitleCategoria>       
-                                    </DivCategoria>                  
-                            </Row>
-                        </Col>
-                        <Col xs={2} sm={2} md={2} >
-                            <Row center="xs"> 
-                                <DivCategoria>
-                                    <ImgCategoria
-                                        src={Salud}
-                                        alt="Salud"
-                                    />      
-                                    <TitleCategoria> Salud</TitleCategoria>       
-                                    </DivCategoria>                  
-                            </Row>
-                        </Col>        
-                        <Col xs={2} sm={2} md={2} >
-                            <Row center="xs"> 
-                                <DivCategoria>
-                                    <ImgCategoria
-                                        src={Salud}
-                                        alt="Salud"
-                                    />      
-                                    <TitleCategoria> Salud</TitleCategoria>       
-                                    </DivCategoria>                  
-                            </Row>
-                        </Col>                                                      */}
+                  ))}                                            
 
                 </Row>      
                 </Sectionportada>

@@ -113,11 +113,12 @@ useEffect(() => {
             </div>   
              : null }
              <Br/>
-             <div>
-                  <Title>CATEGORIAS </Title>
-                  {/* <Br/> */}
-                  <Categorias />
-             </div>
+             
+              <div>
+                    <Title>CATEGORIAS </Title>                  
+                    <Categorias />
+              </div>
+            
                <Br/>
              <div>
                   <Title>PATROCINADORES </Title>
