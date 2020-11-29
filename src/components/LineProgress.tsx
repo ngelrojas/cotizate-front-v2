@@ -11,17 +11,14 @@ const LineProgress: React.FC<Istyles> = (props)=> {
         width: '100%',
         backgroundColor: "#C4C4C4",
         borderRadius: 50,
-        // margin: 50
       }
     
       const fillerStyles = {
         height: '100%',
         width: `${props.completed}%`, 
-        // width: `50%`,
         backgroundColor: props.bgcolor,
-        // backgroundColor: '#7CC142',
-        borderRadius: 'inherit',
-        textAlign: 'right'
+        borderRadius: 'inherit'
+        // textAlign: 'right'
       }
       const labelStyles = {
         padding: 1,
