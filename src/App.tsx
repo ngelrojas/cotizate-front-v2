@@ -20,6 +20,8 @@ import Crowdfunding from './pages/crowdfunding'
 import Cotizate from './pages/cotizate'
 import PageNotFound from './pages/404'
 import {CheckAuthentication} from './redux/auth'
+import ReactNotification from 'react-notifications-component'
+import 'react-notifications-component/dist/theme.css'
 
 const App: React.FC = () => {
     useEffect(() => {
@@ -28,6 +30,7 @@ const App: React.FC = () => {
     return (
         <Layout>
             <Router>
+                <ReactNotification />
                 <Header />
 
                 <Switch>

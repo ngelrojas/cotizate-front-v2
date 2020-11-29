@@ -38,9 +38,11 @@
         "react-moment": "^0.9.7",
         "react-multi-carousel": "^2.5.5",
         "react-multi-select-component": "^2.0.11",
+        "react-notifications-component": "^3.0.2",
         "react-redux": "^7.2.0",
         "react-router-dom": "^5.1.2",
         "react-scripts": "^3.4.4",
+        "react-step-progress": "^1.0.3",
         "react-styled-flexboxgrid": "^3.2.1",
         "react-sweet-progress": "^1.1.2",
         "react-tabs": "^3.1.0",
@@ -75,6 +77,7 @@
         ]
     },
     "devDependencies": {
-        "@types/brainhubeu__react-carousel": "^2.0.1"
+        "@types/brainhubeu__react-carousel": "^2.0.1",
+        "@types/react-notifications-component": "^2.4.0"
     }
 }

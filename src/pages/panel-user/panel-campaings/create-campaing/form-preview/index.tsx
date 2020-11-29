@@ -2,8 +2,11 @@ import React from 'react'
 import {Row, Col} from 'react-styled-flexboxgrid'
 import {Table, Th, Td, Done, Err, Preview} from './styles'
 import {CampaingHeader, CampaingBody} from '../../../../../userCampaings'
+import {Phases} from '../../../../../userPhases'
+import {Reward} from '../../../../../userReward'
+import {PersonalProfile} from '../../../../../userProfile'
 
-type IcampTypeBody = {
+interface IcampTypeBody {
     created_at: string,
     currency: number,
     description: string,
@@ -26,7 +29,17 @@ const FormPreview: React.FC = () => {
     let token = window.sessionStorage.getItem('token')
     let CamHeader = new CampaingHeader(token)
     let CamBody = new CampaingBody(token)
+    let Phase = new Phases(token)
+    let reward = new Reward(token)
+    let personalProfile = new PersonalProfile(token)
+    const [isLoading, setIsLoading] = React.useState(true)
     const [datach, setDatach] = React.useState(0)
+    const [QtyPhases, setQtyPhases] = React.useState(0)
+    const [QtyRewards, setQtyRewards] = React.useState(0)
+    const [StatusCamp, setStatusCamp] = React.useState(0)
+    const [IsCompany, setIsCompany] = React.useState(0)
+    const [IdProfile, setIdProfile] = React.useState(0)
+    const [DataProfile, setDataProfile] = React.useState()
     const [cpb, setCpb] = React.useState<IcampTypeBody>()
 
     const getLast = () => {
@@ -40,24 +53,73 @@ const FormPreview: React.FC = () => {
             })
     }
 
-    const retrieveCampBody= () =>{
-        CamBody.getRetrieveCBody(datach)
-            .then(resp =>{
-                setCpb(resp.data.data)
-                console.info(cpb)
+    const ListPhases = () => {
+        Phase.listPhases(datach)
+            .then(resp => {
+                setQtyPhases(resp.data.data.length)
             })
             .catch(err => {
                 console.info(err)
             })
+            .then(()=>{
+                setIsLoading(false)
+            })
     }
+
+    const ListRewards = ()=> {
+        reward.retrieveReward(datach)
+            .then(resp => {
+                setQtyRewards(resp.data.data.length)
+            })
+            .catch(err => {
+                console.info(err)
+            })
+            .then(()=>{
+                setIsLoading(false)
+            })
+    }
+
+    const retrieveCampBody= () =>{
+        CamBody.getRetrieveCBody(datach)
+            .then(resp =>{
+                setCpb(resp.data.data)
+                setIdProfile(resp.data.data.profile.id)
+                setStatusCamp(resp.data.data.status)
+                setIsCompany(resp.data.data.profile_ca)
+            })
+            .catch(err => {
+                console.info(err)
+            }).then(()=>{
+                setIsLoading(false)
+            })
+    }
+
+    const retrievePP = () => {
+        personalProfile.currentPersonalProfile(IdProfile)
+            .then(resp => {
+                //console.info(resp.data.data)
+                setDataProfile(resp.data.data.id)
+            })
+            .catch(err => {
+                console.info(err)
+            })
+            .then(()=>{
+                setIsLoading(false)
+            })
+    } 
 
     React.useEffect(()=>{
         getLast()
         if(datach !== 0){
             retrieveCampBody()
         } 
+        ListPhases()
+        ListRewards()
+        retrievePP()
 
-    },[datach])
+    },[datach,QtyPhases,
+        QtyRewards,IdProfile,
+        StatusCamp])
 
     return(
         <div>
@@ -74,25 +136,29 @@ const FormPreview: React.FC = () => {
                             </thead>                           
                              <tbody>
                                 <tr>
-                                    <Td> title</Td>
-                                    <Td><Done /> </Td>
+                                    <Td> Campaña Completa</Td>
+                                    <Td>{!isLoading && cpb && StatusCamp === 2 ? (<Done />):(<Err />)} </Td>
                                 </tr>
                                 <tr>
                                     <Td>Fases</Td>
-                                    <Td><Done /></Td>
+                                    <Td>{!isLoading && QtyPhases >= 1 && StatusCamp === 2 ? (<Done />):(<Err />)}</Td>
                                 </tr>
                                 <tr>
                                     <Td>Recompensas</Td>
-                                    <Td><Err /></Td>
+                                    <Td>{!isLoading && QtyRewards >= 1 && StatusCamp === 2 ? (<Done />):(<Err />)}</Td>
                                 </tr>
                                 <tr>
                                     <Td>Perfil Personal</Td>
-                                    <Td><Err /></Td>
+                                    <Td>{!isLoading && DataProfile >= 1  && StatusCamp === 2 ? (<Done />):(<Err />)}</Td>
                                 </tr>
-                                <tr>
-                                <Td>Perfil Empresa/Asociacion</Td>
-                                    <Td><Err /></Td>
-                                </tr>
+                                
+                                {!isLoading && IsCompany && StatusCamp === 2 ? (
+                                    <tr>
+                                    <Td>Perfil Empresa/Asociacion</Td>
+                                    <Td><Done /></Td> 
+                                    </tr>
+                                ):(<tr></tr>)}
+                                
                             </tbody>
                             
                         </Table>
@@ -105,7 +171,9 @@ const FormPreview: React.FC = () => {
             <Col xs={12}>
                 <Row center="xs">
                     <Col xs={6}>
-                       <Preview to="#">vista previa</Preview>
+                    {!isLoading && StatusCamp ===2 && QtyPhases >= 1 &&  QtyRewards >= 1 && DataProfile >= 1 ? 
+                        (<Preview to={!isLoading && cpb ? `vista-previa/${cpb.slug}`:``}>vista previa</Preview>):(<Preview to="#">vista previa</Preview>)}
+                       
                     </Col>
                 </Row>
 

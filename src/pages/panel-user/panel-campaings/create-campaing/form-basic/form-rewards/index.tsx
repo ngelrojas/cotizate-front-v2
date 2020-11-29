@@ -2,7 +2,7 @@ import React from 'react'
 import {useForm} from 'react-hook-form'
 import {Editor} from '@tinymce/tinymce-react'
 import {Row, Col} from 'react-styled-flexboxgrid'
-// import TableReward from './table-reward'
+import {store} from 'react-notifications-component'
 import {CampaingHeader} from '../../../../../../userCampaings'
 import {Cities} from '../../../../../../userCities'
 import {Reward} from '../../../../../../userReward'
@@ -11,7 +11,7 @@ import {
     BtnAdd,
     Form,
     MsgError,
-    MsgSuccess,
+    MsgErrorPhase,
     WrapperBoxRD,
     BoxTitle,
     H4,
@@ -20,6 +20,7 @@ import {
     SpaceB,
     WrappBoxInput,
     BoxInput,
+    BoxText,
     BS,
     TableCities,
     ItemCity,
@@ -47,11 +48,9 @@ const FormRewards: React.FC = () => {
     let Rewards = new Reward(token)
     let City = new Cities(token)
     const [datach, setDatach] = React.useState<number>(0)
-    const [msg, Setmsg] = React.useState('')
     const [description, Setdescription] = React.useState()
     const [selected, Setselected] = React.useState<number[]>([])
     const [MsgErrorF, setMsgErrorF] = React.useState()
-    //const [sendData, SetsendData] = React.useState<FormData[]>([])
     const [cities, setCities] = React.useState()
     const {register, handleSubmit, reset, errors} = useForm<FormData>({
         mode: 'onChange'
@@ -92,12 +91,11 @@ const FormRewards: React.FC = () => {
 
             Rewards.createReward(data_reward)
                 .then(resp => {
-                    console.info(resp.data)
-                    Setmsg('recompensa agregada.')
+                    Notifications('Recompensa agregada.', 'success')
                     reset() 
                     setMsgErrorF('')
                 }).catch(err => {
-                    console.info(err)
+                    Notifications('La descripcion de la Recompensa no debe exceder mas 900 caracteres o 159 palabras.', 'danger')
                 })         
         }
 
@@ -118,14 +116,42 @@ const FormRewards: React.FC = () => {
     }
 
     const validate = () => { 
-        if(!description){
+        if(description.length === 0){
+
+            Notifications('La Descripcion de la recompensa es requerida', 'danger')
             setMsgErrorF('este campo es requerido')
+            return false
+        }
+        if(description.length >= 940){
+            Notifications('La descripcion de la Recompensa no debe exceder mas 900 caracteres o 159 palabras.', 'danger')
+            setMsgErrorF('no debe exceder mas de 900 caracteres o 159 palabras')
             return false
         }
         return true
     }
     
+    const Notifications = (set_messages: string, set_type: any) => {
+        store.addNotification({
+            title: 'Guardando Datos',
+            message: set_messages,
+            type: set_type,
+            insert: 'top',
+            container: 'top-right',
+            animationIn: ['animate__animated', 'animate__fadeIn'],
+            animationOut: ['animate__animated', 'animate__fadeOut'],
+            dismiss: {
+                duration: 5000,
+                onScreen: true
+            }
+        })
+    }
+
     React.useEffect(()=>{ 
+        window.scrollTo({
+            top: 0,
+            left: 0,
+            behavior: 'smooth'
+        })
         getLast()
         listCities()
         
@@ -177,7 +203,11 @@ const FormRewards: React.FC = () => {
                     />
                 </WrappBoxInput>
             <SpaceB />
+                
             <BoxTitle>* Descripcion de la recompensa</BoxTitle>
+            <BoxText> 
+            La descripcion de la Recompensa no debe exceder mas de <b> 900</b> caracteres o<b> 159</b> palabras.
+            </BoxText>
             <SpaceB />
                 <Editor
                     initialValue=''
@@ -225,6 +255,7 @@ const FormRewards: React.FC = () => {
                     onEditorChange={handleEditorReward}
                 />
                 <SpaceB />
+                <MsgErrorPhase>{MsgErrorF}</MsgErrorPhase>
                 <BoxTitle>Alcanse de entrega a : </BoxTitle>
                 <SpaceB />
                 <BoxCity>
@@ -280,10 +311,7 @@ const FormRewards: React.FC = () => {
                     </Row>
                 </BoxCity>
 
-
-                <MsgSuccess>{msg}</MsgSuccess>
-                
-                <MsgError>{MsgErrorF}</MsgError>
+                <SpaceB />
 
                 <WrapBtnAdd>
                     <BtnAdd>adicionar</BtnAdd>
