@@ -18,9 +18,7 @@ const Patrocinadores: React.FC = () => {
     useEffect(() => {
         
     }, [])
-    const  handleSubmit = () => {        
-        
-    };
+  
     const responsive = {
         superLargeDesktop: {
           // the naming can be any, depends on you.
@@ -62,43 +60,46 @@ const Patrocinadores: React.FC = () => {
             dotListClass="custom-dot-list-style"
             // itemClass="carousel-item-padding-40-px"
             >
-                
-                   <ImgPatrocinador
-                        src={Santacruz}
-                        alt="cotizate"
-                    />
-                    <ImgPatrocinador
-                        src={Comunity}
-                        alt="cotizate"
-                    />
-                    <ImgPatrocinador
-                        src={Ypfb}
-                        alt="cotizate"
-                    />
-                      <ImgPatrocinador
-                        src={Santacruz}
-                        alt="cotizate"
-                    />
-                    <ImgPatrocinador
-                        src={Comunity}
-                        alt="cotizate"
-                    />
-                    <ImgPatrocinador
-                        src={Ypfb}
-                        alt="cotizate"
-                    />
-                      <ImgPatrocinador
-                        src={Santacruz}
-                        alt="cotizate"
-                    />
-                    <ImgPatrocinador
-                        src={Comunity}
-                        alt="cotizate"
-                    />
-                    <ImgPatrocinador
-                        src={Ypfb}
-                        alt="cotizate"
-                    />
+                <Row center="xs">
+                     <Col xs={6} sm={4} md={3} >
+                      <Row center="xs">
+                          <ImgPatrocinador
+                            src={Santacruz}
+                            alt="cotizate"
+                         />                                   
+                      </Row>
+                     </Col>
+                </Row>
+                <Row center="xs">
+                     <Col xs={6} sm={4} md={3} >
+                      <Row center="xs">
+                          <ImgPatrocinador
+                            src={Comunity}
+                            alt="Comunity"
+                         />                                   
+                      </Row>
+                     </Col>
+                </Row>
+                <Row center="xs">
+                     <Col xs={6} sm={4} md={3} >
+                      <Row center="xs">
+                          <ImgPatrocinador
+                            src={Ypfb}
+                            alt="Ypfb"
+                         />                                   
+                      </Row>
+                     </Col>
+                </Row>
+                <Row center="xs">
+                     <Col xs={6} sm={4} md={3} >
+                      <Row center="xs">
+                          <ImgPatrocinador
+                            src={YANBAL}
+                            alt="YANBAL"
+                         />                                   
+                      </Row>
+                     </Col>
+                </Row>         
               
             </Carousel>
             
