@@ -74,13 +74,10 @@ useEffect(() => {
                 <Carousel  responsive={responsive} >
                   {featuredProjects.map((value : any, index : number) =>(
                      <Projects data={value} />
-                  ))}
-                    
-                
-                </Carousel>
-               
+                  ))}                                    
+                </Carousel>               
             </div>   
-             : null }
+             : null }             
              
              {proyectosFinalizados?
              <div style={{ background:'#F9F0E8'}}>     
@@ -89,11 +86,8 @@ useEffect(() => {
                 <Carousel  responsive={responsive}   >
                   {finalizedProjects.map((value : any, index : number) =>(
                      <Projects data={value} />
-                  ))}
-                    
-                
-                </Carousel>
-               
+                  ))}                                    
+                </Carousel>               
             </div>   
              : null }
              
@@ -106,65 +100,24 @@ useEffect(() => {
                 >
                   {listCausasSociales.map((value : any, index : number) =>(
                      <Projects data={value} />
-                  ))}
-                                  
-                </Carousel>
-               
+                  ))}                                  
+                </Carousel>               
             </div>   
              : null }
              <Br/>
              
               <div>
-                    <Title>CATEGORIAS </Title>                  
-                    <Categorias />
-              </div>
-            
+                  <Title>CATEGORIAS </Title>                  
+                  <Categorias />
+              </div>            
                <Br/>
-             <div>
+              <div>
                   <Title>PATROCINADORES </Title>
                   <LineCeleste/>
                   <Br/>
                     <Patrocinadores/>
                   <LineCeleste/>
              </div>
-
-
-            {/* <div style={{ background:'#F9F0E8'}}>
-                
-                <Title>PROYECTOS DESTACADOS </Title>
-                <Carousel >
-                    <ListBulletin />
-                    <ListBulletin />
-                    <ListBulletin />
-                    <ListBulletin />
-                    <ListBulletin />
-                </Carousel>
-               
-            </div>   
-            <Br/>
-            <div style={{ background:'#F9F0E8'}} >
-            <Title>PROYECTOS FINALIZADOS </Title>
-            <Carousel >
-                    <ListBulletin />
-                    <ListBulletin />
-                    <ListBulletin />
-                    <ListBulletin />
-                    <ListBulletin />
-            </Carousel>
-            </div>
-            <Br/>
-            <div style={{ background:'#F9F0E8'}}>
-            <Title>CAUSAS SOCIALES </Title>
-            <Carousel 
-            // arrows={true} dots={true}
-            >
-                    <ListBulletin />
-                    <ListBulletin />
-                    <ListBulletin />
-                    <ListBulletin />
-                    <ListBulletin />
-            </Carousel>
-            </div> */}
         </Content>
     )
 }
