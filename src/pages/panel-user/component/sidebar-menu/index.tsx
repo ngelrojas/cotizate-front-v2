@@ -20,7 +20,7 @@ const appMenuItems = [
         link: `${DASHBOARD}/aportaciones`,
       },
       {
-        name: 'Guardades',
+        name: 'Guardados',
         link: `${DASHBOARD}/guardados`,
       },
       {

@@ -68,3 +68,7 @@ export const CardPanels = styled(Col)`
     background-color: #c4c4c4;
     height: 170px;
 `
+
+export const ContainerContent = styled.div`
+    margin: 5%;
+`
