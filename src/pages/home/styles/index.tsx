@@ -25,6 +25,55 @@ export const Title = styled.h1`
 "
 
 `
+export const TitlePatrocinadores = styled.h1`
+    
+    padding-top: 5px;
+    height: 22px;
+    left: 30px;
+    top: 842px;
+    padding-left:6px;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 23px;
+    color: #5D5A5A;
+    margin-bottom: 15px;
+    @media ${device.mobileL} {
+        text-align: center;
+
+        font-family: Roboto;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 13px;
+        line-height: 14px;
+    }
+
+`
+export const TitleCategoriaIndex = styled.h1`
+    
+    padding-top: 5px;
+    height: 22px;
+    left: 30px;
+    top: 842px;
+    padding-left:6px;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 23px;
+    color: #5D5A5A;
+    margin-bottom: 15px;
+    @media ${device.mobileL} {
+        text-align: center;
+             
+        font-family: Roboto;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 14px;
+        line-height: 14px;
+    }
+
+`
+
 export const LineCeleste = styled.hr`
     width: 100%;
     height: 3px;
@@ -158,8 +207,8 @@ export const TitleCategoria = styled.h2`
         font-size: 12px;
     
     }
-    @media ${device.tablet} {
-        font-size: 10px;
+    @media ${device.mobileL} {
+        font-size: 12px;
     }
   
 `

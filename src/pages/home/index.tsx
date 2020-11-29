@@ -1,6 +1,6 @@
 import React, { useEffect,useState } from 'react'
 import {Grid} from 'react-styled-flexboxgrid'
-import {Content,Title2,Title,LineCeleste,LineMostaza, Br,DivPortada} from './styles'
+import {Content,Title2,Title,LineCeleste,LineMostaza, Br,DivPortada,TitlePatrocinadores, TitleCategoriaIndex} from './styles'
 import ListBulletin from '../../components/list-bulletin'
 import Banner from './component/Banner'
 import Portada from './component/Portada'
@@ -107,12 +107,12 @@ useEffect(() => {
              <Br/>
              
               <div>
-                  <Title>CATEGORIAS </Title>                  
+                  <TitleCategoriaIndex>CATEGORIAS </TitleCategoriaIndex>                  
                   <Categorias />
               </div>            
                <Br/>
               <div>
-                  <Title>PATROCINADORES </Title>
+                  <TitlePatrocinadores>PATROCINADORES </TitlePatrocinadores>
                   <LineCeleste/>
                   <Br/>
                     <Patrocinadores/>

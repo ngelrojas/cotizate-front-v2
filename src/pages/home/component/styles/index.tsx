@@ -97,15 +97,17 @@ export const Description = styled.p`
     display: flex;
     align-items: center;
 
-color: #6C6C6C;
+    color: #6C6C6C;
     @media ${device.tablet} {
         margin: 0%;
         padding-bottom: 8%;
+        font-size: 11px;
         width: 100%;
     }
     @media ${device.mobileM} {
         width: 100%;
         padding-bottom: 2%;
+        font-size: 11px;
     }
 `
 export const Author = styled.div`
