@@ -39,7 +39,20 @@ const Portada: React.FC = () => {
             <LineMostaza/>
                 <Sectionportada>
                 <Row>
-                        <Col xs={2} sm={2} md={2} >
+                {listaCategorias.map((value : any, index : number) =>(
+                     <Col xs={2} sm={2} md={2} >
+                     <Row end="lg">
+                         <DivCategoria>
+                             <ImgCategoria
+                                 src={Ecologico}
+                                 alt="Ecologico"
+                             />      
+                             <TitleCategoria> {value.name}</TitleCategoria>    
+                         </DivCategoria>                                           
+                     </Row>
+                 </Col>
+                  ))}
+                        {/* <Col xs={2} sm={2} md={2} >
                             <Row end="lg">
                                 <DivCategoria>
                                     <ImgCategoria
@@ -93,7 +106,7 @@ const Portada: React.FC = () => {
                                     <TitleCategoria> Salud</TitleCategoria>       
                                     </DivCategoria>                  
                             </Row>
-                        </Col>                                 
+                        </Col>                                  */}
                 </Row>      
                 </Sectionportada>
                 <LineMostaza/>

@@ -168,6 +168,13 @@ export const ImgCategoria = styled.img`
 `
 export const DivCategoria = styled.div`
 text-align: center;
+  width: 50%;
+  @media ${device.tablet} {
+    width: 70%;
+    }
+    @media ${device.mobileM} {
+        width: 90%;
+    }
 `
 export const ImgPatrocinador = styled.img`
     width: 40%;
