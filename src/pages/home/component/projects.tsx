@@ -89,7 +89,7 @@ const Projects: React.FC<Iproyect> = (props)=> {
                 <Picture>
                     <Go to="/my-article">
                         <Img
-                            src="https://placebeard.it/640x360"
+                            src={'http://35.225.59.226:9000/'+props.data.imagen_main}
                             alt="cotizate"
                         />
                     </Go>
