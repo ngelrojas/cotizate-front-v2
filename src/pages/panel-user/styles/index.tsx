@@ -1,4 +1,6 @@
 import styled from 'styled-components'
+import Container from '@material-ui/core/Container'
+import {Col} from 'react-styled-flexboxgrid'
 import {Tab, Tabs, TabPanel, TabList} from 'react-tabs'
 
 export const Content = styled.main`
@@ -37,4 +39,32 @@ export const TabLists = styled(TabList)`
     width: 25%;
     float: left;
     cursor: pointer;
+`
+
+export const Img = styled.img`
+    width: 100%;
+    border-radius: 50%;
+    height: 204px;
+`
+
+export const DivImg = styled.div`
+    width: 90%;
+    margin: 0 auto;
+`
+
+export const ProfileName = styled.p`
+    text-align: center;
+    margin-top: 5%;
+    margin-bottom: 5%;
+`
+
+export const ContainerCo = styled(Container)`
+    max-width: 100%!important;
+    padding-left: 2%!important;
+    padding-right: 2%!important;
+`
+
+export const CardPanels = styled(Col)`
+    background-color: #c4c4c4;
+    height: 170px;
 `
