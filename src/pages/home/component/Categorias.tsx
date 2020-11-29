@@ -3,6 +3,8 @@ import {Sectionportada, Div2,ImgCategoria,DivCategoria,LineMostaza, TitleCategor
 import PortadaImg from '../images/7portada-nueva-crow.png';
 import { useHistory } from "react-router-dom";
 import {Row, Col, Grid} from 'react-styled-flexboxgrid';
+import * as Action from '../../../redux/actions/homeAction';
+import { useDispatch, useSelector } from "react-redux";
 import Arte from '../images/categorias/artes.png';
 import Ecologico from '../images/categorias/ecologico.png';
 import Fotografia from '../images/categorias/fotografia.png';
@@ -16,8 +18,18 @@ import Tegnologia from '../images/categorias/tegnologia.png';
 
 const Portada: React.FC = () => {
     const history = useHistory();
+    const dispatch = useDispatch();
+
+    const {
+        categoriasStatus,
+        listaCategorias
+      } = useSelector((stateSelector: any) => {
+        return stateSelector.home;
+      });
+
+
     useEffect(() => {
-        
+         dispatch(Action.getCategorias());
     }, [])
     const  handleSubmit = () => {        
         

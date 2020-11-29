@@ -1,7 +1,8 @@
 import {
     PROYECTOS_FINALIZADOS_LOAD,
     PROYECTOS_DESTACADOS_LOAD,
-    CAUSAS_SOCIALES_LOAD
+    CAUSAS_SOCIALES_LOAD,
+    CATEGORIAS_LISTA
 } from '../types/homeTypes'
 import API from '../../api'
 
@@ -136,6 +137,24 @@ export function causasSociales(header_id: number){
                 dispatch({
                     type: CAUSAS_SOCIALES_LOAD,
                     causas:resp.data.data
+                })
+            }
+          }            
+        })
+        .catch(err => console.log(err))
+        
+        }
+}
+export function getCategorias(){       
+    return (dispatch : any) =>{                  
+       API.get(`category`).then(resp => {
+          if(resp.status === 200){
+             console.log("categ : ",resp.data[0] )
+            if(resp.data.length > 0){ 
+                console.log("tieneeee data");
+                dispatch({
+                    type: CATEGORIAS_LISTA,
+                    categorias:resp.data
                 })
             }
           }            

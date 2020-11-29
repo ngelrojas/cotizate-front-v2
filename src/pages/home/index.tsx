@@ -22,7 +22,8 @@ const Home: React.FC = () => {
     proyectosFinalizados,
     finalizedProjects,
     causasSociales,
-    listCausasSociales
+    listCausasSociales,
+    categoriasStatus
   } = useSelector((stateSelector: any) => {
     return stateSelector.home;
   });
@@ -37,7 +38,7 @@ useEffect(() => {
 
   console.log(proyectosFinalizados);
 
-}, [featuredProjects,proyectosFinalizados,finalizedProjects]);
+}, [featuredProjects,proyectosFinalizados,finalizedProjects,categoriasStatus]);
 
         const responsive = {
           superLargeDesktop: {

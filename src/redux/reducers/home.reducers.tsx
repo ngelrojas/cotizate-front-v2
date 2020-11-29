@@ -1,7 +1,8 @@
 import {
     PROYECTOS_FINALIZADOS_LOAD,
     PROYECTOS_DESTACADOS_LOAD,
-    CAUSAS_SOCIALES_LOAD
+    CAUSAS_SOCIALES_LOAD,
+    CATEGORIAS_LISTA
 } from '../types/homeTypes'
 const initialState = {
     proyectosDestacados: false,
@@ -9,7 +10,9 @@ const initialState = {
     proyectosFinalizados: false,
     finalizedProjects:[],
     causasSociales: false,
-    listCausasSociales:[]
+    listCausasSociales:[],
+    categoriasStatus:false,
+    listaCategorias:[]
 }
 
 export default function(state = initialState, action: any) {
@@ -31,6 +34,12 @@ export default function(state = initialState, action: any) {
                 ...state,
                 causasSociales: true,
                 listCausasSociales:action.causas
+            }
+        case CATEGORIAS_LISTA:
+            return {
+                ...state,
+                categoriasStatus: true,
+                listaCategorias:action.categorias
             }
         default:
             return state
