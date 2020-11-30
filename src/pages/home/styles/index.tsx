@@ -170,20 +170,27 @@ export const Link2 = styled(Link)`
 `
 export const Btnflotante = styled.button`
     position: absolute;
-    bottom:18%;
-    left:44%;
+    bottom:15%;
+    left:38%;
     background-color:#1986C6;
     border-radius:1.5em;
     color:white;
     text-transform:uppercase;
     padding:1em 1.5em;
+    width: 200px;
+    height: 50px;
+
     @media ${device.tablet} {
         bottom:18%;
-        left:44%;
+        left:40%;
+        width: 156px;
+        height: 45px;
     }
     @media ${device.mobileM} {
         bottom:15%;
-        left:33%;
+        left:32%;
+        width: 135px;
+        height: 40px;
     }
 `
 export const DivPortada = styled.div`
@@ -215,6 +222,12 @@ export const TitleCategoria = styled.h2`
 export const ImgCategoria = styled.img`
     width: 80%;
     border-radius: 2px;
+    @media ${device.tablet} {
+        width: 40%;
+    }
+    @media ${device.mobileL} {
+        width: 35%;
+    }
 `
 export const DivCategoria = styled.div`
   text-align: center;
