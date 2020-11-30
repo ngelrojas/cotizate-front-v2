@@ -130,7 +130,7 @@ const Projects: React.FC<Iproyect> = (props)=> {
                     <Col xs={12} sm={12} md={12} lg={12}>
                         <Excerpt>
                             <Go to="/my-article">
-                                {props.data.excerpt}
+                                {props.data.excerpt}                                
                             </Go>
                         </Excerpt>
                     </Col>

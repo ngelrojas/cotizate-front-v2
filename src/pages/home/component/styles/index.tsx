@@ -70,7 +70,8 @@ export const Excerpt = styled.p`
     margin: 2%;
     text-align: justify;
     width: 97%;
-    
+    white-space: nowrap;
+   overflow: hidden;
     @media ${device.tablet} {
         margin: 0%;
         padding-bottom: 8%;
@@ -84,7 +85,7 @@ export const Excerpt = styled.p`
 export const Description = styled.p`
 
     width: 97%;
-    height: 26px;
+    // height: 26px;
     left: 50px;
     margin: 2%;
     top: 1216px;
@@ -99,6 +100,9 @@ export const Description = styled.p`
     align-items: center;
 
     color: #6C6C6C;
+    white-space: nowrap;
+    overflow: hidden;
+    
     @media ${device.tablet} {
         margin: 0%;
         padding-bottom: 8%;
