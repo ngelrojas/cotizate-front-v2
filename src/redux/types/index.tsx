@@ -22,3 +22,4 @@ export const SET_DEFAULT_PHASE = 'SET_DEFAULT_PHASE'
 /* types increment */
 export const NEXT = 'NEXT'
 export const BACK = 'BACK'
+export const ZERO = 'ZERO'

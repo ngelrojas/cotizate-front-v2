@@ -26,7 +26,7 @@ type FormData = {
     amount: number
 }
 
-const FormPhase: React.FC = () => {
+const FormPhase: React.FC= () => {
 
     let token = window.sessionStorage.getItem('token')
     let CamHeader = new CampaingHeader(token)
