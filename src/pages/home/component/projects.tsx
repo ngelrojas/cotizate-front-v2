@@ -130,7 +130,7 @@ const Projects: React.FC<Iproyect> = (props)=> {
                     <Col xs={12} sm={12} md={12} lg={12}>
                         <Excerpt>
                             <Go to="/my-article">
-                                {props.data.excerpt}                                
+                                {props.data.title}                                
                             </Go>
                         </Excerpt>
                     </Col>
@@ -200,7 +200,7 @@ const Projects: React.FC<Iproyect> = (props)=> {
                         <Row start="lg">
                             <Col sm={12} md={12} lg={12}>
                                 <Author>
-                                    <p>Autor:  {props.data.header.user.first_name} {' '} {props.data.header.user.first_name}</p>                                   
+                                    <p>Autor:  {props.data.header.user.first_name} {' '} {props.data.header.user.last_name}</p>                                   
                                 </Author>
                             </Col>
                         </Row>
