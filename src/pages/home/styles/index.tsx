@@ -171,7 +171,7 @@ export const Link2 = styled(Link)`
 export const Btnflotante = styled.button`
     position: absolute;
     bottom:15%;
-    left:38%;
+    left:43%;
     background-color:#1986C6;
     border-radius:1.5em;
     color:white;
@@ -192,6 +192,16 @@ export const Btnflotante = styled.button`
         width: 135px;
         height: 40px;
     }
+`
+export const TitlePortadaFlotante = styled.h2`
+    height: 22px;
+    left: 30px;
+    top: 842px;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 23px;
+    color: #5D5A5A;
 `
 export const DivPortada = styled.div`
 text-align: center;

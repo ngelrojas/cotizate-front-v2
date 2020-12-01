@@ -2,7 +2,8 @@ import React, {useState, useEffect} from 'react';
 import {Sectionportada, Article, Picture, Go,Img, Title, Div2, Link2, Btnflotante } from '../styles/index'
 import PortadaImg from '../images/7portada-nueva-crow.png';
 import { useHistory } from "react-router-dom";
-
+import Carousel from 'react-multi-carousel';
+import 'react-multi-carousel/lib/styles.css';
 
 const Portada: React.FC = () => {
     const [content, setContent] = useState('');
@@ -14,19 +15,56 @@ const Portada: React.FC = () => {
     const  handleSubmit = () => {        
         history.push("/registrarse");
     };
+    const responsive = {
+        superLargeDesktop: {          
+          breakpoint: { max: 4000, min: 3000 },
+          items: 5
+        },
+        desktop: {
+          breakpoint: { max: 3000, min: 1024 },
+          items: 1
+        },
+        tablet: {
+          breakpoint: { max: 1024, min: 464 },
+          items: 1
+        },
+        mobile: {
+          breakpoint: { max: 464, min: 0 },
+          items: 1
+        }
+      };
 
     return (
         <>
-            <Sectionportada  >
-               <Div2 >
-                    <Img
-                        src={PortadaImg}
-                        alt="cotizate"
-                    />
-                    <Btnflotante onClick={handleSubmit} > Registrate  </Btnflotante>
-               </Div2>
-
-            </Sectionportada>      
+            <Carousel  responsive={responsive}   >
+                <Sectionportada  >
+                    <Div2 >
+                        <Img
+                            src={PortadaImg}
+                            alt="cotizate"
+                        />
+                        <Btnflotante onClick={handleSubmit} > Registrate  </Btnflotante>
+                    </Div2>
+                </Sectionportada>    
+                <Sectionportada  >
+                    <Div2 >
+                        <Img
+                            src={PortadaImg}
+                            alt="cotizate"
+                        />
+                        <Btnflotante onClick={handleSubmit} > Registrate  </Btnflotante>
+                    </Div2>
+                </Sectionportada>   
+                <Sectionportada  >
+                    <Div2 >
+                        <Img
+                            src={PortadaImg}
+                            alt="cotizate"
+                        />
+                        <Btnflotante onClick={handleSubmit} > Registrate  </Btnflotante>
+                    </Div2>
+                </Sectionportada>  
+            </Carousel> 
         </>
       
     )

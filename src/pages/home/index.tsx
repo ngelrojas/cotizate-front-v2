@@ -62,7 +62,7 @@ useEffect(() => {
 
     return (
         <Content>
-            <DivPortada >
+             <DivPortada >
                   <Portada />
              </DivPortada>
              <div >
