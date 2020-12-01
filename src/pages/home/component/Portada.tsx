@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {Sectionportada, Article, Picture, Go,Img, Title, Div2, Link2, Btnflotante } from '../styles/index'
+import {Sectionportada, Article, Picture, Go,Img, Title, Div2, Link2, Btnflotante, TitlePortadaFlotante,SubTitlePortadaFlotante } from '../styles/index'
 import PortadaImg from '../images/7portada-nueva-crow.png';
 import { useHistory } from "react-router-dom";
 import Carousel from 'react-multi-carousel';
@@ -36,7 +36,7 @@ const Portada: React.FC = () => {
 
     return (
         <>
-            <Carousel  responsive={responsive}   >
+            <Carousel  responsive={responsive} infinite={true} autoPlaySpeed={1000}  >
                 <Sectionportada  >
                     <Div2 >
                         <Img
@@ -44,6 +44,8 @@ const Portada: React.FC = () => {
                             alt="cotizate"
                         />
                         <Btnflotante onClick={handleSubmit} > Registrate  </Btnflotante>
+                        <TitlePortadaFlotante> Bienvenino a Cotizate! </TitlePortadaFlotante>
+                        <SubTitlePortadaFlotante>Cotizate un plataforma para conseguir inversion para tu idea </SubTitlePortadaFlotante>
                     </Div2>
                 </Sectionportada>    
                 <Sectionportada  >

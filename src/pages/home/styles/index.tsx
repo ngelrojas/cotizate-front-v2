@@ -193,22 +193,60 @@ export const Btnflotante = styled.button`
         height: 40px;
     }
 `
-export const TitlePortadaFlotante = styled.h2`
-    height: 22px;
-    left: 30px;
-    top: 842px;
-    font-style: normal;
-    font-weight: 500;
-    font-size: 20px;
-    line-height: 23px;
-    color: #5D5A5A;
+export const TitlePortadaFlotante = styled.h1`
+    
+    font-size: 50px;
+    position: absolute;
+    bottom:70%;
+    left:20%;
+    color:black;
+    padding:1em 1.5em;
+    width: 65%;
+    height: 70px;
+    @media ${device.tablet} {
+        font-size: 35px;
+        color:black;
+        width: 70%;
+    }
+    @media ${device.mobileL} {
+        font-size: 16px;
+        color:black;
+        bottom:43%;
+        left:17%;
+        width: 70%;
+    }
+
+`
+export const SubTitlePortadaFlotante = styled.h2`
+    
+    font-size: 25px;
+    position: absolute;
+    bottom:42%;
+    left:20%;
+    color:black;
+    padding:1em 1.5em;
+    width: 65%;
+    height: 70px;
+    @media ${device.tablet} {
+        font-size: 16px;
+        color:black;
+        width: 80%;
+        left:16%;
+        bottom:32%;
+    }
+    @media ${device.mobileL} {
+        font-size: 11px;
+        color:black;
+        bottom:15%;
+        left:2%;
+        width: 100%;
+        padding:1em 0.5em;
+    }
+
 `
 export const DivPortada = styled.div`
 text-align: center;
 
-
-
- 
 `
 export const TitleCategoria = styled.h2`
     height: 22px;
