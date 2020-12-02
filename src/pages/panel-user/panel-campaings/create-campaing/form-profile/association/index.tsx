@@ -212,7 +212,7 @@ const Association: React.FC<Iauth> = ({authenticated, currentUser})=>{
                                 <WrapperBox>
                                     <label>
                                     <SpanAE>* Assiciacion/Empresa/Otros: </SpanAE>
-                                        <SelectInput ref={register({required: true})} name="typeIns">
+                                        <SelectInput ref={register({required: true})} name="typeIns" autoFocus>
                                             <option value="">SELECIONAR</option>
                                             <option value="1">ASOCIACION</option>
                                             <option value="2">EMPRESA</option>

@@ -1,9 +1,9 @@
 import React from 'react'
-
+import PanelConent from '../content-principal' 
 
 const ContentPrincipal: React.FC = () => {
     return(
-        <div>content principal</div>
+        <PanelConent>content principal</PanelConent>
     )
 }
 

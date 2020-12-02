@@ -1,8 +1,7 @@
 import styled from 'styled-components'
 import {Link} from 'react-router-dom'
-// import {Tab, TabList} from 'react-tabs'
-import { MdLens, MdPanoramaFishEye } from 'react-icons/md'
-import { Tabs, TabList, Tab, TabPanels, TabPanel} from '@reach/tabs';
+import { MdLens } from 'react-icons/md'
+import { TabList, Tab} from '@reach/tabs'
 
 export const Content = styled.main`
     height: auto;
@@ -120,9 +119,13 @@ export const Label = styled.label`
 `
 
 export const Input = styled.input`
-    width: 45%;
+    width: 90%;
     height: 49px;
     padding-left: 2%;
+`
+
+export const InputReward = styled(Input)`
+    width: 100%;
 `
 
 export const FormSubTitle = styled.p`
@@ -185,6 +188,15 @@ export const BtnSaveProject = styled(Btn)`
 
 export const Form = styled.form`
     width: 100%;
+    padding: 5%;
+    background-color: #FCF2E9;
+`
+
+export const FormConf = styled(Form)`
+    padding-top: 0%;
+    padding-left: 5%;
+    padding-right: 5%;
+    padding-bottom: 4%;
 `
 
 export const FormR = styled.form`
@@ -297,23 +309,42 @@ export const WrapperBoxPhase = styled(WrapperBox)`
 
 export const BoxTitle = styled.p`
     margin-bottom: 1%;
+    margin-top: 10%;
 `
 
 export const BoxText = styled.p`
+    margin-top: 3%;
     margin-bottom: 1%;
     color: #828282;
+    height: 53px;
+`
+
+export const BoxTextPhase = styled(BoxText)`
+    height: 46px;
+`
+
+export const BoxTextPD = styled(BoxText)`
+    height: 56px;
+`
+
+export const BoxTextPR = styled(BoxText)`
+    height: 36px;
 `
 
 export const BoxSelect = styled.select`
-    width: 45%;
+    width: 90%;
     height: 49px;
     padding: 1%;
 `
 
 export const BoxInput = styled.input`
-    width: 45%;
+    width: 90%;
     height: 49px;
-    padding-left: 5%;
+    padding-left: 9%;
+`
+
+export const BoxInputReward = styled(BoxInput)`
+    width: 100%;
 `
 
 export const BoxInputPhase = styled(BoxInput)`
@@ -330,9 +361,9 @@ export const WrappBoxInput = styled.div`
 
 export const BS = styled.p`
     background-color: #F2A85D;
-    padding-top: 1.5%;
-    padding-left: 1%;
-    padding-right: 1%;
+    padding-top: 3%;
+    padding-left: 2%;
+    padding-right: 2%;
     position: absolute;
     top: 0%;
     height: 49px;
@@ -350,18 +381,25 @@ export const ImgText = styled.p`
 
 export const WrapperBoxRD = styled.div`
     background-color:#FCF2E9;
-    padding-top: 4%;
-    padding-bottom: 4%;
     padding-left: 4%;
     padding-right: 4%;
-    margin-bottom: 4%;
+    padding-bottom: 4%;
 `
 
 export const WrapperSave = styled.div`
     width: 40%;
     position: absolute;
-    margin-left: 12%;
-    margin-top: 0.8%;
+    margin-left: 8.5%;
+    margin-top: 3.9%;
+`
+
+export const WrapperSavePhase = styled(WrapperSave)`
+    margin-top: 3.2%;
+    margin-left: 6.5%;
+`
+
+export const WrapperSaveConfig = styled(WrapperSave)`
+    margin-top: 3.2%;
 `
 
 export const SpaceB = styled.p`
@@ -387,6 +425,15 @@ export const BoxCity = styled.div`
     background-color: #ffffff;
     padding-left: 2%;
     padding-bottom: 2%;
-    width: 71%;
-    margin-left: 29%;
+    width: 80%;
+    margin-left: 20%;
+`
+
+export const BoxTitleContent = styled.p`
+    margin-top: 5%;
+    margin-bottom: 3%;
+`
+
+export const BSRE = styled(BS)`
+    top: 39%;
 `
