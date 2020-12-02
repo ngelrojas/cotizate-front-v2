@@ -23,8 +23,9 @@ const Banner: React.FC = () => {
 
     return (
     <>      
-        <Row>
+        <Row >
             <Col xs={12} sm={6} md={6} lg={6}>
+            <Row center="xs">
                 <SectionBanner>
                     <ArticleBanner>
                         <Picture>
@@ -37,8 +38,10 @@ const Banner: React.FC = () => {
                         </Picture>
                     </ArticleBanner>
                </SectionBanner>
+               </Row> 
             </Col>
             <Col xs={12} sm={6} md={6} lg={6}>
+            <Row center="xs">
                 <SectionBanner>
                     <ArticleBanner>
                         <Picture>
@@ -51,6 +54,7 @@ const Banner: React.FC = () => {
                         </Picture>
                     </ArticleBanner>
                  </SectionBanner>
+                 </Row>   
             </Col>
         </Row>          
     </>

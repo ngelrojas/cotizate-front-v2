@@ -65,6 +65,7 @@ useEffect(() => {
              <DivPortada >
                   <Portada />
              </DivPortada>
+             <br/>
              <div >
                   <Banner />
              </div>

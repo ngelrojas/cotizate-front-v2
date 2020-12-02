@@ -102,8 +102,8 @@ export const Br = styled.br`
   
 `
 export const SectionBanner = styled.section`
-    width: 100%;
-    padding: 1%;
+    width: 94%;
+    padding: 0%;
 
     @media ${device.tablet} {
         width: 100%;
