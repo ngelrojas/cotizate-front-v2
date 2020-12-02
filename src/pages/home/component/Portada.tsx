@@ -1,6 +1,9 @@
 import React, {useState, useEffect} from 'react';
 import {Sectionportada, Article, Picture, Go,Img, Title, Div2, Link2, Btnflotante, TitlePortadaFlotante,SubTitlePortadaFlotante } from '../styles/index'
 import PortadaImg from '../images/7portada-nueva-crow.png';
+import PortadaCerebroImg2 from '../images/portada/cerebro-con-texto.png';
+import PortadaMundoImg1 from '../images/portada/mundo-con-texto.png';
+import PortadaSolidarioImg3 from '../images/portada/SOLIDARIO-CON-TEXTO.png';
 import { useHistory } from "react-router-dom";
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
@@ -40,7 +43,7 @@ const Portada: React.FC = () => {
                 <Sectionportada  >
                     <Div2 >
                         <Img
-                            src={PortadaImg}
+                            src={PortadaMundoImg1}
                             alt="cotizate"
                         />
                         <Btnflotante onClick={handleSubmit} > Registrate  </Btnflotante>
@@ -51,7 +54,7 @@ const Portada: React.FC = () => {
                 <Sectionportada  >
                     <Div2 >
                         <Img
-                            src={PortadaImg}
+                            src={PortadaCerebroImg2}
                             alt="cotizate"
                         />
                         <Btnflotante onClick={handleSubmit} > Registrate  </Btnflotante>
@@ -60,7 +63,7 @@ const Portada: React.FC = () => {
                 <Sectionportada  >
                     <Div2 >
                         <Img
-                            src={PortadaImg}
+                            src={PortadaSolidarioImg3}
                             alt="cotizate"
                         />
                         <Btnflotante onClick={handleSubmit} > Registrate  </Btnflotante>
