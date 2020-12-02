@@ -38,7 +38,7 @@ const Portada: React.FC = () => {
                       <Row center="xs">
                          <DivCategoria>
                              <ImgCategoria
-                                 src={Ecologico}
+                                 src={'http://35.225.59.226:9000/'+value.imagen}
                                  alt={value.descripcion}
                              />      
                              <TitleCategoria> {value.name}</TitleCategoria>    

@@ -28,11 +28,28 @@ const Home: React.FC = () => {
     return stateSelector.home;
   });
   const dispatch = useDispatch();
+  const [dispositivoMovil, setDispositivoMovil] = useState(false);
   useEffect(() => {        
     dispatch(Action.proyectosDestacados(5));
     dispatch(Action.proyectosFinalizados(7));
     dispatch(Action.causasSociales(1));
 }, []);
+const verificarDispositivo =() =>{
+  if( navigator.userAgent.match(/Android/i)
+        // || navigator.userAgent.match(/webOS/i)
+        || navigator.userAgent.match(/iPhone/i)
+        // || navigator.userAgent.match(/iPad/i)
+        // || navigator.userAgent.match(/iPod/i)
+        || navigator.userAgent.match(/BlackBerry/i)
+        || navigator.userAgent.match(/Windows Phone/i)){
+               setDispositivoMovil(true);
+      }else{
+        setDispositivoMovil(true);
+      }
+}
+useEffect(() => {        
+
+}, [dispositivoMovil]);
 
 useEffect(() => {   
 

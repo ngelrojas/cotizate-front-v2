@@ -39,7 +39,13 @@ const Portada: React.FC = () => {
 
     return (
         <>
-            <Carousel  responsive={responsive} infinite={true} autoPlaySpeed={1000}  >
+            <Carousel  
+            responsive={responsive} 
+            infinite={true} 
+            arrows={false}
+            autoPlaySpeed={2500} 
+            autoPlay={true}  
+            >
                 <Sectionportada  >
                     <Div2 >
                         <Img
