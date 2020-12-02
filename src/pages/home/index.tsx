@@ -1,5 +1,5 @@
 import React, { useEffect,useState } from 'react'
-import {Grid} from 'react-styled-flexboxgrid'
+import {Grid, Row} from 'react-styled-flexboxgrid'
 import {Content,Title2,Title,LineCeleste,LineMostaza, Br,DivPortada,TitlePatrocinadores, TitleCategoriaIndex} from './styles'
 import ListBulletin from '../../components/list-bulletin'
 import Banner from './component/Banner'
@@ -69,13 +69,14 @@ useEffect(() => {
              <div >
                   <Banner />
              </div>
+             <br/>
              {proyectosDestacados?
              <div style={{ background:'#F9F0E8'}}>             
                 <Title>PROYECTOS DESTACADOS </Title>
                 <Carousel  responsive={responsive} >
-                  {featuredProjects.map((value : any, index : number) =>(
-                     <Projects data={value} />
-                  ))}                                    
+                      {featuredProjects.map((value : any, index : number) =>(
+                        <Projects data={value} />
+                      ))}             
                 </Carousel>               
             </div>   
              : null }             

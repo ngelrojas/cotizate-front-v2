@@ -26,12 +26,13 @@ export const SectionDetails = styled.section`
     padding-top: 0px;
     margin: 1%;
     
+    
 
     @media ${device.tablet} {
         width: 92%;
     }
     @media ${device.mobileL} {
-        width: 92%;
+        width: 100%;
     }
 `
 export const Article = styled.article`

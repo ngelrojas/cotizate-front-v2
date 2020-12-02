@@ -47,8 +47,8 @@ const Portada: React.FC = () => {
                             alt="cotizate"
                         />
                         <Btnflotante onClick={handleSubmit} > Registrate  </Btnflotante>
-                        <TitlePortadaFlotante> Bienvenino a Cotizate! </TitlePortadaFlotante>
-                        <SubTitlePortadaFlotante>Cotizate un plataforma para conseguir inversion para tu idea </SubTitlePortadaFlotante>
+                        {/* <TitlePortadaFlotante> Bienvenino a Cotizate! </TitlePortadaFlotante>
+                        <SubTitlePortadaFlotante>Cotizate un plataforma para conseguir inversion para tu idea </SubTitlePortadaFlotante> */}
                     </Div2>
                 </Sectionportada>    
                 <Sectionportada  >

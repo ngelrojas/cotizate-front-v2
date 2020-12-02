@@ -83,7 +83,9 @@ const Projects: React.FC<Iproyect> = (props)=> {
     }, [])
     
     return (
-        <>            
+        <> 
+         <Col >     
+         <Row start="lg">   
             <SectionDetails>
             <Article>
                 <Picture>
@@ -208,7 +210,8 @@ const Projects: React.FC<Iproyect> = (props)=> {
                 </Row>
             </ArticleBody>
         </SectionDetails>
-            
+        </Row>
+        </Col>   
         </>
     )
 }
