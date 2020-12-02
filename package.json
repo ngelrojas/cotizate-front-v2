@@ -4,6 +4,7 @@
     "private": false,
     "homepage": "http://cotizate.com",
     "dependencies": {
+        "@brainhubeu/react-carousel": "^1.19.26",
         "@material-ui/core": "^4.11.1",
         "@material-ui/icons": "^4.9.1",
         "@reach/tabs": "^0.11.2",
@@ -37,6 +38,7 @@
         "react-imask": "^6.0.5",
         "react-modal": "^3.11.2",
         "react-moment": "^0.9.7",
+        "react-multi-carousel": "^2.5.5",
         "react-multi-select-component": "^2.0.11",
         "react-notifications-component": "^3.0.2",
         "react-number-format": "^4.4.1",
@@ -46,6 +48,7 @@
         "react-scripts": "^3.4.4",
         "react-step-progress": "^1.0.3",
         "react-styled-flexboxgrid": "^3.2.1",
+        "react-sweet-progress": "^1.1.2",
         "react-tabs": "^3.1.0",
         "react-tabtab": "^2.0.0",
         "react-text-mask": "^5.4.3",
@@ -79,6 +82,7 @@
         ]
     },
     "devDependencies": {
+        "@types/brainhubeu__react-carousel": "^2.0.1",
         "@types/react-notifications-component": "^2.4.0"
     }
 }
