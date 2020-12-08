@@ -1,10 +1,12 @@
 import React from 'react'
+import {Route, useRouteMatch} from 'react-router-dom'
 import {Row} from 'react-styled-flexboxgrid'
+import Created from './created'
 import {CardPanels, ContainerContent} from '../styles'
-import ContentPrincipal from './content-principal'
 
-
-const PanelContent: React.FC = ({children}) => {
+const PanelContent: React.FC= () => {
+    let match = useRouteMatch('/panel-de-usuario/')
+    console.info(match)
 
     React.useEffect(()=>{
 
@@ -28,7 +30,7 @@ const PanelContent: React.FC = ({children}) => {
             </Row>
             <Row>
                 <ContainerContent>
-                {children} 
+                    <Route exact path={`${match ? match.url: ''}/creado`} component={Created} />
                 </ContainerContent>
             </Row>
         </div>

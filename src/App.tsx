@@ -65,7 +65,7 @@ const App: React.FC = () => {
                     />
                     <Route
                         exact
-                        path="/dashboard-de-usuario"
+                        path="/panel-de-usuario"
                         component={PanelUser} 
                     />
                     <Route
