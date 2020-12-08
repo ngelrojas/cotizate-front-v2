@@ -1,6 +1,5 @@
 import React from 'react'
 import {useForm} from 'react-hook-form'
-import MultiSelect from 'react-multi-select-component'
 import {CategoriesCampaing} from '../../../../../userCategories'
 import {TagCampaing} from '../../../../../userTags'
 import {Campaings} from '../../../../../userCampaings'
