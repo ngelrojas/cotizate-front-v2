@@ -92,7 +92,7 @@ useEffect(() => {
                 <Title>PROYECTOS DESTACADOS </Title>
                 <Carousel  responsive={responsive} >
                       {featuredProjects.map((value : any, index : number) =>(
-                        <Projects data={value} />
+                        <Projects key={index} data={value} />
                       ))}             
                 </Carousel>               
             </div>   
@@ -104,7 +104,7 @@ useEffect(() => {
                 <Title>PROYECTOS FINALIZADOS </Title>
                 <Carousel  responsive={responsive}   >
                   {finalizedProjects.map((value : any, index : number) =>(
-                     <Projects data={value} />
+                     <Projects key={index} data={value} />
                   ))}                                    
                 </Carousel>               
             </div>   
@@ -118,7 +118,7 @@ useEffect(() => {
                   arrows={false}
                 >
                   {listCausasSociales.map((value : any, index : number) =>(
-                     <Projects data={value} />
+                     <Projects  key={index} data={value} />
                   ))}                                  
                 </Carousel>               
             </div>   

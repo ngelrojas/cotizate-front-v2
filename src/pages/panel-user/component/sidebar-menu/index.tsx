@@ -5,7 +5,7 @@ import List from '@material-ui/core/List'
 
 import AppMenuItem from './AppMenuItem'
 
-const DASHBOARD = '/panel-de-usuario'
+const DASHBOARD = '/dashboard-de-usuario'
 
 const appMenuItems = [
   {
