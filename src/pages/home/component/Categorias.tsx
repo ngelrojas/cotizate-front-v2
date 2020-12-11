@@ -34,8 +34,8 @@ const Portada: React.FC = () => {
                 <Sectionportada>
                 <Row center="xs">
                   {listaCategorias.map((value : any, index : number) =>(
-                     <Col xs={4} sm={2} md={2} >
-                      <Row center="xs">
+                     <Col xs={4} sm={2} md={2}  key={index} >
+                      <Row center="xs" >
                          <DivCategoria>
                             <Go to={{
                                     pathname: '/category',
