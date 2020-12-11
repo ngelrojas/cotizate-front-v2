@@ -36,19 +36,17 @@ const Home: React.FC = () => {
 }, []);
 const verificarDispositivo =() =>{
   if( navigator.userAgent.match(/Android/i)
-        // || navigator.userAgent.match(/webOS/i)
         || navigator.userAgent.match(/iPhone/i)
-        // || navigator.userAgent.match(/iPad/i)
-        // || navigator.userAgent.match(/iPod/i)
         || navigator.userAgent.match(/BlackBerry/i)
         || navigator.userAgent.match(/Windows Phone/i)){
                setDispositivoMovil(true);
       }else{
-        setDispositivoMovil(true);
+        setDispositivoMovil(false);
       }
 }
 useEffect(() => {        
-
+  verificarDispositivo();
+    console.log(dispositivoMovil);
 }, [dispositivoMovil]);
 
 useEffect(() => {   
@@ -90,7 +88,7 @@ useEffect(() => {
              {proyectosDestacados?
              <div style={{ background:'#F9F0E8'}}>             
                 <Title>PROYECTOS DESTACADOS </Title>
-                <Carousel  responsive={responsive} >
+                <Carousel  responsive={responsive} showDots={dispositivoMovil} arrows={!dispositivoMovil} >
                       {featuredProjects.map((value : any, index : number) =>(
                         <Projects key={index} data={value} />
                       ))}             
@@ -102,7 +100,7 @@ useEffect(() => {
              <div style={{ background:'#F9F0E8'}}>     
               <Br/>        
                 <Title>PROYECTOS FINALIZADOS </Title>
-                <Carousel  responsive={responsive}   >
+                <Carousel  responsive={responsive} showDots={dispositivoMovil} arrows={false}  >
                   {finalizedProjects.map((value : any, index : number) =>(
                      <Projects key={index} data={value} />
                   ))}                                    
@@ -115,6 +113,7 @@ useEffect(() => {
                 <Br/>     
                 <Title>PROYECTOS FINALIZADOS </Title>
                 <Carousel responsive={responsive}
+                  showDots={dispositivoMovil}
                   arrows={false}
                 >
                   {listCausasSociales.map((value : any, index : number) =>(
