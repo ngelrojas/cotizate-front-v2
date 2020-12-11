@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {Sectionportada, Div2,ImgCategoria,DivCategoria,LineMostaza, TitleCategoria } from '../styles/index'
+import {Sectionportada, Div2,ImgCategoria,DivCategoria,LineMostaza, TitleCategoria, Go } from '../styles/index'
 import PortadaImg from '../images/7portada-nueva-crow.png';
 import { useHistory } from "react-router-dom";
 import {Row, Col, Grid} from 'react-styled-flexboxgrid';
@@ -37,11 +37,20 @@ const Portada: React.FC = () => {
                      <Col xs={4} sm={2} md={2} >
                       <Row center="xs">
                          <DivCategoria>
+                            <Go to={{
+                                    pathname: '/category',
+                                    state: {
+                                      idCategoria: `${value.id}`,
+                                      nombre: `${value.name}`
+                                    }
+                                  }}>
                              <ImgCategoria
                                  src={'http://35.225.59.226:9000/'+value.imagen}
                                  alt={value.descripcion}
-                             />      
+                             />   
+                             
                              <TitleCategoria> {value.name}</TitleCategoria>    
+                             </Go>
                          </DivCategoria>                                           
                       </Row>
                      </Col>

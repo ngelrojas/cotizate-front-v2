@@ -77,7 +77,7 @@ interface Iproyect {
 const Projects: React.FC<Iproyect> = (props)=> {
 
     const [content, setContent] = useState('')
-    console.log(props.data);
+    // console.log(props.data);
     useEffect(() => {
         setContent('titulo more longer the now more here please')
     }, [])
