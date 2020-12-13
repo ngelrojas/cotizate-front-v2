@@ -32,6 +32,7 @@ export const Th = styled.th`
 export const Td = styled.td`
     padding-top: 2%;
 `
+
 export const Btn = styled.button`
     border: 0px;
     border-radius: 2px;

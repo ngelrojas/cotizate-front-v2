@@ -1,2 +1,4 @@
 /// <reference types="react-scripts" />
-///declare module 'react-filtered-multiselect'
+declare module 'react-text-mask'
+declare module 'react-reveal/Fade'
+declare module 'react-reveal/Slide'

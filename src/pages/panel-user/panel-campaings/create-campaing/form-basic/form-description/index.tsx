@@ -7,6 +7,7 @@ import DefaultImg from '../public/default.png'
 import {CampaingHeader, Campaings} from '../../../../../../userCampaings'
 import {Row, Col} from 'react-styled-flexboxgrid'
 import {next, back} from '../../../../../../redux/actions/next_back.actions'
+import Slide from 'react-reveal/Slide'
 
 import {
     Input,
@@ -20,9 +21,13 @@ import {
     WrapperBox,
     BoxTitle,
     BoxText,
+    BoxTextPhase,
+    BoxTextPD,
+    BoxTextPR,
     Img,
     ImgText,
     WrapperBoxRD,
+    BoxTitleContent,
 } from '../../styles'
 
 type FormData = {
@@ -162,9 +167,9 @@ const FormDescription: React.FC<AllProps> = ({counter, handleNext, handleBack}) 
         reader.readAsDataURL(file[0])
     }
 
-
-
     React.useEffect(()=>{
+        const input: any = document.querySelector('input[name="title"]')
+        input.focus()
         window.scrollTo({
             top: 0,
             left: 0,
@@ -175,41 +180,58 @@ const FormDescription: React.FC<AllProps> = ({counter, handleNext, handleBack}) 
 
     return (
         <>
-
-        <H4>2.- DESCRIPCIÓN DEL PROYECTO </H4>
+        <Slide top>
+        <H4>2.- DESCRIPCmeIÓN DEL PROYECTO </H4>
         <TextConf>Describe tu proyecto en forma clara, cuando llegues a las faces detente y piensa en cuanto nesecitas para cada  face de tu proyecto y cuanto será el costo para este item  
         </TextConf>
         <Form onSubmit={onSubmit} encType="multipart/form-data">
-        <WrapperBox>
-                <BoxTitle>* Titulo</BoxTitle>
-                <BoxText>¿Cuál es el título del proyecto? </BoxText>
-                <Input
-                    type="text"
-                    name="title"
-                    ref={register({required: true})}
-                />
-                <MsgError>
-                    {errors.title && 'este campo es requerido'}
-                </MsgError>
-        </WrapperBox>
-        <WrapperBox>
+        <Row>
+            <Col xs={6}>
+                    <BoxTitle>* Titulo</BoxTitle>
+                    <BoxText>¿Cuál es el título del proyecto? </BoxText>
+                    <Input
+                        type="text"
+                        name="title"
+                        ref={register({required: true})}
+                    />
+                    <MsgError>
+                        {errors.title && 'este campo es requerido'}
+                    </MsgError>
+            </Col>
+            <Col xs={6}>
                 <BoxTitle>Lema de la campaña del proyecto</BoxTitle>
-                <BoxText>Elija una frase que permite resumir el espíritu o la idea de tu campaña</BoxText>
-                <Input
-                    type="text"
-                    name="slogan_campaing"
-                    ref={register({required: false})}
-                />
-        </WrapperBox>
-        <WrapperBox>
+                    <BoxText>Elija una frase que permite resumir el espíritu o la idea de tu campaña</BoxText>
+                    <Input
+                        type="text"
+                        name="slogan_campaing"
+                        ref={register({required: false})}
+                    />
+            </Col>
+        </Row>
+        <Row>
+            <Col xs={6}>
                 <BoxTitle>Url corto del proyecto</BoxTitle>
-                <BoxText>Puede adicionar una url corta para que su proyecto, sea compartido de manera mas fasil.</BoxText>
-                <Input
-                    type="text"
-                    name="short_url"
-                    ref={register({required: false})}
-                />
-        </WrapperBox>
+                    <BoxTextPhase>Puede adicionar una url corta para que su proyecto, sea compartido de manera mas fasil.</BoxTextPhase>
+                    <Input
+                        type="text"
+                        name="short_url"
+                        ref={register({required: false})}
+                    />
+            </Col>
+            <Col xs={6}>
+                    <BoxTitle>* Video</BoxTitle>
+                    <BoxTextPhase>As tu mejor video, Un buen video marca la diferencia y es en gran parte responsable del éxito de tu proyecto.</BoxTextPhase>
+                    <Input
+                        type="text"
+                        name="video_main"
+                        ref={register({required: true})}
+                    />
+                    <MsgError>
+                        {errors.video_main && 'este campo es requerido'}
+                    </MsgError>
+            </Col>
+        </Row>
+
         <WrapperBox>
                 <BoxTitle>* Imagen</BoxTitle>
                 <Row>
@@ -217,10 +239,6 @@ const FormDescription: React.FC<AllProps> = ({counter, handleNext, handleBack}) 
                         <ImgText>
                             Esta imagen se utilizará como miniatura de su proyecto (PNG, JPG tamaño 305 x 161 pixeles tamanho minimo 220 x 220 px.
                         </ImgText>
-                    </Col>
-                    <Col xs={5}>
-
-                        <Img src={ showImg ? showImg : DefaultImg } alt="cotizate" />
                         <Input
                             type="file"
                             name="imagen_main"
@@ -229,28 +247,22 @@ const FormDescription: React.FC<AllProps> = ({counter, handleNext, handleBack}) 
                             onChange={_onChange}
                         />
                     </Col>
+                    <Col xs={5}>
+
+                        <Img src={ showImg ? showImg : DefaultImg } alt="cotizate" />
+                        
+                    </Col>
                 <MsgError>
                     {errors.imagen_main && 'este campo es requerido'}
                 </MsgError>
                 </Row>
         </WrapperBox>
-         <WrapperBox>
-                <BoxTitle>* Video</BoxTitle>
-                <BoxText>As tu mejor video, Un buen video marca la diferencia y es en gran parte responsable del éxito de tu proyecto.</BoxText>
-                <Input
-                    type="text"
-                    name="video_main"
-                    ref={register({required: true})}
-                />
-                <MsgError>
-                    {errors.video_main && 'este campo es requerido'}
-                </MsgError>
-        </WrapperBox>       
+     
             <WrapperBoxRD>
-                <BoxTitle> * Resumen descripción </BoxTitle>
-                <BoxText> 
+                <BoxTitleContent> * Resumen descripción </BoxTitleContent>
+                <BoxTextPR> 
                 Este es el resumen de  descripción del post utiliza max. 244 caracteres o 44 palabras
-                </BoxText>
+                </BoxTextPR>
                 <Editor
                     initialValue=''
                     init={{
@@ -300,10 +312,10 @@ const FormDescription: React.FC<AllProps> = ({counter, handleNext, handleBack}) 
             </WrapperBoxRD>
 
             <WrapperBoxRD>
-                <BoxTitle>* Descripción de tu campaña </BoxTitle>
-                <BoxText> 
+                <BoxTitleContent>* Descripción de tu campaña </BoxTitleContent>
+                <BoxTextPD> 
                 Habla con claridad sobre lo que quieres lograr. Aclara posibles dudas sobre cómo se utilizará el dinero, quién está detrás del proyecto, La transparencia atrae a más seguidores. Recuerde: su proyecto será accedido por personas comunes que decidirán si quieren o no apoyar su proyecto.
-                </BoxText>
+                </BoxTextPD>
                 <Editor
                     initialValue=''
                     init={{
@@ -360,6 +372,7 @@ const FormDescription: React.FC<AllProps> = ({counter, handleNext, handleBack}) 
                 </WrapperSave>
             </Row>
         </Form>
+        </Slide>
         </>
 
     )

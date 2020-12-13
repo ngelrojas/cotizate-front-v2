@@ -34,7 +34,7 @@ const Portada: React.FC = () => {
                 <Sectionportada>
                 <Row center="xs">
                   {listaCategorias.map((value : any, index : number) =>(
-                     <Col xs={4} sm={2} md={2} >
+                     <Col  key={index} xs={4} sm={2} md={2} >
                       <Row center="xs">
                          <DivCategoria>
                              <ImgCategoria

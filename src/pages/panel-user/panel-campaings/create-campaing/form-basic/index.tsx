@@ -5,6 +5,7 @@ import FormDescription from './form-description'
 import FormPhase from './form-phase'
 import FormReward from './form-rewards'
 import {WrapBtn, BtnBack, BtnNext} from '../styles'
+import Slide from 'react-reveal/Slide'
 
 interface Icounter {
     counter: any 
@@ -78,7 +79,7 @@ const FormBasic: React.FC<AllProps> = ({counter, handle_Next, handle_Back}) => {
             {
                 
                stepForm(menu) 
-            }
+            } 
             <div>           
             <WrapBtn>
                 <BtnBack onClick={handleBack}>volver</BtnBack>
@@ -87,7 +88,6 @@ const FormBasic: React.FC<AllProps> = ({counter, handle_Next, handle_Back}) => {
                 <BtnNext  onClick={handleNext}>siguiente</BtnNext>
             </WrapBtn>
             </div>
-
         </>
 
     )
