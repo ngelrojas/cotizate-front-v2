@@ -55,7 +55,7 @@ const PanelUser: React.FC<Iauth> = ({authenticated, currentUser}) => {
       <main className={classes.content}>
         <ContainerCo maxWidth="lg" className={classes.container}>
             <Panels />
-            Panel INICIAL 
+            <p>PANEL PRINCIPAL</p> 
         </ContainerCo>
       </main>
     </div>

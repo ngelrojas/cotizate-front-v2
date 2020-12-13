@@ -142,7 +142,6 @@ const Personal: React.FC<Iauth> = ({authenticated, currentUser})=>{
 
         currentPersonal.createPP(data_profile)
             .then(resp => {
-                //console.info(resp.data)
                 Notifications('Su perfil se ha creado', 'success')
                 reset()
             }).catch(err=>{

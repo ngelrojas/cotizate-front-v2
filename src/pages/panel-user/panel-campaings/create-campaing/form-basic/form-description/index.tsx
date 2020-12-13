@@ -167,8 +167,6 @@ const FormDescription: React.FC<AllProps> = ({counter, handleNext, handleBack}) 
         reader.readAsDataURL(file[0])
     }
 
-
-
     React.useEffect(()=>{
         const input: any = document.querySelector('input[name="title"]')
         input.focus()
