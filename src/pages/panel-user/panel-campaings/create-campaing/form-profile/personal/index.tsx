@@ -107,10 +107,10 @@ const Personal: React.FC<Iauth> = ({authenticated, currentUser})=>{
     let CityUser = new City(token)
     let UploadImages = new UploadFiles()
 
-    const [personalData, SetpersonalData] = React.useState<IprofileType>()
     const [loadcity, setLoadcity] = React.useState<Icities[]>()
     const [isLoading, setIsLoading] = React.useState(true)
     const [showImg, SetShowImg] = React.useState()
+    const input = document.querySelector("cinit")
     const {register, handleSubmit, reset, errors} = useForm<FormData>({
         mode: 'onChange'
     })
@@ -142,7 +142,6 @@ const Personal: React.FC<Iauth> = ({authenticated, currentUser})=>{
 
         currentPersonal.createPP(data_profile)
             .then(resp => {
-                //console.info(resp.data)
                 Notifications('Su perfil se ha creado', 'success')
                 reset()
             }).catch(err=>{
@@ -220,6 +219,8 @@ const Personal: React.FC<Iauth> = ({authenticated, currentUser})=>{
 
     React.useEffect(()=>{
         LoadCities()
+        const input: any = document.querySelector('input[name="cinit"]')
+        input.focus()
     },[])
 
     return(
@@ -283,6 +284,7 @@ const Personal: React.FC<Iauth> = ({authenticated, currentUser})=>{
                                         <Input type="text"
                                                name="cinit"
                                                ref={register({required: true})}
+                                               autoFocus
                                             />
                                         
                                     </label>

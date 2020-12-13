@@ -34,8 +34,8 @@ const Portada: React.FC = () => {
                 <Sectionportada>
                 <Row center="xs">
                   {listaCategorias.map((value : any, index : number) =>(
-                     <Col xs={4} sm={2} md={2}  key={index} >
-                      <Row center="xs" >
+                     <Col  key={index} xs={4} sm={2} md={2} >
+                      <Row center="xs">
                          <DivCategoria>
                             <Go to={{
                                     pathname: '/category',
@@ -45,7 +45,7 @@ const Portada: React.FC = () => {
                                     }
                                   }}>
                              <ImgCategoria
-                                 src={'http://35.225.59.226:9000/'+value.imagen}
+                                 src={'http://8.vps.confiared.com:16593/'+value.imagen}
                                  alt={value.descripcion}
                              />   
                              

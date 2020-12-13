@@ -91,7 +91,7 @@ const Projects: React.FC<Iproyect> = (props)=> {
                 <Picture>
                     <Go to="/my-article">
                         <Img
-                            src={'http://35.225.59.226:9000/'+props.data.imagen_main}
+                            src={'http://8.vps.confiared.com:16593/'+props.data.imagen_main}
                             alt="cotizate"
                         />
                     </Go>

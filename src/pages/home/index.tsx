@@ -117,7 +117,7 @@ useEffect(() => {
                   arrows={false}
                 >
                   {listCausasSociales.map((value : any, index : number) =>(
-                     <Projects key={index} data={value} />
+                     <Projects  key={index} data={value} />
                   ))}                                  
                 </Carousel>               
             </div>   

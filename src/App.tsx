@@ -15,6 +15,7 @@ import PanelUser from './pages/panel-user'
 import PanelCampaing from './pages/panel-user/panel-campaings'
 import CreateCampaing from './pages/panel-user/panel-campaings/create-campaing'
 import UpdateCampaing from './pages/panel-user/panel-campaings/update-campaing'
+import PanelCreated from './pages/panel-user/panel-created'
 import PageCreating from './pages/creating'
 import Crowdfunding from './pages/crowdfunding'
 import Category from './pages/categorias'
@@ -67,7 +68,7 @@ const App: React.FC = () => {
                     <Route
                         exact
                         path="/panel-de-usuario"
-                        component={PanelUser}
+                        component={PanelUser} 
                     />
                     <Route
                         exact
@@ -83,6 +84,11 @@ const App: React.FC = () => {
                         exact
                         path="/panel-de-usuario/actualizar-campania/:id"
                         component={UpdateCampaing}
+                    />
+                    <Route
+                        exact
+                        path="/dashboard-de-usuario/creados"
+                        component={PanelCreated}
                     />
                     <Route
                         exact
