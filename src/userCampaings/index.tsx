@@ -99,7 +99,7 @@ export class CampaingBody{
         this.token = token
     }
 
-    listCamapingBody = async(status:number) => {
+    listCampaingBody = async(status:number) => {
         this.resp_campaing_body = await API.get(`campaing-private/${status}`, {
            headers: {Authorization: `Bearer ${this.token}`} 
         })

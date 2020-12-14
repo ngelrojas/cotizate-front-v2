@@ -10,7 +10,8 @@ import SideBarMenu from '../component/sidebar-menu'
 import DefaultImg from '../../public/img/default.png'
 import {Img, DivImg, ProfileName, ContainerCo, ContainerPC} from '../styles'
 import Panels from '../panels'
-import CardCreated from './component/cardCreated'
+import ListCard from './component/listCard'
+
 
 type userType = {
     id: number
@@ -60,7 +61,7 @@ const PanelCreated: React.FC<Iauth> = ({authenticated, currentUser}) => {
         <ContainerCo maxWidth="lg" className={classes.container}>
             <Panels />
             <ContainerPC>
-               <CardCreated />
+               <ListCard />
             </ContainerPC>
         </ContainerCo>
       </main>
