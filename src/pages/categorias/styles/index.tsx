@@ -20,7 +20,6 @@ export const SectionPortal = styled.section`
 `
 export const ImgPortal = styled.img`
     width: 100%;
-    height: 350px;
     border-radius: 2px;
 `
 export const DivPortal = styled.div`

@@ -9,6 +9,7 @@ import phaseReducer from '../reducers/phase.reducers'
 import homeReducer from '../reducers/home.reducers'
 import profileReducer from '../reducers/profile.reducers' 
 import NextBackReducer from '../reducers/next_back.reducers'
+import categoriaReducer from '../reducers/categoriaReducers'
 
 const initialState = {}
 const middleware = [thunk]
@@ -26,7 +27,8 @@ const reducer = combineReducers({
     campaing: campaingReducer,
     phase: phaseReducer,
     home:homeReducer,
-    nextForm: NextBackReducer
+    nextForm: NextBackReducer,
+    categorias:categoriaReducer
 })
 
 const store = createStore(

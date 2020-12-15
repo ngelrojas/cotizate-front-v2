@@ -41,7 +41,8 @@ const Portada: React.FC = () => {
                                     pathname: '/category',
                                     state: {
                                       idCategoria: `${value.id}`,
-                                      nombre: `${value.name}`
+                                      nombre: `${value.name}`,
+                                      slug: `${value.slug}`
                                     }
                                   }}>
                              <ImgCategoria
