@@ -12,7 +12,6 @@ const ListCard: React.FC = () => {
     const LoadCards = () => {
         CampaingCard.listCampaingBody(5)
             .then(resp => {
-                console.info(resp.data.data)
                 setCards(resp.data.data)
             })
             .catch(err => {
@@ -30,13 +29,13 @@ const ListCard: React.FC = () => {
         <Row>
             {
                 !isLoading && Cards ? (
-                    Cards.map((data: any, index: number) => {
+                    Cards.map((data: any) => {
                         return  <Col xs={6}>
-                                    <CardCreated key={index} {...data} />
+                                    <CardCreated {...data} />
                                 </Col>
                     })
 
-                ):("<div>No Data</div>")
+                ):("<Col xs={12}><h2>NO EXITE POSTS</h2></Col>")
             }
 
         </Row>

@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 import {Link} from 'react-router-dom'
-import {Tab, TabList} from 'react-tabs'
+import { MdLens } from 'react-icons/md'
+import { TabList, Tab} from '@reach/tabs'
 
 export const Content = styled.main`
     height: auto;
@@ -23,6 +24,24 @@ export const H3 = styled.h3`
     color: #007bff;
 `
 
+export const H4 = styled(H3)`
+    text-align: left;
+    margin-top: 5%;
+    margin-bottom: 2%;
+    font-size: 18px;
+`
+
+export const TextConf = styled.p`
+    font-size: 18px;
+    color: #828282;
+    margin-bottom: 6%;
+`
+
+export const TextMain = styled.p`
+    font-size: 18px;
+    color: #828282;
+`
+
 export const Title = styled.div`
     width: 100%;
 `
@@ -30,10 +49,21 @@ export const Title = styled.div`
 export const Btn = styled.button`
     border: 0px;
     border-radius: 2px;
-    color: #dddddd;
-    padding: 1.1%;
+    color: #fff;
+    padding: 2.1%;
     text-transform: uppercase;
     cursor: pointer;
+    width: 20%;
+`
+
+export const BtnLink = styled(Link)`
+    border: 0px;
+    border-radius: 2px;
+    color: #fff;
+    padding: 2.1%;
+    text-transform: uppercase;
+    cursor: pointer;
+    width: 20%;
 `
 
 export const BtnCreate = styled(Link)`
@@ -58,19 +88,29 @@ export const BtnCreateCampaing = styled(Btn)`
     text-decoration: none;
     width: 100%;
 `
-export const TabMenu = styled(TabList)`
-    display: flex;
-    margin-top: 3%;
+
+export const TabNav = styled(TabList)`
+    background-color: #ffffff;
+    margin-bottom: 5%;
+`
+
+export const TabNavProfile = styled(TabList)`
+    background-color: #fcfcfc;
+    width: 68%;
+    margin: 0 auto;
+    border: 1px solid #5D5A5A;
+    padding: 1%;
     margin-bottom: 5%;
 `
 
 export const TabSubMenu = styled(Tab)`
-    width: 100%;
-    text-align: center;
-    cursor: pointer;
-    &:hover {
-        color: #f37a22;
-    }
+    width: 33%;
+    border-bottom: 0px;
+`
+
+export const TabSubMenuPro = styled(Tab)`
+    width: 50%;
+    border-bottom: 0px;
 `
 
 export const Label = styled.label`
@@ -79,9 +119,12 @@ export const Label = styled.label`
 `
 
 export const Input = styled.input`
-    border: 0;
-    border-bottom: 1px solid #f37a22;
-    padding: 1%;
+    width: 90%;
+    height: 49px;
+    padding-left: 2%;
+`
+
+export const InputReward = styled(Input)`
     width: 100%;
 `
 
@@ -97,23 +140,63 @@ export const FormSubTitle = styled.p`
 `
 
 export const WrapBtn = styled.div`
-    width: 100%;
+    width: 50%;
     overflow: hidden;
     margin-top: 4%;
+    float:left;
+`
+
+export const WrapBtnSave = styled(WrapBtn)`
+    width: 95%;
+`
+
+export const WrapBtnAdd = styled(WrapBtn)`
+    margin-top: 0%;
+    width: 100%;
+    float:none;
 `
 
 export const BtnNext = styled(Btn)`
-    background-color: #007bff;
+    background-color:#F4A14C ;
     float: right;
+    font-size: 14px;
+`
+
+export const BtnAdd = styled(Btn)`
+    background-color:#F4A14C ;
+    float: right;
+    font-size: 14px;
+    width: 100%;
+    padding: 1.5%;
+    float: none;
+`
+
+export const BtnBack = styled(Btn)`
+    background-color:#F4A14C ;
+    float: left;
+    text-decoration: none;
+    text-align: center;
+    font-size: 14px;
 `
 
 export const BtnSaveProject = styled(Btn)`
     background-color: #007bff;
     width: 100%;
+    padding: 1.5%;
+    font-size: 16px;
 `
+
 export const Form = styled.form`
-    width: 60%;
-    margin: 0 auto;
+    width: 100%;
+    padding: 5%;
+    background-color: #FCF2E9;
+`
+
+export const FormConf = styled(Form)`
+    padding-top: 0%;
+    padding-left: 5%;
+    padding-right: 5%;
+    padding-bottom: 4%;
 `
 
 export const FormR = styled.form`
@@ -121,13 +204,18 @@ export const FormR = styled.form`
     margin: 0 auto;
 `
 
-export const MsgError = styled.span`
-    width: 100%;
+export const MsgError = styled.div`
+    width: 45%;
     left: 0%;
     top: 150%;
     color: red;
     text-align: center;
-    margin-top: 2%;
+    text-align: center;
+    overflow: hidden;
+`
+
+export const MsgErrorPhase = styled(MsgError)`
+    width: 100%;
     margin-bottom: 2%;
 `
 
@@ -168,12 +256,13 @@ export const TagLabel = styled.label`
 
 export const Table = styled.table`
     width: 100%;
-    margin-top: 10%;
+    margin-top: 2%;
 `
 
 export const Thead = styled.thead`
     text-transform: uppercase;
     color: #f37a22;
+    text-align: left;
 `
 
 export const Th = styled.th`
@@ -186,5 +275,165 @@ export const Td = styled.td`
 `
 
 export const Tr = styled.tr`
-    text-align: center;
+    text-align: left;
+`
+
+export const IconOn = styled(MdLens)`
+    color: #f37a22;
+`
+
+export const WrapperBox = styled.div`
+    background-color:#FCF2E9;
+    padding-top: 4%;
+    padding-bottom: 4%;
+    padding-left: 6%;
+    padding-right: 1%;
+`
+
+export const WrapperBoxTable = styled(WrapperBox)`
+    width:100%;
+`
+
+export const WrapperBoxTableP = styled(WrapperBox)`
+    width:100%;
+    padding-left: 10%;
+    padding-right: 4%;
+`
+
+export const WrapperBoxPhase = styled(WrapperBox)`
+    padding-top: 0%;
+    padding-bottom: 6%;
+    padding-left: 0%;
+    padding-right: 0%;
+`
+
+export const BoxTitle = styled.p`
+    margin-bottom: 1%;
+    margin-top: 10%;
+`
+
+export const BoxText = styled.p`
+    margin-top: 3%;
+    margin-bottom: 1%;
+    color: #828282;
+    height: 53px;
+`
+
+export const BoxTextPhase = styled(BoxText)`
+    height: 46px;
+`
+
+export const BoxTextPD = styled(BoxText)`
+    height: 56px;
+`
+
+export const BoxTextPR = styled(BoxText)`
+    height: 36px;
+`
+
+export const BoxSelect = styled.select`
+    width: 90%;
+    height: 49px;
+    padding: 1%;
+`
+
+export const BoxInput = styled.input`
+    width: 90%;
+    height: 49px;
+    padding-left: 9%;
+`
+
+export const BoxInputReward = styled(BoxInput)`
+    width: 100%;
+`
+
+export const BoxInputPhase = styled(BoxInput)`
+    padding-left: 1%;
+` 
+
+export const BoxInputDuration = styled(BoxInput)`
+    padding-left: 2%;
+`
+
+export const WrappBoxInput = styled.div`
+    position: relative;
+`
+
+export const BS = styled.p`
+    background-color: #F2A85D;
+    padding-top: 3%;
+    padding-left: 2%;
+    padding-right: 2%;
+    position: absolute;
+    top: 0%;
+    height: 49px;
+    color: #fff;
+`
+
+export const Img = styled.img`
+    width: 305px;
+`
+
+export const ImgText = styled.p`
+    width: 50%;
+    color: #1383C5;
+`
+
+export const WrapperBoxRD = styled.div`
+    background-color:#FCF2E9;
+    padding-left: 4%;
+    padding-right: 4%;
+    padding-bottom: 4%;
+`
+
+export const WrapperSave = styled.div`
+    width: 40%;
+    position: absolute;
+    margin-left: 8.5%;
+    margin-top: 3.9%;
+`
+
+export const WrapperSavePhase = styled(WrapperSave)`
+    margin-top: 3.2%;
+    margin-left: 6.5%;
+`
+
+export const WrapperSaveConfig = styled(WrapperSave)`
+    margin-top: 3.2%;
+`
+
+export const SpaceB = styled.p`
+    margin: 2%;
+`
+
+export const TableCities = styled.div`
+    display: flex;
+    padding: 3%;
+    width: 80%;
+`
+
+export const ItemCity = styled.label`
+    margin: 2%;
+`
+
+export const SecondItem = styled.div`
+    width: 95%;
+    margin: 0 auto;
+`
+
+export const BoxCity = styled.div`
+    background-color: #ffffff;
+    padding-left: 2%;
+    padding-bottom: 2%;
+    width: 80%;
+    margin-left: 20%;
+`
+
+export const BoxTitleContent = styled.p`
+    margin-top: 5%;
+    margin-bottom: 3%;
+`
+
+export const BSRE = styled(BS)`
+    top: 39%;
 `

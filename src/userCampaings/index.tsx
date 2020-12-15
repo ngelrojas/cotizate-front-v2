@@ -70,6 +70,13 @@ export class CampaingHeader {
         this.token = token
     }
 
+    retrieveCampaingHeader = async(data_id: any) => {
+        this.resp_campaing_header = await API.get(`campaing-header/${data_id}`, {
+            headers: {Authorization: `Bearer ${this.token}`}
+        })
+        return this.resp_campaing_header
+    }
+
     /*
      * create campaing header
     */

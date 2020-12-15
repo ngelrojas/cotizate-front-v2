@@ -4,6 +4,7 @@ import {Link} from 'react-router-dom'
 export const ContainerCard = styled.div`
    width: 100%; 
    border: 1px solid;
+   height: 25.2vh;
 `
 
 export const Spaces = styled.div`
@@ -65,8 +66,8 @@ export const Box = styled.div`
 `
 
 export const Img = styled.img`
-    width: 234px;
-    height: 234px;
+    width: 25vh;
+    height: 25vh;
 `
 
 export const H3 = styled.h3`
