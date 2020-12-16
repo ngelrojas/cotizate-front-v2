@@ -33,11 +33,22 @@ export const SectionDetails = styled.section`
     }
     @media ${device.mobileL} {
         width: 100%;
+   
     }
 `
 export const Article = styled.article`
     margin: 0%;
     position: relative;
+    @media ${device.tablet} {
+     
+    }
+    @media ${device.mobileL} {
+
+
+        padding-top: 0px;
+        padding-bottom: 0px;
+
+    }
 `
 export const ArticleBody = styled.article`
     margin: 3%;
@@ -50,6 +61,16 @@ export const Picture = styled.picture`
 export const Img = styled.img`
     width: 100%;
     border-radius: 2px;
+
+    @media ${device.tablet} {
+
+    }
+    @media ${device.mobileL} {
+  
+
+    }
+
+
 `
 
 export const Title = styled.h1`

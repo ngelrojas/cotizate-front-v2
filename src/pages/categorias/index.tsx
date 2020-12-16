@@ -29,6 +29,7 @@ const Categorias: React.FC<Icateg>  = (props) => {
           <Portal />  
         </Content>
         <Contentbody> 
+              
             {/* <h1>Estamos trabajando : {nombre}</h1> */}
            <br/>
            <br/>
@@ -41,7 +42,7 @@ const Categorias: React.FC<Icateg>  = (props) => {
            <br/>
            <br/>
            <br/>
-           
+
            </Contentbody>
 
         </>
