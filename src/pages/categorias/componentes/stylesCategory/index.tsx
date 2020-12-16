@@ -18,7 +18,7 @@ export const Section = styled.section`
     }
 `
 export const SectionDetails = styled.section`
-    width: 95%;
+    width: 33%;
     background: #F2F2F2;
     padding-left: 0px;
     padding-bottom: 0px;

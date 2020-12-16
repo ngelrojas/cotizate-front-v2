@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {SectionPortal,ImgPortal, DivPortal  } from '../styles/index'
-import PortadaCerebroImg2 from './ecologia-sin-texto.png';
+import PortadaCerebroImg2 from './tecnologia-con-texto.png';
 import { useHistory } from "react-router-dom";
 
 
