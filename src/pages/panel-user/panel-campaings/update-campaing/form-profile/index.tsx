@@ -13,55 +13,7 @@ import {
     TabNavProfile
 } from '../styles'
 
-interface Icountries {
-    id: number,
-    short_name: string,
-    code_name: string,
-    description: string,
-    name: string
-}
-
-interface Icities {
-    id: number,
-    shortname: string,
-    codename: string,
-    description: string,
-    countries:number, 
-    name: string
-}
-
-interface Iuser {
-    id: number
-    email: string
-    first_name: string
-    last_name: string
-
-}
-
-type propsCamp = {
-    id: number
-    profile: Iuser 
-    cinit: string
-    cellphone: string
-    telephone: string
-    country_id: number
-    countries: Icountries 
-    cities: Icities
-    city_id: number
-    address: string
-    photo: any 
-    neightbordhood: string
-    number_address: number
-    rs_facebook: string
-    rs_twitter: string
-    rs_linkedin: string
-    rs_another: string
-    description: string
-    current_position: string
-    headline: string
-}
-
-const FormProfile: React.FC<propsCamp> = (propsCamp) => {
+const FormProfile: React.FC = () => {
 
     let history = useHistory()
 
@@ -94,7 +46,7 @@ const FormProfile: React.FC<propsCamp> = (propsCamp) => {
                                   <CoolTab> Perfil Asociación/Empresa/Otros</CoolTab>
                               </TabNavProfile>
                               <TabPanels>
-                                      <TabPanel><Personal {...propsCamp} /></TabPanel>
+                                      <TabPanel><Personal /></TabPanel>
                                       <TabPanel><Association /></TabPanel>
                               </TabPanels>
                             </Tabs>

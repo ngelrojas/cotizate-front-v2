@@ -11,6 +11,7 @@ import FormPreview from './form-preview'
 import {Content, TabNav, TabSubMenu, IconOn} from './styles'
 import {CheckAuthentication} from '../../../../redux/auth'
 import {CampaingBody} from '../../../../userCampaings'
+import {RetrieveCampaing} from '../../../../redux/actions/campaing.actions' 
 
 type profileType = {
     first_name: string
@@ -23,7 +24,7 @@ interface Iauth {
     currentUser: profileType
 }
 
-const UpdateCampaing: React.FC<Iauth> = ({authenticated, currentUser}) => {
+const UpdateCampaing: React.FC = (props: any) => {
 
     const [dcamp, setDcamp] = React.useState()
     let history = useHistory()
@@ -47,13 +48,13 @@ const UpdateCampaing: React.FC<Iauth> = ({authenticated, currentUser}) => {
         return cmpID
     }
 
-    const RetrieveCampaing = (camp_id:number) =>{
-        dataCampaing.getRetrieveCBody(camp_id).then(res => {
-            setDcamp(res.data.data)
-        }).catch(err => {
-            console.error(err)
-        })
-    }
+/*    const RetrieveCampaing = (camp_id:number) =>{*/
+        //dataCampaing.getRetrieveCBody(camp_id).then(res => {
+            //setDcamp(res.data.data)
+        //}).catch(err => {
+            //console.error(err)
+        //})
+    /*}*/
 
     React.useEffect(()=>{
         if(!CheckAuthentication()){
@@ -61,7 +62,7 @@ const UpdateCampaing: React.FC<Iauth> = ({authenticated, currentUser}) => {
         }
 
         let ID = GetCampID() 
-        RetrieveCampaing(ID)
+        props.RetrieveCampaing(ID)
     },[])
 
     return (
@@ -79,7 +80,7 @@ const UpdateCampaing: React.FC<Iauth> = ({authenticated, currentUser}) => {
                                   <CoolTab><p>VISTA PREVIA</p></CoolTab>
                                   </TabNav>
                                   <TabPanels>
-                                    <TabPanel> <FormProfile {...dcamp} /></TabPanel>
+                                    <TabPanel> <FormProfile /></TabPanel>
                                     <TabPanel> <FormBasic /></TabPanel>
                                     <TabPanel> <FormPreview /></TabPanel>
                                   </TabPanels>
@@ -95,8 +96,11 @@ const UpdateCampaing: React.FC<Iauth> = ({authenticated, currentUser}) => {
 }
 
 const mapStateToProps = (state: any) => ({
-    authenticated: state.user.authenticated,
-    currentUser: state.user
+    campaing: state.campaing
 })
 
-export default connect(mapStateToProps)(UpdateCampaing)
+const mapActionToProps = {
+    RetrieveCampaing   
+}
+
+export default connect(mapStateToProps, mapActionToProps)(UpdateCampaing)

@@ -4,26 +4,27 @@ import {
     LOADING_CAMPAING,
 } from '../types'
 
-import {CampaingHeader} from '../../userCampaings'
+import {CampaingBody} from '../../userCampaings'
 
 
 let token = window.sessionStorage.getItem('token')
 
-let CampHeader = new CampaingHeader(token)
+let CampHeader = new CampaingBody(token)
 
-export const CreateCampaingHeader = (campaingData: any) => (dispatch: any) => {
+export const RetrieveCampaing = (campaing_id: number) => (dispatch: any) => {
     dispatch({type: LOADING_CAMPAING})
 
-    CampHeader.createCampaingHeader(campaingData)
+    CampHeader.getRetrieveCBody(campaing_id)
         .then(resp =>{
-                 dispatch({
+                
+                return  dispatch({
                     type: SET_CAMPAING,
                     payload: resp.data.data
                  })
         }).catch(err =>{
                  dispatch({
                     type: SET_ERRORS,
-                    payload: err 
+                    errors: err 
                  })
         })
 }

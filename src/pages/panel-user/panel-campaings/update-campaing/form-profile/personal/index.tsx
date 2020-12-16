@@ -1,4 +1,5 @@
 import React from 'react'
+import {connect} from 'react-redux'
 import {useForm} from 'react-hook-form'
 import {store} from 'react-notifications-component'
 import {Row, Col} from 'react-styled-flexboxgrid'
@@ -71,32 +72,14 @@ type FormData = {
     description: string
     current_position: string
     headline: string
+    title: string
 }
 
-type propsCamp = {
-    id: number
-    profile: Iuser 
-    cinit: string
-    cellphone: string
-    telephone: string
-    country_id: number
-    countries: Icountries 
-    cities: Icities
-    city_id: number
-    address: string
-    photo: any 
-    neightbordhood: string
-    number_address: number
-    rs_facebook: string
-    rs_twitter: string
-    rs_linkedin: string
-    rs_another: string
-    description: string
-    current_position: string
-    headline: string
+interface Icampaing {
+    campaing: FormData 
 }
 
-const Personal: React.FC<propsCamp> = (propsCamp)=>{
+const Personal: React.FC<Icampaing> = ({campaing})=>{
 
     let token = window.sessionStorage.getItem('token')
     let currentPersonal = new PersonalProfile(token)
@@ -218,6 +201,8 @@ const Personal: React.FC<propsCamp> = (propsCamp)=>{
         LoadCities()
         const input: any = document.querySelector('input[name="cinit"]')
         input.focus()
+        console.info('from redux')
+        console.info(campaing)
     },[])
 
     return(
@@ -229,7 +214,7 @@ const Personal: React.FC<propsCamp> = (propsCamp)=>{
                     <Col xs={12}>
                         <Row center="xs">
                             <Col xs={6}>       
-                            <InfoText>DATOS PERSONALES</InfoText>
+                            <InfoText>DATOS PERSONALES {campaing.title}</InfoText>
                             </Col>
                         </Row>
                     </Col>
@@ -240,14 +225,11 @@ const Personal: React.FC<propsCamp> = (propsCamp)=>{
                                 <WrapperBox>
                                     <label>
                                         <Span>Nombre: </Span>
-                                        {!isLoading && propsCamp.profile ? (
                                             <Input type="text"
                                                    name="first_name"
                                                    ref={register({required: true})}
-                                                   defaultValue={propsCamp.profile.first_name}
                                                    disabled
                                             />
-                                        ):('...Loading')}
 
                                     </label>
                                     <ErrorInput>{errors.first_name && 'este campo es requerido'}</ErrorInput>
@@ -262,14 +244,11 @@ const Personal: React.FC<propsCamp> = (propsCamp)=>{
                                 <WrapperBox>
                                     <label>
                                         <Span>Apellido: </Span>
-                                        {!isLoading && propsCamp.profile ? (
                                             <Input type="text"
                                                name="last_name"
                                                ref={register({required: true})}
-                                               defaultValue={propsCamp.profile.last_name}
                                                 disabled
                                             />
-                                        ):('...Loading')}
                                         
                                     </label>
                                     <ErrorInput>{errors.last_name && 'este campo es requerido'}</ErrorInput>
@@ -287,7 +266,6 @@ const Personal: React.FC<propsCamp> = (propsCamp)=>{
                                         <Input type="text"
                                                name="cinit"
                                                ref={register({required: true})}
-                                               defaultValue={propsCamp.cinit}
                                                autoFocus
                                             />
                                         
@@ -339,14 +317,11 @@ const Personal: React.FC<propsCamp> = (propsCamp)=>{
                                 <WrapperBox>
                                     <label>
                                         <Span>Email: </Span>
-                                        {!isLoading && propsCamp.profile ? (
                                             <Input type="text"
                                                    name="email"
                                                    ref={register({required: true})}
-                                                   defaultValue={propsCamp.profile.email}
                                                    disabled
                                             />
-                                        ):('...Loading')}
 
                                     </label>
                                     <ErrorInput>{errors.email && 'este campo es requerido'}</ErrorInput>
@@ -622,5 +597,8 @@ const Personal: React.FC<propsCamp> = (propsCamp)=>{
     ) 
 } 
 
+const mapStateToProps = (state: any) =>({
+    campaing: state.campaing
+})
 
-export default Personal
+export default connect(mapStateToProps)(Personal)
