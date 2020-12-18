@@ -19,4 +19,21 @@ export function obtenerCategorias(categoria: string){
         .catch(err => console.log(err))
         }
 }
+export function filtrarCategorias(filtro : any){       
+  return (dispatch : any) =>{ 
+         console.log("llego la peticion: ",filtro )
+  //    API.get(`category`).then(resp => {
+  //       if(resp.status === 200){             
+  //         if(resp.data.length > 0){               
+  //             dispatch({
+  //                 type: CATEGORIAS_LISTA,
+  //                 categorias:resp.data
+  //             })
+  //         }
+  //       }            
+  //     })
+  //     .catch(err => console.log(err))
+      }
+}
+
 

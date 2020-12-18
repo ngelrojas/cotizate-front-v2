@@ -86,9 +86,11 @@ const Categorias: React.FC<Icateg>  = (props) => {
     },[]);
 
     const classes = useStyles();
-    const [age, setAge] = React.useState('');
+    const [tipo, setTipo] = useState('');
     const handleChange = (event : any) => {
-      setAge(event.target.value);
+        setTipo(event.target.value);
+        // console.log((event.target.value));
+        dispatch(Action.filtrarCategorias(event.target.value));
     };
 
     return (
@@ -106,14 +108,14 @@ const Categorias: React.FC<Icateg>  = (props) => {
                 {/* <InputLabel htmlFor="demo-customized-select-native">Age</InputLabel> */}      
                         <NativeSelect
                         id="demo-customized-select-native"
-                        value={age}
+                        value={tipo}
                         onChange={handleChange}
                         input={<BootstrapInput />}
                         >
                         <option aria-label="None" value="" />
-                        <option value={1}>Recientes</option>
-                        <option value={2}>Destacados</option>
-                        <option value={3}>Finalizados</option>
+                        <option value={'Recientes'}>Recientes</option>
+                        <option value={'Destacados'}>Destacados</option>
+                        <option value={'Finalizados'}>Finalizados</option>
                         </NativeSelect>
                     </FormControl>
                 </Row>
