@@ -89,14 +89,25 @@ const Projects: React.FC<Iproyect> = (props)=> {
             <SectionDetails>
             <Article>
                 <Picture>
-                    <Go to="/my-article">
+                    <Go to="/">
                         <Img
                             src={'http://8.vps.confiared.com:16593/'+props.data.imagen_main}
                             alt="cotizate"
                         />
                     </Go>
                 </Picture>
-                <Title>{props.data.header.category.name}</Title>
+                <Title>
+                    <Go to={{
+                        pathname: '/category',
+                        state: {
+                            idCategoria: `${1}`,
+                            nombre: `${'teno'}`,
+                            slug: `${'tecnoloia'}`
+                        }
+                    }}> 
+                     {props.data.header.category.name}
+                   </Go>
+                </Title>
             </Article>
             <ArticleBody>
                 <Row>
@@ -106,9 +117,9 @@ const Projects: React.FC<Iproyect> = (props)=> {
                                 <Place>
                                    <MdLocationOn />
                                     <span>
-                                        <Go to="/category/santa-cruz">                                            
+                                        {/* <Go to="/">                                             */}
                                           {' '}  {props.data.header.city.name} - {props.data.header.city.countries.name}
-                                        </Go>
+                                        {/* </Go> */}
                                     </span>                                    
                                 </Place>
                             </Col>
@@ -131,9 +142,9 @@ const Projects: React.FC<Iproyect> = (props)=> {
                 <Row>
                     <Col xs={12} sm={12} md={12} lg={12}>
                         <Excerpt>
-                            <Go to="/my-article">
+                            {/* <Go to="/"> */}
                                 {props.data.title}                                
-                            </Go>
+                            {/* </Go> */}
                         </Excerpt>
                     </Col>
                 </Row>

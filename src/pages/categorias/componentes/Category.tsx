@@ -116,12 +116,12 @@ const Category: React.FC<ICategory> = (props)=> {
             <SectionDetails>
             <Article>
                 <Picture>
-                    <Go to="/my-article">
+                    {/* <Go to="/"> */}
                         <Img
                             src={'http://8.vps.confiared.com:16593/'+props.data.imagen_main}
                             alt="cotizate"
                         />
-                    </Go>
+                    {/* </Go> */}
                 </Picture>
                 <Title>{props.data.title}</Title>
                 {/* <Title>{'name'}</Title> */}
@@ -134,10 +134,10 @@ const Category: React.FC<ICategory> = (props)=> {
                                 <Place>
                                    <MdLocationOn />
                                     <span>
-                                        <Go to="/">                                            
+                                        {/* <Go to="/">                                             */}
                                           {' '}  {props.data.profile.cities.name} - {props.data.profile.cities.countries.name}
                                            {/* {'city'} */}
-                                        </Go>
+                                        {/* </Go> */}
                                     </span>                                    
                                 </Place>
                             </Col>
@@ -160,9 +160,9 @@ const Category: React.FC<ICategory> = (props)=> {
                 <Row>
                     <Col xs={12} sm={12} md={12} lg={12}>
                         <Excerpt>
-                            <Go to="/my-article">
+                            {/* <Go to="/my-article"> */}
                                 {props.data.title}                                
-                            </Go>
+                            {/* </Go> */}
                         </Excerpt>
                     </Col>
                 </Row>
