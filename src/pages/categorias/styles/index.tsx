@@ -64,3 +64,8 @@ export const DivPortal = styled.div`
     position:relative;
     width:100%;
 `
+export const BoxSelect = styled.select`
+    width: 90%;
+    height: 49px;
+    padding: 1%;
+`

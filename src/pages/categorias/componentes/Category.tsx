@@ -123,8 +123,8 @@ const Category: React.FC<ICategory> = (props)=> {
                         />
                     </Go>
                 </Picture>
-                {/* <Title>{props.data.header.category.name}</Title> */}
-                <Title>{'name'}</Title>
+                <Title>{props.data.title}</Title>
+                {/* <Title>{'name'}</Title> */}
             </Article>
             <ArticleBody>
                 <Row>
@@ -134,9 +134,9 @@ const Category: React.FC<ICategory> = (props)=> {
                                 <Place>
                                    <MdLocationOn />
                                     <span>
-                                        <Go to="/category/santa-cruz">                                            
-                                          {/* {' '}  {props.data.header.city.name} - {props.data.header.city.countries.name} */}
-                                           {'city'}
+                                        <Go to="/">                                            
+                                          {' '}  {props.data.profile.cities.name} - {props.data.profile.cities.countries.name}
+                                           {/* {'city'} */}
                                         </Go>
                                     </span>                                    
                                 </Place>
@@ -180,7 +180,8 @@ const Category: React.FC<ICategory> = (props)=> {
                         <Row start="lg">
                             <Col xs={12} sm={12} md={12} lg={12}>
                                 <Porcentaje>
-                                <LineProgress bgcolor={'#7CC142'} completed={props.data.header.percent_reached} />
+                                {/* <LineProgress bgcolor={'#7CC142'} completed={props.data.header.percent_reached} /> */}
+                                <LineProgress bgcolor={'#7CC142'} completed={50} />
                                 </Porcentaje>                            
                             </Col>
                         </Row>
@@ -193,7 +194,8 @@ const Category: React.FC<ICategory> = (props)=> {
                         <Row start="lg">
                             <Col xs={12} sm={12} md={12} lg={12}>
                                <Alcanzado>
-                                    <p> {props.data.header.percent_reached}{'% '} ALCANZADO</p>                                    
+                                    {/* <p> {props.data.header.percent_reached}{'% '} ALCANZADO</p>                                     */}
+                                    <p> {50}{'% '} ALCANZADO</p>  
                                 </Alcanzado>  
                             </Col>
                         </Row>
@@ -201,7 +203,8 @@ const Category: React.FC<ICategory> = (props)=> {
                     <Col xs={6} sm={6} md={6} lg={6}>                    
                         <Row end="lg">
                             <Col xs={12} sm={12} md={12} lg={12}>                             
-                               <NumberMonto> {props.data.header.amount_reached } Bs</NumberMonto>
+                               {/* <NumberMonto> {props.data.header.amount_reached } Bs</NumberMonto> */}
+                               <NumberMonto> {111 } Bs</NumberMonto>
                             </Col>
                         </Row>
                     </Col>
@@ -213,7 +216,7 @@ const Category: React.FC<ICategory> = (props)=> {
                             <Col xs={12} sm={12} md={12} lg={12}>
                                <CodigoFaltante>
                                     {/* <p>Faltan: {props.data.header.qty_day_left} Dias</p> */}
-                                    <p>Faltan:  Dias</p>     
+                                    <p>Faltan: 5 Dias</p>     
                                 </CodigoFaltante>  
                             </Col>
                         </Row>
@@ -223,7 +226,7 @@ const Category: React.FC<ICategory> = (props)=> {
                         <Row end="lg">
                             <Col xs={12} sm={12} md={12} lg={12}>                             
                                {/* <PercentNumber>Cod: {props.data.header.code_campaing }</PercentNumber> */}
-                               <PercentNumber>Cod: {'code' }</PercentNumber>
+                               <PercentNumber>Cod: {'code 00005' }</PercentNumber>
                             </Col>
                         </Row>
                     </Col>
@@ -233,8 +236,8 @@ const Category: React.FC<ICategory> = (props)=> {
                         <Row start="lg">
                             <Col sm={12} md={12} lg={12}>
                                 <Author>
-                                    {/* <p>Autor:  {props.data.header.user.first_name} {' '} {props.data.header.user.last_name}</p>  */}
-                                    <p>Autor:  </p> 
+                                    <p>Autor:  {props.data.profile.user.first_name} {' '} {props.data.profile.user.last_name}</p> 
+                                    {/* <p>Autor:  </p>  */}
                                 </Author>
                             </Col>
                         </Row>
