@@ -64,8 +64,19 @@ export const DivPortal = styled.div`
     position:relative;
     width:100%;
 `
-export const BoxSelect = styled.select`
-    width: 90%;
-    height: 49px;
-    padding: 1%;
+export const Title = styled.h1`
+    color: #3b3b3b;
+
+
+    
+    text-align: justify;
+    padding: 3%;
+    text-transform: uppercase;
+    
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 21px;
+
 `
