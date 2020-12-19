@@ -653,20 +653,13 @@ const Categorias: React.FC<Icateg>  = (props) => {
            <br/>
 
            <Row center="xs">
-                  {list22.map((value : any, index : number) =>(
-                     <Col  key={index} xs={12} sm={6} md={4} lg={4}> 
-                        {/* <Row center="xs"> */}
-                              <Category key={index} data={value} />                                 
-                        {/* </Row> */}
+                  {listaCateg.map((value : any, index : number) =>(
+                     <Col  key={index} xs={12} sm={6} md={4} lg={4}>                   
+                              <Category key={index} data={value} />                                                        
                      </Col>
                   ))}                                            
 
             </Row>      
-
-           {/* {list22.map((value : any, index : number) =>(
-                        <Category key={index} data={value} />
-            ))}  */}
-           <br/>
      
            </Contentbody>
 
