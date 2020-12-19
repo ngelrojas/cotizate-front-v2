@@ -620,7 +620,7 @@ const Categorias: React.FC<Icateg>  = (props) => {
                         onChange={handleChange}
                         input={<BootstrapInput />}
                         >
-                        <option aria-label="None" value="" />
+                        <option aria-label="None" value="Todos">Todos</option>
                         <option value={'Recientes'}>Recientes</option>
                         <option value={'Destacados'}>Destacados</option>
                         <option value={'Finalizados'}>Finalizados</option>
