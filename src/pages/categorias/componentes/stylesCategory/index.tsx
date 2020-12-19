@@ -18,22 +18,22 @@ export const Section = styled.section`
     }
 `
 export const SectionDetails = styled.section`
-    width: 33%;
+    width: 100%;
     background: #F2F2F2;
     padding-left: 0px;
     padding-bottom: 0px;
     padding-right: 0px;
     padding-top: 0px;
     margin: 1%;
-    
-    
+    margin-bottom: 50px;
 
     @media ${device.tablet} {
-        width: 92%;
+        width: 95%;
+        margin-bottom: 30px;
     }
     @media ${device.mobileL} {
         width: 100%;
-   
+        margin-bottom: 20px;
     }
 `
 export const Article = styled.article`
@@ -57,6 +57,7 @@ export const ArticleBody = styled.article`
 
 export const Picture = styled.picture`
     height: auto;
+    width: auto%;
 `
 export const Img = styled.img`
     width: 100%;

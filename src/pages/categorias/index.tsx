@@ -21,7 +21,8 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import NativeSelect from '@material-ui/core/NativeSelect';
 import InputBase from '@material-ui/core/InputBase';
-import { any } from 'prop-types';
+
+
 
 const BootstrapInput = withStyles((theme) => ({
     root: {
@@ -67,6 +68,512 @@ const BootstrapInput = withStyles((theme) => ({
       
     },
   }));
+
+  const list22=[
+    {
+      "id": 2,
+      "title": "second campaing",
+      "video_main": "https://youtube.com/my-video",
+      "imagen_main": "two.jpeg",
+      "slug": "second-campaing",
+      "excerpt": "this is a excerpt to this campaing",
+      "description": "this is a description complete",
+      "created_at": "2020-12-12T14:04:17.817656Z",
+      "updated_at": null,
+      "public_at": "2020-09-10T00:00:00Z",
+      "ended_at": null,
+      "status": 5,
+      "header": 2,
+      "profile": {
+          "id": 3,
+          "user": {
+              "id": 4,
+              "first_name": "azumi",
+              "last_name": "doe",
+              "email": "azumi@yopmail.com"
+          },
+          "countries": {
+              "id": 1,
+              "name": "Bolivia",
+              "slug": "bolivia",
+              "short_name": "bo",
+              "code_name": "BO",
+              "description": "bolivia"
+          },
+          "cities": {
+              "id": 1,
+              "name": "La Paz",
+              "slug": "la-paz",
+              "short_name": "lp",
+              "code_name": "LP",
+              "description": "la paz",
+              "countries": {
+                  "id": 1,
+                  "name": "Bolivia",
+                  "slug": "bolivia",
+                  "short_name": "bo",
+                  "code_name": "BO",
+                  "description": "bolivia"
+              }
+          },
+          "cinit": "98876776",
+          "address": "some place",
+          "number_address": "# 1456",
+          "neightbordhood": "bom retiro",
+          "cellphone": "98377732",
+          "telephone": "7373238828",
+          "description": "my description",
+          "complete": true,
+          "rs_facebook": null,
+          "rs_twitter": null,
+          "rs_linkedin": null,
+          "rs_another": null,
+          "current_position": "Manager",
+          "headline": "CEO",
+          "birthdate": "2000-10-10",
+          "photo": "http://someplace"
+      },
+      "profile_ca": 2,
+      "currency": {
+          "id": 1,
+          "name": "Boliviano",
+          "symbol": "$BO"
+      },
+      "short_url": "http://shorttener.com",
+      "slogan_campaing": "this is a slogan the second campaing."
+  },
+  {
+    "id": 2,
+    "title": "second campaing",
+    "video_main": "https://youtube.com/my-video",
+    "imagen_main": "two.jpeg",
+    "slug": "second-campaing",
+    "excerpt": "this is a excerpt to this campaing",
+    "description": "this is a description complete",
+    "created_at": "2020-12-12T14:04:17.817656Z",
+    "updated_at": null,
+    "public_at": "2020-09-10T00:00:00Z",
+    "ended_at": null,
+    "status": 5,
+    "header": 2,
+    "profile": {
+        "id": 3,
+        "user": {
+            "id": 4,
+            "first_name": "azumi",
+            "last_name": "doe",
+            "email": "azumi@yopmail.com"
+        },
+        "countries": {
+            "id": 1,
+            "name": "Bolivia",
+            "slug": "bolivia",
+            "short_name": "bo",
+            "code_name": "BO",
+            "description": "bolivia"
+        },
+        "cities": {
+            "id": 1,
+            "name": "La Paz",
+            "slug": "la-paz",
+            "short_name": "lp",
+            "code_name": "LP",
+            "description": "la paz",
+            "countries": {
+                "id": 1,
+                "name": "Bolivia",
+                "slug": "bolivia",
+                "short_name": "bo",
+                "code_name": "BO",
+                "description": "bolivia"
+            }
+        },
+        "cinit": "98876776",
+        "address": "some place",
+        "number_address": "# 1456",
+        "neightbordhood": "bom retiro",
+        "cellphone": "98377732",
+        "telephone": "7373238828",
+        "description": "my description",
+        "complete": true,
+        "rs_facebook": null,
+        "rs_twitter": null,
+        "rs_linkedin": null,
+        "rs_another": null,
+        "current_position": "Manager",
+        "headline": "CEO",
+        "birthdate": "2000-10-10",
+        "photo": "http://someplace"
+    },
+    "profile_ca": 2,
+    "currency": {
+        "id": 1,
+        "name": "Boliviano",
+        "symbol": "$BO"
+    },
+    "short_url": "http://shorttener.com",
+    "slogan_campaing": "this is a slogan the second campaing."
+},
+{
+  "id": 2,
+  "title": "second campaing",
+  "video_main": "https://youtube.com/my-video",
+  "imagen_main": "two.jpeg",
+  "slug": "second-campaing",
+  "excerpt": "this is a excerpt to this campaing",
+  "description": "this is a description complete",
+  "created_at": "2020-12-12T14:04:17.817656Z",
+  "updated_at": null,
+  "public_at": "2020-09-10T00:00:00Z",
+  "ended_at": null,
+  "status": 5,
+  "header": 2,
+  "profile": {
+      "id": 3,
+      "user": {
+          "id": 4,
+          "first_name": "azumi",
+          "last_name": "doe",
+          "email": "azumi@yopmail.com"
+      },
+      "countries": {
+          "id": 1,
+          "name": "Bolivia",
+          "slug": "bolivia",
+          "short_name": "bo",
+          "code_name": "BO",
+          "description": "bolivia"
+      },
+      "cities": {
+          "id": 1,
+          "name": "La Paz",
+          "slug": "la-paz",
+          "short_name": "lp",
+          "code_name": "LP",
+          "description": "la paz",
+          "countries": {
+              "id": 1,
+              "name": "Bolivia",
+              "slug": "bolivia",
+              "short_name": "bo",
+              "code_name": "BO",
+              "description": "bolivia"
+          }
+      },
+      "cinit": "98876776",
+      "address": "some place",
+      "number_address": "# 1456",
+      "neightbordhood": "bom retiro",
+      "cellphone": "98377732",
+      "telephone": "7373238828",
+      "description": "my description",
+      "complete": true,
+      "rs_facebook": null,
+      "rs_twitter": null,
+      "rs_linkedin": null,
+      "rs_another": null,
+      "current_position": "Manager",
+      "headline": "CEO",
+      "birthdate": "2000-10-10",
+      "photo": "http://someplace"
+  },
+  "profile_ca": 2,
+  "currency": {
+      "id": 1,
+      "name": "Boliviano",
+      "symbol": "$BO"
+  },
+  "short_url": "http://shorttener.com",
+  "slogan_campaing": "this is a slogan the second campaing."
+},
+{
+  "id": 2,
+  "title": "second campaing",
+  "video_main": "https://youtube.com/my-video",
+  "imagen_main": "two.jpeg",
+  "slug": "second-campaing",
+  "excerpt": "this is a excerpt to this campaing",
+  "description": "this is a description complete",
+  "created_at": "2020-12-12T14:04:17.817656Z",
+  "updated_at": null,
+  "public_at": "2020-09-10T00:00:00Z",
+  "ended_at": null,
+  "status": 5,
+  "header": 2,
+  "profile": {
+      "id": 3,
+      "user": {
+          "id": 4,
+          "first_name": "azumi",
+          "last_name": "doe",
+          "email": "azumi@yopmail.com"
+      },
+      "countries": {
+          "id": 1,
+          "name": "Bolivia",
+          "slug": "bolivia",
+          "short_name": "bo",
+          "code_name": "BO",
+          "description": "bolivia"
+      },
+      "cities": {
+          "id": 1,
+          "name": "La Paz",
+          "slug": "la-paz",
+          "short_name": "lp",
+          "code_name": "LP",
+          "description": "la paz",
+          "countries": {
+              "id": 1,
+              "name": "Bolivia",
+              "slug": "bolivia",
+              "short_name": "bo",
+              "code_name": "BO",
+              "description": "bolivia"
+          }
+      },
+      "cinit": "98876776",
+      "address": "some place",
+      "number_address": "# 1456",
+      "neightbordhood": "bom retiro",
+      "cellphone": "98377732",
+      "telephone": "7373238828",
+      "description": "my description",
+      "complete": true,
+      "rs_facebook": null,
+      "rs_twitter": null,
+      "rs_linkedin": null,
+      "rs_another": null,
+      "current_position": "Manager",
+      "headline": "CEO",
+      "birthdate": "2000-10-10",
+      "photo": "http://someplace"
+  },
+  "profile_ca": 2,
+  "currency": {
+      "id": 1,
+      "name": "Boliviano",
+      "symbol": "$BO"
+  },
+  "short_url": "http://shorttener.com",
+  "slogan_campaing": "this is a slogan the second campaing."
+},
+{
+  "id": 2,
+  "title": "second campaing",
+  "video_main": "https://youtube.com/my-video",
+  "imagen_main": "two.jpeg",
+  "slug": "second-campaing",
+  "excerpt": "this is a excerpt to this campaing",
+  "description": "this is a description complete",
+  "created_at": "2020-12-12T14:04:17.817656Z",
+  "updated_at": null,
+  "public_at": "2020-09-10T00:00:00Z",
+  "ended_at": null,
+  "status": 5,
+  "header": 2,
+  "profile": {
+      "id": 3,
+      "user": {
+          "id": 4,
+          "first_name": "azumi",
+          "last_name": "doe",
+          "email": "azumi@yopmail.com"
+      },
+      "countries": {
+          "id": 1,
+          "name": "Bolivia",
+          "slug": "bolivia",
+          "short_name": "bo",
+          "code_name": "BO",
+          "description": "bolivia"
+      },
+      "cities": {
+          "id": 1,
+          "name": "La Paz",
+          "slug": "la-paz",
+          "short_name": "lp",
+          "code_name": "LP",
+          "description": "la paz",
+          "countries": {
+              "id": 1,
+              "name": "Bolivia",
+              "slug": "bolivia",
+              "short_name": "bo",
+              "code_name": "BO",
+              "description": "bolivia"
+          }
+      },
+      "cinit": "98876776",
+      "address": "some place",
+      "number_address": "# 1456",
+      "neightbordhood": "bom retiro",
+      "cellphone": "98377732",
+      "telephone": "7373238828",
+      "description": "my description",
+      "complete": true,
+      "rs_facebook": null,
+      "rs_twitter": null,
+      "rs_linkedin": null,
+      "rs_another": null,
+      "current_position": "Manager",
+      "headline": "CEO",
+      "birthdate": "2000-10-10",
+      "photo": "http://someplace"
+  },
+  "profile_ca": 2,
+  "currency": {
+      "id": 1,
+      "name": "Boliviano",
+      "symbol": "$BO"
+  },
+  "short_url": "http://shorttener.com",
+  "slogan_campaing": "this is a slogan the second campaing."
+},
+{
+  "id": 2,
+  "title": "second campaing",
+  "video_main": "https://youtube.com/my-video",
+  "imagen_main": "two.jpeg",
+  "slug": "second-campaing",
+  "excerpt": "this is a excerpt to this campaing",
+  "description": "this is a description complete",
+  "created_at": "2020-12-12T14:04:17.817656Z",
+  "updated_at": null,
+  "public_at": "2020-09-10T00:00:00Z",
+  "ended_at": null,
+  "status": 5,
+  "header": 2,
+  "profile": {
+      "id": 3,
+      "user": {
+          "id": 4,
+          "first_name": "azumi",
+          "last_name": "doe",
+          "email": "azumi@yopmail.com"
+      },
+      "countries": {
+          "id": 1,
+          "name": "Bolivia",
+          "slug": "bolivia",
+          "short_name": "bo",
+          "code_name": "BO",
+          "description": "bolivia"
+      },
+      "cities": {
+          "id": 1,
+          "name": "La Paz",
+          "slug": "la-paz",
+          "short_name": "lp",
+          "code_name": "LP",
+          "description": "la paz",
+          "countries": {
+              "id": 1,
+              "name": "Bolivia",
+              "slug": "bolivia",
+              "short_name": "bo",
+              "code_name": "BO",
+              "description": "bolivia"
+          }
+      },
+      "cinit": "98876776",
+      "address": "some place",
+      "number_address": "# 1456",
+      "neightbordhood": "bom retiro",
+      "cellphone": "98377732",
+      "telephone": "7373238828",
+      "description": "my description",
+      "complete": true,
+      "rs_facebook": null,
+      "rs_twitter": null,
+      "rs_linkedin": null,
+      "rs_another": null,
+      "current_position": "Manager",
+      "headline": "CEO",
+      "birthdate": "2000-10-10",
+      "photo": "http://someplace"
+  },
+  "profile_ca": 2,
+  "currency": {
+      "id": 1,
+      "name": "Boliviano",
+      "symbol": "$BO"
+  },
+  "short_url": "http://shorttener.com",
+  "slogan_campaing": "this is a slogan the second campaing."
+}, {
+  "id": 2,
+  "title": "second campaing",
+  "video_main": "https://youtube.com/my-video",
+  "imagen_main": "two.jpeg",
+  "slug": "second-campaing",
+  "excerpt": "this is a excerpt to this campaing",
+  "description": "this is a description complete",
+  "created_at": "2020-12-12T14:04:17.817656Z",
+  "updated_at": null,
+  "public_at": "2020-09-10T00:00:00Z",
+  "ended_at": null,
+  "status": 5,
+  "header": 2,
+  "profile": {
+      "id": 3,
+      "user": {
+          "id": 4,
+          "first_name": "azumi",
+          "last_name": "doe",
+          "email": "azumi@yopmail.com"
+      },
+      "countries": {
+          "id": 1,
+          "name": "Bolivia",
+          "slug": "bolivia",
+          "short_name": "bo",
+          "code_name": "BO",
+          "description": "bolivia"
+      },
+      "cities": {
+          "id": 1,
+          "name": "La Paz",
+          "slug": "la-paz",
+          "short_name": "lp",
+          "code_name": "LP",
+          "description": "la paz",
+          "countries": {
+              "id": 1,
+              "name": "Bolivia",
+              "slug": "bolivia",
+              "short_name": "bo",
+              "code_name": "BO",
+              "description": "bolivia"
+          }
+      },
+      "cinit": "98876776",
+      "address": "some place",
+      "number_address": "# 1456",
+      "neightbordhood": "bom retiro",
+      "cellphone": "98377732",
+      "telephone": "7373238828",
+      "description": "my description",
+      "complete": true,
+      "rs_facebook": null,
+      "rs_twitter": null,
+      "rs_linkedin": null,
+      "rs_another": null,
+      "current_position": "Manager",
+      "headline": "CEO",
+      "birthdate": "2000-10-10",
+      "photo": "http://someplace"
+  },
+  "profile_ca": 2,
+  "currency": {
+      "id": 1,
+      "name": "Boliviano",
+      "symbol": "$BO"
+  },
+  "short_url": "http://shorttener.com",
+  "slogan_campaing": "this is a slogan the second campaing."
+}
+  ];
   
 
 interface Icateg {
@@ -86,6 +593,7 @@ const Categorias: React.FC<Icateg>  = (props) => {
     },[]);
 
     const classes = useStyles();
+  
     const [tipo, setTipo] = useState('');
     const handleChange = (event : any) => {
         setTipo(event.target.value);
@@ -126,7 +634,7 @@ const Categorias: React.FC<Icateg>  = (props) => {
                     // label="Search field" 
                     type="search"
                     variant="outlined" 
-                    style={{width:'94%'}}
+                    style={{width:'90%'}}
                     InputProps={{
                         startAdornment: (
                           <InputAdornment position="end">
@@ -140,21 +648,26 @@ const Categorias: React.FC<Icateg>  = (props) => {
                 </Col>
             </Row>
   
-        
-              
-            {/* <h1>Estamos trabajando : {nombre}</h1> */}
+      
          
            <br/>
-           {listaCateg.map((value : any, index : number) =>(
-                        <Category key={index} data={value} />
-            ))} 
-           <br/>
-           <br/>
-           <br/>
-           <br/>
-           <br/>
-           <br/>
 
+           <Row center="xs">
+                  {list22.map((value : any, index : number) =>(
+                     <Col  key={index} xs={12} sm={6} md={4} lg={4}> 
+                        {/* <Row center="xs"> */}
+                              <Category key={index} data={value} />                                 
+                        {/* </Row> */}
+                     </Col>
+                  ))}                                            
+
+            </Row>      
+
+           {/* {list22.map((value : any, index : number) =>(
+                        <Category key={index} data={value} />
+            ))}  */}
+           <br/>
+     
            </Contentbody>
 
         </>
