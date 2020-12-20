@@ -4,7 +4,8 @@ import {Link} from 'react-router-dom'
 export const ContainerCard = styled.div`
    width: 100%; 
    border: 1px solid;
-   height: 25.2vh;
+   height: 27vh;
+   margin: 1%;
 `
 
 export const Spaces = styled.div`

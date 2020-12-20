@@ -2,16 +2,16 @@ import {
     SET_DEFAULT_CAMPAING,
     SET_CAMPAING,
     SET_ERRORS
-} from '../types'
+} from '../types/campaing.types'
 
 const InitCampaingState = {
+    answer: false,
     campaing: {}, 
     errors: {}
 }
 
 export default function(state = InitCampaingState, action: any) {
-    console.info('ACTIONS')
-    console.info(action.type)
+
     switch (action.type) {
 
         case SET_DEFAULT_CAMPAING:
@@ -19,15 +19,19 @@ export default function(state = InitCampaingState, action: any) {
         
         case SET_CAMPAING:
             return {
-                campaing: action.payload
+                ...state,
+                answer: true,
+                campaing: action.campaing
             }
 
         case SET_ERRORS:
             return {
-                errors: action.payload
+                ...state,
+                answer: false,
+                errors: action.campaing
             }
 
         default:
-            return state
+            return state 
     }
 }

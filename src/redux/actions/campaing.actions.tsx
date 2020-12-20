@@ -1,8 +1,7 @@
 import {
     SET_CAMPAING,
     SET_ERRORS,
-    LOADING_CAMPAING,
-} from '../types'
+} from '../types/campaing.types'
 
 import {CampaingBody} from '../../userCampaings'
 
@@ -12,14 +11,14 @@ let token = window.sessionStorage.getItem('token')
 let CampHeader = new CampaingBody(token)
 
 export const RetrieveCampaing = (campaing_id: number) => (dispatch: any) => {
-    dispatch({type: LOADING_CAMPAING})
 
     CampHeader.getRetrieveCBody(campaing_id)
-        .then(resp =>{
-                
-                return  dispatch({
+        .then(resp =>{ 
+                console.info('inside ACTIONS')
+                console.info(resp.data.data)
+                dispatch({
                     type: SET_CAMPAING,
-                    payload: resp.data.data
+                    campaing: resp.data.data,
                  })
         }).catch(err =>{
                  dispatch({
@@ -27,4 +26,5 @@ export const RetrieveCampaing = (campaing_id: number) => (dispatch: any) => {
                     errors: err 
                  })
         })
+
 }
