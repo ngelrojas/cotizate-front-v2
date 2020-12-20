@@ -12,4 +12,9 @@ export class UploadFiles {
         return this.resp
         
     }
+
+    getImg = async(name_img: string) => {
+        this.resp = await API.get(`${name_img}`)
+        return this.resp
+    }
 }

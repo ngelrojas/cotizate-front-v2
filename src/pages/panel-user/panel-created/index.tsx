@@ -1,7 +1,6 @@
 import React from 'react'
 import clsx from 'clsx'
-import {connect, useDispatch, useSelector} from 'react-redux'
-import * as Action from '../../../redux/actions/homeAction'
+import {connect} from 'react-redux'
 import {useHistory} from 'react-router-dom'
 import { makeStyles } from '@material-ui/core/styles'
 import CssBaseline from '@material-ui/core/CssBaseline'
@@ -9,8 +8,10 @@ import Drawer from '@material-ui/core/Drawer'
 import {CheckAuthentication} from '../../../redux/auth'
 import SideBarMenu from '../component/sidebar-menu'
 import DefaultImg from '../../public/img/default.png'
-import {Img, DivImg, ProfileName, ContainerCo} from '../styles'
+import {Img, DivImg, ProfileName, ContainerCo, ContainerPC} from '../styles'
 import Panels from '../panels'
+import ListCard from './component/listCard'
+
 
 type userType = {
     id: number
@@ -29,19 +30,13 @@ const PanelCreated: React.FC<Iauth> = ({authenticated, currentUser}) => {
     const classes = useStyles()
     const [showImg, SetShowImg] = React.useState()
     let history = useHistory()
-    const {proyectosCreados, projectsCreated} = useSelector((stateSelector: any) => {
-        return stateSelector.home
-    })
-    const dispatch = useDispatch()
 
     React.useEffect(()=>{
         if(!CheckAuthentication()){
             history.push('/')
         }
 
-        dispatch(Action.proyectosDestacados(2))
-
-    },[projectsCreated])
+    },[])
 
     return(
     <div className={clsx('App', classes.root)}>
@@ -65,16 +60,9 @@ const PanelCreated: React.FC<Iauth> = ({authenticated, currentUser}) => {
       <main className={classes.content}>
         <ContainerCo maxWidth="lg" className={classes.container}>
             <Panels />
-            {
-                proyectosCreados ? (
-                    <div>
-                    {projectsCreated.map((data:any) => 
-                        <p>data.title</p>
-                    )}
-                    </div>
-                ):("no data")
-
-            } 
+            <ContainerPC>
+               <ListCard />
+            </ContainerPC>
         </ContainerCo>
       </main>
     </div>
