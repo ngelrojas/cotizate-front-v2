@@ -1,5 +1,7 @@
 import {
-    OBJETO_CATEGORIAS
+    OBJETO_CATEGORIAS,
+    FILTRO_CATEGORIAS,
+    FILTRO_CATEGORIAS_ENTY
 } from '../types/categoriaTypes'
 import API from '../../api'
 
@@ -19,20 +21,21 @@ export function obtenerCategorias(categoria: string){
         .catch(err => console.log(err))
         }
 }
-export function filtrarCategorias(filtro : any){       
-  return (dispatch : any) =>{ 
-         console.log("llego la peticion: ",filtro )
-  //    API.get(`category`).then(resp => {
-  //       if(resp.status === 200){             
-  //         if(resp.data.length > 0){               
-  //             dispatch({
-  //                 type: CATEGORIAS_LISTA,
-  //                 categorias:resp.data
-  //             })
-  //         }
-  //       }            
-  //     })
-  //     .catch(err => console.log(err))
+
+export function filtrarCategorias(header_id: number){       
+  return (dispatch : any) =>{          
+      
+     API.get(`campaing-public/${header_id}`).then(resp => {
+        if(resp.status === 200 ){
+            if(resp.data.data.length > 0){              
+                  dispatch({
+                      type: FILTRO_CATEGORIAS,
+                      listaFiltada:resp.data.data
+                  })
+         }
+        }            
+      })
+      .catch(err => console.log(err))
       }
 }
 
