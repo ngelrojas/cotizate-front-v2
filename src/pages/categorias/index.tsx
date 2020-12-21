@@ -91,7 +91,7 @@ const Categorias: React.FC<Icateg>  = (props) => {
 
     const classes = useStyles();
   
-    const [tipo, setTipo] = useState('');
+    const [tipo, setTipo] = useState(0);
     const handleChange = (event : any) => {
         setTipo(event.target.value);
         // console.log((event.target.value));
@@ -117,10 +117,10 @@ const Categorias: React.FC<Icateg>  = (props) => {
                         onChange={handleChange}
                         input={<BootstrapInput />}
                         >
-                        <option aria-label="None" value="Todos">Todos</option>
+                        <option aria-label="None" value={0}>Todos</option>
                         <option value={1}>Recientes</option>
-                        <option value={5}>Destacados</option>
-                        <option value={7}>Finalizados</option>
+                        <option value={2}>Destacados</option>
+                        <option value={3}>Finalizados</option>
                         </NativeSelect>
                     </FormControl>
                 </Row>

@@ -18,7 +18,7 @@ export default function(state = initialState, action: any) {
                 statusCategorias: true,
                 listaCateg:action.listaCateg
             }
-        case OBJETO_CATEGORIAS:
+        case FILTRO_CATEGORIAS:
             return {
                 ...state,
                 statusFiltrada: true,

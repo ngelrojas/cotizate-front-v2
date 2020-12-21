@@ -117,7 +117,7 @@ export function proyectosDestacados(header_id: number){
 }
 export function proyectosFinalizados(header_id: number){       
     return (dispatch : any) =>{          
-        
+        console.log("aaa : ", header_id);
        API.get(`campaing-public/${header_id}`).then(resp => {
           if(resp.status === 200 ){
               if(resp.data.data.length > 0){              

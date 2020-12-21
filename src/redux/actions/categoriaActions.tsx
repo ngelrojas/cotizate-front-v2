@@ -24,9 +24,11 @@ export function obtenerCategorias(categoria: string){
 
 export function filtrarCategorias(header_id: number){       
   return (dispatch : any) =>{          
-      
+    console.log("llego datos.....", header_id);
      API.get(`campaing-public/${header_id}`).then(resp => {
+      console.log(resp);
         if(resp.status === 200 ){
+         
             if(resp.data.data.length > 0){              
                   dispatch({
                       type: FILTRO_CATEGORIAS,
