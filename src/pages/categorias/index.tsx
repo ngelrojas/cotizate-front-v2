@@ -82,7 +82,7 @@ const Categorias: React.FC<Icateg>  = (props) => {
     const dispatch = useDispatch();
     const { nombre, idCategoria, slug } = props.location.state;
     console.log("parametro :", nombre , "  id : ",idCategoria , "  slug : ",slug );
-    const { statusCategorias, listaCateg } = useSelector((stateSelector: any) => {
+    const { statusCategorias, listaCateg, statusFiltrada, listaFiltada } = useSelector((stateSelector: any) => {
         return stateSelector.categorias;
       });
     useEffect(()=>{
@@ -93,10 +93,16 @@ const Categorias: React.FC<Icateg>  = (props) => {
   
     const [tipo, setTipo] = useState(0);
     const handleChange = (event : any) => {
-        setTipo(event.target.value);
-        // console.log((event.target.value));
-        dispatch(Action.filtrarCategorias(event.target.value));
+        setTipo(event.target.value);        
+        if(event.target.value != 0){
+          dispatch(Action.filtrarCategorias(event.target.value));
+        }
+        
     };
+    useEffect(()=>{
+      console.log("aaa : ", tipo);
+  },[tipo]);
+
 
     return (
         <>
@@ -148,16 +154,23 @@ const Categorias: React.FC<Icateg>  = (props) => {
       
          
            <br/>
-
-           <Row center="xs">
+            { tipo === 0? 
+                <Row center="xs">
                   {listaCateg.map((value : any, index : number) =>(
                      <Col  key={index} xs={12} sm={6} md={4} lg={4}>                   
                               <Category key={index} data={value} />                                                        
                      </Col>
                   ))}                                            
-
-            </Row>      
-     
+                </Row>      
+              :
+               <Row center="xs">
+                {listaFiltada.map((value : any, index : number) =>(
+                  <Col  key={index} xs={12} sm={6} md={4} lg={4}> 
+                        <Projects key={index} data={value} />
+                  </Col>
+                ))}     
+               </Row>
+             }
            </Contentbody>
 
         </>
