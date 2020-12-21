@@ -103,10 +103,12 @@ export function proyectosDestacados(header_id: number){
         
        API.get(`campaing-public/${header_id}`).then(resp => {
           if(resp.status === 200){
-            dispatch({
-                type: PROYECTOS_DESTACADOS_LOAD,
-                destacados:resp.data.data
-            })
+            if(resp.data.data.length > 0){    
+                dispatch({
+                    type: PROYECTOS_DESTACADOS_LOAD,
+                    destacados:resp.data.data
+                })
+            }
           }
             
         })
