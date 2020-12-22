@@ -42,7 +42,8 @@ const Portada: React.FC = () => {
                                     state: {
                                       idCategoria: `${value.id}`,
                                       nombre: `${value.name}`,
-                                      slug: `${value.slug}`
+                                      slug: `${value.slug}`,
+                                      imgbanner:`${value.img_banner}`
                                     }
                                   }}>
                              <ImgCategoria

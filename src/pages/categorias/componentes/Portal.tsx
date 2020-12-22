@@ -1,22 +1,20 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 import {SectionPortal,ImgPortal, DivPortal  } from '../styles/index'
 import PortadaCerebroImg2 from './tecnologia-con-texto.png';
-import { useHistory } from "react-router-dom";
 
+interface Iportal {
+    imagenPotal:string
+}
 
-const Portal: React.FC = () => {
-    const history = useHistory();
-    useEffect(() => {
-       
-    }, [])
-
-
+const Portal: React.FC<Iportal> = (props) => {
+    
     return (
         <>
                 <SectionPortal   >
                     <DivPortal key={1} >
                         <ImgPortal
-                            src={PortadaCerebroImg2}
+                            // src={PortadaCerebroImg2}
+                            src={props.imagenPotal? 'http://8.vps.confiared.com:16593/'+props.imagenPotal: PortadaCerebroImg2}
                             alt="cotizate"
                         />                        
                     </DivPortal>

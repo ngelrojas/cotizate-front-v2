@@ -80,8 +80,8 @@ interface Icateg {
 
 const Categorias: React.FC<Icateg>  = (props) => {
     const dispatch = useDispatch();
-    const { nombre, idCategoria, slug } = props.location.state;
-    console.log("parametro :", nombre , "  id : ",idCategoria , "  slug : ",slug );
+    const { nombre, idCategoria, slug, imgbanner } = props.location.state;
+   
     const { statusCategorias, listaCateg, statusFiltrada, listaFiltada } = useSelector((stateSelector: any) => {
         return stateSelector.categorias;
       });
@@ -100,14 +100,13 @@ const Categorias: React.FC<Icateg>  = (props) => {
         
     };
     useEffect(()=>{
-      console.log("aaa : ", tipo);
   },[tipo]);
 
 
     return (
         <>
         <Content>
-          <Portal />  
+          <Portal imagenPotal={imgbanner} />  
         </Content>
         <Contentbody> 
         <br/>

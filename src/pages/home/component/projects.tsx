@@ -52,7 +52,8 @@ interface Iproyect {
                 id:number,
                 name: string,
                 slug: string,
-                description:string
+                description:string,
+                img_banner:string
             },
             city:{
                 id: number,
@@ -100,9 +101,10 @@ const Projects: React.FC<Iproyect> = (props)=> {
                     <Go to={{
                         pathname: '/category',
                         state: {
-                            idCategoria: `${1}`,
-                            nombre: `${'teno'}`,
-                            slug: `${'tecnoloia'}`
+                            idCategoria: `${props.data.header.category.id}`,
+                            nombre: `${props.data.header.category.name}`,
+                            slug: `${props.data.header.category.slug}`,
+                            imgbanner:`${props.data.header.category.img_banner}`
                         }
                     }}> 
                      {props.data.header.category.name}
