@@ -82,7 +82,7 @@ const App: React.FC = () => {
                     />
                     <Route
                         exact
-                        path="/panel-de-usuario/actualizar-campania/:id"
+                        path="/panel-de-usuario/actualizar-proyecto/:id"
                         component={UpdateCampaing}
                     />
                     <Route

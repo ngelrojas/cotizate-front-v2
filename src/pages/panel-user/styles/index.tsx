@@ -72,3 +72,7 @@ export const CardPanels = styled(Col)`
 export const ContainerContent = styled.div`
     margin: 5%;
 `
+
+export const ContainerPC = styled.div`
+    margin:  4%;
+`
