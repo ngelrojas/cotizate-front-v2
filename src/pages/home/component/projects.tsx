@@ -90,7 +90,7 @@ const Projects: React.FC<Iproyect> = (props)=> {
             <SectionDetails>
             <Article>
                 <Picture>
-                    <Go to="/">
+                    <Go to="/detail-proyect">
                         <Img
                             src={'http://8.vps.confiared.com:16593/'+props.data.imagen_main}
                             alt="cotizate"

@@ -4,6 +4,7 @@ import {Layout} from './layout/main'
 import Header from './header'
 import Footer from './footer'
 import Home from './pages/home'
+import DetalleProyecto from './pages/detalleProyecto'
 import Register from './pages/register'
 import Login from './pages/login'
 import ExploreProject from './pages/explorer'
@@ -104,6 +105,11 @@ const App: React.FC = () => {
                         exact
                         path="/category"
                         component={Category}
+                    />
+                     <Route
+                        exact
+                        path="/detail-proyect"
+                        component={DetalleProyecto}
                     />
                      <Route
                         exact
