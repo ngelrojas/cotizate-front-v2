@@ -181,7 +181,7 @@ const Category: React.FC<ICategory> = (props)=> {
                             <Col xs={12} sm={12} md={12} lg={12}>
                                 <Porcentaje>
                                 {/* <LineProgress bgcolor={'#7CC142'} completed={props.data.header.percent_reached} /> */}
-                                <LineProgress bgcolor={'#7CC142'} completed={50} />
+                                <LineProgress bgcolor={'#7CC142'} completed={'50'} />
                                 </Porcentaje>                            
                             </Col>
                         </Row>

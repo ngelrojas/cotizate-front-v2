@@ -90,7 +90,13 @@ const Projects: React.FC<Iproyect> = (props)=> {
             <SectionDetails>
             <Article>
                 <Picture>
-                    <Go to="/detail-proyect">
+                    <Go   to={{
+                            pathname: '/detail-proyect',
+                            state: {
+                                idProyecto: `${props.data.id}`,
+                                slug: `${props.data.slug}`
+                            }
+                            }}>
                         <Img
                             src={'http://8.vps.confiared.com:16593/'+props.data.imagen_main}
                             alt="cotizate"

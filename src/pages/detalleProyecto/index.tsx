@@ -5,12 +5,15 @@ import {Row, Col} from 'react-styled-flexboxgrid'
 // } from './styles';
 
 interface Idetalle {
-    // title: string
+    location: any
 }
 const Projectdetails: React.FC<Idetalle> = props => {
+
+    const { idProyecto, slug } = props.location.state;
+       console.log(idProyecto);
     return (
         <div>
-            <h1>detalle del proyecto</h1>
+            <h1>detalle {idProyecto} del proyectos {slug}</h1>
         </div>
     )
 }
