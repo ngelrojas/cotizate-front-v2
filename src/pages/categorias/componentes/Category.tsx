@@ -39,10 +39,22 @@ interface ICategory {
         public_at: string,
         ended_at:any,
         status:number,
-        header:number,
         profile_ca:number,
         short_url:string,
         slogan_campaing:string,
+        header:{
+            id:number,
+            user:number,
+            category:number,
+            city:number,
+            qty_day:number,
+            amount:string,
+            amount_reached:string,
+            percent_reached:string,
+            qty_day_left:number,
+            role:number,
+            code_campaing:number,
+        },
         currency:{
             id:number,
             name:string,
@@ -116,15 +128,20 @@ const Category: React.FC<ICategory> = (props)=> {
             <SectionDetails>
             <Article>
                 <Picture>
-                    {/* <Go to="/"> */}
+                  <Go   to={{
+                            pathname: '/detail-proyect',
+                            state: {
+                                idProyecto: `${props.data.id}`,
+                                slug: `${props.data.slug}`
+                            }
+                            }}>
                         <Img
                             src={'http://8.vps.confiared.com:16593/'+props.data.imagen_main}
                             alt="cotizate"
                         />
-                    {/* </Go> */}
+                    </Go>
                 </Picture>
                 <Title>{props.data.title}</Title>
-                {/* <Title>{'name'}</Title> */}
             </Article>
             <ArticleBody>
                 <Row>
@@ -135,8 +152,7 @@ const Category: React.FC<ICategory> = (props)=> {
                                    <MdLocationOn />
                                     <span>
                                         {/* <Go to="/">                                             */}
-                                          {' '}  {props.data.profile.cities.name} - {props.data.profile.cities.countries.name}
-                                           {/* {'city'} */}
+                                          {' '}  {props.data.profile.cities.name} - {props.data.profile.cities.countries.name}                                           
                                         {/* </Go> */}
                                     </span>                                    
                                 </Place>
@@ -180,8 +196,7 @@ const Category: React.FC<ICategory> = (props)=> {
                         <Row start="lg">
                             <Col xs={12} sm={12} md={12} lg={12}>
                                 <Porcentaje>
-                                {/* <LineProgress bgcolor={'#7CC142'} completed={props.data.header.percent_reached} /> */}
-                                <LineProgress bgcolor={'#7CC142'} completed={'50'} />
+                                <LineProgress bgcolor={'#7CC142'} completed={props.data.header.percent_reached} />                                
                                 </Porcentaje>                            
                             </Col>
                         </Row>
@@ -194,8 +209,7 @@ const Category: React.FC<ICategory> = (props)=> {
                         <Row start="lg">
                             <Col xs={12} sm={12} md={12} lg={12}>
                                <Alcanzado>
-                                    {/* <p> {props.data.header.percent_reached}{'% '} ALCANZADO</p>                                     */}
-                                    <p> {50}{'% '} ALCANZADO</p>  
+                                    <p> {props.data.header.percent_reached}{'% '} ALCANZADO</p>                                                                        
                                 </Alcanzado>  
                             </Col>
                         </Row>
@@ -203,8 +217,7 @@ const Category: React.FC<ICategory> = (props)=> {
                     <Col xs={6} sm={6} md={6} lg={6}>                    
                         <Row end="lg">
                             <Col xs={12} sm={12} md={12} lg={12}>                             
-                               {/* <NumberMonto> {props.data.header.amount_reached } Bs</NumberMonto> */}
-                               <NumberMonto> {111 } Bs</NumberMonto>
+                               <NumberMonto> {props.data.header.amount_reached } Bs</NumberMonto>                               
                             </Col>
                         </Row>
                     </Col>
@@ -215,8 +228,7 @@ const Category: React.FC<ICategory> = (props)=> {
                         <Row start="lg">
                             <Col xs={12} sm={12} md={12} lg={12}>
                                <CodigoFaltante>
-                                    {/* <p>Faltan: {props.data.header.qty_day_left} Dias</p> */}
-                                    <p>Faltan: 5 Dias</p>     
+                                    <p>Faltan: {props.data.header.qty_day_left} Dias</p>
                                 </CodigoFaltante>  
                             </Col>
                         </Row>
@@ -225,8 +237,7 @@ const Category: React.FC<ICategory> = (props)=> {
                     <Col xs={6} sm={6} md={6} lg={6}>
                         <Row end="lg">
                             <Col xs={12} sm={12} md={12} lg={12}>                             
-                               {/* <PercentNumber>Cod: {props.data.header.code_campaing }</PercentNumber> */}
-                               <PercentNumber>Cod: {'code 00005' }</PercentNumber>
+                               <PercentNumber>Cod: {props.data.header.code_campaing }</PercentNumber>                               
                             </Col>
                         </Row>
                     </Col>
@@ -236,8 +247,7 @@ const Category: React.FC<ICategory> = (props)=> {
                         <Row start="lg">
                             <Col sm={12} md={12} lg={12}>
                                 <Author>
-                                    <p>Autor:  {props.data.profile.user.first_name} {' '} {props.data.profile.user.last_name}</p> 
-                                    {/* <p>Autor:  </p>  */}
+                                    <p>Autor:  {props.data.profile.user.first_name} {' '} {props.data.profile.user.last_name}</p>                                     
                                 </Author>
                             </Col>
                         </Row>
