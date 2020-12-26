@@ -214,7 +214,9 @@ const Personal: React.FC<Icampaing> = ({campaing})=>{
                     <Col xs={12}>
                         <Row center="xs">
                             <Col xs={6}>       
-                            <InfoText>DATOS PERSONALES {campaing.title}</InfoText>
+                            <InfoText>DATOS PERSONALES 
+                            
+                            </InfoText>
                             </Col>
                         </Row>
                     </Col>

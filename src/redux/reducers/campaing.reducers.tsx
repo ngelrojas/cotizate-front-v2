@@ -1,5 +1,4 @@
 import {
-    SET_DEFAULT_CAMPAING,
     SET_CAMPAING,
     SET_ERRORS
 } from '../types/campaing.types'
@@ -7,31 +6,46 @@ import {
 const InitCampaingState = {
     answer: false,
     campaing: {}, 
-    errors: {}
 }
 
 export default function(state = InitCampaingState, action: any) {
-
-    switch (action.type) {
-
-        case SET_DEFAULT_CAMPAING:
-            return InitCampaingState
-        
-        case SET_CAMPAING:
-            return {
-                ...state,
-                answer: true,
-                campaing: action.campaing
-            }
-
-        case SET_ERRORS:
-            return {
-                ...state,
-                answer: false,
-                errors: action.campaing
-            }
-
-        default:
-            return state 
+    console.info('REDUCER HERE')
+    console.info(action)
+    return {
+        answer: true,
+        campaing: action.payload
     }
+    //switch (action.type) {
+       
+        //case SET_CAMPAING:
+            //return{
+                //answer: true,
+                //...action.payload
+            //} 
+
+        //case SET_ERRORS:
+            //return {
+                //answer: false,
+                //...action.errors
+            //}
+
+        //default:
+            //return state 
+    //}
+
+//    if(action.type === SET_CAMPAING){
+        //console.info('INSIDE SET CAMPAING')
+        //console.info(action.payload)
+        //return{
+            //answer: true,
+            //...action.payload
+        //}
+    //}else{
+        //if(action.type === SET_ERRORS){
+            //console.info('ERROR HERE')
+            //console.info(action.errors)
+        //}
+
+        //return state
+    //}
 }

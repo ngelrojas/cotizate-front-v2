@@ -14,11 +14,9 @@ export const RetrieveCampaing = (campaing_id: number) => (dispatch: any) => {
 
     CampHeader.getRetrieveCBody(campaing_id)
         .then(resp =>{ 
-                console.info('inside ACTIONS')
-                console.info(resp.data.data)
                 dispatch({
                     type: SET_CAMPAING,
-                    campaing: resp.data.data,
+                    payload: resp.data.data,
                  })
         }).catch(err =>{
                  dispatch({
