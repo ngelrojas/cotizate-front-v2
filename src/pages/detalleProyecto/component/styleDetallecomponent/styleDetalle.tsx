@@ -75,3 +75,60 @@ export const TitleVideo1 = styled.h1`
     width:100%;
 
 `
+
+export const Porcentaje = styled.div`
+    padding-left: 5px;
+    padding-bottom: 5%;
+    padding-top: 3%;
+   
+    @media ${device.tablet} {
+        width: 100%;
+        padding-left: 1px;
+        margin-bottom: 5%;
+    }
+    @media ${device.mobileM} {
+        
+    }
+`
+export const Alcanzado = styled.div`
+   
+    
+    padding-left: 5px;
+    width: 100%;
+    height: 12px;
+    padding-bottom: 5%;
+    padding-top: 5%;
+    top: 1302px;
+
+    color: #000000;
+    font-family: Roboto;
+    font-style: normal;
+    
+    font-size: 16px;
+    line-height: 12px;
+    @media ${device.tablet} {
+        width: 80%;
+        padding-left: 1px;
+        margin-bottom: 10%;
+    }
+    @media ${device.mobileM} {
+        padding-left: 1px;
+        width: 100%;
+        font-style: normal;
+        line-height: 12px;
+    }
+
+`
+export const NumberMontoMeta = styled.span`
+color: #000000;
+font-family: Roboto;
+     
+    float: right;
+    margin: 2%;
+    font-style: normal;
+    font-size: 16px;
+    @media ${device.tablet} {
+        float: right;
+        
+    }
+`

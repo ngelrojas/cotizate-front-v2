@@ -1,10 +1,14 @@
 import React, { useEffect,useState } from 'react'
 import {Row, Col} from 'react-styled-flexboxgrid'
 import ReactPlayer from 'react-player'
+import LineProgress from '../../../components/LineProgress'
 
-import {Article, SectionDetails, Picture, Go,
+import {Article, SectionDetails, Picture, 
     TitleVideo1,
-     Img
+    Porcentaje,
+     Img,
+     Alcanzado,
+     NumberMontoMeta
     } from './styleDetallecomponent/styleDetalle';
 
 interface Idetalle {
@@ -154,7 +158,38 @@ const Detalle: React.FC<Idetalle> = props => {
               </SectionDetails>
            </Col>
            <Col xs={6} sm={6} md={6} lg={6}>
-
+                <Row>   
+                   <Col xs={6} sm={6} md={6} lg={6}>                   
+                        <Row start="lg">
+                            <Col xs={12} sm={12} md={12} lg={12}>
+                               <Alcanzado>
+                                    {/* <p> {props.data.header.percent_reached}{'% '} ALCANZADO</p> */}
+                                    <p> {'50% '} ALCANZADO</p>   
+                                </Alcanzado>  
+                            </Col>
+                        </Row>
+                    </Col>
+                    <Col xs={6} sm={6} md={6} lg={6}>                    
+                        <Row end="lg">
+                            <Col xs={12} sm={12} md={12} lg={12}>                             
+                               {/* <NumberMontoMeta> {props.data.header.amount_reached } Bs</NumberMontoMeta>   */}
+                               <NumberMontoMeta> {'1500'} Bs</NumberMontoMeta>
+                            </Col>
+                        </Row>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col xs={12} sm={12} md={12} lg={12}>
+                        <Row start="lg">
+                            <Col xs={12} sm={12} md={12} lg={12}>
+                                <Porcentaje>
+                                <LineProgress bgcolor={'#7CC142'} completed={'50'} />                                
+                                </Porcentaje>                            
+                            </Col>
+                        </Row>
+                    </Col>
+                </Row>
+                
            </Col>
         </Row>
         </Col>  
