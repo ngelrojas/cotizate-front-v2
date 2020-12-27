@@ -33,7 +33,7 @@ export const SectionDetails = styled.section`
     margin-bottom: 50px;
 
     @media ${device.tablet} {
-        width: 95%;
+        width: 100%;
         margin-bottom: 30px;
     }
     @media ${device.mobileL} {
@@ -43,7 +43,7 @@ export const SectionDetails = styled.section`
 `
 export const Picture = styled.picture`
     height: auto;
-    width: auto%;
+    width: 100%;
 `
 export const Go = styled(Link)`
     text-decoration: none;
@@ -61,11 +61,12 @@ export const Img = styled.img`
 
     }
 `
-export const Title = styled.h1`
+export const TitleVideo1 = styled.h1`
     color: #f9f9f9;
     font-weight: 410;
     position: absolute;
-    bottom: 4px;
+    bottom: 0px;
+    left:0px;
     background: #2B76B1;
     text-align: justify;
     padding: 1%;

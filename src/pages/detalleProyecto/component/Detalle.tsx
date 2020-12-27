@@ -1,8 +1,9 @@
 import React, { useEffect,useState } from 'react'
 import {Row, Col} from 'react-styled-flexboxgrid'
+import ReactPlayer from 'react-player'
 
 import {Article, SectionDetails, Picture, Go,
-     Title,
+    TitleVideo1,
      Img
     } from './styleDetallecomponent/styleDetalle';
 
@@ -120,21 +121,35 @@ const Detalle: React.FC<Idetalle> = props => {
         <>
         <Col >     
          <Row start="lg">   
-           <Col xs={6} sm={6} md={6} lg={6}> 
+           <Col xs={12} sm={6} md={6} lg={6}> 
               <SectionDetails>
                     <Article>
                         <Picture>
-                            <Go to={{
+                            {/* <Go to={{
                                 pathname: '/',
                                 state: { }
-                            }}>
-                                <Img
-                                    src={'https://aws.traveler.es/prod/designs/v1/assets/1000x667/21250.jpg'}
-                                    alt="cotizate"
-                                />
-                            </Go>
+                            }}> */}
+                               {/* <ReactPlayer width={'99.9%'} url='https://www.youtube.com/watch?v=QaXhVryxVBk' /> */}
+                               <ReactPlayer width={'99.9%'} url={props.detalle.video_main} />
+                            {/* </Go> */}
                         </Picture>
-                        <Title>hola</Title>
+                        <Row >
+                            <Col xs={12} sm={12} md={6} lg={6}>
+                                <Row start="lg">
+                                   <Col xs={12} sm={12} md={12} lg={12}>
+                                   <TitleVideo1>Arte - pintura oleo</TitleVideo1>
+                                   </Col>
+                                </Row>
+                            </Col>
+                            <Col xs={12} sm={12} md={6} lg={6}>
+                                <Row start="lg">
+                                   <Col xs={12} sm={12} md={12} lg={12}>
+                                      <TitleVideo1>bbbbbb</TitleVideo1>
+                                   </Col>
+                                </Row>
+                            </Col>
+                            
+                        </Row>
                     </Article>          
               </SectionDetails>
            </Col>
