@@ -7,8 +7,15 @@ import {Article, SectionDetails, Picture,
     TitleVideo1,
     Porcentaje,
      Img,
+     Contenedor,
      Alcanzado,
-     NumberMontoMeta
+     NumberMontoMeta,
+     Aportetitle,
+     AporteNumber,
+     TileDias,
+     Div1,
+     TileCode,
+     BotonAportar
     } from './styleDetallecomponent/styleDetalle';
 
 interface Idetalle {
@@ -157,23 +164,26 @@ const Detalle: React.FC<Idetalle> = props => {
                     </Article>          
               </SectionDetails>
            </Col>
-           <Col xs={6} sm={6} md={6} lg={6}>
+           <Col xs={12} sm={6} md={6} lg={6}>
+               <Contenedor>
                 <Row>   
                    <Col xs={6} sm={6} md={6} lg={6}>                   
                         <Row start="lg">
                             <Col xs={12} sm={12} md={12} lg={12}>
                                <Alcanzado>
                                     {/* <p> {props.data.header.percent_reached}{'% '} ALCANZADO</p> */}
-                                    <p> {'50% '} ALCANZADO</p>   
+                                    <p> {'ALCANZADOS BS 1000 '} </p>   
                                 </Alcanzado>  
                             </Col>
                         </Row>
                     </Col>
                     <Col xs={6} sm={6} md={6} lg={6}>                    
                         <Row end="lg">
-                            <Col xs={12} sm={12} md={12} lg={12}>                             
+                            <Col xs={12} sm={12} md={12} lg={12}>   
+                               <Alcanzado>
                                {/* <NumberMontoMeta> {props.data.header.amount_reached } Bs</NumberMontoMeta>   */}
-                               <NumberMontoMeta> {'1500'} Bs</NumberMontoMeta>
+                                  <NumberMontoMeta> {'1500'} Bs</NumberMontoMeta>
+                               </Alcanzado>                          
                             </Col>
                         </Row>
                     </Col>
@@ -189,7 +199,66 @@ const Detalle: React.FC<Idetalle> = props => {
                         </Row>
                     </Col>
                 </Row>
-                
+                <Row>
+                    <Col xs={12} sm={12} md={12} lg={12}>
+                        <Row start="lg">
+                            <Col xs={12} sm={12} md={12} lg={12}>                                
+                               <AporteNumber>{10}</AporteNumber> <Aportetitle>{'Aportadore'}</Aportetitle>
+                            </Col>
+                        </Row>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col xs={12} sm={12} md={12} lg={12}>
+                        <Row start="lg">
+                            <Col xs={12} sm={12} md={12} lg={12}>
+                                <Div1>
+                                    <TileDias>{'FALTAN 60 DIAS'}</TileDias> 
+                                </Div1>                               
+                            </Col>
+                        </Row>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col xs={12} sm={12} md={12} lg={12}>
+                        <Row start="lg">
+                            <Col xs={6  } sm={6} md={6} lg={6}>
+                                <Div1>
+                                {'icon like'}
+                                </Div1>
+                              
+                            </Col>
+                            <Col xs={6} sm={6} md={6} lg={6}>
+                               <Div1>
+                                {'icon save'}
+                                </Div1>
+                            </Col>
+                        </Row>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col xs={12} sm={12} md={12} lg={12}>
+                        <Row start="lg">
+                            <Col xs={12} sm={12} md={12} lg={12}>
+                                <Div1>
+                                    <TileCode>{'COD: 000111'}</TileCode> 
+                                </Div1>                               
+                            </Col>
+                        </Row>
+                    </Col>
+                </Row>
+                </Contenedor>
+                    <Row>
+                        <Col xs={12} sm={12} md={12} lg={12}>
+                            <Row start="lg" >
+                                <Col xs={12} sm={12} md={12} lg={12}>
+                                    <Div1>
+                                    <BotonAportar >Aportar</BotonAportar>
+                                    </Div1>                               
+                                </Col>
+                            </Row>
+                        </Col>
+                    </Row>
            </Col>
         </Row>
         </Col>  

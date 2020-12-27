@@ -61,6 +61,17 @@ export const Img = styled.img`
 
     }
 `
+export const Contenedor = styled.div`   
+    background: #1383C5;
+   
+    @media ${device.tablet} {
+    
+    }
+    @media ${device.mobileM} {
+      
+    }
+
+`
 export const TitleVideo1 = styled.h1`
     color: #f9f9f9;
     font-weight: 410;
@@ -77,7 +88,8 @@ export const TitleVideo1 = styled.h1`
 `
 
 export const Porcentaje = styled.div`
-    padding-left: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
     padding-bottom: 5%;
     padding-top: 3%;
    
@@ -93,14 +105,16 @@ export const Porcentaje = styled.div`
 export const Alcanzado = styled.div`
    
     
-    padding-left: 5px;
+    padding-left: 12px;
+    padding-top: 17px;
+
     width: 100%;
     height: 12px;
     padding-bottom: 5%;
     padding-top: 5%;
     top: 1302px;
 
-    color: #000000;
+    color: #F1F1F1;
     font-family: Roboto;
     font-style: normal;
     
@@ -120,15 +134,106 @@ export const Alcanzado = styled.div`
 
 `
 export const NumberMontoMeta = styled.span`
-color: #000000;
-font-family: Roboto;
-     
+    color: #F1F1F1;
+    font-family: Roboto;  
+    padding-right: 12px;
     float: right;
-    margin: 2%;
+    margin: 0%;
     font-style: normal;
     font-size: 16px;
     @media ${device.tablet} {
         float: right;
         
     }
+`
+export const Aportetitle = styled.span`
+color: #F1F1F1;
+font-family: Roboto;
+     
+    float: left;
+    margin: 1%;
+    font-style: normal;
+
+        font-family: Roboto;
+        font-weight: 300;
+        font-size: 18px;
+        
+    @media ${device.tablet} {
+              
+    }
+    @media ${device.mobileM} {
+
+    }
+`
+export const AporteNumber = styled.span`
+    color: #F1F1F1;
+    font-family: Roboto;
+    padding-left: 10px;
+    float: left;
+    margin: 1%;
+    font-style: normal;
+    font-size: 20px;
+    @media ${device.tablet} {
+               
+    }
+    @media ${device.mobileM} {
+
+    }
+`
+export const TileDias = styled.span`
+color: #F1F1F1;
+font-family: Roboto;
+     
+    float: left;
+    margin: 1%;
+    font-style: normal;
+    font-size: 20px;
+    @media ${device.tablet} {
+               
+    }
+    @media ${device.mobileM} {
+
+    }
+`
+export const Div1 = styled.div`
+    padding-left: 10px;
+    padding-bottom: 7%;
+    padding-top: 5%;
+   
+    @media ${device.tablet} {
+        width: 100%;
+        padding-left: 1px;
+        margin-bottom: 5%;
+        padding-top: 5%;
+    }
+    @media ${device.mobileM} {
+        width: 100%;
+        padding-left: 1px;
+        margin-bottom: 5%;
+        padding-top: 5%;
+    }
+`
+export const TileCode = styled.span`
+    color: #F1F1F1;
+    font-family: Roboto;
+     
+    float: left;
+    margin: 1%;
+    font-style: normal;
+    font-size: 16px;
+    @media ${device.tablet} {
+               
+    }
+    @media ${device.mobileM} {
+
+    }
+`
+export const BotonAportar = styled.button`
+    background-color: #F4A14C;
+    color: #F1F1F1;
+    width: 30%;
+    
+    height: 40px;
+    text-transform: uppercase;
+    border-radius: 5px;
 `
