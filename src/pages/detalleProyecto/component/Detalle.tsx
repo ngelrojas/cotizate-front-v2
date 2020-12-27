@@ -1,7 +1,10 @@
 import React, { useEffect,useState } from 'react'
 import {Row, Col} from 'react-styled-flexboxgrid'
 
-import {Article} from './styleDetallecomponent/styleDetalle';
+import {Article, SectionDetails, Picture, Go,
+     Title,
+     Img
+    } from './styleDetallecomponent/styleDetalle';
 
 interface Idetalle {
     detalle: {
@@ -115,9 +118,31 @@ const Detalle: React.FC<Idetalle> = props => {
 
     return (
         <>
-            <div>
-                <h1>detalle 11 </h1>
-            </div>
+        <Col >     
+         <Row start="lg">   
+           <Col xs={6} sm={6} md={6} lg={6}> 
+              <SectionDetails>
+                    <Article>
+                        <Picture>
+                            <Go to={{
+                                pathname: '/',
+                                state: { }
+                            }}>
+                                <Img
+                                    src={'https://aws.traveler.es/prod/designs/v1/assets/1000x667/21250.jpg'}
+                                    alt="cotizate"
+                                />
+                            </Go>
+                        </Picture>
+                        <Title>hola</Title>
+                    </Article>          
+              </SectionDetails>
+           </Col>
+           <Col xs={6} sm={6} md={6} lg={6}>
+
+           </Col>
+        </Row>
+        </Col>  
         </>
     )
 }

@@ -61,3 +61,16 @@ export const Img = styled.img`
 
     }
 `
+export const Title = styled.h1`
+    color: #f9f9f9;
+    font-weight: 410;
+    position: absolute;
+    bottom: 4px;
+    background: #2B76B1;
+    text-align: justify;
+    padding: 1%;
+    text-transform: uppercase;
+    font-size: 15px;
+    width:100%;
+
+`
