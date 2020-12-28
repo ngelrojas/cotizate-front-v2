@@ -49,11 +49,23 @@ interface Iuser {
 
 }
 
-type FormData = {
-    profile: Iuser
-    first_name: string
-    last_name: string
-    email: string
+interface Icurrency {
+    id: number
+    name: string
+    symbol: string
+}
+
+interface Iheader {
+    id: number
+    category: number
+    city: number
+    qty_day: number
+    qty_day_left: number
+    role: number
+    user: number
+}
+
+interface Iprofile {
     cinit: string
     cellphone: string
     telephone: string
@@ -75,10 +87,52 @@ type FormData = {
     title: string
 }
 
+type FormData = {
+    created_at: Date
+    currency: Icurrency
+    description: string
+    ended_at: Date
+    excerpt: string
+    header: Iheader
+    id: number
+    imagen_main: any
+    profile: Iprofile
+    profile_ca: number
+    public_at: Date
+    short_url: string
+    slog_campaing: string
+    slug: string
+    status: number
+    title: string
+    update_at: Date
+    video_main: string
+    first_name: string
+    last_name: string
+    email: string
+    cinit: string
+    cellphone: string
+    telephone: string
+    country_id: number
+    countries: Icountries
+    cities: Icities 
+    city_id: number
+    address: string
+    neightbordhood: string
+    number_address: number
+    photo: any 
+    rs_facebook: string
+    rs_twitter: string
+    rs_linkedin: string
+    rs_another: string
+    current_position: string
+    headline: string
+}
+
 interface Icampaing {
     campaing: FormData 
 }
 
+// TODO: COMPLETE FILL DATA
 const Personal: React.FC<Icampaing> = ({campaing})=>{
 
     let token = window.sessionStorage.getItem('token')
@@ -203,7 +257,7 @@ const Personal: React.FC<Icampaing> = ({campaing})=>{
         input.focus()
         console.info('from redux')
         console.info(campaing)
-    },[])
+    },[campaing])
 
     return(
         <>
@@ -214,9 +268,7 @@ const Personal: React.FC<Icampaing> = ({campaing})=>{
                     <Col xs={12}>
                         <Row center="xs">
                             <Col xs={6}>       
-                            <InfoText>DATOS PERSONALES 
-                            
-                            </InfoText>
+                            <InfoText>DATOS PERSONALES </InfoText>
                             </Col>
                         </Row>
                     </Col>
@@ -268,6 +320,7 @@ const Personal: React.FC<Icampaing> = ({campaing})=>{
                                         <Input type="text"
                                                name="cinit"
                                                ref={register({required: true})}
+                                               defaultValue={campaing.profile ? campaing.profile.cinit: ''}
                                                autoFocus
                                             />
                                         

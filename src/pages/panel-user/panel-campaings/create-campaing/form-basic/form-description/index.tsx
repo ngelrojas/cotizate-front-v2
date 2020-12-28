@@ -33,7 +33,7 @@ import {
 type FormData = {
     title: string
     video_main: string
-    imagen_main: string
+    imagen_main: any 
     excerpt: string
     description: string
     public_at: string
@@ -86,7 +86,7 @@ const FormDescription: React.FC<AllProps> = ({counter, handleNext, handleBack}) 
     const handleEditorExcerptChange = (content: any, editor: any) => {
         setExcerpt(content)
     }
-
+    // TODO: HERE PROBLEM TO SEND IMAGES
     const onSubmit = handleSubmit(({title, video_main, imagen_main, public_at, short_url, slogan_campaing}) => {
         
         if (validate()) {
@@ -102,21 +102,21 @@ const FormDescription: React.FC<AllProps> = ({counter, handleNext, handleBack}) 
                 short_url: short_url ? short_url: '', 
                 slogan_campaing: slogan_campaing ? slogan_campaing: ''
             }
-
+            console.info(typeof(imagen_main[0]))
+            console.info(send_data)
             CamBody.createCampaing(send_data)
                 .then(resp =>{
                     Notifications('Datos de Descripcion de proyecto guardados', 'success')
                     setMsgExcerpt('')
                     setMsgdescription('')
-                    reset()
-                    handleNext()
+                    //reset()
+                    //handleNext()
                 }).catch(err => {
                     console.error(err)
                     Notifications('Porfavor debe revisar los datos a ser llenados.', 'danger')
                 })
 
         }
-
     })
 
     const validate = () => {
@@ -239,7 +239,7 @@ const FormDescription: React.FC<AllProps> = ({counter, handleNext, handleBack}) 
                         <ImgText>
                             Esta imagen se utilizará como miniatura de su proyecto (PNG, JPG tamaño 305 x 161 pixeles tamanho minimo 220 x 220 px.
                         </ImgText>
-                        <Input
+                        <input
                             type="file"
                             name="imagen_main"
                             ref={register({required: true})}
@@ -247,11 +247,13 @@ const FormDescription: React.FC<AllProps> = ({counter, handleNext, handleBack}) 
                             onChange={_onChange}
                         />
                     </Col>
-                    <Col xs={5}>
+                    
+                        <Col xs={5}>
 
                         <Img src={ showImg ? showImg : DefaultImg } alt="cotizate" />
                         
-                    </Col>
+                        </Col>
+                    
                 <MsgError>
                     {errors.imagen_main && 'este campo es requerido'}
                 </MsgError>

@@ -9,29 +9,24 @@ const InitCampaingState = {
 }
 
 export default function(state = InitCampaingState, action: any) {
-    console.info('REDUCER HERE')
-    console.info(action)
-    return {
-        answer: true,
-        campaing: action.payload
-    }
-    //switch (action.type) {
+    
+    switch (action.type) {
        
-        //case SET_CAMPAING:
-            //return{
-                //answer: true,
-                //...action.payload
-            //} 
+        case SET_CAMPAING:
+            return{
+                answer: true,
+                ...action.payload
+            } 
 
-        //case SET_ERRORS:
-            //return {
-                //answer: false,
-                //...action.errors
-            //}
+        case SET_ERRORS:
+            return {
+                answer: false,
+                ...action.errors
+            }
 
-        //default:
-            //return state 
-    //}
+        default:
+            return state 
+    }
 
 //    if(action.type === SET_CAMPAING){
         //console.info('INSIDE SET CAMPAING')
