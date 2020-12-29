@@ -3,7 +3,17 @@ import {Row, Col} from 'react-styled-flexboxgrid'
 import ReactPlayer from 'react-player'
 import LineProgress from '../../../components/LineProgress'
 
+import ThumbUpAltIcon from '@material-ui/icons/ThumbUpAlt';
+import ThumbDownIcon from '@material-ui/icons/ThumbDown';
+
+import BookmarkBorderIcon from '@material-ui/icons/BookmarkBorder';
+import BookmarkIcon from '@material-ui/icons/Bookmark';
+import { IconButton } from '@material-ui/core';
+
 import {Article, SectionDetails, Picture, 
+    DivPrincipal,
+    DivPortada,
+    TilePortada,
     TitleVideo1,
     Porcentaje,
      Img,
@@ -131,6 +141,16 @@ const Detalle: React.FC<Idetalle> = props => {
     return (
         <>
         <Col >     
+        <DivPrincipal> 
+        <Row start="lg">
+                            <Col xs={12} sm={12} md={12} lg={12}>
+                               <DivPortada>
+                                  <TilePortada> 
+                                     {'LA LUCHA POR LA  LIBERACIÓN REFORMA EDUCATIVA Y VOTO UNIVERSAL'}
+                                    </TilePortada>
+                                </DivPortada>  
+                            </Col>
+                        </Row>
          <Row start="lg">   
            <Col xs={12} sm={6} md={6} lg={6}> 
               <SectionDetails>
@@ -224,13 +244,16 @@ const Detalle: React.FC<Idetalle> = props => {
                         <Row start="lg">
                             <Col xs={6  } sm={6} md={6} lg={6}>
                                 <Div1>
-                                {'icon like'}
+                                <IconButton >
+                                    <ThumbUpAltIcon />
+                                </IconButton>
                                 </Div1>
-                              
                             </Col>
                             <Col xs={6} sm={6} md={6} lg={6}>
                                <Div1>
-                                {'icon save'}
+                                  <IconButton >
+                                    <BookmarkBorderIcon />
+                                  </IconButton>
                                 </Div1>
                             </Col>
                         </Row>
@@ -261,6 +284,7 @@ const Detalle: React.FC<Idetalle> = props => {
                     </Row>
            </Col>
         </Row>
+        </DivPrincipal>
         </Col>  
         </>
     )

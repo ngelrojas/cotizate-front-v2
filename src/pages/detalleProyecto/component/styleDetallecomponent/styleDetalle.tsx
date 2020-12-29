@@ -8,6 +8,55 @@ export const List = styled.ul`
         display: block;
     }
 `
+export const DivPrincipal = styled.div`   
+    
+    padding-left: 6%;
+    padding-right: 6%;
+    @media ${device.tablet} {
+        padding-left: 6%;
+        padding-right: 6%;
+    }
+    @media ${device.mobileM} {
+        padding-left: 1%;
+        padding-right: 1%;
+    }
+`
+export const DivPortada = styled.div`
+    padding-left: 10px;
+    padding-bottom: 2%;
+    padding-top: 2%;
+   
+    @media ${device.tablet} {
+        width: 100%;
+        padding-left: 1px;
+        margin-bottom: 5%;
+        padding-top: 5%;
+    }
+    @media ${device.mobileM} {
+        width: 100%;
+        padding-left: 1px;
+        margin-bottom: 5%;
+        padding-top: 5%;
+    }
+`
+export const TilePortada = styled.span`
+    color: #5D5A5A;
+    font-family: Roboto;
+     
+    float: left;
+    margin: 1%;
+    font-style: normal;
+
+    font-weight: bold;
+    font-size: 22px;
+   
+    @media ${device.tablet} {
+        font-size: 20px;      
+    }
+    @media ${device.mobileM} {
+        font-size: 15px;
+    }
+`
 export const Article = styled.article`
     margin: 0%;
     position: relative;
@@ -29,7 +78,7 @@ export const SectionDetails = styled.section`
     padding-bottom: 0px;
     padding-right: 0px;
     padding-top: 0px;
-    margin: 1%;
+    margin: 2%;
     margin-bottom: 50px;
 
     @media ${device.tablet} {
@@ -63,7 +112,8 @@ export const Img = styled.img`
 `
 export const Contenedor = styled.div`   
     background: #1383C5;
-   
+    margin: 2%;
+    width:100%;
     @media ${device.tablet} {
     
     }
@@ -197,20 +247,20 @@ font-family: Roboto;
 `
 export const Div1 = styled.div`
     padding-left: 10px;
-    padding-bottom: 7%;
-    padding-top: 5%;
+    padding-bottom: 2%;
+    padding-top: 2%;
    
     @media ${device.tablet} {
         width: 100%;
         padding-left: 1px;
-        margin-bottom: 5%;
-        padding-top: 5%;
+        margin-bottom: 2%;
+        padding-top: 2%;
     }
     @media ${device.mobileM} {
         width: 100%;
         padding-left: 1px;
-        margin-bottom: 5%;
-        padding-top: 5%;
+        margin-bottom: 2%;
+        padding-top: 2%;
     }
 `
 export const TileCode = styled.span`
