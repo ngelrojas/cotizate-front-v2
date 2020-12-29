@@ -56,9 +56,10 @@ export class PersonalProfile {
     
     /*
      * update personal profile
+     * currentUser = profile ID
     */
 
-    upadteProfilePersonal = async (dataUpdate: any, currentUser: number) => {
+    updateProfilePersonal = async (dataUpdate: any, currentUser: number) => {
         this.resp_profile = await API.put(`profile/personal/${currentUser}`, dataUpdate, {
             headers: {Authorization: `Bearer ${this.token}`}
         })
