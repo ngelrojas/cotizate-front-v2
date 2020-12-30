@@ -1,18 +1,18 @@
 import {
-    SET_CAMPAING,
+    SET_PROFILECA,
     SET_ERRORS
-} from '../types/campaing.types'
+} from '../types/profileca.types'
 
-const InitCampaingState = {
+const InitCompanyState = {
     answer: false,
-    campaing: {}, 
+    profileca: {}, 
 }
 
-export default function(state = InitCampaingState, action: any) {
+export default function(state = InitCompanyState, action: any) {
     
     switch (action.type) {
        
-        case SET_CAMPAING:
+        case SET_PROFILECA:
             return{
                 answer: true,
                 ...action.payload

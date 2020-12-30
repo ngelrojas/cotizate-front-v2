@@ -5,9 +5,7 @@ import {store} from 'react-notifications-component'
 import {Row, Col} from 'react-styled-flexboxgrid'
 import DefaultImg from '../../form-basic/public/default.png'
 import {PersonalProfile} from '../../../../../../userProfile'
-import {User} from '../../../../../../user'
 import {City} from '../../../../../../userCountryCities'
-import {UploadFiles} from '../../../../../../userImg'
 import {ContentProfile,
         Input, 
         WrapperBox,
@@ -106,7 +104,7 @@ type FormData = {
     slug: string
     status: number
     title: string
-    update_at: Date
+    updated_at: Date
     video_main: string
     first_name: string
     last_name: string
@@ -133,20 +131,17 @@ type FormData = {
 interface Icampaing {
     campaing: FormData 
 }
-
-// TODO: send to update data
+// TODO: LOAD DATA PROFILE COMPANY/ASSOCIATION
 const Personal: React.FC<Icampaing> = ({campaing})=>{
 
     let token = window.sessionStorage.getItem('token')
     let currentPersonal = new PersonalProfile(token)
     let CityUser = new City(token)
-    let UploadImages = new UploadFiles()
-
     const [loadcity, setLoadcity] = React.useState<Icities[]>()
     const [isLoading, setIsLoading] = React.useState(true)
     const [showImg, SetShowImg] = React.useState()
     const input = document.querySelector("cinit")
-    const {register, handleSubmit, reset, errors} = useForm<FormData>({
+    const {register, handleSubmit, errors} = useForm<FormData>({
         mode: 'onChange'
     })
 
@@ -178,7 +173,6 @@ const Personal: React.FC<Icampaing> = ({campaing})=>{
         currentPersonal.updateProfilePersonal(data_profile, campaing.profile.id)
             .then(resp => {
                 Notifications('Su perfil se ha actualizado', 'success')
-                reset()
             }).catch(err=>{
                 Notifications('Hubo un error en la conexion, intentelo mas tarde porfavor.', 'danger')
             })
@@ -186,24 +180,6 @@ const Personal: React.FC<Icampaing> = ({campaing})=>{
         ScrollTop()
 
     })
-
-    const SendImg = (photo: any) => {
-
-         let data_img = {
-            file_uploaded:photo 
-        }
-        //console.info(data_img)
-        UploadImages.uploadImg(data_img)
-            .then(resp => {
-                console.info(resp.data)
-            })
-            .catch(err=>{
-                console.error(err)
-            })
-            .then(()=>{
-                setIsLoading(false)
-            })       
-    }
     
     const ScrollTop = () => {
         window.scrollTo({
@@ -257,6 +233,9 @@ const Personal: React.FC<Icampaing> = ({campaing})=>{
         const input: any = document.querySelector('input[name="cinit"]')
         input.focus()
         console.info('from redux')
+        if(campaing.profile_ca){
+            console.info('THERE IS A PROFILE CA')
+        }
         console.info(campaing)
     },[campaing])
 

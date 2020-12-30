@@ -65,6 +65,7 @@ type FormData = {
     rs_another: string
     typeIns: number
 }
+
 type userType = {
     id: number
     email: string
@@ -77,6 +78,7 @@ interface Iauth {
     authenticated: boolean
     currentUser: userType
 }
+
 const Association: React.FC<Iauth> = ({authenticated, currentUser})=>{
 
     let token = window.sessionStorage.getItem('token')
