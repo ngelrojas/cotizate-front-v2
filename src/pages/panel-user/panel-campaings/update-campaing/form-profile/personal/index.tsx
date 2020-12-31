@@ -131,7 +131,7 @@ type FormData = {
 interface Icampaing {
     campaing: FormData 
 }
-// TODO: LOAD DATA PROFILE COMPANY/ASSOCIATION
+
 const Personal: React.FC<Icampaing> = ({campaing})=>{
 
     let token = window.sessionStorage.getItem('token')
@@ -169,7 +169,6 @@ const Personal: React.FC<Icampaing> = ({campaing})=>{
             current_position: current_position,
             headline: headline
         }
-        console.info(data_profile)
         currentPersonal.updateProfilePersonal(data_profile, campaing.profile.id)
             .then(resp => {
                 Notifications('Su perfil se ha actualizado', 'success')
@@ -232,11 +231,6 @@ const Personal: React.FC<Icampaing> = ({campaing})=>{
         LoadCities()
         const input: any = document.querySelector('input[name="cinit"]')
         input.focus()
-        console.info('from redux')
-        if(campaing.profile_ca){
-            console.info('THERE IS A PROFILE CA')
-        }
-        console.info(campaing)
     },[campaing])
 
     return(

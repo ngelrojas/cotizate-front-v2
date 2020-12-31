@@ -10,26 +10,11 @@ import FormProfile from './form-profile'
 import FormPreview from './form-preview'
 import {Content, TabNav, TabSubMenu, IconOn} from './styles'
 import {CheckAuthentication} from '../../../../redux/auth'
-import {CampaingBody} from '../../../../userCampaings'
 import {RetrieveCampaing} from '../../../../redux/actions/campaing.actions' 
-
-type profileType = {
-    first_name: string
-    last_name: string
-    id: number
-}
-
-interface Iauth {
-    authenticated: boolean
-    currentUser: profileType
-}
 
 const UpdateCampaing: React.FC = (props: any) => {
 
-    const [dcamp, setDcamp] = React.useState()
     let history = useHistory()
-    let token = window.sessionStorage.getItem('token')
-    let dataCampaing = new CampaingBody(token)
 
     function CoolTab(props:any) {
         const { isSelected, children } = props;
@@ -48,14 +33,6 @@ const UpdateCampaing: React.FC = (props: any) => {
         return cmpID
     }
 
-/*    const RetrieveCampaing = (camp_id:number) =>{*/
-        //dataCampaing.getRetrieveCBody(camp_id).then(res => {
-            //setDcamp(res.data.data)
-        //}).catch(err => {
-            //console.error(err)
-        //})
-    /*}*/
-
     React.useEffect(()=>{
         if(!CheckAuthentication()){
             history.push('/')
@@ -63,6 +40,7 @@ const UpdateCampaing: React.FC = (props: any) => {
 
         let ID = GetCampID() 
         props.RetrieveCampaing(ID)
+
     },[])
 
     return (
