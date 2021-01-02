@@ -5,7 +5,6 @@ import FormDescription from './form-description'
 import FormPhase from './form-phase'
 import FormReward from './form-rewards'
 import {WrapBtn, BtnBack, BtnNext} from '../styles'
-import Slide from 'react-reveal/Slide'
 
 interface Icounter {
     counter: any 

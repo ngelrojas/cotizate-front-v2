@@ -6,6 +6,7 @@ import {Row, Col} from 'react-styled-flexboxgrid'
 import DefaultImg from '../../form-basic/public/default.png'
 import {PersonalProfile} from '../../../../../../userProfile'
 import {City} from '../../../../../../userCountryCities'
+import {RetrieveCompany} from '../../../../../../redux/actions/profileca.actions'
 import {ContentProfile,
         Input, 
         WrapperBox,
@@ -44,7 +45,6 @@ interface Iuser {
     email: string
     first_name: string
     last_name: string
-
 }
 
 interface Icurrency {
@@ -129,10 +129,10 @@ type FormData = {
 }
 
 interface Icampaing {
-    campaing: FormData 
+    campaing: FormData
 }
-
-const Personal: React.FC<Icampaing> = ({campaing})=>{
+// TODO: fix problem whe try get a data from company profile
+const Personal: React.FC<Icampaing> = ({campaing}) => {
 
     let token = window.sessionStorage.getItem('token')
     let currentPersonal = new PersonalProfile(token)
@@ -231,6 +231,11 @@ const Personal: React.FC<Icampaing> = ({campaing})=>{
         LoadCities()
         const input: any = document.querySelector('input[name="cinit"]')
         input.focus()
+        //console.info("CAMPAING DATA")
+        //console.log(campaing)
+        //let pf_id: any = campaing.profile ? campaing.profile.id : 0
+        //let pc_id: any = campaing.profile_ca
+        //retrieveCompany(pf_id, pc_id) 
     },[campaing])
 
     return(
@@ -654,4 +659,12 @@ const mapStateToProps = (state: any) =>({
     campaing: state.campaing
 })
 
-export default connect(mapStateToProps)(Personal)
+const mapActionToProps = {
+    RetrieveCompany
+} 
+
+//const mapDispatchToProps = (dispatch: any) => ({
+    //RetrieveCompany: (pfId: number, pcId: number) => dispatch(RetrieveCompany(pfId, pcId))
+//})
+
+export default connect(mapStateToProps, mapActionToProps)(Personal)

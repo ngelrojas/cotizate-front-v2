@@ -7,6 +7,7 @@ import DefaultImg from '../public/default.png'
 import {CampaingHeader, Campaings} from '../../../../../../userCampaings'
 import {Row, Col} from 'react-styled-flexboxgrid'
 import {next, back} from '../../../../../../redux/actions/next_back.actions'
+import {URL_IMG} from '../../../../../../constants'
 import Slide from 'react-reveal/Slide'
 
 import {
@@ -30,18 +31,109 @@ import {
     BoxTitleContent,
 } from '../../styles'
 
-type FormData = {
-    title: string
-    video_main: string
-    imagen_main: string
-    excerpt: string
+interface Iuser {
+    id: number
+    email: string
+    first_name: string
+    last_name: string
+}
+
+interface Iprofile {
+    id: number
+    cinit: string
+    cellphone: string
+    telephone: string
+    country_id: number
+    countries: Icountries
+    cities: Icities 
+    city_id: number
+    address: string
+    neightbordhood: string
+    number_address: number
+    photo: any 
+    rs_facebook: string
+    rs_twitter: string
+    rs_linkedin: string
+    rs_another: string
     description: string
-    public_at: string
-    header: number
-    currency: string
+    current_position: string
+    headline: string
+    title: string
+    user: Iuser
+}
+
+interface Icurrency {
+    id: number
+    name: string
+    symbol: string
+}
+
+interface Iheader {
+    id: number
+    category: number
+    city: number
+    qty_day: number
+    qty_day_left: number
+    role: number
+    user: number
+}
+
+interface Icountries {
+    id: number,
+    short_name: string,
+    code_name: string,
+    description: string,
+    name: string
+}
+
+interface Icities {
+    id: number,
+    shortname: string,
+    codename: string,
+    description: string,
+    countries:number, 
+    name: string
+}
+
+type FormData = {
+    created_at: Date
+    currency: Icurrency
+    description: string
+    ended_at: Date
+    excerpt: string
+    header: Iheader
+    id: number
+    imagen_main: any
+    profile: Iprofile
+    profile_ca: number
+    public_at: Date
     short_url: string
     slogan_campaing: string
-    profile_ca: number
+    slug: string
+    status: number
+    title: string
+    updated_at: Date
+    video_main: string
+    first_name: string
+    last_name: string
+    email: string
+    cinit: string
+    cellphone: string
+    telephone: string
+    country_id: number
+    countries: Icountries
+    cities: Icities 
+    city_id: number
+    address: string
+    neightbordhood: string
+    number_address: number
+    photo: any 
+    rs_facebook: string
+    rs_twitter: string
+    rs_linkedin: string
+    rs_another: string
+    current_position: string
+    headline: string
 }
 
 interface Icounter {
@@ -53,9 +145,13 @@ interface Ihandlers {
     handleBack: typeof back; 
 }
 
-type AllProps = Icounter & Ihandlers
+interface Icampaing {
+    campaing: FormData
+}
 
-const FormDescription: React.FC<AllProps> = ({counter, handleNext, handleBack}) => {
+type AllProps = Icounter & Ihandlers & Icampaing
+// TODO: test updated description form
+const FormDescription: React.FC<AllProps> = ({counter, handleNext, handleBack, campaing}) => {
 
     let token = window.sessionStorage.getItem('token')
     let CamHeader = new CampaingHeader(token)
@@ -66,7 +162,7 @@ const FormDescription: React.FC<AllProps> = ({counter, handleNext, handleBack}) 
     const [msgdescription, setMsgdescription] = React.useState('')
     const [datach, setDatach] = React.useState()
     const [showImg, SetShowImg] = React.useState()
-    const {register, handleSubmit, reset, errors} = useForm<FormData>({
+    const {register, handleSubmit, errors} = useForm<FormData>({
         mode: 'onChange'
     })
 
@@ -88,27 +184,33 @@ const FormDescription: React.FC<AllProps> = ({counter, handleNext, handleBack}) 
     }
 
     const onSubmit = handleSubmit(({title, video_main, imagen_main, public_at, short_url, slogan_campaing}) => {
-        
+        let headerID: number = campaing.header ? campaing.header.id: 0 
+        let profileCA: number = campaing.profile_ca ? campaing.profile_ca:0
+        let profilId: number = campaing.profile ? campaing.profile.id:0
+        let images: string = imagen_main ? imagen_main : campaing.imagen_main 
+
         if (validate()) {
             let send_data = {
                 title: title,
                 video_main: video_main,
-                imagen_main: imagen_main[0],
+                imagen_main: images,
                 excerpt: excerpt,
                 description: description, 
-                public_at: "2020-03-19 00:00:00", 
-                header: datach,
-                currency: 1, 
-                short_url: short_url ? short_url: '', 
-                slogan_campaing: slogan_campaing ? slogan_campaing: ''
+                header: headerID,
+                currency: 1,
+                short_url: short_url, 
+                slogan_campaing: slogan_campaing,
+                profile_ca: profileCA,
+                profile:profilId 
             }
 
-            CamBody.createCampaing(send_data)
+            let campbId: number = campaing.id ? campaing.id:0
+
+            CamBody.updateCampaing(campbId, send_data)
                 .then(resp =>{
-                    Notifications('Datos de Descripcion de proyecto guardados', 'success')
+                    Notifications('Datos de Descripcion de proyecto Actualizados', 'success')
                     setMsgExcerpt('')
                     setMsgdescription('')
-                    reset()
                     handleNext()
                 }).catch(err => {
                     console.error(err)
@@ -176,12 +278,14 @@ const FormDescription: React.FC<AllProps> = ({counter, handleNext, handleBack}) 
             behavior: 'smooth'
         })
         getLast()
-    },[])
+        console.info("IN FORM DESCRIPTION")
+        console.log(campaing)
+    },[campaing])
 
     return (
         <>
         <Slide top>
-        <H4>2.- DESCRIPCmeIÓN DEL PROYECTO </H4>
+        <H4>2.- DESCRIPCIÓN DEL PROYECTO </H4>
         <TextConf>Describe tu proyecto en forma clara, cuando llegues a las faces detente y piensa en cuanto nesecitas para cada  face de tu proyecto y cuanto será el costo para este item  
         </TextConf>
         <Form onSubmit={onSubmit} encType="multipart/form-data">
@@ -193,6 +297,7 @@ const FormDescription: React.FC<AllProps> = ({counter, handleNext, handleBack}) 
                         type="text"
                         name="title"
                         ref={register({required: true})}
+                        defaultValue={campaing.title ? campaing.title:''}
                     />
                     <MsgError>
                         {errors.title && 'este campo es requerido'}
@@ -205,6 +310,7 @@ const FormDescription: React.FC<AllProps> = ({counter, handleNext, handleBack}) 
                         type="text"
                         name="slogan_campaing"
                         ref={register({required: false})}
+                        defaultValue={campaing.slogan_campaing ? campaing.slogan_campaing:''}
                     />
             </Col>
         </Row>
@@ -216,6 +322,7 @@ const FormDescription: React.FC<AllProps> = ({counter, handleNext, handleBack}) 
                         type="text"
                         name="short_url"
                         ref={register({required: false})}
+                        defaultValue={campaing.short_url ? campaing.short_url:''}
                     />
             </Col>
             <Col xs={6}>
@@ -225,6 +332,7 @@ const FormDescription: React.FC<AllProps> = ({counter, handleNext, handleBack}) 
                         type="text"
                         name="video_main"
                         ref={register({required: true})}
+                        defaultValue={campaing.video_main ? campaing.video_main:''}
                     />
                     <MsgError>
                         {errors.video_main && 'este campo es requerido'}
@@ -242,14 +350,14 @@ const FormDescription: React.FC<AllProps> = ({counter, handleNext, handleBack}) 
                         <Input
                             type="file"
                             name="imagen_main"
-                            ref={register({required: true})}
+                            ref={register({required: false})}
                             accept="image/png, image/jpeg"
                             onChange={_onChange}
                         />
                     </Col>
                     <Col xs={5}>
 
-                        <Img src={ showImg ? showImg : DefaultImg } alt="cotizate" />
+                        <Img src={ URL_IMG + campaing.imagen_main ? URL_IMG + campaing.imagen_main : DefaultImg } alt="cotizate" />
                         
                     </Col>
                 <MsgError>
@@ -264,7 +372,7 @@ const FormDescription: React.FC<AllProps> = ({counter, handleNext, handleBack}) 
                 Este es el resumen de  descripción del post utiliza max. 244 caracteres o 44 palabras
                 </BoxTextPR>
                 <Editor
-                    initialValue=''
+                    initialValue={campaing.excerpt ? campaing.excerpt:''}
                     init={{
                         height: 200,
                         menubar: false,
@@ -317,7 +425,7 @@ const FormDescription: React.FC<AllProps> = ({counter, handleNext, handleBack}) 
                 Habla con claridad sobre lo que quieres lograr. Aclara posibles dudas sobre cómo se utilizará el dinero, quién está detrás del proyecto, La transparencia atrae a más seguidores. Recuerde: su proyecto será accedido por personas comunes que decidirán si quieren o no apoyar su proyecto.
                 </BoxTextPD>
                 <Editor
-                    initialValue=''
+                    initialValue={campaing.description ? campaing.description:''}
                     init={{
                         height: 500,
                         menubar: false,
@@ -367,7 +475,7 @@ const FormDescription: React.FC<AllProps> = ({counter, handleNext, handleBack}) 
             <Row>
                 <WrapperSave>
                     <WrapBtnSave>
-                        <BtnSaveProject>guardar</BtnSaveProject>
+                        <BtnSaveProject>actualizar</BtnSaveProject>
                     </WrapBtnSave>
                 </WrapperSave>
             </Row>
@@ -378,8 +486,9 @@ const FormDescription: React.FC<AllProps> = ({counter, handleNext, handleBack}) 
     )
 }
 
-const mapStateToProps = (counter:number) => ({
-    counter,
+const mapStateToProps = (state: any) => ({
+    counter: state.counter,
+    campaing: state.campaing
 })
 
 const mapDispatchToProps = {

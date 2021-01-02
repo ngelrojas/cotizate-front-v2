@@ -179,8 +179,7 @@ const Association: React.FC<Icampaing> = ({campaing})=>{
     const [loadcity, setLoadcity] = React.useState<Icities[]>()
     const [isLoading, setIsLoading] = React.useState(true)
     const [showImg, SetShowImg] = React.useState()
-    const [displayMsg, setDisplayMsg] = React.useState('')
-    const [ProfileCA, setProfileCA] = React.useState<Iprofileca>()
+    const [ProfileCA, setProfileCA] = React.useState()
     const {register, handleSubmit, reset, errors} = useForm<FormData>({
         mode: 'onChange'
     })
@@ -289,9 +288,8 @@ const Association: React.FC<Icampaing> = ({campaing})=>{
 
     React.useEffect(()=>{
         LoadCities()
-        LoadCompanyProfileCA()
-        console.info("PROFILE CA")
-        console.info(ProfileCA)
+        LoadCompanyProfileCA()    
+
     },[campaing])
 
     return(
@@ -316,12 +314,9 @@ const Association: React.FC<Icampaing> = ({campaing})=>{
                                     <SpanAE>* Assiciacion/Empresa/Otros: </SpanAE>
                                         <SelectInput ref={register({required: true})} name="typeIns" autoFocus> 
                                         {
-                                            !isLoading && ProfileCA ? InstitutionType.map((inst: any) => {
-                                                if(ProfileCA.institution_type === inst.id){
-                                                    return <option value={inst.id} selected>{inst.name}</option>
-                                                }
+                                            InstitutionType.map((inst: any) => {    
                                                 return <option value={inst.id}>{inst.name}</option>
-                                            }):('')
+                                            }) 
                                         }
                                         </SelectInput>
                                     </label>

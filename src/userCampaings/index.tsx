@@ -43,10 +43,12 @@ export class Campaings {
 
     /*
      * update current camaping
+     * data_id: campaing header ID
+     * data_send: campaing data form description
     */
     updateCampaing = async(data_id: number, data_send: any) => {
         this.resp_campaing = await API.put(
-            `campaing/${data_id}`,
+            `campaing-body/${data_id}`,
             data_send,
             {headers: {Authorization: `Bearer ${this.token}`}}
         )
@@ -94,6 +96,18 @@ export class CampaingHeader {
      */
     getLastCampaingHeader = async() => {
         this.resp_campaing_header = await API.get(`campaing-header-last`,{
+            headers: {Authorization: `Bearer ${this.token}`}
+        })
+        return this.resp_campaing_header
+    }
+
+    /*
+     * update campaing header
+     * data_send: data to updated
+     * camhId: campaing header ID
+    */
+    updateCampaingHeader = async(data_send: any, camphId:number) => {
+        this.resp_campaing_header = await API.put(`campaing-header/${camphId}`, data_send, {
             headers: {Authorization: `Bearer ${this.token}`}
         })
         return this.resp_campaing_header
