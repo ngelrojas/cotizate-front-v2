@@ -5,7 +5,7 @@ import {store} from 'react-notifications-component'
 import {Row, Col} from 'react-styled-flexboxgrid'
 import DefaultImg from '../../form-basic/public/default.png'
 import {City} from '../../../../../../userCountryCities'
-import {CompanyProfile} from '../../../../../../userCompany'
+import {CompanyProfile} from '../../../../../../userProfile'
 import {ContentProfile,
         Input, 
         WrapperBox,
@@ -24,6 +24,12 @@ import {ContentProfile,
         SecondSpan,
 } from './styles' 
 
+const InstitutionType = [
+    {"id": 1, "name": "EMPRESA"},
+    {"id": 2, "name": "ASOCIACION"},
+    {"id": 3, "name": "OTROS"}
+]
+
 interface Icountries {
     id: number,
     short_name: string,
@@ -41,31 +47,7 @@ interface Icities {
     name: string
 }
 
-type FormData = {
-    first_name: string
-    last_name: string
-    company_email: string
-    cinit: string
-    address: string
-    number_address: number
-    neightbordhood: string
-    cellphone: string
-    telephone: string
-    description: string
-    company_name: string
-    photo: any 
-    country_id: number
-    countries: Icountries
-    cities: Icities 
-    city_id: number
-    heading: string
-    rs_facebook: string
-    rs_twitter: string
-    rs_linkedin: string
-    rs_another: string
-    typeIns: number
-}
-type userType = {
+interface Iuser {
     id: number
     email: string
     first_name: string
@@ -73,11 +55,123 @@ type userType = {
 
 }
 
-interface Iauth {
-    authenticated: boolean
-    currentUser: userType
+interface Icurrency {
+    id: number
+    name: string
+    symbol: string
 }
-const Association: React.FC<Iauth> = ({authenticated, currentUser})=>{
+
+interface Iheader {
+    id: number
+    category: number
+    city: number
+    qty_day: number
+    qty_day_left: number
+    role: number
+    user: number
+}
+
+interface Iprofile {
+    id: number
+    cinit: string
+    cellphone: string
+    telephone: string
+    country_id: number
+    countries: Icountries
+    cities: Icities 
+    city_id: number
+    address: string
+    neightbordhood: string
+    number_address: number
+    photo: any 
+    rs_facebook: string
+    rs_twitter: string
+    rs_linkedin: string
+    rs_another: string
+    description: string
+    current_position: string
+    headline: string
+    title: string
+    user: Iuser
+}
+
+type FormData = {
+    created_at: Date
+    currency: Icurrency
+    description: string
+    ended_at: Date
+    excerpt: string
+    header: Iheader
+    id: number
+    imagen_main: any
+    profile: Iprofile
+    profile_ca: number
+    public_at: Date
+    short_url: string
+    slog_campaing: string
+    slug: string
+    status: number
+    title: string
+    updated_at: Date
+    video_main: string
+    first_name: string
+    last_name: string
+    email: string
+    cinit: string
+    cellphone: string
+    telephone: string
+    country_id: number
+    countries: Icountries
+    cities: Icities 
+    city_id: number
+    address: string
+    neightbordhood: string
+    number_address: number
+    photo: any 
+    rs_facebook: string
+    rs_twitter: string
+    rs_linkedin: string
+    rs_another: string
+    current_position: string
+    headline: string
+    heading: string
+    company_name: string
+    company_email: string
+    typeIns: number
+    institution_type: number
+}
+
+interface Iprofileca {
+    id: number
+    profiles: Iprofile
+    cinit: string
+    cellphone: string
+    telephone: string
+    country_id: number
+    countries: Icountries
+    cities: Icities 
+    city_id: number
+    address: string
+    neightbordhood: string
+    number_address: number
+    photo: any 
+    rs_facebook: string
+    rs_twitter: string
+    rs_linkedin: string
+    rs_another: string
+    heading: string
+    company_name: string
+    company_email: string
+    typeIns: number
+    institution_type: number
+}
+
+interface Icampaing {
+    campaing: FormData
+}
+
+// TODO: the problem is not loading data PROFILE-CA
+const Association: React.FC<Icampaing> = ({campaing})=>{
 
     let token = window.sessionStorage.getItem('token')
     let CityUser = new City(token)
@@ -85,7 +179,7 @@ const Association: React.FC<Iauth> = ({authenticated, currentUser})=>{
     const [loadcity, setLoadcity] = React.useState<Icities[]>()
     const [isLoading, setIsLoading] = React.useState(true)
     const [showImg, SetShowImg] = React.useState()
-    const [displayMsg, setDisplayMsg] = React.useState('')
+    const [ProfileCA, setProfileCA] = React.useState()
     const {register, handleSubmit, reset, errors} = useForm<FormData>({
         mode: 'onChange'
     })
@@ -116,28 +210,15 @@ const Association: React.FC<Iauth> = ({authenticated, currentUser})=>{
             type_institution: typeIns
         }
 
-        //console.info(data_profile)
-
-        /*let data_img = {*/
-            //file_uploaded: photo[0] 
-        //}
-
-        //UploadImages.uploadImg(photo)
+        //companyProfile.createCP(data_profile)
             //.then(resp => {
-                //console.info(resp.data)
+                ////console.info(resp.data)
+                //Notifications('Perfil Institucional guardada', 'success')
+                //reset()
             //}).catch(err=>{
-                //console.error(err)
-            /*})*/
-
-        companyProfile.createCP(data_profile)
-            .then(resp => {
-                //console.info(resp.data)
-                Notifications('Perfil Institucional guardada', 'success')
-                reset()
-            }).catch(err=>{
                 
-                Notifications('Existe problemas de red, intentelo mas tarde porfavor.', 'danger')
-            })
+                //Notifications('Existe problemas de red, intentelo mas tarde porfavor.', 'danger')
+            //})
 
         ScrollTop()
     })
@@ -189,9 +270,28 @@ const Association: React.FC<Iauth> = ({authenticated, currentUser})=>{
             })
     }
 
+    const LoadCompanyProfileCA = () =>{
+        let pf_id: any = campaing.profile ? campaing.profile.id: ''
+        let pc_id: any = campaing.profile_ca
+        if(pc_id){
+            companyProfile.retrieveCompany(pf_id, pc_id)
+                .then(resp => {
+                    console.info(resp.data.data)
+                    setProfileCA(resp.data.data)
+                }).catch(err =>{
+                    console.error(err)
+                }).then(()=>{
+                    setIsLoading(false)
+                })
+        }
+    }
+
     React.useEffect(()=>{
         LoadCities()
-    },[])
+        LoadCompanyProfileCA()    
+
+    },[campaing])
+
     return(
         <>
         <div>
@@ -212,11 +312,12 @@ const Association: React.FC<Iauth> = ({authenticated, currentUser})=>{
                                 <WrapperBox>
                                     <label>
                                     <SpanAE>* Assiciacion/Empresa/Otros: </SpanAE>
-                                        <SelectInput ref={register({required: true})} name="typeIns" autoFocus>
-                                            <option value="">SELECIONAR</option>
-                                            <option value="1">ASOCIACION</option>
-                                            <option value="2">EMPRESA</option>
-                                            <option value="3">OTROS</option>
+                                        <SelectInput ref={register({required: true})} name="typeIns" autoFocus> 
+                                        {
+                                            InstitutionType.map((inst: any) => {    
+                                                return <option value={inst.id}>{inst.name}</option>
+                                            }) 
+                                        }
                                         </SelectInput>
                                     </label>
                                     <ErrorInput>{errors.typeIns && 'este campo es requerido'}</ErrorInput>
@@ -245,7 +346,8 @@ const Association: React.FC<Iauth> = ({authenticated, currentUser})=>{
                                         <Span>* Nombre Asociación: </Span>
                                         <Input type="text"
                                                name="company_name"
-                                               ref={register({required: true})}/>
+                                            ref={register({required: true})}
+                                            defaultValue={!isLoading && ProfileCA ? ProfileCA.company_name : 'company default'}/>
                                     </label>
                                     <ErrorInput>{errors.company_name && 'este campo es requerido'}</ErrorInput>
                                 </WrapperBox>
@@ -261,7 +363,8 @@ const Association: React.FC<Iauth> = ({authenticated, currentUser})=>{
                                         <Span>* Numero de NIT: </Span>
                                         <Input type="text"
                                                name="cinit"
-                                               ref={register({required: true})}/>
+                                            ref={register({required: true})}
+                                        defaultValue={!isLoading && ProfileCA ? ProfileCA.cinit : '0'}/>
                                     </label>
                                     <ErrorInput>{errors.cinit && 'este campo es requerido'}</ErrorInput>
                                 </WrapperBox>
@@ -547,8 +650,7 @@ const Association: React.FC<Iauth> = ({authenticated, currentUser})=>{
 } 
 
 const mapStateToProps = (state: any) => ({
-    authenticated: state.user.authenticated,
-    currentUser: state.user
+    campaing: state.campaing 
 })
 
 export default connect(mapStateToProps)(Association)

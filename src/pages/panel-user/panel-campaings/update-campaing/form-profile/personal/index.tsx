@@ -5,9 +5,8 @@ import {store} from 'react-notifications-component'
 import {Row, Col} from 'react-styled-flexboxgrid'
 import DefaultImg from '../../form-basic/public/default.png'
 import {PersonalProfile} from '../../../../../../userProfile'
-import {User} from '../../../../../../user'
 import {City} from '../../../../../../userCountryCities'
-import {UploadFiles} from '../../../../../../userImg'
+import {RetrieveCompany} from '../../../../../../redux/actions/profileca.actions'
 import {ContentProfile,
         Input, 
         WrapperBox,
@@ -46,14 +45,26 @@ interface Iuser {
     email: string
     first_name: string
     last_name: string
-
 }
 
-type FormData = {
-    profile: Iuser
-    first_name: string
-    last_name: string
-    email: string
+interface Icurrency {
+    id: number
+    name: string
+    symbol: string
+}
+
+interface Iheader {
+    id: number
+    category: number
+    city: number
+    qty_day: number
+    qty_day_left: number
+    role: number
+    user: number
+}
+
+interface Iprofile {
+    id: number
     cinit: string
     cellphone: string
     telephone: string
@@ -73,25 +84,64 @@ type FormData = {
     current_position: string
     headline: string
     title: string
+    user: Iuser
+}
+
+type FormData = {
+    created_at: Date
+    currency: Icurrency
+    description: string
+    ended_at: Date
+    excerpt: string
+    header: Iheader
+    id: number
+    imagen_main: any
+    profile: Iprofile
+    profile_ca: number
+    public_at: Date
+    short_url: string
+    slog_campaing: string
+    slug: string
+    status: number
+    title: string
+    updated_at: Date
+    video_main: string
+    first_name: string
+    last_name: string
+    email: string
+    cinit: string
+    cellphone: string
+    telephone: string
+    country_id: number
+    countries: Icountries
+    cities: Icities 
+    city_id: number
+    address: string
+    neightbordhood: string
+    number_address: number
+    photo: any 
+    rs_facebook: string
+    rs_twitter: string
+    rs_linkedin: string
+    rs_another: string
+    current_position: string
+    headline: string
 }
 
 interface Icampaing {
-    campaing: FormData 
+    campaing: FormData
 }
-
-const Personal: React.FC<Icampaing> = ({campaing})=>{
+// TODO: fix problem whe try get a data from company profile
+const Personal: React.FC<Icampaing> = ({campaing}) => {
 
     let token = window.sessionStorage.getItem('token')
     let currentPersonal = new PersonalProfile(token)
-    let DataUser = new User(token)
     let CityUser = new City(token)
-    let UploadImages = new UploadFiles()
-
     const [loadcity, setLoadcity] = React.useState<Icities[]>()
     const [isLoading, setIsLoading] = React.useState(true)
     const [showImg, SetShowImg] = React.useState()
     const input = document.querySelector("cinit")
-    const {register, handleSubmit, reset, errors} = useForm<FormData>({
+    const {register, handleSubmit, errors} = useForm<FormData>({
         mode: 'onChange'
     })
 
@@ -110,7 +160,7 @@ const Personal: React.FC<Icampaing> = ({campaing})=>{
             address: address, 
             neightbordhood: neightbordhood,
             number_address: number_address,
-            photo: 'mediafiles/',
+            photo: photo[0],
             rs_facebook: rs_facebook,
             rs_twitter: rs_twitter,
             rs_linkedin: rs_linkedin,
@@ -119,11 +169,9 @@ const Personal: React.FC<Icampaing> = ({campaing})=>{
             current_position: current_position,
             headline: headline
         }
-
-        currentPersonal.createPP(data_profile)
+        currentPersonal.updateProfilePersonal(data_profile, campaing.profile.id)
             .then(resp => {
-                Notifications('Su perfil se ha creado', 'success')
-                reset()
+                Notifications('Su perfil se ha actualizado', 'success')
             }).catch(err=>{
                 Notifications('Hubo un error en la conexion, intentelo mas tarde porfavor.', 'danger')
             })
@@ -131,24 +179,6 @@ const Personal: React.FC<Icampaing> = ({campaing})=>{
         ScrollTop()
 
     })
-
-    const SendImg = (photo: any) => {
-
-         let data_img = {
-            file_uploaded:photo 
-        }
-        //console.info(data_img)
-        UploadImages.uploadImg(data_img)
-            .then(resp => {
-                console.info(resp.data)
-            })
-            .catch(err=>{
-                console.error(err)
-            })
-            .then(()=>{
-                setIsLoading(false)
-            })       
-    }
     
     const ScrollTop = () => {
         window.scrollTo({
@@ -201,9 +231,12 @@ const Personal: React.FC<Icampaing> = ({campaing})=>{
         LoadCities()
         const input: any = document.querySelector('input[name="cinit"]')
         input.focus()
-        console.info('from redux')
-        console.info(campaing)
-    },[])
+        //console.info("CAMPAING DATA")
+        //console.log(campaing)
+        //let pf_id: any = campaing.profile ? campaing.profile.id : 0
+        //let pc_id: any = campaing.profile_ca
+        //retrieveCompany(pf_id, pc_id) 
+    },[campaing])
 
     return(
         <>
@@ -214,7 +247,7 @@ const Personal: React.FC<Icampaing> = ({campaing})=>{
                     <Col xs={12}>
                         <Row center="xs">
                             <Col xs={6}>       
-                            <InfoText>DATOS PERSONALES {campaing.title}</InfoText>
+                            <InfoText>DATOS PERSONALES </InfoText>
                             </Col>
                         </Row>
                     </Col>
@@ -228,6 +261,7 @@ const Personal: React.FC<Icampaing> = ({campaing})=>{
                                             <Input type="text"
                                                    name="first_name"
                                                    ref={register({required: true})}
+                                                   defaultValue={campaing.profile ? campaing.profile.user.first_name: ''}
                                                    disabled
                                             />
 
@@ -247,7 +281,8 @@ const Personal: React.FC<Icampaing> = ({campaing})=>{
                                             <Input type="text"
                                                name="last_name"
                                                ref={register({required: true})}
-                                                disabled
+                                               defaultValue={campaing.profile ? campaing.profile.user.last_name: ''}
+                                               disabled
                                             />
                                         
                                     </label>
@@ -266,6 +301,7 @@ const Personal: React.FC<Icampaing> = ({campaing})=>{
                                         <Input type="text"
                                                name="cinit"
                                                ref={register({required: true})}
+                                               defaultValue={campaing.profile ? campaing.profile.cinit: ''}
                                                autoFocus
                                             />
                                         
@@ -285,6 +321,7 @@ const Personal: React.FC<Icampaing> = ({campaing})=>{
                                         <Input type="text"
                                                name="cellphone"
                                                ref={register({required: true})}
+                                               defaultValue={campaing.profile ? campaing.profile.cellphone : '' }
                                                />
                                         
                                     </label>
@@ -303,6 +340,7 @@ const Personal: React.FC<Icampaing> = ({campaing})=>{
                                         <Input type="text"
                                                 name="telephone"
                                                 ref={register({required: false})}
+                                                defaultValue={campaing.profile ? campaing.profile.telephone : '' }
                                                 />
                                         
                                     </label>
@@ -320,6 +358,7 @@ const Personal: React.FC<Icampaing> = ({campaing})=>{
                                             <Input type="text"
                                                    name="email"
                                                    ref={register({required: true})}
+                                                   defaultValue={campaing.profile ? campaing.profile.user.email : '' }
                                                    disabled
                                             />
 
@@ -340,6 +379,7 @@ const Personal: React.FC<Icampaing> = ({campaing})=>{
                                                 name="headline"
                                                 placeholder="ej. ARQUITECTO, INGENIERO, etc."
                                                 ref={register({required: false})}
+                                                defaultValue={campaing.profile ? campaing.profile.current_position : '' }
                                                 />
                                         
                                     </label>
@@ -358,6 +398,7 @@ const Personal: React.FC<Icampaing> = ({campaing})=>{
                                                 name="current_position"
                                                 placeholder="ej. CEO, EMPRESARIO, etc."
                                                 ref={register({required: false})}
+                                                defaultValue={campaing.profile ? campaing.profile.headline : '' }
                                                 />
                                         
                                     </label>
@@ -390,9 +431,11 @@ const Personal: React.FC<Icampaing> = ({campaing})=>{
                                         <Span>* Ciudad: </Span>
                                         <SelectInput ref={register({required: true})} name="city_id"> 
                                                 <option value="">SELECIONAR</option>
-                                            {!isLoading && loadcity ? (
+                                            {!isLoading && loadcity && campaing.profile ? (
                                                 loadcity.map((city:any)=>{
-
+                                                    if(campaing.profile.cities.id === city.id){
+                                                        return <option key={city.id} value={city.id} selected>{city.name}</option>
+                                                    }
                                                     return <option key={city.id} value={city.id}>{city.name}</option>
                                                 }
                                             ) 
@@ -414,7 +457,9 @@ const Personal: React.FC<Icampaing> = ({campaing})=>{
                                         <TextArea 
                                                rows={5}
                                                name="address"
-                                               ref={register({required: true})}/>
+                                               ref={register({required: true})}
+                                               defaultValue={campaing.profile ? campaing.profile.address : ''}
+                                        />
                                             
                                         
                                     </label>
@@ -433,7 +478,9 @@ const Personal: React.FC<Icampaing> = ({campaing})=>{
                                             <TextArea 
                                                rows={5}
                                                name="neightbordhood"
-                                               ref={register({required: true})}/>
+                                               ref={register({required: true})}
+                                               defaultValue={campaing.profile ? campaing.profile.neightbordhood : ''}
+                                            />
                                         
                                     </label>
                                     <ErrorInput>{errors.neightbordhood && 'este campo es requerido'}</ErrorInput>
@@ -450,7 +497,9 @@ const Personal: React.FC<Icampaing> = ({campaing})=>{
                                         <Span>* Numero: </Span>
                                             <Input type="number"
                                                name="number_address"
-                                                ref={register({required: true})}/>
+                                                ref={register({required: true})}
+                                               defaultValue={campaing.profile ? campaing.profile.number_address : ''}
+                                            />
                                         
                                     </label>
                                     <ErrorInput>{errors.number_address && 'este campo es requerido'}</ErrorInput>
@@ -487,7 +536,7 @@ const Personal: React.FC<Icampaing> = ({campaing})=>{
                                         />
                                     </label>
 
-                                    <ProfileImg src={ showImg ? showImg : DefaultImg } alt="cotizate-" />
+                                    <ProfileImg src={ campaing.profile && campaing.profile.photo ? campaing.profile.photo : DefaultImg } alt="cotizate-" />
                                 </WrapperBox>
                             </Col>
                         </Row>
@@ -501,7 +550,9 @@ const Personal: React.FC<Icampaing> = ({campaing})=>{
                                         <Span>Facebook: </Span>
                                             <Input type="text"
                                                 name="rs_facebook"
-                                                ref={register({required: false})} /> 
+                                                ref={register({required: false})} 
+                                               defaultValue={campaing.profile ? campaing.profile.rs_facebook : ''}
+                                            /> 
                                     </label>
                                 </WrapperBox>
                             </Col>
@@ -516,7 +567,9 @@ const Personal: React.FC<Icampaing> = ({campaing})=>{
                                         <Span>Twitter: </Span>
                                         <Input type="text"
                                                 name="rs_twitter"
-                                                ref={register({required: false})} />
+                                            ref={register({required: false})} 
+                                            defaultValue={campaing.profile ? campaing.profile.rs_twitter : ''}
+                                        />
                                     </label>
                                 </WrapperBox>
                             </Col>
@@ -531,7 +584,9 @@ const Personal: React.FC<Icampaing> = ({campaing})=>{
                                         <Span>LinkedIn: </Span>
                                         <Input type="text"
                                                 name="rs_linkedin"
-                                                ref={register({required: false})} />
+                                            ref={register({required: false})}
+                                            defaultValue={campaing.profile ? campaing.profile.rs_linkedin : ''}
+                                        />
                                     </label>
                                 </WrapperBox>
                             </Col>
@@ -546,7 +601,9 @@ const Personal: React.FC<Icampaing> = ({campaing})=>{
                                         <Span>Otra red social: </Span>
                                         <Input type="text"
                                                 name="rs_another"
-                                                ref={register({required: false})} />
+                                            ref={register({required: false})}
+                                            defaultValue={campaing.profile ? campaing.profile.rs_another : ''}
+                                        />
                                     </label>
                                 </WrapperBox>
                             </Col>
@@ -567,6 +624,7 @@ const Personal: React.FC<Icampaing> = ({campaing})=>{
                                             <TextArea rows={6}
                                                 name="description"
                                                 ref={register({required: false})}
+                                            defaultValue={campaing.profile ? campaing.profile.description : ''}
                                                  />
                                         
                                     </label>
@@ -601,4 +659,12 @@ const mapStateToProps = (state: any) =>({
     campaing: state.campaing
 })
 
-export default connect(mapStateToProps)(Personal)
+const mapActionToProps = {
+    RetrieveCompany
+} 
+
+//const mapDispatchToProps = (dispatch: any) => ({
+    //RetrieveCompany: (pfId: number, pcId: number) => dispatch(RetrieveCompany(pfId, pcId))
+//})
+
+export default connect(mapStateToProps, mapActionToProps)(Personal)

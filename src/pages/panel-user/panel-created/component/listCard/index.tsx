@@ -10,7 +10,7 @@ const ListCard: React.FC = () => {
     const [isLoading, setIsLoading] = React.useState(true)
 
     const LoadCards = () => {
-        CampaingCard.listCampaingBody(5)
+        CampaingCard.listCampaingBody(2)
             .then(resp => {
                 setCards(resp.data.data)
             })

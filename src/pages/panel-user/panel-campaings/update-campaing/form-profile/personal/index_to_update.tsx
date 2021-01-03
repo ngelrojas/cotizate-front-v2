@@ -141,7 +141,7 @@ const Personal: React.FC<Iauth> = ({authenticated, currentUser})=>{
                 //console.error(err)
             /*})*/
 
-        currentPersonal.upadteProfilePersonal(data_profile, currentUser.id)
+        currentPersonal.updateProfilePersonal(data_profile, currentUser.id)
             .then(resp => {
                 console.info(resp.data)
             }).catch(err=>{

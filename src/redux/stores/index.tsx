@@ -8,6 +8,7 @@ import uiReducer from '../reducers/ui.reducers'
 import phaseReducer from '../reducers/phase.reducers'
 import homeReducer from '../reducers/home.reducers'
 import profileReducer from '../reducers/profile.reducers' 
+import profilecaReducer from '../reducers/profileca.reducers'
 import NextBackReducer from '../reducers/next_back.reducers'
 import categoriaReducer from '../reducers/categoriaReducers'
 import detalleProyecto from '../reducers/detalleProyectoReducers'
@@ -25,6 +26,7 @@ const reducer = combineReducers({
     user: userReducer,
     UI: uiReducer,
     profile: profileReducer,
+    profileca: profilecaReducer,
     campaing: campaingReducer,
     phase: phaseReducer,
     home:homeReducer,

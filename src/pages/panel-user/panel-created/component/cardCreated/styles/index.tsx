@@ -4,7 +4,7 @@ import {Link} from 'react-router-dom'
 export const ContainerCard = styled.div`
    width: 100%; 
    border: 1px solid;
-   height: 27vh;
+   height: 25vh;
    margin: 1%;
 `
 
@@ -53,7 +53,7 @@ export const Delete = styled(Btn)`
 export const H4 = styled.h4`
    color: #1383C5;
    margin: 0px;
-   padding-left: 21%;
+   padding-left: 12%;
 `
 
 export const SpacesBtn = styled.div`

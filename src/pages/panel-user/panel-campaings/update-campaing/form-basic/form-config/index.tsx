@@ -1,6 +1,5 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {useRouteMatch} from 'react-router-dom'
 import {useForm} from 'react-hook-form'
 import {store} from 'react-notifications-component'
 import {CategoriesCampaing} from '../../../../../../userCategories'
@@ -26,12 +25,22 @@ import {
     BS,
 } from '../../styles'
 
+interface Iheader {
+    id: number
+    category: string
+    qty_day: number
+    amount: number
+    city: string
+    role: number
+}
+
 type FormData = {
     category: string
     qty_day: number
     amount: number
     city: string
     role: number
+    header: Iheader
 }
 
 interface Icounter {
@@ -43,38 +52,38 @@ interface Ihandlers {
     handleBack: typeof back; 
 }
 
-type AllProps = Icounter & Ihandlers
+interface Icampaing {
+    campaing: FormData
+}
 
-const FormConfig: React.FC<AllProps> = ({counter, handleNext}) => {
+type AllProps = Icounter & Ihandlers & Icampaing
 
-    let match = useRouteMatch('/panel-de-usuario/:campania')
+const FormConfig: React.FC<AllProps> = ({counter, handleNext, campaing}) => {
+
     let token = window.sessionStorage.getItem('token')
     let CatCamp = new CategoriesCampaing(token)
     let GetCities = new City(token)
     let SaveCampaing = new CampaingHeader(token)
     const [cate, SetCate] = React.useState()
     const [cities, SetCities] = React.useState()
-    let matchUrl: any = match
-    let type_campaing = matchUrl.params.campania   
 
-    const {register, handleSubmit, reset, errors} = useForm<FormData>({
+    const {register, handleSubmit, errors} = useForm<FormData>({
         mode: 'onChange'
     })
 
     const onSubmit = handleSubmit(({category, city, qty_day, amount}) => {
-        let campaing_type:number = type_campaing === 'crear-emprendimiento' ? 2 : 1 
         let send_data = {
             category: category,
             city: city,
             qty_day: qty_day,
             amount: amount,
-            role: campaing_type
         }
 
-        SaveCampaing.createCampaingHeader(send_data)
+        let camphId:number = campaing.header ? campaing.header.id : 0
+
+        SaveCampaing.updateCampaingHeader(send_data, camphId)
             .then(resp=>{
-                Notifications('Datos de configuracion guardados', 'success')
-                reset()
+                Notifications('Datos de configuracion Actualizados', 'success')
                 handleNext()
             })
             .catch(err => {
@@ -122,7 +131,7 @@ const FormConfig: React.FC<AllProps> = ({counter, handleNext}) => {
     React.useEffect(()=>{
         LoadCategories()
         LoadListCities()
-    },[])
+    },[campaing])
 
     return (
         <>
@@ -144,13 +153,20 @@ const FormConfig: React.FC<AllProps> = ({counter, handleNext}) => {
                 <BoxTitle>* Categoria</BoxTitle>
                 <BoxText>Seleccione la categoría que mejor represente su proyecto </BoxText>
                 <BoxSelect ref={register({required: true})} name="category">
-                    <option value="">SELECCIONAR</option>
-                    {cate &&
-                        (cate as any).map((category: any) => (
-                            <option value={category.id} key={category.id}>
-                                {category.name}
-                            </option>
-                        ))}
+                    {cate && campaing.header &&
+                        (cate as any).map((category: any) => {
+                            if(campaing.header.category === category.id){
+                                return <option value={category.id} key={category.id} selected>
+                                            {category.name}
+                                        </option>
+                            }
+                            return <option value={category.id} key={category.id}>
+                                            {category.name}
+                                        </option>
+                    }
+                            
+                            
+                        )}
                 </BoxSelect>
                 <MsgError>
                     {errors.category && 'este campo es requerido'}
@@ -160,13 +176,20 @@ const FormConfig: React.FC<AllProps> = ({counter, handleNext}) => {
                 <BoxTitle>* Ubicacion</BoxTitle>
                 <BoxText>Donde esta ubicado tu proyecto, Elija la ubicación de donde esta ubicado tu proyecto</BoxText>
                 <BoxSelect ref={register({required: true})} name="city">
-                    <option value="">SELECCIONAR</option>
-                    {cities &&
-                        (cities as any).map((city: any) => (
-                            <option value={city.id} key={city.id}>
-                                {city.name}
-                            </option>
-                        ))}
+                    {cities && campaing.header &&
+                        (cities as any).map((city: any) => {
+                            if(campaing.header.city === city.id){
+                                return <option value={city.id} key={city.id} selected>
+                                    {city.name}
+                                </option>
+                         }
+                         return <option value={city.id} key={city.id}>
+                                    {city.name}
+                                </option>
+                        }
+                            
+                            
+                        )}
                 </BoxSelect>
                 <MsgError>
                     {errors.city && 'este campo es requerido'}
@@ -181,6 +204,7 @@ const FormConfig: React.FC<AllProps> = ({counter, handleNext}) => {
                     name="qty_day"
                     placeholder="cantidad de dias"
                     ref={register({required: true})}
+                    defaultValue={campaing.header ? campaing.header.qty_day: ''}
                 />
                 <MsgError>
                     {errors.qty_day && 'este campo es requerido'}
@@ -195,6 +219,7 @@ olvide incluir las tarifas administrativas en su cálculo. </BoxText>
                         name="amount"
                         ref={register({required: true})}
                         placeholder="000.000,000"
+                        defaultValue={campaing.header ? campaing.header.amount : ''}
                     />
                     <BS>BS</BS>
                 </WrappBoxInput>
@@ -207,7 +232,7 @@ olvide incluir las tarifas administrativas en su cálculo. </BoxText>
             <Row>
                 <WrapperSaveConfig>
                     <WrapBtnSave>
-                        <BtnSaveProject>guardar</BtnSaveProject>
+                        <BtnSaveProject>actualizar</BtnSaveProject>
                     </WrapBtnSave>
                 </WrapperSaveConfig>
             </Row>
@@ -219,8 +244,9 @@ olvide incluir las tarifas administrativas en su cálculo. </BoxText>
     )
 }
 
-const mapStateToProps = (counter:number) => ({
-    counter,
+const mapStateToProps = (state:any) => ({
+    counter: state.counter,
+    campaing: state.campaing
 })
 
 const mapDispatchToProps = {
