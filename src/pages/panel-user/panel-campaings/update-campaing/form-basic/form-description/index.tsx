@@ -176,10 +176,12 @@ const FormDescription: React.FC<AllProps> = ({counter, handleNext, handleBack, c
     }
 
     const handleEditorChange = (content: any, editor: any) => {
+        content = campaing.description ? campaing.description : ''
         setDescripction(content)
     }
 
     const handleEditorExcerptChange = (content: any, editor: any) => {
+        content = campaing.excerpt ? campaing.excerpt : ''
         setExcerpt(content)
     }
 
@@ -187,8 +189,11 @@ const FormDescription: React.FC<AllProps> = ({counter, handleNext, handleBack, c
         let headerID: number = campaing.header ? campaing.header.id: 0 
         let profileCA: number = campaing.profile_ca ? campaing.profile_ca:0
         let profilId: number = campaing.profile ? campaing.profile.id:0
-        let images: string = imagen_main ? imagen_main : campaing.imagen_main 
-
+        let images: string = imagen_main[0] ? imagen_main[0] : campaing.imagen_main 
+        console.info("EXCERPT")
+        console.log(excerpt)
+        console.info("DESCRIPTION")
+        console.log(description)
         if (validate()) {
             let send_data = {
                 title: title,
@@ -203,19 +208,19 @@ const FormDescription: React.FC<AllProps> = ({counter, handleNext, handleBack, c
                 profile_ca: profileCA,
                 profile:profilId 
             }
+            console.log(send_data) 
+            //let campbId: number = campaing.id ? campaing.id:0
 
-            let campbId: number = campaing.id ? campaing.id:0
-
-            CamBody.updateCampaing(campbId, send_data)
-                .then(resp =>{
-                    Notifications('Datos de Descripcion de proyecto Actualizados', 'success')
-                    setMsgExcerpt('')
-                    setMsgdescription('')
-                    handleNext()
-                }).catch(err => {
-                    console.error(err)
-                    Notifications('Porfavor debe revisar los datos a ser llenados.', 'danger')
-                })
+            //CamBody.updateCampaing(campbId, send_data)
+                //.then(resp =>{
+                    //Notifications('Datos de Descripcion de proyecto Actualizados', 'success')
+                    //setMsgExcerpt('')
+                    //setMsgdescription('')
+                    //handleNext()
+                //}).catch(err => {
+                    //console.error(err)
+                    //Notifications('Porfavor debe revisar los datos a ser llenados.', 'danger')
+                //})
 
         }
 
@@ -372,7 +377,7 @@ const FormDescription: React.FC<AllProps> = ({counter, handleNext, handleBack, c
                 Este es el resumen de  descripción del post utiliza max. 244 caracteres o 44 palabras
                 </BoxTextPR>
                 <Editor
-                    initialValue={campaing.excerpt ? campaing.excerpt:''}
+                    initialValue={campaing.excerpt ? campaing.excerpt : ''}
                     init={{
                         height: 200,
                         menubar: false,

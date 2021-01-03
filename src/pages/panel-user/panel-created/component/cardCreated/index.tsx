@@ -1,7 +1,6 @@
 import React from 'react'
 import Moment from 'react-moment'
 import {Row, Col} from 'react-styled-flexboxgrid'
-import {CampaingHeader} from '../../../../../userCampaings'
 import Default from '../../../../public/img/default.png'
 import {URL_IMG} from '../../../../../constants'
 import {ContainerCard,
@@ -36,26 +35,11 @@ type propsCamp = {
     profile: propsProfile
     created_at: string 
     imagen_main: string
-    header: number
+    header: IHeader 
     status: number
 }
 
 const CardCreated: React.FC<propsCamp> = (propsCamp) => {
-    let token = window.sessionStorage.getItem('token')
-    let CampHeader = new CampaingHeader(token)
-    const [GetHeader, setGetHeader] = React.useState<IHeader>()
-    const [IsLoad, setIsLoad] = React.useState(true)
-
-    const LoadHeader = () => {
-        CampHeader.retrieveCampaingHeader(propsCamp.header)
-            .then(resp => {
-                setGetHeader(resp.data.data)
-            }).catch(err => {
-                console.error(err)
-            }).then(() => {
-                setIsLoad(false)
-            })
-    }
 
     const StatusCamp = (index: number) => {
         switch(index){
@@ -72,16 +56,11 @@ const CardCreated: React.FC<propsCamp> = (propsCamp) => {
         } 
     }
 
-    React.useEffect(()=>{
-        LoadHeader()
-    },[])
-
-
     return(
         <ContainerCard key={propsCamp.id}>
             <Row between="xs">
                 <Col xs={4}>
-                <Img src={!IsLoad && propsCamp.imagen_main ? URL_IMG + propsCamp.imagen_main: Default} alt={`${propsCamp.slug} - cotizate`} />
+                <Img src={propsCamp.imagen_main ? URL_IMG + propsCamp.imagen_main: Default} alt={`${propsCamp.slug} - cotizate`} />
                 </Col>
                 <Col xs={5}>
                     <Box>
@@ -90,7 +69,7 @@ const CardCreated: React.FC<propsCamp> = (propsCamp) => {
                             <Label>por:</Label> <span>{propsCamp.profile.user.first_name} {propsCamp.profile.user.last_name}</span>
                         </Spaces>
                         <Spaces>
-                             <Label>Cod:</Label> <span> {!IsLoad && GetHeader ? GetHeader.code_campaing: '0'}</span>
+                             <Label>Cod:</Label> <span> { propsCamp.header ? propsCamp.header.code_campaing: '0'}</span>
                         </Spaces>                   
                         <Spaces>
                             <Label>Creado:</Label> <span> <Moment format="DD/MM/YYYY">{propsCamp.created_at}</Moment></span>
