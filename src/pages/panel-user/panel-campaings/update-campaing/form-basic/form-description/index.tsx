@@ -150,7 +150,7 @@ interface Icampaing {
 }
 
 type AllProps = Icounter & Ihandlers & Icampaing
-// TODO: test updated description form
+// TODO: check excerpt and description
 const FormDescription: React.FC<AllProps> = ({counter, handleNext, handleBack, campaing}) => {
 
     let token = window.sessionStorage.getItem('token')
@@ -176,12 +176,10 @@ const FormDescription: React.FC<AllProps> = ({counter, handleNext, handleBack, c
     }
 
     const handleEditorChange = (content: any, editor: any) => {
-        content = campaing.description ? campaing.description : ''
         setDescripction(content)
     }
 
     const handleEditorExcerptChange = (content: any, editor: any) => {
-        content = campaing.excerpt ? campaing.excerpt : ''
         setExcerpt(content)
     }
 
@@ -189,16 +187,14 @@ const FormDescription: React.FC<AllProps> = ({counter, handleNext, handleBack, c
         let headerID: number = campaing.header ? campaing.header.id: 0 
         let profileCA: number = campaing.profile_ca ? campaing.profile_ca:0
         let profilId: number = campaing.profile ? campaing.profile.id:0
-        let images: string = imagen_main[0] ? imagen_main[0] : campaing.imagen_main 
-        console.info("EXCERPT")
-        console.log(excerpt)
-        console.info("DESCRIPTION")
-        console.log(description)
+        let imagenMain: any = imagen_main[0] ? imagen_main[0] : campaing.imagen_main 
+
+
         if (validate()) {
             let send_data = {
                 title: title,
                 video_main: video_main,
-                imagen_main: images,
+                imagen_main: imagenMain,
                 excerpt: excerpt,
                 description: description, 
                 header: headerID,
@@ -208,38 +204,42 @@ const FormDescription: React.FC<AllProps> = ({counter, handleNext, handleBack, c
                 profile_ca: profileCA,
                 profile:profilId 
             }
-            console.log(send_data) 
-            //let campbId: number = campaing.id ? campaing.id:0
+            console.log(imagen_main[0])
 
-            //CamBody.updateCampaing(campbId, send_data)
-                //.then(resp =>{
-                    //Notifications('Datos de Descripcion de proyecto Actualizados', 'success')
-                    //setMsgExcerpt('')
-                    //setMsgdescription('')
-                    //handleNext()
-                //}).catch(err => {
-                    //console.error(err)
-                    //Notifications('Porfavor debe revisar los datos a ser llenados.', 'danger')
-                //})
+            let campbId: number = campaing.id ? campaing.id:0
+
+            CamBody.updateCampaing(campbId, send_data)
+                .then(resp =>{
+                    Notifications('Datos de Descripcion de proyecto Actualizados', 'success')
+                    setMsgExcerpt('')
+                    setMsgdescription('')
+                    handleNext()
+                }).catch(err => {
+                    console.error(err)
+                    Notifications('Porfavor debe revisar los datos a ser llenados.', 'danger')
+                })
 
         }
 
     })
 
     const validate = () => {
-        if (excerpt.length === 0) {
+        let content_excerpt: string = campaing.excerpt ? campaing.excerpt : '' 
+        let content_description: string = campaing.description ? campaing.description : ''
+
+        if (content_excerpt.length === 0) {
             Notifications('El Resumen de tu proyecto es requerido','danger')
             setMsgExcerpt('este campo es requerido')
             return false
         }
 
-        if (excerpt.length >= 249) {
+        if (content_excerpt.length >= 249) {
             setMsgExcerpt('asegurate de no tener letras resaltadas o con negritas.')
             Notifications('El Resumen no debe superar las 44 palabras','danger')
             return false
         }
 
-        if (description.length === 0) {
+        if (content_description.length === 0) {
             setMsgdescription('este campo es requerido')
             Notifications('Es obligatorio detallar tu proyecto','danger')
             return false
@@ -356,7 +356,6 @@ const FormDescription: React.FC<AllProps> = ({counter, handleNext, handleBack, c
                             type="file"
                             name="imagen_main"
                             ref={register({required: false})}
-                            accept="image/png, image/jpeg"
                             onChange={_onChange}
                         />
                     </Col>
