@@ -10,11 +10,11 @@ export const List = styled.ul`
 `
 export const DivPrincipal = styled.div`   
     
-    padding-left: 6%;
-    padding-right: 6%;
+    padding-left: 4%;
+    padding-right: 4%;
     @media ${device.tablet} {
-        padding-left: 6%;
-        padding-right: 6%;
+        padding-left: 3%;
+        padding-right: 3%;
     }
     @media ${device.mobileM} {
         padding-left: 1%;
@@ -44,17 +44,19 @@ export const TilePortada = styled.span`
     font-family: Roboto;
      
     float: left;
-    margin: 1%;
+    margin: 0%;
     font-style: normal;
 
     font-weight: bold;
     font-size: 22px;
    
     @media ${device.tablet} {
-        font-size: 20px;      
+        
+        font-size: 16px;      
     }
     @media ${device.mobileM} {
-        font-size: 15px;
+        margin: 2%;
+        font-size: 12px;
     }
 `
 export const Article = styled.article`
@@ -84,10 +86,14 @@ export const SectionDetails = styled.section`
     @media ${device.tablet} {
         width: 100%;
         margin-bottom: 30px;
+        padding-left: 0px;        
+        padding-right: 10px;
     }
     @media ${device.mobileL} {
         width: 100%;
         margin-bottom: 20px;
+        padding-left: 0px;        
+        padding-right: 13px;
     }
 `
 export const Picture = styled.picture`
@@ -249,6 +255,24 @@ export const Div1 = styled.div`
     padding-left: 10px;
     padding-bottom: 2%;
     padding-top: 2%;
+   
+    @media ${device.tablet} {
+        width: 100%;
+        padding-left: 1px;
+        margin-bottom: 2%;
+        padding-top: 2%;
+    }
+    @media ${device.mobileM} {
+        width: 100%;
+        padding-left: 1px;
+        margin-bottom: 2%;
+        padding-top: 2%;
+    }
+`
+export const DivCod = styled.div`
+    padding-left: 10px;
+    padding-bottom: 2%;
+    padding-top: 7%;
    
     @media ${device.tablet} {
         width: 100%;

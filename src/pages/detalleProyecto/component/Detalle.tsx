@@ -24,6 +24,7 @@ import {Article, SectionDetails, Picture,
      AporteNumber,
      TileDias,
      Div1,
+     DivCod,
      TileCode,
      BotonAportar
     } from './styleDetallecomponent/styleDetalle';
@@ -142,7 +143,7 @@ const Detalle: React.FC<Idetalle> = props => {
         <>
         <Col >     
         <DivPrincipal> 
-        <Row start="lg">
+                       <Row center="xs">
                             <Col xs={12} sm={12} md={12} lg={12}>
                                <DivPortada>
                                   <TilePortada> 
@@ -259,21 +260,21 @@ const Detalle: React.FC<Idetalle> = props => {
                         </Row>
                     </Col>
                 </Row>
-                <Row>
+                <Row start="lg">
                     <Col xs={12} sm={12} md={12} lg={12}>
                         <Row start="lg">
                             <Col xs={12} sm={12} md={12} lg={12}>
-                                <Div1>
+                                <DivCod>
                                     <TileCode>{'COD: 000111'}</TileCode> 
-                                </Div1>                               
+                                </DivCod>                               
                             </Col>
                         </Row>
                     </Col>
                 </Row>
                 </Contenedor>
-                    <Row>
+                    <Row center='xs' >
                         <Col xs={12} sm={12} md={12} lg={12}>
-                            <Row start="lg" >
+                            <Row >
                                 <Col xs={12} sm={12} md={12} lg={12}>
                                     <Div1>
                                     <BotonAportar >Aportar</BotonAportar>
