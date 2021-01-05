@@ -51,7 +51,7 @@ export const TilePortada = styled.span`
     font-size: 22px;
    
     @media ${device.tablet} {
-        
+        margin: 2%;
         font-size: 16px;      
     }
     @media ${device.mobileM} {
@@ -87,13 +87,13 @@ export const SectionDetails = styled.section`
         width: 100%;
         margin-bottom: 30px;
         padding-left: 0px;        
-        padding-right: 10px;
+        padding-right: 0px;
     }
     @media ${device.mobileL} {
         width: 100%;
         margin-bottom: 20px;
         padding-left: 0px;        
-        padding-right: 13px;
+        padding-right: 0px;
     }
 `
 export const Picture = styled.picture`
@@ -179,6 +179,7 @@ export const Alcanzado = styled.div`
     @media ${device.tablet} {
         width: 80%;
         padding-left: 1px;
+        padding-top: 5%;
         margin-bottom: 10%;
     }
     @media ${device.mobileM} {
@@ -197,9 +198,35 @@ export const NumberMontoMeta = styled.span`
     margin: 0%;
     font-style: normal;
     font-size: 16px;
+    padding-top: 1%;
     @media ${device.tablet} {
         float: right;
+        padding-top: 1%;
         
+    }
+    @media ${device.mobileM} {
+
+    }
+    
+`
+export const AlcanceText = styled.span`
+    color: #F1F1F1;
+    font-family: Roboto;  
+    padding-right: 12px;
+    float: left;
+    margin: 0%;
+    font-style: normal;
+    font-size: 16px;
+    padding-top: 1%;
+    @media ${device.tablet} {
+        float: left;
+        padding-top: 1%;
+        padding-left: 2%;
+        margin-top:1%;
+    }
+    @media ${device.mobileM} {
+        float: left;
+        padding-left: 2%;
     }
 `
 export const Aportetitle = styled.span`
@@ -272,7 +299,7 @@ export const Div1 = styled.div`
 export const DivCod = styled.div`
     padding-left: 10px;
     padding-bottom: 2%;
-    padding-top: 7%;
+    padding-top: 6%;
    
     @media ${device.tablet} {
         width: 100%;

@@ -18,6 +18,7 @@ import {Article, SectionDetails, Picture,
     Porcentaje,
      Img,
      Contenedor,
+     AlcanceText,
      Alcanzado,
      NumberMontoMeta,
      Aportetitle,
@@ -141,8 +142,8 @@ const Detalle: React.FC<Idetalle> = props => {
 
     return (
         <>
-        <Col >     
-        <DivPrincipal> 
+        <Col xs={12} sm={12} md={12} lg={12} >     
+          <DivPrincipal> 
                        <Row center="xs">
                             <Col xs={12} sm={12} md={12} lg={12}>
                                <DivPortada>
@@ -188,17 +189,18 @@ const Detalle: React.FC<Idetalle> = props => {
            <Col xs={12} sm={6} md={6} lg={6}>
                <Contenedor>
                 <Row>   
-                   <Col xs={6} sm={6} md={6} lg={6}>                   
+                   <Col xs={8} sm={8} md={8} lg={6}>                   
                         <Row start="lg">
                             <Col xs={12} sm={12} md={12} lg={12}>
                                <Alcanzado>
                                     {/* <p> {props.data.header.percent_reached}{'% '} ALCANZADO</p> */}
-                                    <p> {'ALCANZADOS BS 1000 '} </p>   
+                                    <AlcanceText> {'ALCANZADOS BS 1000 '} </AlcanceText>
+                                    
                                 </Alcanzado>  
                             </Col>
                         </Row>
                     </Col>
-                    <Col xs={6} sm={6} md={6} lg={6}>                    
+                    <Col xs={4} sm={4} md={4} lg={6}>                    
                         <Row end="lg">
                             <Col xs={12} sm={12} md={12} lg={12}>   
                                <Alcanzado>
@@ -283,6 +285,29 @@ const Detalle: React.FC<Idetalle> = props => {
                             </Row>
                         </Col>
                     </Row>
+           </Col>
+           <Col xs={12} sm={12} md={12} lg={12}>
+            <Row start="lg">
+                <Col xs={12} sm={6} md={6} lg={6}>
+                    
+                        <span>
+                            {/* <Go to="/">                                             */}
+                                {'columna  1'} 
+                            {/* </Go> */}
+                        </span>                                    
+                    
+                </Col>
+                <Col xs={12} sm={6} md={6} lg={6}>
+           
+                        <span>
+                            {/* <Go to="/">                                             */}
+                                {' hola columna 2'} 
+                            {/* </Go> */}
+                        </span>                                    
+                
+                </Col>
+           </Row>
+           
            </Col>
         </Row>
         </DivPrincipal>
