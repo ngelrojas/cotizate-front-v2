@@ -3,7 +3,6 @@ import {connect} from 'react-redux'
 import {useForm} from 'react-hook-form'
 import {store} from 'react-notifications-component'
 import {Editor} from '@tinymce/tinymce-react'
-import DefaultImg from '../public/default.png'
 import {CampaingHeader, Campaings} from '../../../../../../userCampaings'
 import {Row, Col} from 'react-styled-flexboxgrid'
 import {next, back} from '../../../../../../redux/actions/next_back.actions'
@@ -187,8 +186,7 @@ const FormDescription: React.FC<AllProps> = ({counter, handleNext, handleBack, c
         let headerID: number = campaing.header ? campaing.header.id: 0 
         let profileCA: number = campaing.profile_ca ? campaing.profile_ca:0
         let profilId: number = campaing.profile ? campaing.profile.id:0
-        let imagenMain: any = imagen_main[0] ? imagen_main[0] : campaing.imagen_main 
-
+        let imagenMain: any = showImg ? showImg : '' 
 
         if (validate()) {
             let send_data = {
@@ -204,7 +202,6 @@ const FormDescription: React.FC<AllProps> = ({counter, handleNext, handleBack, c
                 profile_ca: profileCA,
                 profile:profilId 
             }
-            console.log(imagen_main[0])
 
             let campbId: number = campaing.id ? campaing.id:0
 
@@ -361,7 +358,7 @@ const FormDescription: React.FC<AllProps> = ({counter, handleNext, handleBack, c
                     </Col>
                     <Col xs={5}>
 
-                        <Img src={ URL_IMG + campaing.imagen_main ? URL_IMG + campaing.imagen_main : DefaultImg } alt="cotizate" />
+                        <Img src={ showImg ? showImg  : URL_IMG + campaing.imagen_main } alt="cotizate" />
                         
                     </Col>
                 <MsgError>
