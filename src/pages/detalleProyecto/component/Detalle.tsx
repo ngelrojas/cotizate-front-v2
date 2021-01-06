@@ -9,6 +9,9 @@ import ThumbDownIcon from '@material-ui/icons/ThumbDown';
 import BookmarkBorderIcon from '@material-ui/icons/BookmarkBorder';
 import BookmarkIcon from '@material-ui/icons/Bookmark';
 import { IconButton } from '@material-ui/core';
+import FacebookIcon from '@material-ui/icons/Facebook';
+import TwitterIcon from '@material-ui/icons/Twitter';
+import WhatsAppIcon from '@material-ui/icons/WhatsApp';
 
 import {Article, SectionDetails, Picture, 
     DivPrincipal,
@@ -27,7 +30,12 @@ import {Article, SectionDetails, Picture,
      Div1,
      DivCod,
      TileCode,
-     BotonAportar
+     BotonAportar,
+     DivTitle,
+     Input,
+     DivSociable,
+     ButtonEnlace,
+     BotonCopiar,
     } from './styleDetallecomponent/styleDetalle';
 
 interface Idetalle {
@@ -153,7 +161,7 @@ const Detalle: React.FC<Idetalle> = props => {
                                 </DivPortada>  
                             </Col>
                         </Row>
-         <Row start="lg">   
+           <Row start="lg">   
            <Col xs={12} sm={6} md={6} lg={6}> 
               <SectionDetails>
                     <Article>
@@ -289,25 +297,44 @@ const Detalle: React.FC<Idetalle> = props => {
            <Col xs={12} sm={12} md={12} lg={12}>
             <Row start="lg">
                 <Col xs={12} sm={6} md={6} lg={6}>
-                    
-                        <span>
-                            {/* <Go to="/">                                             */}
-                                {'columna  1'} 
-                            {/* </Go> */}
-                        </span>                                    
-                    
+                  <div style={{ background:'#F5F5F5'}}>
+                    <Col xs={12} sm={12} md={12} lg={12}>
+                        <DivTitle>
+                        {'COMPARTE EN TUS REDES SOCIALES'   }
+                        </DivTitle>  
+                    </Col>
+                    <Col xs={12} sm={12} md={12} lg={12}> 
+                      <DivSociable> 
+                      <Row>
+                          <Col xs={12} sm={12} md={6} lg={4}>
+                            <FacebookIcon style={{width:"30%" }} /> {' '} 
+                            <TwitterIcon style={{width:"30%" }} />  {' '} 
+                            <WhatsAppIcon style={{width:"30%" }}/> {' '} 
+                          
+                          </Col> 
+                          <Col xs={12} sm={12} md={6} lg={4}>
+                              <Row end="lg">
+                                
+                                  <ButtonEnlace  >http//:cotizate.com</ButtonEnlace>
+                                
+                              </Row>
+                          </Col>
+                          <Col xs={12} sm={12} md={6} lg={4}>
+                              <Row end="lg">
+                                <BotonAportar style={{width:"50%", background: "#1383C5"}} >Copiar</BotonAportar>
+                              </Row>
+                          </Col>
+                        </Row>
+                      </DivSociable>
+                    </Col>     
+                  </div>                                                                                          
                 </Col>
-                <Col xs={12} sm={6} md={6} lg={6}>
-           
-                        <span>
-                            {/* <Go to="/">                                             */}
-                                {' hola columna 2'} 
-                            {/* </Go> */}
-                        </span>                                    
-                
+                <Col xs={12} sm={6} md={6} lg={6}>           
+                    <div style={{ background:'#F5F5F5'}}>
+                        {'COMPARTE EN TUS REDES SOCIALES'}
+                    </div>                                                  
                 </Col>
-           </Row>
-           
+            </Row>           
            </Col>
         </Row>
         </DivPrincipal>

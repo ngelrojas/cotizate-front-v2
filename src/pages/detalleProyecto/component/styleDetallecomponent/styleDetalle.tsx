@@ -338,3 +338,56 @@ export const BotonAportar = styled.button`
     text-transform: uppercase;
     border-radius: 5px;
 `
+export const DivTitle = styled.div`   
+    
+    padding-left: 1%;
+    padding-right: 0%;
+    margin-bottom: 2%;
+    padding-top: 2%;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 20px;
+    line-height: 23px;
+
+    color: #000000;
+    @media ${device.tablet} {
+        font-size: 17px;
+    }
+    @media ${device.mobileM} {
+        font-size: 12px;
+    }
+`
+export const Input = styled.input`
+    width: 40%;    
+    height: 30px;
+    
+`
+export const DivSociable = styled.div`   
+    
+    @media ${device.tablet} {
+        
+    }
+    @media ${device.mobileM} {
+        
+    }
+`
+export const ButtonEnlace = styled.button`
+  display: inline-block;
+  color: #1383C5;
+  font-size: 1em;
+//   margin: 1em;
+//   padding: 0.25em 1em;
+  text-decoration: none;
+//   border: 2px solid palevioletred;
+  border-radius: 3px;
+`
+export const BotonCopiar = styled.button`
+    background-color: #F4A14C;
+    color: #F1F1F1;
+    width: 30%;
+    
+    // height: 40px;
+    text-transform: uppercase;
+    border-radius: 5px;
+`
