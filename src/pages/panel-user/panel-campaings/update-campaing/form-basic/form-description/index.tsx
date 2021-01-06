@@ -149,7 +149,7 @@ interface Icampaing {
 }
 
 type AllProps = Icounter & Ihandlers & Icampaing
-// TODO: check excerpt and description
+
 const FormDescription: React.FC<AllProps> = ({counter, handleNext, handleBack, campaing}) => {
 
     let token = window.sessionStorage.getItem('token')
