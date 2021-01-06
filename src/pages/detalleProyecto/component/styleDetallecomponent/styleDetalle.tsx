@@ -10,11 +10,11 @@ export const List = styled.ul`
 `
 export const DivPrincipal = styled.div`   
     
-    padding-left: 6%;
-    padding-right: 6%;
+    padding-left: 4%;
+    padding-right: 4%;
     @media ${device.tablet} {
-        padding-left: 6%;
-        padding-right: 6%;
+        padding-left: 3%;
+        padding-right: 3%;
     }
     @media ${device.mobileM} {
         padding-left: 1%;
@@ -44,17 +44,19 @@ export const TilePortada = styled.span`
     font-family: Roboto;
      
     float: left;
-    margin: 1%;
+    margin: 0%;
     font-style: normal;
 
     font-weight: bold;
     font-size: 22px;
    
     @media ${device.tablet} {
-        font-size: 20px;      
+        margin: 2%;
+        font-size: 16px;      
     }
     @media ${device.mobileM} {
-        font-size: 15px;
+        margin: 2%;
+        font-size: 12px;
     }
 `
 export const Article = styled.article`
@@ -84,10 +86,14 @@ export const SectionDetails = styled.section`
     @media ${device.tablet} {
         width: 100%;
         margin-bottom: 30px;
+        padding-left: 0px;        
+        padding-right: 0px;
     }
     @media ${device.mobileL} {
         width: 100%;
         margin-bottom: 20px;
+        padding-left: 0px;        
+        padding-right: 0px;
     }
 `
 export const Picture = styled.picture`
@@ -173,6 +179,7 @@ export const Alcanzado = styled.div`
     @media ${device.tablet} {
         width: 80%;
         padding-left: 1px;
+        padding-top: 5%;
         margin-bottom: 10%;
     }
     @media ${device.mobileM} {
@@ -191,9 +198,35 @@ export const NumberMontoMeta = styled.span`
     margin: 0%;
     font-style: normal;
     font-size: 16px;
+    padding-top: 1%;
     @media ${device.tablet} {
         float: right;
+        padding-top: 1%;
         
+    }
+    @media ${device.mobileM} {
+
+    }
+    
+`
+export const AlcanceText = styled.span`
+    color: #F1F1F1;
+    font-family: Roboto;  
+    padding-right: 12px;
+    float: left;
+    margin: 0%;
+    font-style: normal;
+    font-size: 16px;
+    padding-top: 1%;
+    @media ${device.tablet} {
+        float: left;
+        padding-top: 1%;
+        padding-left: 2%;
+        margin-top:1%;
+    }
+    @media ${device.mobileM} {
+        float: left;
+        padding-left: 2%;
     }
 `
 export const Aportetitle = styled.span`
@@ -263,6 +296,24 @@ export const Div1 = styled.div`
         padding-top: 2%;
     }
 `
+export const DivCod = styled.div`
+    padding-left: 10px;
+    padding-bottom: 2%;
+    padding-top: 6%;
+   
+    @media ${device.tablet} {
+        width: 100%;
+        padding-left: 1px;
+        margin-bottom: 2%;
+        padding-top: 2%;
+    }
+    @media ${device.mobileM} {
+        width: 100%;
+        padding-left: 1px;
+        margin-bottom: 2%;
+        padding-top: 2%;
+    }
+`
 export const TileCode = styled.span`
     color: #F1F1F1;
     font-family: Roboto;
@@ -284,6 +335,59 @@ export const BotonAportar = styled.button`
     width: 30%;
     
     height: 40px;
+    text-transform: uppercase;
+    border-radius: 5px;
+`
+export const DivTitle = styled.div`   
+    
+    padding-left: 1%;
+    padding-right: 0%;
+    margin-bottom: 2%;
+    padding-top: 2%;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 20px;
+    line-height: 23px;
+
+    color: #000000;
+    @media ${device.tablet} {
+        font-size: 17px;
+    }
+    @media ${device.mobileM} {
+        font-size: 12px;
+    }
+`
+export const Input = styled.input`
+    width: 40%;    
+    height: 30px;
+    
+`
+export const DivSociable = styled.div`   
+    
+    @media ${device.tablet} {
+        
+    }
+    @media ${device.mobileM} {
+        
+    }
+`
+export const ButtonEnlace = styled.button`
+  display: inline-block;
+  color: #1383C5;
+  font-size: 1em;
+//   margin: 1em;
+//   padding: 0.25em 1em;
+  text-decoration: none;
+//   border: 2px solid palevioletred;
+  border-radius: 3px;
+`
+export const BotonCopiar = styled.button`
+    background-color: #F4A14C;
+    color: #F1F1F1;
+    width: 30%;
+    
+    // height: 40px;
     text-transform: uppercase;
     border-radius: 5px;
 `
