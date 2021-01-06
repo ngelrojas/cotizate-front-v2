@@ -1,29 +1,30 @@
 {
   "files": {
-    "main.js": "/static/js/main.38868f04.chunk.js",
-    "main.js.map": "/static/js/main.38868f04.chunk.js.map",
+    "main.js": "/static/js/main.564be2e7.chunk.js",
+    "main.js.map": "/static/js/main.564be2e7.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.01d84a3f.js",
     "runtime-main.js.map": "/static/js/runtime-main.01d84a3f.js.map",
     "static/css/2.cd1f34f9.chunk.css": "/static/css/2.cd1f34f9.chunk.css",
-    "static/js/2.18690acf.chunk.js": "/static/js/2.18690acf.chunk.js",
-    "static/js/2.18690acf.chunk.js.map": "/static/js/2.18690acf.chunk.js.map",
+    "static/js/2.a77b16dd.chunk.js": "/static/js/2.a77b16dd.chunk.js",
+    "static/js/2.a77b16dd.chunk.js.map": "/static/js/2.a77b16dd.chunk.js.map",
     "index.html": "/index.html",
-    "precache-manifest.d47584ad826501d6fe266b3c78d27230.js": "/precache-manifest.d47584ad826501d6fe266b3c78d27230.js",
+    "precache-manifest.bd69b1d0c8198e9865a349888533a009.js": "/precache-manifest.bd69b1d0c8198e9865a349888533a009.js",
     "service-worker.js": "/service-worker.js",
     "static/css/2.cd1f34f9.chunk.css.map": "/static/css/2.cd1f34f9.chunk.css.map",
-    "static/js/2.18690acf.chunk.js.LICENSE.txt": "/static/js/2.18690acf.chunk.js.LICENSE.txt",
+    "static/js/2.a77b16dd.chunk.js.LICENSE.txt": "/static/js/2.a77b16dd.chunk.js.LICENSE.txt",
     "static/media/SOLIDARIO-CON-TEXTO.png": "/static/media/SOLIDARIO-CON-TEXTO.ef6e457d.png",
     "static/media/arte-con-texto.png": "/static/media/arte-con-texto.ab511cd5.png",
     "static/media/cerebro-con-texto.png": "/static/media/cerebro-con-texto.6c0e11ad.png",
     "static/media/default.png": "/static/media/default.41f20cf1.png",
     "static/media/ecologia-con-texto.png": "/static/media/ecologia-con-texto.5732632f.png",
     "static/media/mundo-con-texto.png": "/static/media/mundo-con-texto.e60dd383.png",
-    "static/media/styles.css": "/static/media/revicons.2feb69cc.eot"
+    "static/media/styles.css": "/static/media/revicons.2feb69cc.eot",
+    "static/media/tecnologia-con-texto.png": "/static/media/tecnologia-con-texto.836cc5a0.png"
   },
   "entrypoints": [
     "static/js/runtime-main.01d84a3f.js",
     "static/css/2.cd1f34f9.chunk.css",
-    "static/js/2.18690acf.chunk.js",
-    "static/js/main.38868f04.chunk.js"
+    "static/js/2.a77b16dd.chunk.js",
+    "static/js/main.564be2e7.chunk.js"
   ]
 }

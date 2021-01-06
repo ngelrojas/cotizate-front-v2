@@ -1,23 +1,23 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "6747e625a4c39abc3d85a7cbff8731dd",
+    "revision": "8e2e014317c6debc7965fcd760b785b2",
     "url": "/index.html"
   },
   {
-    "revision": "9fad0a5f39e8dfb56d99",
+    "revision": "50c6207539cc804f9f29",
     "url": "/static/css/2.cd1f34f9.chunk.css"
   },
   {
-    "revision": "9fad0a5f39e8dfb56d99",
-    "url": "/static/js/2.18690acf.chunk.js"
+    "revision": "50c6207539cc804f9f29",
+    "url": "/static/js/2.a77b16dd.chunk.js"
   },
   {
     "revision": "fb21d5a95ad85eff1cf914b3618a85a7",
-    "url": "/static/js/2.18690acf.chunk.js.LICENSE.txt"
+    "url": "/static/js/2.a77b16dd.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "b5e4a05dffff1290aacf",
-    "url": "/static/js/main.38868f04.chunk.js"
+    "revision": "64c3d5790172a951a3bd",
+    "url": "/static/js/main.564be2e7.chunk.js"
   },
   {
     "revision": "500ab8af4971f16a0921",
@@ -58,5 +58,9 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "2feb69ccb596730c72920c6ba3e37ef8",
     "url": "/static/media/revicons.2feb69cc.eot"
+  },
+  {
+    "revision": "836cc5a0f1706aa73e88b5ff64605904",
+    "url": "/static/media/tecnologia-con-texto.836cc5a0.png"
   }
 ]);
