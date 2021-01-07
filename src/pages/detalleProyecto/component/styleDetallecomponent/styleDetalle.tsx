@@ -391,3 +391,20 @@ export const BotonCopiar = styled.button`
     text-transform: uppercase;
     border-radius: 5px;
 `
+export const DivSeparador = styled.div`
+        background:#F5F5F5;
+        margin-top: 2%;
+        margin-bottom: 2%;
+        padding-top: 2%;
+        padding-bottom: 2%;
+        padding-left: 1%;
+        padding-right: 1%;
+    @media ${device.tablet} {
+        margin-top: 1%;
+        margin-bottom: 1%;
+    }
+    @media ${device.mobileM} {
+        margin-top: 1%;
+        margin-bottom: 1%;
+    }
+`

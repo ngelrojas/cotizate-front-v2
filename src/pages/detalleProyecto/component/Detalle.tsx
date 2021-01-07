@@ -36,6 +36,7 @@ import {Article, SectionDetails, Picture,
      DivSociable,
      ButtonEnlace,
      BotonCopiar,
+     DivSeparador,
     } from './styleDetallecomponent/styleDetalle';
 
 interface Idetalle {
@@ -297,7 +298,7 @@ const Detalle: React.FC<Idetalle> = props => {
            <Col xs={12} sm={12} md={12} lg={12}>
             <Row start="lg">
                 <Col xs={12} sm={6} md={6} lg={6}>
-                  <div style={{ background:'#F5F5F5'}}>
+                  <DivSeparador>
                     <Col xs={12} sm={12} md={12} lg={12}>
                         <DivTitle>
                         {'COMPARTE EN TUS REDES SOCIALES'   }
@@ -327,10 +328,20 @@ const Detalle: React.FC<Idetalle> = props => {
                         </Row>
                       </DivSociable>
                     </Col>     
-                  </div>                                                                                          
+                    
+                  </DivSeparador>    
+                  
+                  <DivSeparador>
+                    <Col xs={12} sm={12} md={12} lg={12}>
+                            
+                              {'descripcion'   }
+                           
+                    </Col>                    
+                  </DivSeparador>    
+                                                                                         
                 </Col>
                 <Col xs={12} sm={6} md={6} lg={6}>           
-                    <div style={{ background:'#F5F5F5'}}>
+                    <div style={{ background:'#F5F5F5' }}>
                         {'COMPARTE EN TUS REDES SOCIALES'}
                     </div>                                                  
                 </Col>
