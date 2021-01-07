@@ -100,10 +100,7 @@ export const Picture = styled.picture`
     height: auto;
     width: 100%;
 `
-export const Go = styled(Link)`
-    text-decoration: none;
-    color: inherit;
-`
+
 export const Img = styled.img`
     width: 100%;
     border-radius: 2px;
@@ -406,5 +403,60 @@ export const DivSeparador = styled.div`
     @media ${device.mobileM} {
         margin-top: 1%;
         margin-bottom: 1%;
+    }
+`
+export const Texto = styled.p`   
+    color: #5D5A5A;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    line-height: 19px;
+    @media ${device.tablet} {
+        line-height: 17px;
+    }
+    @media ${device.mobileM} {
+        line-height: 16px;
+    }
+`
+export const LinkAzul = styled(Link)`
+    text-decoration: none;    
+    color: #1383C5;
+    font-weight: 600;
+`
+export const Go = styled(Link)`
+    text-decoration: none;    
+    color: #5D5A5A;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 19px;
+`
+export const ImgPortal = styled.img`
+    width: 100%;
+    padding-left: 0%;
+    padding-right: 0%;
+
+    @media ${device.tablet} {
+
+    }
+    @media ${device.mobileL} {
+  
+
+    }
+`
+export const DivSin = styled.div`
+        background:#F5F5F5;
+        
+        padding-left: 0%;
+        padding-right: 0%;
+    @media ${device.tablet} {
+
+    }
+    @media ${device.mobileM} {
+
     }
 `

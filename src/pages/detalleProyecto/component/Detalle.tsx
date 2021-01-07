@@ -37,6 +37,11 @@ import {Article, SectionDetails, Picture,
      ButtonEnlace,
      BotonCopiar,
      DivSeparador,
+     Texto,
+     LinkAzul,
+     Go,
+     ImgPortal,
+     DivSin
     } from './styleDetallecomponent/styleDetalle';
 
 interface Idetalle {
@@ -329,16 +334,33 @@ const Detalle: React.FC<Idetalle> = props => {
                       </DivSociable>
                     </Col>     
                     
-                  </DivSeparador>    
-                  
+                  </DivSeparador>  
                   <DivSeparador>
                     <Col xs={12} sm={12} md={12} lg={12}>
-                            
-                              {'descripcion'   }
-                           
+                        
+                             <LinkAzul to="/descripcion">{'Descripcion'}</LinkAzul> {' '}
+                             <Go to="/descripcion">{'Fases'} </Go> {' '}
+                             <Go to="/descripcion">{'Aportacion'} </Go> {' '}
+                             <Go to="/descripcion">{'Comentarios'} </Go> {' '}
+                             <Go to="/descripcion">{'Actualizaciones'} </Go> 
+                       
                     </Col>                    
-                  </DivSeparador>    
-                                                                                         
+                  </DivSeparador>   
+                  
+                  <DivSeparador>
+                   <Col xs={12} sm={12} md={12} lg={12}>
+                        <Texto>
+                              {'En Las Payas hace 15 años que hacemos vino comprando uvas a pequeños como por productores de la zona siempre con la idea de hacer vinos de baja intervención de la manera más natural posible. Hacemos pequeñas partidas de vinos con la intención dedede que puedan transmitir de manera franca y sin maquillajes lo que da la tierra decccdgh ccnuestro oasis. '   }
+                        </Texto>  
+                   </Col>                    
+                  </DivSeparador>  
+                  
+                  <Col xs={12} sm={12} md={12} lg={12}>
+                        <ImgPortal
+                           src={'https://blog.naturlider.com/wp-content/uploads/2020/03/AdobeStock_309195144-post-dia-mundial-naturaleza.jpeg'}
+                         />
+                  </Col>   
+                                                                                      
                 </Col>
                 <Col xs={12} sm={6} md={6} lg={6}>           
                     <div style={{ background:'#F5F5F5' }}>
