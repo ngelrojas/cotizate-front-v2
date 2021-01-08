@@ -460,3 +460,89 @@ export const DivSin = styled.div`
 
     }
 `
+export const DivSeparadorSinColor = styled.div`   
+        width:100%,     
+        margin-top: 2%;
+        margin-bottom: 2%;
+        padding-top: 2%;
+        padding-bottom: 2%;
+        padding-left: 1%;
+        padding-right: 1%;
+    @media ${device.tablet} {
+        margin-top: 1%;
+        margin-bottom: 1%;
+    }
+    @media ${device.mobileM} {
+        margin-top: 1%;
+        margin-bottom: 1%;
+    }
+`
+export const LinkAzul2 = styled(Link)`
+    text-decoration: none;    
+    color: #1383C5;
+    align-items: center;
+    font-size: 14px;
+    font-family: Roboto;
+    font-style: normal;
+`
+export const ButtonBordeAzul = styled.button`
+  background: #FFFFFF;
+  border-radius: 0px;
+  border: 1px solid #1383C5;
+  color: #1383C5;
+  font-size: 17px;
+  margin: 0.5em 1em;
+  padding: 0.25em 1em;
+
+`
+export const DivBorderSinColor = styled.div`   
+        background:#F5F5F5;
+        width:100%,     
+        margin-top: 2%;
+        margin-bottom: 2%;
+        padding-top: 2%;
+        padding-bottom: 2%;
+        padding-left: 1%;
+        padding-right: 1%;
+        border: 1px solid #6C6C6C;
+    @media ${device.tablet} {
+        margin-top: 1%;
+        margin-bottom: 1%;
+    }
+    @media ${device.mobileM} {
+        margin-top: 1%;
+        margin-bottom: 1%;
+    }
+`
+export const Texto2 = styled.p`   
+    color: #000000;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    display: flex;
+    align-items: center;
+    font-size: 17px;
+    line-height: 19px;
+    @media ${device.tablet} {
+        line-height: 17px;
+    }
+    @media ${device.mobileM} {
+        line-height: 16px;
+    }
+`
+export const Texto3 = styled.p`   
+    color: #6C6C6C;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 300;
+    display: flex;
+    align-items: center;
+    font-size: 17px;
+    line-height: 25px;
+    @media ${device.tablet} {
+        line-height: 17px;
+    }
+    @media ${device.mobileM} {
+        line-height: 16px;
+    }
+`

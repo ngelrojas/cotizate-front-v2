@@ -12,6 +12,7 @@ import { IconButton } from '@material-ui/core';
 import FacebookIcon from '@material-ui/icons/Facebook';
 import TwitterIcon from '@material-ui/icons/Twitter';
 import WhatsAppIcon from '@material-ui/icons/WhatsApp';
+import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
 
 import {Article, SectionDetails, Picture, 
     DivPrincipal,
@@ -41,7 +42,13 @@ import {Article, SectionDetails, Picture,
      LinkAzul,
      Go,
      ImgPortal,
-     DivSin
+     DivSin,
+     DivSeparadorSinColor,
+     LinkAzul2,
+     ButtonBordeAzul,
+     DivBorderSinColor,
+     Texto2,
+     Texto3
     } from './styleDetallecomponent/styleDetalle';
 
 interface Idetalle {
@@ -359,8 +366,51 @@ const Detalle: React.FC<Idetalle> = props => {
                         <ImgPortal
                            src={'https://blog.naturlider.com/wp-content/uploads/2020/03/AdobeStock_309195144-post-dia-mundial-naturaleza.jpeg'}
                          />
-                  </Col>   
-                                                                                      
+                  </Col> 
+                  <DivSeparador>
+                   <Col xs={12} sm={12} md={12} lg={12}>
+                        <Texto>
+                              {'Titulo 2 En Las Payas hace 15 años que hacemos vino comprando uvas a pequeños como por productores de la zona siempre con la idea de hacer vinos de baja intervención de la manera más natural posible. Hacemos pequeñas partidas de vinos con la intención dedede que puedan transmitir de manera franca y sin maquillajes lo que da la tierra decccdgh ccnuestro oasis. '   }
+                        </Texto>  
+                   </Col>                    
+                  </DivSeparador>  
+                  <DivSeparadorSinColor>
+                    <Col xs={12} sm={12} md={12} lg={12}>                        
+                                <LinkAzul2 to="/descripcion">{'* si crees que este proyecto va en contra de las politicas de Cotizate reporta este proyecto'}</LinkAzul2>                                                    
+                    </Col>  
+                  </DivSeparadorSinColor>       
+                  <DivSeparadorSinColor >
+                    <Col xs={12} sm={12} md={12} lg={12}> 
+                        <Row center='xs' >
+                            <ButtonBordeAzul>Reporte este proyecto a cotizate</ButtonBordeAzul>
+                       </Row>                       
+                    </Col>  
+                  </DivSeparadorSinColor>       
+                  <DivBorderSinColor>
+                    <Col xs={12} sm={12} md={12} lg={12}>   
+                        <Col xs={12} sm={12} md={12} lg={12}>                                                 
+                            <Texto2><CheckCircleOutlineIcon />
+                              Este proyecto no respeta las reglas    
+                            </Texto2>                    
+                        </Col> 
+                        <Col xs={12} sm={12} md={12} lg={12}>                                                                   
+                            <Texto3>
+                             - Contiene Discurso de acoso , odio y razismo    
+                            </Texto3>   
+                        </Col>  
+                        <Col xs={12} sm={12} md={12} lg={12}>                                                                   
+                            <Texto3>
+                              - Ofrese recompensas Prohibidas    
+                            </Texto3>   
+                        </Col>        
+                        <Col xs={12} sm={12} md={12} lg={12}>                                                                   
+                            <Texto3>
+                              - Contiene Discurso de acoso , odio y razismo   
+                            </Texto3>   
+                        </Col>                                     
+                    </Col>  
+                  </DivBorderSinColor>    
+
                 </Col>
                 <Col xs={12} sm={6} md={6} lg={6}>           
                     <div style={{ background:'#F5F5F5' }}>
