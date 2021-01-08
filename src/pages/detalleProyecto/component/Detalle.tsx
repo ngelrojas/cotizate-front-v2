@@ -409,7 +409,37 @@ const Detalle: React.FC<Idetalle> = props => {
                             </Texto3>   
                         </Col>                                     
                     </Col>  
-                  </DivBorderSinColor>    
+                  </DivBorderSinColor>  
+                  <DivBorderSinColor>
+                    <Col xs={12} sm={12} md={12} lg={12}>   
+                        <Col xs={12} sm={12} md={12} lg={12}>                                                 
+                            <Texto2><CheckCircleOutlineIcon />
+                             Este proyecto infringe propiedad intelectual   
+                            </Texto2>                    
+                        </Col> 
+                        <Col xs={12} sm={12} md={12} lg={12}>                                                                   
+                            <Texto3>
+                             - Este proyecto infringe derechos de autor   
+                            </Texto3>   
+                        </Col>  
+                                                        
+                    </Col>  
+                  </DivBorderSinColor>  
+                  <DivBorderSinColor>
+                    <Col xs={12} sm={12} md={12} lg={12}>   
+                        <Col xs={12} sm={12} md={12} lg={12}>                                                 
+                            <Texto2><CheckCircleOutlineIcon />
+                                Recompensa  
+                            </Texto2>                    
+                        </Col> 
+                        <Col xs={12} sm={12} md={12} lg={12}>                                                                   
+                            <Texto3>
+                             - Apoye y no resivi mi recompensa  
+                            </Texto3>   
+                        </Col>  
+                                                        
+                    </Col>  
+                  </DivBorderSinColor>   
 
                 </Col>
                 <Col xs={12} sm={6} md={6} lg={6}>           
