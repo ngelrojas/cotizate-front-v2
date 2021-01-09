@@ -56,9 +56,10 @@ export class PersonalProfile {
     
     /*
      * update personal profile
+     * currentUser = profile ID
     */
 
-    upadteProfilePersonal = async (dataUpdate: any, currentUser: number) => {
+    updateProfilePersonal = async (dataUpdate: any, currentUser: number) => {
         this.resp_profile = await API.put(`profile/personal/${currentUser}`, dataUpdate, {
             headers: {Authorization: `Bearer ${this.token}`}
         })
@@ -83,9 +84,12 @@ export class CompanyProfile {
     constructor(token:any){
         this.token = token
     }
-
-    retrieveCompany = async(current_user:any, token: any) => {
-        this.resp_company = await API.get(`profile/company/${current_user}`, {
+    /*
+     * profile_id: pf_id = ID current profile user 
+     * profile_ca: pc_id = ID current profile company user 
+    **/
+    retrieveCompany = async(pf_id:any, pc_id:any) => {
+        this.resp_company = await API.get(`profile/company/${pf_id}/${pc_id}`, {
             headers: {Authorization: `Bearer ${this.token}`}
         })
         return this.resp_company
