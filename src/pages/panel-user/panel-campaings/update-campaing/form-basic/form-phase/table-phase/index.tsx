@@ -1,4 +1,5 @@
 import React from 'react';
+import {connect} from 'react-redux'
 import {useRouteMatch} from 'react-router-dom'
 import { withStyles, Theme, createStyles, makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
@@ -9,6 +10,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import {Phases} from '../../../../../../../userPhases'
+import {getPhase} from '../../../../../../../redux/actions/phase.actions' 
 
 type propsPhases = {
     id: number
@@ -46,7 +48,7 @@ const useStyles = makeStyles({
   },
 });
 
-const TablePhases:React.FC = () => {
+const TablePhases:React.FC = (props: any) => {
   let match = useRouteMatch('/panel-de-usuario/actualizar-proyecto/:campania')
   let matchUrl: any = match
   let campaingId = matchUrl.params.campania
@@ -73,6 +75,7 @@ const TablePhases:React.FC = () => {
   const onSend =(e:number)=>{
       let camp_id: number = e
       console.info(camp_id)
+      props.getPhase(camp_id)
   }
 
   React.useEffect(()=>{
@@ -107,4 +110,13 @@ const TablePhases:React.FC = () => {
     </TableContainer>
   );
 }
-export default TablePhases
+
+const mapStateToProps = (state: any) => ({
+    phase: state.phase
+}) 
+
+const mapActionToProps = {
+    getPhase
+}
+
+export default connect(mapStateToProps, mapActionToProps)(TablePhases)

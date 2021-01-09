@@ -1,16 +1,23 @@
-import {GET_PROFILE, LOADING_USER} from '../types'
-import API from '../../api'
+import {SET_PHASES, SET_ERRORS} from '../types/phases.types'
 
-export const getPhaseData = (token: any, header_id: number) => (dispatch: any) => {
-    dispatch({type: LOADING_USER})
-    API.get(`phase/${header_id}`, {
-        headers: {Authorization: `Bearer ${token}`}
-    })
+import {Phases} from '../../userPhases'
+
+let token = window.sessionStorage.getItem('token')
+
+let Phase = new Phases(token)
+
+export const getPhase = (phaseId: number) => (dispatch: any) => {
+    
+    Phase.getPhases(phaseId)
         .then(resp => {
             dispatch({
-                type: GET_PROFILE,
+                type: SET_PHASES,
                 payload: resp.data.data
             })
+        }).catch(err => {
+            dispatch({
+                type: SET_ERRORS,
+                errors: err
+            })
         })
-        .catch(err => console.log(err))
 }

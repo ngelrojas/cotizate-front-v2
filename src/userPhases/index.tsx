@@ -19,6 +19,16 @@ export class Phases {
     }
 
     /*
+     * get phases from phaseId, Private
+    */
+    getPhases = async (phaseId: number)=>{
+        this.resp_phase = await API.get(`phase/${phaseId}`, {
+            headers: {Authorization: `Bearer ${this.token}`}
+        })
+        return this.resp_phase
+    }
+
+    /*
      * create phases
      */
 
