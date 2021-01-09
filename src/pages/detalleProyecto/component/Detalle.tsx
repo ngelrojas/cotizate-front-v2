@@ -13,7 +13,12 @@ import FacebookIcon from '@material-ui/icons/Facebook';
 import TwitterIcon from '@material-ui/icons/Twitter';
 import WhatsAppIcon from '@material-ui/icons/WhatsApp';
 import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
+import Avatar from '@material-ui/core/Avatar';
+import { makeStyles, createStyles } from '@material-ui/core/styles';
 
+
+
+  
 import {Article, SectionDetails, Picture, 
     DivPrincipal,
     DivPortada,
@@ -48,8 +53,10 @@ import {Article, SectionDetails, Picture,
      ButtonBordeAzul,
      DivBorderSinColor,
      Texto2,
-     Texto3
+     Texto3,
+     Autor
     } from './styleDetallecomponent/styleDetalle';
+
 
 interface Idetalle {
     detalle: {
@@ -156,7 +163,7 @@ interface Idetalle {
 
 
 const Detalle: React.FC<Idetalle> = props => {
-   
+    const classes = useStyles();
     console.log(props.detalle);
     useEffect(() =>{
     },[]);
@@ -442,10 +449,50 @@ const Detalle: React.FC<Idetalle> = props => {
                   </DivBorderSinColor>   
 
                 </Col>
-                <Col xs={12} sm={6} md={6} lg={6}>           
-                    <div style={{ background:'#F5F5F5' }}>
-                        {'COMPARTE EN TUS REDES SOCIALES'}
-                    </div>                                                  
+                <Col xs={12} sm={6} md={6} lg={6}>                      
+                    <DivSeparador>
+                    <Col xs={12} sm={12} md={12} lg={12}>
+                     <Row> 
+                        <Col xs={3} sm={3} md={3} lg={3}>
+                            <Row center='xs' >
+                               <div className={classes.root}>
+                                 <Avatar alt="Remy Sharp" src="https://hipertextual.com/files/2015/11/albert-einstein-retrato-scaled.jpg" className={classes.large} />
+                               </div>
+                            </Row>
+                        </Col>
+                        <Col xs={9} sm={9} md={9} lg={9}>
+                            <Col xs={12} sm={12} md={12} lg={12}>
+                                <Autor>
+                                  Miguel alandia  pantoja
+                                </Autor>
+                                
+                            </Col>
+                            <Col xs={12} sm={12} md={12} lg={12}>
+                                <LinkAzul to="/descripcion" style={{fontSize:"12px"}}>{'3 proyectos creados'}</LinkAzul> {' '}
+                                
+                                <LinkAzul to="/descripcion" style={{fontSize:"12px"}} >{'2 proyectos apoyados'}</LinkAzul> {' '}
+                            </Col>
+                            <Col xs={12} sm={12} md={12} lg={12}>
+                                <div style={{marginTop:"2%", marginBottom:"2%"}} > 
+                                    <FacebookIcon style={{width:"30%" }} /> {' '} 
+                                    <TwitterIcon style={{width:"30%" }} />  {' '} 
+                                    <WhatsAppIcon style={{width:"30%" }}/> {' '} 
+                                </div>
+                            </Col>
+                          
+                        </Col>
+                        <Col xs={12} sm={12} md={12} lg={12}>
+                            <Row center='xs' >
+                                <div style={{marginTop:"2%", marginBottom:"2%"}} > 
+                                <ButtonBordeAzul>Siguiendo </ButtonBordeAzul>
+                                <ButtonBordeAzul>Contacto</ButtonBordeAzul>
+                                </div>
+                            </Row>  
+                        </Col>
+                      </Row>                                                                               
+                    </Col>                    
+                  </DivSeparador>   
+
                 </Col>
             </Row>           
            </Col>
@@ -455,4 +502,22 @@ const Detalle: React.FC<Idetalle> = props => {
         </>
     )
 }
+
+const useStyles = makeStyles((theme) => ({
+    root: {
+      display: 'flex',
+      '& > *': {
+        margin: theme.spacing(1),
+      },
+      
+    },
+    small: {
+      width: theme.spacing(3),
+      height: theme.spacing(3),
+    },
+    large: {
+      width: theme.spacing(7),
+      height: theme.spacing(7),
+    },
+  }));
 export default Detalle

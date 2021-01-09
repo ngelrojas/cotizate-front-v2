@@ -546,3 +546,19 @@ export const Texto3 = styled.p`
         line-height: 16px;
     }
 `
+export const Autor = styled.p`   
+    color: #000000;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    font-size: 17px;
+    line-height: 25px;
+    @media ${device.tablet} {
+        line-height: 17px;
+    }
+    @media ${device.mobileM} {
+        line-height: 16px;
+    }
+`
