@@ -46,8 +46,8 @@ const Portada: React.FC = () => {
             autoPlaySpeed={2500} 
             autoPlay={true}  
             >
-                <Sectionportada  >
-                    <Div2 >
+                <Sectionportada   >
+                    <Div2 key={1} >
                         <Img
                             src={PortadaMundoImg1}
                             alt="cotizate"
@@ -57,8 +57,8 @@ const Portada: React.FC = () => {
                         <SubTitlePortadaFlotante>Cotizate un plataforma para conseguir inversion para tu idea </SubTitlePortadaFlotante> */}
                     </Div2>
                 </Sectionportada>    
-                <Sectionportada  >
-                    <Div2 >
+                <Sectionportada   >
+                    <Div2 key={2} >
                         <Img
                             src={PortadaCerebroImg2}
                             alt="cotizate"
@@ -67,7 +67,7 @@ const Portada: React.FC = () => {
                     </Div2>
                 </Sectionportada>   
                 <Sectionportada  >
-                    <Div2 >
+                    <Div2 key={3} >
                         <Img
                             src={PortadaSolidarioImg3}
                             alt="cotizate"

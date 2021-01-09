@@ -1,11 +1,14 @@
 import React from 'react'
 import {useForm} from 'react-hook-form'
+import {connect} from 'react-redux'
+import {useRouteMatch} from 'react-router-dom'
 import {Editor} from '@tinymce/tinymce-react'
 import {store} from 'react-notifications-component'
 import {Row, Col} from 'react-styled-flexboxgrid'
 import {CampaingHeader} from '../../../../../../userCampaings'
 import {Phases} from '../../../../../../userPhases'
 import Slide from 'react-reveal/Slide'
+import TablePhases from './table-phase'
 import {
     FormR,
     MsgErrorPhase,
@@ -23,31 +26,30 @@ import {
     BtnSaveProject
 } from '../../styles'
 
+interface Iphases {
+    id: number
+    title: string
+    description: string
+    amount: number
+    header: number
+}
+
 type FormData = {
     title: string
     amount: number
 }
 
-const FormPhase: React.FC= () => {
-
+const FormPhase: React.FC = () => {
+    let match = useRouteMatch('/panel-de-usuario/actualizar-proyecto/:campania')
+    let matchUrl: any = match
+    let campaingId = matchUrl.params.campania
     let token = window.sessionStorage.getItem('token')
-    let CamHeader = new CampaingHeader(token)
     let Phase = new Phases(token)
-    const [datach, setDatach] = React.useState<number>(0)
     const [description, Setdescription] = React.useState()
     const [MsgErrorF, setMsgErrorF] = React.useState()
     const {register, handleSubmit, reset, errors} = useForm<FormData>({
         mode: 'onChange'
     })
-
-    const getLast = () => {
-        CamHeader.getLastCampaingHeader()
-            .then(resp => {
-                setDatach(resp.data.data.id)
-            }).catch(err =>{
-                console.error(err)
-            })
-    }
 
     const onSubmit = handleSubmit(({title, amount}) => {
         if(validate()){
@@ -55,7 +57,7 @@ const FormPhase: React.FC= () => {
                 title: title,
                 amount: amount,
                 description: description,
-                header: datach 
+                header: campaingId 
             }
 
             Phase.createPhase(data_phase)
@@ -99,6 +101,11 @@ const FormPhase: React.FC= () => {
         })
     }
 
+    const onSend = (e:number) => {
+        console.info("FROM CHILD COMPONENT")
+        console.log(e)
+    }
+
     React.useEffect(()=>{ 
         const input: any = document.querySelector('input[name="title"]')
         input.focus()
@@ -107,7 +114,6 @@ const FormPhase: React.FC= () => {
             left: 0,
             behavior: 'smooth'
         })
-       getLast()
     },[])
 
     return (
@@ -120,6 +126,9 @@ const FormPhase: React.FC= () => {
                  ¿Cómo se utilizará su dinero? Cuanta más transparencia, mejor. Muestre qué pasos seguira y cuanto de dinero invertira en cada fase del proyecto.
                 </BoxText>
             </WrapperBox>
+        <Row>
+        <TablePhases {...onSend} />
+        </Row>
 
         <FormR onSubmit={onSubmit}>
         <Row>

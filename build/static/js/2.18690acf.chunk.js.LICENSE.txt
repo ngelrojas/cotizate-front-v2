@@ -5,28 +5,10 @@ object-assign
 */
 
 /*!
-  Copyright (c) 2015 Jed Watson.
-  Based on code that is Copyright 2013-2015, Facebook, Inc.
-  All rights reserved.
-*/
-
-/*!
   Copyright (c) 2017 Jed Watson.
   Licensed under the MIT License (MIT), see
   http://jedwatson.github.io/classnames
 */
-
-/*!
- * Adapted from jQuery UI core
- *
- * http://jqueryui.com
- *
- * Copyright 2014 jQuery Foundation and other contributors
- * Released under the MIT license.
- * http://jquery.org/license
- *
- * http://api.jqueryui.com/category/ui-core/
- */
 
 /*! *****************************************************************************
 Copyright (c) Microsoft Corporation. All rights reserved.
@@ -42,6 +24,25 @@ MERCHANTABLITY OR NON-INFRINGEMENT.
 See the Apache Version 2.0 License for specific language governing permissions
 and limitations under the License.
 ***************************************************************************** */
+
+/*! Moment Duration Format v2.2.2
+     *  https://github.com/jsmreese/moment-duration-format
+     *  Date: 2018-02-16
+     *
+     *  Duration format plugin function for the Moment.js library
+     *  http://momentjs.com/
+     *
+     *  Copyright 2018 John Madhavan-Reese
+     *  Released under the MIT license
+     */
+
+/**
+ * A better abstraction over CSS.
+ *
+ * @copyright Oleg Isonen (Slobodskoi) / Isonen 2014-present
+ * @website https://github.com/cssinjs/jss
+ * @license MIT
+ */
 
 /** @license React v0.19.1
  * scheduler.production.min.js
@@ -78,3 +79,5 @@ and limitations under the License.
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  */
+
+//! moment.js

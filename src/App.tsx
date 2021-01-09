@@ -4,6 +4,7 @@ import {Layout} from './layout/main'
 import Header from './header'
 import Footer from './footer'
 import Home from './pages/home'
+import DetalleProyecto from './pages/detalleProyecto'
 import Register from './pages/register'
 import Login from './pages/login'
 import ExploreProject from './pages/explorer'
@@ -18,6 +19,7 @@ import UpdateCampaing from './pages/panel-user/panel-campaings/update-campaing'
 import PanelCreated from './pages/panel-user/panel-created'
 import PageCreating from './pages/creating'
 import Crowdfunding from './pages/crowdfunding'
+import Category from './pages/categorias'
 import Cotizate from './pages/cotizate'
 import PageNotFound from './pages/404'
 import {CheckAuthentication} from './redux/auth'
@@ -98,6 +100,16 @@ const App: React.FC = () => {
                         exact
                         path="/crowfounding"
                         component={Crowdfunding}
+                    />
+                     <Route
+                        exact
+                        path="/category"
+                        component={Category}
+                    />
+                     <Route
+                        exact
+                        path="/detail-proyect"
+                        component={DetalleProyecto}
                     />
                      <Route
                         exact

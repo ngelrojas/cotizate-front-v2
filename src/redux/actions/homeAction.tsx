@@ -103,10 +103,12 @@ export function proyectosDestacados(header_id: number){
         
        API.get(`campaing-public/${header_id}`).then(resp => {
           if(resp.status === 200){
-            dispatch({
-                type: PROYECTOS_DESTACADOS_LOAD,
-                destacados:resp.data.data
-            })
+            if(resp.data.data.length > 0){    
+                dispatch({
+                    type: PROYECTOS_DESTACADOS_LOAD,
+                    destacados:resp.data.data
+                })
+            }
           }
             
         })
@@ -115,7 +117,7 @@ export function proyectosDestacados(header_id: number){
 }
 export function proyectosFinalizados(header_id: number){       
     return (dispatch : any) =>{          
-        
+        console.log("aaa : ", header_id);
        API.get(`campaing-public/${header_id}`).then(resp => {
           if(resp.status === 200 ){
               if(resp.data.data.length > 0){              
@@ -148,10 +150,8 @@ export function causasSociales(header_id: number){
 export function getCategorias(){       
     return (dispatch : any) =>{                  
        API.get(`category`).then(resp => {
-          if(resp.status === 200){
-             console.log("categ : ",resp.data[0] )
-            if(resp.data.length > 0){ 
-                console.log("tieneeee data");
+          if(resp.status === 200){             
+            if(resp.data.length > 0){               
                 dispatch({
                     type: CATEGORIAS_LISTA,
                     categorias:resp.data

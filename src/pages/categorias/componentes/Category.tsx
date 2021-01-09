@@ -4,7 +4,7 @@ import * as Action from '../../../redux/actions/homeAction';
 import {Row, Col, Grid} from 'react-styled-flexboxgrid'
 import {MdLocationOn} from 'react-icons/md'
 import { FaSave } from 'react-icons/fa'
-import LineProgress from '../../../../src/components/LineProgress'
+import LineProgress from '../../../components/LineProgress'
 
 import {
     SectionDetails,
@@ -18,44 +18,82 @@ import {
     Author,
     CodigoFaltante,
     Place,
-    PercentTitle,
     Alcanzado,
     NumberMonto,
     Porcentaje,
     PercentNumber,
-    Bar,
     Go
-} from './styles'
+} from './stylesCategory'
 
-interface Iproyect {
+interface ICategory {
     data: {
-        title:string,
         id: number,
+        title:string, 
+        video_main:string,      
         imagen_main:string,
         slug: string,
         excerpt: string,
-        currency: number,
+        description: string,
+        created_at:string,
+        updated_at: any,
+        public_at: string,
+        ended_at:any,
+        status:number,
+        profile_ca:number,
+        short_url:string,
         slogan_campaing:string,
         header:{
-            id: number,
-            qty_day_left:number,
-            amount: string,
+            id:number,
+            user:number,
+            category:number,
+            city:number,
+            qty_day:number,
+            amount:string,
             amount_reached:string,
             percent_reached:string,
+            qty_day_left:number,
             role:number,
-            code_campaing: string,
+            code_campaing:number,
+        },
+        currency:{
+            id:number,
+            name:string,
+            symbol:string
+        },
+        profile:{
+            id: number,
+            cinit:string,
+            amount: string,
+            address:string,
+            number_address:string,
+            neightbordhood:string,
+            cellphone: string,
+            telephone:string,
+            description:string,
+            complete: boolean,
+            rs_facebook:any,
+            rs_twitter:any,
+            rs_linkedin:any,
+            rs_another:any,
+            current_position:string,
+            headline:string,
+            birthdate:string,
+            photo:string,
             user:{
+                id:number,
                 first_name: string,
-                last_name: string
+                last_name: string,
+                email:string
             },
-            category:{
+            countries:{
                 id:number,
                 name: string,
                 slug: string,
-                description:string,
-                img_banner:string
+                short_name:string,
+                code_name:string,
+                description:string
             },
-            city:{
+            cities:{
                 id: number,
                 name: string,
                 slug: string,
@@ -75,13 +113,13 @@ interface Iproyect {
     }
 }
 
-const Projects: React.FC<Iproyect> = (props)=> {
+const Category: React.FC<ICategory> = (props)=> {
 
-    const [content, setContent] = useState('')
+  
     // console.log(props.data);
-    useEffect(() => {
-        setContent('titulo more longer the now more here please')
-    }, [])
+    // useEffect(() => {
+        
+    // }, [])
     
     return (
         <> 
@@ -90,7 +128,7 @@ const Projects: React.FC<Iproyect> = (props)=> {
             <SectionDetails>
             <Article>
                 <Picture>
-                    <Go   to={{
+                  <Go   to={{
                             pathname: '/detail-proyect',
                             state: {
                                 idProyecto: `${props.data.id}`,
@@ -103,19 +141,7 @@ const Projects: React.FC<Iproyect> = (props)=> {
                         />
                     </Go>
                 </Picture>
-                <Title>
-                    <Go to={{
-                        pathname: '/category',
-                        state: {
-                            idCategoria: `${props.data.header.category.id}`,
-                            nombre: `${props.data.header.category.name}`,
-                            slug: `${props.data.header.category.slug}`,
-                            imgbanner:`${props.data.header.category.img_banner}`
-                        }
-                    }}> 
-                     {props.data.header.category.name}
-                   </Go>
-                </Title>
+                <Title>{props.data.title}</Title>
             </Article>
             <ArticleBody>
                 <Row>
@@ -126,7 +152,7 @@ const Projects: React.FC<Iproyect> = (props)=> {
                                    <MdLocationOn />
                                     <span>
                                         {/* <Go to="/">                                             */}
-                                          {' '}  {props.data.header.city.name} - {props.data.header.city.countries.name}
+                                          {' '}  {props.data.profile.cities.name} - {props.data.profile.cities.countries.name}                                           
                                         {/* </Go> */}
                                     </span>                                    
                                 </Place>
@@ -150,7 +176,7 @@ const Projects: React.FC<Iproyect> = (props)=> {
                 <Row>
                     <Col xs={12} sm={12} md={12} lg={12}>
                         <Excerpt>
-                            {/* <Go to="/"> */}
+                            {/* <Go to="/my-article"> */}
                                 {props.data.title}                                
                             {/* </Go> */}
                         </Excerpt>
@@ -170,7 +196,7 @@ const Projects: React.FC<Iproyect> = (props)=> {
                         <Row start="lg">
                             <Col xs={12} sm={12} md={12} lg={12}>
                                 <Porcentaje>
-                                <LineProgress bgcolor={'#7CC142'} completed={props.data.header.percent_reached} />
+                                <LineProgress bgcolor={'#7CC142'} completed={props.data.header.percent_reached} />                                
                                 </Porcentaje>                            
                             </Col>
                         </Row>
@@ -183,7 +209,7 @@ const Projects: React.FC<Iproyect> = (props)=> {
                         <Row start="lg">
                             <Col xs={12} sm={12} md={12} lg={12}>
                                <Alcanzado>
-                                    <p> {props.data.header.percent_reached}{'% '} ALCANZADO</p>                                    
+                                    <p> {props.data.header.percent_reached}{'% '} ALCANZADO</p>                                                                        
                                 </Alcanzado>  
                             </Col>
                         </Row>
@@ -191,7 +217,7 @@ const Projects: React.FC<Iproyect> = (props)=> {
                     <Col xs={6} sm={6} md={6} lg={6}>                    
                         <Row end="lg">
                             <Col xs={12} sm={12} md={12} lg={12}>                             
-                               <NumberMonto> {props.data.header.amount_reached } Bs</NumberMonto>
+                               <NumberMonto> {props.data.header.amount_reached } Bs</NumberMonto>                               
                             </Col>
                         </Row>
                     </Col>
@@ -202,7 +228,7 @@ const Projects: React.FC<Iproyect> = (props)=> {
                         <Row start="lg">
                             <Col xs={12} sm={12} md={12} lg={12}>
                                <CodigoFaltante>
-                                    <p>Faltan: {props.data.header.qty_day_left} Dias</p>                                    
+                                    <p>Faltan: {props.data.header.qty_day_left} Dias</p>
                                 </CodigoFaltante>  
                             </Col>
                         </Row>
@@ -211,7 +237,7 @@ const Projects: React.FC<Iproyect> = (props)=> {
                     <Col xs={6} sm={6} md={6} lg={6}>
                         <Row end="lg">
                             <Col xs={12} sm={12} md={12} lg={12}>                             
-                               <PercentNumber>Cod: {props.data.header.code_campaing }</PercentNumber>
+                               <PercentNumber>Cod: {props.data.header.code_campaing }</PercentNumber>                               
                             </Col>
                         </Row>
                     </Col>
@@ -221,7 +247,7 @@ const Projects: React.FC<Iproyect> = (props)=> {
                         <Row start="lg">
                             <Col sm={12} md={12} lg={12}>
                                 <Author>
-                                    <p>Autor:  {props.data.header.user.first_name} {' '} {props.data.header.user.last_name}</p>                                   
+                                    <p>Autor:  {props.data.profile.user.first_name} {' '} {props.data.profile.user.last_name}</p>                                     
                                 </Author>
                             </Col>
                         </Row>
@@ -235,5 +261,5 @@ const Projects: React.FC<Iproyect> = (props)=> {
     )
 }
 
-export default Projects
+export default Category
 

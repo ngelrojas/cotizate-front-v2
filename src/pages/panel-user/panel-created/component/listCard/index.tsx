@@ -35,7 +35,7 @@ const ListCard: React.FC = () => {
                                 </Col>
                     })
 
-                ):("<Col xs={12}><h2>NO EXITE POSTS</h2></Col>")
+                ):(<Col xs={12}><h2>AUN NO TIENES PROYECTOS</h2></Col>)
             }
 
         </Row>
