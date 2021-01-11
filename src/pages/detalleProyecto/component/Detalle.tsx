@@ -453,24 +453,27 @@ const Detalle: React.FC<Idetalle> = props => {
                     <DivSeparador>
                     <Col xs={12} sm={12} md={12} lg={12}>
                      <Row> 
-                        <Col xs={3} sm={3} md={3} lg={3}>
+                        <Col xs={12} sm={3} md={3} lg={3}>
                             <Row center='xs' >
                                <div className={classes.root}>
                                  <Avatar alt="Remy Sharp" src="https://hipertextual.com/files/2015/11/albert-einstein-retrato-scaled.jpg" className={classes.large} />
                                </div>
                             </Row>
                         </Col>
-                        <Col xs={9} sm={9} md={9} lg={9}>
+                        <Col xs={12} sm={9} md={9} lg={9}>
                             <Col xs={12} sm={12} md={12} lg={12}>
+                                
                                 <Autor>
                                   Miguel alandia  pantoja
                                 </Autor>
                                 
                             </Col>
                             <Col xs={12} sm={12} md={12} lg={12}>
-                                <LinkAzul to="/descripcion" style={{fontSize:"12px"}}>{'3 proyectos creados'}</LinkAzul> {' '}
+                                {/* <Row center='xs' > */}
+                                  <LinkAzul to="/descripcion" style={{fontSize:"12px"}}>{'3 proyectos creados'}</LinkAzul> {' '}
                                 
-                                <LinkAzul to="/descripcion" style={{fontSize:"12px"}} >{'2 proyectos apoyados'}</LinkAzul> {' '}
+                                  <LinkAzul to="/descripcion" style={{fontSize:"12px"}} >{'2 proyectos apoyados'}</LinkAzul> {' '}
+                                {/* </Row> */}
                             </Col>
                             <Col xs={12} sm={12} md={12} lg={12}>
                                 <div style={{marginTop:"2%", marginBottom:"2%"}} > 
@@ -481,15 +484,16 @@ const Detalle: React.FC<Idetalle> = props => {
                             </Col>
                           
                         </Col>
-                        <Col xs={12} sm={12} md={12} lg={12}>
+
+                      </Row>   
+                      <Col xs={12} sm={12} md={12} lg={12}>
                             <Row center='xs' >
-                                <div style={{marginTop:"2%", marginBottom:"2%"}} > 
-                                <ButtonBordeAzul>Siguiendo </ButtonBordeAzul>
-                                <ButtonBordeAzul>Contacto</ButtonBordeAzul>
+                                <div style={{marginTop:"2%", marginBottom:"2%", width:'100%'}} > 
+                                <ButtonBordeAzul style={{width:'39%', background: '#F69939', color:'#FFFFFF', border: '1px solid #F69939',fontWeight: 'bold',borderRadius: '5px' }} >Siguiendo </ButtonBordeAzul>
+                                <ButtonBordeAzul style={{ width:'39%', background: '#FFFFFF', color:'#F69939', border: '1px solid #F69939',fontWeight: 'bold',borderRadius: '5px' }} >Contacto</ButtonBordeAzul>
                                 </div>
                             </Row>  
-                        </Col>
-                      </Row>                                                                               
+                        </Col>                                                                            
                     </Col>                    
                   </DivSeparador>   
 

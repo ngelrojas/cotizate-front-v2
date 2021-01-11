@@ -560,5 +560,6 @@ export const Autor = styled.p`
     }
     @media ${device.mobileM} {
         line-height: 16px;
+        text-align:center
     }
 `
