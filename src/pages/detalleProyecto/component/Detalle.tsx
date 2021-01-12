@@ -62,7 +62,8 @@ import {Article, SectionDetails, Picture,
      TitleAportaciones,
      TitleAportaciones2,
      SubTitleAportacion,
-     TextoSubtitulo
+     TextoSubtitulo,
+     TextoSubtitulo2
     } from './styleDetallecomponent/styleDetalle';
 
 
@@ -202,7 +203,7 @@ const Detalle: React.FC<Idetalle> = props => {
                                <ReactPlayer width={'99.9%'} url={props.detalle.video_main} />
                             {/* </Go> */}
                         </Picture>
-                        <Row >
+                        <Row >                           
                             <Col xs={12} sm={12} md={6} lg={6}>
                                 <Row start="lg">
                                    <Col xs={12} sm={12} md={12} lg={12}>
@@ -217,7 +218,7 @@ const Detalle: React.FC<Idetalle> = props => {
                                    </Col>
                                 </Row>
                             </Col>
-                            
+                          
                         </Row>
                     </Article>          
               </SectionDetails>
@@ -606,6 +607,39 @@ const Detalle: React.FC<Idetalle> = props => {
                                   </Col>
                                 </Row>                          
                             </Col>
+                            <Col xs={12} sm={12} md={12} lg={12}>     
+                               <Row end="lg">                                  
+                                    <TextoSubtitulo2>
+                                        {'* incluye valor del envio'}
+                                    </TextoSubtitulo2>                                                                                                    
+                                </Row>                          
+                            </Col>
+                            <Col xs={12} sm={12} md={12} lg={12}>
+                            <Row center='xs' >
+                                
+                            <TextField
+                                id="outlined-number"
+                                name="txtEnviar"                              
+                                type="number"
+                                style={{background:'#FFFFFF', width:'65%'}}
+                                variant="outlined"
+                                InputProps={{
+                                    startAdornment: (
+                                      <InputAdornment position="start">
+                                        Bs.
+                                      </InputAdornment>
+                                    ),
+                                  }}
+                                />
+                            
+                            </Row>  
+                          </Col> 
+                          <Col xs={12} sm={12} md={12} lg={12}>
+                            <Row center='xs' >                                
+                                <ButtonBordeAzul style={{width:'65%',height:'45px', background: '#F69939', color:'#FFFFFF', border: '1px solid #F69939',fontWeight: 'bold',borderRadius: '5px' }} >Enviar </ButtonBordeAzul>                                                        
+                            </Row>  
+                          </Col>              
+
                         </Col>
                     </DivSeparador2>
                     

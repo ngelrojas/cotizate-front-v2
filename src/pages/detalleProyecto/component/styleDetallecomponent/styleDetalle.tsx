@@ -115,8 +115,12 @@ export const Img = styled.img`
 `
 export const Contenedor = styled.div`   
     background: #1383C5;
-    margin: 2%;
-    width:100%;
+    margin-top: 2%;
+    margin-bottom: 2%;
+    padding-top: 2%;
+    padding-bottom: 2%;
+    padding-left: 1%;
+    padding-right: 1%;
     @media ${device.tablet} {
     
     }
@@ -653,6 +657,28 @@ export const SubTitleAportacion = styled.h2`
 `
 export const TextoSubtitulo = styled.p`   
     color: #5D5A5A;
+    font-family: Roboto;
+    font-style: normal;
+    margin-top: 4%;
+    margin-bottom: 3%;
+    font-weight: normal;
+    display: flex;
+    align-items: center;
+    font-size: 20px;
+    line-height: 19px;
+    @media ${device.tablet} {
+        line-height: 17px;
+        font-size: 20px;
+        margin-top: 1%;
+    }
+    @media ${device.mobileM} {
+        line-height: 16px;
+        font-size: 17px;
+        margin-top: 4%;
+    }
+`
+export const TextoSubtitulo2 = styled.p`   
+    color: #F2A85D;
     font-family: Roboto;
     font-style: normal;
     margin-top: 4%;
