@@ -72,10 +72,10 @@ const TablePhases:React.FC = (props: any) => {
         })
   }
 
-  const onSend =(e:number)=>{
-      let camp_id: number = e
-      console.info(camp_id)
-      props.getPhase(camp_id)
+  const onSend =(e: any)=>{
+      let phaseId: number = e.id
+      let headId: number = e.header
+      props.getPhase(phaseId, headId)
   }
 
   React.useEffect(()=>{
@@ -99,7 +99,7 @@ const TablePhases:React.FC = (props: any) => {
                     <StyledTableRow key={phase.id}>
                         <StyledTableCell align="right">{phase.id}</StyledTableCell>
                         <StyledTableCell align="right">{phase.title}</StyledTableCell>
-                        <StyledTableCell align="right"><div onClick={e=>onSend(phase.id)}>actualizar</div></StyledTableCell>
+                        <StyledTableCell align="right"><div onClick={e=>onSend(phase)}>actualizar</div></StyledTableCell>
                     </StyledTableRow>
 
                 ) 

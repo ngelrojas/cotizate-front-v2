@@ -6,9 +6,9 @@ let token = window.sessionStorage.getItem('token')
 
 let Phase = new Phases(token)
 
-export const getPhase = (phaseId: number) => (dispatch: any) => {
+export const getPhase = (phaseId: number, headerId: number) => (dispatch: any) => {
     
-    Phase.getPhases(phaseId)
+    Phase.getPhases(phaseId, headerId)
         .then(resp => {
             dispatch({
                 type: SET_PHASES,

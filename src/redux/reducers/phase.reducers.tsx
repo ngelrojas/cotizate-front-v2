@@ -5,7 +5,7 @@ import {
 
 const initialState = {
     answer: false,
-    phase: {}, 
+    phases: {}, 
 } 
 
 export default function(state = initialState, action: any) {

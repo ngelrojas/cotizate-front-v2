@@ -5,7 +5,7 @@ import {useRouteMatch} from 'react-router-dom'
 import {Editor} from '@tinymce/tinymce-react'
 import {store} from 'react-notifications-component'
 import {Row, Col} from 'react-styled-flexboxgrid'
-import {CampaingHeader} from '../../../../../../userCampaings'
+//import {CampaingHeader} from '../../../../../../userCampaings'
 import {Phases} from '../../../../../../userPhases'
 import Slide from 'react-reveal/Slide'
 import TablePhases from './table-phase'
@@ -26,7 +26,7 @@ import {
     BtnSaveProject
 } from '../../styles'
 
-interface Iphases {
+type FormData = {
     id: number
     title: string
     description: string
@@ -34,18 +34,19 @@ interface Iphases {
     header: number
 }
 
-type FormData = {
-    title: string
-    amount: number
+type TypePhase = {
+    phases: FormData 
 }
 
-const FormPhase: React.FC = () => {
+type AllProps = TypePhase
+
+const FormPhase: React.FC<AllProps> = ({phases}) => {
     let match = useRouteMatch('/panel-de-usuario/actualizar-proyecto/:campania')
     let matchUrl: any = match
     let campaingId = matchUrl.params.campania
     let token = window.sessionStorage.getItem('token')
     let Phase = new Phases(token)
-    const [description, Setdescription] = React.useState()
+    const [descriptions, Setdescriptions] = React.useState()
     const [MsgErrorF, setMsgErrorF] = React.useState()
     const {register, handleSubmit, reset, errors} = useForm<FormData>({
         mode: 'onChange'
@@ -56,7 +57,7 @@ const FormPhase: React.FC = () => {
             let data_phase = {
                 title: title,
                 amount: amount,
-                description: description,
+                description: descriptions,
                 header: campaingId 
             }
 
@@ -73,11 +74,11 @@ const FormPhase: React.FC = () => {
     })
 
     const handleEditorReward = (content: any, editor: any) => {
-        Setdescription(content)
+        Setdescriptions(content)
     }
 
     const validate = () => { 
-        if(!description){
+        if(!descriptions){
             setMsgErrorF('este campo es requerido')
             Notifications('La Fase debe contener una descripcion', 'danger')
             return false
@@ -101,11 +102,6 @@ const FormPhase: React.FC = () => {
         })
     }
 
-    const onSend = (e:number) => {
-        console.info("FROM CHILD COMPONENT")
-        console.log(e)
-    }
-
     React.useEffect(()=>{ 
         const input: any = document.querySelector('input[name="title"]')
         input.focus()
@@ -114,7 +110,9 @@ const FormPhase: React.FC = () => {
             left: 0,
             behavior: 'smooth'
         })
-    },[])
+        console.info("IN FORM")
+        console.info(phases)
+    },[phases])
 
     return (
         <>
@@ -127,7 +125,7 @@ const FormPhase: React.FC = () => {
                 </BoxText>
             </WrapperBox>
         <Row>
-        <TablePhases {...onSend} />
+        <TablePhases />
         </Row>
 
         <FormR onSubmit={onSubmit}>
@@ -140,6 +138,7 @@ const FormPhase: React.FC = () => {
                             name="title"
                             ref={register({required: true})}
                             placeholder="Fase"
+                            defaultValue={phases.title ? phases.title: ''}
                         />
                     </WrappBoxInput>
 
@@ -154,6 +153,7 @@ const FormPhase: React.FC = () => {
                             name="amount"
                             ref={register({required: true})}
                             placeholder="000.000.000"
+                            defaultValue={phases.amount ? phases.amount: ''}
                         />
                         <BS>BS</BS>
                     </WrappBoxInput>
@@ -162,12 +162,12 @@ const FormPhase: React.FC = () => {
                     </MsgError>
         </Col>
         </Row>
-                <BoxTitleContent>* Descripcion </BoxTitleContent>
+                <BoxTitleContent>* Descripcion</BoxTitleContent>
                 <BoxText> 
                 Descripción de la fase no debe exceder mas de  870 caracteres o 150 palabras
                 </BoxText>
                 <Editor
-                    initialValue=''
+                    initialValue={phases.description ? phases.description : ''}
                     init={{
                         height: 300,
                         menubar: false,
@@ -231,4 +231,8 @@ const FormPhase: React.FC = () => {
     )
 }
 
-export default FormPhase
+const mapStateToProps = (state: any) => ({
+    phases: state.phase
+})
+
+export default connect(mapStateToProps, '')(FormPhase)
