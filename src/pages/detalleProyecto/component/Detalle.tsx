@@ -15,7 +15,9 @@ import WhatsAppIcon from '@material-ui/icons/WhatsApp';
 import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
 import Avatar from '@material-ui/core/Avatar';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
-
+import { TextField } from '@material-ui/core';
+import InputAdornment from '@material-ui/core/InputAdornment';
+import AccountCircle from '@material-ui/icons/AccountCircle';
 
 
   
@@ -54,7 +56,9 @@ import {Article, SectionDetails, Picture,
      DivBorderSinColor,
      Texto2,
      Texto3,
-     Autor
+     Autor,
+     DivSeparador2,
+     TitleDonacion
     } from './styleDetallecomponent/styleDetalle';
 
 
@@ -486,16 +490,52 @@ const Detalle: React.FC<Idetalle> = props => {
                         </Col>
 
                       </Row>   
-                      <Col xs={12} sm={12} md={12} lg={12}>
+                       <Col xs={12} sm={12} md={12} lg={12}>
                             <Row center='xs' >
                                 <div style={{marginTop:"2%", marginBottom:"2%", width:'100%'}} > 
-                                <ButtonBordeAzul style={{width:'39%', background: '#F69939', color:'#FFFFFF', border: '1px solid #F69939',fontWeight: 'bold',borderRadius: '5px' }} >Siguiendo </ButtonBordeAzul>
-                                <ButtonBordeAzul style={{ width:'39%', background: '#FFFFFF', color:'#F69939', border: '1px solid #F69939',fontWeight: 'bold',borderRadius: '5px' }} >Contacto</ButtonBordeAzul>
+                                <ButtonBordeAzul style={{width:'39%',height:'40px', background: '#F69939', color:'#FFFFFF', border: '1px solid #F69939',fontWeight: 'bold',borderRadius: '5px' }} >Siguiendo </ButtonBordeAzul>
+                                <ButtonBordeAzul style={{ width:'39%', height:'40px', background: '#FFFFFF', color:'#F69939', border: '1px solid #F69939',fontWeight: 'bold',borderRadius: '5px' }} >Contacto</ButtonBordeAzul>
                                 </div>
                             </Row>  
                         </Col>                                                                            
                     </Col>                    
-                  </DivSeparador>   
+                  </DivSeparador> 
+                  <DivSeparador2>
+                    <Col xs={12} sm={12} md={12} lg={12}>
+                        <Col xs={12} sm={12} md={12} lg={12}>
+                                <Row center='xs' >
+                                    <TitleDonacion>
+                                        Donacion 
+                                    </TitleDonacion>                                    
+                                </Row>  
+                        </Col> 
+                           <Col xs={12} sm={12} md={12} lg={12}>
+                            <Row center='xs' >
+                                
+                            <TextField
+                                id="outlined-number"
+                              
+                                type="number"
+                               style={{background:'#FFFFFF', width:'65%'}}
+                                variant="outlined"
+                                InputProps={{
+                                    startAdornment: (
+                                      <InputAdornment position="start">
+                                        Bs.
+                                      </InputAdornment>
+                                    ),
+                                  }}
+                                />
+                            
+                            </Row>  
+                          </Col> 
+                          <Col xs={12} sm={12} md={12} lg={12}>
+                            <Row center='xs' >                                
+                                <ButtonBordeAzul style={{width:'65%',height:'45px', background: '#F69939', color:'#FFFFFF', border: '1px solid #F69939',fontWeight: 'bold',borderRadius: '5px' }} >Siguiendo </ButtonBordeAzul>                                                        
+                            </Row>  
+                          </Col>                
+                     </Col>   
+                  </DivSeparador2>  
 
                 </Col>
             </Row>           

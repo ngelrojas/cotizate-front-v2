@@ -563,3 +563,37 @@ export const Autor = styled.p`
         text-align:center
     }
 `
+export const DivSeparador2 = styled.div`
+        background:#FCF2E9;
+        margin-top: 2%;
+        margin-bottom: 2%;
+        padding-top: 2%;
+        padding-bottom: 2%;
+        padding-left: 1%;
+        padding-right: 1%;
+    @media ${device.tablet} {
+        margin-top: 1%;
+        margin-bottom: 1%;
+    }
+    @media ${device.mobileM} {
+        margin-top: 1%;
+        margin-bottom: 1%;
+    }
+`
+export const TitleDonacion = styled.h1`
+    color: #1383C5;
+    font-style: normal;
+    font-weight: normal;
+    padding-top: 1%;
+    padding-bottom: 2%;
+    
+    @media ${device.tablet} {
+      
+    }
+    @media ${device.mobileM} {
+        padding-top: 1%;
+        padding-bottom: 1%;
+    }
+
+
+`
