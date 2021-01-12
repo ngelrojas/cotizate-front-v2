@@ -58,7 +58,10 @@ import {Article, SectionDetails, Picture,
      Texto3,
      Autor,
      DivSeparador2,
-     TitleDonacion
+     TitleDonacion,
+     TitleAportaciones,
+     TitleAportaciones2,
+     SubTitleAportacion
     } from './styleDetallecomponent/styleDetalle';
 
 
@@ -509,7 +512,7 @@ const Detalle: React.FC<Idetalle> = props => {
                                     </TitleDonacion>                                    
                                 </Row>  
                         </Col> 
-                           <Col xs={12} sm={12} md={12} lg={12}>
+                        <Col xs={12} sm={12} md={12} lg={12}>
                             <Row center='xs' >
                                 
                             <TextField
@@ -534,8 +537,44 @@ const Detalle: React.FC<Idetalle> = props => {
                                 <ButtonBordeAzul style={{width:'65%',height:'45px', background: '#F69939', color:'#FFFFFF', border: '1px solid #F69939',fontWeight: 'bold',borderRadius: '5px' }} >Siguiendo </ButtonBordeAzul>                                                        
                             </Row>  
                           </Col>                
-                     </Col>   
-                  </DivSeparador2>  
+                          </Col>   
+                   </DivSeparador2> 
+                     
+                    <DivSeparador2>
+                        <Col xs={12} sm={12} md={12} lg={12}>
+                           <Col xs={12} sm={12} md={12} lg={12}>
+                                    <TitleAportaciones>
+                                      {'aporte con mas  Bs. 100 O mas '}
+                                    </TitleAportaciones>  
+                            </Col>
+                            <Col xs={12} sm={12} md={12} lg={12}>
+                               <ImgPortal
+                                src={'https://img.freepik.com/vector-gratis/fondo-plano-naturaleza_1308-20252.jpg?size=626&ext=jpg'}
+                                />
+                            </Col>
+                            <Col xs={12} sm={12} md={12} lg={12}>
+                                    <TitleAportaciones2>
+                                      {' "aporte con mas  Bs. 100 O mas " '}
+                                    </TitleAportaciones2>  
+                            </Col>
+                            <Col xs={12} sm={12} md={12} lg={12}>
+                                    <SubTitleAportacion>
+                                      {' Esta recompensa garante '}
+                                    </SubTitleAportacion>  
+                            </Col>
+                            <Col xs={12} sm={12} md={12} lg={12}>
+                                    <Texto>
+                                      {'Lorem Ipsum é simplesmente uma simulação de texto da indústria tipográfica e de impressos, e vem sendo utilizado desde o século XVI, quando um impressor desconhecido pegou uma bandeja de tipos e os embaralhou para fazer um livro de modelos de tipos. Lorem Ipsum sobreviveu não só a cinco séculos, como também ao salto para a editoração eletrônica, permanecendo essencialmente inalterado. Se popularizou na década de 60, quando a Letraset lançou decalques contendo passagens de Lorem Ipsum, e mais recentemente quando passou a ser integrado a softwares de editoração eletrônica como Aldus PageMaker. '}
+                                    </Texto>  
+                            </Col>
+                            <Col xs={12} sm={12} md={12} lg={12}>
+                                    <Texto>
+                                      {'Lorem Ipsum é simplesmente uma simulação de texto da indústria tipográfica e de impressos, e vem sendo utilizado desde o século XVI, quando um impressor desconhecido pegou uma bandeja de tipos e os embaralhou para fazer um livro de modelos de tipos. Lorem Ipsum sobreviveu não só a cinco séculos, como também ao salto para a editoração eletrônica, permanecendo essencialmente inalterado. Se popularizou na década de 60, quando a Letraset lançou decalques contendo passagens de Lorem Ipsum, e mais '}
+                                    </Texto>  
+                            </Col>
+                        </Col>
+                    </DivSeparador2>
+                    
 
                 </Col>
             </Row>           

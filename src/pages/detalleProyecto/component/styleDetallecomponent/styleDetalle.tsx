@@ -409,6 +409,7 @@ export const Texto = styled.p`
     color: #5D5A5A;
     font-family: Roboto;
     font-style: normal;
+    margin-top: 1%;
     font-weight: normal;
     display: flex;
     align-items: center;
@@ -416,9 +417,11 @@ export const Texto = styled.p`
     line-height: 19px;
     @media ${device.tablet} {
         line-height: 17px;
+        margin-top: 1%;
     }
     @media ${device.mobileM} {
         line-height: 16px;
+        margin-top: 1%;
     }
 `
 export const LinkAzul = styled(Link)`
@@ -594,6 +597,57 @@ export const TitleDonacion = styled.h1`
         padding-top: 1%;
         padding-bottom: 1%;
     }
-
-
+`
+export const TitleAportaciones = styled.h2`
+    color: #1383C5;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 23px;
+    line-height: 26px;
+    padding-top: 2%;
+    padding-bottom: 3%;
+    text-transform: uppercase;
+    @media ${device.tablet} {
+      
+    }
+    @media ${device.mobileM} {
+        padding-top: 1%;
+        padding-bottom: 1%;
+    }
+`
+export const TitleAportaciones2 = styled.h2`
+    color: #1383C5;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 21px;
+    line-height: 26px;
+    padding-top: 2%;
+    padding-bottom: 3%;
+    text-transform: uppercase;
+    @media ${device.tablet} {
+      
+    }
+    @media ${device.mobileM} {
+        padding-top: 1%;
+        padding-bottom: 1%;
+    }
+`
+export const SubTitleAportacion = styled.h2`
+    color: #5D5A5A;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 21px;
+    line-height: 21px;
+    padding-top: 2%;
+    padding-bottom: 3%;
+    @media ${device.tablet} {
+      
+    }
+    @media ${device.mobileM} {
+        padding-top: 1%;
+        padding-bottom: 1%;
+    }
 `
