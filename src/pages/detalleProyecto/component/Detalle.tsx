@@ -61,7 +61,8 @@ import {Article, SectionDetails, Picture,
      TitleDonacion,
      TitleAportaciones,
      TitleAportaciones2,
-     SubTitleAportacion
+     SubTitleAportacion,
+     TextoSubtitulo
     } from './styleDetallecomponent/styleDetalle';
 
 
@@ -571,6 +572,39 @@ const Detalle: React.FC<Idetalle> = props => {
                                     <Texto>
                                       {'Lorem Ipsum é simplesmente uma simulação de texto da indústria tipográfica e de impressos, e vem sendo utilizado desde o século XVI, quando um impressor desconhecido pegou uma bandeja de tipos e os embaralhou para fazer um livro de modelos de tipos. Lorem Ipsum sobreviveu não só a cinco séculos, como também ao salto para a editoração eletrônica, permanecendo essencialmente inalterado. Se popularizou na década de 60, quando a Letraset lançou decalques contendo passagens de Lorem Ipsum, e mais '}
                                     </Texto>  
+                            </Col>
+                            <Col xs={12} sm={12} md={12} lg={12}>
+                                <Row>
+                                  <Col xs={6} sm={6} md={6} lg={6}>
+                                            <TextoSubtitulo>
+                                            {'Entrega prevista'}
+                                            </TextoSubtitulo>                                      
+                                  </Col>
+                                  <Col xs={6} sm={6} md={6} lg={6}>
+                                       <Row end="lg">                                      
+                                            <TextoSubtitulo>
+                                                {'Envio:'}
+                                            </TextoSubtitulo>
+                                       </Row>
+                                  </Col>        
+                                </Row>             
+                            </Col>
+                            <Col xs={12} sm={12} md={12} lg={12}>     
+                               <Row>
+                                  <Col xs={6} sm={6} md={6} lg={6}>
+                                        <TextoSubtitulo>
+                                            {'12/02/2021'}
+                                        </TextoSubtitulo>
+                                      
+                                  </Col>
+                                  <Col xs={6} sm={6} md={6} lg={6}>                                      
+                                       <Row end="lg">
+                                         <TextoSubtitulo>
+                                            {'Toda Bolivia'}
+                                         </TextoSubtitulo>                                     
+                                       </Row>
+                                  </Col>
+                                </Row>                          
                             </Col>
                         </Col>
                     </DivSeparador2>

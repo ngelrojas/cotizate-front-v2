@@ -651,3 +651,25 @@ export const SubTitleAportacion = styled.h2`
         padding-bottom: 1%;
     }
 `
+export const TextoSubtitulo = styled.p`   
+    color: #5D5A5A;
+    font-family: Roboto;
+    font-style: normal;
+    margin-top: 4%;
+    margin-bottom: 3%;
+    font-weight: normal;
+    display: flex;
+    align-items: center;
+    font-size: 20px;
+    line-height: 19px;
+    @media ${device.tablet} {
+        line-height: 17px;
+        font-size: 20px;
+        margin-top: 1%;
+    }
+    @media ${device.mobileM} {
+        line-height: 16px;
+        font-size: 17px;
+        margin-top: 4%;
+    }
+`
