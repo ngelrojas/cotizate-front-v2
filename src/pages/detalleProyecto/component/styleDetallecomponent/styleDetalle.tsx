@@ -115,17 +115,20 @@ export const Img = styled.img`
 `
 export const Contenedor = styled.div`   
     background: #1383C5;
+    margin-left: 2%;
+    margin-right: 1%;
     margin-top: 2%;
     margin-bottom: 2%;
     padding-top: 2%;
     padding-bottom: 2%;
-    padding-left: 1%;
-    padding-right: 1%;
+    padding-left: 3%;
+    padding-right: 3%;
     @media ${device.tablet} {
     
     }
     @media ${device.mobileM} {
-      
+        margin-left: 0%;
+        margin-right: 0%;
     }
 
 `
@@ -145,15 +148,15 @@ export const TitleVideo1 = styled.h1`
 `
 
 export const Porcentaje = styled.div`
-    padding-left: 10px;
-    padding-right: 10px;
+    // padding-left: 10px;
+    // padding-right: 10px;
     padding-bottom: 5%;
     padding-top: 3%;
    
     @media ${device.tablet} {
         width: 100%;
-        padding-left: 1px;
-        margin-bottom: 5%;
+        // padding-left: 1px;
+        // margin-bottom: 5%;
     }
     @media ${device.mobileM} {
         
@@ -162,7 +165,7 @@ export const Porcentaje = styled.div`
 export const Alcanzado = styled.div`
    
     
-    padding-left: 12px;
+    // padding-left: 12px;
     padding-top: 17px;
 
     width: 100%;
@@ -179,12 +182,12 @@ export const Alcanzado = styled.div`
     line-height: 12px;
     @media ${device.tablet} {
         width: 80%;
-        padding-left: 1px;
+        // padding-left: 1px;
         padding-top: 5%;
         margin-bottom: 10%;
     }
     @media ${device.mobileM} {
-        padding-left: 1px;
+        // padding-left: 1px;
         width: 100%;
         font-style: normal;
         line-height: 12px;
@@ -252,7 +255,7 @@ font-family: Roboto;
 export const AporteNumber = styled.span`
     color: #F1F1F1;
     font-family: Roboto;
-    padding-left: 10px;
+    // padding-left: 10px;
     float: left;
     margin: 1%;
     font-style: normal;
@@ -280,37 +283,37 @@ font-family: Roboto;
     }
 `
 export const Div1 = styled.div`
-    padding-left: 10px;
+    // padding-left: 10px;
     padding-bottom: 2%;
     padding-top: 2%;
    
     @media ${device.tablet} {
         width: 100%;
-        padding-left: 1px;
+        // padding-left: 1px;
         margin-bottom: 2%;
         padding-top: 2%;
     }
     @media ${device.mobileM} {
         width: 100%;
-        padding-left: 1px;
+        // padding-left: 1px;
         margin-bottom: 2%;
         padding-top: 2%;
     }
 `
 export const DivCod = styled.div`
-    padding-left: 10px;
+    // padding-left: 10px;
     padding-bottom: 2%;
     padding-top: 6%;
    
     @media ${device.tablet} {
         width: 100%;
-        padding-left: 1px;
+        // padding-left: 1px;
         margin-bottom: 2%;
         padding-top: 2%;
     }
     @media ${device.mobileM} {
         width: 100%;
-        padding-left: 1px;
+        // padding-left: 1px;
         margin-bottom: 2%;
         padding-top: 2%;
     }

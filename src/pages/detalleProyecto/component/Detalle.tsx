@@ -311,14 +311,14 @@ const Detalle: React.FC<Idetalle> = props => {
                     </Col>
                 </Row>
                 </Contenedor>
-                    <Row center='xs' >
+                    <Row  >
                         <Col xs={12} sm={12} md={12} lg={12}>
-                            <Row >
-                                <Col xs={12} sm={12} md={12} lg={12}>
-                                    <Div1>
+                            <Row center='xs' >
+                                {/* <Col xs={12} sm={12} md={12} lg={12}> */}
+                                    {/* <Div1> */}
                                     <BotonAportar >Aportar</BotonAportar>
-                                    </Div1>                               
-                                </Col>
+                                    {/* </Div1>                                */}
+                                {/* </Col> */}
                             </Row>
                         </Col>
                     </Row>
