@@ -40,4 +40,29 @@ export class Phases {
         })
         return this.resp_phase
     }
+
+    /*
+     * params
+     * - phaseId
+     * - headerId
+     * - data_send 
+    */
+    updatePhases = async (phaseId: number, headerId: number, data_send: any)=>{
+        this.resp_phase = await API.put(`phase/${phaseId}/${headerId}`, data_send, {
+            headers: {Authorization: `Bearer ${this.token}`}
+        })
+        return this.resp_phase
+    }
+
+    /*
+     * params
+     * - phaseId
+     * - headerId
+    */
+    deletePhases = async (phaseId: number, headerId: number)=>{
+        this.resp_phase = await API.delete(`phase/${phaseId}/${headerId}`, {
+            headers: {Authorization: `Bearer ${this.token}`}
+        })
+        return this.resp_phase
+    }
 }

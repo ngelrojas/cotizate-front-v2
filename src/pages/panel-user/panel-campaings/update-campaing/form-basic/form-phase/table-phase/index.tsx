@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 import {connect} from 'react-redux'
 import {useRouteMatch} from 'react-router-dom'
 import { withStyles, Theme, createStyles, makeStyles } from '@material-ui/core/styles';
@@ -11,6 +11,8 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import {Phases} from '../../../../../../../userPhases'
 import {getPhase} from '../../../../../../../redux/actions/phase.actions' 
+import EditIcon from '@material-ui/icons/Edit'
+import DeleteIcon from '@material-ui/icons/Delete'
 
 type propsPhases = {
     id: number
@@ -61,7 +63,6 @@ const TablePhases:React.FC = (props: any) => {
   const getPhases = (campID: number) => {
     Phase.listPhases(campID)
         .then(resp => {
-            console.info(resp.data.data)
             setLoadPhases(resp.data.data) 
         })
         .catch(err => {
@@ -73,6 +74,12 @@ const TablePhases:React.FC = (props: any) => {
   }
 
   const onSend =(e: any)=>{
+      let phaseId: number = e.id
+      let headId: number = e.header
+      props.getPhase(phaseId, headId)
+  }
+
+  const onDelete =(e: any)=>{
       let phaseId: number = e.id
       let headId: number = e.header
       props.getPhase(phaseId, headId)
@@ -99,7 +106,10 @@ const TablePhases:React.FC = (props: any) => {
                     <StyledTableRow key={phase.id}>
                         <StyledTableCell align="right">{phase.id}</StyledTableCell>
                         <StyledTableCell align="right">{phase.title}</StyledTableCell>
-                        <StyledTableCell align="right"><div onClick={e=>onSend(phase)}>actualizar</div></StyledTableCell>
+                        <StyledTableCell align="right">
+                                <button type="button" onClick={e=>onSend(phase)}> <EditIcon /></button>
+                                <button type="button" onClick={e=>onDelete(phase)}> <DeleteIcon /></button>
+                        </StyledTableCell>
                     </StyledTableRow>
 
                 ) 

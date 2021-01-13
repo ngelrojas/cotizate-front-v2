@@ -5,7 +5,6 @@ import {useRouteMatch} from 'react-router-dom'
 import {Editor} from '@tinymce/tinymce-react'
 import {store} from 'react-notifications-component'
 import {Row, Col} from 'react-styled-flexboxgrid'
-//import {CampaingHeader} from '../../../../../../userCampaings'
 import {Phases} from '../../../../../../userPhases'
 import Slide from 'react-reveal/Slide'
 import TablePhases from './table-phase'
@@ -46,7 +45,7 @@ const FormPhase: React.FC<AllProps> = ({phases}) => {
     let campaingId = matchUrl.params.campania
     let token = window.sessionStorage.getItem('token')
     let Phase = new Phases(token)
-    const [descriptions, Setdescriptions] = React.useState()
+    const [resumes, Setresumes] = React.useState()
     const [MsgErrorF, setMsgErrorF] = React.useState()
     const {register, handleSubmit, reset, errors} = useForm<FormData>({
         mode: 'onChange'
@@ -57,13 +56,16 @@ const FormPhase: React.FC<AllProps> = ({phases}) => {
             let data_phase = {
                 title: title,
                 amount: amount,
-                description: descriptions,
+                description: resumes,
                 header: campaingId 
             }
 
-            Phase.createPhase(data_phase)
+            let headerId = phases.header
+            let phaseId = phases.id
+
+            Phase.updatePhases(phaseId, headerId, data_phase)
                 .then(resp => {
-                    Notifications('Fase Guardada, puede seguir agregando.', 'success')
+                    Notifications('Fase actualizada.', 'success')
                     reset() 
                     setMsgErrorF('')
                 }).catch(err =>{    
@@ -74,11 +76,11 @@ const FormPhase: React.FC<AllProps> = ({phases}) => {
     })
 
     const handleEditorReward = (content: any, editor: any) => {
-        Setdescriptions(content)
+        Setresumes(content)
     }
 
     const validate = () => { 
-        if(!descriptions){
+        if(!resumes){
             setMsgErrorF('este campo es requerido')
             Notifications('La Fase debe contener una descripcion', 'danger')
             return false
@@ -110,26 +112,26 @@ const FormPhase: React.FC<AllProps> = ({phases}) => {
             left: 0,
             behavior: 'smooth'
         })
-        console.info("IN FORM")
-        console.info(phases)
+        
     },[phases])
 
     return (
         <>
         <Slide top>
-            <WrapperBoxRD>
+
+        <WrapperBoxRD>
+        <Row>
+                <TablePhases />
+        </Row>
             <WrapperBox>
                 <BoxTitleContent> *Fases del proyecto</BoxTitleContent>
                 <BoxText> 
                  ¿Cómo se utilizará su dinero? Cuanta más transparencia, mejor. Muestre qué pasos seguira y cuanto de dinero invertira en cada fase del proyecto.
                 </BoxText>
             </WrapperBox>
-        <Row>
-        <TablePhases />
-        </Row>
 
         <FormR onSubmit={onSubmit}>
-        <Row>
+<Row>
         <Col xs={6}>
                     <BoxTitleContent>* Titulo de la Fase </BoxTitleContent>
                     <WrappBoxInput>
@@ -161,13 +163,13 @@ const FormPhase: React.FC<AllProps> = ({phases}) => {
                         {errors.amount && 'este campo es requerido'}
                     </MsgError>
         </Col>
-        </Row>
+</Row>
                 <BoxTitleContent>* Descripcion</BoxTitleContent>
                 <BoxText> 
                 Descripción de la fase no debe exceder mas de  870 caracteres o 150 palabras
                 </BoxText>
                 <Editor
-                    initialValue={phases.description ? phases.description : ''}
+                    value={phases.description}
                     init={{
                         height: 300,
                         menubar: false,
@@ -217,7 +219,7 @@ const FormPhase: React.FC<AllProps> = ({phases}) => {
             <Row>
                 <WrapperSavePhase>
                     <WrapBtnSave>
-                        <BtnSaveProject>adicionar</BtnSaveProject>
+                        <BtnSaveProject>actualizar</BtnSaveProject>
                     </WrapBtnSave>
                 </WrapperSavePhase>
             </Row>
