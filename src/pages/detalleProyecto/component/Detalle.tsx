@@ -26,6 +26,7 @@ import {Article, SectionDetails, Picture,
     DivPortada,
     TilePortada,
     TitleVideo1,
+    DivTitlevideo,
     Porcentaje,
      Img,
      Contenedor,
@@ -198,25 +199,33 @@ const Detalle: React.FC<Idetalle> = props => {
                             {/* <Go to={{
                                 pathname: '/',
                                 state: { }
-                            }}> */}
-                               {/* <ReactPlayer width={'99.9%'} url='https://www.youtube.com/watch?v=QaXhVryxVBk' /> */}
+                            }}> */}                            
                                <ReactPlayer width={'99.9%'} url={props.detalle.video_main} />
                             {/* </Go> */}
                         </Picture>
                         <Row >                           
-                            <Col xs={12} sm={12} md={6} lg={6}>
+                            {/* <Col xs={12} sm={12} md={6} lg={6}>
                                 <Row start="lg">
                                    <Col xs={12} sm={12} md={12} lg={12}>
-                                   <TitleVideo1>Arte - pintura oleo</TitleVideo1>
+                                   <TitleVideo1>Arte - pintura oleo</TitleVideo1>                                      
                                    </Col>
                                 </Row>
-                            </Col>
-                            <Col xs={12} sm={12} md={6} lg={6}>
-                                <Row start="lg">
-                                   <Col xs={12} sm={12} md={12} lg={12}>
-                                      <TitleVideo1>bbbbbb</TitleVideo1>
-                                   </Col>
-                                </Row>
+                            </Col> */}
+                            <Col xs={12} sm={12} md={12} lg={12}>
+                              <DivTitlevideo>
+                                   <Row>
+                                    {/* <Row  start="lg" >                                  */}
+                                        <Col xs={6} sm={6} md={6} lg={6}>                                                                           
+                                            <TitleVideo1>cultura</TitleVideo1>  
+                                        </Col>
+                                    {/* </Row> */}
+                                    {/* <Row end="lg"> */}
+                                        <Col xs={6} sm={6} md={6} lg={6}>                                          
+                                            <TitleVideo1>cultura</TitleVideo1>                                                                    
+                                        </Col>
+                                    {/* </Row>    */}
+                                   </Row>
+                                </DivTitlevideo>
                             </Col>
                           
                         </Row>

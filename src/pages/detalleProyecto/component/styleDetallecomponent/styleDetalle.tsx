@@ -135,15 +135,27 @@ export const Contenedor = styled.div`
 export const TitleVideo1 = styled.h1`
     color: #f9f9f9;
     font-weight: 410;
-    position: absolute;
+    
     bottom: 0px;
     left:0px;
     background: #2B76B1;
     text-align: justify;
-    padding: 1%;
-    text-transform: uppercase;
+    padding: 1%;    
     font-size: 15px;
-    width:100%;
+    width:100%;    
+    
+`
+export const DivTitlevideo = styled.div`   
+    background: #2B76B1;
+    padding-bottom: 1%;
+    padding-top: 1%;    
+    padding-left: 10px;
+    padding-right: 10px;
+    @media ${device.tablet} {
+    
+    }
+    @media ${device.mobileM} {
+    }
 
 `
 
