@@ -5,9 +5,8 @@ import LineProgress from '../../../components/LineProgress'
 
 import ThumbUpAltIcon from '@material-ui/icons/ThumbUpAlt';
 import ThumbDownIcon from '@material-ui/icons/ThumbDown';
-
+import { useDispatch, useSelector } from "react-redux";
 import BookmarkBorderIcon from '@material-ui/icons/BookmarkBorder';
-import BookmarkIcon from '@material-ui/icons/Bookmark';
 import { IconButton } from '@material-ui/core';
 import FacebookIcon from '@material-ui/icons/Facebook';
 import TwitterIcon from '@material-ui/icons/Twitter';
@@ -68,8 +67,8 @@ import {Article, SectionDetails, Picture,
     } from './styleDetallecomponent/styleDetalle';
 
 
-interface Idetalle {
-    detalle: {
+interface IDetalle {
+    data: {
         id:number,
         title:string,
         video_main:string,
@@ -171,10 +170,35 @@ interface Idetalle {
     }
 }
 
+const useStyles = makeStyles((theme) => ({
+    root: {
+      display: 'flex',
+      '& > *': {
+        margin: theme.spacing(1),
+      },
+      
+    },
+    small: {
+      width: theme.spacing(3),
+      height: theme.spacing(3),
+    },
+    large: {
+      width: theme.spacing(7),
+      height: theme.spacing(7),
+    },
+  }));
 
-const Detalle: React.FC<Idetalle> = props => {
+
+const Detalle: React.FC<IDetalle> = (props) => {
     const classes = useStyles();
-    console.log(props.detalle);
+  
+    const {
+        proyectosDetalle
+      } = useSelector((stateSelector: any) => {
+        return stateSelector.detalleProyecto;
+      });
+    
+      
     useEffect(() =>{
     },[]);
 
@@ -195,35 +219,21 @@ const Detalle: React.FC<Idetalle> = props => {
            <Col xs={12} sm={6} md={6} lg={6}> 
               <SectionDetails>
                     <Article>
-                        <Picture>
-                            {/* <Go to={{
-                                pathname: '/',
-                                state: { }
-                            }}> */}                            
-                               <ReactPlayer width={'99.9%'} url={props.detalle.video_main} />
-                            {/* </Go> */}
+                        <Picture>                       
+                               <ReactPlayer width={'99.9%'} url={props.data.video_main} />                    
                         </Picture>
-                        <Row >                           
-                            {/* <Col xs={12} sm={12} md={6} lg={6}>
-                                <Row start="lg">
-                                   <Col xs={12} sm={12} md={12} lg={12}>
-                                   <TitleVideo1>Arte - pintura oleo</TitleVideo1>                                      
-                                   </Col>
-                                </Row>
-                            </Col> */}
+                        <Row >                                                
                             <Col xs={12} sm={12} md={12} lg={12}>
                               <DivTitlevideo>
                                    <Row>
-                                    {/* <Row  start="lg" >                                  */}
+                                                            
                                         <Col xs={6} sm={6} md={6} lg={6}>                                                                           
-                                            <TitleVideo1>cultura</TitleVideo1>  
-                                        </Col>
-                                    {/* </Row> */}
-                                    {/* <Row end="lg"> */}
+                                            {/* <TitleVideo1>{props.data.header.amount}</TitleVideo1>                                               */}
+                                        </Col>                                                          
                                         <Col xs={6} sm={6} md={6} lg={6}>                                          
                                             <TitleVideo1>cultura</TitleVideo1>                                                                    
                                         </Col>
-                                    {/* </Row>    */}
+                               
                                    </Row>
                                 </DivTitlevideo>
                             </Col>
@@ -238,10 +248,8 @@ const Detalle: React.FC<Idetalle> = props => {
                    <Col xs={8} sm={8} md={8} lg={6}>                   
                         <Row start="lg">
                             <Col xs={12} sm={12} md={12} lg={12}>
-                               <Alcanzado>
-                                    {/* <p> {props.data.header.percent_reached}{'% '} ALCANZADO</p> */}
-                                    <AlcanceText> {'ALCANZADOS BS 1000 '} </AlcanceText>
-                                    
+                               <Alcanzado>                                    
+                                    <AlcanceText> {'ALCANZADOS BS 1000 '} </AlcanceText>                                    
                                 </Alcanzado>  
                             </Col>
                         </Row>
@@ -249,8 +257,7 @@ const Detalle: React.FC<Idetalle> = props => {
                     <Col xs={4} sm={4} md={4} lg={6}>                    
                         <Row end="lg">
                             <Col xs={12} sm={12} md={12} lg={12}>   
-                               <Alcanzado>
-                               {/* <NumberMontoMeta> {props.data.header.amount_reached } Bs</NumberMontoMeta>   */}
+                               <Alcanzado>                               
                                   <NumberMontoMeta> {'1500'} Bs</NumberMontoMeta>
                                </Alcanzado>                          
                             </Col>
@@ -323,11 +330,8 @@ const Detalle: React.FC<Idetalle> = props => {
                     <Row  >
                         <Col xs={12} sm={12} md={12} lg={12}>
                             <Row center='xs' >
-                                {/* <Col xs={12} sm={12} md={12} lg={12}> */}
-                                    {/* <Div1> */}
-                                    <BotonAportar >Aportar</BotonAportar>
-                                    {/* </Div1>                                */}
-                                {/* </Col> */}
+
+                                    <BotonAportar >Aportar</BotonAportar>   
                             </Row>
                         </Col>
                     </Row>
@@ -487,11 +491,10 @@ const Detalle: React.FC<Idetalle> = props => {
                                 
                             </Col>
                             <Col xs={12} sm={12} md={12} lg={12}>
-                                {/* <Row center='xs' > */}
+                                
                                   <LinkAzul to="/descripcion" style={{fontSize:"12px"}}>{'3 proyectos creados'}</LinkAzul> {' '}
                                 
-                                  <LinkAzul to="/descripcion" style={{fontSize:"12px"}} >{'2 proyectos apoyados'}</LinkAzul> {' '}
-                                {/* </Row> */}
+                                  <LinkAzul to="/descripcion" style={{fontSize:"12px"}} >{'2 proyectos apoyados'}</LinkAzul> {' '}                                
                             </Col>
                             <Col xs={12} sm={12} md={12} lg={12}>
                                 <div style={{marginTop:"2%", marginBottom:"2%"}} > 
@@ -663,21 +666,5 @@ const Detalle: React.FC<Idetalle> = props => {
     )
 }
 
-const useStyles = makeStyles((theme) => ({
-    root: {
-      display: 'flex',
-      '& > *': {
-        margin: theme.spacing(1),
-      },
-      
-    },
-    small: {
-      width: theme.spacing(3),
-      height: theme.spacing(3),
-    },
-    large: {
-      width: theme.spacing(7),
-      height: theme.spacing(7),
-    },
-  }));
+
 export default Detalle

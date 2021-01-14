@@ -150,9 +150,15 @@ const Projects: React.FC<Iproyect> = (props)=> {
                 <Row>
                     <Col xs={12} sm={12} md={12} lg={12}>
                         <Excerpt>
-                            {/* <Go to="/"> */}
+                        <Go   to={{
+                            pathname: '/detail-proyect',
+                            state: {
+                                idProyecto: `${props.data.id}`,
+                                slug: `${props.data.slug}`
+                            }
+                            }}>
                                 {props.data.title}                                
-                            {/* </Go> */}
+                            </Go>
                         </Excerpt>
                     </Col>
                 </Row>
