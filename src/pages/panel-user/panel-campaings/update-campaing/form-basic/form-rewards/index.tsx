@@ -1,5 +1,6 @@
 import React from 'react'
 import {useForm} from 'react-hook-form'
+import {connect} from 'react-redux'
 import {Editor} from '@tinymce/tinymce-react'
 import {Row, Col} from 'react-styled-flexboxgrid'
 import {store} from 'react-notifications-component'
@@ -7,6 +8,7 @@ import {CampaingHeader} from '../../../../../../userCampaings'
 import {Cities} from '../../../../../../userCities'
 import {Reward} from '../../../../../../userReward'
 import Slide from 'react-reveal/Slide'
+import TableReward from './table-reward'
 import {
     InputReward,
     Form,
@@ -34,7 +36,7 @@ import {
 type FormData = {
     title: string,
     amount: number,
-    descript: string,
+    description: string,
     expected_delivery: string,
     header: number,
     user: number,
@@ -44,13 +46,19 @@ type FormData = {
 
 }
 
-const FormRewards: React.FC= () => {
+type TypeReward = {
+    rewards: FormData
+}
+
+type AllProps = TypeReward
+
+const FormRewards: React.FC<AllProps>= ({rewards}) => {
     let token = window.sessionStorage.getItem('token')
     let CamHeader = new CampaingHeader(token)
     let Rewards = new Reward(token)
     let City = new Cities(token)
     const [datach, setDatach] = React.useState<number>(0)
-    const [description, Setdescription] = React.useState()
+    const [resumes, Setresumes] = React.useState()
     const [selected, Setselected] = React.useState<number[]>([])
     const [MsgErrorF, setMsgErrorF] = React.useState()
     const [cities, setCities] = React.useState()
@@ -76,13 +84,13 @@ const FormRewards: React.FC= () => {
             })
     }
 
-    const onSubmit = handleSubmit(({title, amount, descript, expected_delivery, all_cities, pick_up_locally}) => {
+    const onSubmit = handleSubmit(({title, amount, expected_delivery, all_cities, pick_up_locally}) => {
         if(validate()){
             let data_format = expected_delivery + " 00:00:00"
             let data_reward = { 
                 title: title,
                 amount: amount,
-                description: description,
+                description: resumes,
                 expected_delivery: data_format,
                 header: datach,
                 user: 0,
@@ -114,17 +122,17 @@ const FormRewards: React.FC= () => {
     }
 
     const handleEditorReward = (content: any, editor: any) => {
-        Setdescription(content)
+        Setresumes(content)
     }
 
     const validate = () => { 
-        if(description.length === 0){
+        if(resumes.length === 0){
 
             Notifications('La Descripcion de la recompensa es requerida', 'danger')
             setMsgErrorF('este campo es requerido')
             return false
         }
-        if(description.length >= 940){
+        if(resumes.length >= 940){
             Notifications('La descripcion de la Recompensa no debe exceder mas 900 caracteres o 159 palabras.', 'danger')
             setMsgErrorF('no debe exceder mas de 900 caracteres o 159 palabras')
             return false
@@ -163,9 +171,12 @@ const FormRewards: React.FC= () => {
     return (
         <>
         <Slide top>
+
         <H4>3- RECOMPENSAS </H4>
         <TextConf>Antes de ofrecer una recompensa, es importante tener mapeados todos los procesos de producción y entrega.</TextConf>
-        
+         <Row>
+                <TableReward />
+        </Row>       
         <Form onSubmit={onSubmit}>
 
         <WrapperBoxRD>
@@ -175,6 +186,7 @@ const FormRewards: React.FC= () => {
                         name="title"
                         ref={register({required: true})}
                         placeholder="titulo de la recompensa"
+                        defaultValue={rewards.title}
                     />
                 <MsgError>
                     {errors.title && 'este campo es requerido'}
@@ -190,6 +202,7 @@ const FormRewards: React.FC= () => {
                         name="amount"
                         ref={register({required: true})}
                         placeholder="15000"
+                        defaultValue={rewards.amount}
                     />
                     <BSRE>BS</BSRE> 
                 </WrappBoxInput>
@@ -197,11 +210,13 @@ const FormRewards: React.FC= () => {
                 </Col>
                 <Col xs={6}>
                 <BoxTitleContent>* Entrega prevista</BoxTitleContent>
+                
                 <WrappBoxInput>
                     <InputReward
-                        type="date"
+                        type="text"
                         name="expected_delivery"
                         ref={register({required: true})}
+                        defaultValue={rewards.expected_delivery}
                     />
                 </WrappBoxInput>
                 <MsgError>{errors.expected_delivery && 'este campo es requerido'}</MsgError>
@@ -216,7 +231,7 @@ const FormRewards: React.FC= () => {
             </BoxText>
             <SpaceB />
                 <Editor
-                    initialValue=''
+                    value={rewards.description}
                     init={{
                         height: 300,
                         menubar: false,
@@ -337,4 +352,8 @@ const FormRewards: React.FC= () => {
     )
 }
 
-export default FormRewards
+const mapStateToProps = (state: any) => ({
+    rewards: state.reward
+})
+
+export default connect(mapStateToProps, '')(FormRewards)

@@ -13,6 +13,7 @@ import {Phases} from '../../../../../../../userPhases'
 import {getPhase} from '../../../../../../../redux/actions/phase.actions' 
 import EditIcon from '@material-ui/icons/Edit'
 import DeleteIcon from '@material-ui/icons/Delete'
+import {BtnUpdate, BtnDelete} from './styles'
 
 type propsPhases = {
     id: number
@@ -107,8 +108,8 @@ const TablePhases:React.FC = (props: any) => {
                         <StyledTableCell align="right">{phase.id}</StyledTableCell>
                         <StyledTableCell align="right">{phase.title}</StyledTableCell>
                         <StyledTableCell align="right">
-                                <button type="button" onClick={e=>onSend(phase)}> <EditIcon /></button>
-                                <button type="button" onClick={e=>onDelete(phase)}> <DeleteIcon /></button>
+                                <BtnUpdate type="button" onClick={e=>onSend(phase)}> <EditIcon /></BtnUpdate>
+                                <BtnDelete type="button" onClick={e=>onDelete(phase)}> <DeleteIcon /></BtnDelete>
                         </StyledTableCell>
                     </StyledTableRow>
 

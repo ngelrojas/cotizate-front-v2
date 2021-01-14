@@ -9,17 +9,29 @@ export class Reward {
     }
 
     /*
-     * retrieve reward
+     * retrieve list rewards related
+     * - headerId
      */
-    retrieveReward = async(campaing_id:number) => {
-        this.resp_reward = await API.get(`reward/${campaing_id}`,{
+    retrieveReward = async(headerId:number) => {
+        this.resp_reward = await API.get(`reward/${headerId}`,{
             headers: {Authorization: `Bearer ${this.token}`}
         })
         return this.resp_reward
     }
 
     /*
-     * retrieve reward
+     * get reward
+     * - headerId
+     * - rewardId
+     */
+    getReward = async(rewardId: number) => {
+        this.resp_reward = await API.get(`rewardr/${rewardId}`,{
+            headers: {Authorization: `Bearer ${this.token}`}
+        })
+        return this.resp_reward
+    }
+    /*
+     * create reward
      */
     createReward = async(data_send: any) => {
         this.resp_reward = await API.post(`reward`, data_send, {
