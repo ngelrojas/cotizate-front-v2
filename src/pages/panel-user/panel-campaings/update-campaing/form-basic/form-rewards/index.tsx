@@ -9,6 +9,8 @@ import {Cities} from '../../../../../../userCities'
 import {Reward} from '../../../../../../userReward'
 import Slide from 'react-reveal/Slide'
 import TableReward from './table-reward'
+import moment from 'moment'
+import Moment from 'react-moment'
 import {
     InputReward,
     Form,
@@ -61,6 +63,7 @@ const FormRewards: React.FC<AllProps>= ({rewards}) => {
     const [resumes, Setresumes] = React.useState()
     const [selected, Setselected] = React.useState<number[]>([])
     const [MsgErrorF, setMsgErrorF] = React.useState()
+    const [LoadDate, setLoadDate] = React.useState()
     const [cities, setCities] = React.useState()
     const {register, handleSubmit, reset, errors} = useForm<FormData>({
         mode: 'onChange'
@@ -84,9 +87,16 @@ const FormRewards: React.FC<AllProps>= ({rewards}) => {
             })
     }
 
+    const FormatDate = (form_date: any) => {
+        let formated_date = new Date(form_date)
+        let formated = moment(formated_date).format('YYYY-MM-DD')
+        setLoadDate(formated) 
+    }
+
     const onSubmit = handleSubmit(({title, amount, expected_delivery, all_cities, pick_up_locally}) => {
         if(validate()){
-            let data_format = expected_delivery + " 00:00:00"
+            let new_date: any = expected_delivery ? expected_delivery + " 00:00:00": expected_delivery 
+            let data_format = new_date ? new_date : rewards.expected_delivery
             let data_reward = { 
                 title: title,
                 amount: amount,
@@ -209,14 +219,13 @@ const FormRewards: React.FC<AllProps>= ({rewards}) => {
                     <MsgError>{errors.amount && 'este campo es requerido'}</MsgError>
                 </Col>
                 <Col xs={6}>
-                <BoxTitleContent>* Entrega prevista</BoxTitleContent>
+                <BoxTitleContent>* Entrega prevista:  <span><Moment format="DD/MM/YYYY">{rewards.expected_delivery}</Moment></span></BoxTitleContent>
                 
                 <WrappBoxInput>
                     <InputReward
-                        type="text"
+                        type="date"
                         name="expected_delivery"
-                        ref={register({required: true})}
-                        defaultValue={rewards.expected_delivery}
+                        ref={register({required: false})}
                     />
                 </WrappBoxInput>
                 <MsgError>{errors.expected_delivery && 'este campo es requerido'}</MsgError>
@@ -289,45 +298,44 @@ const FormRewards: React.FC<AllProps>= ({rewards}) => {
                         <TableCities>
                             <Row between="xs">
                                 {
-                                    cities && cities.map((ct: any)=>(
-                                            <Col xs={4} key={ct.id} > 
-                                            <ItemCity>
-                                            <input 
-                                                defaultChecked={selected.includes(ct.id)}
-                                                type="checkbox" 
-                                                name="cities[]" 
-                                                value={ct.id}
-                                                onClick={handleCities} 
-                                                />{ct.name} 
-                                            </ItemCity>
-                                            </Col>
+                                    cities && cities.map((ct: any) =>(
+                                        <Col xs={4} key={ct.id}>
+                                                <ItemCity>
+                                                    <input 
+                                                        defaultChecked={selected.includes(ct.id)}
+                                                        type="checkbox" 
+                                                        name="cities[]" 
+                                                        value={ct.id}
+                                                        onClick={handleCities} 
+                                                        />{ct.name} 
+                                                </ItemCity>
+                                        </Col>
                                     )) 
                                 }
                             </Row>
-
                         </TableCities>
                         <SecondItem>
 
                             <Row>
                                     <Col xs={6} > 
-                                    <ItemCity>
-                                        <input 
-                                            type="checkbox" 
-                                            name="all_cities" 
-                                            value="1"
-                                            ref={register({required: false})}
-                                        /> Toda Bolivia
-                                    </ItemCity>
+                                        <ItemCity>
+                                            <input 
+                                                type="checkbox" 
+                                                name="all_cities" 
+                                                value="1"
+                                                ref={register({required: false})}
+                                            /> Toda Bolivia
+                                        </ItemCity>
                                     </Col>
                                     <Col xs={6} > 
-                                    <ItemCity>
-                                        <input 
-                                            type="checkbox" 
-                                            name="pick_up_locally" 
-                                            value="1"
-                                            ref={register({required: false})}
-                                        /> Retirar en el local
-                                    </ItemCity>
+                                        <ItemCity>
+                                            <input 
+                                                type="checkbox" 
+                                                name="pick_up_locally" 
+                                                value="1"
+                                                ref={register({required: false})}
+                                            /> Retirar en el local
+                                        </ItemCity>
                                     </Col>
                             </Row>
                         </SecondItem>
