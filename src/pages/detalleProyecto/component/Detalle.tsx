@@ -20,6 +20,7 @@ import AccountCircle from '@material-ui/icons/AccountCircle';
 import {MdLocationOn} from 'react-icons/md';
 import LinkedInIcon from '@material-ui/icons/LinkedIn';
 import LinkIcon from '@material-ui/icons/Link';
+import {copiarTextoToPapelera } from '../../../lib/FuncionesGenerales';
 
 
   
@@ -205,6 +206,12 @@ const Detalle: React.FC<IDetalle> = (props) => {
     useEffect(() =>{
     },[]);
 
+    const copiarLink =(data: string)=>{
+       
+        copiarTextoToPapelera(data);
+
+    }
+
     return (
         <>
         <Col xs={12} sm={12} md={12} lg={12} >     
@@ -362,7 +369,7 @@ const Detalle: React.FC<IDetalle> = (props) => {
                           </Col>
                           <Col xs={12} sm={12} md={6} lg={4}>
                               <Row end="lg">
-                                <BotonAportar style={{width:"50%", background: "#1383C5"}} >Copiar</BotonAportar>
+                                <BotonAportar onClick={()=> copiarLink(props.data.short_url)} style={{width:"50%", background: "#1383C5"}} >Copiar</BotonAportar>
                               </Row>
                           </Col>
                         </Row>
