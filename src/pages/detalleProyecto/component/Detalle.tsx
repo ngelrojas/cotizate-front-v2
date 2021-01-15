@@ -17,6 +17,9 @@ import { makeStyles, createStyles } from '@material-ui/core/styles';
 import { TextField } from '@material-ui/core';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import AccountCircle from '@material-ui/icons/AccountCircle';
+import {MdLocationOn} from 'react-icons/md';
+import LinkedInIcon from '@material-ui/icons/LinkedIn';
+import LinkIcon from '@material-ui/icons/Link';
 
 
   
@@ -210,7 +213,7 @@ const Detalle: React.FC<IDetalle> = (props) => {
                             <Col xs={12} sm={12} md={12} lg={12}>
                                <DivPortada>
                                   <TilePortada> 
-                                     {'LA LUCHA POR LA  LIBERACIÓN REFORMA EDUCATIVA Y VOTO UNIVERSAL'}
+                                     {props.data.title}
                                     </TilePortada>
                                 </DivPortada>  
                             </Col>
@@ -225,15 +228,13 @@ const Detalle: React.FC<IDetalle> = (props) => {
                         <Row >                                                
                             <Col xs={12} sm={12} md={12} lg={12}>
                               <DivTitlevideo>
-                                   <Row>
-                                                            
+                                   <Row>                                                            
                                         <Col xs={6} sm={6} md={6} lg={6}>                                                                           
-                                            {/* <TitleVideo1>{props.data.header.amount}</TitleVideo1>                                               */}
+                                            <TitleVideo1>{props.data.header.category.name}</TitleVideo1>                                              
                                         </Col>                                                          
                                         <Col xs={6} sm={6} md={6} lg={6}>                                          
-                                            <TitleVideo1>cultura</TitleVideo1>                                                                    
-                                        </Col>
-                               
+                                            <TitleVideo1> <MdLocationOn /> {props.data.header.city.name}{' - '} {props.data.header.city.countries.name} </TitleVideo1>
+                                        </Col>                               
                                    </Row>
                                 </DivTitlevideo>
                             </Col>
@@ -249,7 +250,7 @@ const Detalle: React.FC<IDetalle> = (props) => {
                         <Row start="lg">
                             <Col xs={12} sm={12} md={12} lg={12}>
                                <Alcanzado>                                    
-                                    <AlcanceText> {'ALCANZADOS BS 1000 '} </AlcanceText>                                    
+                                    <AlcanceText> {'ALCANZADOS BS: '}{props.data.header.amount_reached} </AlcanceText>                                    
                                 </Alcanzado>  
                             </Col>
                         </Row>
@@ -258,7 +259,7 @@ const Detalle: React.FC<IDetalle> = (props) => {
                         <Row end="lg">
                             <Col xs={12} sm={12} md={12} lg={12}>   
                                <Alcanzado>                               
-                                  <NumberMontoMeta> {'1500'} Bs</NumberMontoMeta>
+                                  <NumberMontoMeta> {'Meta: '}{props.data.header.amount} Bs</NumberMontoMeta>
                                </Alcanzado>                          
                             </Col>
                         </Row>
@@ -289,7 +290,7 @@ const Detalle: React.FC<IDetalle> = (props) => {
                         <Row start="lg">
                             <Col xs={12} sm={12} md={12} lg={12}>
                                 <Div1>
-                                    <TileDias>{'FALTAN 60 DIAS'}</TileDias> 
+                                    <TileDias>{'FALTAN'} {props.data.header.qty_day_left} {' DIAS'}</TileDias> 
                                 </Div1>                               
                             </Col>
                         </Row>
@@ -320,7 +321,7 @@ const Detalle: React.FC<IDetalle> = (props) => {
                         <Row start="lg">
                             <Col xs={12} sm={12} md={12} lg={12}>
                                 <DivCod>
-                                    <TileCode>{'COD: 000111'}</TileCode> 
+                                    <TileCode>{'COD: '}{props.data.header.code_campaing}</TileCode> 
                                 </DivCod>                               
                             </Col>
                         </Row>
@@ -355,10 +356,8 @@ const Detalle: React.FC<IDetalle> = (props) => {
                           
                           </Col> 
                           <Col xs={12} sm={12} md={6} lg={4}>
-                              <Row end="lg">
-                                
-                                  <ButtonEnlace  >http//:cotizate.com</ButtonEnlace>
-                                
+                              <Row end="lg">                                
+                                  <ButtonEnlace>{props.data.short_url}</ButtonEnlace>                                
                               </Row>
                           </Col>
                           <Col xs={12} sm={12} md={6} lg={4}>
@@ -486,7 +485,7 @@ const Detalle: React.FC<IDetalle> = (props) => {
                             <Col xs={12} sm={12} md={12} lg={12}>
                                 
                                 <Autor>
-                                  Miguel alandia  pantoja
+                                 {props.data.profile.user.first_name}{' '}{props.data.profile.user.last_name}
                                 </Autor>
                                 
                             </Col>
@@ -498,12 +497,32 @@ const Detalle: React.FC<IDetalle> = (props) => {
                             </Col>
                             <Col xs={12} sm={12} md={12} lg={12}>
                                 <div style={{marginTop:"2%", marginBottom:"2%"}} > 
-                                    <FacebookIcon style={{width:"30%" }} /> {' '} 
-                                    <TwitterIcon style={{width:"30%" }} />  {' '} 
-                                    <WhatsAppIcon style={{width:"30%" }}/> {' '} 
+                                   {props.data.profile.rs_facebook? <> 
+                                      <Go  to={{ pathname:  `${props.data.profile.rs_facebook}` }} target="_blank" >
+                                         <FacebookIcon style={{marginLeft:'2%' }} /> {' '}
+                                      </Go>
+                                    </>: null
+                                    }
+                                   {props.data.profile.rs_twitter? <>  
+                                      <Go  to={{ pathname:  `${props.data.profile.rs_twitter}` }} target="_blank" >
+                                         <TwitterIcon style={{marginLeft:'2%'  }} />  {' '} 
+                                      </Go>
+                                   </>: null
+                                   }
+                                   {props.data.profile.rs_linkedin? <>  
+                                       <Go  to={{ pathname:  `${props.data.profile.rs_linkedin}` }} target="_blank" >
+                                         <LinkedInIcon style={{marginLeft:'2%'  }} />  {' '} 
+                                       </Go>
+                                   </>: null 
+                                   }
+                                    {props.data.profile.rs_another? <>  
+                                       <Go  to={{ pathname:  `${props.data.profile.rs_another}` }} target="_blank" >
+                                         <LinkIcon style={{marginLeft:'2%'  }} />  {' '} 
+                                       </Go>
+                                   </>: null 
+                                   }
                                 </div>
-                            </Col>
-                          
+                            </Col>                          
                         </Col>
 
                       </Row>   
