@@ -42,6 +42,8 @@ export class Reward {
 
     /*
      * update reward
+     * reward_id = reward id
+     * data_send = data to update
      */
     updateReward = async(reward_id:number, data_send: any) => {
         this.resp_reward = await API.put(`reward/${reward_id}`, data_send, {

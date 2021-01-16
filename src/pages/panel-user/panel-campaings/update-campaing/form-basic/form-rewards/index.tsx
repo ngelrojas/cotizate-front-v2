@@ -4,12 +4,10 @@ import {connect} from 'react-redux'
 import {Editor} from '@tinymce/tinymce-react'
 import {Row, Col} from 'react-styled-flexboxgrid'
 import {store} from 'react-notifications-component'
-import {CampaingHeader} from '../../../../../../userCampaings'
 import {Cities} from '../../../../../../userCities'
 import {Reward} from '../../../../../../userReward'
 import Slide from 'react-reveal/Slide'
 import TableReward from './table-reward'
-import moment from 'moment'
 import Moment from 'react-moment'
 import {
     InputReward,
@@ -36,6 +34,7 @@ import {
 } from '../../styles'
 
 type FormData = {
+    id: number
     title: string,
     amount: number,
     description: string,
@@ -56,14 +55,11 @@ type AllProps = TypeReward
 
 const FormRewards: React.FC<AllProps>= ({rewards}) => {
     let token = window.sessionStorage.getItem('token')
-    let CamHeader = new CampaingHeader(token)
     let Rewards = new Reward(token)
     let City = new Cities(token)
-    const [datach, setDatach] = React.useState<number>(0)
     const [resumes, Setresumes] = React.useState()
     const [selected, Setselected] = React.useState<number[]>([])
     const [MsgErrorF, setMsgErrorF] = React.useState()
-    const [LoadDate, setLoadDate] = React.useState()
     const [cities, setCities] = React.useState()
     const {register, handleSubmit, reset, errors} = useForm<FormData>({
         mode: 'onChange'
@@ -78,38 +74,26 @@ const FormRewards: React.FC<AllProps>= ({rewards}) => {
             })
     }
 
-    const getLast = () => {
-        CamHeader.getLastCampaingHeader()
-            .then(resp => {
-                setDatach(resp.data.data.id)
-            }).catch(err =>{
-                console.error(err)
-            })
-    }
-
-    const FormatDate = (form_date: any) => {
-        let formated_date = new Date(form_date)
-        let formated = moment(formated_date).format('YYYY-MM-DD')
-        setLoadDate(formated) 
-    }
-
     const onSubmit = handleSubmit(({title, amount, expected_delivery, all_cities, pick_up_locally}) => {
+
         if(validate()){
             let new_date: any = expected_delivery ? expected_delivery + " 00:00:00": expected_delivery 
             let data_format = new_date ? new_date : rewards.expected_delivery
+            let rewardId = rewards.id
+
             let data_reward = { 
                 title: title,
                 amount: amount,
                 description: resumes,
                 expected_delivery: data_format,
-                header: datach,
+                header: rewards.header,
                 user: 0,
-                cities:selected,
+                cities: selected,
                 all_cities: all_cities,
                 pick_up_locally: pick_up_locally
             }
 
-            Rewards.createReward(data_reward)
+            Rewards.updateReward(rewardId, data_reward)
                 .then(resp => {
                     Notifications('Recompensa agregada.', 'success')
                     reset() 
@@ -145,6 +129,7 @@ const FormRewards: React.FC<AllProps>= ({rewards}) => {
         if(resumes.length >= 940){
             Notifications('La descripcion de la Recompensa no debe exceder mas 900 caracteres o 159 palabras.', 'danger')
             setMsgErrorF('no debe exceder mas de 900 caracteres o 159 palabras')
+            Setresumes(0)
             return false
         }
         return true
@@ -174,7 +159,6 @@ const FormRewards: React.FC<AllProps>= ({rewards}) => {
             left: 0,
             behavior: 'smooth'
         })
-        getLast()
         listCities()
     },[])
 
