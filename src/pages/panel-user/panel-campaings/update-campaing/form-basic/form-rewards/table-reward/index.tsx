@@ -1,56 +1,140 @@
 import React from 'react'
-import {Col} from 'react-styled-flexboxgrid'
-import {
-    H3,
-    Table,
-    Thead,
-    Th,
-    Td,
-    Tr
-} from '../../../styles'
+import {connect} from 'react-redux'
+import {useRouteMatch} from 'react-router-dom'
+import { withStyles, Theme, createStyles, makeStyles } from '@material-ui/core/styles';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableContainer from '@material-ui/core/TableContainer';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+import Paper from '@material-ui/core/Paper';
+import {Reward} from '../../../../../../../userReward'
+import {getReward} from '../../../../../../../redux/actions/reward.actions' 
+import EditIcon from '@material-ui/icons/Edit'
+import DeleteIcon from '@material-ui/icons/Delete'
+import {BtnUpdate, BtnDelete} from './styles'
 
-const TableReward: React.FC = ()=>{
-    const [getRewards, SetgetRewards] = React.useState()
-    let _formReward:any = window.localStorage.getItem('formReward')  
-    let form_parse = JSON.parse(_formReward)
-    let _rewards: any = form_parse
-
-    React.useEffect(() => {
-        if(_rewards){
-           SetgetRewards(_rewards) 
-        }
-    }, [])
-    const handleDelete = (e:number) => {
-        const conjunt = _rewards.slice(0, e).concat(_rewards.slice(e + 1, _rewards.length))
-        console.log(conjunt) 
-        window.localStorage.setItem('formReward', JSON.stringify(conjunt))
-    }
-
-    return(
-        <Col>
-            <H3>LISTA DE RECOMPENSAS</H3>
-            <Table>
-                <Thead>
-                    <tr>
-                        <Th>titulo</Th>
-                        <Th>monto</Th>
-                        <Th>opcion</Th>
-                    </tr>
-                </Thead>
-                <tbody>
-                {
-                    getRewards && getRewards.map( (reward:any, index:number) =>(
-                     <Tr key={index}>
-                        <Td>{reward.title}</Td>
-                        <Td>{reward.cant_reward}</Td>
-                        <Td><button type="button" onClick={()=>handleDelete(index)}>eleminiar</button></Td>
-                    </Tr>                        
-                    ))
-                }
-
-                </tbody> 
-            </Table>
-        </Col>
-    )
+interface Icity {
+    id: number
 }
-export default TableReward
+
+type propsRewards = {
+    id: number
+    title: string
+    amount: number
+    description: string
+    header: number
+    expected_delivery: string
+    user: number
+    cities: Icity
+    all_cities: boolean
+    pick_up_locally: boolean
+}
+
+const StyledTableCell = withStyles((theme: Theme) =>
+  createStyles({
+    head: {
+      backgroundColor: theme.palette.common.black,
+      color: theme.palette.common.white,
+    },
+    body: {
+      fontSize: 14,
+    },
+  }),
+)(TableCell);
+
+const StyledTableRow = withStyles((theme: Theme) =>
+  createStyles({
+    root: {
+      '&:nth-of-type(odd)': {
+        backgroundColor: theme.palette.action.hover,
+      },
+    },
+  }),
+)(TableRow);
+
+const useStyles = makeStyles({
+  table: {
+    minWidth: 700,
+  },
+});
+
+const TableReward:React.FC = (props: any) => {
+  let match = useRouteMatch('/panel-de-usuario/actualizar-proyecto/:campania')
+  let matchUrl: any = match
+  let campaingId = matchUrl.params.campania
+  let token = window.sessionStorage.getItem('token')
+  let CReward = new Reward(token)
+  const classes = useStyles();
+  const [IsLoading, setIsLoading] = React.useState(true)
+  const [LoadRewards, setLoadRewards] = React.useState()
+
+  const listRewards = (campID: number) => {
+    CReward.retrieveReward(campID)
+        .then(resp => {
+            setLoadRewards(resp.data.data) 
+        })
+        .catch(err => {
+            console.error(err)
+        })
+        .then(()=>{
+            setIsLoading(false)
+        })
+  }
+
+  const onSend =(e: any)=>{
+      let rewardId: number = e.id 
+      props.getReward(rewardId)
+  }
+
+  const onDelete =(e: any)=>{
+      let rewardId: number = e.id
+      props.getReward(rewardId)
+  }
+
+  React.useEffect(()=>{
+    listRewards(campaingId)
+  },[])
+
+  return (
+    <TableContainer component={Paper}>
+      <Table className={classes.table} aria-label="customized table">
+        <TableHead>
+          <TableRow>
+            <StyledTableCell>ID</StyledTableCell>
+            <StyledTableCell align="right">TITULO</StyledTableCell>
+            <StyledTableCell align="right">OPCIONES</StyledTableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+        {
+            !IsLoading && LoadRewards ? (LoadRewards.map((reward: any)=>{
+                return(
+                    <StyledTableRow key={reward.id}>
+                        <StyledTableCell align="right">{reward.id}</StyledTableCell>
+                        <StyledTableCell align="right">{reward.title}</StyledTableCell>
+                        <StyledTableCell align="right">
+                                <BtnUpdate type="button" onClick={e=>onSend(reward)}> <EditIcon /></BtnUpdate>
+                                <BtnDelete type="button" onClick={e=>onDelete(reward)}> <DeleteIcon /></BtnDelete>
+                        </StyledTableCell>
+                    </StyledTableRow>
+
+                ) 
+                    })):('Loading...!')
+        }
+        </TableBody>
+      </Table>
+    </TableContainer>
+  )
+}
+
+const mapStateToProps = (state: any) => ({
+    reward: state.reward
+}) 
+
+const mapActionToProps = {
+    getReward 
+}
+
+export default connect(mapStateToProps, mapActionToProps)(TableReward)

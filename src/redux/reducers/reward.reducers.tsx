@@ -1,17 +1,23 @@
 import {
-    SET_PHASES,
+    SET_REWARD,
+    GET_REWARD,
     SET_ERRORS
-} from '../types/phases.types'
+} from '../types/rewards.types'
 
 const initialState = {
     answer: false,
-    phases: {}, 
+    rewards: {}, 
 } 
 
 export default function(state = initialState, action: any) {
     switch (action.type) {
 
-        case SET_PHASES:
+        case SET_REWARD:
+            return {
+                answer: true,
+                ...action.payload
+            }
+        case GET_REWARD:
             return {
                 answer: true,
                 ...action.payload

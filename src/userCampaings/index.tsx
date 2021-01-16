@@ -24,7 +24,8 @@ export class Campaings {
     createCampaing = async(data_send: any) => {
         this.resp_campaing = await API.post(`campaing-body`, data_send, {
             headers: {
-                Authorization: `Bearer ${this.token}`
+                Authorization: `Bearer ${this.token}`,
+                'Content-Type': 'multipart/form-data'
             }
         })
         return this.resp_campaing

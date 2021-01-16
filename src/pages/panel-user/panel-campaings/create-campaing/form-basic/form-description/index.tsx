@@ -102,21 +102,22 @@ const FormDescription: React.FC<AllProps> = ({counter, handleNext, handleBack}) 
                 short_url: short_url ? short_url: '', 
                 slogan_campaing: slogan_campaing ? slogan_campaing: ''
             }
-            console.info(typeof(imagen_main[0]))
-            console.info(send_data)
+            //console.info(typeof(imagen_main[0]))
+            //console.info(send_data)
             CamBody.createCampaing(send_data)
                 .then(resp =>{
                     Notifications('Datos de Descripcion de proyecto guardados', 'success')
                     setMsgExcerpt('')
                     setMsgdescription('')
-                    //reset()
-                    //handleNext()
+                    reset()
+                    handleNext()
                 }).catch(err => {
                     console.error(err)
                     Notifications('Porfavor debe revisar los datos a ser llenados.', 'danger')
                 })
 
         }
+
     })
 
     const validate = () => {
@@ -184,7 +185,7 @@ const FormDescription: React.FC<AllProps> = ({counter, handleNext, handleBack}) 
         <H4>2.- DESCRIPCmeIÓN DEL PROYECTO </H4>
         <TextConf>Describe tu proyecto en forma clara, cuando llegues a las faces detente y piensa en cuanto nesecitas para cada  face de tu proyecto y cuanto será el costo para este item  
         </TextConf>
-        <Form onSubmit={onSubmit} encType="multipart/form-data">
+        <Form onSubmit={onSubmit}>
         <Row>
             <Col xs={6}>
                     <BoxTitle>* Titulo</BoxTitle>
