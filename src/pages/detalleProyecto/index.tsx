@@ -16,14 +16,14 @@ const Projectdetails: React.FC<Idetalle> = props => {
         proyectosDetalle,
         statusDetalle
       } = useSelector((stateSelector: any) => {  return stateSelector.detalleProyecto;  });
-
+    console.log(proyectosDetalle);
     useEffect(() =>{
      dispatch(Action.ObtenerProyecto(slug));
     },[]);
 
     return (
         <>
-        <Detalle detalle={proyectosDetalle} />
+        <Detalle data={proyectosDetalle} />
             
         </>
     )

@@ -5,9 +5,8 @@ import LineProgress from '../../../components/LineProgress'
 
 import ThumbUpAltIcon from '@material-ui/icons/ThumbUpAlt';
 import ThumbDownIcon from '@material-ui/icons/ThumbDown';
-
+import { useDispatch, useSelector } from "react-redux";
 import BookmarkBorderIcon from '@material-ui/icons/BookmarkBorder';
-import BookmarkIcon from '@material-ui/icons/Bookmark';
 import { IconButton } from '@material-ui/core';
 import FacebookIcon from '@material-ui/icons/Facebook';
 import TwitterIcon from '@material-ui/icons/Twitter';
@@ -15,8 +14,14 @@ import WhatsAppIcon from '@material-ui/icons/WhatsApp';
 import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
 import Avatar from '@material-ui/core/Avatar';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
-
-
+import { TextField } from '@material-ui/core';
+import InputAdornment from '@material-ui/core/InputAdornment';
+import AccountCircle from '@material-ui/icons/AccountCircle';
+import {MdLocationOn} from 'react-icons/md';
+import LinkedInIcon from '@material-ui/icons/LinkedIn';
+import LinkIcon from '@material-ui/icons/Link';
+import {copiarTextoToPapelera } from '../../../lib/FuncionesGenerales';
+import TabDetalle from './TabDetalle';
 
   
 import {Article, SectionDetails, Picture, 
@@ -24,6 +29,7 @@ import {Article, SectionDetails, Picture,
     DivPortada,
     TilePortada,
     TitleVideo1,
+    DivTitlevideo,
     Porcentaje,
      Img,
      Contenedor,
@@ -54,12 +60,19 @@ import {Article, SectionDetails, Picture,
      DivBorderSinColor,
      Texto2,
      Texto3,
-     Autor
+     Autor,
+     DivSeparador2,
+     TitleDonacion,
+     TitleAportaciones,
+     TitleAportaciones2,
+     SubTitleAportacion,
+     TextoSubtitulo,
+     TextoSubtitulo2
     } from './styleDetallecomponent/styleDetalle';
 
 
-interface Idetalle {
-    detalle: {
+interface IDetalle {
+    data: {
         id:number,
         title:string,
         video_main:string,
@@ -161,12 +174,43 @@ interface Idetalle {
     }
 }
 
+const useStyles = makeStyles((theme) => ({
+    root: {
+      display: 'flex',
+      '& > *': {
+        margin: theme.spacing(1),
+      },
+      
+    },
+    small: {
+      width: theme.spacing(3),
+      height: theme.spacing(3),
+    },
+    large: {
+      width: theme.spacing(7),
+      height: theme.spacing(7),
+    },
+  }));
 
-const Detalle: React.FC<Idetalle> = props => {
+
+const Detalle: React.FC<IDetalle> = (props) => {
     const classes = useStyles();
-    console.log(props.detalle);
+  
+    const {
+        proyectosDetalle
+      } = useSelector((stateSelector: any) => {
+        return stateSelector.detalleProyecto;
+      });
+    
+      
     useEffect(() =>{
     },[]);
+
+    const copiarLink =(data: string)=>{
+       
+        copiarTextoToPapelera(data);
+
+    }
 
     return (
         <>
@@ -176,7 +220,7 @@ const Detalle: React.FC<Idetalle> = props => {
                             <Col xs={12} sm={12} md={12} lg={12}>
                                <DivPortada>
                                   <TilePortada> 
-                                     {'LA LUCHA POR LA  LIBERACIÓN REFORMA EDUCATIVA Y VOTO UNIVERSAL'}
+                                     {props.data.title}
                                     </TilePortada>
                                 </DivPortada>  
                             </Col>
@@ -185,31 +229,23 @@ const Detalle: React.FC<Idetalle> = props => {
            <Col xs={12} sm={6} md={6} lg={6}> 
               <SectionDetails>
                     <Article>
-                        <Picture>
-                            {/* <Go to={{
-                                pathname: '/',
-                                state: { }
-                            }}> */}
-                               {/* <ReactPlayer width={'99.9%'} url='https://www.youtube.com/watch?v=QaXhVryxVBk' /> */}
-                               <ReactPlayer width={'99.9%'} url={props.detalle.video_main} />
-                            {/* </Go> */}
+                        <Picture>                       
+                               <ReactPlayer width={'99.9%'} url={props.data.video_main} />                    
                         </Picture>
-                        <Row >
-                            <Col xs={12} sm={12} md={6} lg={6}>
-                                <Row start="lg">
-                                   <Col xs={12} sm={12} md={12} lg={12}>
-                                   <TitleVideo1>Arte - pintura oleo</TitleVideo1>
-                                   </Col>
-                                </Row>
+                        <Row >                                                
+                            <Col xs={12} sm={12} md={12} lg={12}>
+                              <DivTitlevideo>
+                                   <Row>                                                            
+                                        <Col xs={6} sm={6} md={6} lg={6}>                                                                           
+                                            <TitleVideo1>{props.data.header.category.name}</TitleVideo1>                                              
+                                        </Col>                                                          
+                                        <Col xs={6} sm={6} md={6} lg={6}>                                          
+                                            <TitleVideo1> <MdLocationOn /> {props.data.header.city.name}{' - '} {props.data.header.city.countries.name} </TitleVideo1>
+                                        </Col>                               
+                                   </Row>
+                                </DivTitlevideo>
                             </Col>
-                            <Col xs={12} sm={12} md={6} lg={6}>
-                                <Row start="lg">
-                                   <Col xs={12} sm={12} md={12} lg={12}>
-                                      <TitleVideo1>bbbbbb</TitleVideo1>
-                                   </Col>
-                                </Row>
-                            </Col>
-                            
+                          
                         </Row>
                     </Article>          
               </SectionDetails>
@@ -220,10 +256,8 @@ const Detalle: React.FC<Idetalle> = props => {
                    <Col xs={8} sm={8} md={8} lg={6}>                   
                         <Row start="lg">
                             <Col xs={12} sm={12} md={12} lg={12}>
-                               <Alcanzado>
-                                    {/* <p> {props.data.header.percent_reached}{'% '} ALCANZADO</p> */}
-                                    <AlcanceText> {'ALCANZADOS BS 1000 '} </AlcanceText>
-                                    
+                               <Alcanzado>                                    
+                                    <AlcanceText> {'ALCANZADOS BS: '}{props.data.header.amount_reached} </AlcanceText>                                    
                                 </Alcanzado>  
                             </Col>
                         </Row>
@@ -231,9 +265,8 @@ const Detalle: React.FC<Idetalle> = props => {
                     <Col xs={4} sm={4} md={4} lg={6}>                    
                         <Row end="lg">
                             <Col xs={12} sm={12} md={12} lg={12}>   
-                               <Alcanzado>
-                               {/* <NumberMontoMeta> {props.data.header.amount_reached } Bs</NumberMontoMeta>   */}
-                                  <NumberMontoMeta> {'1500'} Bs</NumberMontoMeta>
+                               <Alcanzado>                               
+                                  <NumberMontoMeta> {'Meta: '}{props.data.header.amount} Bs</NumberMontoMeta>
                                </Alcanzado>                          
                             </Col>
                         </Row>
@@ -264,7 +297,7 @@ const Detalle: React.FC<Idetalle> = props => {
                         <Row start="lg">
                             <Col xs={12} sm={12} md={12} lg={12}>
                                 <Div1>
-                                    <TileDias>{'FALTAN 60 DIAS'}</TileDias> 
+                                    <TileDias>{'FALTAN'} {props.data.header.qty_day_left} {' DIAS'}</TileDias> 
                                 </Div1>                               
                             </Col>
                         </Row>
@@ -295,21 +328,18 @@ const Detalle: React.FC<Idetalle> = props => {
                         <Row start="lg">
                             <Col xs={12} sm={12} md={12} lg={12}>
                                 <DivCod>
-                                    <TileCode>{'COD: 000111'}</TileCode> 
+                                    <TileCode>{'COD: '}{props.data.header.code_campaing}</TileCode> 
                                 </DivCod>                               
                             </Col>
                         </Row>
                     </Col>
                 </Row>
                 </Contenedor>
-                    <Row center='xs' >
+                    <Row  >
                         <Col xs={12} sm={12} md={12} lg={12}>
-                            <Row >
-                                <Col xs={12} sm={12} md={12} lg={12}>
-                                    <Div1>
-                                    <BotonAportar >Aportar</BotonAportar>
-                                    </Div1>                               
-                                </Col>
+                            <Row center='xs' >
+
+                                    <BotonAportar >Aportar</BotonAportar>   
                             </Row>
                         </Col>
                     </Row>
@@ -333,15 +363,13 @@ const Detalle: React.FC<Idetalle> = props => {
                           
                           </Col> 
                           <Col xs={12} sm={12} md={6} lg={4}>
-                              <Row end="lg">
-                                
-                                  <ButtonEnlace  >http//:cotizate.com</ButtonEnlace>
-                                
+                              <Row end="lg">                                
+                                  <ButtonEnlace>{props.data.short_url}</ButtonEnlace>                                
                               </Row>
                           </Col>
                           <Col xs={12} sm={12} md={6} lg={4}>
                               <Row end="lg">
-                                <BotonAportar style={{width:"50%", background: "#1383C5"}} >Copiar</BotonAportar>
+                                <BotonAportar onClick={()=> copiarLink(props.data.short_url)} style={{width:"50%", background: "#1383C5"}} >Copiar</BotonAportar>
                               </Row>
                           </Col>
                         </Row>
@@ -349,38 +377,9 @@ const Detalle: React.FC<Idetalle> = props => {
                     </Col>     
                     
                   </DivSeparador>  
-                  <DivSeparador>
-                    <Col xs={12} sm={12} md={12} lg={12}>
-                        
-                             <LinkAzul to="/descripcion">{'Descripcion'}</LinkAzul> {' '}
-                             <Go to="/descripcion">{'Fases'} </Go> {' '}
-                             <Go to="/descripcion">{'Aportacion'} </Go> {' '}
-                             <Go to="/descripcion">{'Comentarios'} </Go> {' '}
-                             <Go to="/descripcion">{'Actualizaciones'} </Go> 
-                       
-                    </Col>                    
-                  </DivSeparador>   
-                  
-                  <DivSeparador>
-                   <Col xs={12} sm={12} md={12} lg={12}>
-                        <Texto>
-                              {'En Las Payas hace 15 años que hacemos vino comprando uvas a pequeños como por productores de la zona siempre con la idea de hacer vinos de baja intervención de la manera más natural posible. Hacemos pequeñas partidas de vinos con la intención dedede que puedan transmitir de manera franca y sin maquillajes lo que da la tierra decccdgh ccnuestro oasis. '   }
-                        </Texto>  
-                   </Col>                    
-                  </DivSeparador>  
-                  
-                  <Col xs={12} sm={12} md={12} lg={12}>
-                        <ImgPortal
-                           src={'https://blog.naturlider.com/wp-content/uploads/2020/03/AdobeStock_309195144-post-dia-mundial-naturaleza.jpeg'}
-                         />
-                  </Col> 
-                  <DivSeparador>
-                   <Col xs={12} sm={12} md={12} lg={12}>
-                        <Texto>
-                              {'Titulo 2 En Las Payas hace 15 años que hacemos vino comprando uvas a pequeños como por productores de la zona siempre con la idea de hacer vinos de baja intervención de la manera más natural posible. Hacemos pequeñas partidas de vinos con la intención dedede que puedan transmitir de manera franca y sin maquillajes lo que da la tierra decccdgh ccnuestro oasis. '   }
-                        </Texto>  
-                   </Col>                    
-                  </DivSeparador>  
+            
+                  <TabDetalle decripcion={props.data.description} />                                                                                              
+           
                   <DivSeparadorSinColor>
                     <Col xs={12} sm={12} md={12} lg={12}>                        
                                 <LinkAzul2 to="/descripcion">{'* si crees que este proyecto va en contra de las politicas de Cotizate reporta este proyecto'}</LinkAzul2>                                                    
@@ -453,45 +452,206 @@ const Detalle: React.FC<Idetalle> = props => {
                     <DivSeparador>
                     <Col xs={12} sm={12} md={12} lg={12}>
                      <Row> 
-                        <Col xs={3} sm={3} md={3} lg={3}>
+                        <Col xs={12} sm={3} md={3} lg={3}>
                             <Row center='xs' >
                                <div className={classes.root}>
                                  <Avatar alt="Remy Sharp" src="https://hipertextual.com/files/2015/11/albert-einstein-retrato-scaled.jpg" className={classes.large} />
                                </div>
                             </Row>
                         </Col>
-                        <Col xs={9} sm={9} md={9} lg={9}>
+                        <Col xs={12} sm={9} md={9} lg={9}>
                             <Col xs={12} sm={12} md={12} lg={12}>
+                                
                                 <Autor>
-                                  Miguel alandia  pantoja
+                                 {props.data.profile.user.first_name}{' '}{props.data.profile.user.last_name}
                                 </Autor>
                                 
                             </Col>
                             <Col xs={12} sm={12} md={12} lg={12}>
-                                <LinkAzul to="/descripcion" style={{fontSize:"12px"}}>{'3 proyectos creados'}</LinkAzul> {' '}
                                 
-                                <LinkAzul to="/descripcion" style={{fontSize:"12px"}} >{'2 proyectos apoyados'}</LinkAzul> {' '}
+                                  <LinkAzul to="/descripcion" style={{fontSize:"12px"}}>{'3 proyectos creados'}</LinkAzul> {' '}
+                                
+                                  <LinkAzul to="/descripcion" style={{fontSize:"12px"}} >{'2 proyectos apoyados'}</LinkAzul> {' '}                                
                             </Col>
                             <Col xs={12} sm={12} md={12} lg={12}>
                                 <div style={{marginTop:"2%", marginBottom:"2%"}} > 
-                                    <FacebookIcon style={{width:"30%" }} /> {' '} 
-                                    <TwitterIcon style={{width:"30%" }} />  {' '} 
-                                    <WhatsAppIcon style={{width:"30%" }}/> {' '} 
+                                   {props.data.profile.rs_facebook? <> 
+                                      <Go  to={{ pathname:  `${props.data.profile.rs_facebook}` }} target="_blank" >
+                                         <FacebookIcon style={{marginLeft:'2%' }} /> {' '}
+                                      </Go>
+                                    </>: null
+                                    }
+                                   {props.data.profile.rs_twitter? <>  
+                                      <Go  to={{ pathname:  `${props.data.profile.rs_twitter}` }} target="_blank" >
+                                         <TwitterIcon style={{marginLeft:'2%'  }} />  {' '} 
+                                      </Go>
+                                   </>: null
+                                   }
+                                   {props.data.profile.rs_linkedin? <>  
+                                       <Go  to={{ pathname:  `${props.data.profile.rs_linkedin}` }} target="_blank" >
+                                         <LinkedInIcon style={{marginLeft:'2%'  }} />  {' '} 
+                                       </Go>
+                                   </>: null 
+                                   }
+                                    {props.data.profile.rs_another? <>  
+                                       <Go  to={{ pathname:  `${props.data.profile.rs_another}` }} target="_blank" >
+                                         <LinkIcon style={{marginLeft:'2%'  }} />  {' '} 
+                                       </Go>
+                                   </>: null 
+                                   }
                                 </div>
-                            </Col>
-                          
+                            </Col>                          
                         </Col>
-                        <Col xs={12} sm={12} md={12} lg={12}>
+
+                      </Row>   
+                       <Col xs={12} sm={12} md={12} lg={12}>
                             <Row center='xs' >
-                                <div style={{marginTop:"2%", marginBottom:"2%"}} > 
-                                <ButtonBordeAzul>Siguiendo </ButtonBordeAzul>
-                                <ButtonBordeAzul>Contacto</ButtonBordeAzul>
+                                <div style={{marginTop:"2%", marginBottom:"2%", width:'100%'}} > 
+                                <ButtonBordeAzul style={{width:'39%',height:'40px', background: '#F69939', color:'#FFFFFF', border: '1px solid #F69939',fontWeight: 'bold',borderRadius: '5px' }} >Siguiendo </ButtonBordeAzul>
+                                <ButtonBordeAzul style={{ width:'39%', height:'40px', background: '#FFFFFF', color:'#F69939', border: '1px solid #F69939',fontWeight: 'bold',borderRadius: '5px' }} >Contacto</ButtonBordeAzul>
                                 </div>
                             </Row>  
-                        </Col>
-                      </Row>                                                                               
+                        </Col>                                                                            
                     </Col>                    
-                  </DivSeparador>   
+                  </DivSeparador> 
+                  <DivSeparador2>
+                    <Col xs={12} sm={12} md={12} lg={12}>
+                        <Col xs={12} sm={12} md={12} lg={12}>
+                                <Row center='xs' >
+                                    <TitleDonacion>
+                                        Donacion 
+                                    </TitleDonacion>                                    
+                                </Row>  
+                        </Col> 
+                        <Col xs={12} sm={12} md={12} lg={12}>
+                            <Row center='xs' >
+                                
+                            <TextField
+                                id="outlined-number"
+                              
+                                type="number"
+                               style={{background:'#FFFFFF', width:'65%'}}
+                                variant="outlined"
+                                InputProps={{
+                                    startAdornment: (
+                                      <InputAdornment position="start">
+                                        Bs.
+                                      </InputAdornment>
+                                    ),
+                                  }}
+                                />
+                            
+                            </Row>  
+                          </Col> 
+                          <Col xs={12} sm={12} md={12} lg={12}>
+                            <Row center='xs' >                                
+                                <ButtonBordeAzul style={{width:'65%',height:'45px', background: '#F69939', color:'#FFFFFF', border: '1px solid #F69939',fontWeight: 'bold',borderRadius: '5px' }} >Siguiendo </ButtonBordeAzul>                                                        
+                            </Row>  
+                          </Col>                
+                          </Col>   
+                   </DivSeparador2> 
+                     
+                    <DivSeparador2>
+                        <Col xs={12} sm={12} md={12} lg={12}>
+                           <Col xs={12} sm={12} md={12} lg={12}>
+                                    <TitleAportaciones>
+                                      {'aporte con mas  Bs. 100 O mas '}
+                                    </TitleAportaciones>  
+                            </Col>
+                            <Col xs={12} sm={12} md={12} lg={12}>
+                               <ImgPortal
+                                src={'https://img.freepik.com/vector-gratis/fondo-plano-naturaleza_1308-20252.jpg?size=626&ext=jpg'}
+                                />
+                            </Col>
+                            <Col xs={12} sm={12} md={12} lg={12}>
+                                    <TitleAportaciones2>
+                                      {' "aporte con mas  Bs. 100 O mas " '}
+                                    </TitleAportaciones2>  
+                            </Col>
+                            <Col xs={12} sm={12} md={12} lg={12}>
+                                    <SubTitleAportacion>
+                                      {' Esta recompensa garante '}
+                                    </SubTitleAportacion>  
+                            </Col>
+                            <Col xs={12} sm={12} md={12} lg={12}>
+                                    <Texto>
+                                      {'Lorem Ipsum é simplesmente uma simulação de texto da indústria tipográfica e de impressos, e vem sendo utilizado desde o século XVI, quando um impressor desconhecido pegou uma bandeja de tipos e os embaralhou para fazer um livro de modelos de tipos. Lorem Ipsum sobreviveu não só a cinco séculos, como também ao salto para a editoração eletrônica, permanecendo essencialmente inalterado. Se popularizou na década de 60, quando a Letraset lançou decalques contendo passagens de Lorem Ipsum, e mais recentemente quando passou a ser integrado a softwares de editoração eletrônica como Aldus PageMaker. '}
+                                    </Texto>  
+                            </Col>
+                            <Col xs={12} sm={12} md={12} lg={12}>
+                                    <Texto>
+                                      {'Lorem Ipsum é simplesmente uma simulação de texto da indústria tipográfica e de impressos, e vem sendo utilizado desde o século XVI, quando um impressor desconhecido pegou uma bandeja de tipos e os embaralhou para fazer um livro de modelos de tipos. Lorem Ipsum sobreviveu não só a cinco séculos, como também ao salto para a editoração eletrônica, permanecendo essencialmente inalterado. Se popularizou na década de 60, quando a Letraset lançou decalques contendo passagens de Lorem Ipsum, e mais '}
+                                    </Texto>  
+                            </Col>
+                            <Col xs={12} sm={12} md={12} lg={12}>
+                                <Row>
+                                  <Col xs={6} sm={6} md={6} lg={6}>
+                                            <TextoSubtitulo>
+                                            {'Entrega prevista'}
+                                            </TextoSubtitulo>                                      
+                                  </Col>
+                                  <Col xs={6} sm={6} md={6} lg={6}>
+                                       <Row end="lg">                                      
+                                            <TextoSubtitulo>
+                                                {'Envio:'}
+                                            </TextoSubtitulo>
+                                       </Row>
+                                  </Col>        
+                                </Row>             
+                            </Col>
+                            <Col xs={12} sm={12} md={12} lg={12}>     
+                               <Row>
+                                  <Col xs={6} sm={6} md={6} lg={6}>
+                                        <TextoSubtitulo>
+                                            {'12/02/2021'}
+                                        </TextoSubtitulo>
+                                      
+                                  </Col>
+                                  <Col xs={6} sm={6} md={6} lg={6}>                                      
+                                       <Row end="lg">
+                                         <TextoSubtitulo>
+                                            {'Toda Bolivia'}
+                                         </TextoSubtitulo>                                     
+                                       </Row>
+                                  </Col>
+                                </Row>                          
+                            </Col>
+                            <Col xs={12} sm={12} md={12} lg={12}>     
+                               <Row end="lg">                                  
+                                    <TextoSubtitulo2>
+                                        {'* incluye valor del envio'}
+                                    </TextoSubtitulo2>                                                                                                    
+                                </Row>                          
+                            </Col>
+                            <Col xs={12} sm={12} md={12} lg={12}>
+                            <Row center='xs' >
+                                
+                            <TextField
+                                id="outlined-number"
+                                name="txtEnviar"                              
+                                type="number"
+                                style={{background:'#FFFFFF', width:'65%'}}
+                                variant="outlined"
+                                InputProps={{
+                                    startAdornment: (
+                                      <InputAdornment position="start">
+                                        Bs.
+                                      </InputAdornment>
+                                    ),
+                                  }}
+                                />
+                            
+                            </Row>  
+                          </Col> 
+                          <Col xs={12} sm={12} md={12} lg={12}>
+                            <Row center='xs' >                                
+                                <ButtonBordeAzul style={{width:'65%',height:'45px', background: '#F69939', color:'#FFFFFF', border: '1px solid #F69939',fontWeight: 'bold',borderRadius: '5px' }} >Enviar </ButtonBordeAzul>                                                        
+                            </Row>  
+                          </Col>              
+
+                        </Col>
+                    </DivSeparador2>
+                    
 
                 </Col>
             </Row>           
@@ -503,21 +663,5 @@ const Detalle: React.FC<Idetalle> = props => {
     )
 }
 
-const useStyles = makeStyles((theme) => ({
-    root: {
-      display: 'flex',
-      '& > *': {
-        margin: theme.spacing(1),
-      },
-      
-    },
-    small: {
-      width: theme.spacing(3),
-      height: theme.spacing(3),
-    },
-    large: {
-      width: theme.spacing(7),
-      height: theme.spacing(7),
-    },
-  }));
+
 export default Detalle

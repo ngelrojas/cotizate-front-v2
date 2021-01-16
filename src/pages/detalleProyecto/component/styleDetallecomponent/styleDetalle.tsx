@@ -115,41 +115,60 @@ export const Img = styled.img`
 `
 export const Contenedor = styled.div`   
     background: #1383C5;
-    margin: 2%;
-    width:100%;
+    margin-left: 2%;
+    margin-right: 1%;
+    margin-top: 2%;
+    margin-bottom: 2%;
+    padding-top: 2%;
+    padding-bottom: 2%;
+    padding-left: 3%;
+    padding-right: 3%;
     @media ${device.tablet} {
     
     }
     @media ${device.mobileM} {
-      
+        margin-left: 0%;
+        margin-right: 0%;
     }
 
 `
 export const TitleVideo1 = styled.h1`
     color: #f9f9f9;
     font-weight: 410;
-    position: absolute;
+    
     bottom: 0px;
     left:0px;
     background: #2B76B1;
     text-align: justify;
-    padding: 1%;
-    text-transform: uppercase;
+    padding: 1%;    
     font-size: 15px;
-    width:100%;
+    width:100%;    
+    
+`
+export const DivTitlevideo = styled.div`   
+    background: #2B76B1;
+    padding-bottom: 1%;
+    padding-top: 1%;    
+    padding-left: 10px;
+    padding-right: 10px;
+    @media ${device.tablet} {
+    
+    }
+    @media ${device.mobileM} {
+    }
 
 `
 
 export const Porcentaje = styled.div`
-    padding-left: 10px;
-    padding-right: 10px;
+    // padding-left: 10px;
+    // padding-right: 10px;
     padding-bottom: 5%;
     padding-top: 3%;
    
     @media ${device.tablet} {
         width: 100%;
-        padding-left: 1px;
-        margin-bottom: 5%;
+        // padding-left: 1px;
+        // margin-bottom: 5%;
     }
     @media ${device.mobileM} {
         
@@ -158,7 +177,7 @@ export const Porcentaje = styled.div`
 export const Alcanzado = styled.div`
    
     
-    padding-left: 12px;
+    // padding-left: 12px;
     padding-top: 17px;
 
     width: 100%;
@@ -175,12 +194,12 @@ export const Alcanzado = styled.div`
     line-height: 12px;
     @media ${device.tablet} {
         width: 80%;
-        padding-left: 1px;
+        // padding-left: 1px;
         padding-top: 5%;
         margin-bottom: 10%;
     }
     @media ${device.mobileM} {
-        padding-left: 1px;
+        // padding-left: 1px;
         width: 100%;
         font-style: normal;
         line-height: 12px;
@@ -248,7 +267,7 @@ font-family: Roboto;
 export const AporteNumber = styled.span`
     color: #F1F1F1;
     font-family: Roboto;
-    padding-left: 10px;
+    // padding-left: 10px;
     float: left;
     margin: 1%;
     font-style: normal;
@@ -276,37 +295,37 @@ font-family: Roboto;
     }
 `
 export const Div1 = styled.div`
-    padding-left: 10px;
+    // padding-left: 10px;
     padding-bottom: 2%;
     padding-top: 2%;
    
     @media ${device.tablet} {
         width: 100%;
-        padding-left: 1px;
+        // padding-left: 1px;
         margin-bottom: 2%;
         padding-top: 2%;
     }
     @media ${device.mobileM} {
         width: 100%;
-        padding-left: 1px;
+        // padding-left: 1px;
         margin-bottom: 2%;
         padding-top: 2%;
     }
 `
 export const DivCod = styled.div`
-    padding-left: 10px;
+    // padding-left: 10px;
     padding-bottom: 2%;
     padding-top: 6%;
    
     @media ${device.tablet} {
         width: 100%;
-        padding-left: 1px;
+        // padding-left: 1px;
         margin-bottom: 2%;
         padding-top: 2%;
     }
     @media ${device.mobileM} {
         width: 100%;
-        padding-left: 1px;
+        // padding-left: 1px;
         margin-bottom: 2%;
         padding-top: 2%;
     }
@@ -409,6 +428,7 @@ export const Texto = styled.p`
     color: #5D5A5A;
     font-family: Roboto;
     font-style: normal;
+    margin-top: 1%;
     font-weight: normal;
     display: flex;
     align-items: center;
@@ -416,9 +436,11 @@ export const Texto = styled.p`
     line-height: 19px;
     @media ${device.tablet} {
         line-height: 17px;
+        margin-top: 1%;
     }
     @media ${device.mobileM} {
         line-height: 16px;
+        margin-top: 1%;
     }
 `
 export const LinkAzul = styled(Link)`
@@ -560,5 +582,135 @@ export const Autor = styled.p`
     }
     @media ${device.mobileM} {
         line-height: 16px;
+        text-align:center
+    }
+`
+export const DivSeparador2 = styled.div`
+        background:#FCF2E9;
+        margin-top: 2%;
+        margin-bottom: 2%;
+        padding-top: 2%;
+        padding-bottom: 2%;
+        padding-left: 1%;
+        padding-right: 1%;
+    @media ${device.tablet} {
+        margin-top: 1%;
+        margin-bottom: 1%;
+    }
+    @media ${device.mobileM} {
+        margin-top: 1%;
+        margin-bottom: 1%;
+    }
+`
+export const TitleDonacion = styled.h1`
+    color: #1383C5;
+    font-style: normal;
+    font-weight: normal;
+    padding-top: 1%;
+    padding-bottom: 2%;
+    
+    @media ${device.tablet} {
+      
+    }
+    @media ${device.mobileM} {
+        padding-top: 1%;
+        padding-bottom: 1%;
+    }
+`
+export const TitleAportaciones = styled.h2`
+    color: #1383C5;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 23px;
+    line-height: 26px;
+    padding-top: 2%;
+    padding-bottom: 3%;
+    text-transform: uppercase;
+    @media ${device.tablet} {
+      
+    }
+    @media ${device.mobileM} {
+        padding-top: 1%;
+        padding-bottom: 1%;
+    }
+`
+export const TitleAportaciones2 = styled.h2`
+    color: #1383C5;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 21px;
+    line-height: 26px;
+    padding-top: 2%;
+    padding-bottom: 3%;
+    text-transform: uppercase;
+    @media ${device.tablet} {
+      
+    }
+    @media ${device.mobileM} {
+        padding-top: 1%;
+        padding-bottom: 1%;
+    }
+`
+export const SubTitleAportacion = styled.h2`
+    color: #5D5A5A;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 21px;
+    line-height: 21px;
+    padding-top: 2%;
+    padding-bottom: 3%;
+    @media ${device.tablet} {
+      
+    }
+    @media ${device.mobileM} {
+        padding-top: 1%;
+        padding-bottom: 1%;
+    }
+`
+export const TextoSubtitulo = styled.p`   
+    color: #5D5A5A;
+    font-family: Roboto;
+    font-style: normal;
+    margin-top: 4%;
+    margin-bottom: 3%;
+    font-weight: normal;
+    display: flex;
+    align-items: center;
+    font-size: 20px;
+    line-height: 19px;
+    @media ${device.tablet} {
+        line-height: 17px;
+        font-size: 20px;
+        margin-top: 1%;
+    }
+    @media ${device.mobileM} {
+        line-height: 16px;
+        font-size: 17px;
+        margin-top: 4%;
+    }
+`
+export const TextoSubtitulo2 = styled.p`   
+    color: #F2A85D;
+    font-family: Roboto;
+    font-style: normal;
+    margin-top: 4%;
+    margin-bottom: 3%;
+    font-weight: normal;
+    display: flex;
+    align-items: center;
+    font-size: 20px;
+    line-height: 19px;
+    @media ${device.tablet} {
+        line-height: 17px;
+        font-size: 20px;
+        margin-top: 1%;
+    }
+    @media ${device.mobileM} {
+        line-height: 16px;
+        font-size: 17px;
+        margin-top: 4%;
     }
 `
