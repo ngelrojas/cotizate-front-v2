@@ -1,5 +1,5 @@
 import {
-    DETALLE_PROYECTO
+    DETALLE_PROYECTO, DETALLE_APORTES
 } from '../types/detalleProyecto.types'
 const initialState = {
     statusDetalle: false,
@@ -103,6 +103,8 @@ const initialState = {
             }
         }
     },
+    statusAportes: false,
+    aportes:[]
 }
 
 export default function(state = initialState, action: any) {
@@ -112,7 +114,13 @@ export default function(state = initialState, action: any) {
                 ...state,
                 statusDetalle: true,
                 proyectosDetalle:action.detalle
-            }                        
+            }   
+            case DETALLE_APORTES:
+                return {
+                    ...state,
+                    statusAportes: action.statusAporte,
+                    aportes:action.aportes
+                }                        
         default:
             return state
     }

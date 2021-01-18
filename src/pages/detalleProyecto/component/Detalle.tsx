@@ -22,6 +22,8 @@ import LinkedInIcon from '@material-ui/icons/LinkedIn';
 import LinkIcon from '@material-ui/icons/Link';
 import {copiarTextoToPapelera } from '../../../lib/FuncionesGenerales';
 import TabDetalle from './TabDetalle';
+import Aporta from './Aporta';
+import * as Action from '../../../redux/actions/detalleProyectoActions';
 
   
 import {Article, SectionDetails, Picture, 
@@ -195,22 +197,23 @@ const useStyles = makeStyles((theme) => ({
 
 const Detalle: React.FC<IDetalle> = (props) => {
     const classes = useStyles();
-  
+    const dispatch = useDispatch();
     const {
-        proyectosDetalle
+        proyectosDetalle, aportes, statusAportes
       } = useSelector((stateSelector: any) => {
         return stateSelector.detalleProyecto;
       });
     
       
-    useEffect(() =>{
-    },[]);
+    // useEffect(() =>{
+    // },[]);
 
-    const copiarLink =(data: string)=>{
-       
+    const copiarLink =(data: string)=>{       
         copiarTextoToPapelera(data);
-
     }
+    useEffect(() =>{
+        dispatch(Action.obtnerAportes(23));
+   },[]);
 
     return (
         <>
@@ -550,107 +553,10 @@ const Detalle: React.FC<IDetalle> = (props) => {
                           </Col>                
                           </Col>   
                    </DivSeparador2> 
-                     
-                    <DivSeparador2>
-                        <Col xs={12} sm={12} md={12} lg={12}>
-                           <Col xs={12} sm={12} md={12} lg={12}>
-                                    <TitleAportaciones>
-                                      {'aporte con mas  Bs. 100 O mas '}
-                                    </TitleAportaciones>  
-                            </Col>
-                            <Col xs={12} sm={12} md={12} lg={12}>
-                               <ImgPortal
-                                src={'https://img.freepik.com/vector-gratis/fondo-plano-naturaleza_1308-20252.jpg?size=626&ext=jpg'}
-                                />
-                            </Col>
-                            <Col xs={12} sm={12} md={12} lg={12}>
-                                    <TitleAportaciones2>
-                                      {' "aporte con mas  Bs. 100 O mas " '}
-                                    </TitleAportaciones2>  
-                            </Col>
-                            <Col xs={12} sm={12} md={12} lg={12}>
-                                    <SubTitleAportacion>
-                                      {' Esta recompensa garante '}
-                                    </SubTitleAportacion>  
-                            </Col>
-                            <Col xs={12} sm={12} md={12} lg={12}>
-                                    <Texto>
-                                      {'Lorem Ipsum é simplesmente uma simulação de texto da indústria tipográfica e de impressos, e vem sendo utilizado desde o século XVI, quando um impressor desconhecido pegou uma bandeja de tipos e os embaralhou para fazer um livro de modelos de tipos. Lorem Ipsum sobreviveu não só a cinco séculos, como também ao salto para a editoração eletrônica, permanecendo essencialmente inalterado. Se popularizou na década de 60, quando a Letraset lançou decalques contendo passagens de Lorem Ipsum, e mais recentemente quando passou a ser integrado a softwares de editoração eletrônica como Aldus PageMaker. '}
-                                    </Texto>  
-                            </Col>
-                            <Col xs={12} sm={12} md={12} lg={12}>
-                                    <Texto>
-                                      {'Lorem Ipsum é simplesmente uma simulação de texto da indústria tipográfica e de impressos, e vem sendo utilizado desde o século XVI, quando um impressor desconhecido pegou uma bandeja de tipos e os embaralhou para fazer um livro de modelos de tipos. Lorem Ipsum sobreviveu não só a cinco séculos, como também ao salto para a editoração eletrônica, permanecendo essencialmente inalterado. Se popularizou na década de 60, quando a Letraset lançou decalques contendo passagens de Lorem Ipsum, e mais '}
-                                    </Texto>  
-                            </Col>
-                            <Col xs={12} sm={12} md={12} lg={12}>
-                                <Row>
-                                  <Col xs={6} sm={6} md={6} lg={6}>
-                                            <TextoSubtitulo>
-                                            {'Entrega prevista'}
-                                            </TextoSubtitulo>                                      
-                                  </Col>
-                                  <Col xs={6} sm={6} md={6} lg={6}>
-                                       <Row end="lg">                                      
-                                            <TextoSubtitulo>
-                                                {'Envio:'}
-                                            </TextoSubtitulo>
-                                       </Row>
-                                  </Col>        
-                                </Row>             
-                            </Col>
-                            <Col xs={12} sm={12} md={12} lg={12}>     
-                               <Row>
-                                  <Col xs={6} sm={6} md={6} lg={6}>
-                                        <TextoSubtitulo>
-                                            {'12/02/2021'}
-                                        </TextoSubtitulo>
-                                      
-                                  </Col>
-                                  <Col xs={6} sm={6} md={6} lg={6}>                                      
-                                       <Row end="lg">
-                                         <TextoSubtitulo>
-                                            {'Toda Bolivia'}
-                                         </TextoSubtitulo>                                     
-                                       </Row>
-                                  </Col>
-                                </Row>                          
-                            </Col>
-                            <Col xs={12} sm={12} md={12} lg={12}>     
-                               <Row end="lg">                                  
-                                    <TextoSubtitulo2>
-                                        {'* incluye valor del envio'}
-                                    </TextoSubtitulo2>                                                                                                    
-                                </Row>                          
-                            </Col>
-                            <Col xs={12} sm={12} md={12} lg={12}>
-                            <Row center='xs' >
-                                
-                            <TextField
-                                id="outlined-number"
-                                name="txtEnviar"                              
-                                type="number"
-                                style={{background:'#FFFFFF', width:'65%'}}
-                                variant="outlined"
-                                InputProps={{
-                                    startAdornment: (
-                                      <InputAdornment position="start">
-                                        Bs.
-                                      </InputAdornment>
-                                    ),
-                                  }}
-                                />
-                            
-                            </Row>  
-                          </Col> 
-                          <Col xs={12} sm={12} md={12} lg={12}>
-                            <Row center='xs' >                                
-                                <ButtonBordeAzul style={{width:'65%',height:'45px', background: '#F69939', color:'#FFFFFF', border: '1px solid #F69939',fontWeight: 'bold',borderRadius: '5px' }} >Enviar </ButtonBordeAzul>                                                        
-                            </Row>  
-                          </Col>              
-
-                        </Col>
-                    </DivSeparador2>
+                    {aportes.map((value: any, index: any) => (
+                        <Aporta aporte={value} />
+                    ))}
+                   
                     
 
                 </Col>
