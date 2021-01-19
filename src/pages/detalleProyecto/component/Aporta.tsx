@@ -151,7 +151,6 @@ const Aporta: React.FC<IAporta> = (props) => {
     const redirecionLoin=()=>{        
        history.push("/registrarse");
     }
-       console.log(props.nroAporte);
 
     return (
         <>        
