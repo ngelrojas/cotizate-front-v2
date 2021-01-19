@@ -23,6 +23,7 @@ import LinkIcon from '@material-ui/icons/Link';
 import {copiarTextoToPapelera } from '../../../lib/FuncionesGenerales';
 import TabDetalle from './TabDetalle';
 import Aporta from './Aporta';
+import Reportar from './Reportar';
 import * as Action from '../../../redux/actions/detalleProyectoActions';
 
   
@@ -382,72 +383,7 @@ const Detalle: React.FC<IDetalle> = (props) => {
             
                   <TabDetalle decripcion={props.data.description} />                                                                                              
            
-                  <DivSeparadorSinColor>
-                    <Col xs={12} sm={12} md={12} lg={12}>                        
-                                <LinkAzul2 to="/descripcion">{'* si crees que este proyecto va en contra de las politicas de Cotizate reporta este proyecto'}</LinkAzul2>                                                    
-                    </Col>  
-                  </DivSeparadorSinColor>       
-                  <DivSeparadorSinColor >
-                    <Col xs={12} sm={12} md={12} lg={12}> 
-                        <Row center='xs' >
-                            <ButtonBordeAzul>Reporte este proyecto a cotizate</ButtonBordeAzul>
-                       </Row>                       
-                    </Col>  
-                  </DivSeparadorSinColor>       
-                  <DivBorderSinColor>
-                    <Col xs={12} sm={12} md={12} lg={12}>   
-                        <Col xs={12} sm={12} md={12} lg={12}>                                                 
-                            <Texto2><CheckCircleOutlineIcon />
-                              Este proyecto no respeta las reglas    
-                            </Texto2>                    
-                        </Col> 
-                        <Col xs={12} sm={12} md={12} lg={12}>                                                                   
-                            <Texto3>
-                             - Contiene Discurso de acoso , odio y razismo    
-                            </Texto3>   
-                        </Col>  
-                        <Col xs={12} sm={12} md={12} lg={12}>                                                                   
-                            <Texto3>
-                              - Ofrese recompensas Prohibidas    
-                            </Texto3>   
-                        </Col>        
-                        <Col xs={12} sm={12} md={12} lg={12}>                                                                   
-                            <Texto3>
-                              - Contiene Discurso de acoso , odio y razismo   
-                            </Texto3>   
-                        </Col>                                     
-                    </Col>  
-                  </DivBorderSinColor>  
-                  <DivBorderSinColor>
-                    <Col xs={12} sm={12} md={12} lg={12}>   
-                        <Col xs={12} sm={12} md={12} lg={12}>                                                 
-                            <Texto2><CheckCircleOutlineIcon />
-                             Este proyecto infringe propiedad intelectual   
-                            </Texto2>                    
-                        </Col> 
-                        <Col xs={12} sm={12} md={12} lg={12}>                                                                   
-                            <Texto3>
-                             - Este proyecto infringe derechos de autor   
-                            </Texto3>   
-                        </Col>  
-                                                        
-                    </Col>  
-                  </DivBorderSinColor>  
-                  <DivBorderSinColor>
-                    <Col xs={12} sm={12} md={12} lg={12}>   
-                        <Col xs={12} sm={12} md={12} lg={12}>                                                 
-                            <Texto2><CheckCircleOutlineIcon />
-                                Recompensa  
-                            </Texto2>                    
-                        </Col> 
-                        <Col xs={12} sm={12} md={12} lg={12}>                                                                   
-                            <Texto3>
-                             - Apoye y no resivi mi recompensa  
-                            </Texto3>   
-                        </Col>  
-                                                        
-                    </Col>  
-                  </DivBorderSinColor>   
+                 <Reportar />
 
                 </Col>
                 <Col xs={12} sm={6} md={6} lg={6}>                      
