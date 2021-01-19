@@ -27,8 +27,9 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
+import Moment from 'react-moment';
+import { useHistory } from "react-router-dom";
 
-  
 import {Article, SectionDetails, Picture, 
     DivPrincipal,
     DivPortada,
@@ -103,6 +104,7 @@ import { isConstructorDeclaration } from 'typescript';
       }
 
 interface IAporta {
+    nroAporte:number,
     aporte:{
         id:number,
         title:string,
@@ -129,6 +131,7 @@ interface IAporta {
 const Aporta: React.FC<IAporta> = (props) => {
    
     const classes = useStyles();   
+    const history = useHistory();
     const { authenticated } = useSelector((stateSelector: any) => {  return stateSelector.profile;  });
     useEffect(() =>{
     },[authenticated]);
@@ -142,10 +145,13 @@ const Aporta: React.FC<IAporta> = (props) => {
         }
      
       };
-    const ClicAportando=()=>{
+    const ClicAportando=()=>{          
           console.log("cliccc", aporte1);
     }
-
+    const redirecionLoin=()=>{        
+       history.push("/registrarse");
+    }
+       console.log(props.nroAporte);
 
     return (
         <>        
@@ -200,9 +206,8 @@ const Aporta: React.FC<IAporta> = (props) => {
                             <Col xs={12} sm={12} md={12} lg={12}>     
                                <Row>
                                   <Col xs={6} sm={6} md={6} lg={6}>
-                                        <TextoSubtitulo>
-                                            {/* {'12/02/2021'} */}
-                                            {props.aporte.expected_delivery}
+                                        <TextoSubtitulo>                       
+                                            <Moment format="DD/MM/YYYY">{props.aporte.expected_delivery}</Moment>
                                         </TextoSubtitulo>
                                       
                                   </Col>
@@ -250,8 +255,11 @@ const Aporta: React.FC<IAporta> = (props) => {
                             </Row>  
                           </Col> 
                           <Col xs={12} sm={12} md={12} lg={12}>
-                            <Row center='xs' >                                
-                                <ButtonBordeAzul onClick={ClicAportando} style={{width:'65%',height:'45px', background: '#F69939', color:'#FFFFFF', border: '1px solid #F69939',fontWeight: 'bold',borderRadius: '5px' }} >Enviar </ButtonBordeAzul>                                                        
+                            <Row center='xs' >    
+                              {authenticated? <ButtonBordeAzul onClick={ClicAportando} style={{width:'65%',height:'45px', background: '#F69939', color:'#FFFFFF', border: '1px solid #F69939',fontWeight: 'bold',borderRadius: '5px' }} >Enviar </ButtonBordeAzul>                                                        
+                              :<ButtonBordeAzul onClick={redirecionLoin}  style={{width:'65%',height:'45px', background: '#F69939', color:'#FFFFFF', border: '1px solid #F69939',fontWeight: 'bold',borderRadius: '5px' }} >Enviar </ButtonBordeAzul>                                                        
+                            }                            
+                                
                             </Row>  
                           </Col>              
 

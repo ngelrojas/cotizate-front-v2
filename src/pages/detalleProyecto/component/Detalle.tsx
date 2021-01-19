@@ -205,8 +205,6 @@ const Detalle: React.FC<IDetalle> = (props) => {
       });
     
       
-    // useEffect(() =>{
-    // },[]);
 
     const copiarLink =(data: string)=>{       
         copiarTextoToPapelera(data);
@@ -214,6 +212,45 @@ const Detalle: React.FC<IDetalle> = (props) => {
     useEffect(() =>{
         dispatch(Action.obtnerAportes(23));
    },[]);
+
+   const aporteJson= [
+    {
+        "id": 23,
+        "title": "23 reward to campaing",
+        "description": "description to campaing one",
+        "amount": "500.000",
+        "expected_delivery": "2020-09-10T00:00:00Z",
+        "user": 0,
+        "all_cities": false,
+        "pick_up_locally": false,
+        "header": 23,
+        "cities": [
+            1,
+            2,
+            3,
+            5,
+            6
+        ]
+    },
+    {
+        "id": 24,
+        "title": "24 reward to campaing",
+        "description": "description to campaing one",
+        "amount": "400.000",
+        "expected_delivery": "2020-09-10T00:00:00Z",
+        "user": 0,
+        "all_cities": true,
+        "pick_up_locally": true,
+        "header": 23,
+        "cities": [
+            1,
+            2,
+            3,
+            5,
+            6
+        ]
+    }
+   ];
 
     return (
         <>
@@ -553,8 +590,8 @@ const Detalle: React.FC<IDetalle> = (props) => {
                           </Col>                
                           </Col>   
                    </DivSeparador2> 
-                    {aportes.map((value: any, index: any) => (
-                        <Aporta aporte={value} />
+                    {aporteJson.map((value: any, index: any) => (
+                        <Aporta aporte={value} nroAporte={index} />
                     ))}
                    
                     
