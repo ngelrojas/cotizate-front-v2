@@ -27,6 +27,7 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
+import Fases from './Fases';
 
   
 import {Article, SectionDetails, Picture, 
@@ -148,7 +149,7 @@ const TabDetalle: React.FC<ITab> = (props) => {
                             </Texto>
                         </TabPanel>
                         <TabPanel value={value} index={1}>
-                            Item Fases
+                                   <Fases />
                         </TabPanel>
                         <TabPanel value={value} index={2}>
                             Item Aportaciones
