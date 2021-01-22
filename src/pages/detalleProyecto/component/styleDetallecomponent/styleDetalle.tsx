@@ -714,3 +714,19 @@ export const TextoSubtitulo2 = styled.p`
         margin-top: 4%;
     }
 `
+
+export const TitleFase = styled.h4`
+    color: #2A8EC8;
+    font-style: normal;
+    // font-weight: normal;
+    // padding-top: 1%;
+    // padding-bottom: 2%;
+    
+    @media ${device.tablet} {
+      
+    }
+    @media ${device.mobileM} {
+        padding-top: 1%;
+        padding-bottom: 1%;
+    }
+`

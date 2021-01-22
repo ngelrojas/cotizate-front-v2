@@ -30,50 +30,13 @@ import Box from '@material-ui/core/Box';
 import Moment from 'react-moment';
 import { useHistory } from "react-router-dom";
 
-import {Article, SectionDetails, Picture, 
-    DivPrincipal,
-    DivPortada,
-    TilePortada,
-    TitleVideo1,
-    DivTitlevideo,
-    Porcentaje,
+import {Article,
      Img,
-     Contenedor,
-     AlcanceText,
-     Alcanzado,
-     NumberMontoMeta,
-     Aportetitle,
-     AporteNumber,
-     TileDias,
-     Div1,
-     DivCod,
-     TileCode,
-     BotonAportar,
-     DivTitle,
-     Input,
-     DivSociable,
-     ButtonEnlace,
-     BotonCopiar,
-     DivSeparador,
      Texto,
-     LinkAzul,
-     Go,
-     ImgPortal,
-     DivSin,
+     TitleFase,
      DivSeparadorSinColor,
-     LinkAzul2,
-     ButtonBordeAzul,
-     DivBorderSinColor,
-     Texto2,
-     Texto3,
-     Autor,
      DivSeparador2,
-     TitleDonacion,
-     TitleAportaciones,
-     TitleAportaciones2,
-     SubTitleAportacion,
-     TextoSubtitulo,
-     TextoSubtitulo2
+
     } from './styleDetallecomponent/styleDetalle';
 import { isConstructorDeclaration } from 'typescript';
 
@@ -97,34 +60,67 @@ const Fases: React.FC<IReportar> = (props) => {
     useEffect(() =>{
     },[authenticated]);
     
-  
-    const ClicAportando=()=>{          
-          console.log("cliccc");
-    }
-    const redirecionLoin=()=>{        
-       history.push("/registrarse");
-    }
+    const [txtFase, setTxtFase] = useState(0); 
+    const _onChangeform = (e: any) => {
+        const texfield = e.target.name;
+        const textValue = e.target.value;
+        if (texfield === "txtFaseBox") {
+            console.log(textValue);
+            setTxtFase(textValue);
+        }
+     
+      };
+    
 
     return (
         <>        
                   <DivSeparadorSinColor>
-                    <Col xs={12} sm={12} md={12} lg={12}>                              
-                          {'FASE 1'}      
+                    <Col xs={12} sm={12} md={12} lg={12}>  
+                        <TitleFase>
+                            {'FASE 1'}
+                        </TitleFase>                            
+                          
                     </Col>  
                   </DivSeparadorSinColor>       
-                  <DivSeparadorSinColor >
-                    <Col xs={12} sm={12} md={12} lg={12}> 
-                        <Row center='xs' >                            
-                            {'icono'}
-                       </Row>                       
+                  <DivSeparador2 >
+                    <Col xs={12} sm={12} md={12} lg={12}>                                                 
+                        <TitleFase>
+                            {'FASE 1'}
+                        </TitleFase>                                          
                     </Col>  
                     <Col xs={12} sm={12} md={12} lg={12}> 
-                        <Row center='xs' >
-                            {/* <ButtonBordeAzul>Reporte este proyecto a cotizate</ButtonBordeAzul> */}
-                            {'icono'}
+                        <Row center='xs'>                            
+                            {'Grafico'}
                        </Row>                       
                     </Col>  
-                  </DivSeparadorSinColor>                                       
+                    <Col xs={12} sm={12} md={12} lg={12}>
+                        <Texto>
+                               {'En Las Payas hace 15 años que hacemos vino comprando uvas a pequeños como por productores de la zona siempre con la idea de hacer vinos de baja intervención de la'}      
+                        </Texto>                              
+                    </Col> 
+                  </DivSeparador2>   
+                  <DivSeparadorSinColor>
+                    <Col xs={12} sm={12} md={12} lg={12}>                              
+                       <Row end='xs' >
+                               <TextField
+                                id="outlined-number"
+                                name="txtFaseBox"                              
+                                type="number"
+                                defaultValue="100.00"
+                                onChange={_onChangeform}
+                                style={{background:'#FFFFFF', width:'65%'}}
+                                variant="outlined"
+                                InputProps={{
+                                    startAdornment: (
+                                      <InputAdornment position="start">
+                                        Bs.
+                                      </InputAdornment>
+                                    ),
+                                  }}
+                                />
+                       </Row>     
+                    </Col>  
+                  </DivSeparadorSinColor>                                   
         </>
     )
 }
