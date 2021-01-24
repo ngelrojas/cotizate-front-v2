@@ -29,52 +29,12 @@ import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import Fases from './Fases';
 import TabAportadores from './TabAportadores';
+import TabComentario from './TabComentario';
 
   
-import {Article, SectionDetails, Picture, 
-    DivPrincipal,
-    DivPortada,
-    TilePortada,
-    TitleVideo1,
-    DivTitlevideo,
-    Porcentaje,
-     Img,
-     Contenedor,
-     AlcanceText,
-     Alcanzado,
-     NumberMontoMeta,
-     Aportetitle,
-     AporteNumber,
-     TileDias,
-     Div1,
-     DivCod,
-     TileCode,
-     BotonAportar,
-     DivTitle,
-     Input,
-     DivSociable,
-     ButtonEnlace,
-     BotonCopiar,
+import {
      DivSeparador,
-     Texto,
-     LinkAzul,
-     Go,
-     ImgPortal,
-     DivSin,
-     DivSeparadorSinColor,
-     LinkAzul2,
-     ButtonBordeAzul,
-     DivBorderSinColor,
-     Texto2,
-     Texto3,
-     Autor,
-     DivSeparador2,
-     TitleDonacion,
-     TitleAportaciones,
-     TitleAportaciones2,
-     SubTitleAportacion,
-     TextoSubtitulo,
-     TextoSubtitulo2
+     Texto
     } from './styleDetallecomponent/styleDetalle';
 
     function TabPanel(props : any) {
@@ -159,7 +119,7 @@ const TabDetalle: React.FC<ITab> = (props) => {
                            <TabAportadores />
                         </TabPanel>
                         <TabPanel value={value} index={3}>
-                            Item Comentarios
+                            <TabComentario />
                         </TabPanel>
                     </div>
                              {/* <LinkAzul to="/descripcion">{'Descripcion'}</LinkAzul> {' '}

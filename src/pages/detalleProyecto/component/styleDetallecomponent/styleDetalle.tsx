@@ -758,23 +758,66 @@ export const DivBorderSinAzulado = styled.div`
     }
 `
 export const TextoAportadores = styled.p`   
-    color: #6C6C6C;
+    color: #5D5A5A;
     font-family: Roboto;
     font-style: normal;
     font-weight: 300;
     display: flex;
     align-items: center;
-    font-size: 17px;
+    font-size: 16px;
     line-height: 25px;
     padding-right: 10px;
 
 
     @media ${device.tablet} {
-        line-height: 17px;
+        line-height: 16px;
         padding-right: 8px;
     }
     @media ${device.mobileM} {
+        line-height: 15px;
+        padding-right: 5px;
+    }
+`
+export const TextoComentarioTitle = styled.p`   
+    color: #5D5A5A;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 300;
+    display: flex;
+    align-items: center;
+    font-size: 15px;
+    line-height: 25px;
+    padding-right: 10px;
+    text-transform: uppercase;
+
+    @media ${device.tablet} {
         line-height: 16px;
+        padding-right: 8px;
+    }
+    @media ${device.mobileM} {
+        line-height: 15px;
+        padding-right: 5px;
+    }
+`
+export const TextoComentario = styled.p`   
+    color: #5D5A5A;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 300;
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    line-height: 25px;
+    padding-right: 10px;
+    padding-left: 12px;
+
+
+    @media ${device.tablet} {
+        line-height: 16px;
+        padding-right: 8px;
+    }
+    @media ${device.mobileM} {
+        line-height: 15px;
         padding-right: 5px;
     }
 `
