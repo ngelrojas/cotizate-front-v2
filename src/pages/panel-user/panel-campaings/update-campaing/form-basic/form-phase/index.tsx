@@ -22,7 +22,8 @@ import {
     BS,
     WrapperSavePhase,
     WrapBtnSave,
-    BtnSaveProject
+    BtnSP,
+    BtnUP
 } from '../../styles'
 
 type FormData = {
@@ -46,12 +47,28 @@ const FormPhase: React.FC<AllProps> = ({phases}) => {
     let token = window.sessionStorage.getItem('token')
     let Phase = new Phases(token)
     const [resumes, Setresumes] = React.useState()
+    const [AddPhase, setAddPhase] = React.useState()
     const [MsgErrorF, setMsgErrorF] = React.useState()
     const {register, handleSubmit, reset, errors} = useForm<FormData>({
         mode: 'onChange'
     })
 
     const onSubmit = handleSubmit(({title, amount}) => {
+
+        if (AddPhase === "add"){
+            CreatePhases(title, amount)
+        }else{
+            UpdatePhases(title, amount)
+        }
+
+    })
+    
+    const handleAdd = (e:any) => {
+        let action: any = e.target.id
+        setAddPhase(action)
+    }
+
+    const UpdatePhases = (title: string, amount:number) => {
         if(validate()){
             let data_phase = {
                 title: title,
@@ -73,7 +90,28 @@ const FormPhase: React.FC<AllProps> = ({phases}) => {
                     Notifications('La descripcion de la Fase no debe exceder mas 870 caracteres o 150 palabras.', 'danger')
                 })
         }
-    })
+    }
+
+    const CreatePhases = (title: string, amount:number) => {
+        if(validate()){
+            let data_phase = {
+                title: title,
+                amount: amount,
+                description: resumes,
+                header: campaingId 
+            }
+
+            Phase.createPhase(data_phase)
+                .then(resp => {
+                    Notifications('Fase Guardada, puede seguir agregando.', 'success')
+                    reset() 
+                    setMsgErrorF('')
+                }).catch(err =>{    
+                    setMsgErrorF('no debe exceder mas 150 palabras')
+                    Notifications('La descripcion de la Fase no debe exceder mas 870 caracteres o 150 palabras.', 'danger')
+                })
+        }
+    }
 
     const handleEditorReward = (content: any, editor: any) => {
         Setresumes(content)
@@ -219,7 +257,8 @@ const FormPhase: React.FC<AllProps> = ({phases}) => {
             <Row>
                 <WrapperSavePhase>
                     <WrapBtnSave>
-                        <BtnSaveProject>actualizar</BtnSaveProject>
+                        <BtnSP>actualizar</BtnSP>
+                        <BtnUP id="add" onClick={(e)=>handleAdd(e)}>adicionar</BtnUP>
                     </WrapBtnSave>
                 </WrapperSavePhase>
             </Row>

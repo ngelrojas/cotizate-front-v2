@@ -437,3 +437,20 @@ export const BoxTitleContent = styled.p`
 export const BSRE = styled(BS)`
     top: 39%;
 `
+
+export const BtnSP = styled(Btn)`
+    background-color: #007bff;
+    width: 49%;
+    padding: 1.5%;
+    font-size: 16px;
+    float: left;
+    margin-right: 0.5%;
+`
+
+export const BtnUP = styled(Btn)`
+    background-color: #1986C6;
+    width: 40%;
+    padding: 1.5%;
+    font-size: 16px;
+    margin-left: 0.5%;
+`

@@ -1,4 +1,5 @@
 import React from 'react'
+import {useRouteMatch} from 'react-router-dom'
 import {Row, Col} from 'react-styled-flexboxgrid'
 import {Table, Th, Td, Done, Err, Preview} from './styles'
 import {CampaingHeader, CampaingBody} from '../../../../../userCampaings'
@@ -26,6 +27,9 @@ interface IcampTypeBody {
 }
 
 const FormPreview: React.FC = () => {
+    let match = useRouteMatch('/panel-de-usuario/actualizar-proyecto/:campania')
+    let matchUrl: any = match
+    let campaingId = matchUrl.params.campania
     let token = window.sessionStorage.getItem('token')
     let CamHeader = new CampaingHeader(token)
     let CamBody = new CampaingBody(token)
@@ -54,7 +58,7 @@ const FormPreview: React.FC = () => {
     }
 
     const ListPhases = () => {
-        Phase.listPhases(datach)
+        Phase.listPhases(campaingId)
             .then(resp => {
                 setQtyPhases(resp.data.data.length)
             })
@@ -67,7 +71,7 @@ const FormPreview: React.FC = () => {
     }
 
     const ListRewards = ()=> {
-        reward.retrieveReward(datach)
+        reward.retrieveReward(campaingId)
             .then(resp => {
                 setQtyRewards(resp.data.data.length)
             })
@@ -80,7 +84,7 @@ const FormPreview: React.FC = () => {
     }
 
     const retrieveCampBody= () =>{
-        CamBody.getRetrieveCBody(datach)
+        CamBody.getRetrieveCBody(campaingId)
             .then(resp =>{
                 setCpb(resp.data.data)
                 setIdProfile(resp.data.data.profile.id)

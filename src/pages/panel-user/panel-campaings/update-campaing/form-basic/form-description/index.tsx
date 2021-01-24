@@ -186,15 +186,17 @@ const FormDescription: React.FC<AllProps> = ({counter, handleNext, handleBack, c
         let headerID: number = campaing.header ? campaing.header.id: 0 
         let profileCA: number = campaing.profile_ca ? campaing.profile_ca:0
         let profilId: number = campaing.profile ? campaing.profile.id:0
-        let imagenMain: any = showImg ? showImg : '' 
+        let imagenMain: any = showImg ? showImg : ''
+        let update_description = description ? description : campaing.description
+        let update_excerpt = excerpt ? excerpt : campaing.excerpt
 
         if (validate()) {
             let send_data = {
                 title: title,
                 video_main: video_main,
                 imagen_main: imagenMain,
-                excerpt: excerpt,
-                description: description, 
+                excerpt: update_excerpt,
+                description: update_description, 
                 header: headerID,
                 currency: 1,
                 short_url: short_url, 
@@ -202,7 +204,6 @@ const FormDescription: React.FC<AllProps> = ({counter, handleNext, handleBack, c
                 profile_ca: profileCA,
                 profile:profilId 
             }
-
             let campbId: number = campaing.id ? campaing.id:0
 
             CamBody.updateCampaing(campbId, send_data)
@@ -221,22 +222,20 @@ const FormDescription: React.FC<AllProps> = ({counter, handleNext, handleBack, c
     })
 
     const validate = () => {
-        let content_excerpt: string = campaing.excerpt ? campaing.excerpt : '' 
-        let content_description: string = campaing.description ? campaing.description : ''
-
-        if (content_excerpt.length === 0) {
+        
+        if (campaing.excerpt.length === 0 && excerpt.length === 0) {
             Notifications('El Resumen de tu proyecto es requerido','danger')
             setMsgExcerpt('este campo es requerido')
             return false
         }
 
-        if (content_excerpt.length >= 249) {
-            setMsgExcerpt('asegurate de no tener letras resaltadas o con negritas.')
-            Notifications('El Resumen no debe superar las 44 palabras','danger')
-            return false
-        }
+        //if (excerpt.length >= 285) {
+        //    setMsgExcerpt('asegurate de no tener letras resaltadas o con negritas.')
+        //    Notifications('El Resumen no debe superar las 44 palabras','danger')
+        //    return false
+        //}
 
-        if (content_description.length === 0) {
+        if (campaing.description.length === 0 && description.length === 0 ) {
             setMsgdescription('este campo es requerido')
             Notifications('Es obligatorio detallar tu proyecto','danger')
             return false
@@ -280,8 +279,6 @@ const FormDescription: React.FC<AllProps> = ({counter, handleNext, handleBack, c
             behavior: 'smooth'
         })
         getLast()
-        console.info("IN FORM DESCRIPTION")
-        console.log(campaing)
     },[campaing])
 
     return (
@@ -373,7 +370,7 @@ const FormDescription: React.FC<AllProps> = ({counter, handleNext, handleBack, c
                 Este es el resumen de  descripción del post utiliza max. 244 caracteres o 44 palabras
                 </BoxTextPR>
                 <Editor
-                    initialValue={campaing.excerpt ? campaing.excerpt : ''}
+                    value={campaing.excerpt}
                     init={{
                         height: 200,
                         menubar: false,
@@ -426,7 +423,7 @@ const FormDescription: React.FC<AllProps> = ({counter, handleNext, handleBack, c
                 Habla con claridad sobre lo que quieres lograr. Aclara posibles dudas sobre cómo se utilizará el dinero, quién está detrás del proyecto, La transparencia atrae a más seguidores. Recuerde: su proyecto será accedido por personas comunes que decidirán si quieren o no apoyar su proyecto.
                 </BoxTextPD>
                 <Editor
-                    initialValue={campaing.description ? campaing.description:''}
+                    value={campaing.description}
                     init={{
                         height: 500,
                         menubar: false,

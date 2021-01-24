@@ -1,4 +1,5 @@
 import React from 'react'
+import {useRouteMatch} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {useForm} from 'react-hook-form'
 import {store} from 'react-notifications-component'
@@ -172,7 +173,9 @@ interface Icampaing {
 
 // TODO: the problem is not loading data PROFILE-CA
 const Association: React.FC<Icampaing> = ({campaing})=>{
-
+    let match = useRouteMatch('/panel-de-usuario/actualizar-proyecto/:campania')
+    let matchUrl: any = match
+    let campaingId = matchUrl.params.campania
     let token = window.sessionStorage.getItem('token')
     let CityUser = new City(token)
     let companyProfile = new CompanyProfile(token)

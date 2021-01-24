@@ -171,7 +171,7 @@ const Personal: React.FC<Icampaing> = ({campaing}) => {
         }
         currentPersonal.updateProfilePersonal(data_profile, campaing.profile.id)
             .then(resp => {
-                Notifications('Su perfil se ha actualizado', 'success')
+                Notifications('Su perfil se ha actualizado.', 'success')
             }).catch(err=>{
                 Notifications('Hubo un error en la conexion, intentelo mas tarde porfavor.', 'danger')
             })
@@ -190,7 +190,7 @@ const Personal: React.FC<Icampaing> = ({campaing}) => {
 
     const Notifications = (set_messages: string, set_type: any) => {
         store.addNotification({
-            title: 'Guardando Datos',
+            title: 'Actualizando Datos',
             message: set_messages,
             type: set_type,
             insert: 'top',
@@ -231,11 +231,6 @@ const Personal: React.FC<Icampaing> = ({campaing}) => {
         LoadCities()
         const input: any = document.querySelector('input[name="cinit"]')
         input.focus()
-        //console.info("CAMPAING DATA")
-        //console.log(campaing)
-        //let pf_id: any = campaing.profile ? campaing.profile.id : 0
-        //let pc_id: any = campaing.profile_ca
-        //retrieveCompany(pf_id, pc_id) 
     },[campaing])
 
     return(

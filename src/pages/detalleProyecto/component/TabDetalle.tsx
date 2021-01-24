@@ -143,9 +143,7 @@ const TabDetalle: React.FC<ITab> = (props) => {
                             </Tabs>
                         </AppBar>
                         <TabPanel value={value} index={0}>
-                            <Texto> 
-                                {props.decripcion}
-                            </Texto>
+                        <Texto dangerouslySetInnerHTML={{__html:props.decripcion}} /> 
                         </TabPanel>
                         <TabPanel value={value} index={1}>
                             Item Fases

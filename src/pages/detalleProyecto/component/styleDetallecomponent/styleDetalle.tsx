@@ -424,13 +424,13 @@ export const DivSeparador = styled.div`
         margin-bottom: 1%;
     }
 `
-export const Texto = styled.p`   
+export const Texto = styled.div`   
     color: #5D5A5A;
     font-family: Roboto;
     font-style: normal;
     margin-top: 1%;
     font-weight: normal;
-    display: flex;
+    display: block;
     align-items: center;
     font-size: 14px;
     line-height: 19px;
