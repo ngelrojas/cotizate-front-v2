@@ -28,6 +28,7 @@ import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import Fases from './Fases';
+import TabAportadores from './TabAportadores';
 
   
 import {Article, SectionDetails, Picture, 
@@ -139,7 +140,8 @@ const TabDetalle: React.FC<ITab> = (props) => {
                             <Tabs style={{background:'#F5F5F5'}} value={value} onChange={handleChange} indicatorColor="primary" textColor="primary" variant="scrollable"  scrollButtons="on" >
                             <Tab label="Descripcion" {...a11yProps(0)} />
                             <Tab label="Fases" {...a11yProps(1)} />
-                            { authenticated? <Tab label="Aportaciones" {...a11yProps(2)} /> : <Tab label="Aportaciones" {...a11yProps(2)} disabled  />} 
+                            {/* { authenticated? <Tab label="Aportaciones" {...a11yProps(2)} /> : <Tab label="Aportaciones" {...a11yProps(2)} disabled  />}  */}
+                            { authenticated? <Tab label="Aportaciones" {...a11yProps(2)} /> : <Tab label="Aportaciones" {...a11yProps(2)}   />} 
                             <Tab label="Comentarios" {...a11yProps(3)} />
                             </Tabs>
                         </AppBar>
@@ -153,7 +155,8 @@ const TabDetalle: React.FC<ITab> = (props) => {
                                    <Fases />
                         </TabPanel>
                         <TabPanel value={value} index={2}>
-                            Item Aportaciones
+                           <TabAportadores />
+                           <TabAportadores />
                         </TabPanel>
                         <TabPanel value={value} index={3}>
                             Item Comentarios

@@ -730,3 +730,51 @@ export const TitleFase = styled.h4`
         padding-bottom: 1%;
     }
 `
+export const DivBorderSinAzulado = styled.div`   
+        background:#F5F5F5;
+        width:100%,     
+        margin-top: 2%;
+        margin-bottom: 2%;
+        padding-top: 2%;
+        padding-bottom: 2%;
+        padding-left: 1%;
+        padding-right: 1%;
+        // display:flex;
+        justify-content: center;
+        // align-items: center;        
+        
+    @media ${device.tablet} {
+        margin-top: 1%;
+        margin-bottom: 1%;
+        padding-bottom: 10px;
+        padding-top: 10px;
+    }
+    @media ${device.mobileM} {
+        margin-top: 0%;
+        margin-bottom: 0%;
+        padding-bottom: 10px;
+        padding-top: 10px;
+
+    }
+`
+export const TextoAportadores = styled.p`   
+    color: #6C6C6C;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 300;
+    display: flex;
+    align-items: center;
+    font-size: 17px;
+    line-height: 25px;
+    padding-right: 10px;
+
+
+    @media ${device.tablet} {
+        line-height: 17px;
+        padding-right: 8px;
+    }
+    @media ${device.mobileM} {
+        line-height: 16px;
+        padding-right: 5px;
+    }
+`
