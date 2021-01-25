@@ -14,6 +14,7 @@ import {getReward} from '../../../../../../../redux/actions/reward.actions'
 import EditIcon from '@material-ui/icons/Edit'
 import DeleteIcon from '@material-ui/icons/Delete'
 import {BtnUpdate, BtnDelete} from './styles'
+import {store} from 'react-notifications-component'
 
 interface Icity {
     id: number
@@ -90,8 +91,27 @@ const TableReward:React.FC = (props: any) => {
 
   const onDelete =(e: any)=>{
       let rewardId: number = e.id
-      props.getReward(rewardId)
+      if(window.confirm("Estas seguro que deseas eliminar esta Recompensa...?")){
+        CReward.deleteReward(rewardId)
+        Notifications("La Recompensa fue eliminada ", 'success')
+      }
   }
+
+    const Notifications = (set_messages: string, set_type: any) => {
+        store.addNotification({
+            title: 'Guardando Datos',
+            message: set_messages,
+            type: set_type,
+            insert: 'top',
+            container: 'top-right',
+            animationIn: ['animate__animated', 'animate__fadeIn'],
+            animationOut: ['animate__animated', 'animate__fadeOut'],
+            dismiss: {
+                duration: 5000,
+                onScreen: true
+            }
+        })
+    }
 
   React.useEffect(()=>{
     listRewards(campaingId)

@@ -169,6 +169,7 @@ const Personal: React.FC<Icampaing> = ({campaing}) => {
             current_position: current_position,
             headline: headline
         }
+
         currentPersonal.updateProfilePersonal(data_profile, campaing.profile.id)
             .then(resp => {
                 Notifications('Su perfil se ha actualizado.', 'success')
@@ -637,7 +638,7 @@ const Personal: React.FC<Icampaing> = ({campaing}) => {
                         <Row center="xs">
                             <Col xs={6}>
                                 <WrapperBox>
-                                   <SaveProfile>guardar</SaveProfile>
+                                   <SaveProfile>actualizar</SaveProfile>
                                 </WrapperBox>
                             </Col>
                         </Row>

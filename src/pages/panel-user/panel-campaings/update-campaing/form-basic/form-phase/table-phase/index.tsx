@@ -9,6 +9,7 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import {store} from 'react-notifications-component'
 import {Phases} from '../../../../../../../userPhases'
 import {getPhase} from '../../../../../../../redux/actions/phase.actions' 
 import EditIcon from '@material-ui/icons/Edit'
@@ -83,8 +84,28 @@ const TablePhases:React.FC = (props: any) => {
   const onDelete =(e: any)=>{
       let phaseId: number = e.id
       let headId: number = e.header
-      props.getPhase(phaseId, headId)
+
+      if(window.confirm("Estas serguro que deseas eliminar esta Fase..?")){
+        Phase.deletePhases(phaseId, headId)
+        Notifications('La Fase fue eliminada', 'success')
+      }
   }
+
+    const Notifications = (set_messages: string, set_type: any) => {
+        store.addNotification({
+            title: 'Procesando Datos',
+            message: set_messages,
+            type: set_type,
+            insert: 'top',
+            container: 'top-right',
+            animationIn: ['animate__animated', 'animate__fadeIn'],
+            animationOut: ['animate__animated', 'animate__fadeOut'],
+            dismiss: {
+                duration: 5000,
+                onScreen: true
+            }
+        })
+    }
 
   React.useEffect(()=>{
     getPhases(campaingId)

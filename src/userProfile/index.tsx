@@ -84,12 +84,24 @@ export class CompanyProfile {
     constructor(token:any){
         this.token = token
     }
-    /*
+
+    /* Retrieve current company
      * profile_id: pf_id = ID current profile user 
      * profile_ca: pc_id = ID current profile company user 
     **/
     retrieveCompany = async(pf_id:any, pc_id:any) => {
         this.resp_company = await API.get(`profile/company/${pf_id}/${pc_id}`, {
+            headers: {Authorization: `Bearer ${this.token}`}
+        })
+        return this.resp_company
+    }
+
+    /* Update profile-company
+     * profile_id: pf_id = ID current profile user 
+     * profile_ca: pc_id = ID current profile company user 
+    **/
+    updateCompany = async(data_update:any, pf_id:any, pc_id:any) => {
+        this.resp_company = await API.put(`profile/company/${pf_id}/${pc_id}`, data_update, {
             headers: {Authorization: `Bearer ${this.token}`}
         })
         return this.resp_company
