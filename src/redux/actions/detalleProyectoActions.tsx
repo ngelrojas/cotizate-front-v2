@@ -43,7 +43,7 @@ const fasePrueba=[
 },
 {
   id:13,
-  title:'faseTop',
+  title:'faseLab',
   description:'es una prueba de color rojo',
   amount:'400.00',
   header:23

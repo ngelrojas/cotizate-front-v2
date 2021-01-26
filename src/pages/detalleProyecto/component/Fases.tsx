@@ -83,7 +83,7 @@ const Fases: React.FC<IFases> = (props) => {
                   <DivSeparadorSinColor>
                     <Col xs={12} sm={12} md={12} lg={12}>  
                         <TitleFase>
-                            {'FASE 1'}
+                            {'FASE '}{props.fase.id}
                         </TitleFase>                            
                           
                     </Col>  
@@ -91,7 +91,7 @@ const Fases: React.FC<IFases> = (props) => {
                   <DivSeparador2 >
                     <Col xs={12} sm={12} md={12} lg={12}>                                                 
                         <TitleFase>
-                            {'FASE 1'}
+                            {props.fase.title}
                         </TitleFase>                                          
                     </Col>  
                     <Col xs={12} sm={12} md={12} lg={12}> 
@@ -101,7 +101,7 @@ const Fases: React.FC<IFases> = (props) => {
                     </Col>  
                     <Col xs={12} sm={12} md={12} lg={12}>
                         <Texto>
-                               {'En Las Payas hace 15 años que hacemos vino comprando uvas a pequeños como por productores de la zona siempre con la idea de hacer vinos de baja intervención de la'}      
+                               {props.fase.description}
                         </Texto>                              
                     </Col> 
                   </DivSeparador2>   
@@ -112,7 +112,7 @@ const Fases: React.FC<IFases> = (props) => {
                                 id="outlined-number"
                                 name="txtFaseBox"                              
                                 type="number"
-                                defaultValue="100.00"
+                                defaultValue={props.fase.amount}
                                 onChange={_onChangeform}
                                 style={{background:'#FFFFFF', width:'65%'}}
                                 variant="outlined"
