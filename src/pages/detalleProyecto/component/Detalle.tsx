@@ -212,6 +212,7 @@ const Detalle: React.FC<IDetalle> = (props) => {
     }
     useEffect(() =>{
         dispatch(Action.obtnerAportes(props.data.header.id));
+        dispatch(Action.obtnerFases(props.data.header.id));
    },[]);
 
 
@@ -381,7 +382,7 @@ const Detalle: React.FC<IDetalle> = (props) => {
                     
                   </DivSeparador>  
             
-                  <TabDetalle decripcion={props.data.description} />                                                                                              
+                  <TabDetalle  decripcion={props.data.description} />                                                                                              
            
                  <Reportar />
 

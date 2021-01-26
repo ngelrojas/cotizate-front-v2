@@ -40,8 +40,14 @@ import {Article,
     } from './styleDetallecomponent/styleDetalle';
 import { isConstructorDeclaration } from 'typescript';
 
-    interface IReportar {
-    
+    interface IFases {
+       fase: {
+         id:number,
+         title:string,
+         description:string,
+         amount:string,
+         header:number
+       }
     }
 
     const useStyles = makeStyles((theme) => ({
@@ -52,7 +58,7 @@ import { isConstructorDeclaration } from 'typescript';
     }));
 
 
-const Fases: React.FC<IReportar> = (props) => {
+const Fases: React.FC<IFases> = (props) => {
    
     const classes = useStyles();   
     const history = useHistory();

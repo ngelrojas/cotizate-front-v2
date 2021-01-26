@@ -1,5 +1,5 @@
 import {
-  DETALLE_PROYECTO, DETALLE_APORTES
+  DETALLE_PROYECTO, DETALLE_APORTES, DETALLE_FASES
 } from '../types/detalleProyecto.types'
 import API from '../../api'
 
@@ -25,7 +25,7 @@ export function obtnerAportes(idAporte: any){
         if(resp.status === 200){             
               dispatch({
                   type: DETALLE_APORTES,
-                  status:true,
+                  statusAporte:true,
                   aportes:resp.data.data
               })                         
         }            
@@ -33,6 +33,38 @@ export function obtnerAportes(idAporte: any){
       .catch(err => console.log(err))
       }
 }
-
+const fasePrueba=[
+  {
+  id:12,
+  title:'faseTop',
+  description:'es una prueba de color rojo',
+  amount:'100.00',
+  header:22
+},
+{
+  id:13,
+  title:'faseTop',
+  description:'es una prueba de color rojo',
+  amount:'400.00',
+  header:23
+}
+];
+export function obtnerFases(idHeader: any){       
+  return (dispatch : any) =>{          
+      
+     API.get(`phases/${idHeader}`).then(resp => {  
+       console.log(resp.data.data);
+        if(resp.status === 200){             
+              dispatch({
+                  type: DETALLE_FASES,
+                  status:true,
+                  // fases:resp.data.data
+                  fases:fasePrueba
+              })                         
+        }            
+      })
+      .catch(err => console.log(err))
+      }
+}
 
 

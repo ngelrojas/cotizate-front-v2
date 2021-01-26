@@ -64,7 +64,7 @@ import {
       }
 
 interface ITab {
-    decripcion:string,
+    decripcion:string
 }
 
   const useStyles = makeStyles((theme) => ({
@@ -88,9 +88,15 @@ const TabDetalle: React.FC<ITab> = (props) => {
       
     
     const { authenticated } = useSelector((stateSelector: any) => {  return stateSelector.profile;  });
-    console.log('autentica: ', authenticated);
+    const { statusFases, fases
+    } = useSelector((stateSelector: any) => {
+      return stateSelector.detalleProyecto;
+    });
+
+    // console.log('autentica: ', authenticated);
     useEffect(() =>{
-    },[authenticated]);
+      console.log('fases: ', fases);
+    },[authenticated, fases]);
     return (
         <>
            <DivSeparador>
@@ -112,7 +118,10 @@ const TabDetalle: React.FC<ITab> = (props) => {
                             </Texto>
                         </TabPanel>
                         <TabPanel value={value} index={1}>
-                                   <Fases />
+                               {fases.map((valuee: any, index:any)=>(
+                                      <Fases fase={valuee} />
+                               ))}
+                                  
                         </TabPanel>
                         <TabPanel value={value} index={2}>
                            <TabAportadores />

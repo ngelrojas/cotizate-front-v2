@@ -1,5 +1,5 @@
 import {
-    DETALLE_PROYECTO, DETALLE_APORTES
+    DETALLE_PROYECTO, DETALLE_APORTES,DETALLE_FASES
 } from '../types/detalleProyecto.types'
 const initialState = {
     statusDetalle: false,
@@ -104,7 +104,9 @@ const initialState = {
         }
     },
     statusAportes: false,
-    aportes:[]
+    aportes:[],
+    statusFases:false,
+    fases:[]
 }
 
 export default function(state = initialState, action: any) {
@@ -120,7 +122,13 @@ export default function(state = initialState, action: any) {
                     ...state,
                     statusAportes: action.statusAporte,
                     aportes:action.aportes
-                }                        
+                }   
+            case DETALLE_FASES:
+                return {
+                    ...state,
+                    statusFases: action.status,
+                    fases:action.fases
+                }                       
         default:
             return state
     }
