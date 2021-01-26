@@ -53,14 +53,16 @@ export function obtnerFases(idHeader: any){
   return (dispatch : any) =>{          
       
      API.get(`phases/${idHeader}`).then(resp => {  
-       console.log(resp.data.data);
-        if(resp.status === 200){             
+       console.log(resp.data.data);       
+        if(resp.status === 200){  
+          if(resp.data.data.length <= 0){  //cambiar condicion a mayor
               dispatch({
                   type: DETALLE_FASES,
                   status:true,
                   // fases:resp.data.data
                   fases:fasePrueba
-              })                         
+              })    
+            }                    
         }            
       })
       .catch(err => console.log(err))
