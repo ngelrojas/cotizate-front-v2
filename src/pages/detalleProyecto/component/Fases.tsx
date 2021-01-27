@@ -83,7 +83,7 @@ const Fases: React.FC<IFases> = (props) => {
                   <DivSeparadorSinColor>
                     <Col xs={12} sm={12} md={12} lg={12}>  
                         <TitleFase>
-                            {'FASE '}{props.fase.id}
+                          {props.fase.title}
                         </TitleFase>                            
                           
                     </Col>  
@@ -93,12 +93,7 @@ const Fases: React.FC<IFases> = (props) => {
                         <TitleFase>
                             {props.fase.title}
                         </TitleFase>                                          
-                    </Col>  
-                    <Col xs={12} sm={12} md={12} lg={12}> 
-                        <Row center='xs'>                            
-                            {'Grafico'}
-                       </Row>                       
-                    </Col>  
+                    </Col>             
                     <Col xs={12} sm={12} md={12} lg={12}>
                         <Texto>
                                {props.fase.description}

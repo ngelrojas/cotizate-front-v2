@@ -113,8 +113,7 @@ const TabDetalle: React.FC<ITab> = (props) => {
                         </AppBar>
                         <TabPanel value={value} index={0}>
                             <Texto> 
-                                {/* {props.decripcion} */}
-                                {'descripcion en proceso'}
+                                {props.decripcion}
                             </Texto>
                         </TabPanel>
                         <TabPanel value={value} index={1}>
