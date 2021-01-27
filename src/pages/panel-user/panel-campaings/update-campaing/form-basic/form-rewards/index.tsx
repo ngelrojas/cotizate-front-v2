@@ -1,12 +1,15 @@
 import React from 'react'
 import {useForm} from 'react-hook-form'
+import {useRouteMatch} from 'react-router-dom'
+import {connect} from 'react-redux'
 import {Editor} from '@tinymce/tinymce-react'
 import {Row, Col} from 'react-styled-flexboxgrid'
 import {store} from 'react-notifications-component'
-import {CampaingHeader} from '../../../../../../userCampaings'
 import {Cities} from '../../../../../../userCities'
 import {Reward} from '../../../../../../userReward'
 import Slide from 'react-reveal/Slide'
+import TableReward from './table-reward'
+import Moment from 'react-moment'
 import {
     InputReward,
     Form,
@@ -28,13 +31,15 @@ import {
     BoxCity,
     WrapperSave,
     WrapBtnSave,
-    BtnSaveProject,
+    BtnSP,
+    BtnUP
 } from '../../styles'
 
 type FormData = {
+    id: number
     title: string,
     amount: number,
-    descript: string,
+    description: string,
     expected_delivery: string,
     header: number,
     user: number,
@@ -44,16 +49,24 @@ type FormData = {
 
 }
 
-const FormRewards: React.FC= () => {
+type TypeReward = {
+    rewards: FormData
+}
+
+type AllProps = TypeReward
+
+const FormRewards: React.FC<AllProps>= ({rewards}) => {
+    let match = useRouteMatch('/panel-de-usuario/actualizar-proyecto/:campania')
+    let matchUrl: any = match
     let token = window.sessionStorage.getItem('token')
-    let CamHeader = new CampaingHeader(token)
     let Rewards = new Reward(token)
     let City = new Cities(token)
-    const [datach, setDatach] = React.useState<number>(0)
-    const [description, Setdescription] = React.useState()
+    let campaingId = matchUrl.params.campania
+    const [resumes, Setresumes] = React.useState()
     const [selected, Setselected] = React.useState<number[]>([])
     const [MsgErrorF, setMsgErrorF] = React.useState()
     const [cities, setCities] = React.useState()
+    const [AddOption, setAddOption] = React.useState()
     const {register, handleSubmit, reset, errors} = useForm<FormData>({
         mode: 'onChange'
     })
@@ -67,24 +80,54 @@ const FormRewards: React.FC= () => {
             })
     }
 
-    const getLast = () => {
-        CamHeader.getLastCampaingHeader()
-            .then(resp => {
-                setDatach(resp.data.data.id)
-            }).catch(err =>{
-                console.error(err)
-            })
+    const onSubmit = handleSubmit(({title, amount, expected_delivery, all_cities, pick_up_locally}) => {
+        
+        if(AddOption === "add"){
+            CreateRewards(title, amount, expected_delivery, all_cities, pick_up_locally)
+        }else{
+            UpdateRewards(title, amount, expected_delivery, all_cities, pick_up_locally)
+        } 
+
+    })
+
+    const UpdateRewards = (title: string, amount:number, expected_delivery: string, all_cities: any, pick_up_locally:any) => {
+        if(validate()){
+            let new_date: any = expected_delivery ? expected_delivery + " 00:00:00": expected_delivery 
+            let data_format = new_date ? new_date : rewards.expected_delivery
+            let rewardId = rewards.id
+
+            let data_reward = { 
+                title: title,
+                amount: amount,
+                description: resumes,
+                expected_delivery: data_format,
+                header: rewards.header,
+                user: 0,
+                cities: selected,
+                all_cities: all_cities,
+                pick_up_locally: pick_up_locally
+            }
+
+            Rewards.updateReward(rewardId, data_reward)
+                .then(resp => {
+                    Notifications('Recompensa actualizada.', 'success')
+                    reset() 
+                    setMsgErrorF('')
+                }).catch(err => {
+                    Notifications('La descripcion de la Recompensa no debe exceder mas 900 caracteres o 159 palabras.', 'danger')
+                })         
+        }
     }
 
-    const onSubmit = handleSubmit(({title, amount, descript, expected_delivery, all_cities, pick_up_locally}) => {
+    const CreateRewards = (title: string, amount:number, expected_delivery: string, all_cities: any, pick_up_locally:any) => {
         if(validate()){
             let data_format = expected_delivery + " 00:00:00"
             let data_reward = { 
                 title: title,
                 amount: amount,
-                description: description,
+                description: resumes,
                 expected_delivery: data_format,
-                header: datach,
+                header: campaingId,
                 user: 0,
                 cities:selected,
                 all_cities: all_cities,
@@ -100,8 +143,12 @@ const FormRewards: React.FC= () => {
                     Notifications('La descripcion de la Recompensa no debe exceder mas 900 caracteres o 159 palabras.', 'danger')
                 })         
         }
+    }
 
-    })
+    const handleAdd = (e:any) => {
+        let options: any = e.target.id
+        setAddOption(options)
+    }
 
     const handleCities = (e:React.FormEvent<HTMLInputElement> ) => {
         const id: number = +e.currentTarget.value
@@ -114,19 +161,20 @@ const FormRewards: React.FC= () => {
     }
 
     const handleEditorReward = (content: any, editor: any) => {
-        Setdescription(content)
+        Setresumes(content)
     }
 
     const validate = () => { 
-        if(description.length === 0){
+        if(resumes.length === 0){
 
             Notifications('La Descripcion de la recompensa es requerida', 'danger')
             setMsgErrorF('este campo es requerido')
             return false
         }
-        if(description.length >= 940){
+        if(resumes.length >= 940){
             Notifications('La descripcion de la Recompensa no debe exceder mas 900 caracteres o 159 palabras.', 'danger')
             setMsgErrorF('no debe exceder mas de 900 caracteres o 159 palabras')
+            Setresumes(0)
             return false
         }
         return true
@@ -156,16 +204,18 @@ const FormRewards: React.FC= () => {
             left: 0,
             behavior: 'smooth'
         })
-        getLast()
         listCities()
     },[])
 
     return (
         <>
         <Slide top>
+
         <H4>3- RECOMPENSAS </H4>
         <TextConf>Antes de ofrecer una recompensa, es importante tener mapeados todos los procesos de producción y entrega.</TextConf>
-        
+         <Row>
+                <TableReward />
+        </Row>       
         <Form onSubmit={onSubmit}>
 
         <WrapperBoxRD>
@@ -175,6 +225,7 @@ const FormRewards: React.FC= () => {
                         name="title"
                         ref={register({required: true})}
                         placeholder="titulo de la recompensa"
+                        defaultValue={rewards.title}
                     />
                 <MsgError>
                     {errors.title && 'este campo es requerido'}
@@ -190,18 +241,20 @@ const FormRewards: React.FC= () => {
                         name="amount"
                         ref={register({required: true})}
                         placeholder="15000"
+                        defaultValue={rewards.amount}
                     />
                     <BSRE>BS</BSRE> 
                 </WrappBoxInput>
                     <MsgError>{errors.amount && 'este campo es requerido'}</MsgError>
                 </Col>
                 <Col xs={6}>
-                <BoxTitleContent>* Entrega prevista</BoxTitleContent>
+                <BoxTitleContent>* Entrega prevista:  <span><Moment format="DD/MM/YYYY">{rewards.expected_delivery}</Moment></span></BoxTitleContent>
+                
                 <WrappBoxInput>
                     <InputReward
                         type="date"
                         name="expected_delivery"
-                        ref={register({required: true})}
+                        ref={register({required: false})}
                     />
                 </WrappBoxInput>
                 <MsgError>{errors.expected_delivery && 'este campo es requerido'}</MsgError>
@@ -216,7 +269,7 @@ const FormRewards: React.FC= () => {
             </BoxText>
             <SpaceB />
                 <Editor
-                    initialValue=''
+                    value={rewards.description}
                     init={{
                         height: 300,
                         menubar: false,
@@ -274,45 +327,44 @@ const FormRewards: React.FC= () => {
                         <TableCities>
                             <Row between="xs">
                                 {
-                                    cities && cities.map((ct: any)=>(
-                                            <Col xs={4} key={ct.id} > 
-                                            <ItemCity>
-                                            <input 
-                                                defaultChecked={selected.includes(ct.id)}
-                                                type="checkbox" 
-                                                name="cities[]" 
-                                                value={ct.id}
-                                                onClick={handleCities} 
-                                                />{ct.name} 
-                                            </ItemCity>
-                                            </Col>
+                                    cities && cities.map((ct: any) =>(
+                                        <Col xs={4} key={ct.id}>
+                                                <ItemCity>
+                                                    <input 
+                                                        defaultChecked={selected.includes(ct.id)}
+                                                        type="checkbox" 
+                                                        name="cities[]" 
+                                                        value={ct.id}
+                                                        onClick={handleCities} 
+                                                        />{ct.name} 
+                                                </ItemCity>
+                                        </Col>
                                     )) 
                                 }
                             </Row>
-
                         </TableCities>
                         <SecondItem>
 
                             <Row>
                                     <Col xs={6} > 
-                                    <ItemCity>
-                                        <input 
-                                            type="checkbox" 
-                                            name="all_cities" 
-                                            value="1"
-                                            ref={register({required: false})}
-                                        /> Toda Bolivia
-                                    </ItemCity>
+                                        <ItemCity>
+                                            <input 
+                                                type="checkbox" 
+                                                name="all_cities" 
+                                                value="1"
+                                                ref={register({required: false})}
+                                            /> Toda Bolivia
+                                        </ItemCity>
                                     </Col>
                                     <Col xs={6} > 
-                                    <ItemCity>
-                                        <input 
-                                            type="checkbox" 
-                                            name="pick_up_locally" 
-                                            value="1"
-                                            ref={register({required: false})}
-                                        /> Retirar en el local
-                                    </ItemCity>
+                                        <ItemCity>
+                                            <input 
+                                                type="checkbox" 
+                                                name="pick_up_locally" 
+                                                value="1"
+                                                ref={register({required: false})}
+                                            /> Retirar en el local
+                                        </ItemCity>
                                     </Col>
                             </Row>
                         </SecondItem>
@@ -326,7 +378,8 @@ const FormRewards: React.FC= () => {
             <Row>
                 <WrapperSave>
                     <WrapBtnSave>
-                        <BtnSaveProject>adicionar</BtnSaveProject>
+                        <BtnSP>actualizar</BtnSP>
+                        <BtnUP id="add" onClick={(e)=>handleAdd(e)}>adicionar</BtnUP>
                     </WrapBtnSave>
                 </WrapperSave>
             </Row>
@@ -337,4 +390,8 @@ const FormRewards: React.FC= () => {
     )
 }
 
-export default FormRewards
+const mapStateToProps = (state: any) => ({
+    rewards: state.reward
+})
+
+export default connect(mapStateToProps, '')(FormRewards)

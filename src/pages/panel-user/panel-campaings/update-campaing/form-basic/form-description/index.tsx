@@ -3,7 +3,6 @@ import {connect} from 'react-redux'
 import {useForm} from 'react-hook-form'
 import {store} from 'react-notifications-component'
 import {Editor} from '@tinymce/tinymce-react'
-import DefaultImg from '../public/default.png'
 import {CampaingHeader, Campaings} from '../../../../../../userCampaings'
 import {Row, Col} from 'react-styled-flexboxgrid'
 import {next, back} from '../../../../../../redux/actions/next_back.actions'
@@ -150,7 +149,7 @@ interface Icampaing {
 }
 
 type AllProps = Icounter & Ihandlers & Icampaing
-// TODO: test updated description form
+
 const FormDescription: React.FC<AllProps> = ({counter, handleNext, handleBack, campaing}) => {
 
     let token = window.sessionStorage.getItem('token')
@@ -176,12 +175,10 @@ const FormDescription: React.FC<AllProps> = ({counter, handleNext, handleBack, c
     }
 
     const handleEditorChange = (content: any, editor: any) => {
-        content = campaing.description ? campaing.description : ''
         setDescripction(content)
     }
 
     const handleEditorExcerptChange = (content: any, editor: any) => {
-        content = campaing.excerpt ? campaing.excerpt : ''
         setExcerpt(content)
     }
 
@@ -189,18 +186,17 @@ const FormDescription: React.FC<AllProps> = ({counter, handleNext, handleBack, c
         let headerID: number = campaing.header ? campaing.header.id: 0 
         let profileCA: number = campaing.profile_ca ? campaing.profile_ca:0
         let profilId: number = campaing.profile ? campaing.profile.id:0
-        let images: string = imagen_main[0] ? imagen_main[0] : campaing.imagen_main 
-        console.info("EXCERPT")
-        console.log(excerpt)
-        console.info("DESCRIPTION")
-        console.log(description)
+        let imagenMain: any = showImg ? showImg : ''
+        let update_description = description ? description : campaing.description
+        let update_excerpt = excerpt ? excerpt : campaing.excerpt
+
         if (validate()) {
             let send_data = {
                 title: title,
                 video_main: video_main,
-                imagen_main: images,
-                excerpt: excerpt,
-                description: description, 
+                imagen_main: imagenMain,
+                excerpt: update_excerpt,
+                description: update_description, 
                 header: headerID,
                 currency: 1,
                 short_url: short_url, 
@@ -208,38 +204,38 @@ const FormDescription: React.FC<AllProps> = ({counter, handleNext, handleBack, c
                 profile_ca: profileCA,
                 profile:profilId 
             }
-            console.log(send_data) 
-            //let campbId: number = campaing.id ? campaing.id:0
+            let campbId: number = campaing.id ? campaing.id:0
 
-            //CamBody.updateCampaing(campbId, send_data)
-                //.then(resp =>{
-                    //Notifications('Datos de Descripcion de proyecto Actualizados', 'success')
-                    //setMsgExcerpt('')
-                    //setMsgdescription('')
-                    //handleNext()
-                //}).catch(err => {
-                    //console.error(err)
-                    //Notifications('Porfavor debe revisar los datos a ser llenados.', 'danger')
-                //})
+            CamBody.updateCampaing(campbId, send_data)
+                .then(resp =>{
+                    Notifications('Datos de Descripcion de proyecto Actualizados', 'success')
+                    setMsgExcerpt('')
+                    setMsgdescription('')
+                    handleNext()
+                }).catch(err => {
+                    console.error(err)
+                    Notifications('Porfavor debe revisar los datos a ser llenados.', 'danger')
+                })
 
         }
 
     })
 
     const validate = () => {
-        if (excerpt.length === 0) {
+        
+        if (campaing.excerpt.length === 0 && excerpt.length === 0) {
             Notifications('El Resumen de tu proyecto es requerido','danger')
             setMsgExcerpt('este campo es requerido')
             return false
         }
 
-        if (excerpt.length >= 249) {
-            setMsgExcerpt('asegurate de no tener letras resaltadas o con negritas.')
-            Notifications('El Resumen no debe superar las 44 palabras','danger')
-            return false
-        }
+        //if (excerpt.length >= 285) {
+        //    setMsgExcerpt('asegurate de no tener letras resaltadas o con negritas.')
+        //    Notifications('El Resumen no debe superar las 44 palabras','danger')
+        //    return false
+        //}
 
-        if (description.length === 0) {
+        if (campaing.description.length === 0 && description.length === 0 ) {
             setMsgdescription('este campo es requerido')
             Notifications('Es obligatorio detallar tu proyecto','danger')
             return false
@@ -283,8 +279,6 @@ const FormDescription: React.FC<AllProps> = ({counter, handleNext, handleBack, c
             behavior: 'smooth'
         })
         getLast()
-        console.info("IN FORM DESCRIPTION")
-        console.log(campaing)
     },[campaing])
 
     return (
@@ -356,13 +350,12 @@ const FormDescription: React.FC<AllProps> = ({counter, handleNext, handleBack, c
                             type="file"
                             name="imagen_main"
                             ref={register({required: false})}
-                            accept="image/png, image/jpeg"
                             onChange={_onChange}
                         />
                     </Col>
                     <Col xs={5}>
 
-                        <Img src={ URL_IMG + campaing.imagen_main ? URL_IMG + campaing.imagen_main : DefaultImg } alt="cotizate" />
+                        <Img src={ showImg ? showImg  : URL_IMG + campaing.imagen_main } alt="cotizate" />
                         
                     </Col>
                 <MsgError>
@@ -377,7 +370,7 @@ const FormDescription: React.FC<AllProps> = ({counter, handleNext, handleBack, c
                 Este es el resumen de  descripción del post utiliza max. 244 caracteres o 44 palabras
                 </BoxTextPR>
                 <Editor
-                    initialValue={campaing.excerpt ? campaing.excerpt : ''}
+                    value={campaing.excerpt}
                     init={{
                         height: 200,
                         menubar: false,
@@ -430,7 +423,7 @@ const FormDescription: React.FC<AllProps> = ({counter, handleNext, handleBack, c
                 Habla con claridad sobre lo que quieres lograr. Aclara posibles dudas sobre cómo se utilizará el dinero, quién está detrás del proyecto, La transparencia atrae a más seguidores. Recuerde: su proyecto será accedido por personas comunes que decidirán si quieren o no apoyar su proyecto.
                 </BoxTextPD>
                 <Editor
-                    initialValue={campaing.description ? campaing.description:''}
+                    value={campaing.description}
                     init={{
                         height: 500,
                         menubar: false,

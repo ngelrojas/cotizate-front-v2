@@ -12,6 +12,7 @@ import profilecaReducer from '../reducers/profileca.reducers'
 import NextBackReducer from '../reducers/next_back.reducers'
 import categoriaReducer from '../reducers/categoriaReducers'
 import detalleProyecto from '../reducers/detalleProyectoReducers'
+import rewardReducer from '../reducers/reward.reducers'
 
 const initialState = {}
 const middleware = [thunk]
@@ -32,7 +33,8 @@ const reducer = combineReducers({
     home:homeReducer,
     nextForm: NextBackReducer,
     categorias:categoriaReducer,
-    detalleProyecto:detalleProyecto
+    detalleProyecto:detalleProyecto,
+    reward: rewardReducer
 })
 
 const store = createStore(

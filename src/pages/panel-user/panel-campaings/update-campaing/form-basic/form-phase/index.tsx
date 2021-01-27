@@ -1,11 +1,13 @@
 import React from 'react'
 import {useForm} from 'react-hook-form'
+import {connect} from 'react-redux'
+import {useRouteMatch} from 'react-router-dom'
 import {Editor} from '@tinymce/tinymce-react'
 import {store} from 'react-notifications-component'
 import {Row, Col} from 'react-styled-flexboxgrid'
-import {CampaingHeader} from '../../../../../../userCampaings'
 import {Phases} from '../../../../../../userPhases'
 import Slide from 'react-reveal/Slide'
+import TablePhases from './table-phase'
 import {
     FormR,
     MsgErrorPhase,
@@ -20,42 +22,83 @@ import {
     BS,
     WrapperSavePhase,
     WrapBtnSave,
-    BtnSaveProject
+    BtnSP,
+    BtnUP
 } from '../../styles'
 
 type FormData = {
+    id: number
     title: string
+    description: string
     amount: number
+    header: number
 }
 
-const FormPhase: React.FC= () => {
+type TypePhase = {
+    phases: FormData 
+}
 
+type AllProps = TypePhase
+
+const FormPhase: React.FC<AllProps> = ({phases}) => {
+    let match = useRouteMatch('/panel-de-usuario/actualizar-proyecto/:campania')
+    let matchUrl: any = match
+    let campaingId = matchUrl.params.campania
     let token = window.sessionStorage.getItem('token')
-    let CamHeader = new CampaingHeader(token)
     let Phase = new Phases(token)
-    const [datach, setDatach] = React.useState<number>(0)
-    const [description, Setdescription] = React.useState()
+    const [resumes, Setresumes] = React.useState()
+    const [AddPhase, setAddPhase] = React.useState()
     const [MsgErrorF, setMsgErrorF] = React.useState()
     const {register, handleSubmit, reset, errors} = useForm<FormData>({
         mode: 'onChange'
     })
 
-    const getLast = () => {
-        CamHeader.getLastCampaingHeader()
-            .then(resp => {
-                setDatach(resp.data.data.id)
-            }).catch(err =>{
-                console.error(err)
-            })
+    const onSubmit = handleSubmit(({title, amount}) => {
+
+        if (AddPhase === "add"){
+            CreatePhases(title, amount)
+        }else{
+            UpdatePhases(title, amount)
+        }
+
+    })
+    
+    const handleAdd = (e:any) => {
+        let action: any = e.target.id
+        setAddPhase(action)
     }
 
-    const onSubmit = handleSubmit(({title, amount}) => {
+    const UpdatePhases = (title: string, amount:number) => {
         if(validate()){
             let data_phase = {
                 title: title,
                 amount: amount,
-                description: description,
-                header: datach 
+                description: resumes,
+                header: campaingId 
+            }
+
+            let headerId = phases.header
+            let phaseId = phases.id
+
+            Phase.updatePhases(phaseId, headerId, data_phase)
+                .then(resp => {
+                    Notifications('Fase actualizada.', 'success')
+                    reset() 
+                    setMsgErrorF('')
+                }).catch(err =>{    
+                    setMsgErrorF('no debe exceder mas 150 palabras')
+                    Notifications('La descripcion de la Fase no debe exceder mas 870 caracteres o 150 palabras.', 'danger')
+                })
+        }
+    }
+
+    const CreatePhases = (title: string, amount:number) => {
+        if(validate()){
+            let data_phase = {
+                title: title,
+                amount: amount,
+                description: resumes,
+                header: campaingId 
             }
 
             Phase.createPhase(data_phase)
@@ -68,14 +111,14 @@ const FormPhase: React.FC= () => {
                     Notifications('La descripcion de la Fase no debe exceder mas 870 caracteres o 150 palabras.', 'danger')
                 })
         }
-    })
+    }
 
     const handleEditorReward = (content: any, editor: any) => {
-        Setdescription(content)
+        Setresumes(content)
     }
 
     const validate = () => { 
-        if(!description){
+        if(!resumes){
             setMsgErrorF('este campo es requerido')
             Notifications('La Fase debe contener una descripcion', 'danger')
             return false
@@ -107,13 +150,17 @@ const FormPhase: React.FC= () => {
             left: 0,
             behavior: 'smooth'
         })
-       getLast()
-    },[])
+        
+    },[phases])
 
     return (
         <>
         <Slide top>
-            <WrapperBoxRD>
+
+        <WrapperBoxRD>
+        <Row>
+                <TablePhases />
+        </Row>
             <WrapperBox>
                 <BoxTitleContent> *Fases del proyecto</BoxTitleContent>
                 <BoxText> 
@@ -122,7 +169,7 @@ const FormPhase: React.FC= () => {
             </WrapperBox>
 
         <FormR onSubmit={onSubmit}>
-        <Row>
+<Row>
         <Col xs={6}>
                     <BoxTitleContent>* Titulo de la Fase </BoxTitleContent>
                     <WrappBoxInput>
@@ -131,6 +178,7 @@ const FormPhase: React.FC= () => {
                             name="title"
                             ref={register({required: true})}
                             placeholder="Fase"
+                            defaultValue={phases.title ? phases.title: ''}
                         />
                     </WrappBoxInput>
 
@@ -145,6 +193,7 @@ const FormPhase: React.FC= () => {
                             name="amount"
                             ref={register({required: true})}
                             placeholder="000.000.000"
+                            defaultValue={phases.amount ? phases.amount: ''}
                         />
                         <BS>BS</BS>
                     </WrappBoxInput>
@@ -152,13 +201,13 @@ const FormPhase: React.FC= () => {
                         {errors.amount && 'este campo es requerido'}
                     </MsgError>
         </Col>
-        </Row>
-                <BoxTitleContent>* Descripcion </BoxTitleContent>
+</Row>
+                <BoxTitleContent>* Descripcion</BoxTitleContent>
                 <BoxText> 
                 Descripción de la fase no debe exceder mas de  870 caracteres o 150 palabras
                 </BoxText>
                 <Editor
-                    initialValue=''
+                    value={phases.description}
                     init={{
                         height: 300,
                         menubar: false,
@@ -208,7 +257,8 @@ const FormPhase: React.FC= () => {
             <Row>
                 <WrapperSavePhase>
                     <WrapBtnSave>
-                        <BtnSaveProject>adicionar</BtnSaveProject>
+                        <BtnSP>actualizar</BtnSP>
+                        <BtnUP id="add" onClick={(e)=>handleAdd(e)}>adicionar</BtnUP>
                     </WrapBtnSave>
                 </WrapperSavePhase>
             </Row>
@@ -222,4 +272,8 @@ const FormPhase: React.FC= () => {
     )
 }
 
-export default FormPhase
+const mapStateToProps = (state: any) => ({
+    phases: state.phase
+})
+
+export default connect(mapStateToProps, '')(FormPhase)
