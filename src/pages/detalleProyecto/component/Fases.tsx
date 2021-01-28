@@ -104,9 +104,9 @@ const Fases: React.FC<IFases> = (props) => {
                     <Col xs={12} sm={12} md={12} lg={12}>                              
                        <Row end='xs' >
                                <TextField
+                                disabled
                                 id="outlined-number"
-                                name="txtFaseBox"                              
-                                type="number"
+                                name="txtFaseBox"
                                 defaultValue={props.fase.amount}
                                 onChange={_onChangeform}
                                 style={{background:'#FFFFFF', width:'65%'}}
