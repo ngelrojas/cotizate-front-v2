@@ -215,6 +215,25 @@ const Detalle: React.FC<IDetalle> = (props) => {
         dispatch(Action.obtnerFases(props.data.header.id));
    },[]);
 
+   const [siguiente, SetSiguiente]= useState(0)
+   const _onChangeSiguiente = (e: any) => {
+        const texfield = e.target.name;
+        const textValue = e.target.value;
+        if (texfield === "txtSiguiente") {
+            console.log(textValue);
+            SetSiguiente(textValue);
+        }  
+   };
+
+
+   const handleSubmitnex =()=>{    
+       if(siguiente >0){
+          alert('en proceso... siguiente.. bs : '+ siguiente );
+       }else{
+        alert('ingrese un monto');
+       }
+       
+   }
 
     return (
         <>
@@ -467,9 +486,11 @@ const Detalle: React.FC<IDetalle> = (props) => {
                                 
                             <TextField
                                 id="outlined-number"
-                              
+                                name="txtSiguiente"
+                                value={siguiente}
+                                onChange={_onChangeSiguiente}
                                 type="number"
-                               style={{background:'#FFFFFF', width:'65%'}}
+                                style={{background:'#FFFFFF', width:'65%'}}
                                 variant="outlined"
                                 InputProps={{
                                     startAdornment: (
@@ -484,7 +505,7 @@ const Detalle: React.FC<IDetalle> = (props) => {
                           </Col> 
                           <Col xs={12} sm={12} md={12} lg={12}>
                             <Row center='xs' >                                
-                                <ButtonBordeAzul style={{width:'65%',height:'45px', background: '#F69939', color:'#FFFFFF', border: '1px solid #F69939',fontWeight: 'bold',borderRadius: '5px' }} >Siguiendo </ButtonBordeAzul>                                                        
+                                <ButtonBordeAzul style={{width:'65%',height:'45px', background: '#F69939', color:'#FFFFFF', border: '1px solid #F69939',fontWeight: 'bold',borderRadius: '5px' }} onClick={handleSubmitnex}>Siguiendo </ButtonBordeAzul>                                                        
                             </Row>  
                           </Col>                
                           </Col>   

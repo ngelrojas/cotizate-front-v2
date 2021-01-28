@@ -106,8 +106,8 @@ const TabDetalle: React.FC<ITab> = (props) => {
                             <Tabs style={{background:'#F5F5F5'}} value={value} onChange={handleChange} indicatorColor="primary" textColor="primary" variant="scrollable"  scrollButtons="on" >
                             <Tab label="Descripcion" {...a11yProps(0)} />
                             <Tab label="Fases" {...a11yProps(1)} />
-                            {/* { authenticated? <Tab label="Aportaciones" {...a11yProps(2)} /> : <Tab label="Aportaciones" {...a11yProps(2)} disabled  />}  */}
-                            { authenticated? <Tab label="Aportaciones" {...a11yProps(2)} /> : <Tab label="Aportaciones" {...a11yProps(2)}   />} 
+                            { authenticated? <Tab label="Aportaciones" {...a11yProps(2)} /> : null} 
+                            {/* { authenticated? <Tab label="Aportaciones" {...a11yProps(2)} /> : <Tab label="Aportaciones" {...a11yProps(2)}   />}  */}
                             <Tab label="Comentarios" {...a11yProps(3)} />
                             </Tabs>
                         </AppBar>
