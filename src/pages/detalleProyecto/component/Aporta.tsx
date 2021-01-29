@@ -73,7 +73,8 @@ import {Article, SectionDetails, Picture,
      TitleAportaciones2,
      SubTitleAportacion,
      TextoSubtitulo,
-     TextoSubtitulo2
+     TextoSubtitulo2,
+     TextoDanger
     } from './styleDetallecomponent/styleDetalle';
 import { isConstructorDeclaration } from 'typescript';
 
@@ -136,17 +137,32 @@ const Aporta: React.FC<IAporta> = (props) => {
     useEffect(() =>{
     },[authenticated]);
     const [aporte1, setAporte1] = useState(false); 
+    const [aporteError, SetAporteError] = useState(false);
+    const [textError, SetTextError] = useState('');
+
     const _onChangeform = (e: any) => {
         const texfield = e.target.name;
         const textValue = e.target.value;
         if (texfield === "txtEnviar") {
-            console.log(textValue);
-            setAporte1(textValue);
+            if(textValue > 200){
+              SetAporteError(false);
+              SetTextError('');
+              console.log(textValue);
+              setAporte1(textValue);
+            }else{
+              SetAporteError(true);
+              SetTextError('* La cantidad de apoyo para esta recompensa debe ser menos de 200 BS.')
+            }
+            
         }
      
       };
-    const ClicAportando=()=>{          
-          console.log("cliccc bs", aporte1);
+    const ClicAportando=()=>{   
+      if(!aporteError){
+        console.log("cliccc bs", aporte1);
+        alert('aportando.... ');
+      }       
+         
     }
     const redirecionLoin=()=>{        
        history.push("/registrarse");
@@ -239,6 +255,7 @@ const Aporta: React.FC<IAporta> = (props) => {
                                 id="outlined-number"
                                 name="txtEnviar"                              
                                 type="number"
+                                error={aporteError}
                                 onChange={_onChangeform}
                                 style={{background:'#FFFFFF', width:'65%'}}
                                 variant="outlined"
@@ -250,8 +267,11 @@ const Aporta: React.FC<IAporta> = (props) => {
                                     ),
                                   }}
                                 />
-                            
+                                 {/* <TextoDanger>
+                                   {textError}
+                                 </TextoDanger> */}
                             </Row>  
+                           
                           </Col> 
                           <Col xs={12} sm={12} md={12} lg={12}>
                             <Row center='xs' >    

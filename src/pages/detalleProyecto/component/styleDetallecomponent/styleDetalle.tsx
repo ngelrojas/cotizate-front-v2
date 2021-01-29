@@ -821,3 +821,25 @@ export const TextoComentario = styled.p`
         padding-right: 5px;
     }
 `
+export const TextoDanger = styled.p`   
+    color: #FF0000;
+    font-family: Roboto;
+    font-style: normal;
+    margin-top: 4%;
+    margin-bottom: 3%;
+    font-weight: 300;
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    line-height: 19px;
+    @media ${device.tablet} {
+        line-height: 17px;
+        font-size: 16px;
+        margin-top: 1%;
+    }
+    @media ${device.mobileM} {
+        line-height: 16px;
+        font-size: 15px;
+        margin-top: 4%;
+    }
+`
