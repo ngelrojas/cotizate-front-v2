@@ -82,7 +82,7 @@ const Categorias: React.FC<Icateg>  = (props) => {
     const dispatch = useDispatch();
     const { nombre, idCategoria, slug, imgbanner } = props.location.state;
    
-    const { statusCategorias, listaCateg, statusFiltrada, listaFiltada } = useSelector((stateSelector: any) => {
+    const { statusCategorias, listaCateg, statusFiltrada, listaFiltada, listaCriterio, statusCriterio } = useSelector((stateSelector: any) => {
         return stateSelector.categorias;
       });
     useEffect(()=>{
@@ -93,8 +93,9 @@ const Categorias: React.FC<Icateg>  = (props) => {
   
     const [tipo, setTipo] = useState(0);
     const [busqueda, setTbusqueda] = useState('');
+    const tipocriterio= 5;
     const handleChange = (event : any) => {
-
+        setTbusqueda('');
         setTipo(event.target.value);              
         if(event.target.value == 1 || event.target.value == 2 || event.target.value == 3){
           console.log('selecciono: ',event.target.value);  
@@ -110,6 +111,7 @@ const Categorias: React.FC<Icateg>  = (props) => {
       }  
  };
     const onchageBuscar=()=>{
+      setTipo(tipocriterio);
       dispatch(Action.buscarCategorias(slug, busqueda));
     }
     useEffect(()=>{
@@ -169,7 +171,20 @@ const Categorias: React.FC<Icateg>  = (props) => {
       
          
            <br/>
-            {(  tipo == 0? 
+            {( tipo == 5?
+              (listaCriterio.length == 0?
+                <p>no se encontro el filtro  : {busqueda} ...</p>
+              :
+                <Row center="xs">
+                    {listaCateg.map((value : any, index : number) =>(
+                      <Col  key={index} xs={12} sm={6} md={4} lg={4}>                   
+                                <Category key={index} data={value} />                                                        
+                      </Col>
+                    ))}                                            
+                  </Row>
+               ) 
+            :
+            (  tipo == 0? 
                 <Row center="xs">
                   {listaCateg.map((value : any, index : number) =>(
                      <Col  key={index} xs={12} sm={6} md={4} lg={4}>                   
@@ -185,7 +200,7 @@ const Categorias: React.FC<Icateg>  = (props) => {
                   </Col>
                 ))}     
                </Row>
-            )}
+            ))}
            </Contentbody>
 
         </>
