@@ -146,7 +146,7 @@ const Aporta: React.FC<IAporta> = (props) => {
      
       };
     const ClicAportando=()=>{          
-          console.log("cliccc", aporte1);
+          console.log("cliccc bs", aporte1);
     }
     const redirecionLoin=()=>{        
        history.push("/registrarse");

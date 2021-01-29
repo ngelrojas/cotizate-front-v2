@@ -1,7 +1,8 @@
 import {
     OBJETO_CATEGORIAS,
     FILTRO_CATEGORIAS,
-    FILTRO_CATEGORIAS_ENTY
+    FILTRO_CATEGORIAS_ENTY,
+    FILTRO_CRITERIO_CATEGORIAS
 } from '../types/categoriaTypes'
 import API from '../../api'
 
@@ -40,5 +41,24 @@ export function filtrarCategorias(header_id: number){
       .catch(err => console.log(err))
       }
 }
+export function buscarCategorias(category: string, criterio: string ){       
+  return (dispatch : any) =>{          
+    console.log("llego datos.....", category, " criterio: ", criterio);
+     API.get(`category/${category}/${criterio}`).then(resp => {
+      console.log(resp);
+        if(resp.status === 200 ){
+         
+            if(resp.data.data.length > 0){              
+                  dispatch({
+                      type: FILTRO_CRITERIO_CATEGORIAS,
+                      listaCriterio:resp.data.data
+                  })
+            }
+        }            
+      })
+      .catch(err => console.log(err))
+      }
+}
+
 
 

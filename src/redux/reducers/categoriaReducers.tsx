@@ -1,13 +1,16 @@
 import {
     OBJETO_CATEGORIAS,
     FILTRO_CATEGORIAS,
-    FILTRO_CATEGORIAS_ENTY
+    FILTRO_CATEGORIAS_ENTY,
+    FILTRO_CRITERIO_CATEGORIAS
 } from '../types/categoriaTypes'
 const initialState = {
     statusCategorias: false,
     listaCateg:[],
     statusFiltrada:false,
-    listaFiltada:[]
+    listaFiltada:[],
+    statusCriterio:false,
+    listaCriterio:[]
 }
 
 export default function(state = initialState, action: any) {
@@ -23,6 +26,12 @@ export default function(state = initialState, action: any) {
                 ...state,
                 statusFiltrada: true,
                 listaFiltada:action.listaFiltada
+            }
+        case FILTRO_CRITERIO_CATEGORIAS:
+            return {
+                ...state,
+                statusCriterio: true,
+                listaCriterio:action.listaCriterio
             }
         default:
             return state

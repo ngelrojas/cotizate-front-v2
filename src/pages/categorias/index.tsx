@@ -92,14 +92,28 @@ const Categorias: React.FC<Icateg>  = (props) => {
     const classes = useStyles();
   
     const [tipo, setTipo] = useState(0);
+    const [busqueda, setTbusqueda] = useState('');
     const handleChange = (event : any) => {
-        setTipo(event.target.value);        
-        if(event.target.value != 0){
+
+        setTipo(event.target.value);              
+        if(event.target.value == 1 || event.target.value == 2 || event.target.value == 3){
+          console.log('selecciono: ',event.target.value);  
           dispatch(Action.filtrarCategorias(event.target.value));
         }
         
     };
+    const _onChange = (e: any) => {
+      const texfield = e.target.name;
+      const textValue = e.target.value;
+      if (texfield === "txtBusqueda") {          
+        setTbusqueda(textValue);
+      }  
+ };
+    const onchageBuscar=()=>{
+      dispatch(Action.buscarCategorias(slug, busqueda));
+    }
     useEffect(()=>{
+      console.log('tipo:', tipo );
   },[tipo]);
 
 
@@ -132,15 +146,17 @@ const Categorias: React.FC<Icateg>  = (props) => {
              </Col>
              <Col   xs={12} sm={6} md={6}  lg={6}> 
                 <Row center="xs">
-                <TextField id="outlined-search"
-                    // label="Search field" 
-                    type="search"
+                  <TextField id="outlined-search"
+                    name="txtBusqueda"
+                    // type="search"
+                    value={busqueda}
+                    onChange={_onChange}
                     variant="outlined" 
                     style={{width:'90%'}}
                     InputProps={{
                         startAdornment: (
-                          <InputAdornment position="end">
-                            <SearchIcon />
+                          <InputAdornment position="end" onClick={onchageBuscar} >
+                            <SearchIcon  />
                           </InputAdornment>
                         ),
                       }}
@@ -153,7 +169,7 @@ const Categorias: React.FC<Icateg>  = (props) => {
       
          
            <br/>
-            { tipo === 0? 
+            {(  tipo == 0? 
                 <Row center="xs">
                   {listaCateg.map((value : any, index : number) =>(
                      <Col  key={index} xs={12} sm={6} md={4} lg={4}>                   
@@ -169,7 +185,7 @@ const Categorias: React.FC<Icateg>  = (props) => {
                   </Col>
                 ))}     
                </Row>
-             }
+            )}
            </Contentbody>
 
         </>
