@@ -4,9 +4,12 @@ import ReactPlayer from 'react-player'
 import LineProgress from '../../../components/LineProgress'
 
 import ThumbUpAltIcon from '@material-ui/icons/ThumbUpAlt';
-import ThumbDownIcon from '@material-ui/icons/ThumbDown';
+import ThumbUpAltOutlinedIcon from '@material-ui/icons/ThumbUpAltOutlined';
+import ThumbUpAltTwoToneIcon from '@material-ui/icons/ThumbUpAltTwoTone';
 import { useDispatch, useSelector } from "react-redux";
 import BookmarkBorderIcon from '@material-ui/icons/BookmarkBorder';
+import BookmarkIcon from '@material-ui/icons/Bookmark';
+import BookmarksTwoToneIcon from '@material-ui/icons/BookmarksTwoTone';
 import { IconButton } from '@material-ui/core';
 import FacebookIcon from '@material-ui/icons/Facebook';
 import TwitterIcon from '@material-ui/icons/Twitter';
@@ -22,6 +25,9 @@ import LinkedInIcon from '@material-ui/icons/LinkedIn';
 import LinkIcon from '@material-ui/icons/Link';
 import {copiarTextoToPapelera } from '../../../lib/FuncionesGenerales';
 import TabDetalle from './TabDetalle';
+import Aporta from './Aporta';
+import Reportar from './Reportar';
+import * as Action from '../../../redux/actions/detalleProyectoActions';
 
   
 import {Article, SectionDetails, Picture, 
@@ -195,22 +201,62 @@ const useStyles = makeStyles((theme) => ({
 
 const Detalle: React.FC<IDetalle> = (props) => {
     const classes = useStyles();
-  
+    const dispatch = useDispatch();
     const {
-        proyectosDetalle
+        proyectosDetalle, aportes, statusAportes, statusLike, statusSave
       } = useSelector((stateSelector: any) => {
         return stateSelector.detalleProyecto;
       });
-    
-      
-    useEffect(() =>{
-    },[]);
+      const { authenticated } = useSelector((stateSelector: any) => {  return stateSelector.profile;  });
 
-    const copiarLink =(data: string)=>{
-       
+    const copiarLink =(data: string)=>{       
         copiarTextoToPapelera(data);
-
     }
+    useEffect(() =>{
+        dispatch(Action.obtnerAportes(props.data.header.id));
+        dispatch(Action.obtnerFases(props.data.header.id));
+   },[]);
+
+   const [siguiente, SetSiguiente]= useState(0)
+   const _onChangeSiguiente = (e: any) => {
+        const texfield = e.target.name;
+        const textValue = e.target.value;
+        if (texfield === "txtSiguiente") {
+            console.log(textValue);
+            SetSiguiente(textValue);
+        }  
+   };
+
+
+   const handleSubmitnex =()=>{    
+       if(siguiente >0){
+          alert('en proceso... siguiente.. bs : '+ siguiente );
+       }else{
+        alert('ingrese un monto');
+       }       
+   }
+
+
+   const onchangeLike = ()=> {
+        if(statusLike){
+            dispatch(Action.onchangeLike(false));           
+        }else{
+            dispatch(Action.onchangeLike(true));          
+        }
+   }
+
+   const onchangeSave = ()=> {
+       if(statusSave){
+           dispatch(Action.onchangeSave(false));
+       }else{
+           dispatch(Action.onchangeSave(true));
+       }
+    
+  }
+
+  useEffect(()=>{
+
+  },[statusLike, statusSave])
 
     return (
         <>
@@ -308,16 +354,28 @@ const Detalle: React.FC<IDetalle> = (props) => {
                         <Row start="lg">
                             <Col xs={6  } sm={6} md={6} lg={6}>
                                 <Div1>
-                                <IconButton >
-                                    <ThumbUpAltIcon />
-                                </IconButton>
+                                    {authenticated? 
+                                    <IconButton onClick={onchangeLike} >
+                                       {statusLike?  <ThumbUpAltIcon />: <ThumbUpAltOutlinedIcon /> }
+                                    </IconButton>
+                                    : 
+                                    <IconButton  >
+                                        <ThumbUpAltTwoToneIcon />
+                                    </IconButton>
+                                    }
                                 </Div1>
                             </Col>
                             <Col xs={6} sm={6} md={6} lg={6}>
                                <Div1>
-                                  <IconButton >
-                                    <BookmarkBorderIcon />
-                                  </IconButton>
+                                    {authenticated? 
+                                        <IconButton onClick={onchangeSave} >
+                                            {statusSave?  <BookmarkIcon />: <BookmarkBorderIcon /> } 
+                                        </IconButton>
+                                        :
+                                        <IconButton >
+                                            <BookmarksTwoToneIcon />    
+                                        </IconButton>
+                                    }
                                 </Div1>
                             </Col>
                         </Row>
@@ -378,74 +436,9 @@ const Detalle: React.FC<IDetalle> = (props) => {
                     
                   </DivSeparador>  
             
-                  <TabDetalle decripcion={props.data.description} />                                                                                              
+                  <TabDetalle  decripcion={props.data.description} />                                                                                              
            
-                  <DivSeparadorSinColor>
-                    <Col xs={12} sm={12} md={12} lg={12}>                        
-                                <LinkAzul2 to="/descripcion">{'* si crees que este proyecto va en contra de las politicas de Cotizate reporta este proyecto'}</LinkAzul2>                                                    
-                    </Col>  
-                  </DivSeparadorSinColor>       
-                  <DivSeparadorSinColor >
-                    <Col xs={12} sm={12} md={12} lg={12}> 
-                        <Row center='xs' >
-                            <ButtonBordeAzul>Reporte este proyecto a cotizate</ButtonBordeAzul>
-                       </Row>                       
-                    </Col>  
-                  </DivSeparadorSinColor>       
-                  <DivBorderSinColor>
-                    <Col xs={12} sm={12} md={12} lg={12}>   
-                        <Col xs={12} sm={12} md={12} lg={12}>                                                 
-                            <Texto2><CheckCircleOutlineIcon />
-                              Este proyecto no respeta las reglas    
-                            </Texto2>                    
-                        </Col> 
-                        <Col xs={12} sm={12} md={12} lg={12}>                                                                   
-                            <Texto3>
-                             - Contiene Discurso de acoso , odio y razismo    
-                            </Texto3>   
-                        </Col>  
-                        <Col xs={12} sm={12} md={12} lg={12}>                                                                   
-                            <Texto3>
-                              - Ofrese recompensas Prohibidas    
-                            </Texto3>   
-                        </Col>        
-                        <Col xs={12} sm={12} md={12} lg={12}>                                                                   
-                            <Texto3>
-                              - Contiene Discurso de acoso , odio y razismo   
-                            </Texto3>   
-                        </Col>                                     
-                    </Col>  
-                  </DivBorderSinColor>  
-                  <DivBorderSinColor>
-                    <Col xs={12} sm={12} md={12} lg={12}>   
-                        <Col xs={12} sm={12} md={12} lg={12}>                                                 
-                            <Texto2><CheckCircleOutlineIcon />
-                             Este proyecto infringe propiedad intelectual   
-                            </Texto2>                    
-                        </Col> 
-                        <Col xs={12} sm={12} md={12} lg={12}>                                                                   
-                            <Texto3>
-                             - Este proyecto infringe derechos de autor   
-                            </Texto3>   
-                        </Col>  
-                                                        
-                    </Col>  
-                  </DivBorderSinColor>  
-                  <DivBorderSinColor>
-                    <Col xs={12} sm={12} md={12} lg={12}>   
-                        <Col xs={12} sm={12} md={12} lg={12}>                                                 
-                            <Texto2><CheckCircleOutlineIcon />
-                                Recompensa  
-                            </Texto2>                    
-                        </Col> 
-                        <Col xs={12} sm={12} md={12} lg={12}>                                                                   
-                            <Texto3>
-                             - Apoye y no resivi mi recompensa  
-                            </Texto3>   
-                        </Col>  
-                                                        
-                    </Col>  
-                  </DivBorderSinColor>   
+                 <Reportar />
 
                 </Col>
                 <Col xs={12} sm={6} md={6} lg={6}>                      
@@ -528,107 +521,9 @@ const Detalle: React.FC<IDetalle> = (props) => {
                                 
                             <TextField
                                 id="outlined-number"
-                              
-                                type="number"
-                               style={{background:'#FFFFFF', width:'65%'}}
-                                variant="outlined"
-                                InputProps={{
-                                    startAdornment: (
-                                      <InputAdornment position="start">
-                                        Bs.
-                                      </InputAdornment>
-                                    ),
-                                  }}
-                                />
-                            
-                            </Row>  
-                          </Col> 
-                          <Col xs={12} sm={12} md={12} lg={12}>
-                            <Row center='xs' >                                
-                                <ButtonBordeAzul style={{width:'65%',height:'45px', background: '#F69939', color:'#FFFFFF', border: '1px solid #F69939',fontWeight: 'bold',borderRadius: '5px' }} >Siguiendo </ButtonBordeAzul>                                                        
-                            </Row>  
-                          </Col>                
-                          </Col>   
-                   </DivSeparador2> 
-                     
-                    <DivSeparador2>
-                        <Col xs={12} sm={12} md={12} lg={12}>
-                           <Col xs={12} sm={12} md={12} lg={12}>
-                                    <TitleAportaciones>
-                                      {'aporte con mas  Bs. 100 O mas '}
-                                    </TitleAportaciones>  
-                            </Col>
-                            <Col xs={12} sm={12} md={12} lg={12}>
-                               <ImgPortal
-                                src={'https://img.freepik.com/vector-gratis/fondo-plano-naturaleza_1308-20252.jpg?size=626&ext=jpg'}
-                                />
-                            </Col>
-                            <Col xs={12} sm={12} md={12} lg={12}>
-                                    <TitleAportaciones2>
-                                      {' "aporte con mas  Bs. 100 O mas " '}
-                                    </TitleAportaciones2>  
-                            </Col>
-                            <Col xs={12} sm={12} md={12} lg={12}>
-                                    <SubTitleAportacion>
-                                      {' Esta recompensa garante '}
-                                    </SubTitleAportacion>  
-                            </Col>
-                            <Col xs={12} sm={12} md={12} lg={12}>
-                                    <Texto>
-                                      {'Lorem Ipsum é simplesmente uma simulação de texto da indústria tipográfica e de impressos, e vem sendo utilizado desde o século XVI, quando um impressor desconhecido pegou uma bandeja de tipos e os embaralhou para fazer um livro de modelos de tipos. Lorem Ipsum sobreviveu não só a cinco séculos, como também ao salto para a editoração eletrônica, permanecendo essencialmente inalterado. Se popularizou na década de 60, quando a Letraset lançou decalques contendo passagens de Lorem Ipsum, e mais recentemente quando passou a ser integrado a softwares de editoração eletrônica como Aldus PageMaker. '}
-                                    </Texto>  
-                            </Col>
-                            <Col xs={12} sm={12} md={12} lg={12}>
-                                    <Texto>
-                                      {'Lorem Ipsum é simplesmente uma simulação de texto da indústria tipográfica e de impressos, e vem sendo utilizado desde o século XVI, quando um impressor desconhecido pegou uma bandeja de tipos e os embaralhou para fazer um livro de modelos de tipos. Lorem Ipsum sobreviveu não só a cinco séculos, como também ao salto para a editoração eletrônica, permanecendo essencialmente inalterado. Se popularizou na década de 60, quando a Letraset lançou decalques contendo passagens de Lorem Ipsum, e mais '}
-                                    </Texto>  
-                            </Col>
-                            <Col xs={12} sm={12} md={12} lg={12}>
-                                <Row>
-                                  <Col xs={6} sm={6} md={6} lg={6}>
-                                            <TextoSubtitulo>
-                                            {'Entrega prevista'}
-                                            </TextoSubtitulo>                                      
-                                  </Col>
-                                  <Col xs={6} sm={6} md={6} lg={6}>
-                                       <Row end="lg">                                      
-                                            <TextoSubtitulo>
-                                                {'Envio:'}
-                                            </TextoSubtitulo>
-                                       </Row>
-                                  </Col>        
-                                </Row>             
-                            </Col>
-                            <Col xs={12} sm={12} md={12} lg={12}>     
-                               <Row>
-                                  <Col xs={6} sm={6} md={6} lg={6}>
-                                        <TextoSubtitulo>
-                                            {'12/02/2021'}
-                                        </TextoSubtitulo>
-                                      
-                                  </Col>
-                                  <Col xs={6} sm={6} md={6} lg={6}>                                      
-                                       <Row end="lg">
-                                         <TextoSubtitulo>
-                                            {'Toda Bolivia'}
-                                         </TextoSubtitulo>                                     
-                                       </Row>
-                                  </Col>
-                                </Row>                          
-                            </Col>
-                            <Col xs={12} sm={12} md={12} lg={12}>     
-                               <Row end="lg">                                  
-                                    <TextoSubtitulo2>
-                                        {'* incluye valor del envio'}
-                                    </TextoSubtitulo2>                                                                                                    
-                                </Row>                          
-                            </Col>
-                            <Col xs={12} sm={12} md={12} lg={12}>
-                            <Row center='xs' >
-                                
-                            <TextField
-                                id="outlined-number"
-                                name="txtEnviar"                              
+                                name="txtSiguiente"
+                                value={siguiente}
+                                onChange={_onChangeSiguiente}
                                 type="number"
                                 style={{background:'#FFFFFF', width:'65%'}}
                                 variant="outlined"
@@ -645,14 +540,14 @@ const Detalle: React.FC<IDetalle> = (props) => {
                           </Col> 
                           <Col xs={12} sm={12} md={12} lg={12}>
                             <Row center='xs' >                                
-                                <ButtonBordeAzul style={{width:'65%',height:'45px', background: '#F69939', color:'#FFFFFF', border: '1px solid #F69939',fontWeight: 'bold',borderRadius: '5px' }} >Enviar </ButtonBordeAzul>                                                        
+                                <ButtonBordeAzul style={{width:'65%',height:'45px', background: '#F69939', color:'#FFFFFF', border: '1px solid #F69939',fontWeight: 'bold',borderRadius: '5px' }} onClick={handleSubmitnex}>Siguiendo </ButtonBordeAzul>                                                        
                             </Row>  
-                          </Col>              
-
-                        </Col>
-                    </DivSeparador2>
-                    
-
+                          </Col>                
+                          </Col>   
+                   </DivSeparador2> 
+                        {aportes.map((value: any, index: any) => (
+                            <Aporta aporte={value} nroAporte={index} />
+                        ))}                                       
                 </Col>
             </Row>           
            </Col>

@@ -714,3 +714,132 @@ export const TextoSubtitulo2 = styled.p`
         margin-top: 4%;
     }
 `
+
+export const TitleFase = styled.h4`
+    color: #2A8EC8;
+    font-style: normal;
+    // font-weight: normal;
+    // padding-top: 1%;
+    // padding-bottom: 2%;
+    
+    @media ${device.tablet} {
+      
+    }
+    @media ${device.mobileM} {
+        padding-top: 1%;
+        padding-bottom: 1%;
+    }
+`
+export const DivBorderSinAzulado = styled.div`   
+        background:#F5F5F5;
+        width:100%,     
+        margin-top: 2%;
+        margin-bottom: 2%;
+        padding-top: 2%;
+        padding-bottom: 2%;
+        padding-left: 1%;
+        padding-right: 1%;
+        // display:flex;
+        justify-content: center;
+        // align-items: center;        
+        
+    @media ${device.tablet} {
+        margin-top: 1%;
+        margin-bottom: 1%;
+        padding-bottom: 10px;
+        padding-top: 10px;
+    }
+    @media ${device.mobileM} {
+        margin-top: 0%;
+        margin-bottom: 0%;
+        padding-bottom: 10px;
+        padding-top: 10px;
+
+    }
+`
+export const TextoAportadores = styled.p`   
+    color: #5D5A5A;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 300;
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    line-height: 25px;
+    padding-right: 10px;
+
+
+    @media ${device.tablet} {
+        line-height: 16px;
+        padding-right: 8px;
+    }
+    @media ${device.mobileM} {
+        line-height: 15px;
+        padding-right: 5px;
+    }
+`
+export const TextoComentarioTitle = styled.p`   
+    color: #5D5A5A;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 300;
+    display: flex;
+    align-items: center;
+    font-size: 15px;
+    line-height: 25px;
+    padding-right: 10px;
+    text-transform: uppercase;
+
+    @media ${device.tablet} {
+        line-height: 16px;
+        padding-right: 8px;
+    }
+    @media ${device.mobileM} {
+        line-height: 15px;
+        padding-right: 5px;
+    }
+`
+export const TextoComentario = styled.p`   
+    color: #5D5A5A;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 300;
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    line-height: 25px;
+    padding-right: 10px;
+    padding-left: 12px;
+
+
+    @media ${device.tablet} {
+        line-height: 16px;
+        padding-right: 8px;
+    }
+    @media ${device.mobileM} {
+        line-height: 15px;
+        padding-right: 5px;
+    }
+`
+export const TextoDanger = styled.p`   
+    color: #FF0000;
+    font-family: Roboto;
+    font-style: normal;
+    margin-top: 4%;
+    margin-bottom: 3%;
+    font-weight: 300;
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    line-height: 19px;
+    @media ${device.tablet} {
+        line-height: 17px;
+        font-size: 16px;
+        margin-top: 1%;
+    }
+    @media ${device.mobileM} {
+        line-height: 16px;
+        font-size: 15px;
+        margin-top: 4%;
+    }
+`
