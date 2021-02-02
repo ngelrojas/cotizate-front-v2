@@ -150,6 +150,11 @@ export const WrapBtnSave = styled(WrapBtn)`
     width: 95%;
 `
 
+export const WrapBtnSaves = styled(WrapBtn)`
+    width: 95%;
+    margin-top: 5%;
+`
+
 export const WrapBtnAdd = styled(WrapBtn)`
     margin-top: 0%;
     width: 100%;
@@ -340,7 +345,7 @@ export const BoxSelect = styled.select`
 export const BoxInput = styled.input`
     width: 90%;
     height: 49px;
-    padding-left: 9%;
+    padding-left: 14%;
 `
 
 export const BoxInputReward = styled(BoxInput)`
@@ -361,7 +366,7 @@ export const WrappBoxInput = styled.div`
 
 export const BS = styled.p`
     background-color: #F2A85D;
-    padding-top: 3%;
+    padding-top: 6%;
     padding-left: 2%;
     padding-right: 2%;
     position: absolute;
@@ -384,6 +389,7 @@ export const WrapperBoxRD = styled.div`
     padding-left: 4%;
     padding-right: 4%;
     padding-bottom: 4%;
+    padding-top: 4%;
 `
 
 export const WrapperSave = styled.div`
@@ -398,6 +404,11 @@ export const WrapperSavePhase = styled(WrapperSave)`
     margin-left: 6.5%;
 `
 
+export const WrapperSavePhases = styled(WrapperSave)`
+    margin-top: 2.2%;
+    margin-left: -14.5%;
+`
+
 export const WrapperSaveConfig = styled(WrapperSave)`
     margin-top: 3.2%;
 `
@@ -409,7 +420,7 @@ export const SpaceB = styled.p`
 export const TableCities = styled.div`
     display: flex;
     padding: 3%;
-    width: 80%;
+    width: 100%;
 `
 
 export const ItemCity = styled.label`
@@ -425,8 +436,8 @@ export const BoxCity = styled.div`
     background-color: #ffffff;
     padding-left: 2%;
     padding-bottom: 2%;
-    width: 80%;
-    margin-left: 20%;
+    width: 104%;
+    margin-left: -4%;
 `
 
 export const BoxTitleContent = styled.p`
@@ -435,7 +446,7 @@ export const BoxTitleContent = styled.p`
 `
 
 export const BSRE = styled(BS)`
-    top: 39%;
+    top: 35%;
 `
 
 export const BtnSP = styled(Btn)`

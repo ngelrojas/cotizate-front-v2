@@ -7,7 +7,6 @@ import {CampaingHeader, Campaings} from '../../../../../../userCampaings'
 import {Row, Col} from 'react-styled-flexboxgrid'
 import {next, back} from '../../../../../../redux/actions/next_back.actions'
 import {URL_IMG} from '../../../../../../constants'
-import Slide from 'react-reveal/Slide'
 
 import {
     Input,
@@ -283,7 +282,6 @@ const FormDescription: React.FC<AllProps> = ({counter, handleNext, handleBack, c
 
     return (
         <>
-        <Slide top>
         <H4>2.- DESCRIPCIÓN DEL PROYECTO </H4>
         <TextConf>Describe tu proyecto en forma clara, cuando llegues a las faces detente y piensa en cuanto nesecitas para cada  face de tu proyecto y cuanto será el costo para este item  
         </TextConf>
@@ -478,7 +476,6 @@ const FormDescription: React.FC<AllProps> = ({counter, handleNext, handleBack, c
                 </WrapperSave>
             </Row>
         </Form>
-        </Slide>
         </>
 
     )

@@ -15,6 +15,7 @@ import EditIcon from '@material-ui/icons/Edit'
 import DeleteIcon from '@material-ui/icons/Delete'
 import {BtnUpdate, BtnDelete} from './styles'
 import {store} from 'react-notifications-component'
+import Loading from '../../../../../../../components/loading'
 
 interface Icity {
     id: number
@@ -57,7 +58,7 @@ const StyledTableRow = withStyles((theme: Theme) =>
 
 const useStyles = makeStyles({
   table: {
-    minWidth: 700,
+    minWidth: 400,
   },
 });
 
@@ -141,7 +142,7 @@ const TableReward:React.FC = (props: any) => {
                     </StyledTableRow>
 
                 ) 
-                    })):('Loading...!')
+                    })):(<Loading message='cargando datos de recompensas' />)
         }
         </TableBody>
       </Table>

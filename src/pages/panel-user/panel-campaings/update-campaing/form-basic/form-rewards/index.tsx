@@ -7,7 +7,6 @@ import {Row, Col} from 'react-styled-flexboxgrid'
 import {store} from 'react-notifications-component'
 import {Cities} from '../../../../../../userCities'
 import {Reward} from '../../../../../../userReward'
-import Slide from 'react-reveal/Slide'
 import TableReward from './table-reward'
 import Moment from 'react-moment'
 import {
@@ -29,8 +28,8 @@ import {
     ItemCity,
     SecondItem,
     BoxCity,
-    WrapperSave,
-    WrapBtnSave,
+    WrapperSavePhases,
+    WrapBtnSaves,
     BtnSP,
     BtnUP
 } from '../../styles'
@@ -209,13 +208,20 @@ const FormRewards: React.FC<AllProps>= ({rewards}) => {
 
     return (
         <>
-        <Slide top>
+        <Row>                                                                                                                            
+            <H4>4- RECOMPENSAS </H4> 
+        </Row>
+        <Row> 
+            <TextConf>Antes de ofrecer una recompensa, es importante tener mapeados todos los procesos de producción y entrega.</TextConf>
+        </Row>
 
-        <H4>3- RECOMPENSAS </H4>
-        <TextConf>Antes de ofrecer una recompensa, es importante tener mapeados todos los procesos de producción y entrega.</TextConf>
-         <Row>
+        <Row>
+            <Col xs={5}>
                 <TableReward />
-        </Row>       
+            </Col>
+            <Col xs={7}>
+
+   
         <Form onSubmit={onSubmit}>
 
         <WrapperBoxRD>
@@ -325,7 +331,7 @@ const FormRewards: React.FC<AllProps>= ({rewards}) => {
 
                     <Col xs={12}>
                         <TableCities>
-                            <Row between="xs">
+                            <Row>
                                 {
                                     cities && cities.map((ct: any) =>(
                                         <Col xs={4} key={ct.id}>
@@ -376,15 +382,18 @@ const FormRewards: React.FC<AllProps>= ({rewards}) => {
 
             </WrapperBoxRD>
             <Row>
-                <WrapperSave>
-                    <WrapBtnSave>
+                <WrapperSavePhases>
+                    <WrapBtnSaves>
                         <BtnSP>actualizar</BtnSP>
                         <BtnUP id="add" onClick={(e)=>handleAdd(e)}>adicionar</BtnUP>
-                    </WrapBtnSave>
-                </WrapperSave>
+                    </WrapBtnSaves>
+                </WrapperSavePhases>
             </Row>
-        </Form>       
-        </Slide>        
+        </Form>
+
+            </Col>
+        </Row>
+       
         </>
 
     )

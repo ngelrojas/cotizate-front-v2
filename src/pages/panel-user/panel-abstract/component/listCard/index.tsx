@@ -2,15 +2,20 @@ import React from 'react'
 import {CampaingBody} from '../../../../../userCampaings'
 import {Row, Col} from 'react-styled-flexboxgrid'
 import CardCreated from '../cardCreated'
+import Loading from '../../../../../components/loading'
 
-const ListCard: React.FC = () => {
+interface IstatusCamp {
+    status: number
+}
+
+const ListCard: React.FC<IstatusCamp> = (props) => {
     let token = window.sessionStorage.getItem('token')
     let CampaingCard = new CampaingBody(token)
     const [Cards, setCards] = React.useState()
     const [isLoading, setIsLoading] = React.useState(true)
 
     const LoadCards = () => {
-        CampaingCard.listCampaingBody(2)
+        CampaingCard.listCampaingBody(props.status)
             .then(resp => {
                 setCards(resp.data.data)
             })
@@ -35,7 +40,9 @@ const ListCard: React.FC = () => {
                                 </Col>
                     })
 
-                ):(<Col xs={12}><h2>AUN NO TIENES PROYECTOS</h2></Col>)
+                ):(<Col xs={12}> 
+                    <Loading message="cargando campañas" />                 
+                    </Col>)
             }
 
         </Row>

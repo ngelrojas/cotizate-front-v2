@@ -45,8 +45,12 @@ const appMenuItems = [
         link: `${DASHBOARD}/en-revision`,
       },
       {
-          name: 'Aprobados',
+          name: 'Aprovados',
           link: `${DASHBOARD}/aprovados`,
+      },
+      {
+          name: 'Publicados',
+          link: `${DASHBOARD}/publicados`,
       },
     ],
   },

@@ -17,6 +17,9 @@ import PanelCampaing from './pages/panel-user/panel-campaings'
 import CreateCampaing from './pages/panel-user/panel-campaings/create-campaing'
 import UpdateCampaing from './pages/panel-user/panel-campaings/update-campaing'
 import PanelCreated from './pages/panel-user/panel-created'
+import PanelRevision from './pages/panel-user/panel-revision'
+import PanelAproved from './pages/panel-user/panel-aproved'
+import PanelPublic from './pages/panel-user/panel-public'
 import PageCreating from './pages/creating'
 import Crowdfunding from './pages/crowdfunding'
 import Category from './pages/categorias'
@@ -90,6 +93,21 @@ const App: React.FC = () => {
                         exact
                         path="/dashboard-de-usuario/creados"
                         component={PanelCreated}
+                    />
+                    <Route
+                        exact
+                        path="/dashboard-de-usuario/en-revision"
+                        component={PanelRevision}
+                    />
+                    <Route
+                        exact
+                        path="/dashboard-de-usuario/aprovados"
+                        component={PanelAproved}
+                    />
+                    <Route
+                        exact
+                        path="/dashboard-de-usuario/publicados"
+                        component={PanelPublic}
                     />
                     <Route
                         exact

@@ -3,10 +3,13 @@ import {connect} from 'react-redux'
 import {useForm} from 'react-hook-form'
 import {store} from 'react-notifications-component'
 import {Row, Col} from 'react-styled-flexboxgrid'
+import Modal from '@material-ui/core/Modal'
+import { makeStyles, Theme, createStyles } from '@material-ui/core/styles'
 import DefaultImg from '../../form-basic/public/default.png'
 import {PersonalProfile} from '../../../../../../userProfile'
 import {City} from '../../../../../../userCountryCities'
 import {RetrieveCompany} from '../../../../../../redux/actions/profileca.actions'
+import Loading from '../../../../../../components/loading'
 import {ContentProfile,
         Input, 
         WrapperBox,
@@ -131,7 +134,33 @@ type FormData = {
 interface Icampaing {
     campaing: FormData
 }
-// TODO: fix problem whe try get a data from company profile
+
+function rand() {
+  return Math.round(Math.random() * 20) - 10
+}
+
+function getModalStyle() {
+  const top = 50 + rand()
+  const left = 50 + rand()
+
+  return {
+    top: `${top}%`,
+    left: `${left}%`,
+    transform: `translate(-${top}%, -${left}%)`,
+  }
+}
+
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    paper: {
+      position: 'absolute',
+      width: 400,
+      backgroundColor: theme.palette.background.paper,
+      boxShadow: theme.shadows[5],
+      padding: theme.spacing(2, 4, 3),
+    },
+  }),
+)
 const Personal: React.FC<Icampaing> = ({campaing}) => {
 
     let token = window.sessionStorage.getItem('token')
@@ -140,6 +169,9 @@ const Personal: React.FC<Icampaing> = ({campaing}) => {
     const [loadcity, setLoadcity] = React.useState<Icities[]>()
     const [isLoading, setIsLoading] = React.useState(true)
     const [showImg, SetShowImg] = React.useState()
+    const classes = useStyles()
+    const [modalStyle] = React.useState(getModalStyle)
+    const [open, setOpen] = React.useState(true)
     const input = document.querySelector("cinit")
     const {register, handleSubmit, errors} = useForm<FormData>({
         mode: 'onChange'
@@ -220,13 +252,22 @@ const Personal: React.FC<Icampaing> = ({campaing}) => {
         CityUser.listCities()
             .then(resp=>{
                 //console.info(resp.data)
+                setOpen(true)
                 setLoadcity(resp.data)
             }).catch(err=>{
+                setOpen(true)
                 console.info(err)
             }).then(()=>{
                 setIsLoading(false)
+                setOpen(false)
             })
     }
+
+  const body = (
+    <div style={modalStyle} className={classes.paper}>
+        <Loading message='cargando sus datos' />
+    </div>
+  )
 
     React.useEffect(()=>{
         LoadCities()
@@ -237,6 +278,14 @@ const Personal: React.FC<Icampaing> = ({campaing}) => {
     return(
         <>
         <div>
+        
+      <Modal
+        open={open}
+        aria-labelledby="simple-modal-title"
+        aria-describedby="simple-modal-description">
+        {body}
+      </Modal>
+
             <form onSubmit={onSubmit} encType="multipart/form-data">
             <ContentProfile>
                 <Row>

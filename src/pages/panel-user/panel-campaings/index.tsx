@@ -135,6 +135,11 @@ const PanelCampaing: React.FC<Iauth> = ({authenticated, currentUser}) => {
                             <tr>
                                 <Td colSpan={5}>no existen datos</Td>
                             </tr>
+                            <tr>
+                                <Td>
+                                   <Loading message="cargando campañas" />
+                                </Td>
+                            </tr>
                         </tbody>
                     )}
                                 </Table>

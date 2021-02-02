@@ -7,7 +7,7 @@ export const Btn = styled.button`
     padding: 2.1%;
     text-transform: uppercase;
     cursor: pointer;
-    width: 20%;
+    width: 40%;
 `
 export const BtnUpdate = styled(Btn)`
     background: #F2A85D;

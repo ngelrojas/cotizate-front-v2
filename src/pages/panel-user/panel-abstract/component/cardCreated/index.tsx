@@ -12,7 +12,8 @@ import {ContainerCard,
     H4,
     H3,
     Box,
-    Img
+    Img,
+    Goto
 } from './styles'
 
 interface IHeader {
@@ -44,7 +45,11 @@ const CardCreated: React.FC<propsCamp> = (propsCamp) => {
     const StatusCamp = (index: number) => {
         switch(index){
             case 2:
-                return <H4>CREADO</H4>
+                return (
+                    <>
+                        {GroupCreated()}
+                        <H4>CREADO</H4>
+                    </>)
             case 3:
                 return <H4>EN REVISION</H4>
             case 4:
@@ -56,15 +61,28 @@ const CardCreated: React.FC<propsCamp> = (propsCamp) => {
         } 
     }
 
+    const GroupCreated = () => {
+        return(
+            <div>
+                <SpacesBtn>
+                    <Edit to={`/panel-de-usuario/actualizar-proyecto/${propsCamp.id}`}> EDITAR</Edit>
+                </SpacesBtn> 
+                <SpacesBtn>
+                    <Delete to={`/eliminar/${propsCamp.id}`}> ELIMINAR</Delete>
+                </SpacesBtn>
+            </div>  
+        )                     
+    }
+
     return(
         <ContainerCard key={propsCamp.id}>
             <Row between="xs">
                 <Col xs={4}>
-                <Img src={propsCamp.imagen_main ? URL_IMG + propsCamp.imagen_main: Default} alt={`${propsCamp.slug} - cotizate`} />
+                    <Img src={propsCamp.imagen_main ? URL_IMG + propsCamp.imagen_main: Default} alt={`${propsCamp.slug} - cotizate`} />
                 </Col>
                 <Col xs={5}>
                     <Box>
-                        <H3>{propsCamp.title}</H3>
+                    <H3> <Goto to={propsCamp.slug}>{propsCamp.title}</Goto></H3>
                         <Spaces>
                             <Label>por:</Label> <span>{propsCamp.profile.user.first_name} {propsCamp.profile.user.last_name}</span>
                         </Spaces>
@@ -78,12 +96,6 @@ const CardCreated: React.FC<propsCamp> = (propsCamp) => {
                 </Col>
                 <Col xs={3}>
                     <Box>
-                        <SpacesBtn>
-                            <Edit to={`/panel-de-usuario/actualizar-proyecto/${propsCamp.id}`}> EDITAR</Edit>
-                        </SpacesBtn> 
-                        <SpacesBtn>
-                            <Delete to={`/eliminar/${propsCamp.id}`}> ELIMINAR</Delete>
-                        </SpacesBtn>
                         {StatusCamp(propsCamp.status)}
                     </Box>
                 </Col>

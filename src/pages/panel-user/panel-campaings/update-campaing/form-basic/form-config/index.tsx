@@ -7,7 +7,6 @@ import {City} from '../../../../../../userCountryCities'
 import {CampaingHeader} from '../../../../../../userCampaings'
 import {Row, Col} from 'react-styled-flexboxgrid'
 import {next, back} from '../../../../../../redux/actions/next_back.actions'
-import Slide from 'react-reveal/Slide'
 import {
     WrapBtnSave,
     WrapperSaveConfig,
@@ -135,7 +134,6 @@ const FormConfig: React.FC<AllProps> = ({counter, handleNext, campaing}) => {
 
     return (
         <>
-        <Slide top>
         <div>
             <TextMain>
         Cotizate es una plataforma donde diferentes tipos de personas pueden expresarse libremente. Y sabemos
@@ -238,7 +236,6 @@ olvide incluir las tarifas administrativas en su cálculo. </BoxText>
             </Row>
             
         </FormConf>
-        </Slide>
         </>
 
     )

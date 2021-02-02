@@ -74,3 +74,11 @@ export const Img = styled.img`
 export const H3 = styled.h3`
     text-transform: uppercase;
 `
+
+export const Goto = styled(Link)`
+    text-decoration: none;
+    color: #000000;
+    &:hover{
+        color: #1383C5;
+    }
+`

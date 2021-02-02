@@ -15,6 +15,7 @@ import {getPhase} from '../../../../../../../redux/actions/phase.actions'
 import EditIcon from '@material-ui/icons/Edit'
 import DeleteIcon from '@material-ui/icons/Delete'
 import {BtnUpdate, BtnDelete} from './styles'
+import Loading from '../../../../../../../components/loading'
 
 type propsPhases = {
     id: number
@@ -48,7 +49,7 @@ const StyledTableRow = withStyles((theme: Theme) =>
 
 const useStyles = makeStyles({
   table: {
-    minWidth: 700,
+    minWidth: 400,
   },
 });
 
@@ -135,7 +136,7 @@ const TablePhases:React.FC = (props: any) => {
                     </StyledTableRow>
 
                 ) 
-                    })):('Loading...!')
+            })):(<Loading message='cargando datos de fases' />)
         }
         </TableBody>
       </Table>

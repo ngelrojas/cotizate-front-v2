@@ -6,24 +6,24 @@ import {Editor} from '@tinymce/tinymce-react'
 import {store} from 'react-notifications-component'
 import {Row, Col} from 'react-styled-flexboxgrid'
 import {Phases} from '../../../../../../userPhases'
-import Slide from 'react-reveal/Slide'
 import TablePhases from './table-phase'
 import {
     FormR,
     MsgErrorPhase,
     MsgError,
     WrapperBoxRD,
-    WrapperBox,
     BoxTitleContent,
     BoxText,
     WrappBoxInput,
     BoxInputPhase,
     BoxInput,
     BS,
-    WrapperSavePhase,
+    WrapperSavePhases,
     WrapBtnSave,
     BtnSP,
-    BtnUP
+    BtnUP,
+    H4,
+    TextConf
 } from '../../styles'
 
 type FormData = {
@@ -155,18 +155,22 @@ const FormPhase: React.FC<AllProps> = ({phases}) => {
 
     return (
         <>
-        <Slide top>
-
-        <WrapperBoxRD>
-        <Row>
-                <TablePhases />
+        <Row>                                                                                                                            
+            <H4>3- Fases del proyecto </H4> 
         </Row>
-            <WrapperBox>
-                <BoxTitleContent> *Fases del proyecto</BoxTitleContent>
-                <BoxText> 
+        <Row> 
+            <TextConf>
                  ¿Cómo se utilizará su dinero? Cuanta más transparencia, mejor. Muestre qué pasos seguira y cuanto de dinero invertira en cada fase del proyecto.
-                </BoxText>
-            </WrapperBox>
+</TextConf>
+        </Row>
+        <Row>
+            <Col xs={5}>
+
+                    <TablePhases />
+            </Col>
+            <Col xs={7}>
+        <WrapperBoxRD>
+
 
         <FormR onSubmit={onSubmit}>
 <Row>
@@ -255,18 +259,20 @@ const FormPhase: React.FC<AllProps> = ({phases}) => {
             <MsgErrorPhase>{MsgErrorF}</MsgErrorPhase>
 
             <Row>
-                <WrapperSavePhase>
+                <WrapperSavePhases>
                     <WrapBtnSave>
                         <BtnSP>actualizar</BtnSP>
                         <BtnUP id="add" onClick={(e)=>handleAdd(e)}>adicionar</BtnUP>
                     </WrapBtnSave>
-                </WrapperSavePhase>
+                </WrapperSavePhases>
             </Row>
 
         </FormR>
 
-        </WrapperBoxRD> 
-        </Slide>
+        </WrapperBoxRD>
+
+            </Col>
+        </Row> 
         </>
 
     )
