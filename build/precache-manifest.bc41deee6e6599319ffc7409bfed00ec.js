@@ -1,39 +1,39 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "bce0b03ac2a368f1587f05a8c30c22fd",
+    "revision": "ef1ace81f0b7eb7590f9bcfb333c8883",
     "url": "/index.html"
   },
   {
-    "revision": "cffd845e8305a3b2af03",
+    "revision": "8f9611dbde11d613a3a8",
     "url": "/static/css/2.cd1f34f9.chunk.css"
   },
   {
-    "revision": "cffd845e8305a3b2af03",
-    "url": "/static/js/2.2d75b29b.chunk.js"
+    "revision": "8f9611dbde11d613a3a8",
+    "url": "/static/js/2.075bb6c0.chunk.js"
   },
   {
     "revision": "fb21d5a95ad85eff1cf914b3618a85a7",
-    "url": "/static/js/2.2d75b29b.chunk.js.LICENSE.txt"
+    "url": "/static/js/2.075bb6c0.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "243206053923fd5efd0a",
-    "url": "/static/js/main.c520e613.chunk.js"
+    "revision": "876d795fa78095068491",
+    "url": "/static/js/main.a1290f42.chunk.js"
   },
   {
     "revision": "500ab8af4971f16a0921",
     "url": "/static/js/runtime-main.01d84a3f.js"
   },
   {
-    "revision": "ef6e457de8376097d936d818bcf01d5b",
-    "url": "/static/media/SOLIDARIO-CON-TEXTO.ef6e457d.png"
+    "revision": "82e1a015176193e4692198090df42195",
+    "url": "/static/media/SOLIDARIO-CON-TEXTO.82e1a015.png"
   },
   {
     "revision": "ab511cd5564c4707ab1b3a2253e15394",
     "url": "/static/media/arte-con-texto.ab511cd5.png"
   },
   {
-    "revision": "6c0e11ade9e445e676e9fe9f18412db8",
-    "url": "/static/media/cerebro-con-texto.6c0e11ad.png"
+    "revision": "57ebb9a317106ce46290103532195fb1",
+    "url": "/static/media/cerebro-con-texto.57ebb9a3.png"
   },
   {
     "revision": "41f20cf18116d6536a4189b18ff30f09",
@@ -44,8 +44,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/static/media/ecologia-con-texto.5732632f.png"
   },
   {
-    "revision": "e60dd3838f60c5304656f822c627945a",
-    "url": "/static/media/mundo-con-texto.e60dd383.png"
+    "revision": "e09d41b6430658ffcdcfec216e8915bb",
+    "url": "/static/media/mundo-con-texto.e09d41b6.png"
   },
   {
     "revision": "04eb8fc57f27498e5ae37523e3bfb2c7",
