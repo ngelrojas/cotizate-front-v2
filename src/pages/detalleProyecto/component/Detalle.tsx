@@ -4,9 +4,10 @@ import ReactPlayer from 'react-player'
 import LineProgress from '../../../components/LineProgress'
 
 import ThumbUpAltIcon from '@material-ui/icons/ThumbUpAlt';
-import ThumbDownIcon from '@material-ui/icons/ThumbDown';
+import ThumbUpAltOutlinedIcon from '@material-ui/icons/ThumbUpAltOutlined';
 import { useDispatch, useSelector } from "react-redux";
 import BookmarkBorderIcon from '@material-ui/icons/BookmarkBorder';
+import BookmarkIcon from '@material-ui/icons/Bookmark';
 import { IconButton } from '@material-ui/core';
 import FacebookIcon from '@material-ui/icons/Facebook';
 import TwitterIcon from '@material-ui/icons/Twitter';
@@ -204,7 +205,7 @@ const Detalle: React.FC<IDetalle> = (props) => {
       } = useSelector((stateSelector: any) => {
         return stateSelector.detalleProyecto;
       });
-    
+      const { authenticated } = useSelector((stateSelector: any) => {  return stateSelector.profile;  });
       
 
     const copiarLink =(data: string)=>{       
@@ -231,9 +232,27 @@ const Detalle: React.FC<IDetalle> = (props) => {
           alert('en proceso... siguiente.. bs : '+ siguiente );
        }else{
         alert('ingrese un monto');
-       }
-       
+       }       
    }
+   const [like, setLike] = useState(false);
+   const [save, setSave] = useState(false);
+
+   const onchangeLike = ()=> {
+        if(like){
+            setLike(false);
+        }else{
+            setLike(true);
+        }
+   }
+
+   const onchangeSave = ()=> {
+       if(save){
+           setSave(false);
+       }else{
+           setSave(true);
+       }
+    
+  }
 
     return (
         <>
@@ -331,16 +350,28 @@ const Detalle: React.FC<IDetalle> = (props) => {
                         <Row start="lg">
                             <Col xs={6  } sm={6} md={6} lg={6}>
                                 <Div1>
-                                <IconButton >
-                                    <ThumbUpAltIcon />
-                                </IconButton>
+                                    {authenticated? 
+                                    <IconButton onClick={onchangeLike} >
+                                       {like?  <ThumbUpAltIcon />: <ThumbUpAltOutlinedIcon /> }
+                                    </IconButton>
+                                    : 
+                                    <IconButton  >
+                                        <ThumbUpAltOutlinedIcon />
+                                    </IconButton>
+                                    }
                                 </Div1>
                             </Col>
                             <Col xs={6} sm={6} md={6} lg={6}>
                                <Div1>
-                                  <IconButton >
-                                    <BookmarkBorderIcon />
+                               {authenticated? 
+                                  <IconButton onClick={onchangeSave} >
+                                      {save?  <BookmarkIcon />: <BookmarkBorderIcon /> } 
                                   </IconButton>
+                                  :
+                                  <IconButton >
+                                     <BookmarkBorderIcon />
+                                  </IconButton>
+                               }
                                 </Div1>
                             </Col>
                         </Row>
