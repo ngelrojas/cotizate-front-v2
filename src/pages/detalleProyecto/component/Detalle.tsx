@@ -5,9 +5,11 @@ import LineProgress from '../../../components/LineProgress'
 
 import ThumbUpAltIcon from '@material-ui/icons/ThumbUpAlt';
 import ThumbUpAltOutlinedIcon from '@material-ui/icons/ThumbUpAltOutlined';
+import ThumbUpAltTwoToneIcon from '@material-ui/icons/ThumbUpAltTwoTone';
 import { useDispatch, useSelector } from "react-redux";
 import BookmarkBorderIcon from '@material-ui/icons/BookmarkBorder';
 import BookmarkIcon from '@material-ui/icons/Bookmark';
+import BookmarksTwoToneIcon from '@material-ui/icons/BookmarksTwoTone';
 import { IconButton } from '@material-ui/core';
 import FacebookIcon from '@material-ui/icons/Facebook';
 import TwitterIcon from '@material-ui/icons/Twitter';
@@ -201,12 +203,11 @@ const Detalle: React.FC<IDetalle> = (props) => {
     const classes = useStyles();
     const dispatch = useDispatch();
     const {
-        proyectosDetalle, aportes, statusAportes
+        proyectosDetalle, aportes, statusAportes, statusLike, statusSave
       } = useSelector((stateSelector: any) => {
         return stateSelector.detalleProyecto;
       });
       const { authenticated } = useSelector((stateSelector: any) => {  return stateSelector.profile;  });
-      
 
     const copiarLink =(data: string)=>{       
         copiarTextoToPapelera(data);
@@ -234,25 +235,28 @@ const Detalle: React.FC<IDetalle> = (props) => {
         alert('ingrese un monto');
        }       
    }
-   const [like, setLike] = useState(false);
-   const [save, setSave] = useState(false);
+
 
    const onchangeLike = ()=> {
-        if(like){
-            setLike(false);
+        if(statusLike){
+            dispatch(Action.onchangeLike(false));           
         }else{
-            setLike(true);
+            dispatch(Action.onchangeLike(true));          
         }
    }
 
    const onchangeSave = ()=> {
-       if(save){
-           setSave(false);
+       if(statusSave){
+           dispatch(Action.onchangeSave(false));
        }else{
-           setSave(true);
+           dispatch(Action.onchangeSave(true));
        }
     
   }
+
+  useEffect(()=>{
+
+  },[statusLike, statusSave])
 
     return (
         <>
@@ -352,26 +356,26 @@ const Detalle: React.FC<IDetalle> = (props) => {
                                 <Div1>
                                     {authenticated? 
                                     <IconButton onClick={onchangeLike} >
-                                       {like?  <ThumbUpAltIcon />: <ThumbUpAltOutlinedIcon /> }
+                                       {statusLike?  <ThumbUpAltIcon />: <ThumbUpAltOutlinedIcon /> }
                                     </IconButton>
                                     : 
                                     <IconButton  >
-                                        <ThumbUpAltOutlinedIcon />
+                                        <ThumbUpAltTwoToneIcon />
                                     </IconButton>
                                     }
                                 </Div1>
                             </Col>
                             <Col xs={6} sm={6} md={6} lg={6}>
                                <Div1>
-                               {authenticated? 
-                                  <IconButton onClick={onchangeSave} >
-                                      {save?  <BookmarkIcon />: <BookmarkBorderIcon /> } 
-                                  </IconButton>
-                                  :
-                                  <IconButton >
-                                     <BookmarkBorderIcon />
-                                  </IconButton>
-                               }
+                                    {authenticated? 
+                                        <IconButton onClick={onchangeSave} >
+                                            {statusSave?  <BookmarkIcon />: <BookmarkBorderIcon /> } 
+                                        </IconButton>
+                                        :
+                                        <IconButton >
+                                            <BookmarksTwoToneIcon />    
+                                        </IconButton>
+                                    }
                                 </Div1>
                             </Col>
                         </Row>

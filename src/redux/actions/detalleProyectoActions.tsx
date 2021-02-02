@@ -1,5 +1,5 @@
 import {
-  DETALLE_PROYECTO, DETALLE_APORTES, DETALLE_FASES
+  DETALLE_PROYECTO, DETALLE_APORTES, DETALLE_FASES,DETAIL_LIKE, DETAIL_SAVE
 } from '../types/detalleProyecto.types'
 import API from '../../api'
 
@@ -68,5 +68,24 @@ export function obtnerFases(idHeader: any){
       .catch(err => console.log(err))
       }
 }
+export function onchangeLike(like: boolean){       
+  return (dispatch : any) =>{     
+    
+    dispatch({
+      type: DETAIL_LIKE,
+      statusLike:like,
+    })  
 
+      }
+}
+export function onchangeSave(save: boolean){       
+  return (dispatch : any) =>{     
+    
+        dispatch({
+          type: DETAIL_SAVE,
+          statusSave:save,
+        })  
+          
+  }
+}
 
