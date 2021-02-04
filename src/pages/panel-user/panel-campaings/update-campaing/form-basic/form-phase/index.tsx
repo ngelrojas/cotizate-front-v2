@@ -60,7 +60,6 @@ const FormPhase: React.FC<AllProps> = ({phases}) => {
         }else{
             UpdatePhases(title, amount)
         }
-
     })
     
     const handleAdd = (e:any) => {
@@ -83,7 +82,8 @@ const FormPhase: React.FC<AllProps> = ({phases}) => {
             Phase.updatePhases(phaseId, headerId, data_phase)
                 .then(resp => {
                     Notifications('Fase actualizada.', 'success')
-                    reset() 
+                    //reset() 
+                    
                     setMsgErrorF('')
                 }).catch(err =>{    
                     setMsgErrorF('no debe exceder mas 150 palabras')
@@ -174,7 +174,7 @@ const FormPhase: React.FC<AllProps> = ({phases}) => {
 
         <FormR onSubmit={onSubmit}>
 <Row>
-        <Col xs={6}>
+        <Col xs={12}>
                     <BoxTitleContent>* Titulo de la Fase </BoxTitleContent>
                     <WrappBoxInput>
                         <BoxInputPhase
@@ -190,7 +190,7 @@ const FormPhase: React.FC<AllProps> = ({phases}) => {
                         {errors.title && 'este campo es requerido'}
                     </MsgError>
         </Col>
-        <Col xs={6}>
+        <Col xs={12}>
                     <BoxTitleContent>* Cuanto de dinero necesitaras para esta fase del proyecto </BoxTitleContent>
                     <WrappBoxInput>
                         <BoxInput

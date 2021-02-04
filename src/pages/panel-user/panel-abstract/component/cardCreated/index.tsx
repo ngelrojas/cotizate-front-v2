@@ -8,6 +8,7 @@ import {ContainerCard,
     SpacesBtn,
     Label,
     Edit,
+    Enviar,
     Delete,
     H4,
     H3,
@@ -51,7 +52,12 @@ const CardCreated: React.FC<propsCamp> = (propsCamp) => {
                         <H4>CREADO</H4>
                     </>)
             case 3:
-                return <H4>EN REVISION</H4>
+                return (
+                    <>
+                        {GroupRevision()}
+                        <H4>EN REVISION</H4>
+                    </>
+                )
             case 4:
                 return <H4>APROBADO</H4>
             case 5:
@@ -61,6 +67,11 @@ const CardCreated: React.FC<propsCamp> = (propsCamp) => {
         } 
     }
 
+    const handleSend = (e:any) => {
+        console.info("SEND TO REVITION")
+        console.info(e.id)
+    }
+
     const GroupCreated = () => {
         return(
             <div>
@@ -68,12 +79,27 @@ const CardCreated: React.FC<propsCamp> = (propsCamp) => {
                     <Edit to={`/panel-de-usuario/actualizar-proyecto/${propsCamp.id}`}> EDITAR</Edit>
                 </SpacesBtn> 
                 <SpacesBtn>
+                <Enviar type='button' onClick={e=>handleSend(propsCamp)}> ENVIAR</Enviar>
+                </SpacesBtn>
+                <SpacesBtn>
                     <Delete to={`/eliminar/${propsCamp.id}`}> ELIMINAR</Delete>
                 </SpacesBtn>
             </div>  
         )                     
     }
 
+    const GroupRevision = () => {
+        return(
+            <div>
+                <SpacesBtn>
+                    <Edit to={`/panel-de-usuario/actualizar-proyecto/${propsCamp.id}`}> EDITAR</Edit>
+                </SpacesBtn> 
+                <SpacesBtn>
+                <Enviar type='button' onClick={e=>handleSend(propsCamp)}> ENVIAR</Enviar>
+                </SpacesBtn>
+            </div>  
+        )                     
+    }
     return(
         <ContainerCard key={propsCamp.id}>
             <Row between="xs">

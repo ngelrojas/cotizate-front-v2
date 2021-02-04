@@ -35,6 +35,7 @@ export const Edit = styled(Btn)`
     &:hover{
         color: #FFFFFF;
         background: #F2A85D;
+        box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.25);
     }
 `
 
@@ -47,6 +48,24 @@ export const Delete = styled(Btn)`
     &:hover{
         color: #FFFFFF;
         background: red;
+        box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.25);
+    }
+`
+
+export const Enviar = styled.button`
+    text-decoration: none;
+    padding-left: 10%;
+    padding-right: 10%;
+    padding-top: 4%;
+    padding-bottom: 4%;
+    border: 1px solid #1383C5;
+    color: #F2A85D;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    &:hover{
+        color: #FFFFFF;
+        background: #3E97CB;
+        box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.25);
+        cursor: pointer;
     }
 `
 
@@ -58,7 +77,7 @@ export const H4 = styled.h4`
 
 export const SpacesBtn = styled.div`
     margin-top: 16%;
-    margin-bottom: 35%; 
+    margin-bottom: 25%; 
 `
 
 export const Box = styled.div`

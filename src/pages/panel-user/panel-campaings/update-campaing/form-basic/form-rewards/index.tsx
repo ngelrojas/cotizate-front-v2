@@ -239,7 +239,7 @@ const FormRewards: React.FC<AllProps>= ({rewards}) => {
             
                 <SpaceB />
                 <Row>
-                <Col xs={6}>
+                <Col xs={12}>
                 <WrappBoxInput>
                 <BoxTitleContent>* Monto</BoxTitleContent>
                     <BoxInputReward
@@ -253,7 +253,7 @@ const FormRewards: React.FC<AllProps>= ({rewards}) => {
                 </WrappBoxInput>
                     <MsgError>{errors.amount && 'este campo es requerido'}</MsgError>
                 </Col>
-                <Col xs={6}>
+                <Col xs={12}>
                 <BoxTitleContent>* Entrega prevista:  <span><Moment format="DD/MM/YYYY">{rewards.expected_delivery}</Moment></span></BoxTitleContent>
                 
                 <WrappBoxInput>

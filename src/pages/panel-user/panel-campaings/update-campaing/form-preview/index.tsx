@@ -6,6 +6,7 @@ import {CampaingHeader, CampaingBody} from '../../../../../userCampaings'
 import {Phases} from '../../../../../userPhases'
 import {Reward} from '../../../../../userReward'
 import {PersonalProfile} from '../../../../../userProfile'
+import {URL_IMG} from '../../../../../constants'
 
 interface IcampTypeBody {
     created_at: string,
@@ -176,7 +177,7 @@ const FormPreview: React.FC = () => {
                 <Row center="xs">
                     <Col xs={6}>
                     {!isLoading && StatusCamp ===2 && QtyPhases >= 1 &&  QtyRewards >= 1 && DataProfile >= 1 ? 
-                        (<Preview to={!isLoading && cpb ? `vista-previa/${cpb.slug}`:``}>vista previa</Preview>):(<Preview to="#">vista previa</Preview>)}
+                        (<Preview to={!isLoading && cpb ? `/detalle-proyecto/${cpb.slug}`:``}>vista previa</Preview>):(<Preview to="#">vista previa</Preview>)}
                        
                     </Col>
                 </Row>

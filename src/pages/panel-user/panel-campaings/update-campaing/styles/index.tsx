@@ -345,7 +345,7 @@ export const BoxSelect = styled.select`
 export const BoxInput = styled.input`
     width: 90%;
     height: 49px;
-    padding-left: 14%;
+    padding-left: 9%;
 `
 
 export const BoxInputReward = styled(BoxInput)`
@@ -366,7 +366,7 @@ export const WrappBoxInput = styled.div`
 
 export const BS = styled.p`
     background-color: #F2A85D;
-    padding-top: 6%;
+    padding-top: 3%;
     padding-left: 2%;
     padding-right: 2%;
     position: absolute;
@@ -389,7 +389,6 @@ export const WrapperBoxRD = styled.div`
     padding-left: 4%;
     padding-right: 4%;
     padding-bottom: 4%;
-    padding-top: 4%;
 `
 
 export const WrapperSave = styled.div`
@@ -446,7 +445,7 @@ export const BoxTitleContent = styled.p`
 `
 
 export const BSRE = styled(BS)`
-    top: 35%;
+    top: 41%;
 `
 
 export const BtnSP = styled(Btn)`

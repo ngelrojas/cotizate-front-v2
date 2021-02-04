@@ -23,15 +23,18 @@ const UserMenu: React.FC<Iusername> = props => {
                         <Go to="/panel-de-usuario">Mi Panel</Go>
                     </Item>
                     <Item>
-                        <Go to="/panel-de-usuario/creados">Proyectos Creados</Go>
+                        <Go to="/dashboard-de-usuario/creados">Proyectos Creados</Go>
                     </Item>
                     <Item>
-                        <Go to="/panel-de-usuario/apoyados">
-                           Proyectos Apoyados 
+                        <Go to="/dashboard-de-usuario/en-revision">
+                           Proyectos en Revision 
                         </Go>
                     </Item>
                     <Item>
-                        <Go to="/panel-de-usuario/guardados">Proyectos Guardados</Go>
+                        <Go to="/dashboard-de-usuario/aprovados">Proyectos Aprovados</Go>
+                    </Item>
+                    <Item>
+                        <Go to="/dashboard-de-usuario/publicados">Proyectos Publicados</Go>
                     </Item>
                     <Item>
                         <Divid>MI PERFIL</Divid>

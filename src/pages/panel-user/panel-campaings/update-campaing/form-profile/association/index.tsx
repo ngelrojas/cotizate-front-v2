@@ -1,16 +1,12 @@
 import React from 'react'
-import {useRouteMatch} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {useForm} from 'react-hook-form'
 import {store} from 'react-notifications-component'
 import {Row, Col} from 'react-styled-flexboxgrid'
-import Modal from '@material-ui/core/Modal'
-import { makeStyles, Theme, createStyles } from '@material-ui/core/styles'
 import DefaultImg from '../../form-basic/public/default.png'
 import {City} from '../../../../../../userCountryCities'
 import {CompanyProfile} from '../../../../../../userProfile'
 import {URL_IMG} from '../../../../../../constants'
-import Loading from '../../../../../../components/loading'
 import {ContentProfile,
         Input, 
         WrapperBox,
@@ -159,46 +155,16 @@ interface Icampaing {
     campaing: FormData
 }
 
-function rand() {
-  return Math.round(Math.random() * 20) - 10
-}
-
-function getModalStyle() {
-  const top = 50 + rand()
-  const left = 50 + rand()
-
-  return {
-    top: `${top}%`,
-    left: `${left}%`,
-    transform: `translate(-${top}%, -${left}%)`,
-  }
-}
-
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    paper: {
-      position: 'absolute',
-      width: 400,
-      backgroundColor: theme.palette.background.paper,
-      boxShadow: theme.shadows[5],
-      padding: theme.spacing(2, 4, 3),
-    },
-  }),
-)
-
 const Association: React.FC<Icampaing> = ({campaing})=>{
-    let match = useRouteMatch('/panel-de-usuario/actualizar-proyecto/:campania')
-    let matchUrl: any = match
-    let campaingId = matchUrl.params.campania
+    //let match = useRouteMatch('/panel-de-usuario/actualizar-proyecto/:campania')
+    //let matchUrl: any = match
+    //let campaingId = matchUrl.params.campania
     let token = window.sessionStorage.getItem('token')
     let CityUser = new City(token)
     let companyProfile = new CompanyProfile(token)
     const [loadcity, setLoadcity] = React.useState<Icities[]>()
     const [isLoading, setIsLoading] = React.useState(true)
     const [showImg, SetShowImg] = React.useState()
-    const classes = useStyles()
-    const [modalStyle] = React.useState(getModalStyle)
-    const [open, setOpen] = React.useState(true)
     const [ProfileCA, setProfileCA] = React.useState<IprofileCA>()
     const {register, handleSubmit, errors} = useForm<FormData>({
         mode: 'onChange'
@@ -283,15 +249,11 @@ const Association: React.FC<Icampaing> = ({campaing})=>{
     const LoadCities = () => {
         CityUser.listCities()
             .then(resp=>{
-                //console.info(resp.data)
-                setOpen(true)
                 setLoadcity(resp.data)
             }).catch(err=>{
-                setOpen(true)
                 console.info(err)
             }).then(()=>{
                 setIsLoading(false)
-                setOpen(false)
             })
     }
 
@@ -310,27 +272,14 @@ const Association: React.FC<Icampaing> = ({campaing})=>{
         }
     }
 
-  const body = (
-    <div style={modalStyle} className={classes.paper}>
-        <Loading message='cargando sus datos' />
-    </div>
-  )
-
     React.useEffect(()=>{
         LoadCities()
         LoadCompanyProfileCA()    
-
     },[campaing])
 
     return(
         <>
         <div>
-      <Modal
-        open={open}
-        aria-labelledby="simple-modal-title"
-        aria-describedby="simple-modal-description">
-        {body}
-      </Modal>
             <form onSubmit={onSubmit} encType="multipart/form-data">
             <ContentProfile>
                 <Row>
