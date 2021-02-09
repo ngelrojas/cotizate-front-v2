@@ -61,7 +61,7 @@ const TablePhases:React.FC = (props: any) => {
   let Phase = new Phases(token)
   const classes = useStyles();
   const [IsLoading, setIsLoading] = React.useState(true)
-  const [LoadPhases, setLoadPhases] = React.useState()
+  const [LoadPhases, setLoadPhases] = React.useState([])
 
   const getPhases = (campID: number) => {
     Phase.listPhases(campID)

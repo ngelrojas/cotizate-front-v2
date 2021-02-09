@@ -61,11 +61,11 @@ const FormRewards: React.FC<AllProps>= ({rewards}) => {
     let Rewards = new Reward(token)
     let City = new Cities(token)
     let campaingId = matchUrl.params.campania
-    const [resumes, Setresumes] = React.useState()
+    const [resumes, Setresumes] = React.useState([])
     const [selected, Setselected] = React.useState<number[]>([])
-    const [MsgErrorF, setMsgErrorF] = React.useState()
-    const [cities, setCities] = React.useState()
-    const [AddOption, setAddOption] = React.useState()
+    const [MsgErrorF, setMsgErrorF] = React.useState('')
+    const [cities, setCities] = React.useState([])
+    const [AddOption, setAddOption] = React.useState('')
     const {register, handleSubmit, reset, errors} = useForm<FormData>({
         mode: 'onChange'
     })
@@ -173,7 +173,7 @@ const FormRewards: React.FC<AllProps>= ({rewards}) => {
         if(resumes.length >= 940){
             Notifications('La descripcion de la Recompensa no debe exceder mas 900 caracteres o 159 palabras.', 'danger')
             setMsgErrorF('no debe exceder mas de 900 caracteres o 159 palabras')
-            Setresumes(0)
+            Setresumes([])
             return false
         }
         return true

@@ -50,10 +50,10 @@ const FormRewards: React.FC= () => {
     let Rewards = new Reward(token)
     let City = new Cities(token)
     const [datach, setDatach] = React.useState<number>(0)
-    const [description, Setdescription] = React.useState()
+    const [description, Setdescription] = React.useState('')
     const [selected, Setselected] = React.useState<number[]>([])
-    const [MsgErrorF, setMsgErrorF] = React.useState()
-    const [cities, setCities] = React.useState()
+    const [MsgErrorF, setMsgErrorF] = React.useState('')
+    const [cities, setCities] = React.useState([])
     const {register, handleSubmit, reset, errors} = useForm<FormData>({
         mode: 'onChange'
     })

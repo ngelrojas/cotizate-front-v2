@@ -46,9 +46,9 @@ const FormPhase: React.FC<AllProps> = ({phases}) => {
     let campaingId = matchUrl.params.campania
     let token = window.sessionStorage.getItem('token')
     let Phase = new Phases(token)
-    const [resumes, Setresumes] = React.useState()
-    const [AddPhase, setAddPhase] = React.useState()
-    const [MsgErrorF, setMsgErrorF] = React.useState()
+    const [resumes, Setresumes] = React.useState('')
+    const [AddPhase, setAddPhase] = React.useState('')
+    const [MsgErrorF, setMsgErrorF] = React.useState('')
     const {register, handleSubmit, reset, errors} = useForm<FormData>({
         mode: 'onChange'
     })
@@ -174,7 +174,7 @@ const FormPhase: React.FC<AllProps> = ({phases}) => {
 
         <FormR onSubmit={onSubmit}>
 <Row>
-        <Col xs={6}>
+        <Col xs={12}>
                     <BoxTitleContent>* Titulo de la Fase </BoxTitleContent>
                     <WrappBoxInput>
                         <BoxInputPhase
@@ -190,7 +190,7 @@ const FormPhase: React.FC<AllProps> = ({phases}) => {
                         {errors.title && 'este campo es requerido'}
                     </MsgError>
         </Col>
-        <Col xs={6}>
+        <Col xs={12}>
                     <BoxTitleContent>* Cuanto de dinero necesitaras para esta fase del proyecto </BoxTitleContent>
                     <WrappBoxInput>
                         <BoxInput

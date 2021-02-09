@@ -4,6 +4,7 @@ import {useForm} from 'react-hook-form'
 import {store} from 'react-notifications-component'
 import {Editor} from '@tinymce/tinymce-react'
 import {CampaingHeader, Campaings} from '../../../../../../userCampaings'
+import DefaultImg from '../public/default.png'
 import {Row, Col} from 'react-styled-flexboxgrid'
 import {next, back} from '../../../../../../redux/actions/next_back.actions'
 import {URL_IMG} from '../../../../../../constants'
@@ -158,8 +159,8 @@ const FormDescription: React.FC<AllProps> = ({counter, handleNext, handleBack, c
     const [excerpt, setExcerpt] = React.useState('')
     const [msgExcerpt, setMsgExcerpt] = React.useState('')
     const [msgdescription, setMsgdescription] = React.useState('')
-    const [datach, setDatach] = React.useState()
-    const [showImg, SetShowImg] = React.useState()
+    const [datach, setDatach] = React.useState([])
+    const [showImg, SetShowImg] = React.useState([])
     const {register, handleSubmit, errors} = useForm<FormData>({
         mode: 'onChange'
     })
@@ -261,9 +262,11 @@ const FormDescription: React.FC<AllProps> = ({counter, handleNext, handleBack, c
     const _onChange = (event: React.ChangeEvent<HTMLInputElement>)=> {
         let file: any = event.currentTarget.files 
         let reader = new FileReader()
+        let current_images: any
 
+        current_images = reader !== null ? reader.result : '{}'
         reader.onloadend = () => {
-            SetShowImg(reader.result)
+            SetShowImg(current_images)
         }
 
         reader.readAsDataURL(file[0])
@@ -353,7 +356,7 @@ const FormDescription: React.FC<AllProps> = ({counter, handleNext, handleBack, c
                     </Col>
                     <Col xs={5}>
 
-                        <Img src={ showImg ? showImg  : URL_IMG + campaing.imagen_main } alt="cotizate" />
+                        <Img src={ showImg ? URL_IMG + campaing.imagen_main :  DefaultImg} alt="cotizate" />
                         
                     </Col>
                 <MsgError>

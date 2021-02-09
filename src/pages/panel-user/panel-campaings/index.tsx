@@ -32,7 +32,7 @@ interface Iauth {
 const PanelCampaing: React.FC<Iauth> = ({authenticated, currentUser}) => {
 
     let history = useHistory()
-    const [dataCamp, setDataCamp] = React.useState()
+    const [dataCamp, setDataCamp] = React.useState([])
     const [isData, setIsData] = React.useState(true)
     let token = window.sessionStorage.getItem('token')
     let campaing = new Campaings(token)
