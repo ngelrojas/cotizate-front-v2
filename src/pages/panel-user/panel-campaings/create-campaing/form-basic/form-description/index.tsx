@@ -65,7 +65,7 @@ const FormDescription: React.FC<AllProps> = ({counter, handleNext, handleBack}) 
     const [msgExcerpt, setMsgExcerpt] = React.useState('')
     const [msgdescription, setMsgdescription] = React.useState('')
     const [datach, setDatach] = React.useState()
-    const [showImg, SetShowImg] = React.useState()
+    const [showImg, SetShowImg] = React.useState('')
     const {register, handleSubmit, reset, errors} = useForm<FormData>({
         mode: 'onChange'
     })
@@ -159,9 +159,12 @@ const FormDescription: React.FC<AllProps> = ({counter, handleNext, handleBack}) 
     const _onChange = (event: React.ChangeEvent<HTMLInputElement>)=> {
         let file: any = event.currentTarget.files 
         let reader = new FileReader()
+        let current_images: any
+
+        current_images = reader !== null ? reader.result : '{}'
 
         reader.onloadend = () => {
-            SetShowImg(reader.result)
+            SetShowImg(current_images)
         }
 
         reader.readAsDataURL(file[0])

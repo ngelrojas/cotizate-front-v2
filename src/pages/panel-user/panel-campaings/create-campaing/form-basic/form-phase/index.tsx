@@ -35,7 +35,7 @@ const FormPhase: React.FC= () => {
     let Phase = new Phases(token)
     const [datach, setDatach] = React.useState<number>(0)
     const [description, Setdescription] = React.useState()
-    const [MsgErrorF, setMsgErrorF] = React.useState()
+    const [MsgErrorF, setMsgErrorF] = React.useState('')
     const {register, handleSubmit, reset, errors} = useForm<FormData>({
         mode: 'onChange'
     })

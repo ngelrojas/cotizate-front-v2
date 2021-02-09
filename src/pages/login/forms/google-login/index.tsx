@@ -13,10 +13,12 @@ const GoogleLogin: React.FC = (props: any) => {
     let history = useHistory()
 
     const responseGoogle = async (response: any) => {
+        let resp_email: string
         let res = response.profileObj
+        resp_email = res ? res.email : ''
         const userData = {
-            email: res.email,
-            password: res.email
+            email: resp_email,
+            password: resp_email
         }
         props.loginUser(userData, history)
         // setSuccess(props.UI.loading)

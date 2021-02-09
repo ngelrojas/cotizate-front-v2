@@ -70,7 +70,7 @@ const TableReward:React.FC = (props: any) => {
   let CReward = new Reward(token)
   const classes = useStyles();
   const [IsLoading, setIsLoading] = React.useState(true)
-  const [LoadRewards, setLoadRewards] = React.useState()
+  const [LoadRewards, setLoadRewards] = React.useState([])
 
   const listRewards = (campID: number) => {
     CReward.retrieveReward(campID)

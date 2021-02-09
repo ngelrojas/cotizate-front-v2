@@ -11,7 +11,7 @@ interface IstatusCamp {
 const ListCard: React.FC<IstatusCamp> = (props) => {
     let token = window.sessionStorage.getItem('token')
     let CampaingCard = new CampaingBody(token)
-    const [Cards, setCards] = React.useState()
+    const [Cards, setCards] = React.useState([])
     const [isLoading, setIsLoading] = React.useState(true)
 
     const LoadCards = () => {

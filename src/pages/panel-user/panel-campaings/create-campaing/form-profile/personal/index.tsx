@@ -109,7 +109,7 @@ const Personal: React.FC<Iauth> = ({authenticated, currentUser})=>{
 
     const [loadcity, setLoadcity] = React.useState<Icities[]>()
     const [isLoading, setIsLoading] = React.useState(true)
-    const [showImg, SetShowImg] = React.useState()
+    const [showImg, SetShowImg] = React.useState('')
     const input = document.querySelector("cinit")
     const {register, handleSubmit, reset, errors} = useForm<FormData>({
         mode: 'onChange'
@@ -197,9 +197,12 @@ const Personal: React.FC<Iauth> = ({authenticated, currentUser})=>{
     const _onChange = (event: React.ChangeEvent<HTMLInputElement>)=> {
         let file: any = event.currentTarget.files 
         let reader = new FileReader()
+        let current_images: any
+
+        current_images = reader !== null ? reader.result : '{}'
 
         reader.onloadend = () => {
-            SetShowImg(reader.result)
+            SetShowImg(current_images)
         }
 
         reader.readAsDataURL(file[0])

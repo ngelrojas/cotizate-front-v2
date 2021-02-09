@@ -44,7 +44,7 @@ const FormPreview: React.FC = () => {
     const [StatusCamp, setStatusCamp] = React.useState(0)
     const [IsCompany, setIsCompany] = React.useState(0)
     const [IdProfile, setIdProfile] = React.useState(0)
-    const [DataProfile, setDataProfile] = React.useState()
+    const [DataProfile, setDataProfile] = React.useState(1)
     const [cpb, setCpb] = React.useState<IcampTypeBody>()
 
     const getLast = () => {

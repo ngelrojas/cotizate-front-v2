@@ -46,9 +46,9 @@ const FormPhase: React.FC<AllProps> = ({phases}) => {
     let campaingId = matchUrl.params.campania
     let token = window.sessionStorage.getItem('token')
     let Phase = new Phases(token)
-    const [resumes, Setresumes] = React.useState()
-    const [AddPhase, setAddPhase] = React.useState()
-    const [MsgErrorF, setMsgErrorF] = React.useState()
+    const [resumes, Setresumes] = React.useState('')
+    const [AddPhase, setAddPhase] = React.useState('')
+    const [MsgErrorF, setMsgErrorF] = React.useState('')
     const {register, handleSubmit, reset, errors} = useForm<FormData>({
         mode: 'onChange'
     })

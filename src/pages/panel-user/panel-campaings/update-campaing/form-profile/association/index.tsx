@@ -238,9 +238,12 @@ const Association: React.FC<Icampaing> = ({campaing})=>{
     const _onChange = (event: React.ChangeEvent<HTMLInputElement>)=> {
         let file: any = event.currentTarget.files 
         let reader = new FileReader()
+        let current_images: any
+
+        current_images = reader !== null ? reader.result : '{}'
 
         reader.onloadend = () => {
-            SetShowImg(reader.result)
+            SetShowImg(current_images)
         }
 
         reader.readAsDataURL(file[0])
