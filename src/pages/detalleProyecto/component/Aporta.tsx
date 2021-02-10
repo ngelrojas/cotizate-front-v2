@@ -133,7 +133,7 @@ const Aporta: React.FC<IAporta> = (props) => {
    
     const classes = useStyles();   
     const history = useHistory();
-    const { authenticated } = useSelector((stateSelector: any) => {  return stateSelector.profile;  });
+    const { authenticated } = useSelector((stateSelector: any) => {  return stateSelector.user;  });
     useEffect(() =>{
     },[authenticated]);
     const [aporte1, setAporte1] = useState(false); 

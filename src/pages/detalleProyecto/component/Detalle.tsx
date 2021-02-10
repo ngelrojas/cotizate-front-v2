@@ -202,12 +202,13 @@ const useStyles = makeStyles((theme) => ({
 const Detalle: React.FC<IDetalle> = (props) => {
     const classes = useStyles();
     const dispatch = useDispatch();
+    const { authenticated } = useSelector((stateSelector: any) => {  return stateSelector.user;  });
     const {
         proyectosDetalle, aportes, statusAportes, statusLike, statusSave
       } = useSelector((stateSelector: any) => {
         return stateSelector.detalleProyecto;
       });
-      const { authenticated } = useSelector((stateSelector: any) => {  return stateSelector.profile;  });
+     
 
     const copiarLink =(data: string)=>{       
         copiarTextoToPapelera(data);
@@ -254,9 +255,8 @@ const Detalle: React.FC<IDetalle> = (props) => {
     
   }
 
-  useEffect(()=>{
-
-  },[statusLike, statusSave])
+  useEffect(()=>{    
+  },[statusLike, statusSave, authenticated])
 
     return (
         <>

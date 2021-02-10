@@ -87,7 +87,7 @@ const TabDetalle: React.FC<ITab> = (props) => {
     
       
     
-    const { authenticated } = useSelector((stateSelector: any) => {  return stateSelector.profile;  });
+    const { authenticated } = useSelector((stateSelector: any) => {  return stateSelector.user;  });
     const { statusFases, fases
     } = useSelector((stateSelector: any) => {
       return stateSelector.detalleProyecto;
