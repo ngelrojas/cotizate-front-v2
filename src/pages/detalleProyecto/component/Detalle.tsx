@@ -213,9 +213,13 @@ const Detalle: React.FC<IDetalle> = (props) => {
     const copiarLink =(data: string)=>{       
         copiarTextoToPapelera(data);
     }
-    useEffect(() =>{
+    useEffect(() =>{      
         dispatch(Action.obtnerAportes(props.data.header.id));
         dispatch(Action.obtnerFases(props.data.header.id));
+        if(authenticated){
+            dispatch(Action.obtenerLike(2));
+        }
+       
    },[]);
 
    const [siguiente, SetSiguiente]= useState(0)

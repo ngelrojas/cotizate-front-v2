@@ -68,6 +68,21 @@ export function obtnerFases(idHeader: any){
       .catch(err => console.log(err))
       }
 }
+export function obtenerLike(idUsueio: number){       
+  return (dispatch : any) =>{          
+    console.log('se ejecuto el like');  
+     API.get(`like/${idUsueio}`).then(resp => {  
+       console.log('get like',resp);       
+        if(resp.status === 200){  
+          // dispatch({
+          //   type: DETAIL_LIKE,
+          //   statusLike:resp.data.data.liked
+          // })                
+        }            
+      })
+      .catch(err => console.log(err))
+      }
+}
 export function onchangeLike(like: boolean){       
   return (dispatch : any) =>{     
     
