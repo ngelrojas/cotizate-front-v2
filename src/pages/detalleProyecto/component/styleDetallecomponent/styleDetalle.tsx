@@ -8,6 +8,24 @@ export const List = styled.ul`
         display: block;
     }
 `
+export const Br = styled.br`
+  
+`
+export const Title = styled.h1`
+    
+    padding-top: 5px;
+    height: 22px;
+    left: 30px;
+    top: 842px;
+    padding-left:6px;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 23px;
+    color: #5D5A5A;
+    margin-bottom: 15px;
+
+`
 export const DivPrincipal = styled.div`   
     
     padding-left: 4%;

@@ -29,6 +29,7 @@ import Aporta from './Aporta';
 import Reportar from './Reportar';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
+import ProyectosRecomendados from './ProyectosRecomendados'
 
 import * as Action from '../../../redux/actions/detalleProyectoActions';
 
@@ -61,6 +62,8 @@ import {Article, SectionDetails, Picture,
      Texto,
      LinkAzul,
      Go,
+     Br,
+     Title,
      ImgPortal,
      DivSin,
      DivSeparadorSinColor,
@@ -235,7 +238,7 @@ const Detalle: React.FC<IDetalle> = (props) => {
         }  
    };
 
-///proyectos finalizados temporal aqui hiran los recomendados--------------------
+///proyectos finalizados temporal aqui cambiar por  recomendados--------------------
    const {
     proyectosDestacados,
     featuredProjects,
@@ -252,6 +255,43 @@ const Detalle: React.FC<IDetalle> = (props) => {
   }, [featuredProjects,proyectosFinalizados,finalizedProjects,categoriasStatus]);
 
 //----------------------------------------------------------------------------------
+const [dispositivoMovil, setDispositivoMovil] = useState(false);
+
+
+const responsive = {
+    superLargeDesktop: {
+      // the naming can be any, depends on you.
+      breakpoint: { max: 4000, min: 3000 },
+      items: 5
+    },
+    desktop: {
+      breakpoint: { max: 3000, min: 1024 },
+      items: 4
+    },
+    tablet: {
+      breakpoint: { max: 1024, min: 464 },
+      items: 2
+    },
+    mobile: {
+      breakpoint: { max: 464, min: 0 },
+      items: 1
+    }
+  };
+  const verificarDispositivo =() =>{
+    if( navigator.userAgent.match(/Android/i)
+          || navigator.userAgent.match(/iPhone/i)
+          || navigator.userAgent.match(/BlackBerry/i)
+          || navigator.userAgent.match(/Windows Phone/i)){
+                 setDispositivoMovil(true);
+        }else{
+          setDispositivoMovil(false);
+        }
+  }
+  useEffect(() => {        
+    verificarDispositivo();
+      console.log(dispositivoMovil);
+  }, [dispositivoMovil]);
+//------------------------------------------------------------
    const handleSubmitnex =()=>{    
        if(siguiente >0){
           alert('en proceso... siguiente.. bs : '+ siguiente );
@@ -575,7 +615,21 @@ const Detalle: React.FC<IDetalle> = (props) => {
             </Row>           
            </Col>
            </Row>
+
+           {causasSociales?
+                <div style={{ background:'#F9F0E8'}}>     
+                  <Br/>        
+                    <Title>RECOMENDADOS </Title>
+                    <Carousel  responsive={responsive} showDots={dispositivoMovil} arrows={true}  >
+                    {listCausasSociales.map((value : any, index : number) =>(
+                        <ProyectosRecomendados key={index} data={value} />
+                    ))}                                    
+                    </Carousel>               
+                </div>   
+             : null }
+
         </DivPrincipal>
+          <Br/>
         </Col>  
         </>
     )
