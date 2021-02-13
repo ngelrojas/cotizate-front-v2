@@ -27,6 +27,9 @@ import {copiarTextoToPapelera } from '../../../lib/FuncionesGenerales';
 import TabDetalle from './TabDetalle';
 import Aporta from './Aporta';
 import Reportar from './Reportar';
+import Carousel from 'react-multi-carousel';
+import 'react-multi-carousel/lib/styles.css';
+
 import * as Action from '../../../redux/actions/detalleProyectoActions';
 
   
@@ -232,7 +235,23 @@ const Detalle: React.FC<IDetalle> = (props) => {
         }  
    };
 
+///proyectos finalizados temporal aqui hiran los recomendados--------------------
+   const {
+    proyectosDestacados,
+    featuredProjects,
+    proyectosFinalizados,
+    finalizedProjects,
+    causasSociales,
+    listCausasSociales,
+    categoriasStatus
+  } = useSelector((stateSelector: any) => {
+    return stateSelector.home;
+  });
 
+  useEffect(() => {   
+  }, [featuredProjects,proyectosFinalizados,finalizedProjects,categoriasStatus]);
+
+//----------------------------------------------------------------------------------
    const handleSubmitnex =()=>{    
        if(siguiente >0){
           alert('en proceso... siguiente.. bs : '+ siguiente );
@@ -266,7 +285,7 @@ const Detalle: React.FC<IDetalle> = (props) => {
         <>
         <Col xs={12} sm={12} md={12} lg={12} >     
           <DivPrincipal> 
-                       <Row center="xs">
+           <Row center="xs">
                             <Col xs={12} sm={12} md={12} lg={12}>
                                <DivPortada>
                                   <TilePortada> 
@@ -276,137 +295,137 @@ const Detalle: React.FC<IDetalle> = (props) => {
                             </Col>
                         </Row>
            <Row start="lg">   
-           <Col xs={12} sm={6} md={6} lg={6}> 
-              <SectionDetails>
-                    <Article>
-                        <Picture>                       
-                               <ReactPlayer width={'99.9%'} url={props.data.video_main} />                    
-                        </Picture>
-                        <Row >                                                
+                <Col xs={12} sm={6} md={6} lg={6}> 
+                    <SectionDetails>
+                            <Article>
+                                <Picture>                       
+                                    <ReactPlayer width={'99.9%'} url={props.data.video_main} />                    
+                                </Picture>
+                                <Row >                                                
+                                    <Col xs={12} sm={12} md={12} lg={12}>
+                                    <DivTitlevideo>
+                                        <Row>                                                            
+                                                <Col xs={6} sm={6} md={6} lg={6}>                                                                           
+                                                    <TitleVideo1>{props.data.header.category.name}</TitleVideo1>                                              
+                                                </Col>                                                          
+                                                <Col xs={6} sm={6} md={6} lg={6}>                                          
+                                                    <TitleVideo1> <MdLocationOn /> {props.data.header.city.name}{' - '} {props.data.header.city.countries.name} </TitleVideo1>
+                                                </Col>                               
+                                        </Row>
+                                        </DivTitlevideo>
+                                    </Col>
+                                
+                                </Row>
+                            </Article>          
+                    </SectionDetails>
+                </Col>
+                <Col xs={12} sm={6} md={6} lg={6}>
+                    <Contenedor>
+                        <Row>   
+                        <Col xs={8} sm={8} md={8} lg={6}>                   
+                                <Row start="lg">
+                                    <Col xs={12} sm={12} md={12} lg={12}>
+                                    <Alcanzado>                                    
+                                            <AlcanceText> {'ALCANZADOS BS: '}{props.data.header.amount_reached} </AlcanceText>                                    
+                                        </Alcanzado>  
+                                    </Col>
+                                </Row>
+                            </Col>
+                            <Col xs={4} sm={4} md={4} lg={6}>                    
+                                <Row end="lg">
+                                    <Col xs={12} sm={12} md={12} lg={12}>   
+                                    <Alcanzado>                               
+                                        <NumberMontoMeta> {'Meta: '}{props.data.header.amount} Bs</NumberMontoMeta>
+                                    </Alcanzado>                          
+                                    </Col>
+                                </Row>
+                            </Col>
+                        </Row>
+                        <Row>
                             <Col xs={12} sm={12} md={12} lg={12}>
-                              <DivTitlevideo>
-                                   <Row>                                                            
-                                        <Col xs={6} sm={6} md={6} lg={6}>                                                                           
-                                            <TitleVideo1>{props.data.header.category.name}</TitleVideo1>                                              
-                                        </Col>                                                          
-                                        <Col xs={6} sm={6} md={6} lg={6}>                                          
-                                            <TitleVideo1> <MdLocationOn /> {props.data.header.city.name}{' - '} {props.data.header.city.countries.name} </TitleVideo1>
-                                        </Col>                               
-                                   </Row>
-                                </DivTitlevideo>
+                                <Row start="lg">
+                                    <Col xs={12} sm={12} md={12} lg={12}>
+                                        <Porcentaje>
+                                        <LineProgress bgcolor={'#7CC142'} completed={'50'} />                                
+                                        </Porcentaje>                            
+                                    </Col>
+                                </Row>
                             </Col>
-                          
                         </Row>
-                    </Article>          
-              </SectionDetails>
-           </Col>
-           <Col xs={12} sm={6} md={6} lg={6}>
-               <Contenedor>
-                <Row>   
-                   <Col xs={8} sm={8} md={8} lg={6}>                   
-                        <Row start="lg">
+                        <Row>
                             <Col xs={12} sm={12} md={12} lg={12}>
-                               <Alcanzado>                                    
-                                    <AlcanceText> {'ALCANZADOS BS: '}{props.data.header.amount_reached} </AlcanceText>                                    
-                                </Alcanzado>  
+                                <Row start="lg">
+                                    <Col xs={12} sm={12} md={12} lg={12}>                                
+                                    <AporteNumber>{10}</AporteNumber> <Aportetitle>{'Aportadore'}</Aportetitle>
+                                    </Col>
+                                </Row>
                             </Col>
                         </Row>
-                    </Col>
-                    <Col xs={4} sm={4} md={4} lg={6}>                    
-                        <Row end="lg">
-                            <Col xs={12} sm={12} md={12} lg={12}>   
-                               <Alcanzado>                               
-                                  <NumberMontoMeta> {'Meta: '}{props.data.header.amount} Bs</NumberMontoMeta>
-                               </Alcanzado>                          
-                            </Col>
-                        </Row>
-                    </Col>
-                </Row>
-                <Row>
-                    <Col xs={12} sm={12} md={12} lg={12}>
-                        <Row start="lg">
+                        <Row>
                             <Col xs={12} sm={12} md={12} lg={12}>
-                                <Porcentaje>
-                                <LineProgress bgcolor={'#7CC142'} completed={'50'} />                                
-                                </Porcentaje>                            
+                                <Row start="lg">
+                                    <Col xs={12} sm={12} md={12} lg={12}>
+                                        <Div1>
+                                            <TileDias>{'FALTAN'} {props.data.header.qty_day_left} {' DIAS'}</TileDias> 
+                                        </Div1>                               
+                                    </Col>
+                                </Row>
                             </Col>
                         </Row>
-                    </Col>
-                </Row>
-                <Row>
-                    <Col xs={12} sm={12} md={12} lg={12}>
-                        <Row start="lg">
-                            <Col xs={12} sm={12} md={12} lg={12}>                                
-                               <AporteNumber>{10}</AporteNumber> <Aportetitle>{'Aportadore'}</Aportetitle>
-                            </Col>
-                        </Row>
-                    </Col>
-                </Row>
-                <Row>
-                    <Col xs={12} sm={12} md={12} lg={12}>
-                        <Row start="lg">
+                        <Row>
                             <Col xs={12} sm={12} md={12} lg={12}>
-                                <Div1>
-                                    <TileDias>{'FALTAN'} {props.data.header.qty_day_left} {' DIAS'}</TileDias> 
-                                </Div1>                               
+                                <Row start="lg">
+                                    <Col xs={6  } sm={6} md={6} lg={6}>
+                                        <Div1>
+                                            {authenticated? 
+                                            <IconButton onClick={onchangeLike} >
+                                            {statusLike?  <ThumbUpAltIcon />: <ThumbUpAltOutlinedIcon /> }
+                                            </IconButton>
+                                            : 
+                                            <IconButton  >
+                                                <ThumbUpAltTwoToneIcon />
+                                            </IconButton>
+                                            }
+                                        </Div1>
+                                    </Col>
+                                    <Col xs={6} sm={6} md={6} lg={6}>
+                                    <Div1>
+                                            {authenticated? 
+                                                <IconButton onClick={onchangeSave} >
+                                                    {statusSave?  <BookmarkIcon />: <BookmarkBorderIcon /> } 
+                                                </IconButton>
+                                                :
+                                                <IconButton >
+                                                    <BookmarksTwoToneIcon />    
+                                                </IconButton>
+                                            }
+                                        </Div1>
+                                    </Col>
+                                </Row>
                             </Col>
                         </Row>
-                    </Col>
-                </Row>
-                <Row>
-                    <Col xs={12} sm={12} md={12} lg={12}>
-                        <Row start="lg">
-                            <Col xs={6  } sm={6} md={6} lg={6}>
-                                <Div1>
-                                    {authenticated? 
-                                    <IconButton onClick={onchangeLike} >
-                                       {statusLike?  <ThumbUpAltIcon />: <ThumbUpAltOutlinedIcon /> }
-                                    </IconButton>
-                                    : 
-                                    <IconButton  >
-                                        <ThumbUpAltTwoToneIcon />
-                                    </IconButton>
-                                    }
-                                </Div1>
-                            </Col>
-                            <Col xs={6} sm={6} md={6} lg={6}>
-                               <Div1>
-                                    {authenticated? 
-                                        <IconButton onClick={onchangeSave} >
-                                            {statusSave?  <BookmarkIcon />: <BookmarkBorderIcon /> } 
-                                        </IconButton>
-                                        :
-                                        <IconButton >
-                                            <BookmarksTwoToneIcon />    
-                                        </IconButton>
-                                    }
-                                </Div1>
-                            </Col>
-                        </Row>
-                    </Col>
-                </Row>
-                <Row start="lg">
-                    <Col xs={12} sm={12} md={12} lg={12}>
                         <Row start="lg">
                             <Col xs={12} sm={12} md={12} lg={12}>
-                                <DivCod>
-                                    <TileCode>{'COD: '}{props.data.header.code_campaing}</TileCode> 
-                                </DivCod>                               
+                                <Row start="lg">
+                                    <Col xs={12} sm={12} md={12} lg={12}>
+                                        <DivCod>
+                                            <TileCode>{'COD: '}{props.data.header.code_campaing}</TileCode> 
+                                        </DivCod>                               
+                                    </Col>
+                                </Row>
                             </Col>
                         </Row>
-                    </Col>
-                </Row>
-                </Contenedor>
-                    <Row  >
-                        <Col xs={12} sm={12} md={12} lg={12}>
-                            <Row center='xs' >
+                        </Contenedor>
+                            <Row  >
+                                <Col xs={12} sm={12} md={12} lg={12}>
+                                    <Row center='xs' >
 
-                                    <BotonAportar >Aportar</BotonAportar>   
+                                            <BotonAportar >Aportar</BotonAportar>   
+                                    </Row>
+                                </Col>
                             </Row>
-                        </Col>
-                    </Row>
-           </Col>
-           <Col xs={12} sm={12} md={12} lg={12}>
+                </Col>
+                <Col xs={12} sm={12} md={12} lg={12}>
             <Row start="lg">
                 <Col xs={12} sm={6} md={6} lg={6}>
                   <DivSeparador>
@@ -555,7 +574,7 @@ const Detalle: React.FC<IDetalle> = (props) => {
                 </Col>
             </Row>           
            </Col>
-        </Row>
+           </Row>
         </DivPrincipal>
         </Col>  
         </>
