@@ -99,12 +99,11 @@ const PanelCampaing: React.FC<Iauth> = ({authenticated, currentUser}) => {
                                             <Th>OPCIONES</Th>
                                         </tr>
                                     </thead>
-                                    
                     {isData ? (
                         <tbody>
                             {dataCamp ? (
                                 dataCamp.map((camp: any) => (
-                                    
+
                                     <tr key={camp.id}>
                                         <Td>{camp.title}</Td>
                                         <Td>

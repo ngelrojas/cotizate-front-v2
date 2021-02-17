@@ -2,12 +2,13 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {useForm} from 'react-hook-form'
 import {store} from 'react-notifications-component'
+import {Editor} from '@tinymce/tinymce-react'
 import {Row, Col} from 'react-styled-flexboxgrid'
-import DefaultImg from '../../form-basic/public/default.png'
+// import DefaultImg from '../../form-basic/public/default.png'
 import {PersonalProfile} from '../../../../../../userProfile'
-import {User} from '../../../../../../user'
+// import {User} from '../../../../../../user'
 import {City} from '../../../../../../userCountryCities'
-import {UploadFiles} from '../../../../../../userImg'
+// import {UploadFiles} from '../../../../../../userImg'
 import {ContentProfile,
         Input, 
         WrapperBox,
@@ -16,7 +17,7 @@ import {ContentProfile,
         SelectInput,
         TextArea,
         InfoText,
-        ProfileImg,
+        // ProfileImg,
         SpanDescription,
         SecondSpan,
         SaveProfile,
@@ -103,17 +104,22 @@ const Personal: React.FC<Iauth> = ({authenticated, currentUser})=>{
 
     let token = window.sessionStorage.getItem('token')
     let currentPersonal = new PersonalProfile(token)
-    let DataUser = new User(token)
+    // let DataUser = new User(token)
     let CityUser = new City(token)
-    let UploadImages = new UploadFiles()
+    // let UploadImages = new UploadFiles(token)
 
     const [loadcity, setLoadcity] = React.useState<Icities[]>()
     const [isLoading, setIsLoading] = React.useState(true)
-    const [showImg, SetShowImg] = React.useState('')
-    const input = document.querySelector("cinit")
+    // const [showImg, SetShowImg] = React.useState('')
+    const [saveImg, SetsaveImg] = React.useState('')
+    // const input = document.querySelector("cinit")
     const {register, handleSubmit, reset, errors} = useForm<FormData>({
         mode: 'onChange'
     })
+
+    const handleEditorImgChange = (content: any, editor: any) => {
+        SetsaveImg(content)
+    }
 
     const onSubmit = handleSubmit(({cinit, cellphone, telephone, countries, cities,
                                    address, neightbordhood, number_address, photo,
@@ -130,16 +136,16 @@ const Personal: React.FC<Iauth> = ({authenticated, currentUser})=>{
             address: address, 
             neightbordhood: neightbordhood,
             number_address: number_address,
-            photo: 'mediafiles/',
+            photo: saveImg,
             rs_facebook: rs_facebook,
             rs_twitter: rs_twitter,
             rs_linkedin: rs_linkedin,
             rs_another: rs_another,
             description: description,
             current_position: current_position,
-            headline: headline
+            headline: headline,
+            header: 0
         }
-
         currentPersonal.createPP(data_profile)
             .then(resp => {
                 Notifications('Su perfil se ha creado', 'success')
@@ -151,24 +157,6 @@ const Personal: React.FC<Iauth> = ({authenticated, currentUser})=>{
         ScrollTop()
 
     })
-
-    const SendImg = (photo: any) => {
-
-         let data_img = {
-            file_uploaded:photo 
-        }
-        //console.info(data_img)
-        UploadImages.uploadImg(data_img)
-            .then(resp => {
-                console.info(resp.data)
-            })
-            .catch(err=>{
-                console.error(err)
-            })
-            .then(()=>{
-                setIsLoading(false)
-            })       
-    }
     
     const ScrollTop = () => {
         window.scrollTo({
@@ -192,20 +180,6 @@ const Personal: React.FC<Iauth> = ({authenticated, currentUser})=>{
                 onScreen: true
             }
         })
-    }
-
-    const _onChange = (event: React.ChangeEvent<HTMLInputElement>)=> {
-        let file: any = event.currentTarget.files 
-        let reader = new FileReader()
-        let current_images: any
-
-        current_images = reader !== null ? reader.result : '{}'
-
-        reader.onloadend = () => {
-            SetShowImg(current_images)
-        }
-
-        reader.readAsDataURL(file[0])
     }
 
     const LoadCities = () => {
@@ -487,6 +461,7 @@ const Personal: React.FC<Iauth> = ({authenticated, currentUser})=>{
                         <Row center="xs">
                             <Col xs={6}>       
                                 <InfoText>Esta será la información pública que aparecerá en tu perfil del proyecto.</InfoText>
+                                <p>el tamanho que debera subir de su foto de perfil debe ser aproximadamente de unos 271 de ancho y 279 de alto.</p>
                             </Col>
                         </Row>
                     </Col>
@@ -499,16 +474,55 @@ const Personal: React.FC<Iauth> = ({authenticated, currentUser})=>{
                                 <WrapperBox>
                                     <label>
                                         <SpanPhoto>Foto de Perfil: </SpanPhoto>
-                                        <input
-                                            type="file"
-                                            name="photo"
-                                            ref={register({required: false})}
-                                            accept="image/png, image/jpeg"
-                                            onChange={_onChange}
-                                        />
+                <Editor
+                    initialValue=''
+                    init={{
+                        branding: false,
+                        statusbar: false,
+                        height: 400,
+                        menubar: false,
+                        plugins: [
+                            'advlist autolink lists link image charmap print preview anchor image',
+                            'imagetools searchreplace visualblocks code fullscreen',
+                            'insertdatetime media table paste code help wordcount'
+                        ],
+                        toolbar:
+                            ' image | imagetools',
+                        automatic_uploads: true,
+                        file_picker_types: 'image',
+                        file_picker_callback: function(
+                            cb: any,
+                            value: any,
+                            meta: any
+                        ) {
+                            let input = document.createElement('input')
+                            input.setAttribute('type', 'file')
+                            input.setAttribute('accept', 'image/*')
+                            input.onchange = function(files: any) {
+                                let file: any = (input as any).files[0]
+                                let reader: any = new FileReader()
+                                reader.onload = function() {
+                                    let id = 'blobid' + new Date().getTime()
+                                    let blobCache = (window as any).tinymce
+                                        .activeEditor.editorUpload.blobCache
+                                    let base64 = reader.result.split(',')[1]
+                                    let blobInfo: any = blobCache.create(
+                                        id,
+                                        file,
+                                        base64
+                                    )
+                                    blobCache.add(blobInfo)
+                                    cb(blobInfo.blobUri(), {title: file.name})
+                                }
+                                reader.readAsDataURL(file)
+                            }
+                            input.click()
+                        }
+                    }}
+                    onEditorChange={handleEditorImgChange}
+                />
                                     </label>
 
-                                    <ProfileImg src={ showImg ? showImg : DefaultImg } alt="cotizate-" />
                                 </WrapperBox>
                             </Col>
                         </Row>

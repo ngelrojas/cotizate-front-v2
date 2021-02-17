@@ -126,7 +126,6 @@ const FormConfig: React.FC<AllProps> = ({counter, handleNext}) => {
 
     return (
         <>
-        <Slide top>
         <div>
             <TextMain>
         Cotizate es una plataforma donde diferentes tipos de personas pueden expresarse libremente. Y sabemos
@@ -213,7 +212,6 @@ olvide incluir las tarifas administrativas en su cálculo. </BoxText>
             </Row>
             
         </FormConf>
-        </Slide>
         </>
 
     )
