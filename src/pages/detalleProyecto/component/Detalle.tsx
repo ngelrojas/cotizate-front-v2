@@ -208,7 +208,7 @@ const useStyles = makeStyles((theme) => ({
 const Detalle: React.FC<IDetalle> = (props) => {
     const classes = useStyles();
     const dispatch = useDispatch();
-    const { authenticated } = useSelector((stateSelector: any) => {  return stateSelector.user;  });
+    const { authenticated,id } = useSelector((stateSelector: any) => {  return stateSelector.user;  });
     const {
         proyectosDetalle, aportes, statusAportes, statusLike, statusSave
       } = useSelector((stateSelector: any) => {
@@ -223,7 +223,7 @@ const Detalle: React.FC<IDetalle> = (props) => {
         dispatch(Action.obtnerAportes(props.data.header.id));
         dispatch(Action.obtnerFases(props.data.header.id));
         if(authenticated){
-            dispatch(Action.obtenerLike(2));
+            dispatch(Action.obtenerLike(id));
         }
        
    },[]);
@@ -289,7 +289,7 @@ const responsive = {
   }
   useEffect(() => {        
     verificarDispositivo();
-      console.log(dispositivoMovil);
+      console.log('disposiito :',dispositivoMovil);
   }, [dispositivoMovil]);
 //------------------------------------------------------------
    const handleSubmitnex =()=>{    
@@ -620,11 +620,13 @@ const responsive = {
                 <div style={{ background:'#F9F0E8'}}>     
                   <Br/>        
                     <Title>RECOMENDADOS </Title>
-                    <Carousel  responsive={responsive} showDots={dispositivoMovil} arrows={true}  >
-                    {listCausasSociales.map((value : any, index : number) =>(
-                        <ProyectosRecomendados key={index} data={value} />
-                    ))}                                    
-                    </Carousel>               
+                    <div style={{ padding:'5px'}} >
+                        <Carousel  responsive={responsive} showDots={dispositivoMovil} arrows={dispositivoMovil}  >
+                            {listCausasSociales.map((value : any, index : number) =>(
+                                <ProyectosRecomendados key={index} data={value} />
+                            ))}                                    
+                        </Carousel>
+                    </div>               
                 </div>   
              : null }
 

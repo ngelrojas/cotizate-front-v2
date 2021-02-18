@@ -72,12 +72,12 @@ export function obtenerLike(idUsueio: number){
   return (dispatch : any) =>{          
     console.log('se ejecuto el like');  
      API.get(`like/${idUsueio}`).then(resp => {  
-       console.log('get like',resp);       
+       console.log('get like',resp.data.data.liked);       
         if(resp.status === 200){  
-          // dispatch({
-          //   type: DETAIL_LIKE,
-          //   statusLike:resp.data.data.liked
-          // })                
+          dispatch({
+            type: DETAIL_LIKE,
+            statusLike:resp.data.data.liked
+          })                
         }            
       })
       .catch(err => console.log(err))

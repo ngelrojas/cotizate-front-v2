@@ -34,7 +34,8 @@ import TabComentario from './TabComentario';
   
 import {
      DivSeparador,
-     Texto
+     Texto,
+     TextoDescription
     } from './styleDetallecomponent/styleDetalle';
 
     function TabPanel(props : any) {
@@ -112,7 +113,7 @@ const TabDetalle: React.FC<ITab> = (props) => {
                             </Tabs>
                         </AppBar>
                         <TabPanel value={value} index={0}>
-                        <Texto dangerouslySetInnerHTML={{__html:props.decripcion}} /> 
+                        <TextoDescription dangerouslySetInnerHTML={{__html:props.decripcion}} /> 
                         </TabPanel>
                         <TabPanel value={value} index={1}>
                                {fases.map((valuee: any, index:any)=>(

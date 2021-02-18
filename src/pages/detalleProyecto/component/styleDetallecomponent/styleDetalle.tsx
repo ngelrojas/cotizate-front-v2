@@ -461,6 +461,26 @@ export const Texto = styled.div`
         margin-top: 1%;
     }
 `
+export const TextoDescription = styled.div`   
+    color: #5D5A5A;
+    font-family: Roboto;
+    font-style: normal;
+    margin-top: 1%;
+    font-weight: normal;
+    display: block;
+    align-items: center;
+    font-size: 14px;
+    line-height: 19px;   
+    flex-wrap: nowrap;
+    @media ${device.tablet} {
+        line-height: 17px;
+        margin-top: 1%;
+    }
+    @media ${device.mobileM} {
+        line-height: 16px;
+        margin-top: 1%;
+    }
+`
 export const LinkAzul = styled(Link)`
     text-decoration: none;    
     color: #1383C5;
