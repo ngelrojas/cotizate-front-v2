@@ -3,9 +3,10 @@ import {connect} from 'react-redux'
 import {useForm} from 'react-hook-form'
 import {store} from 'react-notifications-component'
 import {Row, Col} from 'react-styled-flexboxgrid'
+import {Editor} from '@tinymce/tinymce-react'
 import Modal from '@material-ui/core/Modal'
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles'
-import DefaultImg from '../../form-basic/public/default.png'
+// import DefaultImg from '../../form-basic/public/default.png'
 import {PersonalProfile} from '../../../../../../userProfile'
 import {City} from '../../../../../../userCountryCities'
 import {RetrieveCompany} from '../../../../../../redux/actions/profileca.actions'
@@ -18,7 +19,6 @@ import {ContentProfile,
         SelectInput,
         TextArea,
         InfoText,
-        ProfileImg,
         SpanDescription,
         SecondSpan,
         SaveProfile,
@@ -168,20 +168,26 @@ const Personal: React.FC<Icampaing> = ({campaing}) => {
     let CityUser = new City(token)
     const [loadcity, setLoadcity] = React.useState<Icities[]>()
     const [isLoading, setIsLoading] = React.useState(true)
-    const [showImg, SetShowImg] = React.useState()
     const classes = useStyles()
     const [modalStyle] = React.useState(getModalStyle)
     const [open, setOpen] = React.useState(true)
-    const input = document.querySelector("cinit")
+    const [saveImg, setsaveImg] = React.useState('')
+    // const input = document.querySelector("cinit")
     const {register, handleSubmit, errors} = useForm<FormData>({
         mode: 'onChange'
     })
+    
+    const handleEditorImgChange = (content: any, editor: any) => {
+        setsaveImg(content)
+    }
 
     const onSubmit = handleSubmit(({cinit, cellphone, telephone, countries, cities,
                                    address, neightbordhood, number_address, photo,
                                    rs_facebook, rs_twitter, rs_linkedin, rs_another,
                                    description, country_id, city_id, current_position,
                                     headline}) => {
+
+        let current_img: string = saveImg && campaing.profile && campaing.profile.photo ? saveImg : campaing.profile.photo 
 
         let data_profile = {
             cinit: cinit,
@@ -192,7 +198,7 @@ const Personal: React.FC<Icampaing> = ({campaing}) => {
             address: address, 
             neightbordhood: neightbordhood,
             number_address: number_address,
-            photo: photo[0],
+            photo: current_img,
             rs_facebook: rs_facebook,
             rs_twitter: rs_twitter,
             rs_linkedin: rs_linkedin,
@@ -237,19 +243,6 @@ const Personal: React.FC<Icampaing> = ({campaing}) => {
         })
     }
 
-    const _onChange = (event: React.ChangeEvent<HTMLInputElement>)=> {
-        let file: any = event.currentTarget.files 
-        let reader = new FileReader()
-        let current_images: any
-
-        current_images = reader !== null ? reader.result : '{}'
-        reader.onloadend = () => {
-            SetShowImg(current_images)
-        }
-
-        reader.readAsDataURL(file[0])
-    }
-
     const LoadCities = () => {
         CityUser.listCities()
             .then(resp=>{
@@ -275,6 +268,7 @@ const Personal: React.FC<Icampaing> = ({campaing}) => {
         LoadCities()
         const input: any = document.querySelector('input[name="cinit"]')
         input.focus()
+        console.info(campaing)
     },[campaing])
 
     return(
@@ -574,16 +568,55 @@ const Personal: React.FC<Icampaing> = ({campaing}) => {
                                 <WrapperBox>
                                     <label>
                                         <SpanPhoto>Foto de Perfil: </SpanPhoto>
-                                        <input
-                                            type="file"
-                                            name="photo"
-                                            ref={register({required: false})}
-                                            accept="image/png, image/jpeg"
-                                            onChange={_onChange}
+                                        <Editor
+                                            initialValue={campaing.profile && campaing.profile.photo ? campaing.profile.photo : ''}
+                                            init={{
+                                                branding: false,
+                                                statusbar: false,
+                                                height: 400,
+                                                width: 400,
+                                                menubar: false,
+                                                plugins: [
+                                                    'advlist autolink lists link image charmap print preview anchor image',
+                                                    'imagetools searchreplace visualblocks code fullscreen',
+                                                    'insertdatetime media table paste code help wordcount'
+                                                ],
+                                                toolbar:
+                                                    ' image | imagetools',
+                                                automatic_uploads: true,
+                                                file_picker_types: 'image',
+                                                file_picker_callback: function(
+                                                    cb: any,
+                                                    value: any,
+                                                    meta: any
+                                                ) {
+                                                    let input = document.createElement('input')
+                                                    input.setAttribute('type', 'file')
+                                                    input.setAttribute('accept', 'image/*')
+                                                    input.onchange = function(files: any) {
+                                                        let file: any = (input as any).files[0]
+                                                        let reader: any = new FileReader()
+                                                        reader.onload = function() {
+                                                            let id = 'blobid' + new Date().getTime()
+                                                            let blobCache = (window as any).tinymce
+                                                                .activeEditor.editorUpload.blobCache
+                                                            let base64 = reader.result.split(',')[1]
+                                                            let blobInfo: any = blobCache.create(
+                                                                id,
+                                                                file,
+                                                                base64
+                                                            )
+                                                            blobCache.add(blobInfo)
+                                                            cb(blobInfo.blobUri(), {title: file.name})
+                                                        }
+                                                        reader.readAsDataURL(file)
+                                                    }
+                                                    input.click()
+                                                }
+                                            }}
+                                            onEditorChange={handleEditorImgChange}
                                         />
                                     </label>
-
-                                    <ProfileImg src={ campaing.profile && campaing.profile.photo ? campaing.profile.photo : DefaultImg } alt="cotizate-" />
                                 </WrapperBox>
                             </Col>
                         </Row>

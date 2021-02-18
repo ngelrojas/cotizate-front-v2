@@ -56,8 +56,11 @@ export const InfoText = styled.p`
     text-align: center;
 `
 
-export const ProfileImg = styled.img`
-    width: 30%;
+export const ProfileImg = styled.div`
+    > p > img {
+        width: auto;
+        height: auto;
+    }
 `
 
 export const SecondSpan = styled.p`
