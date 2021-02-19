@@ -555,7 +555,8 @@ const Personal: React.FC<Icampaing> = ({campaing}) => {
                     <Col xs={12}>
                         <Row center="xs">
                             <Col xs={6}>       
-                                <InfoText>Esta será la información pública que aparecerá en tu perfil del proyecto.</InfoText>
+                                <InfoText>Esta será la imagen que aparecerá en tu perfil personal de proyecto.</InfoText>
+                                <p>el tamano para esta imagen debe ser 271 ancho  X 279 alto, formatos permitidos PNG, JPEG, JPG </p>
                             </Col>
                         </Row>
                     </Col>

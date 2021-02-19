@@ -5,7 +5,6 @@ import {store} from 'react-notifications-component'
 import {Row, Col} from 'react-styled-flexboxgrid'
 import {CampaingHeader} from '../../../../../../userCampaings'
 import {Phases} from '../../../../../../userPhases'
-import Slide from 'react-reveal/Slide'
 import {
     FormR,
     MsgErrorPhase,
@@ -112,14 +111,13 @@ const FormPhase: React.FC= () => {
 
     return (
         <>
-        <Slide top>
-            <WrapperBoxRD>
-            <WrapperBox>
-                <BoxTitleContent> *Fases del proyecto</BoxTitleContent>
-                <BoxText> 
-                 ¿Cómo se utilizará su dinero? Cuanta más transparencia, mejor. Muestre qué pasos seguira y cuanto de dinero invertira en cada fase del proyecto.
-                </BoxText>
-            </WrapperBox>
+        <WrapperBoxRD>
+        <WrapperBox>
+            <BoxTitleContent> *Fases del proyecto</BoxTitleContent>
+            <BoxText> 
+                ¿Cómo se utilizará su dinero? Cuanta más transparencia, mejor. Muestre qué pasos seguira y cuanto de dinero invertira en cada fase del proyecto.
+            </BoxText>
+        </WrapperBox>
 
         <FormR onSubmit={onSubmit}>
         <Row>
@@ -215,8 +213,7 @@ const FormPhase: React.FC= () => {
 
         </FormR>
 
-        </WrapperBoxRD> 
-        </Slide>
+        </WrapperBoxRD>
         </>
 
     )

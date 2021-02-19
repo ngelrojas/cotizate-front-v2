@@ -8,7 +8,6 @@ import {City} from '../../../../../../userCountryCities'
 import {CampaingHeader} from '../../../../../../userCampaings'
 import {Row, Col} from 'react-styled-flexboxgrid'
 import {next, back} from '../../../../../../redux/actions/next_back.actions'
-import Slide from 'react-reveal/Slide'
 import {
     WrapBtnSave,
     WrapperSaveConfig,

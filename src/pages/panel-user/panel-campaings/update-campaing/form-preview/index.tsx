@@ -1,12 +1,12 @@
 import React from 'react'
 import {useRouteMatch} from 'react-router-dom'
+import {connect} from 'react-redux'
 import {Row, Col} from 'react-styled-flexboxgrid'
 import {Table, Th, Td, Done, Err, Preview} from './styles'
 import {CampaingHeader, CampaingBody} from '../../../../../userCampaings'
 import {Phases} from '../../../../../userPhases'
 import {Reward} from '../../../../../userReward'
 import {PersonalProfile} from '../../../../../userProfile'
-import {URL_IMG} from '../../../../../constants'
 
 interface IcampTypeBody {
     created_at: string,
@@ -27,7 +27,22 @@ interface IcampTypeBody {
     video_main: string
 }
 
-const FormPreview: React.FC = () => {
+interface Iheader {
+    id: number
+}
+
+type FormCamp = {
+    id: number
+    header: Iheader
+}
+
+interface IFormCamp {
+    campaing: FormCamp
+}
+
+type AllProps = IFormCamp
+
+const FormPreview: React.FC<AllProps> = ({campaing}) => {
     let match = useRouteMatch('/panel-de-usuario/actualizar-proyecto/:campania')
     let matchUrl: any = match
     let campaingId = matchUrl.params.campania
@@ -50,16 +65,15 @@ const FormPreview: React.FC = () => {
     const getLast = () => {
         CamHeader.getLastCampaingHeader()
             .then(resp => {
-                //console.info(resp.data.data.id)
                 setDatach(resp.data.data.id)
-                //camp_header_id.current = resp.data.data.id
             }).catch(err =>{
                 console.error(err)
             })
     }
 
     const ListPhases = () => {
-        Phase.listPhases(campaingId)
+        let camp_id: number = campaing.header ? campaing.header.id : 0
+        Phase.listPhases(camp_id)
             .then(resp => {
                 setQtyPhases(resp.data.data.length)
             })
@@ -72,7 +86,8 @@ const FormPreview: React.FC = () => {
     }
 
     const ListRewards = ()=> {
-        reward.retrieveReward(campaingId)
+        let camp_id: number = campaing.header ? campaing.header.id : 0
+        reward.retrieveReward(camp_id)
             .then(resp => {
                 setQtyRewards(resp.data.data.length)
             })
@@ -102,7 +117,6 @@ const FormPreview: React.FC = () => {
     const retrievePP = () => {
         personalProfile.currentPersonalProfile(IdProfile)
             .then(resp => {
-                //console.info(resp.data.data)
                 setDataProfile(resp.data.data.id)
             })
             .catch(err => {
@@ -188,4 +202,8 @@ const FormPreview: React.FC = () => {
     )
 }
 
-export default FormPreview
+const mapStateToProps = (state: any) => ({
+    campaing: state.campaing
+})
+
+export default connect(mapStateToProps, '')(FormPreview)

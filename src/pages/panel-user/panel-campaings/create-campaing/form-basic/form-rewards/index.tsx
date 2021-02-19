@@ -6,7 +6,6 @@ import {store} from 'react-notifications-component'
 import {CampaingHeader} from '../../../../../../userCampaings'
 import {Cities} from '../../../../../../userCities'
 import {Reward} from '../../../../../../userReward'
-import Slide from 'react-reveal/Slide'
 import {
     InputReward,
     Form,
@@ -162,7 +161,6 @@ const FormRewards: React.FC= () => {
 
     return (
         <>
-        <Slide top>
         <H4>3- RECOMPENSAS </H4>
         <TextConf>Antes de ofrecer una recompensa, es importante tener mapeados todos los procesos de producción y entrega.</TextConf>
         
@@ -330,8 +328,7 @@ const FormRewards: React.FC= () => {
                     </WrapBtnSave>
                 </WrapperSave>
             </Row>
-        </Form>       
-        </Slide>        
+        </Form>     
         </>
 
     )

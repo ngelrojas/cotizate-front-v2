@@ -4,10 +4,8 @@ import {useForm} from 'react-hook-form'
 import {store} from 'react-notifications-component'
 import {Editor} from '@tinymce/tinymce-react'
 import {CampaingHeader, Campaings} from '../../../../../../userCampaings'
-import DefaultImg from '../public/default.png'
 import {Row, Col} from 'react-styled-flexboxgrid'
 import {next, back} from '../../../../../../redux/actions/next_back.actions'
-import {URL_IMG} from '../../../../../../constants'
 
 import {
     Input,
@@ -24,7 +22,6 @@ import {
     BoxTextPhase,
     BoxTextPD,
     BoxTextPR,
-    Img,
     ImgText,
     WrapperBoxRD,
     BoxTitleContent,
@@ -160,7 +157,7 @@ const FormDescription: React.FC<AllProps> = ({counter, handleNext, handleBack, c
     const [msgExcerpt, setMsgExcerpt] = React.useState('')
     const [msgdescription, setMsgdescription] = React.useState('')
     const [datach, setDatach] = React.useState([])
-    const [showImg, SetShowImg] = React.useState([])
+    const [saveImg, setsaveImg] = React.useState([])
     const {register, handleSubmit, errors} = useForm<FormData>({
         mode: 'onChange'
     })
@@ -182,19 +179,24 @@ const FormDescription: React.FC<AllProps> = ({counter, handleNext, handleBack, c
         setExcerpt(content)
     }
 
+    const handleEditorImgChange = (content: any, editor: any) => {
+        setsaveImg(content)
+    }
+
     const onSubmit = handleSubmit(({title, video_main, imagen_main, public_at, short_url, slogan_campaing}) => {
         let headerID: number = campaing.header ? campaing.header.id: 0 
         let profileCA: number = campaing.profile_ca ? campaing.profile_ca:0
         let profilId: number = campaing.profile ? campaing.profile.id:0
-        let imagenMain: any = showImg ? showImg : ''
         let update_description = description ? description : campaing.description
         let update_excerpt = excerpt ? excerpt : campaing.excerpt
+
+        let current_img: string = saveImg && campaing.imagen_main ? saveImg : campaing.imagen_main
 
         if (validate()) {
             let send_data = {
                 title: title,
                 video_main: video_main,
-                imagen_main: imagenMain,
+                imagen_main: current_img,
                 excerpt: update_excerpt,
                 description: update_description, 
                 header: headerID,
@@ -229,12 +231,6 @@ const FormDescription: React.FC<AllProps> = ({counter, handleNext, handleBack, c
             return false
         }
 
-        //if (excerpt.length >= 285) {
-        //    setMsgExcerpt('asegurate de no tener letras resaltadas o con negritas.')
-        //    Notifications('El Resumen no debe superar las 44 palabras','danger')
-        //    return false
-        //}
-
         if (campaing.description.length === 0 && description.length === 0 ) {
             setMsgdescription('este campo es requerido')
             Notifications('Es obligatorio detallar tu proyecto','danger')
@@ -257,19 +253,6 @@ const FormDescription: React.FC<AllProps> = ({counter, handleNext, handleBack, c
                 onScreen: true
             }
         })
-    }
-
-    const _onChange = (event: React.ChangeEvent<HTMLInputElement>)=> {
-        let file: any = event.currentTarget.files 
-        let reader = new FileReader()
-        let current_images: any
-
-        current_images = reader !== null ? reader.result : '{}'
-        reader.onloadend = () => {
-            SetShowImg(current_images)
-        }
-
-        reader.readAsDataURL(file[0])
     }
 
     React.useEffect(()=>{
@@ -343,22 +326,69 @@ const FormDescription: React.FC<AllProps> = ({counter, handleNext, handleBack, c
         <WrapperBox>
                 <BoxTitle>* Imagen</BoxTitle>
                 <Row>
-                    <Col xs={6}>
+                    <Col xs={12}>
                         <ImgText>
-                            Esta imagen se utilizará como miniatura de su proyecto (PNG, JPG tamaño 305 x 161 pixeles tamanho minimo 220 x 220 px.
+                            Esta imagen se utilizará como miniatura de su proyecto (PNG, JPG tamaño 305 ancho x 161 alto pixeles).
                         </ImgText>
-                        <Input
-                            type="file"
-                            name="imagen_main"
-                            ref={register({required: false})}
-                            onChange={_onChange}
-                        />
+                        <Row>
+                            <Col xs={12}>
+                                <Row center="xs">
+                                <Col xs={6} >
+                                <Editor 
+                                    initialValue={campaing ? campaing.imagen_main : ''}
+                                    init={{
+                                        branding: false,
+                                        statusbar: false,
+                                        height: 300,
+                                        width: 350,
+                                        menubar: false,
+                                        plugins: [
+                                            'advlist autolink lists link image charmap print preview anchor image',
+                                            'imagetools searchreplace visualblocks code fullscreen',
+                                            'insertdatetime media table paste code help wordcount'
+                                        ],
+                                        toolbar:
+                                            ' image | imagetools',
+                                        automatic_uploads: true,
+                                        file_picker_types: 'image',
+                                        file_picker_callback: function(
+                                            cb: any,
+                                            value: any,
+                                            meta: any
+                                        ) {
+                                            let input = document.createElement('input')
+                                            input.setAttribute('type', 'file')
+                                            input.setAttribute('accept', 'image/*')
+                                            input.onchange = function(files: any) {
+                                                let file: any = (input as any).files[0]
+                                                let reader: any = new FileReader()
+                                                reader.onload = function() {
+                                                    let id = 'blobid' + new Date().getTime()
+                                                    let blobCache = (window as any).tinymce
+                                                        .activeEditor.editorUpload.blobCache
+                                                    let base64 = reader.result.split(',')[1]
+                                                    let blobInfo: any = blobCache.create(
+                                                        id,
+                                                        file,
+                                                        base64
+                                                    )
+                                                    blobCache.add(blobInfo)
+                                                    cb(blobInfo.blobUri(), {title: file.name})
+                                                }
+                                                reader.readAsDataURL(file)
+                                            }
+                                            input.click()
+                                        }
+                                    }}
+                                    onEditorChange={handleEditorImgChange}
+                                />
+                                </Col>
+                                </Row>
+                            </Col>
+                        </Row>
+                            
                     </Col>
-                    <Col xs={5}>
-
-                        <Img src={ showImg ? URL_IMG + campaing.imagen_main :  DefaultImg} alt="cotizate" />
-                        
-                    </Col>
+                    
                 <MsgError>
                     {errors.imagen_main && 'este campo es requerido'}
                 </MsgError>

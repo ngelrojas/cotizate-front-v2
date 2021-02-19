@@ -26,6 +26,10 @@ import {
     TextConf
 } from '../../styles'
 
+interface Iheader {
+    id: number
+}
+
 type FormData = {
     id: number
     title: string
@@ -34,13 +38,22 @@ type FormData = {
     header: number
 }
 
+type FormCamp = {
+    id: number
+    header: Iheader
+}
+
+interface IFormCamp {
+    campaing: FormCamp
+}
+
 type TypePhase = {
     phases: FormData 
 }
 
-type AllProps = TypePhase
+type AllProps = TypePhase & IFormCamp
 
-const FormPhase: React.FC<AllProps> = ({phases}) => {
+const FormPhase: React.FC<AllProps> = ({phases, campaing}) => {
     let match = useRouteMatch('/panel-de-usuario/actualizar-proyecto/:campania')
     let matchUrl: any = match
     let campaingId = matchUrl.params.campania
@@ -73,7 +86,7 @@ const FormPhase: React.FC<AllProps> = ({phases}) => {
                 title: title,
                 amount: amount,
                 description: resumes,
-                header: campaingId 
+                header: campaing.header.id
             }
 
             let headerId = phases.header
@@ -98,7 +111,7 @@ const FormPhase: React.FC<AllProps> = ({phases}) => {
                 title: title,
                 amount: amount,
                 description: resumes,
-                header: campaingId 
+                header: campaing.header.id
             }
 
             Phase.createPhase(data_phase)
@@ -151,7 +164,7 @@ const FormPhase: React.FC<AllProps> = ({phases}) => {
             behavior: 'smooth'
         })
         
-    },[phases])
+    },[phases, campaing])
 
     return (
         <>
@@ -166,7 +179,7 @@ const FormPhase: React.FC<AllProps> = ({phases}) => {
         <Row>
             <Col xs={5}>
 
-                    <TablePhases />
+                    <TablePhases {...campaing.header} />
             </Col>
             <Col xs={7}>
         <WrapperBoxRD>
@@ -279,7 +292,8 @@ const FormPhase: React.FC<AllProps> = ({phases}) => {
 }
 
 const mapStateToProps = (state: any) => ({
-    phases: state.phase
+    phases: state.phase,
+    campaing: state.campaing
 })
 
 export default connect(mapStateToProps, '')(FormPhase)
