@@ -53,6 +53,7 @@ export const Img = styled.img`
 `
 
 export const Title = styled.h1`
+    font-family: Roboto;
     color: #f9f9f9;
     font-weight: 410;
     position: absolute;
@@ -63,11 +64,36 @@ export const Title = styled.h1`
     text-transform: uppercase;
     font-size: 15px;
     width:100%;
+    @media ${device.tablet} {
+        
+    }
+    @media ${device.mobileL} {
+        
+    }
+
+`
+export const TitleCity = styled.h1`
+    font-family: Roboto;
+    color: #f9f9f9;
+    font-weight: 410;
+    position: absolute;
+    bottom: 4px;    
+    text-align: justify;
+    padding: 1%;
+    text-transform: uppercase;
+    font-size: 15px;
+    width:100%;
+    @media ${device.tablet} {
+        
+    }
+    @media ${device.mobileL} {
+        
+    }
 
 `
 
 export const Excerpt = styled.p`
-    color: #3b3b3b;
+    color: #1383C5;
     margin: 2%;
     text-align: justify;
     width: 97%;

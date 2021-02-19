@@ -323,6 +323,10 @@ const responsive = {
   useEffect(()=>{    
   },[statusLike, statusSave, authenticated])
 
+  useEffect(()=>{    
+      
+  },[])
+
     return (
         <>
         <Col xs={12} sm={12} md={12} lg={12} >     

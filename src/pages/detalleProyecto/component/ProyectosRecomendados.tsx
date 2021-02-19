@@ -13,6 +13,7 @@ import {
     Picture,
     Img,
     Title,
+    TitleCity,
     Excerpt,
     Description,
     Author,
@@ -77,8 +78,7 @@ interface Iproyectorecomendad {
 
 const ProjectosRecomendados: React.FC<Iproyectorecomendad> = (props)=> {
 
-    const [content, setContent] = useState('')
-    // console.log(props.data);
+    const [content, setContent] = useState('')    
     useEffect(() => {
         setContent('titulo more longer the now more here please')
     }, [])
@@ -91,10 +91,10 @@ const ProjectosRecomendados: React.FC<Iproyectorecomendad> = (props)=> {
             <Article>
                 <Picture>
                     <Go   to={{
-                            pathname: `/detail-proyect/${props.data.slug}`,
+                            pathname: `/detail-proyect/${'slug'}`,
                             state: {
-                                idProyecto: `${props.data.id}`,
-                                slug: `${props.data.slug}`
+                                idProyecto: `${1}`,
+                                slug: `${'slug'}`
                             }
                             }}>
                         <Img
@@ -103,136 +103,57 @@ const ProjectosRecomendados: React.FC<Iproyectorecomendad> = (props)=> {
                         />
                     </Go>
                 </Picture>
-                <Title>
-                    <Go to={{
-                        pathname: '/category',
-                        state: {
-                            idCategoria: `${props.data.header.category.id}`,
-                            nombre: `${props.data.header.category.name}`,
-                            slug: `${props.data.header.category.slug}`,
-                            imgbanner:`${props.data.header.category.img_banner}`
-                        }
-                    }}> 
-                     {props.data.header.category.name}
-                   </Go>
-                </Title>
-            </Article>
-            <ArticleBody>
                 <Row>
-                <Col xs={6} sm={6} md={12} lg={6}>
-                        <Row start="lg">
-                            <Col sm={12} md={12} lg={12}>
-                                <Place>
-                                   <MdLocationOn />
-                                    <span>
-                                        {/* <Go to="/">                                             */}
-                                          {' '}  {props.data.header.city.name} - {props.data.header.city.countries.name}
-                                        {/* </Go> */}
-                                    </span>                                    
-                                </Place>
-                            </Col>
-                        </Row>
+                    <Col xs={6} sm={6} md={6} lg={6}>
+                        <Title>
+                            <Go to={{
+                                pathname: '/category',
+                                state: {
+                                    idCategoria: `${2}`,
+                                    nombre: `${'tecnologi'}`,
+                                    slug: `${2}`,
+                                    imgbanner:`${33}`
+                                }
+                            }}> 
+                            {'ARTE - PINTURA'}
+                          </Go>
+                        </Title>
+                   </Col>
+                   <Col xs={6} sm={6} md={6} lg={6}>
+                        <TitleCity>                           
+                                    <Place>
+                                    <MdLocationOn />
+                                        <span style={{color:'white'}}>                                                                               
+                                            {' '}  {'ciudad'} - {'pais'}                                      
+                                        </span>                                    
+                                    </Place>                                
+                        </TitleCity>
                     </Col>
-
-                    <Col xs={6} sm={6} md={12} lg={6}>
-                        <Row end="lg">
-                            <Col sm={12} md={12} lg={12}>
-                                {/* <Author>
-                                    <p>Autor:</p>
-                                    <p>Aljandro Matos</p>
-                                </Author> */}
-                               
-                            </Col>
-                        </Row>
-                    </Col>
- 
                 </Row>
+            </Article>
+            <ArticleBody>          
                 <Row>
                     <Col xs={12} sm={12} md={12} lg={12}>
                         <Excerpt>
                         <Go   to={{
-                            pathname:`/detail-proyect/${props.data.slug}`,
+                            pathname:`/detail-proyect/${'slug'}`,
                             state: {
-                                idProyecto: `${props.data.id}`,
-                                slug: `${props.data.slug}`
+                                idProyecto: `${1}`,
+                                slug: `${2}`
                             }
                             }}>
-                                {props.data.title}                                
+                                {'titulo1'}                                
                             </Go>
                         </Excerpt>
                     </Col>
                 </Row>
                 <Row>
                     <Col xs={12} sm={12} md={12} lg={12}>
-                        <Description>
-                            {/* <Go to="/"> */}
-                                {props.data.excerpt}
-                            {/* </Go> */}
+                        <Description>                          
+                                {'descripcion'}                          
                         </Description>
                     </Col>
-                </Row>
-                <Row>
-                    <Col xs={12} sm={12} md={12} lg={12}>
-                        <Row start="lg">
-                            <Col xs={12} sm={12} md={12} lg={12}>
-                                <Porcentaje>
-                                <LineProgress bgcolor={'#7CC142'} completed={props.data.header.percent_reached} />
-                                </Porcentaje>                            
-                            </Col>
-                        </Row>
-                    </Col>
-                </Row>
-           
-
-                <Row>   
-                   <Col xs={6} sm={6} md={6} lg={6}>                   
-                        <Row start="lg">
-                            <Col xs={12} sm={12} md={12} lg={12}>
-                               <Alcanzado>
-                                    <p> {props.data.header.percent_reached}{'% '} ALCANZADO</p>                                    
-                                </Alcanzado>  
-                            </Col>
-                        </Row>
-                    </Col>
-                    <Col xs={6} sm={6} md={6} lg={6}>                    
-                        <Row end="lg">
-                            <Col xs={12} sm={12} md={12} lg={12}>                             
-                               <NumberMonto> {props.data.header.amount_reached } Bs</NumberMonto>
-                            </Col>
-                        </Row>
-                    </Col>
-                </Row>
-               
-               <Row>
-                   <Col xs={6} sm={6} md={6} lg={6}>
-                        <Row start="lg">
-                            <Col xs={12} sm={12} md={12} lg={12}>
-                               <CodigoFaltante>
-                                    <p>Faltan: {props.data.header.qty_day_left} Dias</p>                                    
-                                </CodigoFaltante>  
-                            </Col>
-                        </Row>
-                    </Col>
-
-                    <Col xs={6} sm={6} md={6} lg={6}>
-                        <Row end="lg">
-                            <Col xs={12} sm={12} md={12} lg={12}>                             
-                               <PercentNumber>Cod: {props.data.header.code_campaing }</PercentNumber>
-                            </Col>
-                        </Row>
-                    </Col>
-                </Row>
-                <Row>
-                    <Col sm={12} md={12} lg={12}>
-                        <Row start="lg">
-                            <Col sm={12} md={12} lg={12}>
-                                <Author>
-                                    <p>Autor:  {props.data.header.user.first_name} {' '} {props.data.header.user.last_name}</p>                                   
-                                </Author>
-                            </Col>
-                        </Row>
-                    </Col>
-                </Row>
+                </Row>                                                                               
             </ArticleBody>
         </SectionDetails>
         </Row>
