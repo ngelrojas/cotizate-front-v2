@@ -214,7 +214,8 @@ const Detalle: React.FC<IDetalle> = (props) => {
       } = useSelector((stateSelector: any) => {
         return stateSelector.detalleProyecto;
       });
-     
+    let idProyectoHeader:number;
+        idProyectoHeader= props.data.header.id; 
 
     const copiarLink =(data: string)=>{       
         copiarTextoToPapelera(data);
@@ -223,7 +224,8 @@ const Detalle: React.FC<IDetalle> = (props) => {
         dispatch(Action.obtnerAportes(props.data.header.id));
         dispatch(Action.obtnerFases(props.data.header.id));
         if(authenticated){
-            dispatch(Action.obtenerLike(id));
+            dispatch(Action.obtenerLike(2));
+            dispatch(Action.obtenerSave(1)); //headerid
         }
        
    },[]);
@@ -300,20 +302,20 @@ const responsive = {
        }       
    }
 
-
+   
    const onchangeLike = ()=> {
         if(statusLike){
-            dispatch(Action.onchangeLike(false));           
+            dispatch(Action.onchangeLike(false, 2));           
         }else{
-            dispatch(Action.onchangeLike(true));          
+            dispatch(Action.onchangeLike(true, 2));          
         }
    }
 
    const onchangeSave = ()=> {
        if(statusSave){
-           dispatch(Action.onchangeSave(false));
+           dispatch(Action.onchangeSave(false, 1)); //es idheader
        }else{
-           dispatch(Action.onchangeSave(true));
+           dispatch(Action.onchangeSave(true, 1)); //es idheades
        }
     
   }

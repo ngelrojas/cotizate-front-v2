@@ -83,23 +83,59 @@ export function obtenerLike(idUsueio: number){
       .catch(err => console.log(err))
       }
 }
-export function onchangeLike(like: boolean){       
+export function onchangeLike(like: boolean, idUsueio:number ){       
   return (dispatch : any) =>{     
-    
-    dispatch({
-      type: DETAIL_LIKE,
-      statusLike:like,
-    })  
 
-      }
+    API.put(`like/${idUsueio}`,{liked: like}).then(resp => {  
+      console.log('get like',resp.data);       
+       if(resp.status === 200){  
+         dispatch({
+           type: DETAIL_LIKE,
+           statusLike:like
+         })                
+       }            
+     })
+     .catch(err => console.log(err))
+     }
+    
+    // dispatch({
+    //   type: DETAIL_LIKE,
+    //   statusLike:like,
+    // })  
+     
 }
-export function onchangeSave(save: boolean){       
+export function obtenerSave(idheader: number){       
+  return (dispatch : any) =>{     
+    console.log('idsave header',idheader);
+    API.get(`book-mark/${idheader}`).then(resp => {  
+      console.log('get save',resp.data);       
+       if(resp.status === 200){  
+          dispatch({
+            type: DETAIL_SAVE,
+            statusSave:resp.data.data.marked,
+          })             
+       }            
+     })
+     .catch(err => console.log('error getsave:',err))
+                
+  }
+}
+
+export function onchangeSave(save: boolean,idHeader: number){       
   return (dispatch : any) =>{     
     
-        dispatch({
+    API.put(`book-mark/${idHeader}`,{ marked: save}).then(resp => {  
+      console.log('get like',resp.data);       
+       if(resp.status === 200){  
+         dispatch({
           type: DETAIL_SAVE,
           statusSave:save,
-        })  
+        })              
+       }            
+     })
+     .catch(err => console.log('error onsave: ',err))
+     
+  
           
   }
 }
