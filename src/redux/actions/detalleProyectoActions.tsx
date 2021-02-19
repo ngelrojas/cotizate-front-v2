@@ -1,5 +1,5 @@
 import {
-  DETALLE_PROYECTO, DETALLE_APORTES, DETALLE_FASES,DETAIL_LIKE, DETAIL_SAVE
+  DETALLE_PROYECTO, DETALLE_APORTES, DETALLE_FASES,DETAIL_LIKE, DETAIL_SAVE,DETAIL_RECOMENDACIONES
 } from '../types/detalleProyecto.types'
 import API from '../../api'
 
@@ -138,5 +138,23 @@ export function onchangeSave(save: boolean,idHeader: number){
   
           
   }
+}
+
+export function obtenerProyectosRecomendados(categoria: any){       
+  return (dispatch : any) =>{          
+      
+     API.get(`category/${categoria}`).then(resp => {  
+       console.log('recomendaciones : ',resp.data.data);       
+        if(resp.status === 200){  
+          if(resp.data.data.length > 0){  
+              dispatch({
+                  type: DETAIL_RECOMENDACIONES,
+                  proyectosRec:resp.data.data,
+              })    
+            }                    
+        }            
+      })
+      .catch(err => console.log(err))
+      }
 }
 

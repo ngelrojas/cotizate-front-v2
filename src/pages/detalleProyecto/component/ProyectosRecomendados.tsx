@@ -29,50 +29,90 @@ import {
 } from './styleDetallecomponent/index'
 
 interface Iproyectorecomendad {
-    data: {
-        title:string,
+    data:{
         id: number,
-        imagen_main:string,
+        title: string,
+        video_main: string,
+        imagen_main: string,
         slug: string,
         excerpt: string,
-        currency: number,
-        slogan_campaing:string,
-        header:{
+        description: string,
+        created_at: any,
+        updated_at: any,
+        public_at: any,
+        ended_at: any,
+        status: number,
+        header: {
             id: number,
-            qty_day_left:number,
+            user: number,
+            category: number,
+            city: number,
+            qty_day: number,
             amount: string,
-            amount_reached:string,
-            percent_reached:string,
-            role:number,
-            code_campaing: string,
-            user:{
+            amount_reached: string,
+            percent_reached: string,
+            qty_day_left: number,
+            role: number,
+            code_campaing: string
+        },
+        profile: {
+            id: number,
+            user: {
+                id: number,
                 first_name: string,
-                last_name: string
+                last_name: string,
+                email: string
             },
-            category:{
-                id:number,
+            countries: {
+                id: number,
                 name: string,
                 slug: string,
-                description:string,
-                img_banner:string
+                short_name: string,
+                code_name: string,
+                description: string
             },
-            city:{
+            cities: {
                 id: number,
                 name: string,
                 slug: string,
                 short_name: string,
                 code_name: string,
                 description: string,
-                countries:{
+                countries: {
                     id: number,
                     name: string,
                     slug: string,
                     short_name: string,
                     code_name: string,
-                    description: string                    
+                    description: string
                 }
-            }
-        }
+            },
+            cinit: string,
+            address: string,
+            number_address: string,
+            neightbordhood: string,
+            cellphone: string,
+            telephone: string,
+            description: string,
+            complete: boolean,
+            rs_facebook: any,
+            rs_twitter: any,
+            rs_linkedin: any,
+            rs_another: any,
+            current_position: string,
+            headline: string,
+            birthdate: string,
+            photo: string,
+            header: number
+        },
+        profile_ca: any,
+        currency: {
+            id: number,
+            name: string,
+            symbol: string,
+        },
+        short_url: string,
+        slogan_campaing: string,
     }
 }
 
@@ -142,7 +182,7 @@ const ProjectosRecomendados: React.FC<Iproyectorecomendad> = (props)=> {
                                 slug: `${2}`
                             }
                             }}>
-                                {'titulo1'}                                
+                                {props.data.title}                                
                             </Go>
                         </Excerpt>
                     </Col>
