@@ -98,7 +98,7 @@ const Projects: React.FC<Iproyect> = (props)=> {
                             }
                             }}>
                         <Img
-                            src={'https://s03.s3c.es/imag/_v0/770x420/6/8/7/700x420_Fotos-del-sol-durante-un-ano.jpg'}
+                            src={'165.227.203.226:9000/mediafiles/'+props.data.imagen_main}
                             alt="cotizate"
                         />
                     </Go>

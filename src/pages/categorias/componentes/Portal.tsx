@@ -14,7 +14,7 @@ const Portal: React.FC<Iportal> = (props) => {
                     <DivPortal key={1} >
                         <ImgPortal
                             // src={PortadaCerebroImg2}
-                            src={props.imagenPotal? 'http://8.vps.confiared.com:16593/'+props.imagenPotal: PortadaCerebroImg2}
+                            src={props.imagenPotal? '165.227.203.226:9000/mediafiles/'+props.imagenPotal: PortadaCerebroImg2}
                             alt="cotizate"
                         />                        
                     </DivPortal>

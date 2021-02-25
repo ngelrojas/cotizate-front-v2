@@ -225,7 +225,7 @@ const Detalle: React.FC<IDetalle> = (props) => {
         dispatch(Action.obtnerFases(props.data.header.id));
         dispatch(Action.obtenerProyectosRecomendados('tecnologia')); //quemado categoria/ slug
         if(authenticated){
-            dispatch(Action.obtenerLike(2));
+            dispatch(Action.obtenerLike(props.data.header.id));
             dispatch(Action.obtenerSave(1)); //headerid
         }
        
@@ -306,9 +306,9 @@ const responsive = {
    
    const onchangeLike = ()=> {
         if(statusLike){
-            dispatch(Action.onchangeLike(false, 2));           
+            dispatch(Action.onchangeLike(false, props.data.header.id));           
         }else{
-            dispatch(Action.onchangeLike(true, 2));          
+            dispatch(Action.onchangeLike(true, props.data.header.id));          
         }
    }
 

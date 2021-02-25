@@ -196,7 +196,7 @@ const Categorias: React.FC<Icateg>  = (props) => {
                <Row center="xs">
                 {listaFiltada.map((value : any, index : number) =>(
                   <Col  key={index} xs={12} sm={6} md={4} lg={4}> 
-                        <Projects key={index} data={value} />
+                        <Category key={index} data={value} />
                   </Col>
                 ))}     
                </Row>
