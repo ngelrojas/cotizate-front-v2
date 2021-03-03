@@ -226,7 +226,7 @@ const Detalle: React.FC<IDetalle> = (props) => {
         dispatch(Action.obtenerProyectosRecomendados('tecnologia')); //quemado categoria/ slug
         if(authenticated){
             dispatch(Action.obtenerLike(props.data.header.id));
-            dispatch(Action.obtenerSave(1)); //headerid
+            dispatch(Action.obtenerSave(props.data.header.id)); //headerid
         }
        
    },[]);
@@ -314,9 +314,9 @@ const responsive = {
 
    const onchangeSave = ()=> {
        if(statusSave){
-           dispatch(Action.onchangeSave(false, 1)); //es idheader
+           dispatch(Action.onchangeSave(false, props.data.header.id)); //es idheader
        }else{
-           dispatch(Action.onchangeSave(true, 1)); //es idheades
+           dispatch(Action.onchangeSave(true, props.data.header.id)); //es idheades
        }
     
   }

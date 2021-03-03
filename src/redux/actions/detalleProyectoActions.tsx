@@ -78,6 +78,11 @@ export function obtenerLike(idUsueio: number){
             type: DETAIL_LIKE,
             statusLike:resp.data.data.liked
           })                
+        }else{
+          dispatch({
+            type: DETAIL_LIKE,
+            statusLike:false //en caso q no exista el like
+          })    
         }            
       })
       .catch(err => console.log(err))
@@ -114,7 +119,13 @@ export function obtenerSave(idheader: number){
             type: DETAIL_SAVE,
             statusSave:resp.data.data.marked,
           })             
-       }            
+       } else
+       {
+          dispatch({
+            type: DETAIL_SAVE,
+            statusSave:false
+          }) 
+       }           
      })
      .catch(err => console.log('error getsave:',err))
                 
