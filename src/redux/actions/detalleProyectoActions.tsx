@@ -51,7 +51,7 @@ const fasePrueba=[
 ];
 export function obtnerFases(idHeader: any){       
   return (dispatch : any) =>{          
-      
+    console.log('fasessssss : ', idHeader); 
      API.get(`phases/${idHeader}`).then(resp => {  
        console.log(resp.data.data);       
         if(resp.status === 200){  
@@ -59,8 +59,7 @@ export function obtnerFases(idHeader: any){
               dispatch({
                   type: DETALLE_FASES,
                   status:true,
-                  // fases:resp.data.data
-                  fases:fasePrueba
+                  fases:resp.data.data
               })    
             }                    
         }            
@@ -101,12 +100,7 @@ export function onchangeLike(like: boolean, idUsueio:number ){
        }            
      })
      .catch(err => console.log(err))
-     }
-    
-    // dispatch({
-    //   type: DETAIL_LIKE,
-    //   statusLike:like,
-    // })  
+     }  
      
 }
 export function obtenerSave(idheader: number){       
@@ -134,9 +128,9 @@ export function obtenerSave(idheader: number){
 
 export function onchangeSave(save: boolean,idHeader: number){       
   return (dispatch : any) =>{     
-    
+    console.log('update save', save, idHeader);
     API.put(`book-mark/${idHeader}`,{ marked: save}).then(resp => {  
-      console.log('get like',resp.data);       
+      console.log('update save',resp.data);       
        if(resp.status === 200){  
          dispatch({
           type: DETAIL_SAVE,

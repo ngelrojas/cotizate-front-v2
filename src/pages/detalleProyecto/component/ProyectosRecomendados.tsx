@@ -150,8 +150,8 @@ const ProjectosRecomendados: React.FC<Iproyectorecomendad> = (props)=> {
                                 pathname: '/category',
                                 state: {
                                     idCategoria: `${2}`,
-                                    nombre: `${'tecnologi'}`,
-                                    slug: `${2}`,
+                                    nombre: `${props.data.slug}`,
+                                    slug: `${'slug'}`,
                                     imgbanner:`${33}`
                                 }
                             }}> 
@@ -163,8 +163,8 @@ const ProjectosRecomendados: React.FC<Iproyectorecomendad> = (props)=> {
                         <TitleCity>                           
                                     <Place>
                                     <MdLocationOn />
-                                        <span style={{color:'white'}}>                                                                               
-                                            {' '}  {'ciudad'} - {'pais'}                                      
+                                        <span style={{color:'white', }}>                                                                               
+                                            {' '}  {props.data.profile.cities.name} - {props.data.profile.countries.name}                                      
                                         </span>                                    
                                     </Place>                                
                         </TitleCity>
@@ -176,7 +176,7 @@ const ProjectosRecomendados: React.FC<Iproyectorecomendad> = (props)=> {
                     <Col xs={12} sm={12} md={12} lg={12}>
                         <Excerpt>
                         <Go   to={{
-                            pathname:`/detail-proyect/${'slug'}`,
+                            pathname:`/detail-proyect/${props.data.slug}`,
                             state: {
                                 idProyecto: `${1}`,
                                 slug: `${2}`
@@ -190,7 +190,7 @@ const ProjectosRecomendados: React.FC<Iproyectorecomendad> = (props)=> {
                 <Row>
                     <Col xs={12} sm={12} md={12} lg={12}>
                         <Description>                          
-                                {'descripcion'}                          
+                                {props.data.excerpt}                          
                         </Description>
                     </Col>
                 </Row>                                                                               

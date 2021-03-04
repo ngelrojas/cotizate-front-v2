@@ -62,7 +62,7 @@ export const Title = styled.h1`
     text-align: justify;
     padding: 1%;
     text-transform: uppercase;
-    font-size: 15px;
+    font-size: 12px;
     width:100%;
     @media ${device.tablet} {
         
@@ -217,7 +217,7 @@ export const Place = styled.div`
     font-weight: 410;
     font-family: Roboto;
     float: left;
-    font-size: 12px;
+    font-size: 10px;
     text-align: left;
     line-height: 11px;
     > svg {
