@@ -223,6 +223,7 @@ const Detalle: React.FC<IDetalle> = (props) => {
     useEffect(() =>{      
         dispatch(Action.obtnerAportes(props.data.header.id));
         dispatch(Action.obtnerFases(props.data.header.id));
+        dispatch(Action.obtnerComentario(props.data.header.id));
         dispatch(Action.obtenerProyectosRecomendados('tecnologia')); //quemado categoria/ slug
         if(authenticated){
             dispatch(Action.obtenerLike(props.data.header.id));

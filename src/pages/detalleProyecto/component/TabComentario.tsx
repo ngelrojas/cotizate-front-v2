@@ -37,8 +37,18 @@ import {Article, SectionDetails, Picture,
     TextoComentario   
     } from './styleDetallecomponent/styleDetalle';
     interface IComentario {
-    
+      data:{
+          id:number,
+          discuss:string,
+          campaings:number,
+          users:{
+            first_name:string,
+            last_name:string
+          },
+          parentid:number
+         }                
     }
+
     const useStyles = makeStyles((theme) => ({
         root: {
         flexGrow: 1,
@@ -67,7 +77,7 @@ const TabComentario: React.FC<IComentario> = (props) => {
                         </Col> 
                         <Col xs={9} sm={9} md={9} lg={10}>                          
                                 <TextoComentarioTitle>
-                                    {'lola llorety'}     
+                                    {props.data.users.first_name}     
                                 </TextoComentarioTitle>       
                                 <TextoComentarioTitle>
                                     {'00/00/0000'}     
@@ -76,7 +86,7 @@ const TabComentario: React.FC<IComentario> = (props) => {
                         <Col xs={12} sm={12} md={12} lg={12}>                                                                   
                         <Row >                        
                                 <TextoComentario>
-                                   {'Lorem Ipsum y, más recientemente, con software de autoedició lkdeio foggo'}  
+                                   {props.data.discuss}  
                                 </TextoComentario>                            
                             </Row>      
                         </Col>     
@@ -84,35 +94,7 @@ const TabComentario: React.FC<IComentario> = (props) => {
                     </Col>  
                 </Row>
             </DivBorderSinAzulado>      
-
-             <DivBorderSinAzulado>
-                <Row >
-                    <Col xs={12} sm={12} md={12} lg={12}>   
-                      <Row >
-                        <Col xs={3} sm={3} md={3} lg={3}>                                                 
-                            <Row center='xs' >
-                                <Avatar alt="Remy Sharp" src={'https://www.dzoom.org.es/wp-content/uploads/2010/09/mirada-ojos-encuadre-primer-plano-sexy-810x540.jpg'} />
-                            </Row>                
-                        </Col> 
-                        <Col xs={9} sm={9} md={9} lg={9}>                          
-                                <TextoComentarioTitle>
-                                    {'maria llorety'}     
-                                </TextoComentarioTitle>       
-                                <TextoComentarioTitle>
-                                    {'00/00/0000'}     
-                                </TextoComentarioTitle>                                                                                            
-                        </Col>  
-                        <Col xs={12} sm={12} md={12} lg={12}>                                                                   
-                        <Row >                        
-                                <TextoComentario>
-                                   {'Lorem Ipsum y, más recientemente, con software de autoedició lkdeio foggo'}  
-                                </TextoComentario>                            
-                            </Row>      
-                        </Col>     
-                      </Row>                                                           
-                    </Col>  
-                </Row>
-            </DivBorderSinAzulado>                                         
+                                      
         </>
     )
 }

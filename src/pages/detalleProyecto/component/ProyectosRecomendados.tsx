@@ -149,9 +149,9 @@ const ProjectosRecomendados: React.FC<Iproyectorecomendad> = (props)=> {
                             <Go to={{
                                 pathname: '/category',
                                 state: {
-                                    idCategoria: `${2}`,
+                                    idCategoria: `${props.data.header.category}`,
                                     nombre: `${props.data.slug}`,
-                                    slug: `${'slug'}`,
+                                    slug: `${props.data.slug}`,
                                     imgbanner:`${33}`
                                 }
                             }}> 
@@ -179,7 +179,7 @@ const ProjectosRecomendados: React.FC<Iproyectorecomendad> = (props)=> {
                             pathname:`/detail-proyect/${props.data.slug}`,
                             state: {
                                 idProyecto: `${1}`,
-                                slug: `${2}`
+                                slug: `${props.data.slug}`
                             }
                             }}>
                                 {props.data.title}                                

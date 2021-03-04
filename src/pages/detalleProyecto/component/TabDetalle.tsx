@@ -89,7 +89,7 @@ const TabDetalle: React.FC<ITab> = (props) => {
       
     
     const { authenticated } = useSelector((stateSelector: any) => {  return stateSelector.user;  });
-    const { statusFases, fases
+    const { statusFases, fases,statusComments, comments
     } = useSelector((stateSelector: any) => {
       return stateSelector.detalleProyecto;
     });
@@ -125,8 +125,11 @@ const TabDetalle: React.FC<ITab> = (props) => {
                            <TabAportadores />
                            <TabAportadores />
                         </TabPanel>
-                        <TabPanel value={value} index={3}>
-                            <TabComentario />
+                        <TabPanel value={value} index={3}> 
+                            {comments.map((value : any, index: any)=>(
+                                <TabComentario data={value} />
+                            ))}
+                            
                         </TabPanel>
                     </div>
                              {/* <LinkAzul to="/descripcion">{'Descripcion'}</LinkAzul> {' '}

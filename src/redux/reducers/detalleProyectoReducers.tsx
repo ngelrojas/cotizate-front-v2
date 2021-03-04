@@ -1,5 +1,5 @@
 import {
-    DETALLE_PROYECTO, DETALLE_APORTES,DETALLE_FASES, DETAIL_SAVE,DETAIL_LIKE,DETAIL_RECOMENDACIONES
+    DETALLE_PROYECTO, DETALLE_APORTES,DETALLE_FASES, DETAIL_SAVE,DETAIL_LIKE,DETAIL_RECOMENDACIONES,DETALLE_COMMENTS
 } from '../types/detalleProyecto.types'
 const initialState = {
     statusDetalle: false,
@@ -107,6 +107,8 @@ const initialState = {
     aportes:[],
     statusFases:false,
     fases:[],
+    statusComments:false,
+    comments:[],
     statusLike:false,
     statusSave:false,
     proyectosRec:[]
@@ -131,6 +133,12 @@ export default function(state = initialState, action: any) {
                     ...state,
                     statusFases: action.status,
                     fases:action.fases
+                } 
+            case DETALLE_COMMENTS:
+                return {
+                    ...state,
+                    statusComments: action.status,
+                    comments:action.coments
                 } 
             case DETAIL_LIKE:
                 return {

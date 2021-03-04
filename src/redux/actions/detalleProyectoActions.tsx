@@ -1,5 +1,5 @@
 import {
-  DETALLE_PROYECTO, DETALLE_APORTES, DETALLE_FASES,DETAIL_LIKE, DETAIL_SAVE,DETAIL_RECOMENDACIONES
+  DETALLE_PROYECTO, DETALLE_APORTES, DETALLE_FASES,DETAIL_LIKE, DETAIL_SAVE,DETAIL_RECOMENDACIONES,DETALLE_COMMENTS
 } from '../types/detalleProyecto.types'
 import API from '../../api'
 
@@ -62,6 +62,24 @@ export function obtnerFases(idHeader: any){
                   fases:resp.data.data
               })    
             }                    
+        }            
+      })
+      .catch(err => console.log(err))
+      }
+}
+export function obtnerComentario(idHeader: any){       
+  return (dispatch : any) =>{          
+      
+     API.get(`comments/${1}`).then(resp => {        
+       console.log("comentarioo------- :", resp); 
+        if(resp.status === 200){  
+          if(resp.data.data.length >= 1){          
+              dispatch({
+                  type: DETALLE_COMMENTS,
+                  status:true,
+                  coments:resp.data.data
+              }) 
+          }                         
         }            
       })
       .catch(err => console.log(err))
