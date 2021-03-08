@@ -228,54 +228,63 @@ const FormDescription: React.FC<AllProps> = ({counter, handleNext, handleBack}) 
                             Esta imagen se utilizará como miniatura de su proyecto (PNG, JPG tamaño 305 x 161 pixeles tamanho minimo 220 x 220 px.
                         </ImgText>
                             
-                <Editor
-                    initialValue=''
-                    init={{
-                        branding: false,
-                        statusbar: false,
-                        height: 400,
-                        width: 800,
-                        menubar: false,
-                        plugins: [
-                            'advlist autolink lists link image charmap print preview anchor image',
-                            'imagetools searchreplace visualblocks code fullscreen',
-                            'insertdatetime media table paste code help wordcount'
-                        ],
-                        toolbar:
-                            ' image | imagetools',
-                        automatic_uploads: true,
-                        file_picker_types: 'image',
-                        file_picker_callback: function(
-                            cb: any,
-                            value: any,
-                            meta: any
-                        ) {
-                            let input = document.createElement('input')
-                            input.setAttribute('type', 'file')
-                            input.setAttribute('accept', 'image/*')
-                            input.onchange = function(files: any) {
-                                let file: any = (input as any).files[0]
-                                let reader: any = new FileReader()
-                                reader.onload = function() {
-                                    let id = 'blobid' + new Date().getTime()
-                                    let blobCache = (window as any).tinymce
-                                        .activeEditor.editorUpload.blobCache
-                                    let base64 = reader.result.split(',')[1]
-                                    let blobInfo: any = blobCache.create(
-                                        id,
-                                        file,
-                                        base64
-                                    )
-                                    blobCache.add(blobInfo)
-                                    cb(blobInfo.blobUri(), {title: file.name})
-                                }
-                                reader.readAsDataURL(file)
-                            }
-                            input.click()
-                        }
-                    }}
-                    onEditorChange={handleEditorImgChange}
-                />
+                        <Row>
+                            <Col xs={12}>
+                                <Row center="xs">
+                                <Col xs={6} >
+                                <Editor 
+                                    initialValue=''
+                                    init={{
+                                        branding: false,
+                                        statusbar: false,
+                                        height: 300,
+                                        width: 350,
+                                        menubar: false,
+                                        plugins: [
+                                            'advlist autolink lists link image charmap print preview anchor image',
+                                            'imagetools searchreplace visualblocks code fullscreen',
+                                            'insertdatetime media table paste code help wordcount'
+                                        ],
+                                        toolbar:
+                                            ' image | imagetools',
+                                        automatic_uploads: true,
+                                        file_picker_types: 'image',
+                                        file_picker_callback: function(
+                                            cb: any,
+                                            value: any,
+                                            meta: any
+                                        ) {
+                                            let input = document.createElement('input')
+                                            input.setAttribute('type', 'file')
+                                            input.setAttribute('accept', 'image/*')
+                                            input.onchange = function(files: any) {
+                                                let file: any = (input as any).files[0]
+                                                let reader: any = new FileReader()
+                                                reader.onload = function() {
+                                                    let id = 'blobid' + new Date().getTime()
+                                                    let blobCache = (window as any).tinymce
+                                                        .activeEditor.editorUpload.blobCache
+                                                    let base64 = reader.result.split(',')[1]
+                                                    let blobInfo: any = blobCache.create(
+                                                        id,
+                                                        file,
+                                                        base64
+                                                    )
+                                                    blobCache.add(blobInfo)
+                                                    cb(blobInfo.blobUri(), {title: file.name})
+                                                }
+                                                reader.readAsDataURL(file)
+                                            }
+                                            input.click()
+                                        }
+                                    }}
+                                    onEditorChange={handleEditorImgChange}
+                                />
+                                </Col>
+                                </Row>
+                            </Col>
+                        </Row>
+
                     </Col>
                     
                 <MsgError>

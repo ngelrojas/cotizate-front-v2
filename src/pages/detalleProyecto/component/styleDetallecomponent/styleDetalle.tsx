@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 import {Link} from 'react-router-dom'
 import {device} from '../../../../styles/mediaquery'
+import FormControl from '@material-ui/core/FormControl'
 
 export const List = styled.ul`
     display: flex;
@@ -515,7 +516,6 @@ export const ButtonBordeAzul = styled.button`
   font-size: 17px;
   margin: 0.5em 1em;
   padding: 0.25em 1em;
-
 `
 export const DivBorderSinColor = styled.div`   
         background:#F5F5F5;
@@ -841,5 +841,56 @@ export const TextoDanger = styled.p`
         line-height: 16px;
         font-size: 15px;
         margin-top: 4%;
+    }
+`
+
+export const H1 = styled.h1`
+    text-align: center;
+    margin-bottom: 5%;
+    color: #1383C5;
+`
+
+export const TxtRequire = styled.p`
+    text-align: center;
+    color: red;
+    margin-bottom: 5%;
+`
+
+export const RowCol = styled.div`
+    display: inline-flex;
+`
+
+export const FormControlD = styled(FormControl)`
+    margin: 6%!important;
+`
+
+export const FormSend = styled.form`
+    display: inline!important;
+`
+
+export const RegistrarsedeAzul = styled(Link)`
+  background: #FFFFFF;
+  border-radius: 0px;
+  border: 1px solid #1383C5;
+  color: #1383C5;
+  font-size: 17px;
+  margin: 0.5em 1em;
+  padding: 0.7em;
+  text-decoration: none;
+  text-align: center;
+`
+
+export const LabelFormControl = styled.div`
+    > label {
+        top: 18px;
+        left: 6px;
+        position: relative;
+        background-color: white;
+        padding: 0px 5px 0px 5px;
+        font-size: 0.9em;
+    }
+    > input{
+        background-color: white;
+    
     }
 `

@@ -2,7 +2,7 @@ import React, { useEffect,useState } from 'react'
 import {Row, Col} from 'react-styled-flexboxgrid'
 import ReactPlayer from 'react-player'
 import LineProgress from '../../../components/LineProgress'
-
+import {useForm} from 'react-hook-form'
 import ThumbUpAltIcon from '@material-ui/icons/ThumbUpAlt';
 import ThumbUpAltOutlinedIcon from '@material-ui/icons/ThumbUpAltOutlined';
 import ThumbUpAltTwoToneIcon from '@material-ui/icons/ThumbUpAltTwoTone';
@@ -27,6 +27,10 @@ import {copiarTextoToPapelera } from '../../../lib/FuncionesGenerales';
 import TabDetalle from './TabDetalle';
 import Aporta from './Aporta';
 import Reportar from './Reportar';
+import Modal from '@material-ui/core/Modal'
+import Input from '@material-ui/core/Input'
+import InputLabel from '@material-ui/core/InputLabel'
+import Button from '@material-ui/core/Button'
 import * as Action from '../../../redux/actions/detalleProyectoActions';
 
   
@@ -37,7 +41,6 @@ import {Article, SectionDetails, Picture,
     TitleVideo1,
     DivTitlevideo,
     Porcentaje,
-     Img,
      Contenedor,
      AlcanceText,
      Alcanzado,
@@ -50,7 +53,6 @@ import {Article, SectionDetails, Picture,
      TileCode,
      BotonAportar,
      DivTitle,
-     Input,
      DivSociable,
      ButtonEnlace,
      BotonCopiar,
@@ -73,7 +75,14 @@ import {Article, SectionDetails, Picture,
      TitleAportaciones2,
      SubTitleAportacion,
      TextoSubtitulo,
-     TextoSubtitulo2
+     TextoSubtitulo2,
+     H1,
+     TxtRequire,
+     RowCol,
+     FormControlD,
+     FormSend,
+     RegistrarsedeAzul,
+     LabelFormControl
     } from './styleDetallecomponent/styleDetalle';
 
 
@@ -180,13 +189,36 @@ interface IDetalle {
     }
 }
 
+type FormData = {
+    first_name: string
+    last_name: string
+    email: string
+    header: number
+    amount: number
+    status_payment: number
+    method_payment: number
+    coin: number
+    cellphone: number
+}
+
+function getModalStyle() {
+    const top = 50
+    const left = 50
+
+    return {
+        top: `${top}%`,
+        left: `${left}%`,
+        transform: `translate(-${top}%, -${left}%)`,
+    }
+}
+
 const useStyles = makeStyles((theme) => ({
     root: {
       display: 'flex',
       '& > *': {
         margin: theme.spacing(1),
+        width: '100%',
       },
-      
     },
     small: {
       width: theme.spacing(3),
@@ -196,18 +228,61 @@ const useStyles = makeStyles((theme) => ({
       width: theme.spacing(7),
       height: theme.spacing(7),
     },
+    paper: {
+        position: 'absolute',
+        width: '50%',
+        backgroundColor: theme.palette.background.paper,
+        boxShadow: theme.shadows[1],
+        padding: theme.spacing(2, 4, 3),
+    },
   }));
 
+  const MethodPayment = [
+      {"id":1, value: "TigoMoney"},
+      {"id":2, value: "Punto PagoFacil"},
+      {"id":3, value: "Tarjeta Débito/Crédito-Enlace"},
+      {"id":4, value: "Transferencia Bancos QR"},
+      {"id":5, value: "BCP rápido y seguro"},
+      {"id":6, value: "LinkSer"}
+  ]
+
+  const Coin = [
+      {"id": 1, value: "BOB"},
+      {"id": 2, value: "USD"}
+  ]
 
 const Detalle: React.FC<IDetalle> = (props) => {
     const classes = useStyles();
     const dispatch = useDispatch();
+    const [modalStyle] = React.useState(getModalStyle)
+    const [open, setOpen] = React.useState(false)
+    const [Methodpy, setMethodpy] = React.useState(1)
+    const [MethodCoin, setMethodCoin] = React.useState(1)
     const {
         proyectosDetalle, aportes, statusAportes, statusLike, statusSave
       } = useSelector((stateSelector: any) => {
         return stateSelector.detalleProyecto;
       });
-      const { authenticated } = useSelector((stateSelector: any) => {  return stateSelector.profile;  });
+    // const { authenticated } = useSelector((stateSelector: any) => {  return stateSelector.profile;  });
+    const {current_user} = useSelector((state: any) => ({ current_user: state.user}))
+    const {register, handleSubmit, errors} = useForm<FormData>({
+        mode: 'onChange'
+    })
+
+    const onSubmit = handleSubmit(({first_name, last_name, email, amount, method_payment, status_payment, coin, cellphone}) => {
+        let data_send = {
+            first_name: first_name,
+            last_name: last_name,
+            email: email,
+            amount: amount,
+            method_payment: method_payment,
+            status_payment: status_payment,
+            coin: coin,
+            cellphone: cellphone
+        }
+        console.info("DATA SEND TO ENCRYPTED")
+        console.log(data_send)
+    })
 
     const copiarLink =(data: string)=>{       
         copiarTextoToPapelera(data);
@@ -217,7 +292,8 @@ const Detalle: React.FC<IDetalle> = (props) => {
         dispatch(Action.obtnerFases(props.data.header.id));
    },[]);
 
-   const [siguiente, SetSiguiente]= useState(0)
+   const [siguiente, SetSiguiente]= useState(5)
+
    const _onChangeSiguiente = (e: any) => {
         const texfield = e.target.name;
         const textValue = e.target.value;
@@ -227,15 +303,26 @@ const Detalle: React.FC<IDetalle> = (props) => {
         }  
    };
 
-
-   const handleSubmitnex =()=>{    
+   const handleSubmitnex =()=>{
+           
        if(siguiente >0){
-          alert('en proceso... siguiente.. bs : '+ siguiente );
+          setOpen(true)
        }else{
         alert('ingrese un monto');
        }       
    }
 
+   const handleClose = () => {
+       setOpen(false)
+   }
+
+   const handleChange = (event: any) => {
+     setMethodpy(event.target.value);
+   }
+
+   const handleCoin = (event: any) => {
+    setMethodCoin(event.target.value);
+   }
 
    const onchangeLike = ()=> {
         if(statusLike){
@@ -253,13 +340,132 @@ const Detalle: React.FC<IDetalle> = (props) => {
        }
     
   }
+  const body = (
+    <div style={modalStyle} className={classes.paper}>
+        <Row>
+        <Col xs={12}>
+            <Row center="xs">
+            <Col xs={10}>
+                <H1>DONACION</H1>
+                <TxtRequire>Todos los campos son requiridos.</TxtRequire>  
+                <FormSend className={classes.root} onSubmit={onSubmit}>
+                    <RowCol>
+                        <FormControlD>
+                            <InputLabel htmlFor="first_name">Nombre</InputLabel>
+                            <input 
+                                type="text"
+                                name="first_name"
+                                defaultValue={current_user.first_name} 
+                                ref={register({required: true})} />
+                            <p>{errors.first_name && 'este campo es requirido'}</p>
+                        </FormControlD>
+                        <FormControlD>
+                            <InputLabel htmlFor="last_name">Apellido</InputLabel>
+                            <input 
+                                name="last_name" 
+                                defaultValue={current_user.last_name} 
+                                ref={register({required: true})} />
+                        </FormControlD>
+                    </RowCol>
+
+                    <RowCol>    
+                        <FormControlD>
+                            <InputLabel htmlFor="email">Email</InputLabel>
+                            <input 
+                                type="eamil" 
+                                name="email" 
+                                defaultValue={current_user.email} 
+                                ref={register({required: true})} />
+                        </FormControlD>
+                        <FormControlD>
+                            <TextField
+                                select
+                                label="Metodo de Pago"
+                                defaultValue={Methodpy}
+                                onChange={handleChange}
+                                SelectProps={{
+                                    native: true,
+                                }}
+                                >
+                                    {MethodPayment.map((option) => (
+                                    <option key={option.id} value={option.id}>
+                                    {option.value}
+                                    </option>
+                                ))}
+                            </TextField>
+                        </FormControlD>
+                    </RowCol>
+                        
+                    <RowCol>
+                        <FormControlD>
+                            <InputLabel htmlFor="amount">Monto</InputLabel>
+                            <input 
+                                type="text" 
+                                name="amount"
+                                defaultValue={siguiente} 
+                                ref={register({required: true})} />
+                        </FormControlD>
+                        <FormControlD>
+                            <TextField
+                                select
+                                label="Moneda"
+                                defaultValue={MethodCoin}
+                                onChange={handleCoin}
+                                SelectProps={{
+                                    native: true,
+                                }}
+                                >
+                                    {Coin.map((option) => (
+                                    <option key={option.id} value={option.id}>
+                                    {option.value}
+                                    </option>
+                                ))}
+                            </TextField>
+                        </FormControlD>
+                    </RowCol>
+                    <RowCol>
+                        <LabelFormControl>
+                            <label htmlFor="cellphone">Celular</label>
+                            <input 
+                                type="text" 
+                                name="cellphone"
+                                defaultValue={props.data.profile.cellphone} 
+                                ref={register({required: true})} />
+                        </LabelFormControl>
+                    </RowCol>
+
+                    <RowCol>
+                        <FormControlD>
+                            <Button type="submit" variant="outlined" color="primary">
+                                ENVIAR
+                            </Button>
+                        </FormControlD>
+                    </RowCol>
+
+                </FormSend>
+            </Col>
+
+            </Row>
+            
+        </Col>
+        </Row>        
+
+    </div>
+  )
 
   useEffect(()=>{
-
   },[statusLike, statusSave])
 
     return (
         <>
+        <Modal
+            open={open}
+            onClose={handleClose}
+            aria-labelledby="modal-payment-cotizate"
+            aria-describedby="modal payment with free contribution-cotizate">
+            {body}
+        </Modal>
+
         <Col xs={12} sm={12} md={12} lg={12} >     
           <DivPrincipal> 
                        <Row center="xs">
@@ -354,7 +560,7 @@ const Detalle: React.FC<IDetalle> = (props) => {
                         <Row start="lg">
                             <Col xs={6  } sm={6} md={6} lg={6}>
                                 <Div1>
-                                    {authenticated? 
+                                    {current_user.authenticated? 
                                     <IconButton onClick={onchangeLike} >
                                        {statusLike?  <ThumbUpAltIcon />: <ThumbUpAltOutlinedIcon /> }
                                     </IconButton>
@@ -367,7 +573,7 @@ const Detalle: React.FC<IDetalle> = (props) => {
                             </Col>
                             <Col xs={6} sm={6} md={6} lg={6}>
                                <Div1>
-                                    {authenticated? 
+                                    {current_user.authenticated? 
                                         <IconButton onClick={onchangeSave} >
                                             {statusSave?  <BookmarkIcon />: <BookmarkBorderIcon /> } 
                                         </IconButton>
@@ -539,8 +745,13 @@ const Detalle: React.FC<IDetalle> = (props) => {
                             </Row>  
                           </Col> 
                           <Col xs={12} sm={12} md={12} lg={12}>
-                            <Row center='xs' >                                
-                                <ButtonBordeAzul style={{width:'65%',height:'45px', background: '#F69939', color:'#FFFFFF', border: '1px solid #F69939',fontWeight: 'bold',borderRadius: '5px' }} onClick={handleSubmitnex}>Siguiendo </ButtonBordeAzul>                                                        
+                            <Row center='xs' >     
+                                {current_user.authenticated ? (
+                                    <ButtonBordeAzul style={{width:'65%',height:'45px', background: '#F69939', color:'#FFFFFF', border: '1px solid #F69939',fontWeight: 'bold',borderRadius: '5px' }} onClick={handleSubmitnex}>Aportar </ButtonBordeAzul>
+                                ):(
+                                    <RegistrarsedeAzul to="ingresar" style={{width:'65%',height:'45px', background: '#F69939', color:'#FFFFFF', border: '1px solid #F69939',fontWeight: 'bold',borderRadius: '5px' }} >Ingresar </RegistrarsedeAzul>
+                                )}                           
+                                                                                        
                             </Row>  
                           </Col>                
                           </Col>   
@@ -557,6 +768,5 @@ const Detalle: React.FC<IDetalle> = (props) => {
         </>
     )
 }
-
 
 export default Detalle
