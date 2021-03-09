@@ -32,6 +32,7 @@ import Input from '@material-ui/core/Input'
 import InputLabel from '@material-ui/core/InputLabel'
 import Button from '@material-ui/core/Button'
 import * as Action from '../../../redux/actions/detalleProyectoActions';
+import {Encrypted} from '../../../userEncrypted'
 
   
 import {Article, SectionDetails, Picture, 
@@ -81,8 +82,7 @@ import {Article, SectionDetails, Picture,
      RowCol,
      FormControlD,
      FormSend,
-     RegistrarsedeAzul,
-     LabelFormControl
+     RegistrarsedeAzul
     } from './styleDetallecomponent/styleDetalle';
 
 
@@ -251,13 +251,19 @@ const useStyles = makeStyles((theme) => ({
       {"id": 2, value: "USD"}
   ]
 
+  const API_PAY = 'https://jsonplaceholder.typicode.com/posts'
+
 const Detalle: React.FC<IDetalle> = (props) => {
     const classes = useStyles();
+    let SendEncrypt = new Encrypted()
     const dispatch = useDispatch();
     const [modalStyle] = React.useState(getModalStyle)
     const [open, setOpen] = React.useState(false)
+    const [EndOpen, setEndOpen] = React.useState(false)
     const [Methodpy, setMethodpy] = React.useState(1)
     const [MethodCoin, setMethodCoin] = React.useState(1)
+    const [TcParameter, setTcParameter] = React.useState("")
+    const [TcCommerce, setTcCommerce] = React.useState("")
     const {
         proyectosDetalle, aportes, statusAportes, statusLike, statusSave
       } = useSelector((stateSelector: any) => {
@@ -269,24 +275,51 @@ const Detalle: React.FC<IDetalle> = (props) => {
         mode: 'onChange'
     })
 
-    const onSubmit = handleSubmit(({first_name, last_name, email, amount, method_payment, status_payment, coin, cellphone}) => {
+    const onSubmit = handleSubmit(({email, amount, coin, cellphone}) => {
         let data_send = {
-            first_name: first_name,
-            last_name: last_name,
-            email: email,
-            amount: amount,
-            method_payment: method_payment,
-            status_payment: status_payment,
-            coin: coin,
-            cellphone: cellphone
+            lcpedidoid: props.data.header.id,
+            lcemail: email,
+            lntelefono: cellphone,
+            lnmonto: amount,
+            lcmoneda: coin
         }
-        console.info("DATA SEND TO ENCRYPTED")
-        console.log(data_send)
+        SendEncrypt.EncryptData(data_send).then(resp => {
+            if(resp.data.data.tcCommerceID){
+                sendToPay(resp.data.data)
+                setEndOpen(true)
+            }
+            
+            
+        }).catch(err => {
+            console.error(err)
+        })
     })
 
     const copiarLink =(data: string)=>{       
         copiarTextoToPapelera(data);
     }
+
+    const sendToPay = (data_send: any) => {
+        setTcParameter(data_send.tcParametros)
+        setTcCommerce(data_send.tcCommerceID)
+        console.info("TC PARAMETERS")
+        console.log(data_send.tcCommerceID)
+        // fetch(API_PAY, {
+        //     method: 'POST',
+        //     body: JSON.stringify({
+        //         tcCommerceID: data_send.tcCommerceID,
+        //         tcParametro: data_send.tcParametros
+        //     }),
+        //     headers: {
+        //         "Content-type": "application/json; charset=UTF-8"
+        //     }
+        // }).then(resp => {
+        //     console.info("data sended")
+        // }).catch(err => {
+        //     console.error(err)
+        // })
+    }
+
     useEffect(() =>{
         dispatch(Action.obtnerAportes(props.data.header.id));
         dispatch(Action.obtnerFases(props.data.header.id));
@@ -314,15 +347,15 @@ const Detalle: React.FC<IDetalle> = (props) => {
 
    const handleClose = () => {
        setOpen(false)
+       setTcCommerce('')
+       setTcParameter('')
    }
 
-   const handleChange = (event: any) => {
-     setMethodpy(event.target.value);
-   }
-
-   const handleCoin = (event: any) => {
-    setMethodCoin(event.target.value);
-   }
+   const handleCloseEnd = () => {
+        setEndOpen(false)
+        setTcCommerce('')
+        setTcParameter('')
+    }
 
    const onchangeLike = ()=> {
         if(statusLike){
@@ -340,12 +373,48 @@ const Detalle: React.FC<IDetalle> = (props) => {
        }
     
   }
+  const EndPay = (
+      <div style={modalStyle} className={classes.paper}>
+          <Row>
+              <Col>
+                <h4>Por favor verifique que todos sus datos y aportaciones estan correctos.</h4>
+                <h5>para realizar la aportacion, sera rediccionado a la pagina de PAGO FASIL.</h5>
+              </Col>
+
+          </Row>
+          <Row>
+              <Col xs={12}>
+                <Row center="xs">
+                    <Col xs={6}>
+                        {TcCommerce ? (
+                            <form action="https://checkout.pagofacil.com.bo/pay" method="post" name="formularioPago" target="_blank">
+                            <input type="hidden" name="tcCommerceID" defaultValue={TcCommerce} />
+                            <input type="hidden" name="tcParametro" defaultValue={TcParameter} />
+                            <Button type="submit" variant="outlined" color="primary">
+                                Realizar Pago
+                            </Button>
+                        </form>
+                        ):('')}
+                    </Col>
+                    <Col xs={6}>
+                        <Button type="button" variant="outlined" color="secondary" onClick={handleCloseEnd}>
+                            Cerrar
+                        </Button>
+                    </Col>                    
+                </Row>
+              </Col>
+          </Row>
+              
+
+      </div>
+  )
+
   const body = (
     <div style={modalStyle} className={classes.paper}>
         <Row>
         <Col xs={12}>
             <Row center="xs">
-            <Col xs={10}>
+            <Col xs={8}>
                 <H1>DONACION</H1>
                 <TxtRequire>Todos los campos son requiridos.</TxtRequire>  
                 <FormSend className={classes.root} onSubmit={onSubmit}>
@@ -378,21 +447,13 @@ const Detalle: React.FC<IDetalle> = (props) => {
                                 ref={register({required: true})} />
                         </FormControlD>
                         <FormControlD>
-                            <TextField
-                                select
-                                label="Metodo de Pago"
-                                defaultValue={Methodpy}
-                                onChange={handleChange}
-                                SelectProps={{
-                                    native: true,
-                                }}
-                                >
-                                    {MethodPayment.map((option) => (
+                            <select ref={register({required:true})} name="method_payment">
+                            {MethodPayment.map((option) => (
                                     <option key={option.id} value={option.id}>
                                     {option.value}
                                     </option>
                                 ))}
-                            </TextField>
+                            </select>
                         </FormControlD>
                     </RowCol>
                         
@@ -406,32 +467,24 @@ const Detalle: React.FC<IDetalle> = (props) => {
                                 ref={register({required: true})} />
                         </FormControlD>
                         <FormControlD>
-                            <TextField
-                                select
-                                label="Moneda"
-                                defaultValue={MethodCoin}
-                                onChange={handleCoin}
-                                SelectProps={{
-                                    native: true,
-                                }}
-                                >
-                                    {Coin.map((option) => (
-                                    <option key={option.id} value={option.id}>
-                                    {option.value}
-                                    </option>
-                                ))}
-                            </TextField>
+                            <select ref={register({required: true})} name="coin">
+                                {Coin.map((option) => (
+                                        <option key={option.id} value={option.id}>
+                                        {option.value}
+                                        </option>
+                                    ))}
+                            </select>
                         </FormControlD>
                     </RowCol>
                     <RowCol>
-                        <LabelFormControl>
-                            <label htmlFor="cellphone">Celular</label>
+                        <FormControlD>
+                            <InputLabel htmlFor="cellphone">Celular</InputLabel>
                             <input 
                                 type="text" 
                                 name="cellphone"
                                 defaultValue={props.data.profile.cellphone} 
                                 ref={register({required: true})} />
-                        </LabelFormControl>
+                        </FormControlD>
                     </RowCol>
 
                     <RowCol>
@@ -440,6 +493,12 @@ const Detalle: React.FC<IDetalle> = (props) => {
                                 ENVIAR
                             </Button>
                         </FormControlD>
+                        <FormControlD>
+                            <Button type="button" variant="outlined" color="secondary" onClick={handleClose}>
+                                Cerrar
+                            </Button>
+                        </FormControlD>
+                        
                     </RowCol>
 
                 </FormSend>
@@ -464,6 +523,14 @@ const Detalle: React.FC<IDetalle> = (props) => {
             aria-labelledby="modal-payment-cotizate"
             aria-describedby="modal payment with free contribution-cotizate">
             {body}
+        </Modal>
+
+        <Modal
+            open={EndOpen}
+            onClose={handleCloseEnd}
+            aria-labelledby="modal-payment-cotizate"
+            aria-describedby="modal payment with free contribution-cotizate">
+            {EndPay}
         </Modal>
 
         <Col xs={12} sm={12} md={12} lg={12} >     

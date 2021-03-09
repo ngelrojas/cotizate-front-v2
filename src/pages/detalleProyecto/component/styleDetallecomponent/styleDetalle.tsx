@@ -879,18 +879,3 @@ export const RegistrarsedeAzul = styled(Link)`
   text-decoration: none;
   text-align: center;
 `
-
-export const LabelFormControl = styled.div`
-    > label {
-        top: 18px;
-        left: 6px;
-        position: relative;
-        background-color: white;
-        padding: 0px 5px 0px 5px;
-        font-size: 0.9em;
-    }
-    > input{
-        background-color: white;
-    
-    }
-`
