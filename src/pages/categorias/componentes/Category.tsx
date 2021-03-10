@@ -136,7 +136,7 @@ const Category: React.FC<ICategory> = (props)=> {
                             }
                             }}>
                         <Img
-                            src={'165.227.203.226:9000/mediafiles/'+props.data.imagen_main}
+                            src={'http://165.227.203.226:9000/mediafiles/'+props.data.imagen_main}
                             alt="cotizate"
                         />
                     </Go>
