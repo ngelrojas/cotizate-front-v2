@@ -133,7 +133,8 @@ const Aporta: React.FC<IAporta> = (props) => {
    
     const classes = useStyles();   
     const history = useHistory();
-    const { authenticated } = useSelector((stateSelector: any) => {  return stateSelector.profile;  });
+    // const { authenticated } = useSelector((stateSelector: any) => {  return stateSelector.profile;  });
+    const {authenticated} = useSelector((state: any) => ({ authenticated: state.user}))
     useEffect(() =>{
     },[authenticated]);
     const [aporte1, setAporte1] = useState(false); 
@@ -165,7 +166,7 @@ const Aporta: React.FC<IAporta> = (props) => {
          
     }
     const redirecionLoin=()=>{        
-       history.push("/registrarse");
+       history.push("/ingresar");
     }
 
     return (
@@ -275,8 +276,8 @@ const Aporta: React.FC<IAporta> = (props) => {
                           </Col> 
                           <Col xs={12} sm={12} md={12} lg={12}>
                             <Row center='xs' >    
-                              {authenticated? <ButtonBordeAzul onClick={ClicAportando} style={{width:'65%',height:'45px', background: '#F69939', color:'#FFFFFF', border: '1px solid #F69939',fontWeight: 'bold',borderRadius: '5px' }} >Enviar </ButtonBordeAzul>                                                        
-                              :<ButtonBordeAzul onClick={redirecionLoin}  style={{width:'65%',height:'45px', background: '#F69939', color:'#FFFFFF', border: '1px solid #F69939',fontWeight: 'bold',borderRadius: '5px' }} >Enviar </ButtonBordeAzul>                                                        
+                              {authenticated? <ButtonBordeAzul onClick={ClicAportando} style={{width:'65%',height:'45px', background: '#F69939', color:'#FFFFFF', border: '1px solid #F69939',fontWeight: 'bold',borderRadius: '5px' }} >Aportar </ButtonBordeAzul>                                                        
+                              :<ButtonBordeAzul onClick={redirecionLoin}  style={{width:'65%',height:'45px', background: '#F69939', color:'#FFFFFF', border: '1px solid #F69939',fontWeight: 'bold',borderRadius: '5px' }} >Ingresar</ButtonBordeAzul>                                                        
                             }                            
                                 
                             </Row>  

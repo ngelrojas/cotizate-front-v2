@@ -28,8 +28,6 @@ import TabDetalle from './TabDetalle';
 import Aporta from './Aporta';
 import Reportar from './Reportar';
 import Modal from '@material-ui/core/Modal'
-import Input from '@material-ui/core/Input'
-import InputLabel from '@material-ui/core/InputLabel'
 import Button from '@material-ui/core/Button'
 import * as Action from '../../../redux/actions/detalleProyectoActions';
 import {Encrypted} from '../../../userEncrypted'
@@ -66,23 +64,22 @@ import {Article, SectionDetails, Picture,
      DivSeparadorSinColor,
      LinkAzul2,
      ButtonBordeAzul,
-     DivBorderSinColor,
-     Texto2,
-     Texto3,
      Autor,
      DivSeparador2,
      TitleDonacion,
-     TitleAportaciones,
-     TitleAportaciones2,
-     SubTitleAportacion,
-     TextoSubtitulo,
-     TextoSubtitulo2,
      H1,
      TxtRequire,
      RowCol,
-     FormControlD,
      FormSend,
-     RegistrarsedeAzul
+     RegistrarsedeAzul,
+     InputPayment,
+     InputPayVal,
+     SelectPayment,
+     BtnLeft,
+     BtnRight,
+     FormSendPay,
+     BtnCloseSend,
+     TxtPayment
     } from './styleDetallecomponent/styleDetalle';
 
 
@@ -237,21 +234,10 @@ const useStyles = makeStyles((theme) => ({
     },
   }));
 
-  const MethodPayment = [
-      {"id":1, value: "TigoMoney"},
-      {"id":2, value: "Punto PagoFacil"},
-      {"id":3, value: "Tarjeta Débito/Crédito-Enlace"},
-      {"id":4, value: "Transferencia Bancos QR"},
-      {"id":5, value: "BCP rápido y seguro"},
-      {"id":6, value: "LinkSer"}
-  ]
-
   const Coin = [
-      {"id": 1, value: "BOB"},
-      {"id": 2, value: "USD"}
+      {"id": 1, value: "USD"},
+      {"id": 2, value: "BOB"}
   ]
-
-  const API_PAY = 'https://jsonplaceholder.typicode.com/posts'
 
 const Detalle: React.FC<IDetalle> = (props) => {
     const classes = useStyles();
@@ -260,8 +246,6 @@ const Detalle: React.FC<IDetalle> = (props) => {
     const [modalStyle] = React.useState(getModalStyle)
     const [open, setOpen] = React.useState(false)
     const [EndOpen, setEndOpen] = React.useState(false)
-    const [Methodpy, setMethodpy] = React.useState(1)
-    const [MethodCoin, setMethodCoin] = React.useState(1)
     const [TcParameter, setTcParameter] = React.useState("")
     const [TcCommerce, setTcCommerce] = React.useState("")
     const {
@@ -302,22 +286,6 @@ const Detalle: React.FC<IDetalle> = (props) => {
     const sendToPay = (data_send: any) => {
         setTcParameter(data_send.tcParametros)
         setTcCommerce(data_send.tcCommerceID)
-        console.info("TC PARAMETERS")
-        console.log(data_send.tcCommerceID)
-        // fetch(API_PAY, {
-        //     method: 'POST',
-        //     body: JSON.stringify({
-        //         tcCommerceID: data_send.tcCommerceID,
-        //         tcParametro: data_send.tcParametros
-        //     }),
-        //     headers: {
-        //         "Content-type": "application/json; charset=UTF-8"
-        //     }
-        // }).then(resp => {
-        //     console.info("data sended")
-        // }).catch(err => {
-        //     console.error(err)
-        // })
     }
 
     useEffect(() =>{
@@ -376,9 +344,12 @@ const Detalle: React.FC<IDetalle> = (props) => {
   const EndPay = (
       <div style={modalStyle} className={classes.paper}>
           <Row>
-              <Col>
-                <h4>Por favor verifique que todos sus datos y aportaciones estan correctos.</h4>
-                <h5>para realizar la aportacion, sera rediccionado a la pagina de PAGO FASIL.</h5>
+              <Col xs={12}>
+                  <TxtPayment>
+                        <h3>Por favor verifique que todos sus datos y aportaciones estan correctos.</h3>
+                        <h4>para realizar la aportacion, sera rediccionado a la pagina de PAGO FASIL.</h4>
+                  </TxtPayment>
+                
               </Col>
 
           </Row>
@@ -387,19 +358,22 @@ const Detalle: React.FC<IDetalle> = (props) => {
                 <Row center="xs">
                     <Col xs={6}>
                         {TcCommerce ? (
-                            <form action="https://checkout.pagofacil.com.bo/pay" method="post" name="formularioPago" target="_blank">
-                            <input type="hidden" name="tcCommerceID" defaultValue={TcCommerce} />
-                            <input type="hidden" name="tcParametro" defaultValue={TcParameter} />
-                            <Button type="submit" variant="outlined" color="primary">
-                                Realizar Pago
-                            </Button>
-                        </form>
+                            <FormSendPay action="https://checkout.pagofacil.com.bo/es/pay" method="post" name="formularioPago" target="_blank">
+                                <input type="hidden" name="tcCommerceID" defaultValue={TcCommerce} />
+                                <input type="hidden" name="tcParametros" defaultValue={TcParameter} />
+                                <Button type="submit" variant="outlined" color="primary" onClick={()=>console.info("SAVED WHEN IS SUBMITED")}>
+                                    Realizar Pago
+                                </Button>
+                            </FormSendPay>
                         ):('')}
                     </Col>
                     <Col xs={6}>
-                        <Button type="button" variant="outlined" color="secondary" onClick={handleCloseEnd}>
-                            Cerrar
-                        </Button>
+                        <BtnCloseSend>
+                            <Button type="button" variant="outlined" color="secondary" onClick={handleCloseEnd}>
+                                Cerrar
+                            </Button>
+                        </BtnCloseSend>
+                        
                     </Col>                    
                 </Row>
               </Col>
@@ -419,85 +393,82 @@ const Detalle: React.FC<IDetalle> = (props) => {
                 <TxtRequire>Todos los campos son requiridos.</TxtRequire>  
                 <FormSend className={classes.root} onSubmit={onSubmit}>
                     <RowCol>
-                        <FormControlD>
-                            <InputLabel htmlFor="first_name">Nombre</InputLabel>
-                            <input 
+                        <Col xs={6}>
+                            <InputPayment htmlFor="first_name">Nombre</InputPayment>
+                            <InputPayVal 
                                 type="text"
                                 name="first_name"
                                 defaultValue={current_user.first_name} 
                                 ref={register({required: true})} />
                             <p>{errors.first_name && 'este campo es requirido'}</p>
-                        </FormControlD>
-                        <FormControlD>
-                            <InputLabel htmlFor="last_name">Apellido</InputLabel>
-                            <input 
+                        </Col>
+                        <Col xs={6}>
+                            <InputPayment htmlFor="last_name">Apellido</InputPayment>
+                            <InputPayVal 
                                 name="last_name" 
                                 defaultValue={current_user.last_name} 
                                 ref={register({required: true})} />
-                        </FormControlD>
+                        </Col>
                     </RowCol>
 
                     <RowCol>    
-                        <FormControlD>
-                            <InputLabel htmlFor="email">Email</InputLabel>
-                            <input 
+                        <Col xs={6}>
+                            <InputPayment htmlFor="email">Email</InputPayment>
+                            <InputPayVal 
                                 type="eamil" 
                                 name="email" 
                                 defaultValue={current_user.email} 
                                 ref={register({required: true})} />
-                        </FormControlD>
-                        <FormControlD>
-                            <select ref={register({required:true})} name="method_payment">
-                            {MethodPayment.map((option) => (
-                                    <option key={option.id} value={option.id}>
-                                    {option.value}
-                                    </option>
-                                ))}
-                            </select>
-                        </FormControlD>
+                        </Col>
+                        <Col xs={6}>
+                            <InputPayment htmlFor="cellphone">Celular</InputPayment>
+                            <InputPayVal 
+                                type="text" 
+                                name="cellphone"
+                                defaultValue={props.data.profile.cellphone} 
+                                ref={register({required: true})} />
+                        
+                        </Col>
                     </RowCol>
                         
                     <RowCol>
-                        <FormControlD>
-                            <InputLabel htmlFor="amount">Monto</InputLabel>
-                            <input 
+                        <Col xs={6}>
+                            <InputPayment htmlFor="amount">Monto</InputPayment>
+                            <InputPayVal 
                                 type="text" 
                                 name="amount"
                                 defaultValue={siguiente} 
                                 ref={register({required: true})} />
-                        </FormControlD>
-                        <FormControlD>
-                            <select ref={register({required: true})} name="coin">
+                        </Col>
+                        <Col xs={6}>
+                            <InputPayment htmlFor="amount">Moneda</InputPayment>
+                            <SelectPayment ref={register({required: true})} name="coin">
                                 {Coin.map((option) => (
                                         <option key={option.id} value={option.id}>
                                         {option.value}
                                         </option>
                                     ))}
-                            </select>
-                        </FormControlD>
-                    </RowCol>
-                    <RowCol>
-                        <FormControlD>
-                            <InputLabel htmlFor="cellphone">Celular</InputLabel>
-                            <input 
-                                type="text" 
-                                name="cellphone"
-                                defaultValue={props.data.profile.cellphone} 
-                                ref={register({required: true})} />
-                        </FormControlD>
+                            </SelectPayment>
+                        </Col>
                     </RowCol>
 
                     <RowCol>
-                        <FormControlD>
-                            <Button type="submit" variant="outlined" color="primary">
-                                ENVIAR
-                            </Button>
-                        </FormControlD>
-                        <FormControlD>
-                            <Button type="button" variant="outlined" color="secondary" onClick={handleClose}>
-                                Cerrar
-                            </Button>
-                        </FormControlD>
+                        <Col xs={6}>
+                            <BtnLeft>
+                                <Button type="submit" variant="outlined" color="primary">
+                                    ENVIAR
+                                </Button>
+                            </BtnLeft>
+                            
+                        </Col>
+                        <Col xs={6}>
+                            <BtnRight>
+                                <Button type="button" variant="outlined" color="secondary" onClick={handleClose}>
+                                    Cerrar
+                                </Button>
+                            </BtnRight>
+                            
+                        </Col>
                         
                     </RowCol>
 
