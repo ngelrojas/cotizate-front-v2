@@ -31,6 +31,7 @@ import Modal from '@material-ui/core/Modal'
 import Button from '@material-ui/core/Button'
 import * as Action from '../../../redux/actions/detalleProyectoActions';
 import {Encrypted} from '../../../userEncrypted'
+import {Payment} from '../../../userPayments'
 
   
 import {Article, SectionDetails, Picture, 
@@ -248,6 +249,8 @@ const Detalle: React.FC<IDetalle> = (props) => {
     const [EndOpen, setEndOpen] = React.useState(false)
     const [TcParameter, setTcParameter] = React.useState("")
     const [TcCommerce, setTcCommerce] = React.useState("")
+    let payments = new Payment()
+    let token: any = window.localStorage.getItem('token')
     const {
         proyectosDetalle, aportes, statusAportes, statusLike, statusSave
       } = useSelector((stateSelector: any) => {
@@ -267,6 +270,13 @@ const Detalle: React.FC<IDetalle> = (props) => {
             lnmonto: amount,
             lcmoneda: coin
         }
+
+        let data_send_api = {
+            lcpedidoid: props.data.header.id,
+            lnmonto: amount,
+            lcmoneda: coin
+        }
+
         SendEncrypt.EncryptData(data_send).then(resp => {
             if(resp.data.data.tcCommerceID){
                 sendToPay(resp.data.data)
@@ -278,6 +288,16 @@ const Detalle: React.FC<IDetalle> = (props) => {
             console.error(err)
         })
     })
+
+    const handleSendPayment = ( data_send:any) => {
+        payments.CreatePayment(data_send, token)
+            .then(resp => {
+                console.log(resp)
+            })
+            .catch(err => {
+                console.error(err)
+            })
+    }
 
     const copiarLink =(data: string)=>{       
         copiarTextoToPapelera(data);
@@ -361,7 +381,7 @@ const Detalle: React.FC<IDetalle> = (props) => {
                             <FormSendPay action="https://checkout.pagofacil.com.bo/es/pay" method="post" name="formularioPago" target="_blank">
                                 <input type="hidden" name="tcCommerceID" defaultValue={TcCommerce} />
                                 <input type="hidden" name="tcParametros" defaultValue={TcParameter} />
-                                <Button type="submit" variant="outlined" color="primary" onClick={()=>console.info("SAVED WHEN IS SUBMITED")}>
+                                <Button type="submit" variant="outlined" color="primary" onClick={handleSendPayment}>
                                     Realizar Pago
                                 </Button>
                             </FormSendPay>
