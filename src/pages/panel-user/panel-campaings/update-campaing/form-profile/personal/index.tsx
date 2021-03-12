@@ -161,6 +161,7 @@ const useStyles = makeStyles((theme: Theme) =>
     },
   }),
 )
+
 const Personal: React.FC<Icampaing> = ({campaing}) => {
 
     let token = window.sessionStorage.getItem('token')
@@ -277,8 +278,8 @@ const Personal: React.FC<Icampaing> = ({campaing}) => {
         
       <Modal
         open={open}
-        aria-labelledby="simple-modal-title"
-        aria-describedby="simple-modal-description">
+        aria-labelledby="loader-background-cotizate"
+        aria-describedby="loader-background-cotizate">
         {body}
       </Modal>
 

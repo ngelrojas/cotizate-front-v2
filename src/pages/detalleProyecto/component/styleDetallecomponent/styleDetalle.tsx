@@ -1,6 +1,8 @@
 import styled from 'styled-components'
 import {Link} from 'react-router-dom'
 import {device} from '../../../../styles/mediaquery'
+import FormControl from '@material-ui/core/FormControl'
+import InputLabel from '@material-ui/core/InputLabel'
 
 export const List = styled.ul`
     display: flex;
@@ -515,7 +517,6 @@ export const ButtonBordeAzul = styled.button`
   font-size: 17px;
   margin: 0.5em 1em;
   padding: 0.25em 1em;
-
 `
 export const DivBorderSinColor = styled.div`   
         background:#F5F5F5;
@@ -841,5 +842,94 @@ export const TextoDanger = styled.p`
         line-height: 16px;
         font-size: 15px;
         margin-top: 4%;
+    }
+`
+
+export const H1 = styled.h1`
+    text-align: center;
+    margin-bottom: 5%;
+    color: #1383C5;
+`
+
+export const TxtRequire = styled.p`
+    text-align: center;
+    color: red;
+    margin-bottom: 5%;
+`
+
+export const RowCol = styled.div`
+    display: inline-flex;
+`
+
+export const FormControlD = styled(FormControl)`
+    margin: 6%!important;
+`
+
+export const FormSend = styled.form`
+    display: inline!important;
+`
+
+export const RegistrarsedeAzul = styled(Link)`
+  background: #FFFFFF;
+  border-radius: 0px;
+  border: 1px solid #1383C5;
+  color: #1383C5;
+  font-size: 17px;
+  margin: 0.5em 1em;
+  padding: 0.7em;
+  text-decoration: none;
+  text-align: center;
+`
+
+export const InputPayment = styled(InputLabel)`
+    padding-top: 4%;
+    padding-bottom: 4%;
+` 
+
+export const InputPayVal = styled.input`
+    margin-top: 2%;
+    margin-bottom: 10%;
+    border: 0px;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 2%;
+`
+
+export const SelectPayment = styled.select`
+    margin-top: 2%;
+    margin-bottom: 2%;
+    border: 0px;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 1%;
+    padding-top: 1%;
+    min-width: 64%;
+`
+
+export const BtnLeft = styled.div`
+    text-align: center;
+    margin-top: 20%;
+`
+
+export const BtnRight = styled.div`
+    margin-top: 20%;
+`
+
+export const FormSendPay = styled.form`
+    text-align: center;
+`
+
+export const BtnCloseSend = styled.div`
+    text-align: center;
+`
+
+export const TxtPayment = styled.div`
+    text-align: center;
+    margin-bottom: 5%;
+    > h3{
+        text-transform: uppercase;
+        color: #1383C5;
+    }
+    > h4{
+        text-transform: uppercase;
+        color: #f50057;
     }
 `
