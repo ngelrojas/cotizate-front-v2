@@ -240,6 +240,12 @@ const useStyles = makeStyles((theme) => ({
       {"id": 2, value: "BOB"}
   ]
 
+  interface FormPayment {
+        lcpedidoid: number
+        lnmonto: number
+        lcmoneda: number
+    }
+
 const Detalle: React.FC<IDetalle> = (props) => {
     const classes = useStyles();
     let SendEncrypt = new Encrypted()
@@ -249,8 +255,10 @@ const Detalle: React.FC<IDetalle> = (props) => {
     const [EndOpen, setEndOpen] = React.useState(false)
     const [TcParameter, setTcParameter] = React.useState("")
     const [TcCommerce, setTcCommerce] = React.useState("")
+    const [DataSend, setDataSend] = React.useState<FormPayment>()
+
     let payments = new Payment()
-    let token: any = window.localStorage.getItem('token')
+    let token: any = window.sessionStorage.getItem('token')
     const {
         proyectosDetalle, aportes, statusAportes, statusLike, statusSave
       } = useSelector((stateSelector: any) => {
@@ -271,26 +279,25 @@ const Detalle: React.FC<IDetalle> = (props) => {
             lcmoneda: coin
         }
 
-        let data_send_api = {
-            lcpedidoid: props.data.header.id,
-            lnmonto: amount,
-            lcmoneda: coin
-        }
-
         SendEncrypt.EncryptData(data_send).then(resp => {
             if(resp.data.data.tcCommerceID){
                 sendToPay(resp.data.data)
                 setEndOpen(true)
+                setDataSend({
+                    lcpedidoid: props.data.header.id,
+                    lnmonto: amount,
+                    lcmoneda: coin
+                })
             }
-            
             
         }).catch(err => {
             console.error(err)
         })
     })
 
-    const handleSendPayment = ( data_send:any) => {
-        payments.CreatePayment(data_send, token)
+    const handleSendPayment = () => {
+
+        payments.CreatePayment(DataSend, token)
             .then(resp => {
                 console.log(resp)
             })
