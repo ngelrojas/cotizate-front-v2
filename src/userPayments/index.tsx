@@ -7,7 +7,7 @@ export class Payment{
      * create method payment 
     **/
     CreatePayment = async(data_send: any, token:any) => {
-        this.resp = await API.post(`payment`, {
+        this.resp = await API.post(`payment`, data_send, {
             headers:{Authorization: `Bearer ${token}`}
         })
         return this.resp

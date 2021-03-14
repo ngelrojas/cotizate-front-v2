@@ -3,6 +3,7 @@ import {Row, Col} from 'react-styled-flexboxgrid'
 import ReactPlayer from 'react-player'
 import LineProgress from '../../../components/LineProgress'
 import {useForm} from 'react-hook-form'
+import {store} from 'react-notifications-component'
 import ThumbUpAltIcon from '@material-ui/icons/ThumbUpAlt';
 import ThumbUpAltOutlinedIcon from '@material-ui/icons/ThumbUpAltOutlined';
 import ThumbUpAltTwoToneIcon from '@material-ui/icons/ThumbUpAltTwoTone';
@@ -235,10 +236,16 @@ const useStyles = makeStyles((theme) => ({
     },
   }));
 
-  const Coin = [
-      {"id": 1, value: "USD"},
-      {"id": 2, value: "BOB"}
-  ]
+const Coin = [
+    {"id": 1, value: "USD"},
+    {"id": 2, value: "BOB"}
+]
+
+interface FormPayment {
+    lcpedidoid: number
+    lnmonto: number
+    lcmoneda: number
+}
 
 const Detalle: React.FC<IDetalle> = (props) => {
     const classes = useStyles();
@@ -249,8 +256,10 @@ const Detalle: React.FC<IDetalle> = (props) => {
     const [EndOpen, setEndOpen] = React.useState(false)
     const [TcParameter, setTcParameter] = React.useState("")
     const [TcCommerce, setTcCommerce] = React.useState("")
+    const [DataSend, setDataSend] = React.useState<FormPayment>()
+
     let payments = new Payment()
-    let token: any = window.localStorage.getItem('token')
+    let token: any = window.sessionStorage.getItem('token')
     const {
         proyectosDetalle, aportes, statusAportes, statusLike, statusSave
       } = useSelector((stateSelector: any) => {
@@ -271,31 +280,35 @@ const Detalle: React.FC<IDetalle> = (props) => {
             lcmoneda: coin
         }
 
-        let data_send_api = {
-            lcpedidoid: props.data.header.id,
-            lnmonto: amount,
-            lcmoneda: coin
-        }
-
         SendEncrypt.EncryptData(data_send).then(resp => {
             if(resp.data.data.tcCommerceID){
                 sendToPay(resp.data.data)
                 setEndOpen(true)
+                setDataSend({
+                    lcpedidoid: props.data.header.id,
+                    lnmonto: amount,
+                    lcmoneda: coin
+                })
             }
-            
             
         }).catch(err => {
             console.error(err)
         })
     })
 
-    const handleSendPayment = ( data_send:any) => {
-        payments.CreatePayment(data_send, token)
+    const handleSendPayment = () => {
+
+        payments.CreatePayment(DataSend, token)
             .then(resp => {
-                console.log(resp)
+                if(resp.data.data === true){
+                    Notifications('Los datos de su Aporte fueron Guardados.', 'success')
+                    setEndOpen(false)
+                    setOpen(false)
+                }
             })
             .catch(err => {
                 console.error(err)
+                Notifications('Tuvimos un problema al guardar sus datos.', 'error')
             })
     }
 
@@ -308,19 +321,19 @@ const Detalle: React.FC<IDetalle> = (props) => {
         setTcCommerce(data_send.tcCommerceID)
     }
 
-    useEffect(() =>{
-        dispatch(Action.obtnerAportes(props.data.header.id));
-        dispatch(Action.obtnerFases(props.data.header.id));
-   },[]);
+//     useEffect(() =>{
+//         dispatch(Action.obtnerAportes(props.data.header.id));
+//         dispatch(Action.obtnerFases(props.data.header.id));
+//    },[]);
+   const support_donate:number = 5.00
 
-   const [siguiente, SetSiguiente]= useState(5)
+   const [siguiente, SetSiguiente]= useState(support_donate)
 
    const _onChangeSiguiente = (e: any) => {
         const texfield = e.target.name;
-        const textValue = e.target.value;
+        let textValue:any = parseInt(e.target.value);
         if (texfield === "txtSiguiente") {
-            console.log(textValue);
-            SetSiguiente(textValue);
+            SetSiguiente(textValue.toFixed(2));
         }  
    };
 
@@ -361,6 +374,23 @@ const Detalle: React.FC<IDetalle> = (props) => {
        }
     
   }
+
+  const Notifications = (set_messages: string, set_type: any) => {
+    store.addNotification({
+        title: 'Guardando Datos',
+        message: set_messages,
+        type: set_type,
+        insert: 'top',
+        container: 'top-right',
+        animationIn: ['animate__animated', 'animate__fadeIn'],
+        animationOut: ['animate__animated', 'animate__fadeOut'],
+        dismiss: {
+            duration: 5000,
+            onScreen: true
+        }
+    })
+  }
+
   const EndPay = (
       <div style={modalStyle} className={classes.paper}>
           <Row>
@@ -457,7 +487,8 @@ const Detalle: React.FC<IDetalle> = (props) => {
                             <InputPayVal 
                                 type="text" 
                                 name="amount"
-                                defaultValue={siguiente} 
+                                defaultValue={siguiente}
+                                placeholder="10.00"
                                 ref={register({required: true})} />
                         </Col>
                         <Col xs={6}>
@@ -504,6 +535,8 @@ const Detalle: React.FC<IDetalle> = (props) => {
   )
 
   useEffect(()=>{
+    dispatch(Action.obtnerAportes(props.data.header.id));
+    dispatch(Action.obtnerFases(props.data.header.id));
   },[statusLike, statusSave])
 
     return (
@@ -791,6 +824,7 @@ const Detalle: React.FC<IDetalle> = (props) => {
                                 type="number"
                                 style={{background:'#FFFFFF', width:'65%'}}
                                 variant="outlined"
+                                placeholder="5.00"
                                 InputProps={{
                                     startAdornment: (
                                       <InputAdornment position="start">
