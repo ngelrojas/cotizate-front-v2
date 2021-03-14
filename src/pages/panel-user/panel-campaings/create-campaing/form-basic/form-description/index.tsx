@@ -3,7 +3,6 @@ import {connect} from 'react-redux'
 import {useForm} from 'react-hook-form'
 import {store} from 'react-notifications-component'
 import {Editor} from '@tinymce/tinymce-react'
-import DefaultImg from '../public/default.png'
 import {CampaingHeader, Campaings} from '../../../../../../userCampaings'
 import {Row, Col} from 'react-styled-flexboxgrid'
 import {next, back} from '../../../../../../redux/actions/next_back.actions'
@@ -20,15 +19,18 @@ import {
     WrapperBox,
     BoxTitle,
     BoxText,
-    Img,
+    BoxTextPhase,
+    BoxTextPD,
+    BoxTextPR,
     ImgText,
     WrapperBoxRD,
+    BoxTitleContent,
 } from '../../styles'
 
 type FormData = {
     title: string
     video_main: string
-    imagen_main: string
+    imagen_main: any 
     excerpt: string
     description: string
     public_at: string
@@ -57,10 +59,10 @@ const FormDescription: React.FC<AllProps> = ({counter, handleNext, handleBack}) 
     let CamBody = new Campaings(token)
     const [description, setDescripction] = React.useState('')
     const [excerpt, setExcerpt] = React.useState('')
+    const [saveImg, setsaveImg] = React.useState('')
     const [msgExcerpt, setMsgExcerpt] = React.useState('')
     const [msgdescription, setMsgdescription] = React.useState('')
     const [datach, setDatach] = React.useState()
-    const [showImg, SetShowImg] = React.useState()
     const {register, handleSubmit, reset, errors} = useForm<FormData>({
         mode: 'onChange'
     })
@@ -82,22 +84,25 @@ const FormDescription: React.FC<AllProps> = ({counter, handleNext, handleBack}) 
         setExcerpt(content)
     }
 
-    const onSubmit = handleSubmit(({title, video_main, imagen_main, public_at, short_url, slogan_campaing}) => {
+    const handleEditorImgChange = (content: any, editor: any) => {
+        setsaveImg(content)
+    }
+  
+    const onSubmit = handleSubmit(({title, video_main, short_url, slogan_campaing}) => {
         
         if (validate()) {
             let send_data = {
                 title: title,
                 video_main: video_main,
-                imagen_main: imagen_main[0],
+                imagen_main: saveImg,
                 excerpt: excerpt,
                 description: description, 
                 public_at: "2020-03-19 00:00:00", 
                 header: datach,
                 currency: 1, 
-                short_url: short_url ? short_url: '', 
-                slogan_campaing: slogan_campaing ? slogan_campaing: ''
+                short_url: short_url, 
+                slogan_campaing: slogan_campaing
             }
-
             CamBody.createCampaing(send_data)
                 .then(resp =>{
                     Notifications('Datos de Descripcion de proyecto guardados', 'success')
@@ -109,7 +114,6 @@ const FormDescription: React.FC<AllProps> = ({counter, handleNext, handleBack}) 
                     console.error(err)
                     Notifications('Porfavor debe revisar los datos a ser llenados.', 'danger')
                 })
-
         }
 
     })
@@ -151,20 +155,9 @@ const FormDescription: React.FC<AllProps> = ({counter, handleNext, handleBack}) 
         })
     }
 
-    const _onChange = (event: React.ChangeEvent<HTMLInputElement>)=> {
-        let file: any = event.currentTarget.files 
-        let reader = new FileReader()
-
-        reader.onloadend = () => {
-            SetShowImg(reader.result)
-        }
-
-        reader.readAsDataURL(file[0])
-    }
-
-
-
     React.useEffect(()=>{
+        const input: any = document.querySelector('input[name="title"]')
+        input.focus()
         window.scrollTo({
             top: 0,
             left: 0,
@@ -176,84 +169,139 @@ const FormDescription: React.FC<AllProps> = ({counter, handleNext, handleBack}) 
     return (
         <>
 
-        <H4>2.- DESCRIPCIÓN DEL PROYECTO </H4>
+        <H4>2.- DESCRIPCmeIÓN DEL PROYECTO </H4>
         <TextConf>Describe tu proyecto en forma clara, cuando llegues a las faces detente y piensa en cuanto nesecitas para cada  face de tu proyecto y cuanto será el costo para este item  
         </TextConf>
-        <Form onSubmit={onSubmit} encType="multipart/form-data">
-        <WrapperBox>
-                <BoxTitle>* Titulo</BoxTitle>
-                <BoxText>¿Cuál es el título del proyecto? </BoxText>
-                <Input
-                    type="text"
-                    name="title"
-                    ref={register({required: true})}
-                />
-                <MsgError>
-                    {errors.title && 'este campo es requerido'}
-                </MsgError>
-        </WrapperBox>
-        <WrapperBox>
+        <Form onSubmit={onSubmit}>
+        <Row>
+            <Col xs={6}>
+                    <BoxTitle>* Titulo</BoxTitle>
+                    <BoxText>¿Cuál es el título del proyecto? </BoxText>
+                    <Input
+                        type="text"
+                        name="title"
+                        ref={register({required: true})}
+                    />
+                    <MsgError>
+                        {errors.title && 'este campo es requerido'}
+                    </MsgError>
+            </Col>
+            <Col xs={6}>
                 <BoxTitle>Lema de la campaña del proyecto</BoxTitle>
-                <BoxText>Elija una frase que permite resumir el espíritu o la idea de tu campaña</BoxText>
-                <Input
-                    type="text"
-                    name="slogan_campaing"
-                    ref={register({required: false})}
-                />
-        </WrapperBox>
-        <WrapperBox>
+                    <BoxText>Elija una frase que permite resumir el espíritu o la idea de tu campaña</BoxText>
+                    <Input
+                        type="text"
+                        name="slogan_campaing"
+                        ref={register({required: false})}
+                    />
+            </Col>
+        </Row>
+        <Row>
+            <Col xs={6}>
                 <BoxTitle>Url corto del proyecto</BoxTitle>
-                <BoxText>Puede adicionar una url corta para que su proyecto, sea compartido de manera mas fasil.</BoxText>
-                <Input
-                    type="text"
-                    name="short_url"
-                    ref={register({required: false})}
-                />
-        </WrapperBox>
+                    <BoxTextPhase>Puede adicionar una url corta para que su proyecto, sea compartido de manera mas fasil.</BoxTextPhase>
+                    <Input
+                        type="text"
+                        name="short_url"
+                        ref={register({required: false})}
+                    />
+            </Col>
+            <Col xs={6}>
+                    <BoxTitle>* Video</BoxTitle>
+                    <BoxTextPhase>As tu mejor video, Un buen video marca la diferencia y es en gran parte responsable del éxito de tu proyecto.</BoxTextPhase>
+                    <Input
+                        type="text"
+                        name="video_main"
+                        ref={register({required: true})}
+                    />
+                    <MsgError>
+                        {errors.video_main && 'este campo es requerido'}
+                    </MsgError>
+            </Col>
+        </Row>
+
         <WrapperBox>
                 <BoxTitle>* Imagen</BoxTitle>
                 <Row>
-                    <Col xs={6}>
+                    <Col xs={12}>
                         <ImgText>
                             Esta imagen se utilizará como miniatura de su proyecto (PNG, JPG tamaño 305 x 161 pixeles tamanho minimo 220 x 220 px.
                         </ImgText>
-                    </Col>
-                    <Col xs={5}>
+                            
+                        <Row>
+                            <Col xs={12}>
+                                <Row center="xs">
+                                <Col xs={6} >
+                                <Editor 
+                                    initialValue=''
+                                    init={{
+                                        branding: false,
+                                        statusbar: false,
+                                        height: 300,
+                                        width: 350,
+                                        menubar: false,
+                                        plugins: [
+                                            'advlist autolink lists link image charmap print preview anchor image',
+                                            'imagetools searchreplace visualblocks code fullscreen',
+                                            'insertdatetime media table paste code help wordcount'
+                                        ],
+                                        toolbar:
+                                            ' image | imagetools',
+                                        automatic_uploads: true,
+                                        file_picker_types: 'image',
+                                        file_picker_callback: function(
+                                            cb: any,
+                                            value: any,
+                                            meta: any
+                                        ) {
+                                            let input = document.createElement('input')
+                                            input.setAttribute('type', 'file')
+                                            input.setAttribute('accept', 'image/*')
+                                            input.onchange = function(files: any) {
+                                                let file: any = (input as any).files[0]
+                                                let reader: any = new FileReader()
+                                                reader.onload = function() {
+                                                    let id = 'blobid' + new Date().getTime()
+                                                    let blobCache = (window as any).tinymce
+                                                        .activeEditor.editorUpload.blobCache
+                                                    let base64 = reader.result.split(',')[1]
+                                                    let blobInfo: any = blobCache.create(
+                                                        id,
+                                                        file,
+                                                        base64
+                                                    )
+                                                    blobCache.add(blobInfo)
+                                                    cb(blobInfo.blobUri(), {title: file.name})
+                                                }
+                                                reader.readAsDataURL(file)
+                                            }
+                                            input.click()
+                                        }
+                                    }}
+                                    onEditorChange={handleEditorImgChange}
+                                />
+                                </Col>
+                                </Row>
+                            </Col>
+                        </Row>
 
-                        <Img src={ showImg ? showImg : DefaultImg } alt="cotizate" />
-                        <Input
-                            type="file"
-                            name="imagen_main"
-                            ref={register({required: true})}
-                            accept="image/png, image/jpeg"
-                            onChange={_onChange}
-                        />
                     </Col>
+                    
                 <MsgError>
                     {errors.imagen_main && 'este campo es requerido'}
                 </MsgError>
                 </Row>
         </WrapperBox>
-         <WrapperBox>
-                <BoxTitle>* Video</BoxTitle>
-                <BoxText>As tu mejor video, Un buen video marca la diferencia y es en gran parte responsable del éxito de tu proyecto.</BoxText>
-                <Input
-                    type="text"
-                    name="video_main"
-                    ref={register({required: true})}
-                />
-                <MsgError>
-                    {errors.video_main && 'este campo es requerido'}
-                </MsgError>
-        </WrapperBox>       
+     
             <WrapperBoxRD>
-                <BoxTitle> * Resumen descripción </BoxTitle>
-                <BoxText> 
+                <BoxTitleContent> * Resumen descripción </BoxTitleContent>
+                <BoxTextPR> 
                 Este es el resumen de  descripción del post utiliza max. 244 caracteres o 44 palabras
-                </BoxText>
+                </BoxTextPR>
                 <Editor
                     initialValue=''
                     init={{
+                        branding: false,
                         height: 200,
                         menubar: false,
                         plugins: [
@@ -300,13 +348,14 @@ const FormDescription: React.FC<AllProps> = ({counter, handleNext, handleBack}) 
             </WrapperBoxRD>
 
             <WrapperBoxRD>
-                <BoxTitle>* Descripción de tu campaña </BoxTitle>
-                <BoxText> 
+                <BoxTitleContent>* Descripción de tu campaña </BoxTitleContent>
+                <BoxTextPD> 
                 Habla con claridad sobre lo que quieres lograr. Aclara posibles dudas sobre cómo se utilizará el dinero, quién está detrás del proyecto, La transparencia atrae a más seguidores. Recuerde: su proyecto será accedido por personas comunes que decidirán si quieren o no apoyar su proyecto.
-                </BoxText>
+                </BoxTextPD>
                 <Editor
                     initialValue=''
                     init={{
+                        branding: false,
                         height: 500,
                         menubar: false,
                         plugins: [

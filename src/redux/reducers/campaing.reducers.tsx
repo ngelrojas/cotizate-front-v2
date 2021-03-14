@@ -1,33 +1,30 @@
 import {
-    SET_DEFAULT_CAMPAING,
     SET_CAMPAING,
     SET_ERRORS
-} from '../types'
+} from '../types/campaing.types'
 
-/*interface InitCampaingState {*/
-    //id: number,
-    //category: string,
-    //city: string,
-    //qty_day: number,
-    //amount: number,
-    //role: number 
-/*}*/
+const InitCampaingState = {
+    answer: false,
+    campaing: {}, 
+}
 
-const initialState = null 
-
-export default function(state = initialState, action: any) {
+export default function(state = InitCampaingState, action: any) {
+    
     switch (action.type) {
-        case SET_DEFAULT_CAMPAING:
-            return initialState
+       
         case SET_CAMPAING:
-            return {
+            return{
+                answer: true,
                 ...action.payload
-            }
+            } 
+
         case SET_ERRORS:
             return {
-                errors: action.payload
+                answer: false,
+                ...action.errors
             }
+
         default:
-            return state
+            return state 
     }
 }

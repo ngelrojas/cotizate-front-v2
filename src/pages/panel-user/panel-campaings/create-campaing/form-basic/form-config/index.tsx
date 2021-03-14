@@ -6,16 +6,14 @@ import {store} from 'react-notifications-component'
 import {CategoriesCampaing} from '../../../../../../userCategories'
 import {City} from '../../../../../../userCountryCities'
 import {CampaingHeader} from '../../../../../../userCampaings'
-import {Row} from 'react-styled-flexboxgrid'
+import {Row, Col} from 'react-styled-flexboxgrid'
 import {next, back} from '../../../../../../redux/actions/next_back.actions'
-
 import {
     WrapBtnSave,
-    WrapperSave,
+    WrapperSaveConfig,
     BtnSaveProject,
-    Form,
+    FormConf,
     MsgError,
-    WrapperBox,
     BoxTitle,
     BoxText,
     BoxSelect,
@@ -23,9 +21,8 @@ import {
     TextConf,
     TextMain,
     BoxInput,
-    BoxInputDuration,
     WrappBoxInput,
-    BS
+    BS,
 } from '../../styles'
 
 type FormData = {
@@ -81,7 +78,7 @@ const FormConfig: React.FC<AllProps> = ({counter, handleNext}) => {
             })
             .catch(err => {
                 console.error(err)
-                Notifications(err, 'danger')
+                Notifications(`${err}`, 'danger')
             })
     })
 
@@ -139,8 +136,9 @@ const FormConfig: React.FC<AllProps> = ({counter, handleNext}) => {
         <H4>1.- CONFIGURACION</H4>
         <TextConf>Vamos a configuar tu proyecto selecciona siguientes opciones</TextConf>
 
-        <Form onSubmit={onSubmit}>
-        <WrapperBox>
+        <FormConf onSubmit={onSubmit}>
+        <Row>
+        <Col xs={6}>
                 <BoxTitle>* Categoria</BoxTitle>
                 <BoxText>Seleccione la categoría que mejor represente su proyecto </BoxText>
                 <BoxSelect ref={register({required: true})} name="category">
@@ -155,9 +153,8 @@ const FormConfig: React.FC<AllProps> = ({counter, handleNext}) => {
                 <MsgError>
                     {errors.category && 'este campo es requerido'}
                 </MsgError>
-        </WrapperBox>
-
-        <WrapperBox>
+        </Col>
+        <Col xs={6}>
                 <BoxTitle>* Ubicacion</BoxTitle>
                 <BoxText>Donde esta ubicado tu proyecto, Elija la ubicación de donde esta ubicado tu proyecto</BoxText>
                 <BoxSelect ref={register({required: true})} name="city">
@@ -172,32 +169,30 @@ const FormConfig: React.FC<AllProps> = ({counter, handleNext}) => {
                 <MsgError>
                     {errors.city && 'este campo es requerido'}
                 </MsgError>
-        </WrapperBox>
-
-        <WrapperBox>
+        </Col>
+        </Row>
+        <Row>
+        <Col xs={6}>
                 <BoxTitle>* Duracion del proyecto</BoxTitle>
                 <BoxText>Cuanto tiempo vaa durar tu campaña, lo mas recomendable es de 90 dias </BoxText>
-                <BoxInputDuration
-                    type="number"
+                <BoxInput
                     name="qty_day"
-                    ref={register({required: true})}
                     placeholder="cantidad de dias"
+                    ref={register({required: true})}
                 />
                 <MsgError>
                     {errors.qty_day && 'este campo es requerido'}
                 </MsgError>
-        </WrapperBox>
-
-        <WrapperBox>
+        </Col>
+        <Col xs={6}>
                 <BoxTitle>* Meta</BoxTitle>
                 <BoxText>¿Cuánto necesitas recaudar? Fíjate una meta coherente con lo que propone tu proyecto. No 
 olvide incluir las tarifas administrativas en su cálculo. </BoxText>
                 <WrappBoxInput>
                     <BoxInput
-                        type="number"
                         name="amount"
                         ref={register({required: true})}
-                        placeholder="15000"
+                        placeholder="000.000,000"
                     />
                     <BS>BS</BS>
                 </WrappBoxInput>
@@ -205,17 +200,17 @@ olvide incluir las tarifas administrativas en su cálculo. </BoxText>
                 <MsgError>
                     {errors.amount && 'este campo es requerido'}
                 </MsgError>
-        </WrapperBox>
+        </Col>
+        </Row>
             <Row>
-                <WrapperSave>
+                <WrapperSaveConfig>
                     <WrapBtnSave>
                         <BtnSaveProject>guardar</BtnSaveProject>
                     </WrapBtnSave>
-                </WrapperSave>
+                </WrapperSaveConfig>
             </Row>
             
-
-        </Form>
+        </FormConf>
         </>
 
     )

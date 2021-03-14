@@ -1,0 +1,3 @@
+export const SET_PROFILECA = 'SET_PROFILECA'
+export const LOADING_PROFILECA = 'LOADING_PROFILECA'
+export const SET_ERRORS = 'SET_ERRORS'

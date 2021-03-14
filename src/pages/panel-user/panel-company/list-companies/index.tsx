@@ -7,7 +7,7 @@ import {Table, Th, Td, Activate, NotActivate} from './styles'
 import {CompanyProfile} from '../../../../userCompany'
 
 const ListCompanies: React.FC = () => {
-    const [companies, setCompanies] = React.useState()
+    const [companies, setCompanies] = React.useState([])
     const [isData, setIsData] = React.useState(true)
     let token = window.sessionStorage.getItem('token')
     const comProfile = new CompanyProfile(token)

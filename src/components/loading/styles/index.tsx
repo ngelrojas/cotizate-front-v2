@@ -3,6 +3,7 @@ import styled from 'styled-components'
 export const WrapDots = styled.p`
     text-align: center;
     color: blue;
+    text-transform: uppercase;
 `
 export const Dots = styled.span`
     &::after {

@@ -158,4 +158,5 @@ const mapStateToProps = (state: any) => ({
 const mapActionToProps = {
     loginUser
 }
+
 export default connect(mapStateToProps, mapActionToProps)(FormLogin)

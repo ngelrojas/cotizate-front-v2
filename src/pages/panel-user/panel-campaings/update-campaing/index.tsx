@@ -1,31 +1,31 @@
 import React from 'react'
+import {connect} from 'react-redux'
 import {useHistory} from 'react-router-dom'
+import { Tabs, TabPanels, TabPanel} from '@reach/tabs';
+import {MdPanoramaFishEye } from 'react-icons/md'
+import '@reach/tabs/styles.css'
 import {Grid, Row, Col} from 'react-styled-flexboxgrid'
-import {Tabs, TabPanel} from 'react-tabs'
 import FormBasic from './form-basic'
-import FormDescription from './form-description'
-import FormCatTag from './form-catags'
-import FormRewards from './form-rewards'
 import FormProfile from './form-profile'
-import {Content, H1, Title, TabMenu, TabSubMenu} from './styles'
+import FormPreview from './form-preview'
+import {Content, TabNav, TabSubMenu, IconOn} from './styles'
 import {CheckAuthentication} from '../../../../redux/auth'
-import {Campaings} from '../../../../userCampaings'
+import {RetrieveCampaing} from '../../../../redux/actions/campaing.actions' 
 
-const UpdateCampaing: React.FC = () => {
-    const [dcamp, setDcamp] = React.useState()
+const UpdateCampaing: React.FC = (props: any) => {
+
     let history = useHistory()
-    let token = window.sessionStorage.getItem('token')
-    let dataCampaing = new Campaings(token)
 
-    const RetrieveCampaing = (camp_id:number) =>{
-        dataCampaing.retrieveCampaing(camp_id).then(res => {
-            console.log(res.data.data)
-            setDcamp(res.data.data)
-        }).catch(err => {
-            console.error(err)
-        })
-    } 
-    
+    function CoolTab(props:any) {
+        const { isSelected, children } = props;
+        return (
+          <TabSubMenu {...props}>
+            {isSelected ? <IconOn /> : <MdPanoramaFishEye />}
+            {children}
+          </TabSubMenu>
+        );
+    }
+
     const GetCampID = () =>{
         let url_param:string = window.location.pathname
         let camp_id = url_param.replace(/[^0-9]/g,'')
@@ -38,9 +38,8 @@ const UpdateCampaing: React.FC = () => {
             history.push('/')
         }
 
-        let ID = GetCampID()
-        
-        RetrieveCampaing(ID)
+        let ID = GetCampID() 
+        props.RetrieveCampaing(ID)
 
     },[])
 
@@ -48,49 +47,23 @@ const UpdateCampaing: React.FC = () => {
         <Content>
             <Grid>
                 <Row>
-                    <Title>
-                        <H1> actualizar campaña</H1>
-                    </Title>
-                </Row>
-
-                <Row>
                     <Col xs={12}>
                         <Row center="xs">
-                            <Col xs={10}>
+                            <Col xs={12}>
+
                                 <Tabs>
-                                    <TabMenu>
-                                        <TabSubMenu>
-                                            INFORMACION BASICA
-                                        </TabSubMenu>
-                                        <TabSubMenu>
-                                            RESUMEN Y DESCRIPCION
-                                        </TabSubMenu>
-                                        <TabSubMenu>
-                                            CATEGORIA Y TAGS
-                                        </TabSubMenu>
-                                        <TabSubMenu>
-                                            RECOMPENSAS
-                                        </TabSubMenu>
-                                        <TabSubMenu>
-                                            PERFIL
-                                        </TabSubMenu>
-                                    </TabMenu>
-                                    <TabPanel>
-                                        <FormBasic {...dcamp} />
-                                    </TabPanel>
-                                    <TabPanel>
-                                        <FormDescription {...dcamp} />
-                                    </TabPanel>
-                                    <TabPanel>
-                                        <FormCatTag {...dcamp} />
-                                    </TabPanel>
-                                    <TabPanel>
-                                        <FormRewards />
-                                    </TabPanel>
-                                    <TabPanel>
-                                        <FormProfile />
-                                    </TabPanel>
+                                  <TabNav>
+                                  <CoolTab><p>PERFIL</p></CoolTab>
+                                  <CoolTab><p>DATOS DE TU PROYECTO</p></CoolTab>
+                                  <CoolTab><p>VISTA PREVIA</p></CoolTab>
+                                  </TabNav>
+                                  <TabPanels>
+                                    <TabPanel> <FormProfile /></TabPanel>
+                                    <TabPanel> <FormBasic /></TabPanel>
+                                    <TabPanel> <FormPreview /></TabPanel>
+                                  </TabPanels>
                                 </Tabs>
+
                             </Col>
                         </Row>
                     </Col>
@@ -100,4 +73,12 @@ const UpdateCampaing: React.FC = () => {
     )
 }
 
-export default UpdateCampaing
+const mapStateToProps = (state: any) => ({
+    campaing: state.campaing
+})
+
+const mapActionToProps = {
+    RetrieveCampaing   
+}
+
+export default connect(mapStateToProps, mapActionToProps)(UpdateCampaing)

@@ -1,118 +1,101 @@
 import React from 'react'
-import {useForm} from 'react-hook-form'
-import {Campaings} from '../../../../../userCampaings'
-import {
-    Label,
-    Input,
-    FormSubTitle,
-    WrapBtn,
-    BtnNext,
-    Form,
-    MsgError,
-    MsgSuccess
-} from '../styles'
+import {connect} from 'react-redux'
+import FormConfig from './form-config' 
+import FormDescription from './form-description'
+import FormPhase from './form-phase'
+import FormReward from './form-rewards'
+import {WrapBtn, BtnBack, BtnNext} from '../styles'
+//import Slide from 'react-reveal/Slide'
 
-type FormData = {
-    title: string
-    video_img: string
-    qty_day: number
-    amount: number
+interface Icounter {
+    counter: any 
 }
 
-type propsCamp = {
-    id: number,
-    title: string,
-    video_img: string,
-    qty_day: number,
-    amount: number
+interface Ihandlers {
+    handle_Next: any; 
+    handle_Back: any; 
 }
 
-const FormBasic: React.FC<propsCamp> = (propsCamp) => {
-    const [msg, Setmsg] = React.useState('')
-    const [formbasic, Setformbasic] = React.useState()
-    let token = window.sessionStorage.getItem('token')
-    let dataCampaing = new Campaings(token)
-    const {register, handleSubmit, errors} = useForm<FormData>({
-        mode: 'onChange'
-    })
 
-    const onSubmit = handleSubmit(({title, video_img, qty_day, amount}) => {
-        let send_data = {
-            title: title,
-            video_img: video_img,
-            qty_day: qty_day,
-            amount: amount
+type AllProps = Icounter & Ihandlers
+
+const FormBasic: React.FC<AllProps> = ({counter, handle_Next, handle_Back}) => {
+
+    const [datai, setDatai] = React.useState(0)
+    const [menu, setMenu] = React.useState(1)
+
+    const handleBack=()=>{
+        if(counter === 1){
+            setMenu(counter - 1)
         }
-        dataCampaing.updateCampaing(propsCamp.id, send_data).then(res =>{
-            console.log(res.data.data)
-            if (res.data.data){
-                Setmsg('datos basicos actualizados.')
-            }
-        }).catch(err =>{
-            console.error(err)
-            Setmsg('existe algun error porfavor intente mas tarde.')
-        })
+
+        if(counter === 2){
+            setMenu(counter - 2)
+        }
+
+        let rest:number = 0 
+        if(menu > 1){
+            rest = menu - 1 
+            setMenu(rest)
+        }
+    }
+
+    const handleNext = ()=>{
         
-    })
+        let menu_length:number = 5 
+        let increment:number = menu + 1
+        
+        if(increment === menu_length){
+            increment = datai
+            setMenu(datai)
+        }
+
+        setDatai(1)
+        setMenu(increment)
+    }
+
+    const stepForm = (index: number) => {
+
+        if(counter >= 1 ){
+            index = counter + index
+        }
+
+        switch(index){
+            case 1: 
+                return <FormConfig />
+            case 2: 
+                return <FormDescription />
+            case 3: 
+                return <FormPhase />
+            case 4: 
+                return <FormReward />
+            default: 
+                return <FormConfig />
+        }
+    }
 
     return (
-        <Form onSubmit={onSubmit}>
-            <Label>
-                <FormSubTitle>titulo del proyecto</FormSubTitle>
-                <Input
-                    type="text"
-                    name="title"
-                    ref={register({required: true})}
-                    placeholder="titulo del proyecto"
-                    defaultValue={propsCamp.title}
-                />
-                <MsgError>{errors.title && 'este campo es requerido'}</MsgError>
-            </Label>
-            <Label>
-                <FormSubTitle>video o imagen del proyecto</FormSubTitle>
-                <Input
-                    type="text"
-                    name="video_img"
-                    ref={register({required: true})}
-                    placeholder="video/imagen proyecto"
-                    defaultValue={propsCamp.video_img} 
-                />
-                <MsgError>
-                    {errors.video_img && 'este campo es requerido'}
-                </MsgError>
-            </Label>
-            <Label>
-                <FormSubTitle>cuantos dias durara tu campaña</FormSubTitle>
-                <Input
-                    type="number"
-                    name="qty_day"
-                    ref={register({required: true})}
-                    placeholder="cantidad de dias"
-                    defaultValue={propsCamp.qty_day}
-                />
-                <MsgError>
-                    {errors.qty_day && 'este campo es requerido'}
-                </MsgError>
-            </Label>
-            <Label>
-                <FormSubTitle>cantidad de dinero a recaudar</FormSubTitle>
-                <Input
-                    type="number"
-                    name="amount"
-                    ref={register({required: true})}
-                    placeholder="Bs 15.000"
-                    defaultValue={propsCamp.amount}
-                />
-                <MsgError>
-                    {errors.amount && 'este campo es requerido'}
-                </MsgError>
-            </Label>
-            <MsgSuccess>{msg}</MsgSuccess>
+        <>
+            {
+                
+               stepForm(menu) 
+            } 
+            <div>           
             <WrapBtn>
-                <BtnNext>guardar</BtnNext>
+                <BtnBack onClick={handleBack}>volver</BtnBack>
             </WrapBtn>
-        </Form>
+            <WrapBtn>
+                <BtnNext  onClick={handleNext}>siguiente</BtnNext>
+            </WrapBtn>
+            </div>
+        </>
+
     )
 }
+const mapStateToProps = (state: any) => ({
+    handle_Next: 0,
+    handle_Back: 0,
+    counter: state.nextForm.counter,
+})
 
-export default FormBasic
+export default connect(mapStateToProps)(FormBasic)

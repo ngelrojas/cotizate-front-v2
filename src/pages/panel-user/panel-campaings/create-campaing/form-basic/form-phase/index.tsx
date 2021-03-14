@@ -2,23 +2,24 @@ import React from 'react'
 import {useForm} from 'react-hook-form'
 import {Editor} from '@tinymce/tinymce-react'
 import {store} from 'react-notifications-component'
+import {Row, Col} from 'react-styled-flexboxgrid'
 import {CampaingHeader} from '../../../../../../userCampaings'
 import {Phases} from '../../../../../../userPhases'
 import {
-    WrapBtnAdd,
-    BtnAdd,
     FormR,
     MsgErrorPhase,
     MsgError,
     WrapperBoxRD,
     WrapperBox,
-    BoxTitle,
+    BoxTitleContent,
     BoxText,
-    WrapperBoxPhase,
     WrappBoxInput,
     BoxInputPhase,
     BoxInput,
-    BS
+    BS,
+    WrapperSavePhase,
+    WrapBtnSave,
+    BtnSaveProject
 } from '../../styles'
 
 type FormData = {
@@ -26,14 +27,14 @@ type FormData = {
     amount: number
 }
 
-const FormPhase: React.FC = () => {
+const FormPhase: React.FC= () => {
 
     let token = window.sessionStorage.getItem('token')
     let CamHeader = new CampaingHeader(token)
     let Phase = new Phases(token)
     const [datach, setDatach] = React.useState<number>(0)
     const [description, Setdescription] = React.useState()
-    const [MsgErrorF, setMsgErrorF] = React.useState()
+    const [MsgErrorF, setMsgErrorF] = React.useState('')
     const {register, handleSubmit, reset, errors} = useForm<FormData>({
         mode: 'onChange'
     })
@@ -98,6 +99,8 @@ const FormPhase: React.FC = () => {
     }
 
     React.useEffect(()=>{ 
+        const input: any = document.querySelector('input[name="title"]')
+        input.focus()
         window.scrollTo({
             top: 0,
             left: 0,
@@ -108,17 +111,18 @@ const FormPhase: React.FC = () => {
 
     return (
         <>
-            <WrapperBoxRD>
-            <WrapperBox>
-                <BoxTitle> *Fases del proyecto</BoxTitle>
-                <BoxText> 
-                 ¿Cómo se utilizará su dinero? Cuanta más transparencia, mejor. Muestre qué pasos seguira y cuanto de dinero invertira en cada fase del proyecto.
-                </BoxText>
-            </WrapperBox>
+        <WrapperBoxRD>
+        <WrapperBox>
+            <BoxTitleContent> *Fases del proyecto</BoxTitleContent>
+            <BoxText> 
+                ¿Cómo se utilizará su dinero? Cuanta más transparencia, mejor. Muestre qué pasos seguira y cuanto de dinero invertira en cada fase del proyecto.
+            </BoxText>
+        </WrapperBox>
 
         <FormR onSubmit={onSubmit}>
-            <WrapperBoxPhase>
-                    <BoxText>* Titulo de la Fase </BoxText>
+        <Row>
+        <Col xs={6}>
+                    <BoxTitleContent>* Titulo de la Fase </BoxTitleContent>
                     <WrappBoxInput>
                         <BoxInputPhase
                             type="text"
@@ -131,23 +135,23 @@ const FormPhase: React.FC = () => {
                     <MsgError>
                         {errors.title && 'este campo es requerido'}
                     </MsgError>
-            </WrapperBoxPhase>
-            <WrapperBoxPhase>
-                    <BoxText>* Cuanto de dinero necesitaras para esta fase del proyecto </BoxText>
+        </Col>
+        <Col xs={6}>
+                    <BoxTitleContent>* Cuanto de dinero necesitaras para esta fase del proyecto </BoxTitleContent>
                     <WrappBoxInput>
                         <BoxInput
-                            type="number"
                             name="amount"
                             ref={register({required: true})}
-                            placeholder="100"
+                            placeholder="000.000.000"
                         />
                         <BS>BS</BS>
                     </WrappBoxInput>
-
                     <MsgError>
                         {errors.amount && 'este campo es requerido'}
                     </MsgError>
-            </WrapperBoxPhase>
+        </Col>
+        </Row>
+                <BoxTitleContent>* Descripcion </BoxTitleContent>
                 <BoxText> 
                 Descripción de la fase no debe exceder mas de  870 caracteres o 150 palabras
                 </BoxText>
@@ -199,14 +203,17 @@ const FormPhase: React.FC = () => {
  
             <MsgErrorPhase>{MsgErrorF}</MsgErrorPhase>
 
-            <WrapBtnAdd>
-                <BtnAdd>adicionar</BtnAdd>
-            </WrapBtnAdd>
+            <Row>
+                <WrapperSavePhase>
+                    <WrapBtnSave>
+                        <BtnSaveProject>adicionar</BtnSaveProject>
+                    </WrapBtnSave>
+                </WrapperSavePhase>
+            </Row>
 
         </FormR>
 
-        </WrapperBoxRD> 
-
+        </WrapperBoxRD>
         </>
 
     )

@@ -20,7 +20,7 @@ type AllProps = Icounter & Ihandlers
 
 const FormBasic: React.FC<AllProps> = ({counter, handle_Next, handle_Back}) => {
 
-    const [datai, setDatai] = React.useState()
+    const [datai, setDatai] = React.useState(0)
     const [menu, setMenu] = React.useState(1)
 
     const handleBack=()=>{
@@ -78,7 +78,7 @@ const FormBasic: React.FC<AllProps> = ({counter, handle_Next, handle_Back}) => {
             {
                 
                stepForm(menu) 
-            }
+            } 
             <div>           
             <WrapBtn>
                 <BtnBack onClick={handleBack}>volver</BtnBack>
@@ -87,7 +87,6 @@ const FormBasic: React.FC<AllProps> = ({counter, handle_Next, handle_Back}) => {
                 <BtnNext  onClick={handleNext}>siguiente</BtnNext>
             </WrapBtn>
             </div>
-
         </>
 
     )
