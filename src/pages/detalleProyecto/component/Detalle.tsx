@@ -3,6 +3,7 @@ import {Row, Col} from 'react-styled-flexboxgrid'
 import ReactPlayer from 'react-player'
 import LineProgress from '../../../components/LineProgress'
 import {useForm} from 'react-hook-form'
+import {store} from 'react-notifications-component'
 import ThumbUpAltIcon from '@material-ui/icons/ThumbUpAlt';
 import ThumbUpAltOutlinedIcon from '@material-ui/icons/ThumbUpAltOutlined';
 import ThumbUpAltTwoToneIcon from '@material-ui/icons/ThumbUpAltTwoTone';
@@ -235,16 +236,16 @@ const useStyles = makeStyles((theme) => ({
     },
   }));
 
-  const Coin = [
-      {"id": 1, value: "USD"},
-      {"id": 2, value: "BOB"}
-  ]
+const Coin = [
+    {"id": 1, value: "USD"},
+    {"id": 2, value: "BOB"}
+]
 
-  interface FormPayment {
-        lcpedidoid: number
-        lnmonto: number
-        lcmoneda: number
-    }
+interface FormPayment {
+    lcpedidoid: number
+    lnmonto: number
+    lcmoneda: number
+}
 
 const Detalle: React.FC<IDetalle> = (props) => {
     const classes = useStyles();
@@ -299,10 +300,15 @@ const Detalle: React.FC<IDetalle> = (props) => {
 
         payments.CreatePayment(DataSend, token)
             .then(resp => {
-                console.log(resp)
+                if(resp.data.data === true){
+                    Notifications('Los datos de su Aporte fueron Guardados.', 'success')
+                    setEndOpen(false)
+                    setOpen(false)
+                }
             })
             .catch(err => {
                 console.error(err)
+                Notifications('Tuvimos un problema al guardar sus datos.', 'error')
             })
     }
 
@@ -315,10 +321,10 @@ const Detalle: React.FC<IDetalle> = (props) => {
         setTcCommerce(data_send.tcCommerceID)
     }
 
-    useEffect(() =>{
-        dispatch(Action.obtnerAportes(props.data.header.id));
-        dispatch(Action.obtnerFases(props.data.header.id));
-   },[]);
+//     useEffect(() =>{
+//         dispatch(Action.obtnerAportes(props.data.header.id));
+//         dispatch(Action.obtnerFases(props.data.header.id));
+//    },[]);
 
    const [siguiente, SetSiguiente]= useState(5)
 
@@ -326,7 +332,6 @@ const Detalle: React.FC<IDetalle> = (props) => {
         const texfield = e.target.name;
         const textValue = e.target.value;
         if (texfield === "txtSiguiente") {
-            console.log(textValue);
             SetSiguiente(textValue);
         }  
    };
@@ -368,6 +373,23 @@ const Detalle: React.FC<IDetalle> = (props) => {
        }
     
   }
+
+  const Notifications = (set_messages: string, set_type: any) => {
+    store.addNotification({
+        title: 'Guardando Datos',
+        message: set_messages,
+        type: set_type,
+        insert: 'top',
+        container: 'top-right',
+        animationIn: ['animate__animated', 'animate__fadeIn'],
+        animationOut: ['animate__animated', 'animate__fadeOut'],
+        dismiss: {
+            duration: 5000,
+            onScreen: true
+        }
+    })
+  }
+
   const EndPay = (
       <div style={modalStyle} className={classes.paper}>
           <Row>
@@ -511,6 +533,8 @@ const Detalle: React.FC<IDetalle> = (props) => {
   )
 
   useEffect(()=>{
+    dispatch(Action.obtnerAportes(props.data.header.id));
+    dispatch(Action.obtnerFases(props.data.header.id));
   },[statusLike, statusSave])
 
     return (

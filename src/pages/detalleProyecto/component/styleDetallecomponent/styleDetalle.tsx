@@ -933,3 +933,30 @@ export const TxtPayment = styled.div`
         color: #f50057;
     }
 `
+
+export const WrapBtn = styled.div`
+    width: 100%;
+    display: inline-flex;
+`
+
+export const BtnRightPY = styled.div`
+    margin-top: 20%;
+    margin-left: 24%;
+`
+
+export const BtnLeftPY = styled.div`
+    text-align: right;
+    margin-top: 20%;
+    margin-right: 10%;
+`
+
+export const RowColPY = styled.div`
+    display: inline-flex;
+    margin-bottom: 10%;
+`
+
+export const TxtRequirePY = styled.p`
+    text-align: center;
+    color: red;
+    margin-bottom: 15%;
+`
