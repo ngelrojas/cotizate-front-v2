@@ -4,6 +4,7 @@ import {Layout} from './layout/main'
 import Header from './header'
 import Footer from './footer'
 import Home from './pages/home'
+import DetalleProyecto from './pages/detalleProyecto'
 import Register from './pages/register'
 import Login from './pages/login'
 import ExploreProject from './pages/explorer'
@@ -15,7 +16,14 @@ import PanelUser from './pages/panel-user'
 import PanelCampaing from './pages/panel-user/panel-campaings'
 import CreateCampaing from './pages/panel-user/panel-campaings/create-campaing'
 import UpdateCampaing from './pages/panel-user/panel-campaings/update-campaing'
+import PanelCreated from './pages/panel-user/panel-created'
+import PanelRevision from './pages/panel-user/panel-revision'
+import PanelAproved from './pages/panel-user/panel-aproved'
+import PanelPublic from './pages/panel-user/panel-public'
 import PageCreating from './pages/creating'
+import Crowdfunding from './pages/crowdfunding'
+import Category from './pages/categorias'
+import Cotizate from './pages/cotizate'
 import PageNotFound from './pages/404'
 import {CheckAuthentication} from './redux/auth'
 import ReactNotification from 'react-notifications-component'
@@ -64,7 +72,7 @@ const App: React.FC = () => {
                     <Route
                         exact
                         path="/panel-de-usuario"
-                        component={PanelUser}
+                        component={PanelUser} 
                     />
                     <Route
                         exact
@@ -78,13 +86,53 @@ const App: React.FC = () => {
                     />
                     <Route
                         exact
-                        path="/panel-de-usuario/actualizar-campania/:id"
+                        path="/panel-de-usuario/actualizar-proyecto/:id"
                         component={UpdateCampaing}
+                    />
+                    <Route
+                        exact
+                        path="/dashboard-de-usuario/creados"
+                        component={PanelCreated}
+                    />
+                    <Route
+                        exact
+                        path="/dashboard-de-usuario/en-revision"
+                        component={PanelRevision}
+                    />
+                    <Route
+                        exact
+                        path="/dashboard-de-usuario/aprovados"
+                        component={PanelAproved}
+                    />
+                    <Route
+                        exact
+                        path="/dashboard-de-usuario/publicados"
+                        component={PanelPublic}
                     />
                     <Route
                         exact
                         path="/crear-proyectos"
                         component={PageCreating}
+                    />
+                    <Route
+                        exact
+                        path="/crowfounding"
+                        component={Crowdfunding}
+                    />
+                     <Route
+                        exact
+                        path="/category"
+                        component={Category}
+                    />
+                     <Route
+                        exact
+                        path="/detail-proyect"
+                        component={DetalleProyecto}
+                    />
+                     <Route
+                        exact
+                        path="/cotizate"
+                        component={Cotizate}
                     />
                     <Route component={PageNotFound} />
                 </Switch>

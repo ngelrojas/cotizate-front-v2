@@ -1,0 +1,5 @@
+export const SET_REWARD = 'SET_REWARD'
+export const GET_REWARD = 'GET_REWARD'
+export const LOADING_REWARD = 'LOADING_REWARD'
+export const SET_DEFAULT_REWARD = 'SET_DEFAULT_REWARD'
+export const SET_ERRORS = 'SET_ERRORS'

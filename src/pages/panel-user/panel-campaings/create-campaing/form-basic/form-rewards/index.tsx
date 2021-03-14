@@ -7,25 +7,27 @@ import {CampaingHeader} from '../../../../../../userCampaings'
 import {Cities} from '../../../../../../userCities'
 import {Reward} from '../../../../../../userReward'
 import {
-    Input,
-    BtnAdd,
+    InputReward,
     Form,
     MsgError,
     MsgErrorPhase,
     WrapperBoxRD,
     BoxTitle,
+    BoxTitleContent,
     H4,
     TextConf,
-    WrapBtnAdd,
     SpaceB,
     WrappBoxInput,
-    BoxInput,
+    BoxInputReward,
     BoxText,
-    BS,
+    BSRE,
     TableCities,
     ItemCity,
     SecondItem,
-    BoxCity
+    BoxCity,
+    WrapperSave,
+    WrapBtnSave,
+    BtnSaveProject,
 } from '../../styles'
 
 type FormData = {
@@ -41,17 +43,16 @@ type FormData = {
 
 }
 
-
-const FormRewards: React.FC = () => {
+const FormRewards: React.FC= () => {
     let token = window.sessionStorage.getItem('token')
     let CamHeader = new CampaingHeader(token)
     let Rewards = new Reward(token)
     let City = new Cities(token)
     const [datach, setDatach] = React.useState<number>(0)
-    const [description, Setdescription] = React.useState()
+    const [description, Setdescription] = React.useState('')
     const [selected, Setselected] = React.useState<number[]>([])
-    const [MsgErrorF, setMsgErrorF] = React.useState()
-    const [cities, setCities] = React.useState()
+    const [MsgErrorF, setMsgErrorF] = React.useState('')
+    const [cities, setCities] = React.useState([])
     const {register, handleSubmit, reset, errors} = useForm<FormData>({
         mode: 'onChange'
     })
@@ -147,6 +148,8 @@ const FormRewards: React.FC = () => {
     }
 
     React.useEffect(()=>{ 
+        const input: any = document.querySelector('input[name="title"]')
+        input.focus()
         window.scrollTo({
             top: 0,
             left: 0,
@@ -154,21 +157,18 @@ const FormRewards: React.FC = () => {
         })
         getLast()
         listCities()
-        
     },[])
 
     return (
         <>
-
         <H4>3- RECOMPENSAS </H4>
         <TextConf>Antes de ofrecer una recompensa, es importante tener mapeados todos los procesos de producción y entrega.</TextConf>
         
         <Form onSubmit={onSubmit}>
 
         <WrapperBoxRD>
-                <BoxTitle>* Titulo</BoxTitle>
-                    <SpaceB />
-                     <Input
+                <BoxTitleContent>* Titulo</BoxTitleContent>
+                     <InputReward
                         type="text"
                         name="title"
                         ref={register({required: true})}
@@ -179,30 +179,34 @@ const FormRewards: React.FC = () => {
                 </MsgError>
             
                 <SpaceB />
-                <BoxTitle>* Monto</BoxTitle>
-                <SpaceB />
+                <Row>
+                <Col xs={6}>
                 <WrappBoxInput>
-                    <BoxInput
+                <BoxTitleContent>* Monto</BoxTitleContent>
+                    <BoxInputReward
                         type="number"
                         name="amount"
                         ref={register({required: true})}
                         placeholder="15000"
                     />
-                    <BS>BS</BS>
+                    <BSRE>BS</BSRE> 
                 </WrappBoxInput>
-
-                <MsgError>{errors.amount && 'este campo es requerido'}</MsgError>
-                <SpaceB />
-                <BoxTitle>* Entrega prevista</BoxTitle>
-                <SpaceB />
+                    <MsgError>{errors.amount && 'este campo es requerido'}</MsgError>
+                </Col>
+                <Col xs={6}>
+                <BoxTitleContent>* Entrega prevista</BoxTitleContent>
                 <WrappBoxInput>
-                    <Input
+                    <InputReward
                         type="date"
                         name="expected_delivery"
                         ref={register({required: true})}
                     />
                 </WrappBoxInput>
-            <SpaceB />
+                <MsgError>{errors.expected_delivery && 'este campo es requerido'}</MsgError>
+                </Col>
+                </Row>
+
+                <SpaceB />
                 
             <BoxTitle>* Descripcion de la recompensa</BoxTitle>
             <BoxText> 
@@ -254,10 +258,13 @@ const FormRewards: React.FC = () => {
                     }}
                     onEditorChange={handleEditorReward}
                 />
-                <SpaceB />
+
                 <MsgErrorPhase>{MsgErrorF}</MsgErrorPhase>
-                <BoxTitle>Alcanse de entrega a : </BoxTitle>
-                <SpaceB />
+                <Row>
+                    <Col xs={3}>
+                        <BoxTitle>Alcanse de entrega a : </BoxTitle>
+                    </Col>
+                    <Col xs={9}>
                 <BoxCity>
                     <Row between="xs">
 
@@ -302,7 +309,7 @@ const FormRewards: React.FC = () => {
                                             name="pick_up_locally" 
                                             value="1"
                                             ref={register({required: false})}
-                                        /> Retirar en le local
+                                        /> Retirar en el local
                                     </ItemCity>
                                     </Col>
                             </Row>
@@ -310,17 +317,18 @@ const FormRewards: React.FC = () => {
                     </Col>
                     </Row>
                 </BoxCity>
-
-                <SpaceB />
-
-                <WrapBtnAdd>
-                    <BtnAdd>adicionar</BtnAdd>
-                </WrapBtnAdd>
+                    </Col>
+                </Row>
 
             </WrapperBoxRD>
-
-        </Form>       
-        
+            <Row>
+                <WrapperSave>
+                    <WrapBtnSave>
+                        <BtnSaveProject>adicionar</BtnSaveProject>
+                    </WrapBtnSave>
+                </WrapperSave>
+            </Row>
+        </Form>     
         </>
 
     )

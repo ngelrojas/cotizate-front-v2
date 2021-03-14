@@ -9,20 +9,23 @@ const GoogleRegister: React.FC = () => {
 
     const responseGoogle = async (response: any) => {
         let res = response.profileObj
-        await API.post(`user`, {
-            first_name: res.givenName,
-            last_name: res.familyName,
-            email: res.email,
-            password: res.email
-        })
-            .then(res => {
-                setSuccess('enviamos un email para su confirmacion.')
+        if(res){
+            await API.post(`user`, {
+                first_name: res.givenName,
+                last_name: res.familyName,
+                email: res.email,
+                password: res.email
             })
-            .catch(err => {
-                setWarning(
-                    'El usuario ya se encuentra registrado, debe hacer login.'
-                )
-            })
+                .then(res => {
+                    setSuccess('enviamos un email para su confirmacion.')
+                })
+                .catch(err => {
+                    setWarning(
+                        'El usuario ya se encuentra registrado, debe hacer login.'
+                    )
+                })
+        }
+
     }
     return (
         <>

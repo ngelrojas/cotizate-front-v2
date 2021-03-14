@@ -40,7 +40,7 @@ const ProfilePersonal: React.FC<Iauth> = ({authenticated, currentUserP}) => {
     const [msgSuccess, setMsgSuccess] = React.useState('')
     const [msgError, setMsgError] = React.useState('')
     const [loading, setLoading] = React.useState(false)
-    const [currentProfile, setCurrentProfile] = React.useState()
+    const [currentProfile, setCurrentProfile] = React.useState([])
     let token = window.sessionStorage.getItem('token')
     const resp = new PersonalProfile(token)
     const {register, handleSubmit, errors} = useForm<profileType>({
@@ -123,11 +123,6 @@ const ProfilePersonal: React.FC<Iauth> = ({authenticated, currentUserP}) => {
                                     <Input
                                         name="address"
                                         type="text"
-                                        defaultValue={
-                                            currentProfile
-                                                ? currentProfile.address
-                                                : ''
-                                        }
                                         ref={register({required: true})}
                                         placeholder="DIRECCION"
                                     />
@@ -143,11 +138,6 @@ const ProfilePersonal: React.FC<Iauth> = ({authenticated, currentUserP}) => {
                                     <Input
                                         name="dni"
                                         type="text"
-                                        defaultValue={
-                                            currentProfile
-                                                ? currentProfile.dni
-                                                : ''
-                                        }
                                         ref={register({required: true})}
                                         placeholder="CEDULA DE IDENTIDAD"
                                     />
@@ -157,11 +147,6 @@ const ProfilePersonal: React.FC<Iauth> = ({authenticated, currentUserP}) => {
                                     <Input
                                         name="country"
                                         type="text"
-                                        defaultValue={
-                                            currentProfile
-                                                ? currentProfile.country
-                                                : ''
-                                        }
                                         ref={register({
                                             required: true
                                         })}
@@ -173,11 +158,6 @@ const ProfilePersonal: React.FC<Iauth> = ({authenticated, currentUserP}) => {
                                     <Input
                                         name="city"
                                         type="text"
-                                        defaultValue={
-                                            currentProfile
-                                                ? currentProfile.city
-                                                : ''
-                                        }
                                         ref={register({
                                             required: true
                                         })}
@@ -193,11 +173,6 @@ const ProfilePersonal: React.FC<Iauth> = ({authenticated, currentUserP}) => {
                                     <Input
                                         name="cellphone"
                                         type="text"
-                                        defaultValue={
-                                            currentProfile
-                                                ? currentProfile.cellphone
-                                                : ''
-                                        }
                                         ref={register({
                                             required: true
                                         })}
@@ -209,11 +184,6 @@ const ProfilePersonal: React.FC<Iauth> = ({authenticated, currentUserP}) => {
                                     <Input
                                         name="current_position"
                                         type="text"
-                                        defaultValue={
-                                            currentProfile
-                                                ? currentProfile.current_position
-                                                : ''
-                                        }
                                         ref={register({
                                             required: true
                                         })}
@@ -225,11 +195,6 @@ const ProfilePersonal: React.FC<Iauth> = ({authenticated, currentUserP}) => {
                                     <Input
                                         name="current_city"
                                         type="text"
-                                        defaultValue={
-                                            currentProfile
-                                                ? currentProfile.current_city
-                                                : ''
-                                        }
                                         ref={register({
                                             required: true
                                         })}
@@ -241,11 +206,6 @@ const ProfilePersonal: React.FC<Iauth> = ({authenticated, currentUserP}) => {
                                     <Input
                                         name="headline"
                                         type="text"
-                                        defaultValue={
-                                            currentProfile
-                                                ? currentProfile.headline
-                                                : ''
-                                        }
                                         ref={register({
                                             required: true
                                         })}
@@ -259,11 +219,6 @@ const ProfilePersonal: React.FC<Iauth> = ({authenticated, currentUserP}) => {
                                     <Input
                                         name="birthdate"
                                         type="date"
-                                        defaultValue={
-                                            currentProfile
-                                                ? currentProfile.birthdate
-                                                : ''
-                                        }
                                         ref={register({
                                             required: true
                                         })}
@@ -275,11 +230,6 @@ const ProfilePersonal: React.FC<Iauth> = ({authenticated, currentUserP}) => {
                                     <Input
                                         name="age"
                                         type="number"
-                                        defaultValue={
-                                            currentProfile
-                                                ? currentProfile.age
-                                                : ''
-                                        }
                                         ref={register({
                                             required: true
                                         })}

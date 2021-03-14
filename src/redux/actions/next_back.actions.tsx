@@ -1,4 +1,4 @@
-import {NEXT, BACK} from '../types'
+import {NEXT, BACK, ZERO} from '../types'
 
 export const next = () => ({
     type: NEXT,
@@ -6,4 +6,8 @@ export const next = () => ({
 
 export const back = () => ({
     type: BACK
+})
+
+export const zero = () => ({
+    type: ZERO
 })

@@ -23,7 +23,9 @@ export class Campaings {
     */
     createCampaing = async(data_send: any) => {
         this.resp_campaing = await API.post(`campaing-body`, data_send, {
-            headers: {Authorization: `Bearer ${this.token}`}
+            headers: {
+                Authorization: `Bearer ${this.token}`,
+            }
         })
         return this.resp_campaing
     }
@@ -41,10 +43,12 @@ export class Campaings {
 
     /*
      * update current camaping
+     * data_id: campaing header ID
+     * data_send: campaing data form description
     */
     updateCampaing = async(data_id: number, data_send: any) => {
         this.resp_campaing = await API.put(
-            `campaing/${data_id}`,
+            `campaing-body/${data_id}`,
             data_send,
             {headers: {Authorization: `Bearer ${this.token}`}}
         )
@@ -70,6 +74,13 @@ export class CampaingHeader {
         this.token = token
     }
 
+    retrieveCampaingHeader = async(data_id: any) => {
+        this.resp_campaing_header = await API.get(`campaing-header/${data_id}`, {
+            headers: {Authorization: `Bearer ${this.token}`}
+        })
+        return this.resp_campaing_header
+    }
+
     /*
      * create campaing header
     */
@@ -89,6 +100,18 @@ export class CampaingHeader {
         })
         return this.resp_campaing_header
     }
+
+    /*
+     * update campaing header
+     * data_send: data to updated
+     * camhId: campaing header ID
+    */
+    updateCampaingHeader = async(data_send: any, camphId:number) => {
+        this.resp_campaing_header = await API.put(`campaing-header/${camphId}`, data_send, {
+            headers: {Authorization: `Bearer ${this.token}`}
+        })
+        return this.resp_campaing_header
+    }
 }
 
 export class CampaingBody{
@@ -97,6 +120,13 @@ export class CampaingBody{
 
     constructor(token: any){
         this.token = token
+    }
+
+    listCampaingBody = async(status:number) => {
+        this.resp_campaing_body = await API.get(`campaing-private/${status}`, {
+           headers: {Authorization: `Bearer ${this.token}`} 
+        })
+        return this.resp_campaing_body
     }
 
     getRetrieveCBody = async(camp_header_id:number) => {

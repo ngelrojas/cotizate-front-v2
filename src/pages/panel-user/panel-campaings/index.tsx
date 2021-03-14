@@ -32,7 +32,7 @@ interface Iauth {
 const PanelCampaing: React.FC<Iauth> = ({authenticated, currentUser}) => {
 
     let history = useHistory()
-    const [dataCamp, setDataCamp] = React.useState()
+    const [dataCamp, setDataCamp] = React.useState([])
     const [isData, setIsData] = React.useState(true)
     let token = window.sessionStorage.getItem('token')
     let campaing = new Campaings(token)
@@ -99,12 +99,11 @@ const PanelCampaing: React.FC<Iauth> = ({authenticated, currentUser}) => {
                                             <Th>OPCIONES</Th>
                                         </tr>
                                     </thead>
-                                    
                     {isData ? (
                         <tbody>
                             {dataCamp ? (
                                 dataCamp.map((camp: any) => (
-                                    
+
                                     <tr key={camp.id}>
                                         <Td>{camp.title}</Td>
                                         <Td>
@@ -134,6 +133,11 @@ const PanelCampaing: React.FC<Iauth> = ({authenticated, currentUser}) => {
                         <tbody>
                             <tr>
                                 <Td colSpan={5}>no existen datos</Td>
+                            </tr>
+                            <tr>
+                                <Td>
+                                   <Loading message="cargando campañas" />
+                                </Td>
                             </tr>
                         </tbody>
                     )}

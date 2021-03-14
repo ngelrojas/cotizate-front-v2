@@ -27,7 +27,7 @@ export const Item = styled.li`
 `
 
 export const List = styled.ul`
-    background-color: #dddddd;
+    background-color: #ddd;
     position: absolute;
     padding: 1%;
     z-index: 1;
