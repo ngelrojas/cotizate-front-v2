@@ -325,14 +325,15 @@ const Detalle: React.FC<IDetalle> = (props) => {
 //         dispatch(Action.obtnerAportes(props.data.header.id));
 //         dispatch(Action.obtnerFases(props.data.header.id));
 //    },[]);
+   const support_donate:number = 5.00
 
-   const [siguiente, SetSiguiente]= useState(5)
+   const [siguiente, SetSiguiente]= useState(support_donate)
 
    const _onChangeSiguiente = (e: any) => {
         const texfield = e.target.name;
-        const textValue = e.target.value;
+        let textValue:any = parseInt(e.target.value);
         if (texfield === "txtSiguiente") {
-            SetSiguiente(textValue);
+            SetSiguiente(textValue.toFixed(2));
         }  
    };
 
@@ -486,7 +487,8 @@ const Detalle: React.FC<IDetalle> = (props) => {
                             <InputPayVal 
                                 type="text" 
                                 name="amount"
-                                defaultValue={siguiente} 
+                                defaultValue={siguiente}
+                                placeholder="10.00"
                                 ref={register({required: true})} />
                         </Col>
                         <Col xs={6}>
@@ -822,6 +824,7 @@ const Detalle: React.FC<IDetalle> = (props) => {
                                 type="number"
                                 style={{background:'#FFFFFF', width:'65%'}}
                                 variant="outlined"
+                                placeholder="5.00"
                                 InputProps={{
                                     startAdornment: (
                                       <InputAdornment position="start">

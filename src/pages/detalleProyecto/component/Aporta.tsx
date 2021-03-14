@@ -204,7 +204,7 @@ const Aporta: React.FC<IAporta> = (props) => {
     const [modalStyle] = React.useState(getModalStyle)
     let SendEncrypt = new Encrypted()
     let payments = new Payment()
-    const support_donate: number = 100
+    let support_donate: any = props.aporte.amount
     let token: any = window.sessionStorage.getItem('token')
     // const { authenticated } = useSelector((stateSelector: any) => {  return stateSelector.profile;  });
     const {current_user} = useSelector((state: any) => ({ current_user: state.user}))
@@ -268,8 +268,8 @@ const Aporta: React.FC<IAporta> = (props) => {
 
     const _onChangeform = (e: any) => {
       // const texfield = e.target.name;
-      const textValue = e.target.value;
-      SetSiguiente(textValue)
+      let textValue: any = parseInt(e.target.value);
+      SetSiguiente(textValue.toFixed(2))
       // if (texfield === "txtEnviar") {
       //   console.info("SUPPORT VALUE")
       //   console.log(textValue)
@@ -380,8 +380,6 @@ const Aporta: React.FC<IAporta> = (props) => {
                 </Row>
               </Col>
           </Row>
-              
-
       </div>
   )
 
@@ -426,8 +424,7 @@ const Aporta: React.FC<IAporta> = (props) => {
                             <InputPayment htmlFor="cellphone">Celular</InputPayment>
                             <InputPayVal 
                                 type="text" 
-                                name="cellphone"
-                                defaultValue='{props.aporte}' 
+                                name="cellphone" 
                                 ref={register({required: true})} />
                         
                         </Col>
@@ -511,14 +508,9 @@ const Aporta: React.FC<IAporta> = (props) => {
                                     </TitleAportaciones>  
                             </Col>
                             <Col xs={12} sm={12} md={12} lg={12}>
-                               <ImgPortal
-                                src={'https://img.freepik.com/vector-gratis/fondo-plano-naturaleza_1308-20252.jpg?size=626&ext=jpg'}
-                                />
-                            </Col>
-                            <Col xs={12} sm={12} md={12} lg={12}>
-                                    <TitleAportaciones2>
-                                      {' "aporte con mas  Bs. 100 O mas " '}
-                                    </TitleAportaciones2>  
+                              <TitleAportaciones2>                                      
+                                Aportar con {props.aporte.amount} o mas.
+                              </TitleAportaciones2>
                             </Col>
                             <Col xs={12} sm={12} md={12} lg={12}>
                                     <SubTitleAportacion>
@@ -526,14 +518,8 @@ const Aporta: React.FC<IAporta> = (props) => {
                                     </SubTitleAportacion>  
                             </Col>
                             <Col xs={12} sm={12} md={12} lg={12}>
-                                    <Texto>
-                                      {'Lorem Ipsum é simplesmente uma simulação de texto da indústria tipográfica e de impressos, e vem sendo utilizado desde o século XVI, quando um impressor desconhecido pegou uma bandeja de tipos e os embaralhou para fazer um livro de modelos de tipos. Lorem Ipsum sobreviveu não só a cinco séculos, como também ao salto para a editoração eletrônica, permanecendo essencialmente inalterado. Se popularizou na década de 60, quando a Letraset lançou decalques contendo passagens de Lorem Ipsum, e mais recentemente quando passou a ser integrado a softwares de editoração eletrônica como Aldus PageMaker. '}
-                                    </Texto>  
-                            </Col>
-                            <Col xs={12} sm={12} md={12} lg={12}>
-                                    <Texto>
-                                      {'Lorem Ipsum é simplesmente uma simulação de texto da indústria tipográfica e de impressos, e vem sendo utilizado desde o século XVI, quando um impressor desconhecido pegou uma bandeja de tipos e os embaralhou para fazer um livro de modelos de tipos. Lorem Ipsum sobreviveu não só a cinco séculos, como também ao salto para a editoração eletrônica, permanecendo essencialmente inalterado. Se popularizou na década de 60, quando a Letraset lançou decalques contendo passagens de Lorem Ipsum, e mais '}
-                                    </Texto>  
+                              <Texto dangerouslySetInnerHTML={{__html:props.aporte.description}} />
+                                      
                             </Col>
                             <Col xs={12} sm={12} md={12} lg={12}>
                                 <Row>
@@ -588,6 +574,7 @@ const Aporta: React.FC<IAporta> = (props) => {
                                 id="outlined-number"
                                 name="txtEnviar"                              
                                 type="number"
+                                placeholder="100.00"
                                 error={aporteError}
                                 onChange={_onChangeform}
                                 style={{background:'#FFFFFF', width:'65%'}}
@@ -600,9 +587,6 @@ const Aporta: React.FC<IAporta> = (props) => {
                                     ),
                                   }}
                                 />
-                                 {/* <TextoDanger>
-                                   {textError}
-                                 </TextoDanger> */}
                             </Row>  
                            
                           </Col> 
