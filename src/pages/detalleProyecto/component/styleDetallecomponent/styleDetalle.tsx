@@ -131,6 +131,20 @@ export const Img = styled.img`
 
     }
 `
+export const ImgActualizacion = styled.img`
+    width: 100%;
+    border-radius: 1px;
+    height:100%;
+
+    @media ${device.tablet} {
+
+    }
+    @media ${device.mobileL} {
+  
+
+    }
+`
+
 export const Contenedor = styled.div`   
     background: #1383C5;
     margin-left: 2%;
@@ -797,6 +811,27 @@ export const DivBorderSinAzulado = styled.div`
 `
 export const TextoAportadores = styled.p`   
     color: #5D5A5A;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 300;
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    line-height: 25px;
+    padding-right: 10px;
+
+
+    @media ${device.tablet} {
+        line-height: 16px;
+        padding-right: 8px;
+    }
+    @media ${device.mobileM} {
+        line-height: 15px;
+        padding-right: 5px;
+    }
+`
+export const TextoActualizaciones = styled.p`   
+    color: #FFFFFF;
     font-family: Roboto;
     font-style: normal;
     font-weight: 300;

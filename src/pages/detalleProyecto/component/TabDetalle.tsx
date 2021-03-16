@@ -30,6 +30,7 @@ import Box from '@material-ui/core/Box';
 import Fases from './Fases';
 import TabAportadores from './TabAportadores';
 import TabComentario from './TabComentario';
+import TabActualizacion from './TabActualizacion';
 
   
 import {
@@ -108,7 +109,8 @@ const TabDetalle: React.FC<ITab> = (props) => {
                             <Tab label="Descripcion" {...a11yProps(0)} />
                             <Tab label="Fases" {...a11yProps(1)} />
                             <Tab label="Comentarios" {...a11yProps(2)} />
-                            { authenticated? <Tab label="Aportaciones" {...a11yProps(3)} /> : null} 
+                            <Tab label="Actualizaciones" {...a11yProps(3)} />
+                            { authenticated? <Tab label="Aportaciones" {...a11yProps(4)} /> : null} 
                             {/* { authenticated? <Tab label="Aportaciones" {...a11yProps(2)} /> : <Tab label="Aportaciones" {...a11yProps(2)}   />}  */}
                            
                             </Tabs>
@@ -127,11 +129,12 @@ const TabDetalle: React.FC<ITab> = (props) => {
                                 <TabComentario data={value} />
                             ))}                            
                         </TabPanel>
-
+                         <TabPanel value={value} index={3}>
+                            <TabActualizacion />                            
+                          </TabPanel>
                         { authenticated?
-                          <TabPanel value={value} index={3}>
-                            <TabAportadores />
-                            <TabAportadores />
+                          <TabPanel value={value} index={4}>
+                            <TabAportadores />                            
                           </TabPanel>
                           :null
                         }
