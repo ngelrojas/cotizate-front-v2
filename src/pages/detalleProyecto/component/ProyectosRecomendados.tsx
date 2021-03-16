@@ -131,14 +131,14 @@ const ProjectosRecomendados: React.FC<Iproyectorecomendad> = (props)=> {
             <Article>
                 <Picture>
                     <Go   to={{
-                            pathname: `/detail-proyect/${'slug'}`,
+                            pathname: `/detail-proyect/${props.data.slug}`,
                             state: {
-                                idProyecto: `${1}`,
-                                slug: `${'slug'}`
+                                idProyecto: `${props.data.id}`,
+                                slug: `${props.data.slug}`
                             }
                             }}>
-                        <Img
-                            src={'https://s03.s3c.es/imag/_v0/770x420/6/8/7/700x420_Fotos-del-sol-durante-un-ano.jpg'}
+                        <Img                            
+                            src={'http://165.227.203.226:9000/mediafiles/'+props.data.imagen_main}
                             alt="cotizate"
                         />
                     </Go>

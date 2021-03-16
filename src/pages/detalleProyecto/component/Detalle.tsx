@@ -596,7 +596,7 @@ const responsive = {
                                 value={siguiente}
                                 onChange={_onChangeSiguiente}
                                 type="number"
-                                style={{background:'#FFFFFF', width:'65%'}}
+                                style={{background:'#FFFFFF', width:'65%', paddingBottom :'2px'}}
                                 variant="outlined"
                                 InputProps={{
                                     startAdornment: (
@@ -611,7 +611,7 @@ const responsive = {
                           </Col> 
                           <Col xs={12} sm={12} md={12} lg={12}>
                             <Row center='xs' >                                
-                                <ButtonBordeAzul style={{width:'65%',height:'45px', background: '#F69939', color:'#FFFFFF', border: '1px solid #F69939',fontWeight: 'bold',borderRadius: '5px' }} onClick={handleSubmitnex}>Siguiendo </ButtonBordeAzul>                                                        
+                                <ButtonBordeAzul style={{width:'65%',height:'45px', background: '#F69939', color:'#FFFFFF', border: '1px solid #F69939',fontWeight: 'bold',borderRadius: '5px' }} onClick={handleSubmitnex}>Enviar </ButtonBordeAzul>                                                        
                             </Row>  
                           </Col>                
                           </Col>   
