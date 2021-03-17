@@ -210,7 +210,7 @@ const Detalle: React.FC<IDetalle> = (props) => {
     const dispatch = useDispatch();
     const { authenticated,id } = useSelector((stateSelector: any) => {  return stateSelector.user;  });
     const {
-        proyectosDetalle, aportes, statusAportes, statusLike, statusSave,proyectosRec
+        proyectosDetalle, aportes, statusAportes, statusLike, statusSave,proyectosRec,profiles
       } = useSelector((stateSelector: any) => {
         return stateSelector.detalleProyecto;
       });
@@ -326,7 +326,7 @@ const responsive = {
   },[statusLike, statusSave, authenticated])
 
   useEffect(()=>{    
-
+     dispatch(Action.obtenerRedesProyecto(props.data.profile.id, props.data.profile_ca));
   },[])
 
     return (
@@ -486,10 +486,26 @@ const responsive = {
                       <DivSociable> 
                       <Row>
                           <Col xs={12} sm={12} md={6} lg={4}>
-                            <FacebookIcon style={{width:"30%" }} /> {' '} 
-                            <TwitterIcon style={{width:"30%" }} />  {' '} 
-                            <WhatsAppIcon style={{width:"30%" }}/> {' '} 
-                          
+                            {profiles.rs_facebook &&
+                                <Go  to={{ pathname: `${profiles.rs_facebook}` }} target="_blank" >
+                                   <FacebookIcon style={{width:"22%" }} /> {' '} 
+                                </Go>
+                             }
+                             {profiles.rs_linkedin &&
+                                <Go  to={{ pathname: `${profiles.rs_linkedin}` }} target="_blank" >
+                                    <LinkedInIcon style={{width:"22%" }} />  {' '} 
+                                </Go>
+                             }
+                             {profiles.rs_twitter &&
+                                <Go  to={{ pathname: `${profiles.rs_twitter}` }} target="_blank" >
+                                    <TwitterIcon style={{width:"22%" }} />  {' '} 
+                                </Go>
+                             }        
+                             {profiles.rs_another &&
+                                <Go  to={{ pathname: `${profiles.rs_another}` }} target="_blank" >
+                                    <LinkIcon style={{width:"22%" }} />  
+                                </Go>
+                             }
                           </Col> 
                           <Col xs={12} sm={12} md={6} lg={4}>
                               <Row end="lg">                                

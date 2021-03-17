@@ -1,5 +1,5 @@
 import {
-  DETALLE_PROYECTO, DETALLE_APORTES, DETALLE_FASES,DETAIL_LIKE, DETAIL_SAVE,DETAIL_RECOMENDACIONES,DETALLE_COMMENTS
+  DETALLE_PROYECTO, DETALLE_APORTES, DETALLE_FASES,DETAIL_LIKE, DETAIL_SAVE,DETAIL_RECOMENDACIONES,DETALLE_COMMENTS,DETAIL_PROFILE_REDES
 } from '../types/detalleProyecto.types'
 import API from '../../api'
 
@@ -179,5 +179,21 @@ export function obtenerProyectosRecomendados(categoria: any){
       })
       .catch(err => console.log(err))
       }
+}
+
+export function obtenerRedesProyecto(profileId: number,profilecad: number){       
+  return (dispatch : any) =>{     
+    console.log('obtener redes',profileId, profilecad);
+    API.get(`profile/company/${profileId}/${profilecad}`).then(resp => {  
+      console.log('obtener redesData: ',resp);       
+       if(resp.status === 200){  
+          dispatch({
+            type: DETAIL_PROFILE_REDES,
+            profilesObj:resp.data.data,
+          })              
+       }            
+     })
+     .catch(err => console.log('error onsave: ',err))                 
+  }
 }
 

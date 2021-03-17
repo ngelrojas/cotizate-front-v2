@@ -144,7 +144,7 @@ const TabActualizacion: React.FC<IActualizacion> = (props) => {
                         <Col xs={6} sm={6} md={6} lg={6}>
                             <Row end='xs' >                        
                                 <TextoActualizaciones>
-                                   miguel alandia 
+                                   miguel alandia    
                                 </TextoActualizaciones>                            
                             </Row>      
                         </Col>   

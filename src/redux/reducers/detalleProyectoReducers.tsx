@@ -1,5 +1,5 @@
 import {
-    DETALLE_PROYECTO, DETALLE_APORTES,DETALLE_FASES, DETAIL_SAVE,DETAIL_LIKE,DETAIL_RECOMENDACIONES,DETALLE_COMMENTS
+    DETALLE_PROYECTO, DETALLE_APORTES,DETALLE_FASES, DETAIL_SAVE,DETAIL_LIKE,DETAIL_RECOMENDACIONES,DETALLE_COMMENTS,DETAIL_PROFILE_REDES
 } from '../types/detalleProyecto.types'
 const initialState = {
     statusDetalle: false,
@@ -111,7 +111,14 @@ const initialState = {
     comments:[],
     statusLike:false,
     statusSave:false,
-    proyectosRec:[]
+    proyectosRec:[],
+    statusProfile:false,
+    profiles:{
+        rs_another: null,
+        rs_facebook: null,
+        rs_linkedin: null,
+        rs_twitter: null
+    },
 }
 
 export default function(state = initialState, action: any) {
@@ -154,7 +161,13 @@ export default function(state = initialState, action: any) {
                 return {
                     ...state,
                     proyectosRec: action.proyectosRec
-                }                     
+                }   
+            case DETAIL_PROFILE_REDES:
+                return {
+                    ...state,
+                    statusProfile:true,
+                    profilesObj: action.profilesObj
+                }                   
         default:
             return state
     }
