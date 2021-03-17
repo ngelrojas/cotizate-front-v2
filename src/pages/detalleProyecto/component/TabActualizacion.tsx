@@ -36,6 +36,7 @@ import {Article, SectionDetails, Picture,
     TextoAportadores,
     ImgActualizacion,
     TextoActualizaciones,
+    ButtonBordeAzul2,
     Title,
     DivPrincipal,
     DivPortada,
@@ -82,6 +83,7 @@ import {Article, SectionDetails, Picture,
      TextoSubtitulo2
     } from './styleDetallecomponent/styleDetalle';
 import { isConstructorDeclaration } from 'typescript';
+import { VerticalAlignBottomSharp } from '@material-ui/icons';
 
     interface IActualizacion {
     
@@ -103,12 +105,10 @@ const TabActualizacion: React.FC<IActualizacion> = (props) => {
     },[authenticated]);
     
   
-    // const ClicAportando=()=>{          
-    //       console.log("cliccc");
-    // }
-    // const redirecionLoin=()=>{        
-    //    history.push("/registrarse");
-    // }
+    const verMas=()=>{          
+          console.log("cliccc en ver mas");
+    }
+
 
     return (
         <>                                       
@@ -123,9 +123,18 @@ const TabActualizacion: React.FC<IActualizacion> = (props) => {
                                 />
                         </Col> 
                         <Col xs={7} sm={7} md={7} lg={7}>                          
-                                <TextoAportadores>
-                                    lola lavaty    3  
-                                </TextoAportadores>                                                                                                
+                                <Col xs={12} sm={12} md={12} lg={12}>                          
+                                        <TextoAportadores>
+                                            lola lavaty    3  
+                                        </TextoAportadores>                                                                                                
+                                </Col>     
+                                <Col xs={12} sm={12} md={12} lg={12}>    
+                                    <Row end="xs" >
+                                        <ButtonBordeAzul2 onClick={verMas} style={{  background: '#FFFFFF', fontWeight: 'bold',borderRadius: '5px' }} >
+                                        Ver mas
+                                        </ButtonBordeAzul2>
+                                    </Row>                      
+                                </Col>                                                                                               
                         </Col>  
    
                       </Row>                                                           

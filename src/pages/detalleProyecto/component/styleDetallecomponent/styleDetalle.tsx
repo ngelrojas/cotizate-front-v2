@@ -569,6 +569,29 @@ export const ButtonBordeAzul = styled.button`
   padding: 0.25em 1em;
 
 `
+export const ButtonBordeAzul2 = styled.button`
+  background: #FFFFFF;
+  border-radius: 0px;
+  border: 1px solid #1383C5;
+  color: #1383C5;
+  font-size: 17px;
+  margin: 0.5em 1em;
+  padding: 0.25em 1em;
+  width:'70%';
+  height:'40px';
+     @media ${device.tablet} {
+        font-size: 15px;
+        width:'70%',
+        height:'40px',
+    }
+    @media ${device.mobileM} {
+        font-size: 11px;
+        margin: 0.2em 0.5em;
+        padding: 0.5em 1em;
+        width:'70%',
+        height:'40px',
+    }
+`
 export const DivBorderSinColor = styled.div`   
         background:#F5F5F5;
         width:100%,     
@@ -843,10 +866,12 @@ export const TextoActualizaciones = styled.p`
 
 
     @media ${device.tablet} {
+        font-size: 15px;
         line-height: 16px;
         padding-right: 8px;
     }
     @media ${device.mobileM} {
+        font-size: 12px;
         line-height: 15px;
         padding-right: 5px;
     }
