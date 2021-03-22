@@ -20,7 +20,9 @@ const Projectdetails: React.FC<Idetalle> = props => {
         proyectosDetalle,
         statusDetalle
       } = useSelector((stateSelector: any) => {  return stateSelector.detalleProyecto;  });
+      console.info("HERE PROYECTO DETALLE")
     console.log(proyectosDetalle);
+    
     useEffect(() =>{
      dispatch(Action.ObtenerProyecto(slugId));
     },[]);

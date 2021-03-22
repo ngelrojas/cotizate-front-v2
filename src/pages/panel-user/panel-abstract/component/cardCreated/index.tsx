@@ -13,7 +13,7 @@ import {ContainerCard,
     H4,
     H3,
     Box,
-    Img,
+    DivImg,
     Goto
 } from './styles'
 
@@ -103,10 +103,10 @@ const CardCreated: React.FC<propsCamp> = (propsCamp) => {
     return(
         <ContainerCard key={propsCamp.id}>
             <Row between="xs">
-                <Col xs={4}>
-                    <Img src={propsCamp.imagen_main ? URL_IMG + propsCamp.imagen_main: Default} alt={`${propsCamp.slug} - cotizate`} />
+                <Col xs={6}>
+                    <DivImg dangerouslySetInnerHTML={{__html:propsCamp.imagen_main}}></DivImg>
                 </Col>
-                <Col xs={5}>
+                <Col xs={4}>
                     <Box>
                     <H3> <Goto to={propsCamp.slug}>{propsCamp.title}</Goto></H3>
                         <Spaces>
@@ -120,7 +120,7 @@ const CardCreated: React.FC<propsCamp> = (propsCamp) => {
                         </Spaces>
                     </Box>
                 </Col>
-                <Col xs={3}>
+                <Col xs={2}>
                     <Box>
                         {StatusCamp(propsCamp.status)}
                     </Box>

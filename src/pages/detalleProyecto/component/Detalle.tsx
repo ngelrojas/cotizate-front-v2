@@ -2,7 +2,8 @@ import React, { useEffect,useState } from 'react'
 import {Row, Col} from 'react-styled-flexboxgrid'
 import ReactPlayer from 'react-player'
 import LineProgress from '../../../components/LineProgress'
-
+import {useForm} from 'react-hook-form'
+import {store} from 'react-notifications-component'
 import ThumbUpAltIcon from '@material-ui/icons/ThumbUpAlt';
 import ThumbUpAltOutlinedIcon from '@material-ui/icons/ThumbUpAltOutlined';
 import ThumbUpAltTwoToneIcon from '@material-ui/icons/ThumbUpAltTwoTone';
@@ -31,7 +32,11 @@ import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import ProyectosRecomendados from './ProyectosRecomendados'
 
+import Modal from '@material-ui/core/Modal'
+import Button from '@material-ui/core/Button'
 import * as Action from '../../../redux/actions/detalleProyectoActions';
+import {Encrypted} from '../../../userEncrypted'
+import {Payment} from '../../../userPayments'
 
   
 import {Article, SectionDetails, Picture, 
@@ -41,7 +46,6 @@ import {Article, SectionDetails, Picture,
     TitleVideo1,
     DivTitlevideo,
     Porcentaje,
-     Img,
      Contenedor,
      AlcanceText,
      Alcanzado,
@@ -54,7 +58,6 @@ import {Article, SectionDetails, Picture,
      TileCode,
      BotonAportar,
      DivTitle,
-     Input,
      DivSociable,
      ButtonEnlace,
      BotonCopiar,
@@ -69,17 +72,22 @@ import {Article, SectionDetails, Picture,
      DivSeparadorSinColor,
      LinkAzul2,
      ButtonBordeAzul,
-     DivBorderSinColor,
-     Texto2,
-     Texto3,
      Autor,
      DivSeparador2,
      TitleDonacion,
-     TitleAportaciones,
-     TitleAportaciones2,
-     SubTitleAportacion,
-     TextoSubtitulo,
-     TextoSubtitulo2
+     H1,
+     TxtRequire,
+     RowCol,
+     FormSend,
+     RegistrarsedeAzul,
+     InputPayment,
+     InputPayVal,
+     SelectPayment,
+     BtnLeft,
+     BtnRight,
+     FormSendPay,
+     BtnCloseSend,
+     TxtPayment
     } from './styleDetallecomponent/styleDetalle';
 
 
@@ -186,13 +194,36 @@ interface IDetalle {
     }
 }
 
+type FormData = {
+    first_name: string
+    last_name: string
+    email: string
+    header: number
+    amount: number
+    status_payment: number
+    method_payment: number
+    coin: number
+    cellphone: number
+}
+
+function getModalStyle() {
+    const top = 50
+    const left = 50
+
+    return {
+        top: `${top}%`,
+        left: `${left}%`,
+        transform: `translate(-${top}%, -${left}%)`,
+    }
+}
+
 const useStyles = makeStyles((theme) => ({
     root: {
       display: 'flex',
       '& > *': {
         margin: theme.spacing(1),
+        width: '100%',
       },
-      
     },
     small: {
       width: theme.spacing(3),
@@ -202,13 +233,40 @@ const useStyles = makeStyles((theme) => ({
       width: theme.spacing(7),
       height: theme.spacing(7),
     },
+    paper: {
+        position: 'absolute',
+        width: '50%',
+        backgroundColor: theme.palette.background.paper,
+        boxShadow: theme.shadows[1],
+        padding: theme.spacing(2, 4, 3),
+    },
   }));
 
+const Coin = [
+    {"id": 1, value: "USD"},
+    {"id": 2, value: "BOB"}
+]
+
+interface FormPayment {
+    lcpedidoid: number
+    lnmonto: number
+    lcmoneda: number
+}
 
 const Detalle: React.FC<IDetalle> = (props) => {
     const classes = useStyles();
+    let SendEncrypt = new Encrypted()
     const dispatch = useDispatch();
     const { authenticated,id } = useSelector((stateSelector: any) => {  return stateSelector.user;  });
+    const [modalStyle] = React.useState(getModalStyle)
+    const [open, setOpen] = React.useState(false)
+    const [EndOpen, setEndOpen] = React.useState(false)
+    const [TcParameter, setTcParameter] = React.useState("")
+    const [TcCommerce, setTcCommerce] = React.useState("")
+    const [DataSend, setDataSend] = React.useState<FormPayment>()
+
+    let payments = new Payment()
+    let token: any = window.sessionStorage.getItem('token')
     const {
         proyectosDetalle, aportes, statusAportes, statusLike, statusSave,proyectosRec,profiles
       } = useSelector((stateSelector: any) => {
@@ -216,6 +274,52 @@ const Detalle: React.FC<IDetalle> = (props) => {
       });
     let idProyectoHeader:number;
         idProyectoHeader= props.data.header.id; 
+    // const { authenticated } = useSelector((stateSelector: any) => {  return stateSelector.profile;  });
+    const {current_user} = useSelector((state: any) => ({ current_user: state.user}))
+    const {register, handleSubmit, errors} = useForm<FormData>({
+        mode: 'onChange'
+    })
+
+    const onSubmit = handleSubmit(({email, amount, coin, cellphone}) => {
+        let data_send = {
+            lcpedidoid: props.data.header.id,
+            lcemail: email,
+            lntelefono: cellphone,
+            lnmonto: amount,
+            lcmoneda: coin
+        }
+
+        SendEncrypt.EncryptData(data_send).then(resp => {
+            if(resp.data.data.tcCommerceID){
+                sendToPay(resp.data.data)
+                setEndOpen(true)
+                setDataSend({
+                    lcpedidoid: props.data.header.id,
+                    lnmonto: amount,
+                    lcmoneda: coin
+                })
+            }
+            
+        }).catch(err => {
+            console.error(err)
+        })
+    })
+
+    const handleSendPayment = () => {
+
+        payments.CreatePayment(DataSend, token)
+            .then(resp => {
+                if(resp.data.data === true){
+                    Notifications('Los datos de su Aporte fueron Guardados.', 'success')
+                    setEndOpen(false)
+                    setOpen(false)
+                }
+            })
+            .catch(err => {
+                console.error(err)
+                Notifications('Tuvimos un problema al guardar sus datos.', 'error')
+            })
+    }
 
     const copiarLink =(data: string)=>{       
         copiarTextoToPapelera(data);
@@ -232,13 +336,24 @@ const Detalle: React.FC<IDetalle> = (props) => {
        
    },[]);
 
-   const [siguiente, SetSiguiente]= useState(0)
+    const sendToPay = (data_send: any) => {
+        setTcParameter(data_send.tcParametros)
+        setTcCommerce(data_send.tcCommerceID)
+    }
+
+//     useEffect(() =>{
+//         dispatch(Action.obtnerAportes(props.data.header.id));
+//         dispatch(Action.obtnerFases(props.data.header.id));
+//    },[]);
+   const support_donate:number = 5.00
+
+   const [siguiente, SetSiguiente]= useState(support_donate)
+
    const _onChangeSiguiente = (e: any) => {
         const texfield = e.target.name;
-        const textValue = e.target.value;
+        let textValue:any = parseInt(e.target.value);
         if (texfield === "txtSiguiente") {
-            console.log(textValue);
-            SetSiguiente(textValue);
+            SetSiguiente(textValue.toFixed(2));
         }  
    };
 
@@ -296,15 +411,28 @@ const responsive = {
       console.log('disposiito :',dispositivoMovil);
   }, [dispositivoMovil]);
 //------------------------------------------------------------
-   const handleSubmitnex =()=>{    
+    
+   const handleSubmitnex =()=>{
+           
        if(siguiente >0){
-          alert('en proceso... siguiente.. bs : '+ siguiente );
+          setOpen(true)
        }else{
         alert('ingrese un monto');
        }       
    }
 
-   
+   const handleClose = () => {
+       setOpen(false)
+       setTcCommerce('')
+       setTcParameter('')
+   }
+
+   const handleCloseEnd = () => {
+        setEndOpen(false)
+        setTcCommerce('')
+        setTcParameter('')
+    }
+
    const onchangeLike = ()=> {
         if(statusLike){
             dispatch(Action.onchangeLike(false, props.data.header.id));           
@@ -328,9 +456,188 @@ const responsive = {
   useEffect(()=>{    
      dispatch(Action.obtenerRedesProyecto(props.data.profile.id, props.data.profile_ca));
   },[])
+  const Notifications = (set_messages: string, set_type: any) => {
+    store.addNotification({
+        title: 'Guardando Datos',
+        message: set_messages,
+        type: set_type,
+        insert: 'top',
+        container: 'top-right',
+        animationIn: ['animate__animated', 'animate__fadeIn'],
+        animationOut: ['animate__animated', 'animate__fadeOut'],
+        dismiss: {
+            duration: 5000,
+            onScreen: true
+        }
+    })
+  }
+
+  const EndPay = (
+      <div style={modalStyle} className={classes.paper}>
+          <Row>
+              <Col xs={12}>
+                  <TxtPayment>
+                        <h3>Por favor verifique que todos sus datos y aportaciones estan correctos.</h3>
+                        <h4>para realizar la aportacion, sera rediccionado a la pagina de PAGO FASIL.</h4>
+                  </TxtPayment>
+                
+              </Col>
+
+          </Row>
+          <Row>
+              <Col xs={12}>
+                <Row center="xs">
+                    <Col xs={6}>
+                        {TcCommerce ? (
+                            <FormSendPay action="https://checkout.pagofacil.com.bo/es/pay" method="post" name="formularioPago" target="_blank">
+                                <input type="hidden" name="tcCommerceID" defaultValue={TcCommerce} />
+                                <input type="hidden" name="tcParametros" defaultValue={TcParameter} />
+                                <Button type="submit" variant="outlined" color="primary" onClick={handleSendPayment}>
+                                    Realizar Pago
+                                </Button>
+                            </FormSendPay>
+                        ):('')}
+                    </Col>
+                    <Col xs={6}>
+                        <BtnCloseSend>
+                            <Button type="button" variant="outlined" color="secondary" onClick={handleCloseEnd}>
+                                Cerrar
+                            </Button>
+                        </BtnCloseSend>
+                        
+                    </Col>                    
+                </Row>
+              </Col>
+          </Row>
+              
+
+      </div>
+  )
+
+  const body = (
+    <div style={modalStyle} className={classes.paper}>
+        <Row>
+        <Col xs={12}>
+            <Row center="xs">
+            <Col xs={8}>
+                <H1>DONACION</H1>
+                <TxtRequire>Todos los campos son requiridos.</TxtRequire>  
+                <FormSend className={classes.root} onSubmit={onSubmit}>
+                    <RowCol>
+                        <Col xs={6}>
+                            <InputPayment htmlFor="first_name">Nombre</InputPayment>
+                            <InputPayVal 
+                                type="text"
+                                name="first_name"
+                                defaultValue={current_user.first_name} 
+                                ref={register({required: true})} />
+                            <p>{errors.first_name && 'este campo es requirido'}</p>
+                        </Col>
+                        <Col xs={6}>
+                            <InputPayment htmlFor="last_name">Apellido</InputPayment>
+                            <InputPayVal 
+                                name="last_name" 
+                                defaultValue={current_user.last_name} 
+                                ref={register({required: true})} />
+                        </Col>
+                    </RowCol>
+
+                    <RowCol>    
+                        <Col xs={6}>
+                            <InputPayment htmlFor="email">Email</InputPayment>
+                            <InputPayVal 
+                                type="eamil" 
+                                name="email" 
+                                defaultValue={current_user.email} 
+                                ref={register({required: true})} />
+                        </Col>
+                        <Col xs={6}>
+                            <InputPayment htmlFor="cellphone">Celular</InputPayment>
+                            <InputPayVal 
+                                type="text" 
+                                name="cellphone"
+                                defaultValue={props.data.profile.cellphone} 
+                                ref={register({required: true})} />
+                        
+                        </Col>
+                    </RowCol>
+                        
+                    <RowCol>
+                        <Col xs={6}>
+                            <InputPayment htmlFor="amount">Monto</InputPayment>
+                            <InputPayVal 
+                                type="text" 
+                                name="amount"
+                                defaultValue={siguiente}
+                                placeholder="10.00"
+                                ref={register({required: true})} />
+                        </Col>
+                        <Col xs={6}>
+                            <InputPayment htmlFor="amount">Moneda</InputPayment>
+                            <SelectPayment ref={register({required: true})} name="coin">
+                                {Coin.map((option) => (
+                                        <option key={option.id} value={option.id}>
+                                        {option.value}
+                                        </option>
+                                    ))}
+                            </SelectPayment>
+                        </Col>
+                    </RowCol>
+
+                    <RowCol>
+                        <Col xs={6}>
+                            <BtnLeft>
+                                <Button type="submit" variant="outlined" color="primary">
+                                    ENVIAR
+                                </Button>
+                            </BtnLeft>
+                            
+                        </Col>
+                        <Col xs={6}>
+                            <BtnRight>
+                                <Button type="button" variant="outlined" color="secondary" onClick={handleClose}>
+                                    Cerrar
+                                </Button>
+                            </BtnRight>
+                            
+                        </Col>
+                        
+                    </RowCol>
+
+                </FormSend>
+            </Col>
+
+            </Row>
+            
+        </Col>
+        </Row>        
+
+    </div>
+  )
+
+  useEffect(()=>{
+    dispatch(Action.obtnerAportes(props.data.header.id));
+    dispatch(Action.obtnerFases(props.data.header.id));
+  },[statusLike, statusSave])
 
     return (
         <>
+        <Modal
+            open={open}
+            onClose={handleClose}
+            aria-labelledby="modal-payment-cotizate"
+            aria-describedby="modal payment with free contribution-cotizate">
+            {body}
+        </Modal>
+
+        <Modal
+            open={EndOpen}
+            onClose={handleCloseEnd}
+            aria-labelledby="modal-payment-cotizate"
+            aria-describedby="modal payment with free contribution-cotizate">
+            {EndPay}
+        </Modal>
+
         <Col xs={12} sm={12} md={12} lg={12} >     
           <DivPrincipal> 
            <Row center="xs">
@@ -614,6 +921,7 @@ const responsive = {
                                 type="number"
                                 style={{background:'#FFFFFF', width:'65%', paddingBottom :'2px'}}
                                 variant="outlined"
+                                placeholder="5.00"
                                 InputProps={{
                                     startAdornment: (
                                       <InputAdornment position="start">
@@ -626,8 +934,13 @@ const responsive = {
                             </Row>  
                           </Col> 
                           <Col xs={12} sm={12} md={12} lg={12}>
-                            <Row center='xs' >                                
-                                <ButtonBordeAzul style={{width:'65%',height:'45px', background: '#F69939', color:'#FFFFFF', border: '1px solid #F69939',fontWeight: 'bold',borderRadius: '5px' }} onClick={handleSubmitnex}>Enviar </ButtonBordeAzul>                                                        
+                            <Row center='xs' >     
+                                {current_user.authenticated ? (
+                                    <ButtonBordeAzul style={{width:'65%',height:'45px', background: '#F69939', color:'#FFFFFF', border: '1px solid #F69939',fontWeight: 'bold',borderRadius: '5px' }} onClick={handleSubmitnex}>Aportar </ButtonBordeAzul>
+                                ):(
+                                    <RegistrarsedeAzul to="ingresar" style={{width:'65%',height:'45px', background: '#F69939', color:'#FFFFFF', border: '1px solid #F69939',fontWeight: 'bold',borderRadius: '5px' }} >Ingresar </RegistrarsedeAzul>
+                                )}                           
+                                                                                        
                             </Row>  
                           </Col>                
                           </Col>   
@@ -660,6 +973,5 @@ const responsive = {
         </>
     )
 }
-
 
 export default Detalle

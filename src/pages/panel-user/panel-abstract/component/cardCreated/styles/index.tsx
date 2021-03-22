@@ -85,9 +85,11 @@ export const Box = styled.div`
     margin-left: 16%;
 `
 
-export const Img = styled.img`
-    width: 25vh;
-    height: 25vh;
+export const DivImg = styled.div`
+    > p > img {
+        width: 35vh;
+        height: 24.9vh;
+    }
 `
 
 export const H3 = styled.h3`

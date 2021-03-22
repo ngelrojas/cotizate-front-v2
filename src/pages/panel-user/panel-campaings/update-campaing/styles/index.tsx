@@ -380,8 +380,9 @@ export const Img = styled.img`
 `
 
 export const ImgText = styled.p`
-    width: 50%;
+    width: 100%;
     color: #1383C5;
+    margin-bottom: 2%;
 `
 
 export const WrapperBoxRD = styled.div`

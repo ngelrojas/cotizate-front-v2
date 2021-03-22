@@ -3,11 +3,9 @@ import {connect} from 'react-redux'
 import {useForm} from 'react-hook-form'
 import {store} from 'react-notifications-component'
 import {Editor} from '@tinymce/tinymce-react'
-import DefaultImg from '../public/default.png'
 import {CampaingHeader, Campaings} from '../../../../../../userCampaings'
 import {Row, Col} from 'react-styled-flexboxgrid'
 import {next, back} from '../../../../../../redux/actions/next_back.actions'
-import Slide from 'react-reveal/Slide'
 
 import {
     Input,
@@ -24,7 +22,6 @@ import {
     BoxTextPhase,
     BoxTextPD,
     BoxTextPR,
-    Img,
     ImgText,
     WrapperBoxRD,
     BoxTitleContent,
@@ -62,10 +59,10 @@ const FormDescription: React.FC<AllProps> = ({counter, handleNext, handleBack}) 
     let CamBody = new Campaings(token)
     const [description, setDescripction] = React.useState('')
     const [excerpt, setExcerpt] = React.useState('')
+    const [saveImg, setsaveImg] = React.useState('')
     const [msgExcerpt, setMsgExcerpt] = React.useState('')
     const [msgdescription, setMsgdescription] = React.useState('')
     const [datach, setDatach] = React.useState()
-    const [showImg, SetShowImg] = React.useState('')
     const {register, handleSubmit, reset, errors} = useForm<FormData>({
         mode: 'onChange'
     })
@@ -86,35 +83,37 @@ const FormDescription: React.FC<AllProps> = ({counter, handleNext, handleBack}) 
     const handleEditorExcerptChange = (content: any, editor: any) => {
         setExcerpt(content)
     }
-    // TODO: HERE PROBLEM TO SEND IMAGES
-    const onSubmit = handleSubmit(({title, video_main, imagen_main, public_at, short_url, slogan_campaing}) => {
+
+    const handleEditorImgChange = (content: any, editor: any) => {
+        setsaveImg(content)
+    }
+  
+    const onSubmit = handleSubmit(({title, video_main, short_url, slogan_campaing}) => {
         
         if (validate()) {
             let send_data = {
                 title: title,
                 video_main: video_main,
-                imagen_main: imagen_main[0],
+                imagen_main: saveImg,
                 excerpt: excerpt,
                 description: description, 
                 public_at: "2020-03-19 00:00:00", 
                 header: datach,
                 currency: 1, 
-                short_url: short_url ? short_url: '', 
-                slogan_campaing: slogan_campaing ? slogan_campaing: ''
+                short_url: short_url, 
+                slogan_campaing: slogan_campaing
             }
-            console.info(send_data)
             CamBody.createCampaing(send_data)
                 .then(resp =>{
-                    //Notifications('Datos de Descripcion de proyecto guardados', 'success')
-                    //setMsgExcerpt('')
-                    //setMsgdescription('')
-                    //reset()
-                    //handleNext()
+                    Notifications('Datos de Descripcion de proyecto guardados', 'success')
+                    setMsgExcerpt('')
+                    setMsgdescription('')
+                    reset()
+                    handleNext()
                 }).catch(err => {
                     console.error(err)
-                    //Notifications('Porfavor debe revisar los datos a ser llenados.', 'danger')
+                    Notifications('Porfavor debe revisar los datos a ser llenados.', 'danger')
                 })
-
         }
 
     })
@@ -156,20 +155,6 @@ const FormDescription: React.FC<AllProps> = ({counter, handleNext, handleBack}) 
         })
     }
 
-    const _onChange = (event: React.ChangeEvent<HTMLInputElement>)=> {
-        let file: any = event.currentTarget.files 
-        let reader = new FileReader()
-        let current_images: any
-
-        current_images = reader !== null ? reader.result : '{}'
-
-        reader.onloadend = () => {
-            SetShowImg(current_images)
-        }
-
-        reader.readAsDataURL(file[0])
-    }
-
     React.useEffect(()=>{
         const input: any = document.querySelector('input[name="title"]')
         input.focus()
@@ -183,11 +168,11 @@ const FormDescription: React.FC<AllProps> = ({counter, handleNext, handleBack}) 
 
     return (
         <>
-        <Slide top>
+
         <H4>2.- DESCRIPCmeIÓN DEL PROYECTO </H4>
         <TextConf>Describe tu proyecto en forma clara, cuando llegues a las faces detente y piensa en cuanto nesecitas para cada  face de tu proyecto y cuanto será el costo para este item  
         </TextConf>
-        <Form onSubmit={onSubmit} encType="multipart/form-data">
+        <Form onSubmit={onSubmit}>
         <Row>
             <Col xs={6}>
                     <BoxTitle>* Titulo</BoxTitle>
@@ -238,24 +223,69 @@ const FormDescription: React.FC<AllProps> = ({counter, handleNext, handleBack}) 
         <WrapperBox>
                 <BoxTitle>* Imagen</BoxTitle>
                 <Row>
-                    <Col xs={6}>
+                    <Col xs={12}>
                         <ImgText>
                             Esta imagen se utilizará como miniatura de su proyecto (PNG, JPG tamaño 305 x 161 pixeles tamanho minimo 220 x 220 px.
                         </ImgText>
-                        <input
-                            type="file"
-                            name="imagen_main"
-                            ref={register({required: true})}
-                            accept="image/png, image/jpeg"
-                            onChange={_onChange}
-                        />
-                    </Col>
-                    
-                        <Col xs={5}>
+                            
+                        <Row>
+                            <Col xs={12}>
+                                <Row center="xs">
+                                <Col xs={6} >
+                                <Editor 
+                                    initialValue=''
+                                    init={{
+                                        branding: false,
+                                        statusbar: false,
+                                        height: 300,
+                                        width: 350,
+                                        menubar: false,
+                                        plugins: [
+                                            'advlist autolink lists link image charmap print preview anchor image',
+                                            'imagetools searchreplace visualblocks code fullscreen',
+                                            'insertdatetime media table paste code help wordcount'
+                                        ],
+                                        toolbar:
+                                            ' image | imagetools',
+                                        automatic_uploads: true,
+                                        file_picker_types: 'image',
+                                        file_picker_callback: function(
+                                            cb: any,
+                                            value: any,
+                                            meta: any
+                                        ) {
+                                            let input = document.createElement('input')
+                                            input.setAttribute('type', 'file')
+                                            input.setAttribute('accept', 'image/*')
+                                            input.onchange = function(files: any) {
+                                                let file: any = (input as any).files[0]
+                                                let reader: any = new FileReader()
+                                                reader.onload = function() {
+                                                    let id = 'blobid' + new Date().getTime()
+                                                    let blobCache = (window as any).tinymce
+                                                        .activeEditor.editorUpload.blobCache
+                                                    let base64 = reader.result.split(',')[1]
+                                                    let blobInfo: any = blobCache.create(
+                                                        id,
+                                                        file,
+                                                        base64
+                                                    )
+                                                    blobCache.add(blobInfo)
+                                                    cb(blobInfo.blobUri(), {title: file.name})
+                                                }
+                                                reader.readAsDataURL(file)
+                                            }
+                                            input.click()
+                                        }
+                                    }}
+                                    onEditorChange={handleEditorImgChange}
+                                />
+                                </Col>
+                                </Row>
+                            </Col>
+                        </Row>
 
-                        <Img src={ showImg ? showImg : DefaultImg } alt="cotizate" />
-                        
-                        </Col>
+                    </Col>
                     
                 <MsgError>
                     {errors.imagen_main && 'este campo es requerido'}
@@ -271,6 +301,7 @@ const FormDescription: React.FC<AllProps> = ({counter, handleNext, handleBack}) 
                 <Editor
                     initialValue=''
                     init={{
+                        branding: false,
                         height: 200,
                         menubar: false,
                         plugins: [
@@ -324,6 +355,7 @@ const FormDescription: React.FC<AllProps> = ({counter, handleNext, handleBack}) 
                 <Editor
                     initialValue=''
                     init={{
+                        branding: false,
                         height: 500,
                         menubar: false,
                         plugins: [
@@ -377,7 +409,6 @@ const FormDescription: React.FC<AllProps> = ({counter, handleNext, handleBack}) 
                 </WrapperSave>
             </Row>
         </Form>
-        </Slide>
         </>
 
     )

@@ -3,6 +3,7 @@ import {connect} from 'react-redux'
 import {useForm} from 'react-hook-form'
 import {store} from 'react-notifications-component'
 import {Row, Col} from 'react-styled-flexboxgrid'
+import {Editor} from '@tinymce/tinymce-react'
 import DefaultImg from '../../form-basic/public/default.png'
 import {City} from '../../../../../../userCountryCities'
 import {CompanyProfile} from '../../../../../../userCompany'
@@ -84,11 +85,14 @@ const Association: React.FC<Iauth> = ({authenticated, currentUser})=>{
     let companyProfile = new CompanyProfile(token)
     const [loadcity, setLoadcity] = React.useState<Icities[]>()
     const [isLoading, setIsLoading] = React.useState(true)
-    const [showImg, SetShowImg] = React.useState('')
-    const [displayMsg, setDisplayMsg] = React.useState('')
+    const [saveImg, SetsaveImg] = React.useState('') 
     const {register, handleSubmit, reset, errors} = useForm<FormData>({
         mode: 'onChange'
     })
+
+    const handleEditorImgChange = (content: any, editor: any) => {
+        SetsaveImg(content)
+    }
 
     const onSubmit = handleSubmit(({cinit, cellphone, telephone, countries, cities, heading,
                                    company_name, address, neightbordhood, number_address, company_email, 
@@ -104,7 +108,7 @@ const Association: React.FC<Iauth> = ({authenticated, currentUser})=>{
             address: address, 
             neightbordhood: neightbordhood,
             number_address: number_address,
-            photo: 'my profile photo here',
+            photo: saveImg,
             heading: heading,
             company_name: company_name,
             email_company: company_email,
@@ -113,21 +117,9 @@ const Association: React.FC<Iauth> = ({authenticated, currentUser})=>{
             rs_linkedin: rs_linkedin,
             rs_another: rs_another,
             description: description,
-            type_institution: typeIns
+            type_institution: typeIns,
+            header: 0
         }
-
-        //console.info(data_profile)
-
-        /*let data_img = {*/
-            //file_uploaded: photo[0] 
-        //}
-
-        //UploadImages.uploadImg(photo)
-            //.then(resp => {
-                //console.info(resp.data)
-            //}).catch(err=>{
-                //console.error(err)
-            /*})*/
 
         companyProfile.createCP(data_profile)
             .then(resp => {
@@ -164,20 +156,6 @@ const Association: React.FC<Iauth> = ({authenticated, currentUser})=>{
                 onScreen: true
             }
         })
-    }
-
-    const _onChange = (event: React.ChangeEvent<HTMLInputElement>)=> {
-        let file: any = event.currentTarget.files 
-        let reader = new FileReader()
-        let current_images: any
-
-        current_images = reader !== null ? reader.result : '{}'
-
-        reader.onloadend = () => {
-            SetShowImg(current_images)
-        }
-
-        reader.readAsDataURL(file[0])
     }
 
     const LoadCities = () => {
@@ -425,20 +403,68 @@ const Association: React.FC<Iauth> = ({authenticated, currentUser})=>{
 
                     <Col xs={12}>
                         <Row center="xs">
+                            <Col xs={6}>       
+                                <InfoText>Esta será la información pública que aparecerá en tu perfil de empresa del proyecto.</InfoText>
+                                <p>el tamanho que debera subir de su foto de perfil debe ser aproximadamente de unos 271 de ancho y 279 de alto.</p>
+                            </Col>
+                        </Row>
+                    </Col>
+
+                    <Col xs={12}>
+                        <Row center="xs">
                             <Col xs={6}>
                                 <WrapperBox>
                                     <label>
                                         <SpanPhoto>Foto de Perfil: </SpanPhoto>
-                                        <input
-                                            type="file"
-                                            name="photo"
-                                            ref={register({required: false})}
-                                            accept="image/png, image/jpeg"
-                                            onChange={_onChange}
-                                        />
+                                        <Editor
+                    initialValue=''
+                    init={{
+                        branding: false,
+                        statusbar: false,
+                        height: 400,
+                        menubar: false,
+                        plugins: [
+                            'advlist autolink lists link image charmap print preview anchor image',
+                            'imagetools searchreplace visualblocks code fullscreen',
+                            'insertdatetime media table paste code help wordcount'
+                        ],
+                        toolbar:
+                            ' image | imagetools',
+                        automatic_uploads: true,
+                        file_picker_types: 'image',
+                        file_picker_callback: function(
+                            cb: any,
+                            value: any,
+                            meta: any
+                        ) {
+                            let input = document.createElement('input')
+                            input.setAttribute('type', 'file')
+                            input.setAttribute('accept', 'image/*')
+                            input.onchange = function(files: any) {
+                                let file: any = (input as any).files[0]
+                                let reader: any = new FileReader()
+                                reader.onload = function() {
+                                    let id = 'blobid' + new Date().getTime()
+                                    let blobCache = (window as any).tinymce
+                                        .activeEditor.editorUpload.blobCache
+                                    let base64 = reader.result.split(',')[1]
+                                    let blobInfo: any = blobCache.create(
+                                        id,
+                                        file,
+                                        base64
+                                    )
+                                    blobCache.add(blobInfo)
+                                    cb(blobInfo.blobUri(), {title: file.name})
+                                }
+                                reader.readAsDataURL(file)
+                            }
+                            input.click()
+                        }
+                    }}
+                    onEditorChange={handleEditorImgChange}
+                />
                                     </label>
 
-                                    <ProfileImg src={ showImg ? showImg : DefaultImg } alt="cotizate-" />
                                 </WrapperBox>
                             </Col>
                         </Row>

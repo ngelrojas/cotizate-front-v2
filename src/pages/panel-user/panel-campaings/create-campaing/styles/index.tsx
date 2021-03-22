@@ -309,7 +309,8 @@ export const WrapperBoxPhase = styled(WrapperBox)`
 
 export const BoxTitle = styled.p`
     margin-bottom: 1%;
-    margin-top: 10%;
+    margin-top: 1%;
+    padding-top: 5%;
 `
 
 export const BoxText = styled.p`
@@ -375,8 +376,9 @@ export const Img = styled.img`
 `
 
 export const ImgText = styled.p`
-    width: 50%;
+    width: 100%;
     color: #1383C5;
+    margin-bottom: 5%;
 `
 
 export const WrapperBoxRD = styled.div`

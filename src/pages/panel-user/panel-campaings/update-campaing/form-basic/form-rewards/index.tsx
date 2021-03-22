@@ -48,13 +48,26 @@ type FormData = {
 
 }
 
+interface Iheader {
+    id: number
+}
+
+type FormCamp = {
+    id: number
+    header: Iheader
+}
+
+interface IFormCamp {
+    campaing: FormCamp
+}
+
 type TypeReward = {
     rewards: FormData
 }
 
-type AllProps = TypeReward
+type AllProps = TypeReward & IFormCamp
 
-const FormRewards: React.FC<AllProps>= ({rewards}) => {
+const FormRewards: React.FC<AllProps>= ({rewards, campaing}) => {
     let match = useRouteMatch('/panel-de-usuario/actualizar-proyecto/:campania')
     let matchUrl: any = match
     let token = window.sessionStorage.getItem('token')
@@ -217,7 +230,7 @@ const FormRewards: React.FC<AllProps>= ({rewards}) => {
 
         <Row>
             <Col xs={5}>
-                <TableReward />
+                <TableReward {...campaing.header} />
             </Col>
             <Col xs={7}>
 
@@ -400,7 +413,8 @@ const FormRewards: React.FC<AllProps>= ({rewards}) => {
 }
 
 const mapStateToProps = (state: any) => ({
-    rewards: state.reward
+    rewards: state.reward,
+    campaing: state.campaing
 })
 
 export default connect(mapStateToProps, '')(FormRewards)

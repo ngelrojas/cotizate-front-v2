@@ -1,6 +1,5 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {useRouteMatch} from 'react-router-dom'
 import { withStyles, Theme, createStyles, makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -63,9 +62,6 @@ const useStyles = makeStyles({
 });
 
 const TableReward:React.FC = (props: any) => {
-  let match = useRouteMatch('/panel-de-usuario/actualizar-proyecto/:campania')
-  let matchUrl: any = match
-  let campaingId = matchUrl.params.campania
   let token = window.sessionStorage.getItem('token')
   let CReward = new Reward(token)
   const classes = useStyles();
@@ -115,7 +111,7 @@ const TableReward:React.FC = (props: any) => {
     }
 
   React.useEffect(()=>{
-    listRewards(campaingId)
+    listRewards(props.id)
   },[])
 
   return (
