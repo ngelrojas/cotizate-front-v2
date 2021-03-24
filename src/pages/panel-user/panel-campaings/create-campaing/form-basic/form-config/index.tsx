@@ -26,10 +26,10 @@ import {
 } from '../../styles'
 
 type FormData = {
-    category: string
+    category: number
     qty_day: number
     amount: number
-    city: string
+    city: number
     role: number
 }
 
@@ -62,14 +62,16 @@ const FormConfig: React.FC<AllProps> = ({counter, handleNext}) => {
 
     const onSubmit = handleSubmit(({category, city, qty_day, amount}) => {
         let campaing_type:number = type_campaing === 'crear-emprendimiento' ? 2 : 1 
+        let send_amount: number = +amount
         let send_data = {
-            category: category,
-            city: city,
-            qty_day: qty_day,
-            amount: amount,
+            category: +category,
+            city: +city,
+            qty_day: +qty_day,
+            amount: send_amount.toFixed(2),
             role: campaing_type
         }
-
+        console.log("IN CONFIG")
+        console.log(send_data)
         SaveCampaing.createCampaingHeader(send_data)
             .then(resp=>{
                 Notifications('Datos de configuracion guardados', 'success')

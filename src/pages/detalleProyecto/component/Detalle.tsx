@@ -492,7 +492,7 @@ const Detalle: React.FC<IDetalle> = (props) => {
                                 ref={register({required: true})} />
                         </Col>
                         <Col xs={6}>
-                            <InputPayment htmlFor="amount">Moneda</InputPayment>
+                            <InputPayment htmlFor="coin">Moneda</InputPayment>
                             <SelectPayment ref={register({required: true})} name="coin">
                                 {Coin.map((option) => (
                                         <option key={option.id} value={option.id}>
