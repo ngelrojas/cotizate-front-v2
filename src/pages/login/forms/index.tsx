@@ -9,7 +9,7 @@ import {Label, Btn, Form, Go, Accept, ErrorInfo, ForgotPwd, Registerlink} from '
 import {loginUser} from '../../../redux/actions/user.actions'
 
 type FormData = {
-    email: string
+    email: string,
     password: string
 }
 

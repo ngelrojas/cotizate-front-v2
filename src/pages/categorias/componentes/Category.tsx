@@ -129,14 +129,14 @@ const Category: React.FC<ICategory> = (props)=> {
             <Article>
                 <Picture>
                   <Go   to={{
-                            pathname: '/detail-proyect',
+                            pathname: `/detail-proyect/${props.data.slug}`,
                             state: {
                                 idProyecto: `${props.data.id}`,
                                 slug: `${props.data.slug}`
                             }
                             }}>
                         <Img
-                            src={'http://8.vps.confiared.com:16593/'+props.data.imagen_main}
+                            src={'http://165.227.203.226:9000/mediafiles/'+props.data.imagen_main}
                             alt="cotizate"
                         />
                     </Go>

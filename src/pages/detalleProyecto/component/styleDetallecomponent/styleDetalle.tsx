@@ -10,6 +10,24 @@ export const List = styled.ul`
         display: block;
     }
 `
+export const Br = styled.br`
+  
+`
+export const Title = styled.h1`
+    
+    padding-top: 5px;
+    height: 22px;
+    left: 30px;
+    top: 842px;
+    padding-left:6px;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 23px;
+    color: #5D5A5A;
+    margin-bottom: 15px;
+
+`
 export const DivPrincipal = styled.div`   
     
     padding-left: 4%;
@@ -115,6 +133,20 @@ export const Img = styled.img`
 
     }
 `
+export const ImgActualizacion = styled.img`
+    width: 100%;
+    border-radius: 1px;
+    height:100%;
+
+    @media ${device.tablet} {
+
+    }
+    @media ${device.mobileL} {
+  
+
+    }
+`
+
 export const Contenedor = styled.div`   
     background: #1383C5;
     margin-left: 2%;
@@ -445,6 +477,26 @@ export const Texto = styled.div`
         margin-top: 1%;
     }
 `
+export const TextoDescription = styled.div`   
+    color: #5D5A5A;
+    font-family: Roboto;
+    font-style: normal;
+    margin-top: 1%;
+    font-weight: normal;
+    display: block;
+    align-items: center;
+    font-size: 14px;
+    line-height: 19px;   
+    flex-wrap: nowrap;
+    @media ${device.tablet} {
+        line-height: 17px;
+        margin-top: 1%;
+    }
+    @media ${device.mobileM} {
+        line-height: 16px;
+        margin-top: 1%;
+    }
+`
 export const LinkAzul = styled(Link)`
     text-decoration: none;    
     color: #1383C5;
@@ -517,6 +569,29 @@ export const ButtonBordeAzul = styled.button`
   font-size: 17px;
   margin: 0.5em 1em;
   padding: 0.25em 1em;
+`
+export const ButtonBordeAzul2 = styled.button`
+  background: #FFFFFF;
+  border-radius: 0px;
+  border: 1px solid #1383C5;
+  color: #1383C5;
+  font-size: 17px;
+  margin: 0.5em 1em;
+  padding: 0.25em 1em;
+  width:'70%';
+  height:'40px';
+     @media ${device.tablet} {
+        font-size: 15px;
+        width:'70%',
+        height:'40px',
+    }
+    @media ${device.mobileM} {
+        font-size: 11px;
+        margin: 0.2em 0.5em;
+        padding: 0.5em 1em;
+        width:'70%',
+        height:'40px',
+    }
 `
 export const DivBorderSinColor = styled.div`   
         background:#F5F5F5;
@@ -775,6 +850,29 @@ export const TextoAportadores = styled.p`
         padding-right: 8px;
     }
     @media ${device.mobileM} {
+        line-height: 15px;
+        padding-right: 5px;
+    }
+`
+export const TextoActualizaciones = styled.p`   
+    color: #FFFFFF;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 300;
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    line-height: 25px;
+    padding-right: 10px;
+
+
+    @media ${device.tablet} {
+        font-size: 15px;
+        line-height: 16px;
+        padding-right: 8px;
+    }
+    @media ${device.mobileM} {
+        font-size: 12px;
         line-height: 15px;
         padding-right: 5px;
     }

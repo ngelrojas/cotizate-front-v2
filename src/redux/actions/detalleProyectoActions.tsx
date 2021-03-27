@@ -1,5 +1,5 @@
 import {
-  DETALLE_PROYECTO, DETALLE_APORTES, DETALLE_FASES,DETAIL_LIKE, DETAIL_SAVE
+  DETALLE_PROYECTO, DETALLE_APORTES, DETALLE_FASES,DETAIL_LIKE, DETAIL_SAVE,DETAIL_RECOMENDACIONES,DETALLE_COMMENTS,DETAIL_PROFILE_REDES
 } from '../types/detalleProyecto.types'
 import API from '../../api'
 
@@ -51,7 +51,7 @@ const fasePrueba=[
 ];
 export function obtnerFases(idHeader: any){       
   return (dispatch : any) =>{          
-      
+    console.log('fasessssss : ', idHeader); 
      API.get(`phases/${idHeader}`).then(resp => {  
        console.log(resp.data.data);       
         if(resp.status === 200){  
@@ -59,8 +59,7 @@ export function obtnerFases(idHeader: any){
               dispatch({
                   type: DETALLE_FASES,
                   status:true,
-                  // fases:resp.data.data
-                  fases:fasePrueba
+                  fases:resp.data.data
               })    
             }                    
         }            
@@ -68,24 +67,133 @@ export function obtnerFases(idHeader: any){
       .catch(err => console.log(err))
       }
 }
-export function onchangeLike(like: boolean){       
-  return (dispatch : any) =>{     
-    
-    dispatch({
-      type: DETAIL_LIKE,
-      statusLike:like,
-    })  
-
+export function obtnerComentario(idHeader: any){       
+  return (dispatch : any) =>{          
+      
+     API.get(`comments/${1}`).then(resp => {        
+       console.log("comentarioo------- :", resp); 
+        if(resp.status === 200){  
+          if(resp.data.data.length >= 1){          
+              dispatch({
+                  type: DETALLE_COMMENTS,
+                  status:true,
+                  coments:resp.data.data
+              }) 
+          }                         
+        }            
+      })
+      .catch(err => console.log(err))
       }
 }
-export function onchangeSave(save: boolean){       
+export function obtenerLike(idUsueio: number){       
+  return (dispatch : any) =>{          
+    console.log('se ejecuto el like');  
+     API.get(`like/${idUsueio}`).then(resp => {  
+       console.log('get like',resp.data.data.liked);       
+        if(resp.status === 200){  
+          dispatch({
+            type: DETAIL_LIKE,
+            statusLike:resp.data.data.liked
+          })                
+        }else{
+          dispatch({
+            type: DETAIL_LIKE,
+            statusLike:false //en caso q no exista el like
+          })    
+        }            
+      })
+      .catch(err => console.log(err))
+      }
+}
+export function onchangeLike(like: boolean, idUsueio:number ){       
   return (dispatch : any) =>{     
-    
-        dispatch({
+
+    API.put(`like/${idUsueio}`,{liked: like}).then(resp => {  
+      console.log('get like',resp.data);       
+       if(resp.status === 200){  
+         dispatch({
+           type: DETAIL_LIKE,
+           statusLike:like
+         })                
+       }            
+     })
+     .catch(err => console.log(err))
+     }  
+     
+}
+export function obtenerSave(idheader: number){       
+  return (dispatch : any) =>{     
+    console.log('idsave header',idheader);
+    API.get(`book-mark/${idheader}`).then(resp => {  
+      console.log('get save',resp.data);       
+       if(resp.status === 200){  
+          dispatch({
+            type: DETAIL_SAVE,
+            statusSave:resp.data.data.marked,
+          })             
+       } else
+       {
+          dispatch({
+            type: DETAIL_SAVE,
+            statusSave:false
+          }) 
+       }           
+     })
+     .catch(err => console.log('error getsave:',err))
+                
+  }
+}
+
+export function onchangeSave(save: boolean,idHeader: number){       
+  return (dispatch : any) =>{     
+    console.log('update save', save, idHeader);
+    API.put(`book-mark/${idHeader}`,{ marked: save}).then(resp => {  
+      console.log('update save',resp.data);       
+       if(resp.status === 200){  
+         dispatch({
           type: DETAIL_SAVE,
           statusSave:save,
-        })  
+        })              
+       }            
+     })
+     .catch(err => console.log('error onsave: ',err))
+     
+  
           
+  }
+}
+
+export function obtenerProyectosRecomendados(categoria: any){       
+  return (dispatch : any) =>{          
+      
+     API.get(`category/${categoria}`).then(resp => {  
+       console.log('recomendaciones : ',resp.data.data);       
+        if(resp.status === 200){  
+          if(resp.data.data.length > 0){  
+              dispatch({
+                  type: DETAIL_RECOMENDACIONES,
+                  proyectosRec:resp.data.data,
+              })    
+            }                    
+        }            
+      })
+      .catch(err => console.log(err))
+      }
+}
+
+export function obtenerRedesProyecto(profileId: number,profilecad: number){       
+  return (dispatch : any) =>{     
+    console.log('obtener redes',profileId, profilecad);
+    API.get(`profile/company/${profileId}/${profilecad}`).then(resp => {  
+      console.log('obtener redesData: ',resp);       
+       if(resp.status === 200){  
+          dispatch({
+            type: DETAIL_PROFILE_REDES,
+            profilesObj:resp.data.data,
+          })              
+       }            
+     })
+     .catch(err => console.log('error onsave: ',err))                 
   }
 }
 

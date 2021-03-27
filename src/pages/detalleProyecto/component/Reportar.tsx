@@ -73,7 +73,7 @@ const Reportar: React.FC<IReportar> = (props) => {
     const classes = useStyles();
 
     
-    const { authenticated } = useSelector((stateSelector: any) => {  return stateSelector.profile;  });
+    const { authenticated } = useSelector((stateSelector: any) => {  return stateSelector.user;  });
     useEffect(() =>{
     },[authenticated]);
     const [value, setValue] = useState('');
@@ -85,7 +85,7 @@ const Reportar: React.FC<IReportar> = (props) => {
       const handleSubmit = (event: any) => {
         event.preventDefault();
     
-        console.log('es el radio : ', value);
+        
         if (value != '') {    
             alert('reportar... en proceso');
           setHelperText('You got 1!');

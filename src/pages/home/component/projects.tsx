@@ -91,14 +91,14 @@ const Projects: React.FC<Iproyect> = (props)=> {
             <Article>
                 <Picture>
                     <Go   to={{
-                            pathname: '/detail-proyect',
+                            pathname: `/detail-proyect/${props.data.slug}`,
                             state: {
                                 idProyecto: `${props.data.id}`,
                                 slug: `${props.data.slug}`
                             }
                             }}>
                         <Img
-                            src={'https://s03.s3c.es/imag/_v0/770x420/6/8/7/700x420_Fotos-del-sol-durante-un-ano.jpg'}
+                            src={'http://165.227.203.226:9000/mediafiles/'+props.data.imagen_main}
                             alt="cotizate"
                         />
                     </Go>
@@ -151,7 +151,7 @@ const Projects: React.FC<Iproyect> = (props)=> {
                     <Col xs={12} sm={12} md={12} lg={12}>
                         <Excerpt>
                         <Go   to={{
-                            pathname: '/detail-proyect',
+                            pathname:`/detail-proyect/${props.data.slug}`,
                             state: {
                                 idProyecto: `${props.data.id}`,
                                 slug: `${props.data.slug}`

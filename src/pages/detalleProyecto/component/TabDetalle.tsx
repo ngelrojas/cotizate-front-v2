@@ -30,11 +30,13 @@ import Box from '@material-ui/core/Box';
 import Fases from './Fases';
 import TabAportadores from './TabAportadores';
 import TabComentario from './TabComentario';
+import TabActualizacion from './TabActualizacion';
 
   
 import {
      DivSeparador,
-     Texto
+     Texto,
+     TextoDescription
     } from './styleDetallecomponent/styleDetalle';
 
     function TabPanel(props : any) {
@@ -87,8 +89,8 @@ const TabDetalle: React.FC<ITab> = (props) => {
     
       
     
-    const { authenticated } = useSelector((stateSelector: any) => {  return stateSelector.profile;  });
-    const { statusFases, fases
+    const { authenticated } = useSelector((stateSelector: any) => {  return stateSelector.user;  });
+    const { statusFases, fases,statusComments, comments
     } = useSelector((stateSelector: any) => {
       return stateSelector.detalleProyecto;
     });
@@ -106,13 +108,15 @@ const TabDetalle: React.FC<ITab> = (props) => {
                             <Tabs style={{background:'#F5F5F5'}} value={value} onChange={handleChange} indicatorColor="primary" textColor="primary" variant="scrollable"  scrollButtons="on" >
                             <Tab label="Descripcion" {...a11yProps(0)} />
                             <Tab label="Fases" {...a11yProps(1)} />
-                            { authenticated? <Tab label="Aportaciones" {...a11yProps(2)} /> : null} 
+                            <Tab label="Comentarios" {...a11yProps(2)} />
+                            <Tab label="Actualizaciones" {...a11yProps(3)} />
+                            { authenticated? <Tab label="Aportaciones" {...a11yProps(4)} /> : null} 
                             {/* { authenticated? <Tab label="Aportaciones" {...a11yProps(2)} /> : <Tab label="Aportaciones" {...a11yProps(2)}   />}  */}
-                            <Tab label="Comentarios" {...a11yProps(3)} />
+                           
                             </Tabs>
                         </AppBar>
                         <TabPanel value={value} index={0}>
-                        <Texto dangerouslySetInnerHTML={{__html:props.decripcion}} /> 
+                        <TextoDescription dangerouslySetInnerHTML={{__html:props.decripcion}} /> 
                         </TabPanel>
                         <TabPanel value={value} index={1}>
                                {fases.map((valuee: any, index:any)=>(
@@ -120,13 +124,21 @@ const TabDetalle: React.FC<ITab> = (props) => {
                                ))}
                                   
                         </TabPanel>
-                        <TabPanel value={value} index={2}>
-                           <TabAportadores />
-                           <TabAportadores />
+                        <TabPanel value={value} index={2}> 
+                            {comments.map((value : any, index: any)=>(
+                                <TabComentario data={value} />
+                            ))}                            
                         </TabPanel>
-                        <TabPanel value={value} index={3}>
-                            <TabComentario />
-                        </TabPanel>
+                         <TabPanel value={value} index={3}>
+                            <TabActualizacion />                            
+                          </TabPanel>
+                        { authenticated?
+                          <TabPanel value={value} index={4}>
+                            <TabAportadores />                            
+                          </TabPanel>
+                          :null
+                        }
+                     
                     </div>
                              {/* <LinkAzul to="/descripcion">{'Descripcion'}</LinkAzul> {' '}
                              <Go to="/descripcion">{'Fases'} </Go> {' '}

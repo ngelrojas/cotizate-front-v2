@@ -111,7 +111,7 @@ useEffect(() => {
              {causasSociales?
              <div style={{ background:'#F9F0E8'}}>        
                 <Br/>     
-                <Title>PROYECTOS FINALIZADOS </Title>
+                <Title>CAUSAS SOCIALES </Title>
                 <Carousel responsive={responsive}
                   showDots={dispositivoMovil}
                   arrows={false}

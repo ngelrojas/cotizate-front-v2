@@ -201,6 +201,7 @@ const Aporta: React.FC<IAporta> = (props) => {
    
     const classes = useStyles();   
     const history = useHistory();
+    const { authenticated } = useSelector((stateSelector: any) => {  return stateSelector.user;  });
     const [modalStyle] = React.useState(getModalStyle)
     let SendEncrypt = new Encrypted()
     let payments = new Payment()

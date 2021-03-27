@@ -28,6 +28,10 @@ import {copiarTextoToPapelera } from '../../../lib/FuncionesGenerales';
 import TabDetalle from './TabDetalle';
 import Aporta from './Aporta';
 import Reportar from './Reportar';
+import Carousel from 'react-multi-carousel';
+import 'react-multi-carousel/lib/styles.css';
+import ProyectosRecomendados from './ProyectosRecomendados'
+
 import Modal from '@material-ui/core/Modal'
 import Button from '@material-ui/core/Button'
 import * as Action from '../../../redux/actions/detalleProyectoActions';
@@ -61,6 +65,8 @@ import {Article, SectionDetails, Picture,
      Texto,
      LinkAzul,
      Go,
+     Br,
+     Title,
      ImgPortal,
      DivSin,
      DivSeparadorSinColor,
@@ -251,6 +257,7 @@ const Detalle: React.FC<IDetalle> = (props) => {
     const classes = useStyles();
     let SendEncrypt = new Encrypted()
     const dispatch = useDispatch();
+    const { authenticated,id } = useSelector((stateSelector: any) => {  return stateSelector.user;  });
     const [modalStyle] = React.useState(getModalStyle)
     const [open, setOpen] = React.useState(false)
     const [EndOpen, setEndOpen] = React.useState(false)
@@ -261,10 +268,12 @@ const Detalle: React.FC<IDetalle> = (props) => {
     let payments = new Payment()
     let token: any = window.sessionStorage.getItem('token')
     const {
-        proyectosDetalle, aportes, statusAportes, statusLike, statusSave
+        proyectosDetalle, aportes, statusAportes, statusLike, statusSave,proyectosRec,profiles
       } = useSelector((stateSelector: any) => {
         return stateSelector.detalleProyecto;
       });
+    let idProyectoHeader:number;
+        idProyectoHeader= props.data.header.id; 
     // const { authenticated } = useSelector((stateSelector: any) => {  return stateSelector.profile;  });
     const {current_user} = useSelector((state: any) => ({ current_user: state.user}))
     const {register, handleSubmit, errors} = useForm<FormData>({
@@ -315,6 +324,17 @@ const Detalle: React.FC<IDetalle> = (props) => {
     const copiarLink =(data: string)=>{       
         copiarTextoToPapelera(data);
     }
+    useEffect(() =>{      
+        dispatch(Action.obtnerAportes(props.data.header.id));
+        dispatch(Action.obtnerFases(props.data.header.id));
+        dispatch(Action.obtnerComentario(props.data.header.id));
+        dispatch(Action.obtenerProyectosRecomendados('tecnologia')); //quemado categoria/ slug
+        if(authenticated){
+            dispatch(Action.obtenerLike(props.data.header.id));
+            dispatch(Action.obtenerSave(props.data.header.id)); //headerid
+        }
+       
+   },[]);
 
     const sendToPay = (data_send: any) => {
         setTcParameter(data_send.tcParametros)
@@ -337,6 +357,61 @@ const Detalle: React.FC<IDetalle> = (props) => {
         }  
    };
 
+///proyectos finalizados temporal aqui cambiar por  recomendados--------------------
+   const {
+    proyectosDestacados,
+    featuredProjects,
+    proyectosFinalizados,
+    finalizedProjects,
+    causasSociales,
+    listCausasSociales,
+    categoriasStatus
+  } = useSelector((stateSelector: any) => {
+    return stateSelector.home;
+  });
+
+  useEffect(() => {   
+  }, [featuredProjects,proyectosFinalizados,finalizedProjects,categoriasStatus]);
+
+//----------------------------------------------------------------------------------
+const [dispositivoMovil, setDispositivoMovil] = useState(false);
+
+
+const responsive = {
+    superLargeDesktop: {
+      // the naming can be any, depends on you.
+      breakpoint: { max: 4000, min: 3000 },
+      items: 5
+    },
+    desktop: {
+      breakpoint: { max: 3000, min: 1024 },
+      items: 4
+    },
+    tablet: {
+      breakpoint: { max: 1024, min: 464 },
+      items: 2
+    },
+    mobile: {
+      breakpoint: { max: 464, min: 0 },
+      items: 1
+    }
+  };
+  const verificarDispositivo =() =>{
+    if( navigator.userAgent.match(/Android/i)
+          || navigator.userAgent.match(/iPhone/i)
+          || navigator.userAgent.match(/BlackBerry/i)
+          || navigator.userAgent.match(/Windows Phone/i)){
+                 setDispositivoMovil(true);
+        }else{
+          setDispositivoMovil(false);
+        }
+  }
+  useEffect(() => {        
+    verificarDispositivo();
+      console.log('disposiito :',dispositivoMovil);
+  }, [dispositivoMovil]);
+//------------------------------------------------------------
+    
    const handleSubmitnex =()=>{
            
        if(siguiente >0){
@@ -360,21 +435,27 @@ const Detalle: React.FC<IDetalle> = (props) => {
 
    const onchangeLike = ()=> {
         if(statusLike){
-            dispatch(Action.onchangeLike(false));           
+            dispatch(Action.onchangeLike(false, props.data.header.id));           
         }else{
-            dispatch(Action.onchangeLike(true));          
+            dispatch(Action.onchangeLike(true, props.data.header.id));          
         }
    }
 
    const onchangeSave = ()=> {
        if(statusSave){
-           dispatch(Action.onchangeSave(false));
+           dispatch(Action.onchangeSave(false, props.data.header.id)); //es idheader
        }else{
-           dispatch(Action.onchangeSave(true));
+           dispatch(Action.onchangeSave(true, props.data.header.id)); //es idheades
        }
     
   }
 
+  useEffect(()=>{    
+  },[statusLike, statusSave, authenticated])
+
+  useEffect(()=>{    
+     dispatch(Action.obtenerRedesProyecto(props.data.profile.id, props.data.profile_ca));
+  },[])
   const Notifications = (set_messages: string, set_type: any) => {
     store.addNotification({
         title: 'Guardando Datos',
@@ -559,7 +640,7 @@ const Detalle: React.FC<IDetalle> = (props) => {
 
         <Col xs={12} sm={12} md={12} lg={12} >     
           <DivPrincipal> 
-                       <Row center="xs">
+           <Row center="xs">
                             <Col xs={12} sm={12} md={12} lg={12}>
                                <DivPortada>
                                   <TilePortada> 
@@ -569,137 +650,137 @@ const Detalle: React.FC<IDetalle> = (props) => {
                             </Col>
                         </Row>
            <Row start="lg">   
-           <Col xs={12} sm={6} md={6} lg={6}> 
-              <SectionDetails>
-                    <Article>
-                        <Picture>                       
-                               <ReactPlayer width={'99.9%'} url={props.data.video_main} />                    
-                        </Picture>
-                        <Row >                                                
+                <Col xs={12} sm={6} md={6} lg={6}> 
+                    <SectionDetails>
+                            <Article>
+                                <Picture>                       
+                                    <ReactPlayer width={'99.9%'} url={props.data.video_main} />                    
+                                </Picture>
+                                <Row >                                                
+                                    <Col xs={12} sm={12} md={12} lg={12}>
+                                    <DivTitlevideo>
+                                        <Row>                                                            
+                                                <Col xs={6} sm={6} md={6} lg={6}>                                                                           
+                                                    <TitleVideo1>{props.data.header.category.name}</TitleVideo1>                                              
+                                                </Col>                                                          
+                                                <Col xs={6} sm={6} md={6} lg={6}>                                          
+                                                    <TitleVideo1> <MdLocationOn /> {props.data.header.city.name}{' - '} {props.data.header.city.countries.name} </TitleVideo1>
+                                                </Col>                               
+                                        </Row>
+                                        </DivTitlevideo>
+                                    </Col>
+                                
+                                </Row>
+                            </Article>          
+                    </SectionDetails>
+                </Col>
+                <Col xs={12} sm={6} md={6} lg={6}>
+                    <Contenedor>
+                        <Row>   
+                        <Col xs={8} sm={8} md={8} lg={6}>                   
+                                <Row start="lg">
+                                    <Col xs={12} sm={12} md={12} lg={12}>
+                                    <Alcanzado>                                    
+                                            <AlcanceText> {'ALCANZADOS BS: '}{props.data.header.amount_reached} </AlcanceText>                                    
+                                        </Alcanzado>  
+                                    </Col>
+                                </Row>
+                            </Col>
+                            <Col xs={4} sm={4} md={4} lg={6}>                    
+                                <Row end="lg">
+                                    <Col xs={12} sm={12} md={12} lg={12}>   
+                                    <Alcanzado>                               
+                                        <NumberMontoMeta> {'Meta: '}{props.data.header.amount} Bs</NumberMontoMeta>
+                                    </Alcanzado>                          
+                                    </Col>
+                                </Row>
+                            </Col>
+                        </Row>
+                        <Row>
                             <Col xs={12} sm={12} md={12} lg={12}>
-                              <DivTitlevideo>
-                                   <Row>                                                            
-                                        <Col xs={6} sm={6} md={6} lg={6}>                                                                           
-                                            <TitleVideo1>{props.data.header.category.name}</TitleVideo1>                                              
-                                        </Col>                                                          
-                                        <Col xs={6} sm={6} md={6} lg={6}>                                          
-                                            <TitleVideo1> <MdLocationOn /> {props.data.header.city.name}{' - '} {props.data.header.city.countries.name} </TitleVideo1>
-                                        </Col>                               
-                                   </Row>
-                                </DivTitlevideo>
+                                <Row start="lg">
+                                    <Col xs={12} sm={12} md={12} lg={12}>
+                                        <Porcentaje>
+                                        <LineProgress bgcolor={'#7CC142'} completed={'50'} />                                
+                                        </Porcentaje>                            
+                                    </Col>
+                                </Row>
                             </Col>
-                          
                         </Row>
-                    </Article>          
-              </SectionDetails>
-           </Col>
-           <Col xs={12} sm={6} md={6} lg={6}>
-               <Contenedor>
-                <Row>   
-                   <Col xs={8} sm={8} md={8} lg={6}>                   
-                        <Row start="lg">
+                        <Row>
                             <Col xs={12} sm={12} md={12} lg={12}>
-                               <Alcanzado>                                    
-                                    <AlcanceText> {'ALCANZADOS BS: '}{props.data.header.amount_reached} </AlcanceText>                                    
-                                </Alcanzado>  
+                                <Row start="lg">
+                                    <Col xs={12} sm={12} md={12} lg={12}>                                
+                                    <AporteNumber>{10}</AporteNumber> <Aportetitle>{'Aportadore'}</Aportetitle>
+                                    </Col>
+                                </Row>
                             </Col>
                         </Row>
-                    </Col>
-                    <Col xs={4} sm={4} md={4} lg={6}>                    
-                        <Row end="lg">
-                            <Col xs={12} sm={12} md={12} lg={12}>   
-                               <Alcanzado>                               
-                                  <NumberMontoMeta> {'Meta: '}{props.data.header.amount} Bs</NumberMontoMeta>
-                               </Alcanzado>                          
-                            </Col>
-                        </Row>
-                    </Col>
-                </Row>
-                <Row>
-                    <Col xs={12} sm={12} md={12} lg={12}>
-                        <Row start="lg">
+                        <Row>
                             <Col xs={12} sm={12} md={12} lg={12}>
-                                <Porcentaje>
-                                <LineProgress bgcolor={'#7CC142'} completed={'50'} />                                
-                                </Porcentaje>                            
+                                <Row start="lg">
+                                    <Col xs={12} sm={12} md={12} lg={12}>
+                                        <Div1>
+                                            <TileDias>{'FALTAN'} {props.data.header.qty_day_left} {' DIAS'}</TileDias> 
+                                        </Div1>                               
+                                    </Col>
+                                </Row>
                             </Col>
                         </Row>
-                    </Col>
-                </Row>
-                <Row>
-                    <Col xs={12} sm={12} md={12} lg={12}>
-                        <Row start="lg">
-                            <Col xs={12} sm={12} md={12} lg={12}>                                
-                               <AporteNumber>{10}</AporteNumber> <Aportetitle>{'Aportadore'}</Aportetitle>
-                            </Col>
-                        </Row>
-                    </Col>
-                </Row>
-                <Row>
-                    <Col xs={12} sm={12} md={12} lg={12}>
-                        <Row start="lg">
+                        <Row>
                             <Col xs={12} sm={12} md={12} lg={12}>
-                                <Div1>
-                                    <TileDias>{'FALTAN'} {props.data.header.qty_day_left} {' DIAS'}</TileDias> 
-                                </Div1>                               
+                                <Row start="lg">
+                                    <Col xs={6  } sm={6} md={6} lg={6}>
+                                        <Div1>
+                                            {authenticated? 
+                                            <IconButton onClick={onchangeLike} >
+                                            {statusLike?  <ThumbUpAltIcon />: <ThumbUpAltOutlinedIcon /> }
+                                            </IconButton>
+                                            : 
+                                            <IconButton  >
+                                                <ThumbUpAltTwoToneIcon />
+                                            </IconButton>
+                                            }
+                                        </Div1>
+                                    </Col>
+                                    <Col xs={6} sm={6} md={6} lg={6}>
+                                    <Div1>
+                                            {authenticated? 
+                                                <IconButton onClick={onchangeSave} >
+                                                    {statusSave?  <BookmarkIcon />: <BookmarkBorderIcon /> } 
+                                                </IconButton>
+                                                :
+                                                <IconButton >
+                                                    <BookmarksTwoToneIcon />    
+                                                </IconButton>
+                                            }
+                                        </Div1>
+                                    </Col>
+                                </Row>
                             </Col>
                         </Row>
-                    </Col>
-                </Row>
-                <Row>
-                    <Col xs={12} sm={12} md={12} lg={12}>
-                        <Row start="lg">
-                            <Col xs={6  } sm={6} md={6} lg={6}>
-                                <Div1>
-                                    {current_user.authenticated? 
-                                    <IconButton onClick={onchangeLike} >
-                                       {statusLike?  <ThumbUpAltIcon />: <ThumbUpAltOutlinedIcon /> }
-                                    </IconButton>
-                                    : 
-                                    <IconButton  >
-                                        <ThumbUpAltTwoToneIcon />
-                                    </IconButton>
-                                    }
-                                </Div1>
-                            </Col>
-                            <Col xs={6} sm={6} md={6} lg={6}>
-                               <Div1>
-                                    {current_user.authenticated? 
-                                        <IconButton onClick={onchangeSave} >
-                                            {statusSave?  <BookmarkIcon />: <BookmarkBorderIcon /> } 
-                                        </IconButton>
-                                        :
-                                        <IconButton >
-                                            <BookmarksTwoToneIcon />    
-                                        </IconButton>
-                                    }
-                                </Div1>
-                            </Col>
-                        </Row>
-                    </Col>
-                </Row>
-                <Row start="lg">
-                    <Col xs={12} sm={12} md={12} lg={12}>
                         <Row start="lg">
                             <Col xs={12} sm={12} md={12} lg={12}>
-                                <DivCod>
-                                    <TileCode>{'COD: '}{props.data.header.code_campaing}</TileCode> 
-                                </DivCod>                               
+                                <Row start="lg">
+                                    <Col xs={12} sm={12} md={12} lg={12}>
+                                        <DivCod>
+                                            <TileCode>{'COD: '}{props.data.header.code_campaing}</TileCode> 
+                                        </DivCod>                               
+                                    </Col>
+                                </Row>
                             </Col>
                         </Row>
-                    </Col>
-                </Row>
-                </Contenedor>
-                    <Row  >
-                        <Col xs={12} sm={12} md={12} lg={12}>
-                            <Row center='xs' >
+                        </Contenedor>
+                            <Row  >
+                                <Col xs={12} sm={12} md={12} lg={12}>
+                                    <Row center='xs' >
 
-                                    <BotonAportar >Aportar</BotonAportar>   
+                                            <BotonAportar >Aportar</BotonAportar>   
+                                    </Row>
+                                </Col>
                             </Row>
-                        </Col>
-                    </Row>
-           </Col>
-           <Col xs={12} sm={12} md={12} lg={12}>
+                </Col>
+                <Col xs={12} sm={12} md={12} lg={12}>
             <Row start="lg">
                 <Col xs={12} sm={6} md={6} lg={6}>
                   <DivSeparador>
@@ -712,10 +793,26 @@ const Detalle: React.FC<IDetalle> = (props) => {
                       <DivSociable> 
                       <Row>
                           <Col xs={12} sm={12} md={6} lg={4}>
-                            <FacebookIcon style={{width:"30%" }} /> {' '} 
-                            <TwitterIcon style={{width:"30%" }} />  {' '} 
-                            <WhatsAppIcon style={{width:"30%" }}/> {' '} 
-                          
+                            {profiles.rs_facebook &&
+                                <Go  to={{ pathname: `${profiles.rs_facebook}` }} target="_blank" >
+                                   <FacebookIcon style={{width:"22%" }} /> {' '} 
+                                </Go>
+                             }
+                             {profiles.rs_linkedin &&
+                                <Go  to={{ pathname: `${profiles.rs_linkedin}` }} target="_blank" >
+                                    <LinkedInIcon style={{width:"22%" }} />  {' '} 
+                                </Go>
+                             }
+                             {profiles.rs_twitter &&
+                                <Go  to={{ pathname: `${profiles.rs_twitter}` }} target="_blank" >
+                                    <TwitterIcon style={{width:"22%" }} />  {' '} 
+                                </Go>
+                             }        
+                             {profiles.rs_another &&
+                                <Go  to={{ pathname: `${profiles.rs_another}` }} target="_blank" >
+                                    <LinkIcon style={{width:"22%" }} />  
+                                </Go>
+                             }
                           </Col> 
                           <Col xs={12} sm={12} md={6} lg={4}>
                               <Row end="lg">                                
@@ -822,7 +919,7 @@ const Detalle: React.FC<IDetalle> = (props) => {
                                 value={siguiente}
                                 onChange={_onChangeSiguiente}
                                 type="number"
-                                style={{background:'#FFFFFF', width:'65%'}}
+                                style={{background:'#FFFFFF', width:'65%', paddingBottom :'2px'}}
                                 variant="outlined"
                                 placeholder="5.00"
                                 InputProps={{
@@ -854,8 +951,24 @@ const Detalle: React.FC<IDetalle> = (props) => {
                 </Col>
             </Row>           
            </Col>
-        </Row>
+           </Row>
+
+           {proyectosRec?
+                <div style={{ background:'#F9F0E8'}}>     
+                  <Br/>        
+                    <Title>RECOMENDADOS </Title>
+                    <div style={{ padding:'5px'}} >
+                        <Carousel  responsive={responsive} showDots={dispositivoMovil} arrows={dispositivoMovil}  >
+                            {proyectosRec.map((value : any, index : number) =>(
+                                <ProyectosRecomendados key={index} data={value} />
+                            ))}                                    
+                        </Carousel>
+                    </div>               
+                </div>   
+             : null }
+
         </DivPrincipal>
+          <Br/>
         </Col>  
         </>
     )
