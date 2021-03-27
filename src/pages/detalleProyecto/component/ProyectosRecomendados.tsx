@@ -5,7 +5,7 @@ import {Row, Col, Grid} from 'react-styled-flexboxgrid'
 import {MdLocationOn} from 'react-icons/md'
 import { FaSave } from 'react-icons/fa'
 import LineProgress from '../../../components/LineProgress'
-
+import Link from '@material-ui/core/Link';
 import {
     SectionDetails,
     Article,
@@ -27,7 +27,7 @@ import {
     Bar,
     Go
 } from './styleDetallecomponent/index'
-
+import {useHistory} from 'react-router-dom'
 interface Iproyectorecomendad {
     data:{
         id: number,
@@ -117,11 +117,19 @@ interface Iproyectorecomendad {
 }
 
 const ProjectosRecomendados: React.FC<Iproyectorecomendad> = (props)=> {
-
+    let history = useHistory()
     const [content, setContent] = useState('')    
     useEffect(() => {
         setContent('titulo more longer the now more here please')
     }, [])
+
+    const redireccionarDetalle = (url: string)=>{
+      
+        console.log(url)
+        // history.push('/detail-proyect/'+url);
+        window.location.replace('/detail-proyect/'+url);
+        // windows.location.reload();
+    }
     
     return (
         <> 
@@ -175,15 +183,27 @@ const ProjectosRecomendados: React.FC<Iproyectorecomendad> = (props)=> {
                 <Row>
                     <Col xs={12} sm={12} md={12} lg={12}>
                         <Excerpt>
-                        <Go   to={{
+                        {/* <Go   
+                            to={{
                             pathname:`/detail-proyect/${props.data.slug}`,
                             state: {
                                 idProyecto: `${1}`,
                                 slug: `${props.data.slug}`
                             }
-                            }}>
+                            }}
+                             
+                            >
                                 {props.data.title}                                
-                            </Go>
+                            </Go> */}
+                             <Link
+                                component="button"
+                                variant="body2"
+                                onClick={() => {
+                                    redireccionarDetalle(`${props.data.slug}`)
+                                }}
+                                >
+                                    {props.data.title}     
+                                </Link>
                         </Excerpt>
                     </Col>
                 </Row>
