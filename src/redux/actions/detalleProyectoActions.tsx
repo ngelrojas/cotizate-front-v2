@@ -1,5 +1,5 @@
 import {
-  DETALLE_PROYECTO, DETALLE_APORTES, DETALLE_FASES,DETAIL_LIKE, DETAIL_SAVE,DETAIL_RECOMENDACIONES,DETALLE_COMMENTS,DETAIL_PROFILE_REDES
+  DETALLE_PROYECTO, DETALLE_APORTES, DETALLE_FASES,DETALLE_ACTUALIZACIONES,DETAIL_LIKE, DETAIL_SAVE,DETAIL_RECOMENDACIONES,DETALLE_COMMENTS,DETAIL_PROFILE_REDES
 } from '../types/detalleProyecto.types'
 import API from '../../api'
 
@@ -195,5 +195,23 @@ export function obtenerRedesProyecto(profileId: number,profilecad: number){
      })
      .catch(err => console.log('error onsave: ',err))                 
   }
+}
+
+export function obtenerActualizaciones(idHeader: any){       
+  return (dispatch : any) =>{          
+     API.get(`alterations/${idHeader}`).then(resp => {  
+       console.log('actualizacioness :',resp.data);       
+        if(resp.status === 200){  
+          if(resp.data.data.length > 0){  
+              dispatch({
+                  type: DETALLE_ACTUALIZACIONES,
+                  status:true,
+                  actualizaciones:resp.data.data
+              })    
+            }                    
+        }            
+      })
+      .catch(err => console.log(err))
+      }
 }
 

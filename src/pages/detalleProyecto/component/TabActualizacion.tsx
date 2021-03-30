@@ -86,7 +86,12 @@ import { isConstructorDeclaration } from 'typescript';
 import { VerticalAlignBottomSharp } from '@material-ui/icons';
 
     interface IActualizacion {
-    
+        data:{
+            id:number,
+            header:number,
+            imagen_up:string,
+            description:string
+        }    
     }
 
     const useStyles = makeStyles((theme) => ({
@@ -118,23 +123,24 @@ const TabActualizacion: React.FC<IActualizacion> = (props) => {
                       <Row >
                         <Col xs={5} sm={5} md={5} lg={5}>                                                 
                                 <ImgActualizacion
-                                    src="https://placebeard.it/640x360"
+                                    // src="https://placebeard.it/640x360"
+                                    src={`http://165.227.203.226:9000/mediafiles/${props.data.imagen_up}`}
                                     alt="cotizate"
                                 />
                         </Col> 
                         <Col xs={7} sm={7} md={7} lg={7}>                          
                                 <Col xs={12} sm={12} md={12} lg={12}>                          
                                         <TextoAportadores>
-                                            lola lavaty    3  
+                                         {props.data.description}  
                                         </TextoAportadores>                                                                                                
                                 </Col>     
-                                <Col xs={12} sm={12} md={12} lg={12}>    
+                                {/* <Col xs={12} sm={12} md={12} lg={12}>    
                                     <Row end="xs" >
                                         <ButtonBordeAzul2 onClick={verMas} style={{  background: '#FFFFFF', fontWeight: 'bold',borderRadius: '5px' }} >
                                         Ver mas
                                         </ButtonBordeAzul2>
                                     </Row>                      
-                                </Col>                                                                                               
+                                </Col>                                                                                                */}
                         </Col>  
    
                       </Row>                                                           
