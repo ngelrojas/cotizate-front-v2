@@ -51,7 +51,7 @@ const Bulletin: React.FC<Ibullentin> = props => {
                             <Col sm={12} md={12} lg={12}>
                                 <Place>
                                     <span>
-                                        <Go to="/category/santa-cruz">
+                                        <Go to="/categoria/santa-cruz">
                                             Bolivia - Santa Cruz de la Sierra
                                         </Go>
                                     </span>

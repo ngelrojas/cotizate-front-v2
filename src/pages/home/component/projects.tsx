@@ -105,7 +105,7 @@ const Projects: React.FC<Iproyect> = (props)=> {
                 </Picture>
                 <Title>
                     <Go to={{
-                        pathname: '/category',
+                        pathname: `/categoria/${props.data.header.category.name}`,
                         state: {
                             idCategoria: `${props.data.header.category.id}`,
                             nombre: `${props.data.header.category.name}`,

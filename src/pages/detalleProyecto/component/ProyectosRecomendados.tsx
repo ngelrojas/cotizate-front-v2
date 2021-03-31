@@ -155,7 +155,7 @@ const ProjectosRecomendados: React.FC<Iproyectorecomendad> = (props)=> {
                     <Col xs={6} sm={6} md={6} lg={6}>
                         <Title>
                             <Go to={{
-                                pathname: '/category',
+                                pathname: `/categoria/${props.data.slug}`,
                                 state: {
                                     idCategoria: `${props.data.header.category}`,
                                     nombre: `${props.data.slug}`,

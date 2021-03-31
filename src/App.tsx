@@ -121,7 +121,7 @@ const App: React.FC = () => {
                     />
                      <Route
                         exact
-                        path="/category"
+                        path="/categoria/:name"
                         component={Category}
                     />
                      <Route

@@ -38,7 +38,7 @@ const Portada: React.FC = () => {
                       <Row center="xs">
                          <DivCategoria>
                             <Go to={{
-                                    pathname: '/category',
+                                    pathname: `/categoria/${value.name}`,
                                     state: {
                                       idCategoria: `${value.id}`,
                                       nombre: `${value.name}`,
