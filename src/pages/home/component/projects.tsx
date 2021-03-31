@@ -91,7 +91,7 @@ const Projects: React.FC<Iproyect> = (props)=> {
             <Article>
                 <Picture>
                     <Go   to={{
-                            pathname: `/detail-proyect/${props.data.slug}`,
+                            pathname: `/detalle-del-proyecto/${props.data.slug}`,
                             state: {
                                 idProyecto: `${props.data.id}`,
                                 slug: `${props.data.slug}`
@@ -151,7 +151,7 @@ const Projects: React.FC<Iproyect> = (props)=> {
                     <Col xs={12} sm={12} md={12} lg={12}>
                         <Excerpt>
                         <Go   to={{
-                            pathname:`/detail-proyect/${props.data.slug}`,
+                            pathname:`/detalle-del-proyecto/${props.data.slug}`,
                             state: {
                                 idProyecto: `${props.data.id}`,
                                 slug: `${props.data.slug}`

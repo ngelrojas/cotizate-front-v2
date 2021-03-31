@@ -129,7 +129,7 @@ const Category: React.FC<ICategory> = (props)=> {
             <Article>
                 <Picture>
                   <Go   to={{
-                            pathname: `/detail-proyect/${props.data.slug}`,
+                            pathname: `/detalle-del-proyecto/${props.data.slug}`,
                             state: {
                                 idProyecto: `${props.data.id}`,
                                 slug: `${props.data.slug}`

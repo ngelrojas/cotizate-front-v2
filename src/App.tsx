@@ -126,7 +126,7 @@ const App: React.FC = () => {
                     />
                      <Route
                         exact
-                        path="/detail-proyect/:slug"
+                        path="/detalle-del-proyecto/:slug"
                         component={DetalleProyecto}
                     />
                      <Route

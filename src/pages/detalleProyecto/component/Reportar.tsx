@@ -183,7 +183,7 @@ const Reportar: React.FC<IReportar> = (props) => {
                                     </Col>  
                                 </DivBorderSinColor>                                  
                             </RadioGroup>
-                            <FormHelperText>{helperText}</FormHelperText>                            
+                            {/* <FormHelperText>{helperText}</FormHelperText>                             */}
                         </FormControl>
                         </DivSeparadorSinColor>
                       {/* </Row>

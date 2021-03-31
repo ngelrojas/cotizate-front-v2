@@ -126,8 +126,8 @@ const ProjectosRecomendados: React.FC<Iproyectorecomendad> = (props)=> {
     const redireccionarDetalle = (url: string)=>{
       
         console.log(url)
-        // history.push('/detail-proyect/'+url);
-        window.location.replace('/detail-proyect/'+url);
+        // history.push('/detalle-del-proyecto/'+url);
+        window.location.replace('/detalle-del-proyecto/'+url);
         // windows.location.reload();
     }
     
@@ -139,7 +139,7 @@ const ProjectosRecomendados: React.FC<Iproyectorecomendad> = (props)=> {
             <Article>
                 <Picture>
                     <Go   to={{
-                            pathname: `/detail-proyect/${props.data.slug}`,
+                            pathname: `/detalle-del-proyecto/${props.data.slug}`,
                             state: {
                                 idProyecto: `${props.data.id}`,
                                 slug: `${props.data.slug}`
@@ -185,7 +185,7 @@ const ProjectosRecomendados: React.FC<Iproyectorecomendad> = (props)=> {
                         <Excerpt>
                         {/* <Go   
                             to={{
-                            pathname:`/detail-proyect/${props.data.slug}`,
+                            pathname:`/detalle-del-proyecto/${props.data.slug}`,
                             state: {
                                 idProyecto: `${1}`,
                                 slug: `${props.data.slug}`

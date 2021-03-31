@@ -329,7 +329,7 @@ const Detalle: React.FC<IDetalle> = (props) => {
         dispatch(Action.obtnerFases(props.data.header.id));
         dispatch(Action.obtenerActualizaciones(props.data.header.id));
         dispatch(Action.obtnerComentario(props.data.header.id));
-        dispatch(Action.obtenerProyectosRecomendados('tecnologia')); //quemado categoria/ slug
+        dispatch(Action.obtenerProyectosRecomendados(props.data.header.category.slug)); //quemado categoria/ slug
         if(authenticated){
             dispatch(Action.obtenerLike(props.data.header.id));
             dispatch(Action.obtenerSave(props.data.header.id)); //headerid
