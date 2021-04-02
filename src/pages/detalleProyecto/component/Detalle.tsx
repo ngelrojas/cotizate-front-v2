@@ -324,7 +324,7 @@ const Detalle: React.FC<IDetalle> = (props) => {
     const copiarLink =(data: string)=>{       
         copiarTextoToPapelera(data);
     }
-    useEffect(() =>{      
+    // useEffect(() =>{      
         dispatch(Action.obtnerAportes(props.data.header.id));
         dispatch(Action.obtnerFases(props.data.header.id));
         dispatch(Action.obtenerActualizaciones(props.data.header.id));
@@ -335,7 +335,7 @@ const Detalle: React.FC<IDetalle> = (props) => {
             dispatch(Action.obtenerSave(props.data.header.id)); //headerid
         }
        
-   },[]);
+//    },[]);
 
     const sendToPay = (data_send: any) => {
         setTcParameter(data_send.tcParametros)
