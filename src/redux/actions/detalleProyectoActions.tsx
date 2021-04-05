@@ -7,7 +7,7 @@ export function ObtenerProyecto(name: string){
     return (dispatch : any) =>{          
         
        API.get(`campaing-public-detail/${name}`).then(resp => {
-           console.log('resp  :',resp );
+         
           if(resp.status === 200){           
                 dispatch({
                     type: DETALLE_PROYECTO,
@@ -51,7 +51,7 @@ const fasePrueba=[
 ];
 export function obtnerFases(idHeader: any){       
   return (dispatch : any) =>{          
-    console.log('fasessssss : ', idHeader); 
+  
      API.get(`phases/${idHeader}`).then(resp => {  
        console.log(resp.data.data);       
         if(resp.status === 200){  
@@ -71,7 +71,7 @@ export function obtnerComentario(idHeader: any){
   return (dispatch : any) =>{          
       
      API.get(`comments/${1}`).then(resp => {        
-       console.log("comentarioo------- :", resp); 
+     
         if(resp.status === 200){  
           if(resp.data.data.length >= 1){          
               dispatch({
@@ -87,7 +87,7 @@ export function obtnerComentario(idHeader: any){
 }
 export function obtenerLike(idUsueio: number){       
   return (dispatch : any) =>{          
-    console.log('se ejecuto el like');  
+   
      API.get(`like/${idUsueio}`).then(resp => {  
        console.log('get like',resp.data.data.liked);       
         if(resp.status === 200){  
@@ -146,9 +146,9 @@ export function obtenerSave(idheader: number){
 
 export function onchangeSave(save: boolean,idHeader: number){       
   return (dispatch : any) =>{     
-    console.log('update save', save, idHeader);
+ 
     API.put(`book-mark/${idHeader}`,{ marked: save}).then(resp => {  
-      console.log('update save',resp.data);       
+    
        if(resp.status === 200){  
          dispatch({
           type: DETAIL_SAVE,
@@ -167,7 +167,7 @@ export function obtenerProyectosRecomendados(categoria: any){
   return (dispatch : any) =>{          
       
      API.get(`category/${categoria}`).then(resp => {  
-       console.log('recomendaciones : ',resp.data.data);       
+    
         if(resp.status === 200){  
           if(resp.data.data.length > 0){  
               dispatch({
@@ -183,9 +183,8 @@ export function obtenerProyectosRecomendados(categoria: any){
 
 export function obtenerRedesProyecto(profileId: number,profilecad: number){       
   return (dispatch : any) =>{     
-    console.log('obtener redes',profileId, profilecad);
+  
     API.get(`profile/company/${profileId}/${profilecad}`).then(resp => {  
-      console.log('obtener redesData: ',resp);       
        if(resp.status === 200){  
           dispatch({
             type: DETAIL_PROFILE_REDES,
@@ -200,7 +199,7 @@ export function obtenerRedesProyecto(profileId: number,profilecad: number){
 export function obtenerActualizaciones(idHeader: any){       
   return (dispatch : any) =>{          
      API.get(`alterations/${idHeader}`).then(resp => {  
-       console.log('actualizacioness :',resp.data);       
+     
         if(resp.status === 200){  
           if(resp.data.data.length > 0){  
               dispatch({

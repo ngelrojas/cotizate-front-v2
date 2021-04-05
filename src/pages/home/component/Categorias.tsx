@@ -46,8 +46,8 @@ const Portada: React.FC = () => {
                                       imgbanner:`${value.img_banner}`
                                     }
                                   }}>
-                             <ImgCategoria
-                                 src={'http://165.227.203.226:9000/mediafiles/'+value.imagen}
+                             <ImgCategoria                                
+                                src={value.img_icon}
                                  alt={value.descripcion}
                              />   
                              
