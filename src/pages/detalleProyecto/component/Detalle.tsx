@@ -947,7 +947,7 @@ const responsive = {
                           </Col>   
                    </DivSeparador2> 
                         {aportes.map((value: any, index: any) => (
-                            <Aporta aporte={value} nroAporte={index} />
+                            <Aporta key={index} aporte={value} nroAporte={index} />
                         ))}                                       
                 </Col>
             </Row>           

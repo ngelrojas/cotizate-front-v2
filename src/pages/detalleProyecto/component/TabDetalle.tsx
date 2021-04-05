@@ -126,7 +126,7 @@ const TabDetalle: React.FC<ITab> = (props) => {
                         </TabPanel>
                         <TabPanel value={value} index={2}> 
                             {comments.map((value : any, index: any)=>(
-                                <TabComentario data={value} />
+                                <TabComentario key={index} data={value} />
                             ))}                            
                         </TabPanel>
                          <TabPanel value={value} index={3}>
