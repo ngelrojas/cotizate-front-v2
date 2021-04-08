@@ -24,7 +24,8 @@ import {
     Porcentaje,
     PercentNumber,
     Bar,
-    Go
+    Go,
+    DivImg
 } from './styles'
 
 interface Iproyect {
@@ -97,10 +98,8 @@ const Projects: React.FC<Iproyect> = (props)=> {
                                 slug: `${props.data.slug}`
                             }
                             }}>
-                        <Img
-                            src={'http://165.227.203.226:9000/mediafiles/'+props.data.imagen_main}
-                            alt="cotizate"
-                        />
+
+                        <DivImg dangerouslySetInnerHTML={{__html:props.data.imagen_main}} />
                     </Go>
                 </Picture>
                 <Title>

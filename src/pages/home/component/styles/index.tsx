@@ -266,3 +266,11 @@ export const Go = styled(Link)`
     text-decoration: none;
     color: inherit;
 `
+
+export const DivImg = styled.div`
+    p > img{
+        width: 100%!important;
+        height: auto!important;
+        
+    }
+`
