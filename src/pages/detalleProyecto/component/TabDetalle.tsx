@@ -141,19 +141,10 @@ const TabDetalle: React.FC<ITab> = (props) => {
                             <TabAportadores />                            
                           </TabPanel>
                           :null
-                        }
-                     
-                    </div>
-                             {/* <LinkAzul to="/descripcion">{'Descripcion'}</LinkAzul> {' '}
-                             <Go to="/descripcion">{'Fases'} </Go> {' '}
-                             <Go to="/descripcion">{'Aportacion'} </Go> {' '}
-                             <Go to="/descripcion">{'Comentarios'} </Go> {' '}
-                             <Go to="/descripcion">{'Actualizaciones'} </Go>  */}
-                       
-                       
+                         }                     
+                    </div>                                           
                     </Col>                    
-           </DivSeparador>   
-      
+           </DivSeparador>         
         </>
     )
 }
