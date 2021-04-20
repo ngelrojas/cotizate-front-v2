@@ -16,15 +16,8 @@ import {
     TitleCity,
     Excerpt,
     Description,
-    Author,
-    CodigoFaltante,
+    TextoDescription,
     Place,
-    PercentTitle,
-    Alcanzado,
-    NumberMonto,
-    Porcentaje,
-    PercentNumber,
-    Bar,
     Go
 } from './styleDetallecomponent/index'
 import {useHistory} from 'react-router-dom'
@@ -145,10 +138,11 @@ const ProjectosRecomendados: React.FC<Iproyectorecomendad> = (props)=> {
                                 slug: `${props.data.slug}`
                             }
                             }}>
-                        <Img                            
+                        {/* <Img                            
                             src={'http://165.227.203.226:9000/mediafiles/'+props.data.imagen_main}
                             alt="cotizate"
-                        />
+                        /> */}
+                        <TextoDescription dangerouslySetInnerHTML={{__html:props.data.imagen_main}} /> 
                     </Go>
                 </Picture>
                 <Row>

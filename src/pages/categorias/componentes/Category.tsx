@@ -22,7 +22,8 @@ import {
     NumberMonto,
     Porcentaje,
     PercentNumber,
-    Go
+    Go,
+    TextoDescription
 } from './stylesCategory'
 
 interface ICategory {
@@ -135,10 +136,11 @@ const Category: React.FC<ICategory> = (props)=> {
                                 slug: `${props.data.slug}`
                             }
                             }}>
-                        <Img
+                        {/* <Img
                             src={'http://165.227.203.226:9000/mediafiles/'+props.data.imagen_main}
                             alt="cotizate"
-                        />
+                        /> */}
+                        <TextoDescription dangerouslySetInnerHTML={{__html:props.data.imagen_main}} /> 
                     </Go>
                 </Picture>
                 <Title>{props.data.title}</Title>
