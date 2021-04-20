@@ -954,7 +954,7 @@ const responsive = {
            </Col>
            </Row>
 
-           {proyectosRec?
+           {proyectosRec.length > 0?
                 <div style={{ background:'#F9F0E8'}}>     
                   <Br/>        
                     <Title>RECOMENDADOS </Title>
