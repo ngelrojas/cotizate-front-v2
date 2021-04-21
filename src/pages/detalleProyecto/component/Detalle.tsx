@@ -436,6 +436,7 @@ const responsive = {
 
    const onchangeLike = ()=> {
         if(statusLike){
+            
             dispatch(Action.onchangeLike(false, props.data.header.id));           
         }else{
             dispatch(Action.onchangeLike(true, props.data.header.id));          
