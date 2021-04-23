@@ -8,6 +8,7 @@ import Category from './componentes/Category';
 import {Row, Col, Grid} from 'react-styled-flexboxgrid';
 
 
+import CategoriaDos from './componentes/CategoriaDos';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -178,7 +179,7 @@ const Categorias: React.FC<Icateg>  = (props) => {
                 <Row center="xs">
                     {listaCateg.map((value : any, index : number) =>(
                       <Col  key={index} xs={12} sm={6} md={4} lg={4}>                   
-                                <Category key={index} data={value} />                                                        
+                                <CategoriaDos key={index} data={value} />                                                        
                       </Col>
                     ))}                                            
                   </Row>
@@ -196,7 +197,7 @@ const Categorias: React.FC<Icateg>  = (props) => {
                <Row center="xs">
                 {listaFiltada.map((value : any, index : number) =>(
                   <Col  key={index} xs={12} sm={6} md={4} lg={4}> 
-                        <Category key={index} data={value} />
+                        <CategoriaDos key={index} data={value} />
                   </Col>
                 ))}     
                </Row>

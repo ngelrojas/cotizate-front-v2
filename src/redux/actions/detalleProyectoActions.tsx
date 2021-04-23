@@ -87,8 +87,8 @@ export function obtnerComentario(idHeader: any){
 }
 export function obtenerLike(idUsueio: number){       
   return (dispatch : any) =>{          
-   
-     API.get(`like/${idUsueio}`).then(resp => {  
+    let token = window.sessionStorage.getItem('token') 
+     API.get(`like/${idUsueio}`,{ headers: {Authorization: `Bearer ${token}`}}).then(resp => {  
        console.log('get like',resp.data.data.liked);       
         if(resp.status === 200){  
           dispatch({
@@ -106,9 +106,13 @@ export function obtenerLike(idUsueio: number){
       }
 }
 export function onchangeLike(like: boolean, idUsueio:number ){       
-  return (dispatch : any) =>{     
+  return (dispatch : any) =>{  
+    let token = window.sessionStorage.getItem('token')
+    let data = {
+        liked: like,      
+    }   
 
-    API.put(`like/${idUsueio}`,{liked: like}).then(resp => {  
+    API.put(`like/${idUsueio}`,data,{ headers: {Authorization: `Bearer ${token}`}}).then(resp => {  
       console.log('get like',resp.data);       
        if(resp.status === 200){  
          dispatch({
@@ -122,9 +126,10 @@ export function onchangeLike(like: boolean, idUsueio:number ){
      
 }
 export function obtenerSave(idheader: number){       
-  return (dispatch : any) =>{     
+  return (dispatch : any) =>{  
+    let token = window.sessionStorage.getItem('token')    
     console.log('idsave header',idheader);
-    API.get(`book-mark/${idheader}`).then(resp => {  
+    API.get(`book-mark/${idheader}`,{ headers: {Authorization: `Bearer ${token}`}}).then(resp => {  
       console.log('get save',resp.data);       
        if(resp.status === 200){  
           dispatch({
@@ -145,9 +150,12 @@ export function obtenerSave(idheader: number){
 }
 
 export function onchangeSave(save: boolean,idHeader: number){       
-  return (dispatch : any) =>{     
- 
-    API.put(`book-mark/${idHeader}`,{ marked: save}).then(resp => {  
+  return (dispatch : any) =>{  
+    let token = window.sessionStorage.getItem('token')   
+    let data = {
+      marked: save      
+    }  
+    API.put(`book-mark/${idHeader}`,data,{ headers: {Authorization: `Bearer ${token}`}}).then(resp => {  
     
        if(resp.status === 200){  
          dispatch({
@@ -183,8 +191,8 @@ export function obtenerProyectosRecomendados(categoria: any){
 
 export function obtenerRedesProyecto(profileId: number,profilecad: number){       
   return (dispatch : any) =>{     
-  
-    API.get(`profile/company/${profileId}/${profilecad}`).then(resp => {  
+    let token = window.sessionStorage.getItem('token') 
+    API.get(`profile/company/${profileId}/${profilecad}`,{ headers: {Authorization: `Bearer ${token}`}}).then(resp => {  
        if(resp.status === 200){  
           dispatch({
             type: DETAIL_PROFILE_REDES,
@@ -197,8 +205,9 @@ export function obtenerRedesProyecto(profileId: number,profilecad: number){
 }
 
 export function obtenerActualizaciones(idHeader: any){       
-  return (dispatch : any) =>{          
-     API.get(`alterations/${idHeader}`).then(resp => {  
+  return (dispatch : any) =>{  
+    let token = window.sessionStorage.getItem('token')         
+     API.get(`alterations/${idHeader}`,{ headers: {Authorization: `Bearer ${token}`}}).then(resp => {  
      
         if(resp.status === 200){  
           if(resp.data.data.length > 0){  
