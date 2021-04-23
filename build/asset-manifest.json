@@ -1,30 +1,29 @@
 {
   "files": {
-    "main.js": "/static/js/main.f17e4f27.chunk.js",
-    "main.js.map": "/static/js/main.f17e4f27.chunk.js.map",
+    "main.js": "/static/js/main.bb48d868.chunk.js",
+    "main.js.map": "/static/js/main.bb48d868.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.01d84a3f.js",
     "runtime-main.js.map": "/static/js/runtime-main.01d84a3f.js.map",
     "static/css/2.4950f793.chunk.css": "/static/css/2.4950f793.chunk.css",
-    "static/js/2.1adf559d.chunk.js": "/static/js/2.1adf559d.chunk.js",
-    "static/js/2.1adf559d.chunk.js.map": "/static/js/2.1adf559d.chunk.js.map",
+    "static/js/2.0feac7b5.chunk.js": "/static/js/2.0feac7b5.chunk.js",
+    "static/js/2.0feac7b5.chunk.js.map": "/static/js/2.0feac7b5.chunk.js.map",
     "index.html": "/index.html",
-    "precache-manifest.1fa98f8f19dbae47bb3ae84ffe0692c6.js": "/precache-manifest.1fa98f8f19dbae47bb3ae84ffe0692c6.js",
+    "precache-manifest.549df33951081d2e922a9ce7c7ff0ab5.js": "/precache-manifest.549df33951081d2e922a9ce7c7ff0ab5.js",
     "service-worker.js": "/service-worker.js",
     "static/css/2.4950f793.chunk.css.map": "/static/css/2.4950f793.chunk.css.map",
-    "static/js/2.1adf559d.chunk.js.LICENSE.txt": "/static/js/2.1adf559d.chunk.js.LICENSE.txt",
+    "static/js/2.0feac7b5.chunk.js.LICENSE.txt": "/static/js/2.0feac7b5.chunk.js.LICENSE.txt",
     "static/media/SOLIDARIO-CON-TEXTO.png": "/static/media/SOLIDARIO-CON-TEXTO.82e1a015.png",
     "static/media/arte-con-texto.png": "/static/media/arte-con-texto.ab511cd5.png",
     "static/media/cerebro-con-texto.png": "/static/media/cerebro-con-texto.57ebb9a3.png",
     "static/media/default.png": "/static/media/default.41f20cf1.png",
     "static/media/ecologia-con-texto.png": "/static/media/ecologia-con-texto.5732632f.png",
     "static/media/mundo-con-texto.png": "/static/media/mundo-con-texto.e09d41b6.png",
-    "static/media/styles.css": "/static/media/revicons.2feb69cc.eot",
-    "static/media/tecnologia-con-texto.png": "/static/media/tecnologia-con-texto.836cc5a0.png"
+    "static/media/styles.css": "/static/media/revicons.2feb69cc.eot"
   },
   "entrypoints": [
     "static/js/runtime-main.01d84a3f.js",
     "static/css/2.4950f793.chunk.css",
-    "static/js/2.1adf559d.chunk.js",
-    "static/js/main.f17e4f27.chunk.js"
+    "static/js/2.0feac7b5.chunk.js",
+    "static/js/main.bb48d868.chunk.js"
   ]
 }
