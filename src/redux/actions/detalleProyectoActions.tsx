@@ -19,8 +19,8 @@ export function ObtenerProyecto(name: string){
         }
 }
 export function obtnerAportes(idAporte: any){       
-  return (dispatch : any) =>{          
-      
+  return (dispatch : any) =>{
+    
      API.get(`reward/${idAporte}`).then(resp => {  
         if(resp.status === 200){             
               dispatch({
