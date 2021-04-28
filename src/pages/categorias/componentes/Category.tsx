@@ -23,6 +23,7 @@ import {
     Porcentaje,
     PercentNumber,
     Go,
+    TextoImg,
     TextoDescription
 } from './stylesCategory'
 
@@ -140,7 +141,7 @@ const Category: React.FC<ICategory> = (props)=> {
                             src={'http://165.227.203.226:9000/mediafiles/'+props.data.imagen_main}
                             alt="cotizate"
                         /> */}
-                        <TextoDescription dangerouslySetInnerHTML={{__html:props.data.imagen_main}} /> 
+                        <TextoImg dangerouslySetInnerHTML={{__html:props.data.imagen_main}} /> 
                     </Go>
                 </Picture>
                 <Title>{props.data.title}</Title>

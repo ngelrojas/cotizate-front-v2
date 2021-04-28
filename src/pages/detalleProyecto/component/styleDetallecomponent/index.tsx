@@ -71,6 +71,26 @@ export const TextoDescription = styled.div`
         margin-top: 1%;
     }
 `
+export const TextoDescriptionRecom = styled.div`   
+
+            p > img{
+                width: 100%;
+                height:200px!important;
+            }      
+        @media ${device.tablet} {
+            p > img{
+                width: 100%;
+                height:190px!important;
+            }       
+        }
+        @media ${device.mobileM} {
+            p > img{
+                width: 100%;
+                height:190px!important;
+                margin:0 auto;
+            }     
+}        
+`
 
 export const Title = styled.h1`
     font-family: Roboto;

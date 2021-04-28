@@ -31,7 +31,7 @@ import Fases from './Fases';
 import TabAportadores from './TabAportadores';
 import TabComentario from './TabComentario';
 import TabActualizacion from './TabActualizacion';
-
+import   '../component/styleDetallecomponent/tools.css'
   
 import {
      DivSeparador,
@@ -116,7 +116,9 @@ const TabDetalle: React.FC<ITab> = (props) => {
                             </Tabs>
                         </AppBar>
                         <TabPanel value={value} index={0}>
-                        <TextoDescription dangerouslySetInnerHTML={{__html:props.decripcion}} /> 
+                         
+                          <TextoDescription dangerouslySetInnerHTML={{__html:props.decripcion}} /> 
+                          
                         </TabPanel>
                         <TabPanel value={value} index={1}>
                                {fases.map((valuee: any, index:any)=>(

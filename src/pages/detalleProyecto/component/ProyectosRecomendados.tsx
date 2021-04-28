@@ -5,7 +5,7 @@ import {Row, Col, Grid} from 'react-styled-flexboxgrid'
 import {MdLocationOn} from 'react-icons/md'
 import { FaSave } from 'react-icons/fa'
 import LineProgress from '../../../components/LineProgress'
-import Link from '@material-ui/core/Link';
+import Link from '@material-ui/core/Link'
 import {
     SectionDetails,
     Article,
@@ -17,6 +17,7 @@ import {
     Excerpt,
     Description,
     TextoDescription,
+    TextoDescriptionRecom,
     Place,
     Go
 } from './styleDetallecomponent/index'
@@ -142,7 +143,7 @@ const ProjectosRecomendados: React.FC<Iproyectorecomendad> = (props)=> {
                             src={'http://165.227.203.226:9000/mediafiles/'+props.data.imagen_main}
                             alt="cotizate"
                         /> */}
-                        <TextoDescription dangerouslySetInnerHTML={{__html:props.data.imagen_main}} /> 
+                        <TextoDescriptionRecom dangerouslySetInnerHTML={{__html:props.data.imagen_main}} /> 
                     </Go>
                 </Picture>
                 <Row>
