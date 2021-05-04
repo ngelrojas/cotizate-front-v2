@@ -268,9 +268,21 @@ export const Go = styled(Link)`
 `
 
 export const DivImg = styled.div`
-    p > img{
-        width: 100%!important;
-        height: auto!important;
-        
+        p > img{
+            width: 100%;
+            height:230px!important;
+        }      
+    @media ${device.tablet} {
+        p > img{
+            width: 100%;
+            height:210px!important;
+        }       
     }
+    @media ${device.mobileM} {
+        p > img{
+            width: 100%;
+            height:200px!important;
+            margin:0 auto;
+        }     
+    }        
 `

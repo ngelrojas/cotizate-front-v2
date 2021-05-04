@@ -307,4 +307,41 @@ export const TextoDescription = styled.div`
         line-height: 16px;
         margin-top: 1%;
     }
+    p > img{
+        width: 100%;
+        height:200px!important;
+    }      
+@media ${device.tablet} {
+    p > img{
+        width: 100%;
+        height:190px!important;
+    }       
+}
+@media ${device.mobileM} {
+    p > img{
+        width: 100%;
+        height:190px!important;
+        margin:0 auto;
+    }     
+}        
+`
+export const TextoImg = styled.div`   
+ 
+    p > img{
+        width: 100%;
+        height:200px!important;
+    }      
+@media ${device.tablet} {
+    p > img{
+        width: 100%;
+        height:190px!important;
+    }       
+}
+@media ${device.mobileM} {
+    p > img{
+        width: 100%;
+        height:190px!important;
+        margin:0 auto;
+    }     
+}        
 `

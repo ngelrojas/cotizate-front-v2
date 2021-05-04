@@ -27,7 +27,6 @@ export const Contentbody = styled.main`
     min-height: 100%;
     padding: 3em 1em 4em 1em;
     box-sizing: border-box;
-    width: 100%;
     margin-left: 22px;
     margin-right: 22px;
     padding-top: 3px;
