@@ -110,9 +110,8 @@ const TabDetalle: React.FC<ITab> = (props) => {
                             <Tab label="Fases" {...a11yProps(1)} />
                             <Tab label="Comentarios" {...a11yProps(2)} />
                             <Tab label="Actualizaciones" {...a11yProps(3)} />
-                            { authenticated? <Tab label="Aportaciones" {...a11yProps(4)} /> : null} 
-                            {/* { authenticated? <Tab label="Aportaciones" {...a11yProps(2)} /> : <Tab label="Aportaciones" {...a11yProps(2)}   />}  */}
-                           
+                            {/* { authenticated? <Tab label="Aportaciones" {...a11yProps(4)} /> : null}  */}
+                          
                             </Tabs>
                         </AppBar>
                         <TabPanel value={value} index={0}>
@@ -138,12 +137,12 @@ const TabDetalle: React.FC<ITab> = (props) => {
                             ))}     
 
                           </TabPanel>
-                        { authenticated?
+                        {/* { authenticated?
                           <TabPanel value={value} index={4}>
                             <TabAportadores />                            
                           </TabPanel>
                           :null
-                         }                     
+                         }    */} 
                     </div>                                           
                     </Col>                    
            </DivSeparador>         

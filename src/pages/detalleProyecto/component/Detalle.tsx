@@ -37,7 +37,7 @@ import Button from '@material-ui/core/Button'
 import * as Action from '../../../redux/actions/detalleProyectoActions';
 import {Encrypted} from '../../../userEncrypted'
 import {Payment} from '../../../userPayments'
-
+import ModalContacto from './ModalContacto'
   
 import {Article, SectionDetails, Picture, 
     DivPrincipal,
@@ -324,9 +324,9 @@ const Detalle: React.FC<IDetalle> = (props) => {
     const copiarLink =(data: string)=>{       
         copiarTextoToPapelera(data);
     }
-    // useEffect(() =>{  
+
     dispatch(Action.obtnerAportes(props.data.header.id));
-//    },[]);
+
 
     useEffect(() =>{      
         dispatch(Action.obtnerFases(props.data.header.id));
@@ -371,9 +371,18 @@ const Detalle: React.FC<IDetalle> = (props) => {
     return stateSelector.home;
   });
 
-  useEffect(() => {   
-  }, [featuredProjects,proyectosFinalizados,finalizedProjects,categoriasStatus]);
+    useEffect(() => {   
+    }, [featuredProjects,proyectosFinalizados,finalizedProjects,categoriasStatus]);
+    const [openModal,setOpenModal]= useState(false)
+    const onchangeSiguiendo=()=>{
 
+    }
+    const onchangeContacto=()=>{
+        setOpenModal(true);
+    }
+    const cerrarModal=()=>{
+        setOpenModal(false);
+    }
 //----------------------------------------------------------------------------------
 const [dispositivoMovil, setDispositivoMovil] = useState(false);
 
@@ -896,8 +905,21 @@ const responsive = {
                        <Col xs={12} sm={12} md={12} lg={12}>
                             <Row center='xs' >
                                 <div style={{marginTop:"2%", marginBottom:"2%", width:'100%'}} > 
-                                <ButtonBordeAzul style={{width:'39%',height:'40px', background: '#F69939', color:'#FFFFFF', border: '1px solid #F69939',fontWeight: 'bold',borderRadius: '5px' }} >Siguiendo </ButtonBordeAzul>
-                                <ButtonBordeAzul style={{ width:'39%', height:'40px', background: '#FFFFFF', color:'#F69939', border: '1px solid #F69939',fontWeight: 'bold',borderRadius: '5px' }} >Contacto</ButtonBordeAzul>
+                                {current_user.authenticated ? (
+                                    <>
+                                        <ButtonBordeAzul style={{width:'39%',height:'40px', background: '#F69939', color:'#FFFFFF', border: '1px solid #F69939',fontWeight: 'bold',borderRadius: '5px' }} >
+                                            Siguiendo 
+                                        </ButtonBordeAzul>
+                                        <ButtonBordeAzul onClick={onchangeContacto} style={{ width:'39%', height:'40px', background: '#FFFFFF', color:'#F69939', border: '1px solid #F69939',fontWeight: 'bold',borderRadius: '5px' }} >
+                                            Contacto
+                                        </ButtonBordeAzul>
+                                    </>
+                                ):
+                                <>
+                                    <ButtonBordeAzul style={{width:'39%',height:'40px', background: '#FFFFFF', color:'#F69939', border: '1px solid #F69939',fontWeight: 'bold',borderRadius: '5px' }} >Siguiendo </ButtonBordeAzul>
+                                    <ButtonBordeAzul style={{ width:'39%', height:'40px', background: '#FFFFFF', color:'#F69939', border: '1px solid #F69939',fontWeight: 'bold',borderRadius: '5px' }} >Contacto</ButtonBordeAzul>
+                                </>
+                                }
                                 </div>
                             </Row>  
                         </Col>                                                                            
@@ -971,7 +993,11 @@ const responsive = {
 
         </DivPrincipal>
           <Br/>
-        </Col>  
+        </Col> 
+            <ModalContacto
+              open={openModal}
+              onHandleClose={cerrarModal}
+            /> 
         </>
     )
 }
