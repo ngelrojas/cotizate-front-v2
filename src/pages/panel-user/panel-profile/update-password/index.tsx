@@ -12,7 +12,8 @@ import {
     WrapBtn,
     Btn,
     ErrorInfo,
-    Span
+    Span,
+    Wrappbtnpwd
 } from '../styles'
 import Loading from '../../../../components/loading'
 
@@ -57,12 +58,15 @@ const UpdatePassword: React.FC = () => {
     })
     return (
         <Row>
-            <Col lg={12}>
-                <Row center="lg">
-                    <Col lg={8}>
+            <Col xs={12}>
+                <Row center="xs">
+                    <Col xs={10}>
+                        <Wrappbtnpwd>
                         <BtnShow type="button" onClick={() => setHide(!hide)}>
                             actualizar contrasena
                         </BtnShow>
+                        </Wrappbtnpwd>
+
                         {hide ? (
                             <Form onSubmit={onSubmit}>
                                 <Label htmlFor="password">

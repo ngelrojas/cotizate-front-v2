@@ -20,6 +20,7 @@ import PanelCreated from './pages/panel-user/panel-created'
 import PanelRevision from './pages/panel-user/panel-revision'
 import PanelAproved from './pages/panel-user/panel-aproved'
 import PanelPublic from './pages/panel-user/panel-public'
+import PersonalUser from './pages/panel-user/personal-user'
 import PageCreating from './pages/creating'
 import Crowdfunding from './pages/crowdfunding'
 import Category from './pages/categorias'
@@ -108,6 +109,11 @@ const App: React.FC = () => {
                         exact
                         path="/dashboard-de-usuario/publicados"
                         component={PanelPublic}
+                    />
+                    <Route
+                        exact
+                        path="/dashboard-de-usuario/datos-de-registro"
+                        component={PersonalUser}
                     />
                     <Route
                         exact

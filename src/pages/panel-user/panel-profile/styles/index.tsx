@@ -98,7 +98,7 @@ export const BtnShow = styled.button`
     background-color: #ddd;
     text-transform: uppercase;
     padding: 1%;
-    width: 93%;
+    width: 74%;
     cursor: pointer;
 `
 
@@ -107,4 +107,17 @@ export const Span = styled.p`
     overflow: hidden;
     text-align: center;
     color: red;
+`
+
+export const Wrapph1 = styled.div`
+    margin-top: 5%;
+    margin-bottom: 5%;
+    > h1{
+        text-align: center;
+    }
+`
+
+export const Wrappbtnpwd = styled.div`
+    width: 100%;
+    margin: 8%;
 `
