@@ -36,6 +36,17 @@ export class PersonalProfile {
     }
 
     /*
+    * get list all profiles about the
+    * the current user loged
+    */
+   listProfilePersonal = async()=>{
+       this.resp_profile = await API.get(`profile/personal`,{
+           headers: {Authorization: `Bearer ${this.token}`}
+       })
+       return this.resp_profile
+   }
+
+    /*
      * method get current personal profile
      */
     currentPersonalProfile = async (current_user_id:number) => {
