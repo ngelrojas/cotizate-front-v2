@@ -74,10 +74,10 @@ const ListProfile: React.FC = () => {
                         <TableCell align="right">{row.cellphone ? row.cellphone:''}</TableCell>
                         <TableCell align="right">{row.cities.name ? row.cities.name:''}</TableCell>
                         <TableCell align="right">
-                            <ButtonUpdate variant="contained" color="primary" href={`${url_general}/actualizar-perfil-${row.id}`}>
+                            <ButtonUpdate variant="contained" color="primary" href={`${url_general}/actualizar-perfil/${row.id}`}>
                                 a
                             </ButtonUpdate>
-                            <Button variant="contained" color="secondary" href={`${url_general}/eliminar-perfil-${row.id}`}>
+                            <Button variant="contained" color="secondary" href={`${url_general}/eliminar-perfil/${row.id}`}>
                                 d
                             </Button>
                         </TableCell>

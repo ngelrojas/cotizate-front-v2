@@ -22,6 +22,7 @@ import PanelAproved from './pages/panel-user/panel-aproved'
 import PanelPublic from './pages/panel-user/panel-public'
 import PersonalUser from './pages/panel-user/personal-user'
 import PersonalUserProfile from './pages/panel-user/personal-user-profile'
+import UpdateProfile from './pages/panel-user/user-profile/update'
 import PageCreating from './pages/creating'
 import Crowdfunding from './pages/crowdfunding'
 import Category from './pages/categorias'
@@ -115,11 +116,16 @@ const App: React.FC = () => {
                         exact
                         path="/dashboard-de-usuario/datos-de-registro"
                         component={PersonalUser}
-                    />
+                    />                    
                     <Route
                         exact
                         path="/dashboard-de-usuario/perfiles-de-usuario"
                         component={PersonalUserProfile} 
+                    />
+                    <Route
+                        exact
+                        path="/dashboard-de-usuario/perfiles-de-usuario/actualizar-perfil/:id"
+                        component={UpdateProfile} 
                     />
                     <Route
                         exact

@@ -8,6 +8,7 @@ export const LOADING_UI = 'LOADING_UI'
 export const CLEAR_ERRORS = 'CLEAR_ERRORS'
 
 export const GET_PROFILE = 'GET_PROFILE'
+export const SET_PROFILE = 'SET_PROFILE'
 export const GET_CURRENT_PROFILE = 'GET_CURRENT_PROFILE'
 /*phases types*/
 export const SET_PHASE = 'SET_PHASE'

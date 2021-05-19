@@ -1,11 +1,10 @@
 import {
-    GET_PROFILE,
+    SET_PROFILE,
     GET_CURRENT_PROFILE,
     LOADING_USER,
     SET_ERRORS
 } from '../types'
 import {PersonalProfile} from '../../userProfile'
-import API from '../../api'
 
 let token = window.sessionStorage.getItem('token')
 let currentPersonal = new PersonalProfile(token)
@@ -24,13 +23,13 @@ let currentPersonal = new PersonalProfile(token)
         //.catch(err => console.log(err))
 /*}*/
 
-export const LoadPersonalData = (current_user_id:number) =>(dispatch: any)=> {
-    dispatch({type: LOADING_USER})
-    currentPersonal.currentPersonalProfile(current_user_id)
+export const LoadPersonalData = (current_profile_id:number) =>(dispatch: any)=> {
+
+    currentPersonal.currentPersonalProfile(current_profile_id)
             .then(resp => {
-                console.info(resp.data.data)
+
                 dispatch({
-                    type: GET_CURRENT_PROFILE,
+                    type: SET_PROFILE,
                     payload: resp.data.data
                 })
             })
