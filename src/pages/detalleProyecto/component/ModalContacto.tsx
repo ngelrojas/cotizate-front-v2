@@ -4,7 +4,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import { TextField, Typography, InputAdornment } from "@material-ui/core";
 import AssignmentIndIcon from '@material-ui/icons/AssignmentInd';
 import { useSelector,useDispatch } from "react-redux";
-import Slide from '@material-ui/core/Slide';
+import * as Action from '../../../redux/actions/detalleProyectoActions';
+import { ButtonBordeAzul   } from './styleDetallecomponent/styleDetalle';
 
 const useStyles = makeStyles((theme) => ({
     icono: {
@@ -13,6 +14,10 @@ const useStyles = makeStyles((theme) => ({
     },
     contentTitle: {
         textAlign: 'center',
+    },
+    contentTitle1: {
+        textAlign: 'center',
+        background:'#1383C5'
     },
     contentButton: {
         textAlign: 'center',
@@ -42,9 +47,7 @@ const useStyles = makeStyles((theme) => ({
 
 }));
 
-const Transition = React.forwardRef(function Transition(props, ref) {
-    return <Slide direction="up" ref={ref} {...props} />;
-  });
+
   interface IDetalle {
     open:boolean,
     onHandleClose: any
@@ -66,7 +69,7 @@ const ModalContacto: React.FC<IDetalle> =(props ) => {
         return  usuarioName.length >= 3;
     };
     const isValidNombre = (nombre: any) => {    
-        return  nombre.length >= 3 ;
+        return  nombre.length >= 20 ;
     };
     const isValidEmail = (email:any) => {    
         return  email.length >= 3;
@@ -97,7 +100,8 @@ const ModalContacto: React.FC<IDetalle> =(props ) => {
         isValidEmail(email) 
       }
     const registrarUsuarioNuevo= () => {
-       // dispatch(Action.registrarUsuario(usuarioName.trim(),nombre.trim(),apellido.trim()));
+       dispatch(Action.contactarContacto(usuarioName,email,nombre));
+       props.onHandleClose();
     }
 
     return (
@@ -110,8 +114,8 @@ const ModalContacto: React.FC<IDetalle> =(props ) => {
         >
         <DialogContent >
                    
-                    <Grid item xs={12} className={style.contentTitle}  >
-                        <Typography variant="h6" gutterBottom>
+                    <Grid item xs={12} className={style.contentTitle1}  >
+                        <Typography variant="h6" style={{color:'#ffffff'}} gutterBottom>
                            Enviar Mensaje
                         </Typography>
                     </Grid>
@@ -161,9 +165,9 @@ const ModalContacto: React.FC<IDetalle> =(props ) => {
                        
 
                     </Grid>
-                        <TextField
+                        {/* <TextField
                             id="nombre"
-                            label="Nombre"
+                            label="Descripcion"
                             type={'text'}
                             variant="outlined"
                             name="nombre"
@@ -179,32 +183,45 @@ const ModalContacto: React.FC<IDetalle> =(props ) => {
                             inputProps={{
                             maxLength: 20,
                             }}
+                        /> */}
+                        <TextField
+                        id="outlined-full-width"
+                        label="Mensaje"
+                        style={{ margin: 8 }}
+                        name="nombre"
+                        value={nombre}
+                        onChange={_onChangeregistro}
+                        placeholder="Mensaje.."
+                        rows={3}
+                        helperText={ nombreError &&
+                            "La descripcion debe es requerida"
+                            }
+                        fullWidth
+                        margin="normal"
+                        InputLabelProps={{
+                            shrink: true,
+                        }}
+                        variant="outlined"
                         />
                       
                 
                     <Grid container item xs={12}  >
                         <Grid item xs={6} >
-                            <Button
-                                type="submit"
-                                fullWidth
-                                variant="contained"
-                                color="secondary"
-                                className={style.submit}
-                                onClick = {props.onHandleClose}                            
-                           >
-                            CANCELAR
-                        </Button>     
+                           
+                        <ButtonBordeAzul  onClick = {props.onHandleClose}  style={{width:'90%',height:'40px', background: '#F69939', color:'#FFFFFF', border: '1px solid #F69939',fontWeight: 'bold',borderRadius: '5px' }} >
+                            CANCELAR 
+                        </ButtonBordeAzul>
+                                      
+
                         </Grid>   
                         <Grid item xs={6}  >
-                            <Button 
-                               onClick={registrarUsuarioNuevo}
-                               variant="contained"
-                               fullWidth
-                               disabled={!isFormValid()}
-                               color="secondary"
-                                >
-                                REGISTRATE
-                            </Button>
+                        <ButtonBordeAzul    onClick={registrarUsuarioNuevo}  
+                       //disabled={!isFormValid()}
+                        style={{width:'90%',height:'40px', background: '#F69939', color:'#FFFFFF', border: '1px solid #F69939',fontWeight: 'bold',borderRadius: '5px' }} >
+                            ENVIAR 
+                        </ButtonBordeAzul>
+
+                        
                         </Grid> 
                     </Grid>
                 

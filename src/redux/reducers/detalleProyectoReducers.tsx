@@ -1,4 +1,5 @@
 import {
+    LISTA_DENUNCIAS,
     DETALLE_PROYECTO, DETALLE_APORTES,DETALLE_FASES,DETALLE_ACTUALIZACIONES, DETAIL_SAVE,DETAIL_LIKE,DETAIL_RECOMENDACIONES,DETALLE_COMMENTS,DETAIL_PROFILE_REDES
 } from '../types/detalleProyecto.types'
 const initialState = {
@@ -120,7 +121,8 @@ const initialState = {
         rs_twitter: null
     },
     statusActualizaciones:false,
-    actualizacionesList:[]
+    actualizacionesList:[],
+    listDenuncias:[]
 }
 
 export default function(state = initialState, action: any) {
@@ -169,7 +171,12 @@ export default function(state = initialState, action: any) {
                     ...state,
                     statusActualizaciones:action.status,
                     actualizacionesList: action.actualizaciones
-                }                   
+                }     
+            case LISTA_DENUNCIAS:
+                return {
+                    ...state,
+                    listDenuncias:action.denuncias
+                }               
         default:
             return state
     }

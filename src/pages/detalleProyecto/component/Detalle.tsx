@@ -336,6 +336,7 @@ const Detalle: React.FC<IDetalle> = (props) => {
         if(authenticated){
             dispatch(Action.obtenerLike(props.data.header.id));
             dispatch(Action.obtenerSave(props.data.header.id)); //headerid
+            dispatch(Action.obtnerListaDenuncias());
         }
        
    },[]);

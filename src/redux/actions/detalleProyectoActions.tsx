@@ -1,4 +1,5 @@
 import {
+  LISTA_DENUNCIAS,
   DETALLE_PROYECTO, DETALLE_APORTES, DETALLE_FASES,DETALLE_ACTUALIZACIONES,DETAIL_LIKE, DETAIL_SAVE,DETAIL_RECOMENDACIONES,DETALLE_COMMENTS,DETAIL_PROFILE_REDES
 } from '../types/detalleProyecto.types'
 import API from '../../api'
@@ -33,22 +34,23 @@ export function obtnerAportes(idAporte: any){
       .catch(err => console.log(err))
       }
 }
-const fasePrueba=[
-  {
-  id:12,
-  title:'faseTop',
-  description:'es una prueba de color rojo',
-  amount:'100.00',
-  header:22
-},
-{
-  id:13,
-  title:'faseLab',
-  description:'es una prueba de color rojo',
-  amount:'400.00',
-  header:23
-}
-];
+const denuncias=[
+    {
+        id:1,
+        title:'faseTop',
+        description:'es una prueba de color rojo',
+    },
+    {
+      id:2,
+      title:'faseTop',
+      description:'es una prueba de color rojo',
+    },
+    {
+      id:3,
+      title:'faseTop',
+      description:'es una prueba de color rojo',
+    }
+  ];
 export function obtnerFases(idHeader: any){       
   return (dispatch : any) =>{          
   
@@ -223,3 +225,23 @@ export function obtenerActualizaciones(idHeader: any){
       }
 }
 
+export function obtnerListaDenuncias(){       
+  return (dispatch : any) =>{          
+      
+     API.get(`denounces`).then(resp => {        
+     console.log('denuncias :', resp.data.data)
+      dispatch({
+        type: LISTA_DENUNCIAS,
+        denuncias:resp.data.data
+      }) 
+
+      })
+      .catch(err => console.log(err))
+      }
+}
+export function contactarContacto(nombre: string, email:string, descripcion: string){       
+  return (dispatch : any) =>{          
+      
+    console .log('llega el reporte', nombre, email, descripcion)
+  }
+}

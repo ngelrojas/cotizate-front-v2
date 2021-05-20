@@ -5,7 +5,7 @@ import LineProgress from '../../../components/LineProgress'
 
 import ThumbUpAltIcon from '@material-ui/icons/ThumbUpAlt';
 import ThumbDownIcon from '@material-ui/icons/ThumbDown';
-import { useDispatch, useSelector } from "react-redux";
+import { AnyIfEmpty, useDispatch, useSelector } from "react-redux";
 import BookmarkBorderIcon from '@material-ui/icons/BookmarkBorder';
 import { IconButton } from '@material-ui/core';
 import FacebookIcon from '@material-ui/icons/Facebook';
@@ -71,11 +71,8 @@ import { isConstructorDeclaration } from 'typescript';
 const Reportar: React.FC<IReportar> = (props) => {
     const history = useHistory();
     const classes = useStyles();
-
-    
-    const { authenticated } = useSelector((stateSelector: any) => {  return stateSelector.user;  });
-    useEffect(() =>{
-    },[authenticated]);
+    const { listDenuncias } = useSelector((stateSelector: any) => {  return stateSelector.detalleProyecto; });
+  
     const [value, setValue] = useState('');
     const [error, setError] = useState(false);
     const [helperText, setHelperText] = useState('seleccione una');
@@ -127,61 +124,28 @@ const Reportar: React.FC<IReportar> = (props) => {
                     <DivSeparadorSinColor> 
                         <FormControl component="fieldset" error={error} className={classes.formControl}>                          
                             <RadioGroup aria-label="quiz" name="quiz" value={value} onChange={handleRadioChange}>
-                                <DivBorderSinColor>
-                                    <Col xs={12} sm={12} md={12} lg={12}>   
-                                        <Col xs={12} sm={12} md={12} lg={12}>                                                 
-                                            <Texto2>
-                                                <FormControlLabel value="tipo1" control={<Radio />} label="" />
-                                                Este proyecto no respeta las reglas    
-                                            </Texto2>                    
-                                        </Col> 
-                                        <Col xs={12} sm={12} md={12} lg={12}>                                                                   
-                                            <Texto3>
-                                            - Contiene Discurso de acoso , odio y razismo    
-                                            </Texto3>   
+                                {listDenuncias.map((value :any, index : any)=>(
+                                    <DivBorderSinColor>
+                                        <Col xs={12} sm={12} md={12} lg={12}>   
+                                            <Col xs={12} sm={12} md={12} lg={12}>                                                 
+                                                <Texto2>
+                                                    <FormControlLabel value={value.id.toString()} control={<Radio />} label="" />
+                                                     {value.title}   
+                                                </Texto2>                    
+                                            </Col> 
+                                            <Col xs={12} sm={12} md={12} lg={12}>                                                                   
+                                                <Texto3>
+                                                  {value.description}    
+                                                </Texto3>   
+                                            </Col>  
+                                                                    
                                         </Col>  
-                                        <Col xs={12} sm={12} md={12} lg={12}>                                                                   
-                                            <Texto3>
-                                            - Ofrese recompensas Prohibidas    
-                                            </Texto3>   
-                                        </Col>        
-                                        <Col xs={12} sm={12} md={12} lg={12}>                                                                   
-                                            <Texto3>
-                                            - Contiene Discurso de acoso , odio y razismo   
-                                            </Texto3>   
-                                        </Col>                                     
-                                    </Col>  
-                                </DivBorderSinColor>  
-                                <DivBorderSinColor>
-                                    <Col xs={12} sm={12} md={12} lg={12}>   
-                                        <Col xs={12} sm={12} md={12} lg={12}>                                                 
-                                            <Texto2>
-                                            <FormControlLabel value="tipo2" control={<Radio />} label="" />
-                                            Este proyecto infringe propiedad intelectual   
-                                            </Texto2>                    
-                                        </Col> 
-                                        <Col xs={12} sm={12} md={12} lg={12}>                                                                   
-                                            <Texto3>
-                                            - Este proyecto infringe derechos de autor   
-                                            </Texto3>   
-                                        </Col>                                                                      
-                                    </Col>  
-                                </DivBorderSinColor> 
-                                <DivBorderSinColor>
-                                    <Col xs={12} sm={12} md={12} lg={12}>   
-                                        <Col xs={12} sm={12} md={12} lg={12}>                                                 
-                                            <Texto2>
-                                            <FormControlLabel value="tipo3" control={<Radio />} label="" />
-                                                Recompensa  
-                                            </Texto2>                    
-                                        </Col> 
-                                        <Col xs={12} sm={12} md={12} lg={12}>                                                                   
-                                            <Texto3>
-                                            - Apoye y no resivi mi recompensa  
-                                            </Texto3>   
-                                        </Col>                                                          
-                                    </Col>  
-                                </DivBorderSinColor>                                  
+                                   </DivBorderSinColor>  
+
+                                ))}
+                               
+                               
+                                                            
                             </RadioGroup>
                             {/* <FormHelperText>{helperText}</FormHelperText>                             */}
                         </FormControl>
