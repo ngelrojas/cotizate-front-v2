@@ -1,13 +1,11 @@
 import {
     SET_PROFILE,
-    GET_CURRENT_PROFILE,
-    LOADING_USER,
     SET_ERRORS
-} from '../types'
+} from '../types/profile.types'
 import {PersonalProfile} from '../../userProfile'
 
 let token = window.sessionStorage.getItem('token')
-let currentPersonal = new PersonalProfile(token)
+let profilePersonal = new PersonalProfile(token)
 
 /*export const getPerfilData = (token: any) => (dispatch: any) => {*/
     //dispatch({type: LOADING_USER})
@@ -23,11 +21,12 @@ let currentPersonal = new PersonalProfile(token)
         //.catch(err => console.log(err))
 /*}*/
 
-export const LoadPersonalData = (current_profile_id:number) =>(dispatch: any)=> {
+export const loadPersonalData = (current_profile_id:number) =>(dispatch: any)=> {
 
-    currentPersonal.currentPersonalProfile(current_profile_id)
+    profilePersonal.currentPersonalProfile(current_profile_id)
             .then(resp => {
-
+                console.log("SEND TO REDUCERS")
+                console.log(resp.data.data)
                 dispatch({
                     type: SET_PROFILE,
                     payload: resp.data.data
@@ -36,7 +35,7 @@ export const LoadPersonalData = (current_profile_id:number) =>(dispatch: any)=> 
             .catch(err => {
                 dispatch({
                     type: SET_ERRORS,
-                    payload: err
+                    errors: err
                 })
             })
 }
