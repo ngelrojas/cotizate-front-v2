@@ -1,5 +1,5 @@
 import {
-  LISTA_DENUNCIAS,
+  LISTA_DENUNCIAS,OBJETO_DENUNCIA,
   DETALLE_PROYECTO, DETALLE_APORTES, DETALLE_FASES,DETALLE_ACTUALIZACIONES,DETAIL_LIKE, DETAIL_SAVE,DETAIL_RECOMENDACIONES,DETALLE_COMMENTS,DETAIL_PROFILE_REDES
 } from '../types/detalleProyecto.types'
 import API from '../../api'
@@ -243,5 +243,25 @@ export function contactarContacto(nombre: string, email:string, descripcion: str
   return (dispatch : any) =>{          
       
     console .log('llega el reporte', nombre, email, descripcion)
+  }
+}
+
+export function obtnerDenuncia(iddenucia: number){       
+  return (dispatch : any) =>{          
+      console.log('ide denuciaa : ', iddenucia);
+     API.get(`denounces/${iddenucia}`).then(resp => {  
+        dispatch({
+          type: OBJETO_DENUNCIA,
+          objDenuncia:resp.data.data
+        }) 
+      })
+      .catch(err => console.log(err))
+      }
+}
+export function denunciarSinlogueo(idDenuncia: number, nombre:string, carnet: string, celular: number, descripcion:string){       
+  return (dispatch : any) =>{          
+      
+    console .log('llega el reporte sin logueo',idDenuncia, nombre, carnet, celular,descripcion );
+
   }
 }

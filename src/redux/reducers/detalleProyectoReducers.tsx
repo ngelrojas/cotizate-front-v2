@@ -1,5 +1,6 @@
+import { string } from 'prop-types'
 import {
-    LISTA_DENUNCIAS,
+    LISTA_DENUNCIAS, OBJETO_DENUNCIA,
     DETALLE_PROYECTO, DETALLE_APORTES,DETALLE_FASES,DETALLE_ACTUALIZACIONES, DETAIL_SAVE,DETAIL_LIKE,DETAIL_RECOMENDACIONES,DETALLE_COMMENTS,DETAIL_PROFILE_REDES
 } from '../types/detalleProyecto.types'
 const initialState = {
@@ -122,7 +123,12 @@ const initialState = {
     },
     statusActualizaciones:false,
     actualizacionesList:[],
-    listDenuncias:[]
+    listDenuncias:[],
+    objDenuncia:{
+        id:0,
+        title:"",
+        description:"",
+    }
 }
 
 export default function(state = initialState, action: any) {
@@ -176,7 +182,12 @@ export default function(state = initialState, action: any) {
                 return {
                     ...state,
                     listDenuncias:action.denuncias
-                }               
+                }   
+            case OBJETO_DENUNCIA:
+                return {
+                    ...state,
+                    objDenuncia:action.objDenuncia
+                }             
         default:
             return state
     }

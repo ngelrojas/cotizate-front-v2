@@ -333,10 +333,11 @@ const Detalle: React.FC<IDetalle> = (props) => {
         dispatch(Action.obtenerActualizaciones(props.data.header.id));
         dispatch(Action.obtnerComentario(props.data.header.id));
         dispatch(Action.obtenerProyectosRecomendados(props.data.header.category.slug)); //quemado categoria/ slug
+        dispatch(Action.obtnerListaDenuncias());
         if(authenticated){
             dispatch(Action.obtenerLike(props.data.header.id));
             dispatch(Action.obtenerSave(props.data.header.id)); //headerid
-            dispatch(Action.obtnerListaDenuncias());
+          
         }
        
    },[]);

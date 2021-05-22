@@ -37,7 +37,7 @@ import FormControl from '@material-ui/core/FormControl';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import FormLabel from '@material-ui/core/FormLabel';
 import Button from '@material-ui/core/Button';
-
+import ModalReportarSin from './ModalReportarSin';
 
 import {
      DivSeparadorSinColor,
@@ -71,15 +71,18 @@ import { isConstructorDeclaration } from 'typescript';
 const Reportar: React.FC<IReportar> = (props) => {
     const history = useHistory();
     const classes = useStyles();
+    
+    const { authenticated,id } = useSelector((stateSelector: any) => {  return stateSelector.user;  });
     const { listDenuncias } = useSelector((stateSelector: any) => {  return stateSelector.detalleProyecto; });
   
     const [value, setValue] = useState('');
     const [error, setError] = useState(false);
     const [helperText, setHelperText] = useState('seleccione una');
 
+    const [openModalSin,setOpenModalSin ] = useState(false)
 
     
-      const handleSubmit = (event: any) => {
+      const reportarLogueado = (event: any) => {
         event.preventDefault();
     
         
@@ -94,6 +97,24 @@ const Reportar: React.FC<IReportar> = (props) => {
           alert('favor seleccione uno para reportar');
         }
       };
+      const reportarSinLogueo = (event: any) => {
+        event.preventDefault();
+    
+        
+        if (value != '') {    
+          console.log('elijio : ', value);
+          setHelperText('You got 1!');
+          setError(false);
+          setOpenModalSin(true);
+        } else {
+          setHelperText('Please select an option.');
+          setError(true);
+          alert('favor seleccione uno para reportar');
+        }
+      };
+      const onHandleCloseSin=()=>{
+           setOpenModalSin(false);
+       }
     const handleRadioChange = (event: any) => {
         console.log('radio', event.target.value);
         setValue(event.target.value);
@@ -115,7 +136,10 @@ const Reportar: React.FC<IReportar> = (props) => {
                   <DivSeparadorSinColor >
                     <Col xs={12} sm={12} md={12} lg={12}> 
                         <Row center='xs' >
-                            <ButtonBordeAzul onClick={handleSubmit}>Reporte este proyecto a cotizate</ButtonBordeAzul>
+                          {authenticated? <ButtonBordeAzul onClick={reportarLogueado}>Reporte este proyecto a cotizate logu</ButtonBordeAzul>
+                            :  <ButtonBordeAzul onClick={reportarSinLogueo}>Reporte este proyecto a cotizate sin</ButtonBordeAzul> 
+                           }
+                           
                        </Row>                       
                     </Col>  
                   </DivSeparadorSinColor>  
@@ -153,7 +177,11 @@ const Reportar: React.FC<IReportar> = (props) => {
                       {/* </Row>
                     </Col> */}
                   
-                   
+                  <ModalReportarSin 
+                     open={openModalSin}
+                     idDenuncia={value}
+                     onHandleClose={onHandleCloseSin}
+                  />
                              
         </>
     )
