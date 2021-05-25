@@ -12,6 +12,7 @@ import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
+import TextareaAutosize from '@material-ui/core/TextareaAutosize';
 import {
     DivSeparadorSinColor,
     LinkAzul2,
@@ -74,14 +75,14 @@ const ModalReportarSin: React.FC<IDetalle> =(props ) => {
     
     const style = useStyles();
     const dispatch = useDispatch();
-
-    const [usuarioName, setUsuarioName] = useState("");
-    const [usuarioNameError, setUsuarioNameError] = useState(false);
     const [error, setError] = useState(false);
     const [value, setValue] = useState('');
+    const [descripcion, setDescripcion] = useState("");
+    const [descripcionError, setDescripcionError] = useState(false);
 
-    const isValidUsuarioName = (usuarioName: any) => {   
-        return  usuarioName.length >= 3;
+
+    const isValidDescripcion = (descripcion: any) => {   
+        return  descripcion.length >= 5;
     };
 
     const { objDenuncia } = useSelector((stateSelector: any) => {  return stateSelector.detalleProyecto; });
@@ -90,15 +91,21 @@ const ModalReportarSin: React.FC<IDetalle> =(props ) => {
     const _onChangeregistro= (e: any) => {
             const texfiel = e.target.name;
             const value = e.target.value;
-            if (texfiel === "usuarioName") {
-                setUsuarioName(value);
-                setUsuarioNameError(!isValidUsuarioName(value));
-            } 
+
+            if (texfiel === "descripcion") {
+                setDescripcion(value);
+                setDescripcionError(!isValidDescripcion(value));
+            }  
       };
 
     const onchangeEniar= () => {
-      // dispatch(Action.contactarContacto(usuarioName,email,nombre));
-       props.onHandleClose();
+        if(isValidDescripcion(descripcion)){
+            
+                dispatch(Action.denunciarConlogueo(props.idDenuncia, descripcion));
+                props.onHandleClose();
+                setDescripcion('');
+        }
+    
     }
    
     useEffect(()=>{
@@ -118,38 +125,14 @@ const ModalReportarSin: React.FC<IDetalle> =(props ) => {
         <DialogContent >
                    
                     <Grid item xs={12} className={style.contentTitle1}  >
-                        <Typography variant="h6" style={{color:'#1383C5',borderColor:'#1383C5' }} gutterBottom>
-                           Enviar Mensaje 
-                        </Typography>
+                    <ButtonBordeAzul >  Reportar este proyecto a Cotizate</ButtonBordeAzul> 
+                    
                     </Grid>
-                    <Grid container item xs={12} className={style.contentTitle}  >
-                        <Grid item xs={12}  >
-                        <TextField
-                                id="usuarioName"
-                                label="Nombre"
-                                type={'text'}
-                                variant="outlined"
-                                name="usuarioName"
-                                value={usuarioName}
-                                onChange={_onChangeregistro}
-                                className={style.TextFielNombre}
-                                error={usuarioNameError}
-                                helperText={ usuarioNameError &&
-                                "El usuario es requerido, no cumple con los requisitos"
-                                }
-                                required
-                                fullWidth
-                                inputProps={{
-                                maxLength: 20,
-                                }}
-                            />
-                        </Grid>   
+                    <Grid container item xs={12} className={style.contentTitle}  > 
                         <Grid item xs={12}  >
                         <DivSeparadorSinColor> 
-                            <FormControl component="fieldset" error={error} className={style.formControl2}>                          
-                                <RadioGroup aria-label="quiz" name="quiz" value={value}
-                                  // onChange={handleRadioChange}
-                                   >
+                            <FormControl component="fieldset"  className={style.formControl2}>                          
+                                <RadioGroup aria-label="quiz" name="quiz" value={value} >
                                   
                                         <DivBorderSinColor>
                                             <Col xs={12} sm={12} md={12} lg={12}>   
@@ -173,25 +156,28 @@ const ModalReportarSin: React.FC<IDetalle> =(props ) => {
                             </DivSeparadorSinColor>
 
                         </Grid>                    
-                    </Grid>                                  
-                  
+                    </Grid>      
+                    <Grid item xs={12}  >
+                             <TextareaAutosize aria-label="minimum height"
+                               style={{width:'100%', marginTop:'10px', fontSize:'16px', borderColor:'rgb(118, 118, 118)'}}
+                               rowsMin={6}
+                               name="descripcion"
+                               value={descripcion}                               
+                               onChange={_onChangeregistro}
+                               placeholder="Descripcion" />
+                    </Grid>                                              
                     <Grid container item xs={12}  >
-                        <Grid item xs={6} >
-                           
-                        <ButtonBordeAzul  onClick = {props.onHandleClose}  style={{width:'90%',height:'40px', background: '#F69939', color:'#FFFFFF', border: '1px solid #F69939',fontWeight: 'bold',borderRadius: '5px' }} >
-                            CANCELAR 
-                        </ButtonBordeAzul>
-                                      
-
+                        <Grid item xs={6} >                           
+                            <ButtonBordeAzul  onClick = {props.onHandleClose}  style={{width:'90%',height:'40px', background: '#F69939', color:'#FFFFFF', border: '1px solid #F69939',fontWeight: 'bold',borderRadius: '5px' }} >
+                                CANCELAR 
+                            </ButtonBordeAzul>                                      
                         </Grid>   
                         <Grid item xs={6}  >
                         <ButtonBordeAzul    onClick={onchangeEniar}                         
                           style={{width:'90%',height:'40px', background: '#F69939', color:'#FFFFFF', border: '1px solid #F69939',fontWeight: 'bold',borderRadius: '5px' }} >
                             ENVIAR 
-                        </ButtonBordeAzul>
-
-                        
-                        </Grid> 
+                        </ButtonBordeAzul>                        
+                        </Grid>  
                     </Grid>
                 
             </DialogContent>

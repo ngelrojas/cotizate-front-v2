@@ -38,7 +38,7 @@ import FormHelperText from '@material-ui/core/FormHelperText';
 import FormLabel from '@material-ui/core/FormLabel';
 import Button from '@material-ui/core/Button';
 import ModalReportarSin from './ModalReportarSin';
-
+import ModalReportCon from './ModalReportCon';
 import {
      DivSeparadorSinColor,
      LinkAzul2,
@@ -80,23 +80,25 @@ const Reportar: React.FC<IReportar> = (props) => {
     const [helperText, setHelperText] = useState('seleccione una');
 
     const [openModalSin,setOpenModalSin ] = useState(false)
-
+    const [openModalCon,setOpenModalCon ] = useState(false)
     
       const reportarLogueado = (event: any) => {
         event.preventDefault();
     
         
         if (value != '') {    
-            alert('reportar... en proceso');
           setHelperText('You got 1!');
           setError(false);
-        
+          setOpenModalCon(true)
         } else {
           setHelperText('Please select an option.');
           setError(true);
-          alert('favor seleccione uno para reportar');
+          // alert('favor seleccione uno para reportar');
         }
       };
+      const onHandleCloseCon=()=>{
+        setOpenModalCon(false);
+      }
       const reportarSinLogueo = (event: any) => {
         event.preventDefault();
     
@@ -109,7 +111,7 @@ const Reportar: React.FC<IReportar> = (props) => {
         } else {
           setHelperText('Please select an option.');
           setError(true);
-          alert('favor seleccione uno para reportar');
+          //alert('favor seleccione uno para reportar');
         }
       };
       const onHandleCloseSin=()=>{
@@ -166,10 +168,7 @@ const Reportar: React.FC<IReportar> = (props) => {
                                         </Col>  
                                    </DivBorderSinColor>  
 
-                                ))}
-                               
-                               
-                                                            
+                                ))}                                                                                                                          
                             </RadioGroup>
                             {/* <FormHelperText>{helperText}</FormHelperText>                             */}
                         </FormControl>
@@ -181,6 +180,11 @@ const Reportar: React.FC<IReportar> = (props) => {
                      open={openModalSin}
                      idDenuncia={value}
                      onHandleClose={onHandleCloseSin}
+                  />
+                  <ModalReportCon 
+                  open={openModalCon}
+                  idDenuncia={value}
+                  onHandleClose={onHandleCloseCon}
                   />
                              
         </>

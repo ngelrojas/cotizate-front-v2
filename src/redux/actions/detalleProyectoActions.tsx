@@ -265,3 +265,8 @@ export function denunciarSinlogueo(idDenuncia: number, nombre:string, carnet: st
 
   }
 }
+export function denunciarConlogueo(idDenuncia: number, descripcion:string){       
+  return (dispatch : any) =>{          
+      console .log('llega el reporte con logueo',idDenuncia, descripcion );
+  }
+}

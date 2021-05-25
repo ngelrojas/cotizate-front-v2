@@ -124,12 +124,14 @@ const ModalReportarSin: React.FC<IDetalle> =(props ) => {
                 setDescripcion(value);
                 setDescripcionError(!isValidDescripcion(value));
             }  
-            console.log(value);
+         
       };
 
     const onchangeEnviar= () => {
-      dispatch(Action.denunciarSinlogueo(props.idDenuncia, nombre, carnet, celular, Description));
-       props.onHandleClose();
+        if(isValidNombre(nombre) && isValidCarnet(carnet) && isValidCelular(celular) && isValidDescripcion(descripcion)  ){
+            dispatch(Action.denunciarSinlogueo(props.idDenuncia, nombre, carnet, celular, Description));
+            props.onHandleClose();
+        }
     }
    
     useEffect(()=>{
