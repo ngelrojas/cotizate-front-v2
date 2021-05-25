@@ -9,12 +9,10 @@ const InitProfileState = {
 }
 
 export default function(state = InitProfileState, action: any) {
-    console.log(action.type)
+    
     switch (action.type) {
 
         case SET_PROFILE:
-            console.log('FROM ACTIONS')
-            console.log(action.payload)
             return {
                 authenticated: true,
                 ...action.payload

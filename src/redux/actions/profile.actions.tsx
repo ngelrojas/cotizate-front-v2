@@ -25,8 +25,6 @@ export const loadPersonalData = (current_profile_id:number) =>(dispatch: any)=> 
 
     profilePersonal.currentPersonalProfile(current_profile_id)
             .then(resp => {
-                console.log("SEND TO REDUCERS")
-                console.log(resp.data.data)
                 dispatch({
                     type: SET_PROFILE,
                     payload: resp.data.data
