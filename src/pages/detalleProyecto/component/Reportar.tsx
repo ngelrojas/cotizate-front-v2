@@ -50,7 +50,7 @@ import {
 import { isConstructorDeclaration } from 'typescript';
 
     interface IReportar {
-    
+      idCanpaings:any
     }
 
     const useStyles = makeStyles((theme) => ({
@@ -180,11 +180,13 @@ const Reportar: React.FC<IReportar> = (props) => {
                      open={openModalSin}
                      idDenuncia={value}
                      onHandleClose={onHandleCloseSin}
+                     idCanpaings={props.idCanpaings}
                   />
                   <ModalReportCon 
-                  open={openModalCon}
-                  idDenuncia={value}
-                  onHandleClose={onHandleCloseCon}
+                    open={openModalCon}
+                    idDenuncia={value}
+                    onHandleClose={onHandleCloseCon}
+                    idCanpaings={props.idCanpaings}
                   />
                              
         </>

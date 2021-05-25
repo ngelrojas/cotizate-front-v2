@@ -70,6 +70,7 @@ const useStyles = makeStyles((theme) => ({
     open:boolean,
     onHandleClose: any,
     idDenuncia:any,
+    idCanpaings:any,
    }
 const ModalReportarSin: React.FC<IDetalle> =(props ) => {
     
@@ -101,7 +102,7 @@ const ModalReportarSin: React.FC<IDetalle> =(props ) => {
     const onchangeEniar= () => {
         if(isValidDescripcion(descripcion)){
             
-                dispatch(Action.denunciarConlogueo(props.idDenuncia, descripcion));
+                dispatch(Action.denunciarConlogueo(props.idDenuncia, descripcion,props.idCanpaings));
                 props.onHandleClose();
                 setDescripcion('');
         }

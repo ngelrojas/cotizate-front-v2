@@ -845,7 +845,7 @@ const responsive = {
             
                   <TabDetalle  decripcion={props.data.description} />                                                                                              
            
-                 <Reportar />
+                 <Reportar idCanpaings={props.data.header.id} />
 
                 </Col>
                 <Col xs={12} sm={6} md={6} lg={6}>                      

@@ -258,15 +258,15 @@ export function obtnerDenuncia(iddenucia: number){
       .catch(err => console.log(err))
       }
 }
-export function denunciarSinlogueo(idDenuncia: number, nombre:string, carnet: string, celular: number, descripcion:string){       
+export function denunciarSinlogueo(idDenuncia: number, nombre:string, carnet: string, celular: number, descripcion:string, idCanpaings: any){       
   return (dispatch : any) =>{          
       
-    console .log('llega el reporte sin logueo',idDenuncia, nombre, carnet, celular,descripcion );
+    console .log('llega el reporte sin logueo',descripcion, idCanpaings );
 
   }
 }
-export function denunciarConlogueo(idDenuncia: number, descripcion:string){       
+export function denunciarConlogueo(idDenuncia: number, descripcion:string, idCanpaings:any){       
   return (dispatch : any) =>{          
-      console .log('llega el reporte con logueo',idDenuncia, descripcion );
+      console .log('llega el reporte con logueo',idDenuncia, descripcion, idCanpaings );
   }
 }

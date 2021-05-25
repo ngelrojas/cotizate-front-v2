@@ -72,8 +72,9 @@ const useStyles = makeStyles((theme) => ({
     open:boolean,
     onHandleClose: any,
     idDenuncia:any,
+    idCanpaings:any,
    }
-const ModalReportarSin: React.FC<IDetalle> =(props ) => {
+const ModalReportarSin: React.FC<IDetalle> =(props) => {
     
     const style = useStyles();
     const dispatch = useDispatch();
@@ -98,8 +99,8 @@ const ModalReportarSin: React.FC<IDetalle> =(props ) => {
     const isValidCelular = (celular: any) => {   
         return  celular.length >= 3;
     };
-    const isValidDescripcion = (descripcion: any) => {   
-        return  descripcion.length >= 3;
+    const isValidDescripcion = (descri: any) => {   
+        return  descri.length >= 3;
     };
 
     const { objDenuncia } = useSelector((stateSelector: any) => {  return stateSelector.detalleProyecto; });
@@ -121,7 +122,7 @@ const ModalReportarSin: React.FC<IDetalle> =(props ) => {
                 setCelularError(!isValidCelular(value));
             }  
             if (texfiel === "descripcion") {
-                setDescripcion(value);
+                setDescripcion(value);                
                 setDescripcionError(!isValidDescripcion(value));
             }  
          
@@ -129,8 +130,14 @@ const ModalReportarSin: React.FC<IDetalle> =(props ) => {
 
     const onchangeEnviar= () => {
         if(isValidNombre(nombre) && isValidCarnet(carnet) && isValidCelular(celular) && isValidDescripcion(descripcion)  ){
-            dispatch(Action.denunciarSinlogueo(props.idDenuncia, nombre, carnet, celular, Description));
+
+            console.log('parametros : ', props.idDenuncia, nombre, carnet, celular, descripcion, props.idCanpaings);
+            dispatch(Action.denunciarSinlogueo(props.idDenuncia, nombre, carnet, celular, descripcion, props.idCanpaings));
             props.onHandleClose();
+            setNombre('');
+            setCarnet('');
+            setCelular(0);
+            setDescripcion('');
         }
     }
    
@@ -255,12 +262,11 @@ const ModalReportarSin: React.FC<IDetalle> =(props ) => {
                             />
                         </Grid>   
                         <Grid item xs={12}  >
-                             <TextareaAutosize aria-label="minimum height"
-                               //value={descripcion}
+                             <TextareaAutosize aria-label="minimum height"                              
                                style={{width:'100%', marginTop:'10px', fontSize:'16px', borderColor:'rgb(118, 118, 118)'}}
                                rowsMin={6}
                                name="descripcion"
-                            value={descripcion}
+                               value={descripcion}
                                onChange={_onChangeregistro}
                                placeholder="Descripcion" />
                         </Grid>
