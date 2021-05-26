@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 import {useRouteMatch} from 'react-router'
 import PanelGeneral from '../../panels-general'
 import {loadPersonalData} from '../../../../redux/actions/profile.actions'
-// import {PersonalProfile} from '../../../../userProfile'
+import {Grid} from 'react-styled-flexboxgrid'
 import FormUpdate from './forms'
 
 const UpdateProfile:React.FC = (props:any) => {
@@ -17,8 +17,10 @@ const UpdateProfile:React.FC = (props:any) => {
 
     return (
         <PanelGeneral>
-            <h1>ACTUALIZAR PERFIL</h1>
-            <FormUpdate />
+            <Grid>
+                <FormUpdate />
+            </Grid>
+
         </PanelGeneral>
     )
 }
