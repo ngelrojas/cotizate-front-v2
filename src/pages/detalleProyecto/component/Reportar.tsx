@@ -103,8 +103,7 @@ const Reportar: React.FC<IReportar> = (props) => {
         event.preventDefault();
     
         
-        if (value != '') {    
-          console.log('elijio : ', value);
+        if (value != '') {              
           setHelperText('You got 1!');
           setError(false);
           setOpenModalSin(true);
@@ -117,8 +116,7 @@ const Reportar: React.FC<IReportar> = (props) => {
       const onHandleCloseSin=()=>{
            setOpenModalSin(false);
        }
-    const handleRadioChange = (event: any) => {
-        console.log('radio', event.target.value);
+    const handleRadioChange = (event: any) => {        
         setValue(event.target.value);
         setHelperText(' ');
         setError(false);

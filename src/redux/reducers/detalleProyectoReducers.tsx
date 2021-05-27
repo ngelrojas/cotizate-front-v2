@@ -1,6 +1,6 @@
 import { string } from 'prop-types'
 import {
-    LISTA_DENUNCIAS, OBJETO_DENUNCIA,
+    LISTA_DENUNCIAS, OBJETO_DENUNCIA,FOLLOW_AUTOR,
     DETALLE_PROYECTO, DETALLE_APORTES,DETALLE_FASES,DETALLE_ACTUALIZACIONES, DETAIL_SAVE,DETAIL_LIKE,DETAIL_RECOMENDACIONES,DETALLE_COMMENTS,DETAIL_PROFILE_REDES
 } from '../types/detalleProyecto.types'
 const initialState = {
@@ -126,9 +126,10 @@ const initialState = {
     listDenuncias:[],
     objDenuncia:{
         id:0,
-        title:"",
-        description:"",
-    }
+        title:" ",
+        description:" ",
+    },
+    followAutor:false,
 }
 
 export default function(state = initialState, action: any) {
@@ -187,7 +188,12 @@ export default function(state = initialState, action: any) {
                 return {
                     ...state,
                     objDenuncia:action.objDenuncia
-                }             
+                }   
+            case FOLLOW_AUTOR:
+                return {
+                    ...state,
+                    followAutor:action.followAutor
+                }           
         default:
             return state
     }

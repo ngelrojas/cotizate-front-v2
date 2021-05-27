@@ -268,7 +268,7 @@ const Detalle: React.FC<IDetalle> = (props) => {
     let payments = new Payment()
     let token: any = window.sessionStorage.getItem('token')
     const {
-        proyectosDetalle, aportes, statusAportes, statusLike, statusSave,proyectosRec,profiles
+        proyectosDetalle, aportes, statusAportes, statusLike, statusSave,proyectosRec,profiles,followAutor
       } = useSelector((stateSelector: any) => {
         return stateSelector.detalleProyecto;
       });
@@ -337,7 +337,7 @@ const Detalle: React.FC<IDetalle> = (props) => {
         if(authenticated){
             dispatch(Action.obtenerLike(props.data.header.id));
             dispatch(Action.obtenerSave(props.data.header.id)); //headerid
-          
+            dispatch(Action.obtenerFollowerAutor());
         }
        
    },[]);
@@ -420,7 +420,6 @@ const responsive = {
   }
   useEffect(() => {        
     verificarDispositivo();
-      console.log('disposiito :',dispositivoMovil);
   }, [dispositivoMovil]);
 //------------------------------------------------------------
     
@@ -461,6 +460,9 @@ const responsive = {
            dispatch(Action.onchangeSave(true, props.data.header.id)); //es idheades
        }
     
+  }
+  const onchangeFollower= ()=>{
+        dispatch(Action.saveFollowerAutor(!followAutor));
   }
 
   useEffect(()=>{    
@@ -909,9 +911,16 @@ const responsive = {
                                 <div style={{marginTop:"2%", marginBottom:"2%", width:'100%'}} > 
                                 {current_user.authenticated ? (
                                     <>
-                                        <ButtonBordeAzul style={{width:'39%',height:'40px', background: '#F69939', color:'#FFFFFF', border: '1px solid #F69939',fontWeight: 'bold',borderRadius: '5px' }} >
-                                            Siguiendo 
+                                     {followAutor?
+                                        <ButtonBordeAzul onClick={onchangeFollower} style={{width:'39%',height:'40px', background: '#F69939', color:'#FFFFFF', border: '1px solid #F69939',fontWeight: 'bold',borderRadius: '5px' }} >
+                                          Siguiendo
+                                        </ButtonBordeAzul>:
+                                        <ButtonBordeAzul  onClick={onchangeFollower} style={{width:'39%',height:'40px', background: '#FFFFFF', color:'#F69939', border: '1px solid #F69939',fontWeight: 'bold',borderRadius: '5px' }} >
+                                          Siguiendo
                                         </ButtonBordeAzul>
+                                     }
+                                        
+
                                         <ButtonBordeAzul onClick={onchangeContacto} style={{ width:'39%', height:'40px', background: '#FFFFFF', color:'#F69939', border: '1px solid #F69939',fontWeight: 'bold',borderRadius: '5px' }} >
                                             Contacto
                                         </ButtonBordeAzul>

@@ -129,9 +129,7 @@ const ModalReportarSin: React.FC<IDetalle> =(props) => {
       };
 
     const onchangeEnviar= () => {
-        if(isValidNombre(nombre) && isValidCarnet(carnet) && isValidCelular(celular) && isValidDescripcion(descripcion)  ){
-
-            console.log('parametros : ', props.idDenuncia, nombre, carnet, celular, descripcion, props.idCanpaings);
+        if(isValidNombre(nombre) && isValidCarnet(carnet) && isValidCelular(celular) && isValidDescripcion(descripcion)  ){           
             dispatch(Action.denunciarSinlogueo(props.idDenuncia, nombre, carnet, celular, descripcion, props.idCanpaings));
             props.onHandleClose();
             setNombre('');

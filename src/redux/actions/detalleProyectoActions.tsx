@@ -1,5 +1,5 @@
 import {
-  LISTA_DENUNCIAS,OBJETO_DENUNCIA,
+  LISTA_DENUNCIAS,OBJETO_DENUNCIA,FOLLOW_AUTOR,
   DETALLE_PROYECTO, DETALLE_APORTES, DETALLE_FASES,DETALLE_ACTUALIZACIONES,DETAIL_LIKE, DETAIL_SAVE,DETAIL_RECOMENDACIONES,DETALLE_COMMENTS,DETAIL_PROFILE_REDES
 } from '../types/detalleProyecto.types'
 import API from '../../api'
@@ -268,5 +268,43 @@ export function denunciarSinlogueo(idDenuncia: number, nombre:string, carnet: st
 export function denunciarConlogueo(idDenuncia: number, descripcion:string, idCanpaings:any){       
   return (dispatch : any) =>{          
       console .log('llega el reporte con logueo',idDenuncia, descripcion, idCanpaings );
+      
+      let token = window.sessionStorage.getItem('token') 
+      let data={
+          comment: descripcion,
+          denouncetxt:idDenuncia,
+          campaings: idCanpaings
+         };
+      API.post(`denounces`,data,{ headers: {Authorization: `Bearer ${token}`} }).then(resp => {  
+        console.log('rspuesta denuncia',resp);       
+         if(resp.status === 200){  
+                     
+         }else{
+          
+         }            
+       })
+       .catch(err => console.log(err))
+       
+
+  }
+}
+export function obtenerFollowerAutor(){       
+  return (dispatch : any) =>{  
+    let token = window.sessionStorage.getItem('token')
+    dispatch({
+      type: FOLLOW_AUTOR,
+      followAutor:true
+    }) 
+
+  }
+}
+export function saveFollowerAutor(follower: boolean ){       
+  return (dispatch : any) =>{  
+    let token = window.sessionStorage.getItem('token')
+    dispatch({
+      type: FOLLOW_AUTOR,
+      followAutor:follower
+    }) 
+    
   }
 }
