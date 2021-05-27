@@ -9541,6 +9541,11 @@ react-filtered-multiselect@^0.5.1:
   dependencies:
     prop-types "^15.5.7"
 
+react-flip-move@^3.0.4:
+  version "3.0.4"
+  resolved "https://registry.yarnpkg.com/react-flip-move/-/react-flip-move-3.0.4.tgz#261f66101fbc305f9b7b28959c5cf8236413ca74"
+  integrity sha512-HyUVv9g3t/BS7Yz9HgrtYSWyRNdR2F81nkj+C5iRY675AwlqCLB5JU9mnZWg0cdVz7IM4iquoyZx70vzZv3Z8Q==
+
 react-google-login@^5.1.14:
   version "5.2.2"
   resolved "https://registry.yarnpkg.com/react-google-login/-/react-google-login-5.2.2.tgz#a20b46440c6c1610175ef75baf427118ff0e9859"
@@ -9560,6 +9565,14 @@ react-icons@^3.10.0:
   integrity sha512-JRgiI/vdF6uyBgyZhVyYJUZAop95Sy4XDe/jmT3R/bKliFWpO/uZBwvSjWEdxwzec7SYbEPNPck0Kff2tUGM2Q==
   dependencies:
     camelcase "^5.0.0"
+
+react-images-upload@^1.2.8:
+  version "1.2.8"
+  resolved "https://registry.yarnpkg.com/react-images-upload/-/react-images-upload-1.2.8.tgz#d1e993c50a0ca266aa7a9c7b7456167d80e9e6ab"
+  integrity sha512-d5mhAE0BfkLTlG5MLvKVw+q76LL8r5easgWW0TTBvXD8n6HXeLMZLwCuPiOibY1a3NRMXI4AnM1r34dqLOBjng==
+  dependencies:
+    react "^16.12.0"
+    react-flip-move "^3.0.4"
 
 react-imask@^6.0.5:
   version "6.0.5"
@@ -9621,10 +9634,10 @@ react-onclickoutside@^6.9.0:
   resolved "https://registry.yarnpkg.com/react-onclickoutside/-/react-onclickoutside-6.9.1.tgz#44f94aba8e82721f2550fbd187c7d2d4669eab14"
   integrity sha512-fkeEZOym0eyf8pemEUFRI6rttdREwfYtNWpN9msWsYtwz0G+w1KeKODc466lKJtfMHn3u8gVmBnGPf2fQ9LxoQ==
 
-react-player@^2.7.2:
-  version "2.8.1"
-  resolved "https://registry.yarnpkg.com/react-player/-/react-player-2.8.1.tgz#1fe315ae960ffc5e1588aefb336beb2dd34fcc08"
-  integrity sha512-gv7I8QU5k+8YHmHOiOxDFs8ZWU7pm7UPHjmMLfCBe+vcIEVpZ53w4b0hKF4WGVhyLXvBW2/c3A4nXJctVqvhsw==
+react-player@^2.9.0:
+  version "2.9.0"
+  resolved "https://registry.yarnpkg.com/react-player/-/react-player-2.9.0.tgz#ef7fe7073434087565f00ff219824e1e02c4b046"
+  integrity sha512-jNUkTfMmUhwPPAktAdIqiBcVUKsFKrVGH6Ocutj6535CNfM91yrvWxHg6fvIX8Y/fjYUPoejddwh7qboNV9vGA==
   dependencies:
     deepmerge "^4.0.0"
     load-script "^1.0.0"
@@ -9847,7 +9860,7 @@ react-transition-group@^4.4.0:
     loose-envify "^1.4.0"
     prop-types "^15.6.2"
 
-react@^16.13.1:
+react@^16.12.0, react@^16.13.1:
   version "16.14.0"
   resolved "https://registry.yarnpkg.com/react/-/react-16.14.0.tgz#94d776ddd0aaa37da3eda8fc5b6b18a4c9a3114d"
   integrity sha512-0X2CImDkJGApiAlcf0ODKIneSwBPhqJawOa5wCtKbu7ZECrmS26NvtSILynQ66cgkT/RJ4LidJOc3bUESwmU8g==
