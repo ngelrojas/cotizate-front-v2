@@ -12,3 +12,8 @@ export const Input = styled.input`
 export const LabelTitle = styled.p`
     margin: 1%;
 `
+
+export const DivBtn = styled.div`
+    margin-top: 5%;
+    margin-bottom: 5%;
+`

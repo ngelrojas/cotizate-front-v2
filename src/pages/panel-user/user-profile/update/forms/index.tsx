@@ -2,10 +2,16 @@ import React from 'react'
 import {useForm} from 'react-hook-form'
 import {connect} from 'react-redux'
 import {Row, Col, Grid} from 'react-styled-flexboxgrid'
+import Button from '@material-ui/core/Button'
+import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
+import {Cities} from '../../../../../userCities'
 import {store} from 'react-notifications-component'
+import {PersonalProfile} from '../../../../../userProfile'
+
 import {
     Input,
-    LabelTitle
+    LabelTitle,
+    DivBtn
 } from '../styles'
 
 interface Icountry{
@@ -61,19 +67,90 @@ type AllProps = {
     profiles: FormData
 }
 
-const FormUpdate:React.FC<AllProps> = ({profiles}) => {
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    root: {
+      '& > *': {
+        margin: theme.spacing(1),
+      },
+    },
+  }),
+)
 
+const FormUpdate:React.FC<AllProps> = ({profiles}) => {
+    const classes = useStyles();
+    let token = window.sessionStorage.getItem('token')
+    let cities = new Cities(token)
+    let personalProfile = new PersonalProfile(token)
+    let current_city: any
+    const [getCities, setCities] = React.useState([])
+    const [getLoading, setLoading] = React.useState(true)
     const {register, handleSubmit, reset, errors} = useForm<FormData>({
         mode: 'onChange'
     })
 
-    // const onSubmit = handleSubmit (({profiles}) => {
-    //     return true
-    // })
+    const loadCities = () => {
+        cities.listCities()
+            .then(resp => {
+                setCities(resp.data)
+            })
+            .catch(error => {
+                console.error(error)
+            })
+            .then(()=>{
+                setLoading(false)
+            })
+    }
+
+    const onSubmit = handleSubmit (({cinit, cellphone, telephone, cities,
+        address, number_address, neightbordhood, description, rs_facebook, rs_twitter, rs_linkedin, rs_another
+    }) => {
+
+        let send_data: any = {
+            cinit: cinit,
+            cellphone: cellphone,
+            telephone: telephone,
+            cities: cities,
+            address: address,
+            number_address: number_address,
+            neightbordhood: neightbordhood,
+            description: description,
+            rs_facebook: rs_facebook,
+            rs_twitter: rs_twitter,
+            rs_linkedin: rs_linkedin,
+            rs_another: rs_another 
+        }
+        // personalProfile.updateProfilePersonal(send_data)
+        //     .then(resp => {
+
+        //     })
+        Notifications('Su perfil se ha actualizado.', 'success')
+    })
+
+    const Notifications = (set_messages: string, set_type: any) => {
+        store.addNotification({
+            title: 'Actualizando Datos',
+            message: set_messages,
+            type: set_type,
+            insert: 'top',
+            container: 'top-right',
+            animationIn: ['animate__animated', 'animate__fadeIn'],
+            animationOut: ['animate__animated', 'animate__fadeOut'],
+            dismiss: {
+                duration: 5000,
+                onScreen: true
+            }
+        })
+    }
+
+    React.useEffect(()=>{
+        loadCities()
+        console.log(profiles.user ? profiles.user.id: 'no data')
+    },[])
 
     return(
         <Grid>
-            <form>
+            <form onSubmit={onSubmit}>
                 <Row>
                     <Col xs={12}>
                         <h4>Datos Personales</h4>
@@ -83,7 +160,7 @@ const FormUpdate:React.FC<AllProps> = ({profiles}) => {
                         <label htmlFor="cinit">
                             <LabelTitle>Carnet de Identidad</LabelTitle>
                             <Input 
-                                type="number"
+                                type="text"
                                 name="cinit"
                                 ref={register({required: true})}
                                 placeholder="Carnet de Identidad"
@@ -94,7 +171,7 @@ const FormUpdate:React.FC<AllProps> = ({profiles}) => {
                         <label htmlFor="cellphone">
                             <LabelTitle>Numero de Celular</LabelTitle>
                             <Input 
-                                type="number"
+                                type="text"
                                 name="cellphone"
                                 ref={register({required: true})}
                                 placeholder="Numero de Celular"
@@ -105,7 +182,7 @@ const FormUpdate:React.FC<AllProps> = ({profiles}) => {
                         <label htmlFor="telephone">
                             <LabelTitle>Telefono</LabelTitle>
                             <Input 
-                                type="number"
+                                type="text"
                                 name="telephone"
                                 ref={register({required: true})}
                                 placeholder="Telefono"
@@ -116,12 +193,15 @@ const FormUpdate:React.FC<AllProps> = ({profiles}) => {
                         <label htmlFor="cities">
                             <LabelTitle>Ciudad</LabelTitle>
                             <select ref={register({required: true})} name="cities">
-                                
-                                <option 
-                                    key={profiles.cities ? profiles.cities.id: ''}
-                                    value={profiles.cities ? profiles.cities.id: ''}>
-                                        {profiles.cities ? profiles.cities.name: ''}
-                                </option>
+                                {
+                                    !getLoading && getCities ? (getCities.map((city:any)=>{
+                                        current_city = profiles.cities ? profiles.cities : ''
+                                        if(current_city.id === city.id){
+                                            return <option key={city.id} value={city.id} selected>{city.name}</option>
+                                        }
+                                        return <option key={city.id} value={city.id}>{city.name}</option>
+                                    })):('no data')
+                                }
 
                             </select>
 
@@ -161,7 +241,7 @@ const FormUpdate:React.FC<AllProps> = ({profiles}) => {
                             <Input 
                                 type="text"
                                 name="neightbordhood"
-                                ref={register({required: true})}
+                                ref={register({required: false})}
                                 placeholder="Zona/Barrio"
                                 defaultValue={profiles.neightbordhood ? profiles.neightbordhood: ''}/>
                         </label>
@@ -177,7 +257,7 @@ const FormUpdate:React.FC<AllProps> = ({profiles}) => {
                             rows={10}
                             cols={100}
                             name="description" 
-                            value={profiles.description ? profiles.description: ''}
+                            defaultValue={profiles.description ? profiles.description: ''}
                         />
                     </Col>
                 </Row>
@@ -219,6 +299,27 @@ const FormUpdate:React.FC<AllProps> = ({profiles}) => {
                                 defaultValue={profiles.rs_linkedin ? profiles.rs_linkedin: ''}/>
                         </label>
                     </Col>
+                    <Col xs={6}>
+                        <label htmlFor="rs_another">
+                            <LabelTitle>Otra red social</LabelTitle>
+                            <Input 
+                                type="text"
+                                name="rs_another"
+                                ref={register({required: false})}
+                                placeholder="Otra red social"
+                                defaultValue={profiles.rs_another ? profiles.rs_another : ''}/>
+                        </label>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col xs={12}>
+                        <DivBtn className={classes.root}>
+                            <Button type="submit" variant="contained" color="primary">
+                                ACTUALIZAR
+                            </Button>
+                        </DivBtn>
+
+                    </Col>
                 </Row>
             </form>
         </Grid>
@@ -227,7 +328,8 @@ const FormUpdate:React.FC<AllProps> = ({profiles}) => {
 }
 
 const mapStateToProps = (state: any) => ({
-    profiles: state.profile
+    profiles: state.profile,
+    currentUser: state.user
 })
 
-export default connect(mapStateToProps, '')(FormUpdate)
+export default connect(mapStateToProps)(FormUpdate)
