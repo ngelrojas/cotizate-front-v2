@@ -1,10 +1,25 @@
-import React from 'react'
-import {Grid, Row, Col} from 'react-styled-flexboxgrid'
+import React,{useEffect} from 'react'
+import { Row, Col} from 'react-styled-flexboxgrid'
 import {TabPanel} from 'react-tabs'
 import Bulletin from '../../components/bulletin'
-import {Content, TabHead, TabLists, TabContent, Title} from './styles'
+import {Content, TabHead, TabLists, TabContent, Title} from './styles';
+
+import Projects from "../home/component/projects";
+import { useDispatch, useSelector } from "react-redux";
+import * as Action from '../../redux/actions/homeAction';
+import Grid from '@material-ui/core/Grid';
 
 const ExploreProject: React.FC = () => {
+    const { proyectosDestacados, featuredProjects, proyectosFinalizados,finalizedProjects,causasSociales,listCausasSociales,categoriasStatus 
+    } = useSelector((stateSelector: any) => {  return stateSelector.home; });
+
+    const dispatch = useDispatch();
+    useEffect(() => {        
+      dispatch(Action.proyectosDestacados(5));
+      dispatch(Action.proyectosFinalizados(7));
+      dispatch(Action.causasSociales(1));
+    },[]);
+
     return (
         <Content>
             <Grid>
@@ -25,35 +40,37 @@ const ExploreProject: React.FC = () => {
                             <TabHead>PROYECOS FINALIZADOS</TabHead>
                         </TabLists>
                         <TabPanel>
-                            <Row>
-                                <Col xs={12} sm={6} lg={4}>
-                                    <Bulletin title="this is my another proyect with long title" />
-                                </Col>
-                                <Col xs={12} sm={6} lg={4}>
-                                    <Bulletin title="tmore and the is si so beatiful in the boos joanee" />
-                                </Col>
-                                <Col xs={12} sm={6} lg={4}>
-                                    <Bulletin title="tchangdel ende your relationship and lucy giveme an coffee" />
-                                </Col>
-                            </Row>
+                          <div style={{marginLeft:'35px',marginRight:'35px'}}>
+                                <Grid container spacing={3}>
+                                    {featuredProjects.map((value : any, index : number) =>(
+                                        <Grid item xs={12} sm={6} md={4} lg={4} >
+                                            <Projects  key={index} data={value} />
+                                    </Grid>
+                                    ))}       
+                                </Grid>
+                            </div>
                         </TabPanel>
                         <TabPanel>
-                            <Grid>
-                                <Row>
-                                    <Col>
-                                        <h1>causas sociales</h1>
-                                    </Col>
-                                </Row>
-                            </Grid>
+                           <div style={{marginLeft:'35px',marginRight:'35px'}}>
+                                <Grid container spacing={3}>
+                                    {listCausasSociales.map((value : any, index : number) =>(
+                                        <Grid item xs={12} sm={6} md={4} lg={4} >
+                                            <Projects  key={index} data={value} />
+                                    </Grid>
+                                    ))}       
+                                </Grid>
+                            </div>
                         </TabPanel>
                         <TabPanel>
-                            <Grid>
-                                <Row>
-                                    <Col>
-                                        <h1>proyectos finalizados</h1>
-                                    </Col>
-                                </Row>
-                            </Grid>
+                              <div style={{marginLeft:'35px',marginRight:'35px'}}>
+                                <Grid container spacing={3}>
+                                    {finalizedProjects.map((value : any, index : number) =>(
+                                        <Grid item xs={12} sm={6} md={4} lg={4} >
+                                            <Projects  key={index} data={value} />
+                                    </Grid>
+                                    ))}       
+                                </Grid>
+                            </div>
                         </TabPanel>
                     </TabContent>
                 </Row>
