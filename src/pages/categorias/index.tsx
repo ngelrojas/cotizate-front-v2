@@ -24,6 +24,7 @@ import NativeSelect from '@material-ui/core/NativeSelect';
 import InputBase from '@material-ui/core/InputBase'
 
 import Projects from '../home/component/projects';
+import Fab from '@material-ui/core/Fab';
 
 
 
@@ -155,7 +156,7 @@ const Categorias: React.FC<Icateg>  = (props) => {
                     value={busqueda}
                     onChange={_onChange}
                     variant="outlined" 
-                    style={{width:'90%'}}
+                    style={{width:'80%'}}
                     InputProps={{
                         startAdornment: (
                           <InputAdornment position="end" onClick={onchageBuscar} >
@@ -165,6 +166,9 @@ const Categorias: React.FC<Icateg>  = (props) => {
                       }}
                   
                    />
+                    <Fab  onClick={onchageBuscar} style={{background:'#1383C5', marginLeft:'3px'}} aria-label="add">
+                      <SearchIcon fontSize="small" style={{ color:'#FFFFFF'}} />
+                    </Fab>
                 </Row>
                 </Col>
             </Row>
