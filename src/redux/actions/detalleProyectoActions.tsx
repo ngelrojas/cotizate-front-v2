@@ -260,8 +260,26 @@ export function obtnerDenuncia(iddenucia: number){
 }
 export function denunciarSinlogueo(idDenuncia: number, nombre:string, carnet: string, celular: number, descripcion:string, idCanpaings: any){       
   return (dispatch : any) =>{          
-      
-    console .log('llega el reporte sin logueo',descripcion, idCanpaings );
+      const data ={
+        first_name:nombre,
+        last_name:"",
+        email:"",
+        comment:descripcion,
+        denouncetxt:idDenuncia,
+        campaings:idCanpaings
+
+      }
+    
+    API.post(`denounces/public`,data).then(resp => {  
+      console.log('rspuesta denuncia publica',resp);       
+       if(resp.status === 200){  
+                   
+       }else{
+        
+       }            
+     })
+     .catch(err => console.log(err))
+
 
   }
 }
