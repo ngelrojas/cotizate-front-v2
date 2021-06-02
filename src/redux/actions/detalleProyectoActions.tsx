@@ -242,7 +242,22 @@ export function obtnerListaDenuncias(){
 export function contactarContacto(nombre: string, email:string, descripcion: string){       
   return (dispatch : any) =>{          
       
-    console .log('llega el reporte', nombre, email, descripcion)
+    const data ={
+      from_user:1,
+      to_user:2,
+      description:descripcion
+
+    }
+  
+  API.post(`contacts`,data).then(resp => {      
+     if(resp.status === 200){  
+                 
+     }else{
+      
+     }            
+   })
+   .catch(err => console.log(err))
+
   }
 }
 
