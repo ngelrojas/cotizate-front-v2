@@ -3,6 +3,7 @@ import {
   DETALLE_PROYECTO, DETALLE_APORTES, DETALLE_FASES,DETALLE_ACTUALIZACIONES,DETAIL_LIKE, DETAIL_SAVE,DETAIL_RECOMENDACIONES,DETALLE_COMMENTS,DETAIL_PROFILE_REDES
 } from '../types/detalleProyecto.types'
 import API from '../../api'
+import * as Action from '../actions/mensajeActions';
 
 export function ObtenerProyecto(name: string){       
     return (dispatch : any) =>{          
@@ -284,7 +285,7 @@ export function denunciarSinlogueo(idDenuncia: number, nombre:string, carnet: st
         campaings:idCanpaings
 
       }
-    
+      dispatch(Action.showMessage({message: 'Intente mas tarde por favor', variant:"info"}));
     API.post(`denounces/public`,data).then(resp => {  
       console.log('rspuesta denuncia publica',resp);       
        if(resp.status === 200){  
