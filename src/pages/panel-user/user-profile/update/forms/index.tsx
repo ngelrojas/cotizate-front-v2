@@ -2,6 +2,7 @@ import React from 'react'
 import {useForm} from 'react-hook-form'
 import {connect} from 'react-redux'
 import {Row, Col, Grid} from 'react-styled-flexboxgrid'
+import {Editor} from '@tinymce/tinymce-react'
 import Button from '@material-ui/core/Button'
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import {Cities} from '../../../../../userCities'
@@ -45,6 +46,7 @@ type FormData = {
     cellphone: string
     cinit: string
     cities: Icities
+    city_id: number
     complete: boolean
     countries: Icountry
     current_position: string
@@ -64,7 +66,8 @@ type FormData = {
 }
 
 type AllProps = {
-    profiles: FormData
+    profiles: FormData,
+    currentUser: Iuser
 }
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -77,7 +80,7 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 )
 
-const FormUpdate:React.FC<AllProps> = ({profiles}) => {
+const FormUpdate:React.FC<AllProps> = ({profiles, currentUser}) => {
     const classes = useStyles();
     let token = window.sessionStorage.getItem('token')
     let cities = new Cities(token)
@@ -85,7 +88,8 @@ const FormUpdate:React.FC<AllProps> = ({profiles}) => {
     let current_city: any
     const [getCities, setCities] = React.useState([])
     const [getLoading, setLoading] = React.useState(true)
-    const {register, handleSubmit, reset, errors} = useForm<FormData>({
+    const [saveImg, setsaveImg] = React.useState('')
+    const {register, handleSubmit, errors} = useForm<FormData>({
         mode: 'onChange'
     })
 
@@ -102,29 +106,44 @@ const FormUpdate:React.FC<AllProps> = ({profiles}) => {
             })
     }
 
-    const onSubmit = handleSubmit (({cinit, cellphone, telephone, cities,
-        address, number_address, neightbordhood, description, rs_facebook, rs_twitter, rs_linkedin, rs_another
+    const onSubmit = handleSubmit (({cinit, cellphone, telephone, city_id,
+        address, number_address, neightbordhood, description, rs_facebook, 
+        rs_twitter, rs_linkedin, rs_another, current_position, headline
     }) => {
-
+        let current_img: string = saveImg && profiles && profiles.photo ? saveImg : profiles.photo
         let send_data: any = {
             cinit: cinit,
-            cellphone: cellphone,
-            telephone: telephone,
-            cities: cities,
-            address: address,
-            number_address: number_address,
+            cellphone: cellphone, 
+            telephone: telephone, 
+            countries: profiles.countries.id, 
+            cities: city_id,
+            address: address, 
             neightbordhood: neightbordhood,
-            description: description,
+            number_address: number_address,
+            photo: current_img,
             rs_facebook: rs_facebook,
             rs_twitter: rs_twitter,
             rs_linkedin: rs_linkedin,
-            rs_another: rs_another 
+            rs_another: rs_another,
+            description: description,
+            current_position: current_position,
+            headline: headline
         }
-        // personalProfile.updateProfilePersonal(send_data)
-        //     .then(resp => {
+        let current_user_id:number = profiles.id
+        console.log(send_data)
+        personalProfile.updateProfilePersonal(send_data, current_user_id)
+            .then(resp => {
+                console.log(resp)
+                if(resp.status === 200){
+                    Notifications('Su perfil se ha actualizado.', 'success')
+                }
 
-        //     })
-        Notifications('Su perfil se ha actualizado.', 'success')
+            })
+            .catch(err =>{
+                console.error(err)
+                Notifications('Su perfil no se ha actualizado, por favor intentelo mas tarde.', 'danger')
+            })
+
     })
 
     const Notifications = (set_messages: string, set_type: any) => {
@@ -142,16 +161,76 @@ const FormUpdate:React.FC<AllProps> = ({profiles}) => {
             }
         })
     }
+    
+    const handleEditorImgChange = (content: any, editor: any) => {
+        setsaveImg(content)
+    }
 
     React.useEffect(()=>{
         loadCities()
-        console.log(profiles.user ? profiles.user.id: 'no data')
     },[])
 
     return(
         <Grid>
             <form onSubmit={onSubmit}>
                 <Row>
+                    <Col xs={12}>
+                        <h4>Foto Principal</h4>
+                    </Col>
+                    <Col xs={6}>
+                                <div>
+                                    <label>
+                                        <Editor
+                                            initialValue={profiles && profiles.photo ? profiles.photo : ''}
+                                            init={{
+                                                branding: false,
+                                                statusbar: false,
+                                                height: 400,
+                                                width: 400,
+                                                menubar: false,
+                                                plugins: [
+                                                    'advlist autolink lists link image charmap print preview anchor image',
+                                                    'imagetools searchreplace visualblocks code fullscreen',
+                                                    'insertdatetime media table paste code help wordcount'
+                                                ],
+                                                toolbar:
+                                                    ' image | imagetools',
+                                                automatic_uploads: true,
+                                                file_picker_types: 'image',
+                                                file_picker_callback: function(
+                                                    cb: any,
+                                                    value: any,
+                                                    meta: any
+                                                ) {
+                                                    let input = document.createElement('input')
+                                                    input.setAttribute('type', 'file')
+                                                    input.setAttribute('accept', 'image/*')
+                                                    input.onchange = function(files: any) {
+                                                        let file: any = (input as any).files[0]
+                                                        let reader: any = new FileReader()
+                                                        reader.onload = function() {
+                                                            let id = 'blobid' + new Date().getTime()
+                                                            let blobCache = (window as any).tinymce
+                                                                .activeEditor.editorUpload.blobCache
+                                                            let base64 = reader.result.split(',')[1]
+                                                            let blobInfo: any = blobCache.create(
+                                                                id,
+                                                                file,
+                                                                base64
+                                                            )
+                                                            blobCache.add(blobInfo)
+                                                            cb(blobInfo.blobUri(), {title: file.name})
+                                                        }
+                                                        reader.readAsDataURL(file)
+                                                    }
+                                                    input.click()
+                                                }
+                                            }}
+                                            onEditorChange={handleEditorImgChange}
+                                        />
+                                    </label>
+                                </div>
+                    </Col>
                     <Col xs={12}>
                         <h4>Datos Personales</h4>
                     </Col>
@@ -192,7 +271,7 @@ const FormUpdate:React.FC<AllProps> = ({profiles}) => {
                     <Col xs={6}>
                         <label htmlFor="cities">
                             <LabelTitle>Ciudad</LabelTitle>
-                            <select ref={register({required: true})} name="cities">
+                            <select ref={register({required: true})} name="city_id">
                                 {
                                     !getLoading && getCities ? (getCities.map((city:any)=>{
                                         current_city = profiles.cities ? profiles.cities : ''
@@ -208,7 +287,33 @@ const FormUpdate:React.FC<AllProps> = ({profiles}) => {
                         </label>
                     </Col>
                 </Row>
-
+                <Row>
+                    <Col xs={12}>
+                        <h4>Datos Profesionales</h4>
+                    </Col>
+                    <Col xs={6}>
+                        <label htmlFor="current_position">
+                            <LabelTitle>Posicion Actual</LabelTitle>
+                            <Input 
+                                type="text"
+                                name="current_position"
+                                ref={register({required: true})}
+                                placeholder="Posicion Actual"
+                                defaultValue={profiles.current_position ? profiles.current_position: ''}/>
+                        </label>
+                    </Col>
+                    <Col xs={6}>
+                        <label htmlFor="headline">
+                            <LabelTitle>Profesion</LabelTitle>
+                            <Input 
+                                type="text"
+                                name="headline"
+                                ref={register({required: true})}
+                                placeholder="Profesion"
+                                defaultValue={profiles.headline ? profiles.headline: ''}/>
+                        </label>
+                    </Col>
+                </Row>
                 <Row>
                     <Col xs={12}>
                         <h4>Direcciones</h4>
@@ -257,6 +362,7 @@ const FormUpdate:React.FC<AllProps> = ({profiles}) => {
                             rows={10}
                             cols={100}
                             name="description" 
+                            ref={register({required: false})}
                             defaultValue={profiles.description ? profiles.description: ''}
                         />
                     </Col>
