@@ -4,6 +4,8 @@ import {
 } from '../types/detalleProyecto.types'
 import API from '../../api'
 import * as Action from '../actions/mensajeActions';
+import {requestPost,requestGet} from '..//../service/repository';
+
 
 export function ObtenerProyecto(name: string){       
     return (dispatch : any) =>{          
@@ -254,7 +256,7 @@ export function contactarContacto(nombre: string, email:string, descripcion: str
      if(resp.status === 200){  
                  
      }else{
-      
+      dispatch(Action.showMessage({message: 'Intente mas tarde por favor', variant:"error"}));
      }            
    })
    .catch(err => console.log(err))
@@ -276,7 +278,7 @@ export function obtnerDenuncia(iddenucia: number){
 }
 export function denunciarSinlogueo(idDenuncia: number, nombre:string, carnet: string, celular: number, descripcion:string, idCanpaings: any){       
   return (dispatch : any) =>{          
-      const data ={
+      const body ={
         first_name:nombre,
         last_name:"",
         email:"",
@@ -285,16 +287,29 @@ export function denunciarSinlogueo(idDenuncia: number, nombre:string, carnet: st
         campaings:idCanpaings
 
       }
-      dispatch(Action.showMessage({message: 'Intente mas tarde por favor', variant:"info"}));
-    API.post(`denounces/public`,data).then(resp => {  
-      console.log('rspuesta denuncia publica',resp);       
-       if(resp.status === 200){  
-                   
-       }else{
-        
-       }            
-     })
-     .catch(err => console.log(err))
+      console.log('service denuncia ');
+      requestPost('denounces/public',body,dispatch)
+      .then((response)=>{
+        console.log('service ', response);
+        if(response && response.data){
+          console.log('que me devuelves', response);
+                                                                       
+        }
+      })
+      .catch(error=>{
+        console.log(error);
+        dispatch(Action.showMessage({message: 'Intente mas tarde por favor', variant:"success"}));
+      })       
+     
+    // API.post(`denounces/public`,body).then(resp => {  
+    //   console.log('denuncia publica : ',resp);       
+    //    if(resp.status === 200){  
+    //     dispatch(Action.showMessage({message: 'Su denuncia fue realizada', variant:"success"}));   
+    //    }else{
+    //     dispatch(Action.showMessage({message: 'Intente mas tarde por favor', variant:"error"}));
+    //    }            
+    //  })
+    //  .catch(err =>  dispatch(Action.showMessage({message: 'Intente mas tarde por favor', variant:"error"})) )
 
 
   }
@@ -314,7 +329,7 @@ export function denunciarConlogueo(idDenuncia: number, descripcion:string, idCan
          if(resp.status === 200){  
                      
          }else{
-          
+          dispatch(Action.showMessage({message: 'Intente mas tarde por favor', variant:"info"}));
          }            
        })
        .catch(err => console.log(err))

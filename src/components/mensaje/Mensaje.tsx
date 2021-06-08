@@ -41,6 +41,7 @@ const Mensaje: React.FC = () => {
       });
 
     const classes = useStyles();
+
     return (
         <Snackbar
             {...options}
@@ -58,7 +59,7 @@ const Mensaje: React.FC = () => {
             }}
         >
             <SnackbarContent
-               className={clsx(classes[options.variant])}
+              // className={classes[options.variant]}
                 message={
                     <div className="flex items-center">
                       { options.message === 'success'&& <CheckCircleOutlineIcon />}
