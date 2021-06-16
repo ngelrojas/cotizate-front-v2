@@ -149,7 +149,7 @@ const Reportar: React.FC<IReportar> = (props) => {
                         <FormControl component="fieldset" error={error} className={classes.formControl}>                          
                             <RadioGroup aria-label="quiz" name="quiz" value={value} onChange={handleRadioChange}>
                                 {listDenuncias.map((value :any, index : any)=>(
-                                    <DivBorderSinColor>
+                                    <DivBorderSinColor key={index} >
                                         <Col xs={12} sm={12} md={12} lg={12}>   
                                             <Col xs={12} sm={12} md={12} lg={12}>                                                 
                                                 <Texto2>

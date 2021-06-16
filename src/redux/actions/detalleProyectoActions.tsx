@@ -276,40 +276,33 @@ export function obtnerDenuncia(iddenucia: number){
       .catch(err => console.log(err))
       }
 }
-export function denunciarSinlogueo(idDenuncia: number, nombre:string, carnet: string, celular: number, descripcion:string, idCanpaings: any){       
+export function denunciarSinlogueo(idDenuncia: number, nombre:string, carnet: string, celular: number, descripcion:string, idCanpaings: any, apellido:string, correo: string){       
   return (dispatch : any) =>{          
-      const body ={
+      const data ={
         first_name:nombre,
-        last_name:"",
-        email:"",
+        last_name:apellido,
+        email:correo,
+        cinit:carnet,
+        cellphone:celular.toString(),
         comment:descripcion,
         denouncetxt:idDenuncia,
-        campaings:idCanpaings
-
+        campaings:idCanpaings,
       }
-      console.log('service denuncia ');
-      requestPost('denounces/public',body,dispatch)
-      .then((response)=>{
-        console.log('service ', response);
-        if(response && response.data){
-          console.log('que me devuelves', response);
-                                                                       
-        }
-      })
-      .catch(error=>{
-        console.log(error);
-        dispatch(Action.showMessage({message: 'Intente mas tarde por favor', variant:"success"}));
-      })       
-     
-    // API.post(`denounces/public`,body).then(resp => {  
-    //   console.log('denuncia publica : ',resp);       
-    //    if(resp.status === 200){  
-    //     dispatch(Action.showMessage({message: 'Su denuncia fue realizada', variant:"success"}));   
-    //    }else{
-    //     dispatch(Action.showMessage({message: 'Intente mas tarde por favor', variant:"error"}));
-    //    }            
-    //  })
-    //  .catch(err =>  dispatch(Action.showMessage({message: 'Intente mas tarde por favor', variant:"error"})) )
+
+
+    API.post(`denounces/public`,data).then(resp => {  
+           
+       if(resp.status === 201){  
+        dispatch(Action.showMessage({message: 'Su denuncia fue realizada', variant:"success"}));   
+       }else{
+        dispatch(Action.showMessage({message: 'Intente mas tarde por favor', variant:"error"}));
+       }            
+     })
+     .catch(err => {
+       console.log(err);
+     } // dispatch(Action.showMessage({message: 'Intente mas tarde por favor', variant:"error"})) 
+    
+     );
 
 
   }
@@ -326,8 +319,8 @@ export function denunciarConlogueo(idDenuncia: number, descripcion:string, idCan
          };
       API.post(`denounces`,data,{ headers: {Authorization: `Bearer ${token}`} }).then(resp => {  
         console.log('rspuesta denuncia',resp);       
-         if(resp.status === 200){  
-                     
+         if(resp.status === 201){  
+          dispatch(Action.showMessage({message: 'Su denunia fue realizada', variant:"success"}));      
          }else{
           dispatch(Action.showMessage({message: 'Intente mas tarde por favor', variant:"info"}));
          }            
@@ -337,23 +330,48 @@ export function denunciarConlogueo(idDenuncia: number, descripcion:string, idCan
 
   }
 }
-export function obtenerFollowerAutor(){       
-  return (dispatch : any) =>{  
+export function obtenerFollowerAutor( idFollower: number){       
+  return (dispatch : any, getState: any) =>{  
     let token = window.sessionStorage.getItem('token')
-    dispatch({
-      type: FOLLOW_AUTOR,
-      followAutor:true
-    }) 
-
+    //console.log('seguidor :')
+    alert('aaa');
+    API.get(`followers/${2}/${idFollower}`,{ headers: {Authorization: `Bearer ${token}`}}).then(resp => {   
+     // console.log('obtener seguidor :', resp)
+      if(resp.status === 200){ 
+        dispatch({
+          type: FOLLOW_AUTOR,
+          followAutor:resp.data.data.status,
+        }) 
+      }else{
+        dispatch({
+          type: FOLLOW_AUTOR,
+          followAutor:false
+        }) 
+      }
+       })
+       .catch(err => {
+          dispatch({
+            type: FOLLOW_AUTOR,
+            followAutor:false
+          }) 
+       })
   }
 }
-export function saveFollowerAutor(follower: boolean ){       
-  return (dispatch : any) =>{  
-    let token = window.sessionStorage.getItem('token')
-    dispatch({
-      type: FOLLOW_AUTOR,
-      followAutor:follower
-    }) 
-    
+export function saveFollowerAutor(follower: boolean, idFollower: number ){       
+  return (dispatch : any,getState: any) =>{  
+    let token = window.sessionStorage.getItem('token');
+    let data={
+      follower:getState().user.id,
+      following:idFollower,
+      status:follower
+    };
+    API.post(`followers`,data,{ headers: {Authorization: `Bearer ${token}`}}).then(resp => {        
+      console.log('aplico seguidor :', resp);
+    })
+    .catch(err => console.log('seguidor eeror :', err))
+      dispatch({
+        type: FOLLOW_AUTOR,
+        followAutor:follower
+      }) 
   }
 }

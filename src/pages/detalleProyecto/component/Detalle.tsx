@@ -337,7 +337,8 @@ const Detalle: React.FC<IDetalle> = (props) => {
         if(authenticated){
             dispatch(Action.obtenerLike(props.data.header.id));
             dispatch(Action.obtenerSave(props.data.header.id)); //headerid
-            dispatch(Action.obtenerFollowerAutor());
+            console.log("se ejecutaaa ")
+            dispatch(Action.obtenerFollowerAutor(props.data.profile.user.id));
         }
        
    },[]);
@@ -462,7 +463,7 @@ const responsive = {
     
   }
   const onchangeFollower= ()=>{
-        dispatch(Action.saveFollowerAutor(!followAutor));
+        dispatch(Action.saveFollowerAutor(!followAutor, props.data.profile.user.id));
   }
 
   useEffect(()=>{    

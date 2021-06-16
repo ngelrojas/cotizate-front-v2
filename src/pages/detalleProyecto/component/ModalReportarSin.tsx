@@ -90,6 +90,11 @@ const ModalReportarSin: React.FC<IDetalle> =(props) => {
     const [descripcion, setDescripcion] = useState("");
     const [descripcionError, setDescripcionError] = useState(false);
 
+    const [apellido, setApellido] = useState("");
+    const [apellidoError, setApellidoError] = useState(false);
+    const [correo, setCorreo] = useState("");
+    const [correoError, setCorreoError] = useState(false);
+
     const isValidNombre = (nombre: any) => {   
         return  nombre.length >= 3;
     };
@@ -101,6 +106,12 @@ const ModalReportarSin: React.FC<IDetalle> =(props) => {
     };
     const isValidDescripcion = (descri: any) => {   
         return  descri.length >= 3;
+    };
+    const isValidApellido = (apelli: any) => {   
+        return  apelli.length >= 3;
+    };
+    const isValidCorreo = (corre: any) => {   
+        return  corre.length >= 3;
     };
 
     const { objDenuncia } = useSelector((stateSelector: any) => {  return stateSelector.detalleProyecto; });
@@ -125,12 +136,20 @@ const ModalReportarSin: React.FC<IDetalle> =(props) => {
                 setDescripcion(value);                
                 setDescripcionError(!isValidDescripcion(value));
             }  
+            if (texfiel === "apellido") {
+                setApellido(value);
+                setApellidoError(!isValidApellido(value));
+            } 
+            if (texfiel === "correo") {
+                setCorreo(value);
+                setCorreoError(!isValidCorreo(value));
+            } 
          
       };
 
     const onchangeEnviar= () => {
         if(isValidNombre(nombre) && isValidCarnet(carnet) && isValidCelular(celular) && isValidDescripcion(descripcion)  ){           
-            dispatch(Action.denunciarSinlogueo(props.idDenuncia, nombre, carnet, celular, descripcion, props.idCanpaings));
+            dispatch(Action.denunciarSinlogueo(props.idDenuncia, nombre, carnet, celular, descripcion, props.idCanpaings, apellido, correo));
             props.onHandleClose();
             setNombre('');
             setCarnet('');
@@ -219,8 +238,28 @@ const ModalReportarSin: React.FC<IDetalle> =(props) => {
                         </Grid>   
                         <Grid item xs={12}  >
                            <TextField
+                                label="Apellido"
+                                type={'text'}
+                                variant="outlined"
+                                name="apellido"
+                                value={apellido}
+                                onChange={_onChangeregistro}
+                                className={style.TextFielNombre}
+                                error={apellidoError}
+                                helperText={ apellidoError &&
+                                "El apellido es requerido "
+                                }
+                                required
+                                fullWidth
+                                inputProps={{
+                                maxLength: 50,
+                                }}
+                            />
+                        </Grid>   
+                        <Grid item xs={12}  >
+                           <TextField
                                 id="carnet"
-                                label="Numero  de C.I."
+                                label="Numero de carnet"
                                 type={'text'}
                                 variant="outlined"
                                 name="carnet"
@@ -241,7 +280,7 @@ const ModalReportarSin: React.FC<IDetalle> =(props) => {
                         <Grid item xs={12}  >
                            <TextField
                                 id="celular"
-                                label="Numero  de C.I."
+                                label="Celular"
                                 type={'number'}
                                 variant="outlined"
                                 name="celular"
@@ -259,6 +298,27 @@ const ModalReportarSin: React.FC<IDetalle> =(props) => {
                                 }}
                             />
                         </Grid>   
+                        <Grid item xs={12}  >
+                           <TextField
+                                label="correo"
+                                type={'text'}
+                                variant="outlined"
+                                name="correo"
+                                value={correo}
+                                onChange={_onChangeregistro}
+                                className={style.TextFielNombre}
+                                error={correoError}
+                                helperText={ correoError &&
+                                "El apellido es requerido "
+                                }
+                                required
+                                fullWidth
+                                inputProps={{
+                                maxLength: 50,
+                                }}
+                            />
+                        </Grid> 
+
                         <Grid item xs={12}  >
                              <TextareaAutosize aria-label="minimum height"                              
                                style={{width:'100%', marginTop:'10px', fontSize:'16px', borderColor:'rgb(118, 118, 118)'}}
