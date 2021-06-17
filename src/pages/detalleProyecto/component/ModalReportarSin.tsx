@@ -159,7 +159,7 @@ const ModalReportarSin: React.FC<IDetalle> =(props) => {
     }
    
     useEffect(()=>{
-         console.log('denunciaaa b:  ', props.idDenuncia);
+        
          if(props.idDenuncia > 0){
             dispatch(Action.obtnerDenuncia(props.idDenuncia));
          }

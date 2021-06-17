@@ -324,8 +324,10 @@ const Detalle: React.FC<IDetalle> = (props) => {
     const copiarLink =(data: string)=>{       
         copiarTextoToPapelera(data);
     }
-
-    dispatch(Action.obtnerAportes(props.data.header.id));
+    if(props.data.header.id != 0){
+        dispatch(Action.obtnerAportes(props.data.header.id));
+    }
+    
 
 
     useEffect(() =>{      
@@ -336,8 +338,7 @@ const Detalle: React.FC<IDetalle> = (props) => {
         dispatch(Action.obtnerListaDenuncias());
         if(authenticated){
             dispatch(Action.obtenerLike(props.data.header.id));
-            dispatch(Action.obtenerSave(props.data.header.id)); //headerid
-            console.log("se ejecutaaa ")
+            dispatch(Action.obtenerSave(props.data.header.id)); //headerid            
             dispatch(Action.obtenerFollowerAutor(props.data.profile.user.id));
         }
        
@@ -632,7 +633,7 @@ const responsive = {
   )
 
   useEffect(()=>{
-    dispatch(Action.obtnerAportes(props.data.header.id));
+    //dispatch(Action.obtnerAportes(props.data.header.id));
     dispatch(Action.obtnerFases(props.data.header.id));
   },[statusLike, statusSave])
 
@@ -929,7 +930,7 @@ const responsive = {
                                 ):
                                 <>
                                     <ButtonBordeAzul style={{width:'39%',height:'40px', background: '#FFFFFF', color:'#F69939', border: '1px solid #F69939',fontWeight: 'bold',borderRadius: '5px' }} >Siguiendo </ButtonBordeAzul>
-                                    <ButtonBordeAzul style={{ width:'39%', height:'40px', background: '#FFFFFF', color:'#F69939', border: '1px solid #F69939',fontWeight: 'bold',borderRadius: '5px' }} >Contacto</ButtonBordeAzul>
+                                    <ButtonBordeAzul onClick={onchangeContacto}  style={{ width:'39%', height:'40px', background: '#FFFFFF', color:'#F69939', border: '1px solid #F69939',fontWeight: 'bold',borderRadius: '5px' }} >Contacto</ButtonBordeAzul>
                                 </>
                                 }
                                 </div>
@@ -1009,6 +1010,7 @@ const responsive = {
             <ModalContacto
               open={openModal}
               onHandleClose={cerrarModal}
+              idUserProyect={props.data.profile.user.id}
             /> 
         </>
     )

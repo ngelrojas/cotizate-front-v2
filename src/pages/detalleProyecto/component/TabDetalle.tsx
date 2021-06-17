@@ -95,9 +95,9 @@ const TabDetalle: React.FC<ITab> = (props) => {
       return stateSelector.detalleProyecto;
     });
 
-    // console.log('autentica: ', authenticated);
+ 
     useEffect(() =>{
-      console.log('fases: ', fases);
+      
     },[authenticated, fases]);
     return (
         <>

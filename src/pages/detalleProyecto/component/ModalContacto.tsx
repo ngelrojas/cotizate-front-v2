@@ -50,7 +50,8 @@ const useStyles = makeStyles((theme) => ({
 
   interface IDetalle {
     open:boolean,
-    onHandleClose: any
+    onHandleClose: any,
+    idUserProyect:number,
    }
 const ModalContacto: React.FC<IDetalle> =(props ) => {
     
@@ -58,21 +59,26 @@ const ModalContacto: React.FC<IDetalle> =(props ) => {
     const dispatch = useDispatch();
 
     const [usuarioName, setUsuarioName] = useState("");
-    const [nombre, setNombre] = useState("");
+    const [descripcion, setDescripcion] = useState("");
     const [email, setEmail] = useState("");
+    const [apellido, setApellido] = useState("");
    
     const [usuarioNameError, setUsuarioNameError] = useState(false);
-    const [nombreError, setNombreError] = useState(false);
+    const [descripcionError, setDescripcionError] = useState(false);
     const [emailError, setEmailError] = useState(false);
+    const [apellidoError, setApellidoError] = useState(false);
    
     const isValidUsuarioName = (usuarioName: any) => {   
         return  usuarioName.length >= 3;
     };
-    const isValidNombre = (nombre: any) => {    
-        return  nombre.length >= 20 ;
+    const isValidDescriocion = (descripcio: any) => {    
+        return  descripcio.length >= 20 ;
     };
     const isValidEmail = (email:any) => {    
         return  email.length >= 3;
+    };
+    const isValidApellido = (apellid:any) => {    
+        return  apellid.length >= 3;
     };
 
 
@@ -84,23 +90,27 @@ const ModalContacto: React.FC<IDetalle> =(props ) => {
                 setUsuarioName(value);
                 setUsuarioNameError(!isValidUsuarioName(value));
             }
-            if (texfiel === "nombre") {
-                setNombre(value);
-                setNombreError(!isValidNombre(value));
+            if (texfiel === "descripcion") {
+                setDescripcion(value);
+                setDescripcionError(!isValidDescriocion(value));
             }
             if (texfiel === "email") {
                 setEmail(value);
                 setEmailError(!isValidEmail(value));
             }
+            if (texfiel === "apellido") {
+                setApellido(value);
+                setApellidoError(!isValidApellido(value));
+            }
           
             
       };
     const isFormValid=()=> {
-        return isValidUsuarioName(usuarioName) && isValidNombre(nombre) && 
+        return isValidUsuarioName(usuarioName) && isValidDescriocion(descripcion) && 
         isValidEmail(email) 
       }
     const registrarUsuarioNuevo= () => {
-       dispatch(Action.contactarContacto(usuarioName,email,nombre));
+       dispatch(Action.contactarContacto(props.idUserProyect, usuarioName, apellido,email,descripcion));
        props.onHandleClose();
     }
 
@@ -113,16 +123,15 @@ const ModalContacto: React.FC<IDetalle> =(props ) => {
            // TransitionComponent={Transition}
         >
         <DialogContent >
-                   
+                 <Grid container >
                     <Grid item xs={12} className={style.contentTitle1}  >
                         <Typography variant="h6" style={{color:'#ffffff'}} gutterBottom>
                            Enviar Mensaje
                         </Typography>
                     </Grid>
-                    <Grid container item xs={12} className={style.contentTitle}  >
+                    <Grid container  className={style.contentTitle}  >
                     <Grid item xs={6}  >
                        <TextField
-                            id="usuarioName"
                             label="Nombre"
                             type={'text'}
                             variant="outlined"
@@ -142,8 +151,27 @@ const ModalContacto: React.FC<IDetalle> =(props ) => {
                         />
                     </Grid>
                     <Grid item xs={6} >
-                    <TextField
-                            id="email"
+                         <TextField                 
+                            label="Apellido"
+                            type={'text'}
+                            variant="outlined"
+                            name="apellido"
+                            value={apellido}
+                            onChange={_onChangeregistro}
+                            className={style.TextFielNombre}
+                            error={apellidoError}
+                            helperText={ apellidoError &&
+                            "El Apellido es requerido-"
+                            }
+                            required
+                            fullWidth
+                            inputProps={{
+                            maxLength: 20,
+                            }}
+                        />                    
+                    </Grid>
+                    <Grid item xs={12}  >
+                         <TextField
                             label="Email"
                             type={'text'}
                             variant="outlined"
@@ -160,49 +188,27 @@ const ModalContacto: React.FC<IDetalle> =(props ) => {
                             inputProps={{
                             maxLength: 20,
                             }}
-                        />
-                    </Grid>
-                       
+                          />
+                    </Grid> 
 
-                    </Grid>
-                        {/* <TextField
-                            id="nombre"
-                            label="Descripcion"
-                            type={'text'}
-                            variant="outlined"
-                            name="nombre"
-                            value={nombre}
+                        </Grid>    
+                            <TextField
+                            label="Mensaje"
+                            style={{ margin: 8 }}
+                            name="descripcion"
+                            value={descripcion}
                             onChange={_onChangeregistro}
-                            className={style.TextFiel}
-                            error={nombreError}
-                            helperText={ nombreError &&
-                            "El nombre es requerido, no cumple con los requisitos"
-                            }
-                            required
+                            rows={3}
+                            helperText={ descripcionError &&
+                                "La descripcion debe es requerida"
+                                }
                             fullWidth
-                            inputProps={{
-                            maxLength: 20,
+                            margin="normal"
+                            InputLabelProps={{
+                                shrink: true,
                             }}
-                        /> */}
-                        <TextField
-                        id="outlined-full-width"
-                        label="Mensaje"
-                        style={{ margin: 8 }}
-                        name="nombre"
-                        value={nombre}
-                        onChange={_onChangeregistro}
-                        placeholder="Mensaje.."
-                        rows={3}
-                        helperText={ nombreError &&
-                            "La descripcion debe es requerida"
-                            }
-                        fullWidth
-                        margin="normal"
-                        InputLabelProps={{
-                            shrink: true,
-                        }}
-                        variant="outlined"
-                        />
+                            variant="outlined"
+                            />
                       
                 
                     <Grid container item xs={12}  >
@@ -224,7 +230,7 @@ const ModalContacto: React.FC<IDetalle> =(props ) => {
                         
                         </Grid> 
                     </Grid>
-                
+                </Grid>
             </DialogContent>
         </Dialog>
     );

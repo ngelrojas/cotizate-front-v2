@@ -178,7 +178,7 @@ export function onchangeSave(save: boolean,idHeader: number){
 
 export function obtenerProyectosRecomendados(categoria: any){       
   return (dispatch : any) =>{          
-      
+      //console.log('idcateforia proyectos :', categoria);
      API.get(`category/${categoria}`).then(resp => {  
     
         if(resp.status === 200){  
@@ -197,42 +197,47 @@ export function obtenerProyectosRecomendados(categoria: any){
 export function obtenerRedesProyecto(profileId: number,profilecad: number){       
   return (dispatch : any) =>{     
     let token = window.sessionStorage.getItem('token') 
-    API.get(`profile/company/${profileId}/${profilecad}`,{ headers: {Authorization: `Bearer ${token}`}}).then(resp => {  
-       if(resp.status === 200){  
-          dispatch({
-            type: DETAIL_PROFILE_REDES,
-            profilesObj:resp.data.data,
-          })              
-       }            
-     })
-     .catch(err => console.log('error onsave: ',err))                 
+    console.log('redes proyecto : ', profileId, profilecad);
+    if(profileId != 0 || profilecad != 0){ 
+        API.get(`profile/company/${profileId}/${profilecad}`,{ headers: {Authorization: `Bearer ${token}`}}).then(resp => {  
+          //console.log('redes proyecto : ', resp.data);
+          if(resp.status === 200){  
+              dispatch({
+                type: DETAIL_PROFILE_REDES,
+                profilesObj:resp.data.data,
+              })              
+          }            
+        })
+        .catch(err => console.log('error onsave: ',err))     
+    }
   }
 }
 
 export function obtenerActualizaciones(idHeader: any){       
   return (dispatch : any) =>{  
-    let token = window.sessionStorage.getItem('token')         
-     API.get(`alterations/${idHeader}`,{ headers: {Authorization: `Bearer ${token}`}}).then(resp => {  
-     
-        if(resp.status === 200){  
-          if(resp.data.data.length > 0){  
-              dispatch({
-                  type: DETALLE_ACTUALIZACIONES,
-                  status:true,
-                  actualizaciones:resp.data.data
-              })    
-            }                    
-        }            
-      })
-      .catch(err => console.log(err))
-      }
+    let token = window.sessionStorage.getItem('token') 
+     if(idHeader != 0){ 
+           API.get(`alterations/${idHeader}`,{ headers: {Authorization: `Bearer ${token}`}}).then(resp => {          
+              if(resp.status === 200){  
+                  if(resp.data.data.length > 0){  
+                      dispatch({
+                          type: DETALLE_ACTUALIZACIONES,
+                          status:true,
+                          actualizaciones:resp.data.data
+                      })    
+                  }                    
+              }            
+           }).catch(err => console.log(err))
+     }
+
+   }
 }
 
 export function obtnerListaDenuncias(){       
   return (dispatch : any) =>{          
       
      API.get(`denounces`).then(resp => {        
-     console.log('denuncias :', resp.data.data)
+     //console.log('denuncias :', resp.data.data)
       dispatch({
         type: LISTA_DENUNCIAS,
         denuncias:resp.data.data
@@ -242,21 +247,21 @@ export function obtnerListaDenuncias(){
       .catch(err => console.log(err))
       }
 }
-export function contactarContacto(nombre: string, email:string, descripcion: string){       
+export function contactarContacto(idUserProyect :number, nombre: string, apellido: string, email:string, descripcion: string){       
   return (dispatch : any) =>{          
-      
     const data ={
-      from_user:1,
-      to_user:2,
+      firt_name:nombre,
+      last_name:apellido,
+      email:email,
+      from_user:0,
+      to_user:idUserProyect,
       description:descripcion
-
     }
-  
   API.post(`contacts`,data).then(resp => {      
-     if(resp.status === 200){  
-                 
+     if(resp.status === 201){  
+        dispatch(Action.showMessage({message: 'Se ha enviado el mensaje', variant:"info"}));       
      }else{
-      dispatch(Action.showMessage({message: 'Intente mas tarde por favor', variant:"error"}));
+         dispatch(Action.showMessage({message: 'Intente mas tarde por favor', variant:"error"}));
      }            
    })
    .catch(err => console.log(err))
@@ -309,7 +314,7 @@ export function denunciarSinlogueo(idDenuncia: number, nombre:string, carnet: st
 }
 export function denunciarConlogueo(idDenuncia: number, descripcion:string, idCanpaings:any){       
   return (dispatch : any) =>{          
-      console .log('llega el reporte con logueo',idDenuncia, descripcion, idCanpaings );
+     // console .log('llega el reporte con logueo',idDenuncia, descripcion, idCanpaings );
       
       let token = window.sessionStorage.getItem('token') 
       let data={
@@ -332,11 +337,9 @@ export function denunciarConlogueo(idDenuncia: number, descripcion:string, idCan
 }
 export function obtenerFollowerAutor( idFollower: number){       
   return (dispatch : any, getState: any) =>{  
-    let token = window.sessionStorage.getItem('token')
-    //console.log('seguidor :')
-    alert('aaa');
-    API.get(`followers/${2}/${idFollower}`,{ headers: {Authorization: `Bearer ${token}`}}).then(resp => {   
-     // console.log('obtener seguidor :', resp)
+    let token = window.sessionStorage.getItem('token')      
+    API.get(`followers/${getState().user.id}/${idFollower}`,{ headers: {Authorization: `Bearer ${token}`}}).then(resp => {      
+      console.log('resp',)  
       if(resp.status === 200){ 
         dispatch({
           type: FOLLOW_AUTOR,
@@ -366,7 +369,7 @@ export function saveFollowerAutor(follower: boolean, idFollower: number ){
       status:follower
     };
     API.post(`followers`,data,{ headers: {Authorization: `Bearer ${token}`}}).then(resp => {        
-      console.log('aplico seguidor :', resp);
+      console.log('sav :', resp);
     })
     .catch(err => console.log('seguidor eeror :', err))
       dispatch({
