@@ -27,7 +27,7 @@ import Cotizate from './pages/cotizate'
 import PageNotFound from './pages/404'
 import {CheckAuthentication} from './redux/auth'
 import ReactNotification from 'react-notifications-component'
-import Mensaje from './components/mensaje/Mensaje';
+// import Mensaje from './components/mensaje/Mensaje';
 // import ProgressDialog from "./components/ProgressDialog";
 import 'react-notifications-component/dist/theme.css'
 
@@ -38,7 +38,7 @@ const App: React.FC = () => {
     return (
         <Layout>
             <Router>
-                <Mensaje />
+                {/* <Mensaje /> */}
                 {/* <ProgressDialog /> */}
                 <ReactNotification />
                 <Header />
