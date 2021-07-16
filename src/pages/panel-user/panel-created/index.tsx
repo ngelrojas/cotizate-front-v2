@@ -11,5 +11,4 @@ const PanelCreated: React.FC<Istatus> = () => {
 
 }
 
-
 export default PanelCreated
