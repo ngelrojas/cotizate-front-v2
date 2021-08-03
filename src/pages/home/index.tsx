@@ -114,7 +114,8 @@ useEffect(() => {
                 <Title>CAUSAS SOCIALES </Title>
                 <Carousel responsive={responsive}
                   showDots={dispositivoMovil}
-                  arrows={false}
+                  arrows={true}
+             
                 >
                   {listCausasSociales.map((value : any, index : number) =>(
                      <Projects  key={index} data={value} />
