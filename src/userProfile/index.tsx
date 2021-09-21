@@ -69,8 +69,8 @@ export class PersonalProfile {
     /*
      * method activate account
      * */
-    activateUser = async (uid: any, token: any) => {
-        this.resp_profile = await API.put(`activate/${uid}/${token}`)
+    activateUser = async (data_activate: any) => {
+        this.resp_profile = await API.put(`activate`, data_activate)
         return this.resp_profile
     }
 }

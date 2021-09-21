@@ -14,8 +14,12 @@ const ActivationAccount: React.FC = () => {
         let matchUrl: any = match
         let uid: string = matchUrl.params.uid
         let token: string = matchUrl.params.token
+        let data_activate = {
+            "uid": uid,
+            "token": token
+        }
         activateAccount
-            .activateUser(uid, token)
+            .activateUser(data_activate)
             .then(resp => {
                 SetIsactivate(true)
             })
