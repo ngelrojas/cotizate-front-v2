@@ -337,15 +337,17 @@ export function denunciarConlogueo(idDenuncia: number, descripcion:string, idCan
 }
 export function obtenerFollowerAutor( idFollower: number){       
   return (dispatch : any, getState: any) =>{  
-    let token = window.sessionStorage.getItem('token')      
+    let token = window.sessionStorage.getItem('token')   
+    console.log('resp followers', idFollower, ' udser', getState().user.id )     
     API.get(`followers/${getState().user.id}/${idFollower}`,{ headers: {Authorization: `Bearer ${token}`}}).then(resp => {      
-      console.log('resp',)  
+      console.log('resp followers',resp )  
       if(resp.status === 200){ 
         dispatch({
           type: FOLLOW_AUTOR,
           followAutor:resp.data.data.status,
         }) 
       }else{
+        console.log('resp followers else false', )  
         dispatch({
           type: FOLLOW_AUTOR,
           followAutor:false

@@ -138,6 +138,7 @@ const ModalContacto: React.FC<IDetalle> =(props ) => {
                             name="usuarioName"
                             value={usuarioName}
                             onChange={_onChangeregistro}
+                            style={{ margin: 6   }}
                             className={style.TextFielNombre}
                             error={usuarioNameError}
                             helperText={ usuarioNameError &&
@@ -157,6 +158,7 @@ const ModalContacto: React.FC<IDetalle> =(props ) => {
                             variant="outlined"
                             name="apellido"
                             value={apellido}
+                            style={{ margin: 6   }}
                             onChange={_onChangeregistro}
                             className={style.TextFielNombre}
                             error={apellidoError}

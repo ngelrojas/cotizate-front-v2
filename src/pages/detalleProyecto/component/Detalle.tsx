@@ -31,6 +31,7 @@ import Reportar from './Reportar';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import ProyectosRecomendados from './ProyectosRecomendados'
+import Snackbar from '@material-ui/core/Snackbar';
 
 import Modal from '@material-ui/core/Modal'
 import Button from '@material-ui/core/Button'
@@ -321,8 +322,27 @@ const Detalle: React.FC<IDetalle> = (props) => {
             })
     }
 
+    const [state, setState] = useState({
+        open: false,
+        vertical: 'top',
+        horizontal: 'center',
+      });
+    
+      const { vertical, horizontal } = state;
+      const [openSna,setOpenSna] = useState(false);
+    
+      const handleCloseSna = (event: any, reason: any) => {
+        if (reason === 'clickaway') {
+          return;
+        }
+    
+        setOpenSna(false);
+      };
+    
+
     const copiarLink =(data: string)=>{       
         copiarTextoToPapelera(data);
+       setOpenSna(true);
     }
     if(props.data.header.id != 0){
         dispatch(Action.obtnerAportes(props.data.header.id));
@@ -1012,6 +1032,16 @@ const responsive = {
               onHandleClose={cerrarModal}
               idUserProyect={props.data.profile.user.id}
             /> 
+        <Snackbar
+        anchorOrigin={{
+        vertical: 'top',
+        horizontal: 'center',
+        }}
+        open={openSna}
+        autoHideDuration={1000}
+        onClose={handleCloseSna}
+        message="Copiado.."
+       />
         </>
     )
 }

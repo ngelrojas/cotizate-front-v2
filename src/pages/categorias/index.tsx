@@ -154,6 +154,7 @@ const Categorias: React.FC<Icateg>  = (props) => {
                     name="txtBusqueda"
                     // type="search"
                     value={busqueda}
+                    placeholder={"Buscar por nombre"}
                     onChange={_onChange}
                     variant="outlined" 
                     style={{width:'80%'}}
